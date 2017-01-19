@@ -1,0 +1,545 @@
+This is BibTeX, Version 0.99d (TeX Live 2016)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: ConSpecPODC.aux
+The style file: abbrv.bst
+Database file #1: allrec.bib
+You're missing a field name---line 73 of file allrec.bib
+ :  
+ :  %booktitle = {Proc. of the 8th USENIX Conference on Operating Systems Design and Implementation},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+I was expecting a `,' or a `}'---line 109 of file allrec.bib
+ :   pages = 243
+ :              --254
+I'm skipping whatever remains of this entry
+You're missing a field name---line 387 of file allrec.bib
+ :  
+ :  %booktitle = {Proc. of the 2013 ACM SIGMOD International Conference on Management of Data},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+You're missing a field name---line 425 of file allrec.bib
+ :  
+ :  %booktitle = {Proc. of the Twenty-Fourth ACM Symposium on Operating Systems Principles},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+You're missing a field name---line 747 of file allrec.bib
+ :  
+ :  %booktitle = {Proc. of the Twelfth ACM SIGPLAN Workshop on Erlang},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+You're missing a field name---line 1099 of file allrec.bib
+ : 
+ : %booktitle = {2014 USENIX Annual Technical Conference (USENIX ATC 14)},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+You're missing a field name---line 1255 of file allrec.bib
+ : 
+ : %   author = "Wikipedia",
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+You're missing a field name---line 1339 of file allrec.bib
+ : 
+ : %booktitle = {11th USENIX Symposium on Operating Systems Design and Implementation (OSDI 14)},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+You're missing a field name---line 1379 of file allrec.bib
+ :  
+ :  %booktitle = {Proc.~ACM Symposium on Operating Systems Principles (SOSP)},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+I was expecting a `,' or a `}'---line 1499 of file allrec.bib
+ :  pages = 558
+ :             --565
+I'm skipping whatever remains of this entry
+You're missing a field name---line 1585 of file allrec.bib
+ :  
+ :  %series = {SoCC '10},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+You're missing a field name---line 1851 of file allrec.bib
+ : 
+ : %year = {2013},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+You're missing a field name---line 1867 of file allrec.bib
+ : 
+ : % author = {Hall, Mark and Frank, Eibe and Holmes, Geoffrey and Pfahringer, Bernhard and Reutemann,
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+You're missing a field name---line 1907 of file allrec.bib
+ : 
+ : %author = "Minka, T. and Winn, J.M. and Guiver, J.P. and Webster, S. and Zaykov, Y. and Yangel, B. and
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+You're missing a field name---line 2805 of file allrec.bib
+ :   
+ :   %booktitle = {Proceedings of the 36th {ACM} {SIGPLAN} Conference on Programming
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+You're missing a field name---line 2869 of file allrec.bib
+ :  
+ :  %booktitle = {Proceedings of the 8th ACM European Conference on Computer Systems},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+You're missing a field name---line 3009 of file allrec.bib
+ : 
+ : %     title = {{Consistify: A Correctness-preserving, SLA-Aware, Automated Consistency Tuning
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+You're missing a field name---line 3047 of file allrec.bib
+ :   
+ :   %note = "[Online; accessed 20-January-2016]"
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+I was expecting a `,' or a `}'---line 3319 of file allrec.bib
+ :   pages = 243
+ :              --254
+I'm skipping whatever remains of this entry
+Repeated entry---line 3589 of file allrec.bib
+ : @inproceedings{Bailis:2013:BCC:2463676.2465279
+ :                                               ,
+I'm skipping whatever remains of this entry
+You're missing a field name---line 3669 of file allrec.bib
+ :  
+ :  %booktitle = {Proc. of the Twenty-Fourth ACM Symposium on Operating Systems Principles},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+Repeated entry---line 4061 of file allrec.bib
+ : @article{Gilbert:2002:BCF:564585.564601
+ :                                        ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 4609 of file allrec.bib
+ : @inproceedings{brew:cap
+ :                        ,
+I'm skipping whatever remains of this entry
+I was expecting a `,' or a `}'---line 4697 of file allrec.bib
+ :  pages = 558
+ :             --565
+I'm skipping whatever remains of this entry
+You're missing a field name---line 5597 of file allrec.bib
+ :  
+ :  %booktitle = {Proceedings of the 2011 IEEE 19th Annual International Symposium on Modelling, Analysis,
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+You're missing a field name---line 5785 of file allrec.bib
+ :  
+ :  %booktitle = {Proceedings of the 7th International Conference on Network and Services Management},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+You're missing a field name---line 5819 of file allrec.bib
+ :  
+ :  %booktitle = {Proceedings of the 2Nd USENIX Conference on Web Application Development},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+You're missing a field name---line 5849 of file allrec.bib
+ :  
+ :  %booktitle = {Proceedings of the 12th International Conference on Algorithms and Architectures for
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+You're missing a field name---line 5923 of file allrec.bib
+ : 
+ : %booktitle={Modeling, Analysis and Simulation of Computers and Telecommunication Systems, 2008. MASCOTS
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+You're missing a field name---line 5981 of file allrec.bib
+ :  
+ :  %booktitle = {Proceedings of the 11th USENIX Workshop on Hot Topics in Operating Systems},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+Repeated entry---line 6467 of file allrec.bib
+ : @inproceedings{Bailis:2013:BCC:2463676.2465279
+ :                                               ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 6931 of file allrec.bib
+ : @article{Gilbert:2002:BCF:564585.564601
+ :                                        ,
+I'm skipping whatever remains of this entry
+You're missing a field name---line 7373 of file allrec.bib
+ :  
+ :  %booktitle = {Proceedings of the 2Nd ACM Symposium on Cloud Computing},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+You're missing a field name---line 7555 of file allrec.bib
+ : 
+ : %journal ={2014 14th IEEE/ACM International Symposium on Cluster, Cloud and Grid Computing},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+You're missing a field name---line 7579 of file allrec.bib
+ :  
+ :  %booktitle = {Proceedings of the 2010 IEEE Second International Conference on Cloud Computing
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+You're missing a field name---line 7613 of file allrec.bib
+ :   
+ :   %booktitle={Cloud Computing in Emerging Markets (CCEM), 2014 IEEE International Conference on},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+You're missing a field name---line 7633 of file allrec.bib
+ :  
+ :  %booktitle = {Proceedings of the 2012 IEEE Fifth International Conference on Cloud Computing},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+You're missing a field name---line 9037 of file allrec.bib
+ :  
+ :  %booktitle = {Proceedings of the 2Nd ACM Symposium on Cloud Computing},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+You're missing a field name---line 9077 of file allrec.bib
+ :  
+ :  %booktitle = {Proceedings of the 11th International Conference on Algorithms and Architectures for
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+You're missing a field name---line 9113 of file allrec.bib
+ :  
+ :  %booktitle = {Proceedings of the 1996 ACM SIGMETRICS International Conference on Measurement and
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+You're missing a field name---line 9153 of file allrec.bib
+ :  
+ :  %booktitle = {Proceedings of the 12th International Workshop on Network and Operating Systems Support
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+You're missing a field name---line 9233 of file allrec.bib
+ :  
+ :  %booktitle = {Proceedings of the 2Nd ACM Symposium on Cloud Computing},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+You're missing a field name---line 9275 of file allrec.bib
+ :  
+ :  %series = {To Appear},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+I was expecting a `,' or a `}'---line 9417 of file allrec.bib
+ :   journal={Proc. of 2nd Int. ICST Conf. on Cloud Computing, CloudComp 2010}
+ :                                                                            %,
+I'm skipping whatever remains of this entry
+You're missing a field name---line 9483 of file allrec.bib
+ :  
+ :  %series = {To Appear},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+You're missing a field name---line 9709 of file allrec.bib
+ :  
+ :  %booktitle = {Proceedings of the 1996 ACM SIGMETRICS International Conference on Measurement and Modeling of Computer Systems},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+You're missing a field name---line 9745 of file allrec.bib
+ :  
+ :  %booktitle = {Proceedings of the 12th International Workshop on Network and Operating Systems Support for Digital Audio and Video},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+You're missing a field name---line 9815 of file allrec.bib
+ :  
+ :  %booktitle = {Proceedings of the 2Nd ACM Symposium on Cloud Computing},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+You're missing a field name---line 10913 of file allrec.bib
+ :  
+ :  %booktitle = {Proc. of the 8th USENIX Conference on Operating Systems Design and Implementation},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+I was expecting a `,' or a `}'---line 10949 of file allrec.bib
+ :   pages = 243
+ :              --254
+I'm skipping whatever remains of this entry
+Repeated entry---line 11219 of file allrec.bib
+ : @inproceedings{Bailis:2013:BCC:2463676.2465279
+ :                                               ,
+I'm skipping whatever remains of this entry
+You're missing a field name---line 11265 of file allrec.bib
+ :  
+ :  %booktitle = {Proc. of the Twenty-Fourth ACM Symposium on Operating Systems Principles},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+You're missing a field name---line 11587 of file allrec.bib
+ :  
+ :  %booktitle = {Proc. of the Twelfth ACM SIGPLAN Workshop on Erlang},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+Repeated entry---line 11697 of file allrec.bib
+ : @article{Gilbert:2002:BCF:564585.564601
+ :                                        ,
+I'm skipping whatever remains of this entry
+You're missing a field name---line 11939 of file allrec.bib
+ : 
+ : %booktitle = {2014 USENIX Annual Technical Conference (USENIX ATC 14)},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+You're missing a field name---line 12095 of file allrec.bib
+ : 
+ : %   author = "Wikipedia",
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+You're missing a field name---line 12181 of file allrec.bib
+ : 
+ : %booktitle = {11th USENIX Symposium on Operating Systems Design and Implementation (OSDI 14)},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+You're missing a field name---line 12221 of file allrec.bib
+ :  
+ :  %booktitle = {Proc.~ACM Symposium on Operating Systems Principles (SOSP)},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+Repeated entry---line 12253 of file allrec.bib
+ : @inproceedings{brew:cap
+ :                        ,
+I'm skipping whatever remains of this entry
+I was expecting a `,' or a `}'---line 12341 of file allrec.bib
+ :  pages = 558
+ :             --565
+I'm skipping whatever remains of this entry
+You're missing a field name---line 12427 of file allrec.bib
+ :  
+ :  %series = {SoCC '10},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+You're missing a field name---line 12693 of file allrec.bib
+ : 
+ : %year = {2013},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+You're missing a field name---line 12709 of file allrec.bib
+ : 
+ : % author = {Hall, Mark and Frank, Eibe and Holmes, Geoffrey and Pfahringer, Bernhard and Reutemann,
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+You're missing a field name---line 12749 of file allrec.bib
+ : 
+ : %author = "Minka, T. and Winn, J.M. and Guiver, J.P. and Webster, S. and Zaykov, Y. and Yangel, B. and
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+You're missing a field name---line 12941 of file allrec.bib
+ : 
+ : % author = {Andrew, Galen and Gao, Jianfeng},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+Repeated entry---line 13497 of file allrec.bib
+ : @article{Lamport:1994:TLA:177492.177726
+ :                                        ,
+I'm skipping whatever remains of this entry
+You're missing a field name---line 13647 of file allrec.bib
+ :   
+ :   %booktitle = {Proceedings of the 36th {ACM} {SIGPLAN} Conference on Programming
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+You're missing a field name---line 13711 of file allrec.bib
+ :  
+ :  %booktitle = {Proceedings of the 8th ACM European Conference on Computer Systems},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+You're missing a field name---line 13851 of file allrec.bib
+ : 
+ : %     title = {{Consistify: A Correctness-preserving, SLA-Aware, Automated Consistency Tuning
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+You're missing a field name---line 13887 of file allrec.bib
+ :   
+ :   %note = "[Online; accessed 20-January-2016]"
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+I was expecting a `,' or a `}'---line 14159 of file allrec.bib
+ :   pages = 243
+ :              --254
+I'm skipping whatever remains of this entry
+Repeated entry---line 14429 of file allrec.bib
+ : @inproceedings{Bailis:2013:BCC:2463676.2465279
+ :                                               ,
+I'm skipping whatever remains of this entry
+You're missing a field name---line 14509 of file allrec.bib
+ :  
+ :  %booktitle = {Proc. of the Twenty-Fourth ACM Symposium on Operating Systems Principles},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+Repeated entry---line 14901 of file allrec.bib
+ : @article{Gilbert:2002:BCF:564585.564601
+ :                                        ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 15449 of file allrec.bib
+ : @inproceedings{brew:cap
+ :                        ,
+I'm skipping whatever remains of this entry
+I was expecting a `,' or a `}'---line 15537 of file allrec.bib
+ :  pages = 558
+ :             --565
+I'm skipping whatever remains of this entry
+You're missing a field name---line 16437 of file allrec.bib
+ :  
+ :  %booktitle = {Proceedings of the 2011 IEEE 19th Annual International Symposium on Modelling, Analysis,
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+You're missing a field name---line 16625 of file allrec.bib
+ :  
+ :  %booktitle = {Proceedings of the 7th International Conference on Network and Services Management},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+You're missing a field name---line 16659 of file allrec.bib
+ :  
+ :  %booktitle = {Proceedings of the 2Nd USENIX Conference on Web Application Development},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+You're missing a field name---line 16689 of file allrec.bib
+ :  
+ :  %booktitle = {Proceedings of the 12th International Conference on Algorithms and Architectures for
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+You're missing a field name---line 16763 of file allrec.bib
+ : 
+ : %booktitle={Modeling, Analysis and Simulation of Computers and Telecommunication Systems, 2008. MASCOTS
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+You're missing a field name---line 16821 of file allrec.bib
+ :  
+ :  %booktitle = {Proceedings of the 11th USENIX Workshop on Hot Topics in Operating Systems},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+Repeated entry---line 17307 of file allrec.bib
+ : @inproceedings{Bailis:2013:BCC:2463676.2465279
+ :                                               ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 17771 of file allrec.bib
+ : @article{Gilbert:2002:BCF:564585.564601
+ :                                        ,
+I'm skipping whatever remains of this entry
+You're missing a field name---line 18213 of file allrec.bib
+ :  
+ :  %booktitle = {Proceedings of the 2Nd ACM Symposium on Cloud Computing},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+You're missing a field name---line 18395 of file allrec.bib
+ : 
+ : %journal ={2014 14th IEEE/ACM International Symposium on Cluster, Cloud and Grid Computing},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+You're missing a field name---line 18419 of file allrec.bib
+ :  
+ :  %booktitle = {Proceedings of the 2010 IEEE Second International Conference on Cloud Computing
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+You're missing a field name---line 18453 of file allrec.bib
+ :   
+ :   %booktitle={Cloud Computing in Emerging Markets (CCEM), 2014 IEEE International Conference on},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+You're missing a field name---line 18473 of file allrec.bib
+ :  
+ :  %booktitle = {Proceedings of the 2012 IEEE Fifth International Conference on Cloud Computing},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+Repeated entry---line 19637 of file allrec.bib
+ : @book{Hennessy:2011:CAF:1999263
+ :                                ,
+I'm skipping whatever remains of this entry
+You're missing a field name---line 19877 of file allrec.bib
+ :  
+ :  %booktitle = {Proceedings of the 2Nd ACM Symposium on Cloud Computing},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+You're missing a field name---line 19917 of file allrec.bib
+ :  
+ :  %booktitle = {Proceedings of the 11th International Conference on Algorithms and Architectures for
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+You're missing a field name---line 19953 of file allrec.bib
+ :  
+ :  %booktitle = {Proceedings of the 1996 ACM SIGMETRICS International Conference on Measurement and
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+You're missing a field name---line 19993 of file allrec.bib
+ :  
+ :  %booktitle = {Proceedings of the 12th International Workshop on Network and Operating Systems Support
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+You're missing a field name---line 20073 of file allrec.bib
+ :  
+ :  %booktitle = {Proceedings of the 2Nd ACM Symposium on Cloud Computing},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+You're missing a field name---line 20115 of file allrec.bib
+ :  
+ :  %series = {To Appear},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+I was expecting a `,' or a `}'---line 20257 of file allrec.bib
+ :   journal={Proc. of 2nd Int. ICST Conf. on Cloud Computing, CloudComp 2010}
+ :                                                                            %,
+I'm skipping whatever remains of this entry
+You're missing a field name---line 20323 of file allrec.bib
+ :  
+ :  %series = {To Appear},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+You're missing a field name---line 20549 of file allrec.bib
+ :  
+ :  %booktitle = {Proceedings of the 1996 ACM SIGMETRICS International Conference on Measurement and Modeling of Computer Systems},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+You're missing a field name---line 20585 of file allrec.bib
+ :  
+ :  %booktitle = {Proceedings of the 12th International Workshop on Network and Operating Systems Support for Digital Audio and Video},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+You're missing a field name---line 20655 of file allrec.bib
+ :  
+ :  %booktitle = {Proceedings of the 2Nd ACM Symposium on Cloud Computing},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+You're missing a field name---line 21931 of file allrec.bib
+ :      
+ :      %group = {csg},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+Repeated entry---line 22193 of file allrec.bib
+ : @book{Hennessy:2011:CAF:1999263
+ :                                ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 22213 of file allrec.bib
+ : @article{Lamport:1994:TLA:177492.177726
+ :                                        ,
+I'm skipping whatever remains of this entry
+A bad cross reference---entry "DBLP:journals/corr/EhlersR14"
+refers to entry "DBLP:journals/corr/ChatterjeeEJ14", which doesn't exist
+Warning--I didn't find a database entry for "DBLP:journals/corr/ChatterjeeEJ14"
+Warning--empty year in Bailis:2013:BCC:2463676.2465279
+Warning--can't use both author and editor fields in Chockler2000
+You've used 11 entries,
+            2118 wiz_defined-function locations,
+            584 strings with 6249 characters,
+and the built_in function-call counts, 4222 in all, are:
+= -- 424
+> -- 170
+< -- 5
++ -- 69
+- -- 56
+* -- 281
+:= -- 656
+add.period$ -- 35
+call.type$ -- 11
+change.case$ -- 60
+chr.to.int$ -- 0
+cite$ -- 13
+duplicate$ -- 185
+empty$ -- 351
+format.name$ -- 56
+if$ -- 922
+int.to.chr$ -- 0
+int.to.str$ -- 11
+missing$ -- 13
+newline$ -- 58
+num.names$ -- 22
+pop$ -- 76
+preamble$ -- 1
+purify$ -- 50
+quote$ -- 0
+skip$ -- 135
+stack$ -- 0
+substring$ -- 272
+swap$ -- 59
+text.length$ -- 5
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 40
+warning$ -- 2
+while$ -- 43
+width$ -- 13
+write$ -- 128
+(There were 105 error messages)
