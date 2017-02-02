@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99996 (TeX Live 2016) (preloaded format=xelatex 2017.1.17)  2 FEB 2017 11:47
+This is XeTeX, Version 3.14159265-2.6-0.99996 (TeX Live 2016) (preloaded format=xelatex 2017.1.17)  2 FEB 2017 14:37
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -781,25 +781,25 @@ LaTeX Warning: Label `eqn:rw' multiply defined.
 )
 \openout1 = `ConSpecPODC.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 99.
-LaTeX Font Info:    ... okay on input line 99.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 99.
-LaTeX Font Info:    ... okay on input line 99.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 99.
-LaTeX Font Info:    ... okay on input line 99.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 99.
-LaTeX Font Info:    ... okay on input line 99.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 99.
-LaTeX Font Info:    ... okay on input line 99.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 99.
-LaTeX Font Info:    ... okay on input line 99.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 99.
-LaTeX Font Info:    Try loading font information for TS1+cmr on input line 99.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 50.
+LaTeX Font Info:    ... okay on input line 50.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 50.
+LaTeX Font Info:    ... okay on input line 50.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 50.
+LaTeX Font Info:    ... okay on input line 50.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 50.
+LaTeX Font Info:    ... okay on input line 50.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 50.
+LaTeX Font Info:    ... okay on input line 50.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 50.
+LaTeX Font Info:    ... okay on input line 50.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 50.
+LaTeX Font Info:    Try loading font information for TS1+cmr on input line 50.
  (/usr/local/texlive/2016/texmf-dist/tex/latex/base/ts1cmr.fd
 File: ts1cmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 99.
-LaTeX Font Info:    Try loading font information for T1+ptm on input line 99.
+LaTeX Font Info:    ... okay on input line 50.
+LaTeX Font Info:    Try loading font information for T1+ptm on input line 50.
 
 (/usr/local/texlive/2016/texmf-dist/tex/latex/psnfss/t1ptm.fd
 File: t1ptm.fd 2001/06/04 font definitions for T1/ptm.
@@ -811,31 +811,31 @@ Package caption Info: End \AtBeginDocument code.
 
 ABD: EveryShipout initializing macros
 \c@lstlisting=\count158
-LaTeX Font Info:    Try loading font information for U+msa on input line 233.
+LaTeX Font Info:    Try loading font information for U+msa on input line 121.
 
 (/usr/local/texlive/2016/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 233.
+LaTeX Font Info:    Try loading font information for U+msb on input line 121.
 
 (/usr/local/texlive/2016/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-LaTeX Font Info:    Try loading font information for U+lasy on input line 233.
+LaTeX Font Info:    Try loading font information for U+lasy on input line 121.
 
 (/usr/local/texlive/2016/texmf-dist/tex/latex/base/ulasy.fd
 File: ulasy.fd 1998/08/17 v2.2e LaTeX symbol font definitions
 )
 LaTeX Font Info:    Font shape `U/lasy/b/n' in size <9> not available
-(Font)              Font shape `U/lasy/m/n' tried instead on input line 233.
+(Font)              Font shape `U/lasy/m/n' tried instead on input line 121.
 LaTeX Font Info:    Font shape `U/lasy/b/n' in size <6> not available
-(Font)              Font shape `U/lasy/m/n' tried instead on input line 233.
+(Font)              Font shape `U/lasy/m/n' tried instead on input line 121.
 LaTeX Font Info:    Font shape `U/lasy/b/n' in size <5> not available
-(Font)              Font shape `U/lasy/m/n' tried instead on input line 233.
+(Font)              Font shape `U/lasy/m/n' tried instead on input line 121.
 LaTeX Font Info:    Font shape `U/lasy/b/n' in size <8> not available
-(Font)              Font shape `U/lasy/m/n' tried instead on input line 233.
+(Font)              Font shape `U/lasy/m/n' tried instead on input line 121.
 
-Overfull \hbox (3.99638pt too wide) in paragraph at lines 357--373
+Overfull \hbox (3.99638pt too wide) in paragraph at lines 173--184
 \T1/ptm/m/n/9 mod-els, ex-pressed us-ing di-rected se-ri-al-iza-tion graphs (DS
 Gs), where
  []
@@ -850,7 +850,7 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 File: system.eps Graphic file (type eps)
 
 <system.eps>
-Overfull \hbox (2.93178pt too wide) in paragraph at lines 462--465
+Overfull \hbox (2.93178pt too wide) in paragraph at lines 267--270
 \T1/ptm/m/n/9 voked from a trans-ac-tion $\OML/cmm/m/it/9 tx$ \T1/ptm/m/n/9 are
  de-noted as $\OML/cmm/m/it/9 r[]\OT1/cmr/m/n/9 (\OML/cmm/m/it/9 o\OT1/cmr/m/n/
 9 )[]$ \T1/ptm/m/n/9 and $\OML/cmm/m/it/9 w[]\OT1/cmr/m/n/9 (\OML/cmm/m/it/9 o;
@@ -861,7 +861,7 @@ Overfull \hbox (2.93178pt too wide) in paragraph at lines 462--465
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [2]
-LaTeX Font Info:    Try loading font information for TS1+ptm on input line 487.
+LaTeX Font Info:    Try loading font information for TS1+ptm on input line 291.
 
 
 (/usr/local/texlive/2016/texmf-dist/tex/latex/psnfss/ts1ptm.fd
@@ -869,24 +869,24 @@ File: ts1ptm.fd 2001/06/04 font definitions for TS1/ptm.
 )
 \c@definition=\count159
 
-Overfull \hbox (2.13939pt too wide) in paragraph at lines 490--497
+Overfull \hbox (2.13939pt too wide) in paragraph at lines 294--301
 \OMS/cmsy/m/n/9 6 9[][] \OT1/cmr/m/n/9 = [][] [] [] \OMS/cmsy/m/n/9 ! [] [][]$\
 T1/ptm/m/it/9 . 
  []
 
 
-Overfull \hbox (1.2965pt too wide) in paragraph at lines 559--568
+Overfull \hbox (1.2965pt too wide) in paragraph at lines 321--330
 \T1/ptm/m/n/9 la-tion lev-els. The Con-Spec spec-i-fi-ca-tion for each con-sis-
 tency model
  []
 
 [3]
-Overfull \hbox (17.6711pt too wide) in paragraph at lines 780--780
+Overfull \hbox (17.6711pt too wide) in paragraph at lines 385--385
 []\secfnt LIST OF CON-SPEC SPEC-I-FI-CA-TIONS FOR
  []
 
 
-Overfull \hbox (6.224pt too wide) in paragraph at lines 780--780
+Overfull \hbox (6.224pt too wide) in paragraph at lines 385--385
 \secfnt VAR-I-OUS CON-SIS-TENCY MOD-ELS AND
  []
 
@@ -894,22 +894,22 @@ Overfull \hbox (6.224pt too wide) in paragraph at lines 780--780
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 899--906
+Underfull \hbox (badness 10000) in paragraph at lines 504--511
 
  []
 
 [4]
-Underfull \hbox (badness 10000) in paragraph at lines 942--943
+Underfull \hbox (badness 10000) in paragraph at lines 547--548
 
  []
 
 
-Overfull \hbox (5.81215pt too wide) in paragraph at lines 1221--1221
+Overfull \hbox (5.81215pt too wide) in paragraph at lines 826--826
 [] 
  []
 
 
-Overfull \hbox (9.50793pt too wide) in paragraph at lines 1321--1321
+Overfull \hbox (9.50793pt too wide) in paragraph at lines 926--926
 [] 
  []
 
@@ -917,35 +917,35 @@ Overfull \hbox (9.50793pt too wide) in paragraph at lines 1321--1321
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [5]
-Overfull \hbox (10.6018pt too wide) in paragraph at lines 1372--1372
+Overfull \hbox (10.6018pt too wide) in paragraph at lines 977--977
 [] 
  []
 
 
-Overfull \hbox (6.12726pt too wide) in paragraph at lines 1374--1374
+Overfull \hbox (6.12726pt too wide) in paragraph at lines 979--979
 []\secfnt REWRITING CAP THE-O-REM IN TERMS
  []
 
 
-Overfull \hbox (4.13145pt too wide) in paragraph at lines 1375--1384
+Overfull \hbox (4.13145pt too wide) in paragraph at lines 980--989
 \T1/ptm/m/n/9 mod-ern stor-age sys-tems re-lax con-sis-tency guar-an-tees to fa
 vour avail-
  []
 
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <9> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 1395.
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 1000.
 [6]
-Overfull \hbox (2.51607pt too wide) in paragraph at lines 1421--1421
+Overfull \hbox (2.51607pt too wide) in paragraph at lines 1026--1026
 []\secfnt ANALYSIS OF CON-SIS-TENCY MOD-ELS
  []
 
 
-Overfull \hbox (5.09654pt too wide) in paragraph at lines 1809--1809
+Overfull \hbox (5.09654pt too wide) in paragraph at lines 1066--1066
 []\secfnt DERIVING CON-SPEC SPEC-I-FI-CA-TIONS
  []
 
 [7]
-Overfull \hbox (7.73517pt too wide) in paragraph at lines 1961--2011
+Overfull \hbox (7.73517pt too wide) in paragraph at lines 1218--1268
 \T1/ptm/m/n/9 that the con-di-tion $[][]\OML/cmm/m/it/9 F[][] \OMS/cmsy/m/n/9 2
  []$ \T1/ptm/m/n/9 is sat-is-fied. Since $[][]\OML/cmm/m/it/9 F[][] \OMS/cmsy/m
 /n/9 2
@@ -961,12 +961,12 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
-Overfull \hbox (11.86707pt too wide) in paragraph at lines 2299--2361
+Overfull \hbox (11.86707pt too wide) in paragraph at lines 1556--1618
 \OMS/cmsy/m/n/9 2 [][][] [] _ [] []$
  []
 
 
-Overfull \hbox (12.0741pt too wide) in paragraph at lines 2361--2370
+Overfull \hbox (12.0741pt too wide) in paragraph at lines 1618--1627
 [][]\OT1/cmr/m/n/9 (\OML/cmm/m/it/9 x\OT1/cmr/m/n/9 )[]\OML/cmm/m/it/9 F[]\OT1/
 cmr/m/n/9 (\OML/cmm/m/it/9 x\OT1/cmr/m/n/9 )[]\OML/cmm/m/it/9 F[]\OT1/cmr/m/n/9
  (\OML/cmm/m/it/9 x\OT1/cmr/m/n/9 )[] \OMS/cmsy/m/n/9 2 [][][][] [] ^ [] [][]$
@@ -976,29 +976,29 @@ cmr/m/n/9 (\OML/cmm/m/it/9 x\OT1/cmr/m/n/9 )[]\OML/cmm/m/it/9 F[]\OT1/cmr/m/n/9
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [9]
-Overfull \hbox (17.16875pt too wide) in paragraph at lines 2374--2374
+Overfull \hbox (17.16875pt too wide) in paragraph at lines 1631--1631
 []\secfnt EQUIVALENCE BE-TWEEN DE-PEN-DENCY
  []
 
 (./ConSpecPODC.bbl [10])
-Overfull \hbox (3.77672pt too wide) in paragraph at lines 2991--2991
+Overfull \hbox (3.77672pt too wide) in paragraph at lines 2248--2248
 \secfnt AGAINST CON-SPEC SPEC-I-FI-CA-TIONS 
  []
 
 
-Overfull \hbox (3.3867pt too wide) in paragraph at lines 2992--3048
+Overfull \hbox (3.3867pt too wide) in paragraph at lines 2249--2305
 \T1/ptm/m/n/9 other clients: $[][]$ = $\OML/cmm/m/it/9 W[]FR[]FW[]FR[]$\T1/ptm/
 m/n/9 , $[][]$ = $\OML/cmm/m/it/9 W[]FR[]FW[]FR[]$\T1/ptm/m/n/9 ,
  []
 
 
-Overfull \hbox (12.75438pt too wide) in paragraph at lines 2992--3048
+Overfull \hbox (12.75438pt too wide) in paragraph at lines 2249--2305
 \T1/ptm/m/n/9 and $[][]$ = $\OML/cmm/m/it/9 R[]FW[]FW[]FR[]$\T1/ptm/m/n/9 . Onl
 y for $[][]$, the con-di-tion $\OML/cmm/m/it/9 W[]FR[] \OMS/cmsy/m/n/9 2
  []
 
 
-Overfull \hbox (39.79887pt too wide) in paragraph at lines 3088--3134
+Overfull \hbox (39.79887pt too wide) in paragraph at lines 2345--2391
 [][]$\T1/ptm/m/n/9 : $\OML/cmm/m/it/9 w[]\OT1/cmr/m/n/9 (\OML/cmm/m/it/9 x; \OT
 1/cmr/m/n/9 1)\OML/cmm/m/it/9 ; r[]\OT1/cmr/m/n/9 (\OML/cmm/m/it/9 x\OT1/cmr/m/
 n/9 )2$\T1/ptm/m/n/9 , $[][]$: $\OML/cmm/m/it/9 r[]\OT1/cmr/m/n/9 (\OML/cmm/m/i
@@ -1010,7 +1010,7 @@ x\OT1/cmr/m/n/9 )1$
  []
 
 
-Overfull \hbox (35.62779pt too wide) in paragraph at lines 3088--3134
+Overfull \hbox (35.62779pt too wide) in paragraph at lines 2345--2391
 \T1/ptm/m/n/9 since $\OML/cmm/m/it/9 w[]\OT1/cmr/m/n/9 (\OML/cmm/m/it/9 x; \OT1
 /cmr/m/n/9 1)$ \T1/ptm/m/n/9 pre-cedes $\OML/cmm/m/it/9 w[]\OT1/cmr/m/n/9 (\OML
 /cmm/m/it/9 x; \OT1/cmr/m/n/9 2)$\T1/ptm/m/n/9 . Sub-se-quently the con-di-tion
@@ -1021,7 +1021,7 @@ Overfull \hbox (35.62779pt too wide) in paragraph at lines 3088--3134
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [11]
-Overfull \hbox (20.3065pt too wide) in paragraph at lines 3139--3156
+Overfull \hbox (20.3065pt too wide) in paragraph at lines 2396--2413
 \T1/ptm/m/n/9 since $\OML/cmm/m/it/9 r[]\OT1/cmr/m/n/9 (\OML/cmm/m/it/9 x\OT1/c
 mr/m/n/9 )2$ \T1/ptm/m/n/9 fol-lows $\OML/cmm/m/it/9 r[]\OT1/cmr/m/n/9 (\OML/cm
 m/m/it/9 x\OT1/cmr/m/n/9 )1$\T1/ptm/m/n/9 . Sub-se-quently the con-di-tions $[]
@@ -1029,19 +1029,19 @@ $
  []
 
 
-Overfull \hbox (34.87155pt too wide) in paragraph at lines 3156--3170
+Overfull \hbox (34.87155pt too wide) in paragraph at lines 2413--2427
 \T1/ptm/m/n/9 traces can be trans-formed into a le-gal se-ri-al-iza-tion $[][]$
  = $\OML/cmm/m/it/9 W[]FR[]FR[]FW[]$\T1/ptm/m/n/9 .
  []
 
 
-Overfull \hbox (1.07266pt too wide) in paragraph at lines 3156--3170
+Overfull \hbox (1.07266pt too wide) in paragraph at lines 2413--2427
 \T1/ptm/m/n/9 that the con-di-tions $[] \OMS/cmsy/m/n/9 ^ []$ \T1/ptm/m/n/9 and
 
  []
 
 
-Overfull \hbox (16.38931pt too wide) in paragraph at lines 3170--3194
+Overfull \hbox (16.38931pt too wide) in paragraph at lines 2427--2451
 [][]$\T1/ptm/m/n/9 : $\OML/cmm/m/it/9 w[]\OT1/cmr/m/n/9 (\OML/cmm/m/it/9 x; \OT
 1/cmr/m/n/9 1)\OML/cmm/m/it/9 ; r[]\OT1/cmr/m/n/9 (\OML/cmm/m/it/9 x\OT1/cmr/m/
 n/9 )2\OML/cmm/m/it/9 ; w[]\OT1/cmr/m/n/9 (\OML/cmm/m/it/9 x; \OT1/cmr/m/n/9 2)
@@ -1052,7 +1052,7 @@ mm/m/it/9 x\OT1/cmr/m/n/9 )2$\T1/ptm/m/n/9 ,
  []
 
 
-Overfull \hbox (51.22537pt too wide) in paragraph at lines 3170--3194
+Overfull \hbox (51.22537pt too wide) in paragraph at lines 2427--2451
 \T1/ptm/m/n/9 ses-sion traces can be trans-formed in a le-gal se-ri-al-iza-tion
  $[]$ = $\OML/cmm/m/it/9 W[]FW[]FR[]FR[]$\T1/ptm/m/n/9 .
  []
@@ -1061,24 +1061,24 @@ Overfull \hbox (51.22537pt too wide) in paragraph at lines 3170--3194
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
-Overfull \hbox (44.7898pt too wide) in paragraph at lines 3194--3221
+Overfull \hbox (44.7898pt too wide) in paragraph at lines 2451--2478
 \T1/ptm/m/n/9 sion trace to sat-isfy TSO con-sis-tency, the con-di-tion $[] \OM
 S/cmsy/m/n/9 ^
  []
 
 
-Overfull \hbox (7.41042pt too wide) in paragraph at lines 3221--3238
+Overfull \hbox (7.41042pt too wide) in paragraph at lines 2478--2495
 \T1/ptm/m/n/9 voked by a client must sat-isfy the con-di-tion $[] \OMS/cmsy/m/n
 /9 6 9 [] ^
  []
 
 
-Overfull \hbox (7.08112pt too wide) in paragraph at lines 3221--3238
+Overfull \hbox (7.08112pt too wide) in paragraph at lines 2478--2495
 [] \OMS/cmsy/m/n/9 ^ [] [][] [] ^ [] []$\T1/ptm/m/n/9 . Thus,
  []
 
 
-Overfull \hbox (8.74712pt too wide) in paragraph at lines 3221--3238
+Overfull \hbox (8.74712pt too wide) in paragraph at lines 2478--2495
 \T1/ptm/m/n/9 dence or-der $\OML/cmm/m/it/9 w[]\OT1/cmr/m/n/9 (\OML/cmm/m/it/9 
 x; \OT1/cmr/m/n/9 1)$ \T1/ptm/m/n/9 fol-lowed by $\OML/cmm/m/it/9 w[]\OT1/cmr/m
 /n/9 (\OML/cmm/m/it/9 y; \OT1/cmr/m/n/9 1)$\T1/ptm/m/n/9 , hence we as-sign $\O
@@ -1086,7 +1086,7 @@ ML/cmm/m/it/9 w[]\OT1/cmr/m/n/9 (\OML/cmm/m/it/9 x; \OT1/cmr/m/n/9 1)$
  []
 
 
-Overfull \hbox (39.71924pt too wide) in paragraph at lines 3252--3266
+Overfull \hbox (39.71924pt too wide) in paragraph at lines 2509--2523
 \T1/ptm/m/n/9 ject $\OML/cmm/m/it/9 x$ \T1/ptm/m/n/9 for the trans-ac-tion $[]$
 , i.e., the con-di-tion $\OMS/cmsy/m/n/9 6 9[][][]\OT1/cmr/m/n/9 (\OML/cmm/m/it
 /9 x\OT1/cmr/m/n/9 )[]\OML/cmm/m/it/9 F[]\OT1/cmr/m/n/9 (\OML/cmm/m/it/9 x\OT1/
@@ -1094,7 +1094,7 @@ cmr/m/n/9 )[]\OML/cmm/m/it/9 Fc[] \OMS/cmsy/m/n/9 2
  []
 
 
-Overfull \hbox (15.88918pt too wide) in paragraph at lines 3252--3266
+Overfull \hbox (15.88918pt too wide) in paragraph at lines 2509--2523
 [][] \OMS/cmsy/m/n/9 ^ [] []^ 6 9[][][]\OT1/cmr/m/n/9 (\OML/cmm/m/it/9 x\OT1/cm
 r/m/n/9 )[]\OML/cmm/m/it/9 F[]\OT1/cmr/m/n/9 (\OML/cmm/m/it/9 x\OT1/cmr/m/n/9 )
 []\OML/cmm/m/it/9 Fc[] \OMS/cmsy/m/n/9 2 [][] ^ [] []$
@@ -1104,7 +1104,7 @@ r/m/n/9 )[]\OML/cmm/m/it/9 F[]\OT1/cmr/m/n/9 (\OML/cmm/m/it/9 x\OT1/cmr/m/n/9 )
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [12]
-Overfull \hbox (8.8529pt too wide) in paragraph at lines 3266--3286
+Overfull \hbox (8.8529pt too wide) in paragraph at lines 2523--2543
 \T1/ptm/m/n/9 fi-ca-tions. Let us con-sider a ses-sion trace $[][]$: $\OML/cmm/
 m/it/9 r[]\OT1/cmr/m/n/9 ([])[]\OML/cmm/m/it/9 ; r[]\OT1/cmr/m/n/9 (\OML/cmm/m/
 it/9 x\OT1/cmr/m/n/9 )[]\OML/cmm/m/it/9 ; [] 

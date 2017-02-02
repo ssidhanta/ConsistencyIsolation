@@ -1,52 +1,4 @@
-% This is "sig-alternate.tex" V2.1 April 2013d
-% This file should be compiled with V2.5 of "sig-alternate.cls" May 2012
-%
-% This example file demonstrates the use of the 'sig-alternate.cls'
-% V2.5 LaTeX2e document class file. It is for those submitting
-% articles to ACM Conference Proceedings WHO DO NOT WISH TO
-% STRICTLY ADHERE TO THE SIGS (PUBS-BOARD-ENDORSED) STYLE.
-% The 'sig-alternate.cls' file will produce a similar-looking,
-% albeit, 'tighter' paper resulting in, invariably, fewer pages.
-%
-% ----------------------------------------------------------------------------------------------------------------
-% This .tex file (and associated .cls V2.5) produces:
-%       1) The Permission Statement
-%       2) The Conference (location) Info information
-%       3) The Copyright Line with ACM data
-%       4) NO page numbers
-%
-% as against the acm_proc_article-sp.cls file which
-% DOES NOT produce 1) thru' 3) above.
-%
-% Using 'sig-alternate.cls' you have control, however, from within
-% the source .tex file, over both the CopyrightYear
-% (defaulted to 200X) and the ACM Copyright Data
-% (defaulted to X-XXXXX-XX-X/XX/XX).
-% e.g.
-% \CopyrightYear{2007} will cause 2007 to appear in the copyright line.
-% \crdata{0-12345-67-8/90/12} will cause 0-12345-67-8/90/12 to appear in the copyright line.
-%
-% ---------------------------------------------------------------------------------------------------------------
-% This .tex source is an example which *does* use
-% the .bib file (from which the .bbl file % is produced).
-% REMEMBER HOWEVER: After having produced the .bbl file,
-% and prior to final submission, you *NEED* to 'insert'
-% your .bbl file into your source .tex file so as to provide
-% ONE 'self-contained' source file.
-%
-% ================= IF YOU HAVE QUESTIONS =======================
-% Questions regarding the SIGS styles, SIGS policies and
-% procedures, Conferences etc. should be sent to
-% Adrienne Griscti (griscti@acm.org)
-%
-% Technical questions _only_ to
-% Gerald Murray (murray@hq.acm.org)
-% ===============================================================
-%
-% For tracking purposes - this is V2.0 - May 2012
-
 \documentclass{sig-alternate-05-2015}
-%\documentclass{vldb}
 \usepackage{subfigure}
 \usepackage{marvosym}
 \usepackage{mathtools}
@@ -54,7 +6,6 @@
 \usepackage{algpseudocode}
 \usepackage{algorithm}
 \usepackage{graphicx}
-%\usepackage{url}
 \usepackage[T1]{fontenc}
 \usepackage{tikz}
 \usepackage{listings}
@@ -97,70 +48,7 @@ escapeinside={\%*}{*)},         % if you want to add a comment within your code
 %morekeywords={Definition, Theorem, Fixpoint}            % if you want to add more keywords to the set
 }
 \begin{document}
-
-% Copyright
-%\setcopyright{acmcopyright}
-%\setcopyright{acmlicensed}
-%\setcopyright{rightsretained}
-%\setcopyright{usgov}
-%\setcopyright{usgovmixed}
-%\setcopyright{cagov}
-%\setcopyright{cagovmixed}
-
-
-% DOI
-%\doi{10.475/123_4}
-
-% ISBN
-%\isbn{123-4567-24-567/08/06}
-
-%Conference
-%\conferenceinfo{PLDI '13}{June 16--19, 2013, Seattle, WA, USA}
-
-%\acmPrice{\$15.00}
-
-%
-% --- Author Metadata here ---
-%\conferenceinfo{WOODSTOCK}{'97 El Paso, Texas USA}
-%\CopyrightYear{2007} % Allows default copyright year (20XX) to be over-ridden - IF NEED BE.
-%\crdata{0-12345-67-8/90/01}  % Allows default copyright data (0-89791-88-6/97/05) to be over-ridden - IF NEED BE.
-% --- End of Author Metadata ---
-
-\title{A Generalized Model of Consistency and Isolation Levels%Alternate {\ttlit ACM} SIG Proceedings Paper in LaTeX
-%Format\titlenote{(Produces the permission block, and
-%copyright information). For use with
-%SIG-ALTERNATE.CLS. Supported by ACM.}
-}
-%\subtitle{[Extended Abstract]
-%\titlenote{A full version of this paper is available as
-%\textit{Author's Guide to Preparing ACM SIG Proceedings Using
-%\LaTeX$2_\epsilon$\ and BibTeX} at
-%\texttt{www.acm.org/eaddress.htm}}}
-%
-% You need the command \numberofauthors to handle the 'placement
-% and alignment' of the authors beneath the title.
-%
-% For aesthetic reasons, we recommend 'three authors at a time'
-% i.e. three 'name/affiliation blocks' be placed beneath the title.
-%
-% NOTE: You are NOT restricted in how many 'rows' of
-% "name/affiliations" may appear. We just ask that you restrict
-% the number of 'columns' to three.
-%
-% Because of the available 'opening page real-estate'
-% we ask you to refrain from putting more than six authors
-% (two rows with three columns) beneath the article title.
-% More than six makes the first-page appear very cluttered indeed.
-%
-% Use the \alignauthor commands to handle the names
-% and affiliations for an 'aesthetic maximum' of six authors.
-% Add names, affiliations, addresses for
-% the seventh etc. author(s) as the argument for the
-% \additionalauthors command.
-% These 'additional authors' will be output/set for you
-% without further effort on your part as the last section in
-% the body of your article BEFORE References or any Appendices.
-
+\title{A Generalized Model of Consistency and Isolation Levels}
 \numberofauthors{3} %  in this sample file, there are a *total*
 %% of EIGHT authors. SIX appear on the 'first-page' (for formatting
 %% reasons) and the remaining two appear in the \additionalauthors section.
@@ -255,82 +143,10 @@ Rodrigo Rodrigues\\ %one who did all the really hard work.}\\
  %For transactional storage systems, we consider only committed transactions; analyzing uncommitted transactions is beyond the scope of this paper.
 \end{abstract}
 
-
-%
-% The code below should be generated by the tool at
-% http://dl.acm.org/ccs.cfm
-% Please copy and paste the code instead of the example below.
-%
-%\begin{CCSXML}
-%<ccs2012>
-% <concept>
-%  <concept_id>10010520.10010553.10010562</concept_id>
-%  <concept_desc>Computer systems organization~Embedded systems</concept_desc>
-%  <concept_significance>500</concept_significance>
-% </concept>
-% <concept>
-%  <concept_id>10010520.10010575.10010755</concept_id>
-%  <concept_desc>Computer systems organization~Redundancy</concept_desc>
-%  <concept_significance>300</concept_significance>
-% </concept>
-% <concept>
-%  <concept_id>10010520.10010553.10010554</concept_id>
-%  <concept_desc>Computer systems organization~Robotics</concept_desc>
-%  <concept_significance>100</concept_significance>
-% </concept>
-% <concept>
-%  <concept_id>10003033.10003083.10003095</concept_id>
-%  <concept_desc>Networks~Network reliability</concept_desc>
-%  <concept_significance>100</concept_significance>
-% </concept>
-%</ccs2012>
-%\end{CCSXML}
-%
-%\ccsdesc[500]{Computer systems organization~Embedded systems}
-%\ccsdesc[300]{Computer systems organization~Redundancy}
-%\ccsdesc{Computer systems organization~Robotics}
-%\ccsdesc[100]{Networks~Network reliability}
-
-
-%
-% End generated code
-%
-
-%
-%  Use this command to print the description
-%
-%\printccsdesc
-
-% We no longer use \terms command
-%\terms{Theory}
-
-%\keywords{ACM proceedings; \LaTeX; text tagging}
-
 \section{Introduction}
- %Internet services and applications that use storage systems as backends to store service and application states and
- %A consistency model \cite{Burckhardt:2014:PEC:2693641.2693642} specifies constraints on the manner that objects
-% (i.e., data items) in a storage system are allowed to be modified by operations invoked from a client application.
-% An isolation level \cite{DBLP:conf/icde/AdyaLO00}  specifies constraints regarding the manner in which results of
-% operations performed on the storage system from a client application is visible from other concurrent client applications
-% or sessions.
- %For users and developers of modern internet-based applications and services, which handle large volume of data, and are
-% accessed by concurrent users spread out across the globe, consistency model \cite{Burckhardt:2014:PEC:2693641.2693642}
-% and isolation level \cite{DBLP:conf/icde/AdyaLO00}  of the underlying
-% storage system are important factors to be considered. %, as discussed below.
-  %We denote the respective client application, session, or transaction, that a storage operation is invoked from, as
-%  \emph{application scope} of that storage operation. Depending on the nature and domain of the application, storage system
-%  operations may be invoked from special-purpose application scopes, like session, transaction, or client application.
- % Concurrent applications and services invoke storage operations, like read or write, on the underlying storage system, from
-%   geographically distributed client locations.
-  Development of modern internet-based applications and services requires application developers to take into
+   Development of modern internet-based applications and services requires application developers to take into
    account the consistency \cite{Burckhardt:2014:PEC:2693641.2693642} and isolation level \cite{DBLP:conf/icde/AdyaLO00} provided by the underlying storage system, to ensure correctness and performance
-   guarantees. %We denote the respective client application, session, or transaction, that a storage operation is invoked from, as  \emph{application scope} of that storage operation. Within a given application scope, operations are executed in a synchronous manner, i.e., an operation is executed once the result from the previous operation in the program order is received.
- % A stronger consistency or a higher isolation level enforces a higher degree of coordination among
-%  replicas in a replicated storage system, resulting in increased observed latency, while guaranteeing that an operation always
-%   sees latest updated versions of any object in the storage system. This ensures that there are no anomalies in the observed
-%   results, at the cost of higher latencies. On the other hand, a weaker consistency or a lower isolation level may
-%   result in anomalies in the observed results, but cause lower observed latency.
- Currently, there is a large number of possible consistency models and isolation levels, many of which are not
+   guarantees.  Currently, there is a large number of possible consistency models and isolation levels, many of which are not
     clearly defined using formal semantics. The universe of consistency models and isolation levels is, in fact, expanding
      constantly. Newer consistency models are coming up regularly to address specific QOS (quality of service) and
      performance  requirement of different applications and services. Existing consistency definitions are tied to
@@ -358,18 +174,13 @@ Rodrigo Rodrigues\\ %one who did all the really hard work.}\\
    \emph{rules} that restrict the order in which results of operations can be observed, specified using axiomatic expressions,
    \emph{anomalies} precluded by the models, expressed using directed serialization graphs (DSGs), where vertices in a DSG
    represent operations, and edges represent the dependency relations among operations corresponding to the connecting
-   vertices. %The above definitions, comprising a combination of axiomatic rules and DSGs, can be difficult to comprehend, and subsequently may result in ambiguous interpretations of the model. This, in turn, may lead to incorrectly implemented storage systems, which do not conform to the correct specifications of the intended consistency models or intended isolation levels which the systems claim to provide. Further, state-of-the-art definitions of consistency and isolation models are tied to specific storage system implementations; making it impossible to apply a particular definition to the context of a different storage system, which is built according to different design principles.
+   vertices. 
  The rules in state-of-the-art consistency and isolation definitions specify the valid order of execution among operations
   in terms of dependency relations, like write-write (ww), write-read (wr) dependency, etc. Such dependency relations
   belong to two categories - explicit dependencies, like ww dependency, and implicit dependencies, like read-write (rw)
-  dependency, that are expressed in terms of one or more explicit dependencies. %An axiomatic rule in a state-of-the-art
-%   definition specifies a combination of valid dependency relations comprising operations on storage system objects.
+  dependency, that are expressed in terms of one or more explicit dependencies. 
  These dependency relations are not apparent from the statement of consistency and isolation definition, especially
- implicit dependencies, since those are further described in terms of explicit dependencies. %The anomaly DSGs in a
-% state-of-the-art definition depict proscribed anomalies. Each DSG depicts the proscribed dependency relations among
-%  operations in a specific invalid execution sequence. Each operation in a proscribed execution sequence is represented
-%  as a vertex in the DSG, and the edge labels specify the proscribed dependency relations. Such anomaly DSGs can not be
-%  derived directly from consistency definitions of consistency and isolation.
+ implicit dependencies, since those are further described in terms of explicit dependencies. 
 \par However, a given consistency or isolation level specifies a valid relative temporal order among operations. Such
 temporal order can be directly expressed using LTL \cite{Lamport:1994:TLA:177492.177726} operators, like next, eventually, etc.
 We argue that consistency and isolation levels can be readily expressed in term of LTL-like expressions
@@ -377,13 +188,7 @@ We argue that consistency and isolation levels can be readily expressed in term 
  Hence, we follow in the footsteps of \cite{DBLP:journals/corr/EhlersR14} to develop a specification language
  \emph{ConSpec} that is an extension of Linear Temporal Logic (LTL). LTL is a natural choice for specifying relative
  temporal ordering among operations in different consistency and isolation definitions. ConSpec uses LTL-like semantics to
-  express the rules that specify the allowed order in which results of operations can be visible to a client application. %,
-   %with respect to an observed session trace.
-   % ConSpec acts as a  unified modelling language that
-%can be used to specify any consistency model or isolation level that is not specific to any particular target storage system.
-% For a given consistency model or isolation level, we derive
-% a single ConSpec expression that specifies the order in which results of operations invoked from a given client application can be observed from a client application.
-  The ConSpec expressions specify the allowed temporal order (i.e., ``happens before" order \cite{Bailis:2013:BCC:2463676.2465279}) in which operations within a client application return results, and restricts the manner in which these results are visible to subsequent operations in the client application.
+  express the rules that specify the allowed order in which results of operations can be visible to a client application.   The ConSpec expressions specify the allowed temporal order (i.e., ``happens before" order \cite{Bailis:2013:BCC:2463676.2465279}) in which operations within a client application return results, and restricts the manner in which these results are visible to subsequent operations in the client application.
   \par We argue that specifications expressed in terms of ConSpec are much easier to reason about than the state-of-the-art definitions, which require an understanding
  of the various dependency relationships; the implicit dependencies can be particularly complex to express and
  comprehend. The main contributions of this paper are as follows.
@@ -472,8 +277,7 @@ We argue that consistency and isolation levels can be readily expressed in term 
      ${o}$, an execution of the operation $r^k(o){v_m}$ immediately follows an execution operation $w^j(o,v_l)$; the
       superscript $'$ denotes an instance of execution of a given operation in a session trace. We also use the  LTL
       operator ``eventually", i.e., $F$, do denote that an operation is preceded by the another operation in a given
-      execution sequence. The superscript ${o}$ in the above operator is used to specify that the operator defines the
-       LTL relationship ``eventually" among only the operations performed specifically on the object ${o}$.
+      execution sequence. The superscript ${o}$ in the above operator is used to specify that the operator defines the  LTL relationship ``eventually" among only the operations performed specifically on the object ${o}$.
   \par %State-of-the-art consistency models and isolation levels have been defined in different forms.
   A \emph{serialization} is a linear sequence comprising all operations comprising a global  execution on a
   storage system.
@@ -512,50 +316,8 @@ We argue that consistency and isolation levels can be readily expressed in term 
   \rightarrow \left( {v_j}^{'} = {v_i}^{'} \right) \big) \big)$.
   \end{definition}\label{def:parser}
   The above legal serialization does not comprise read operations from other clients, hence its a  serialization of a partial execution.
-% We use the notation $S$ to denote \emph{serialization set},  which is a set comprising a legal
-%  serialization for global execution of each client. %, i.e., $S$ is a set comprising a legal serialization of all operations
-%   %executed from each client application on a storage system.
-%
-%   \begin{definition}(Serialization Set)
-%   Formally, we define serialization set $S$ $S$ as a set comprising a legal serialization of all operations
-%   executed from each client application on a storage system. Thus,
-%  % a sequence of propositional variables ${\mathit{Op}^i}^{'}$, each variable ${\mathit{Op}^i}$ denoting an execution of an
-%%    operation ${\mathit{op}}^i$ in a global session trace $\mathit{St}$, as follows.
-%    $S$ =  \[ \Set{S_p \; is \; partial\; serialization\; for\; a\; client\; \mathit{Cl}} {\forall \mathit{Cl} \in \mathit{St}} \]
-%       \end{definition}\label{def:ser}
-   %We consider concurrent read/write operations performed from a given application scope on a storage system that is configured to operate under a particular consistency model or a particular isolation level.
-   %We develop a formal system for specifying the consistency and isolation models of a storage system.
-%
-%\section{Design of ConSpec}
-%%We formally define a consistency model or isolation level with axiomatic rules that specify the manner in
-%%which results of operations invoked from a given application can be observed by users or other client applications,
-%% with respect to the session trace of the client application.
-%
-%Traditionally, specifications of consistency models or isolation levels are comprised of the following components: 1) rules that restrict the order in which results of operations can be observed, specified using axiomatic expressions, 2) anomalies precluded by the models, expressed using directed serialization graphs (DSGs), where vertices in a DSG represent operations, and edges represent the dependency relations among operations corresponding to the connecting vertices. The above definitions, comprising a combination of axiomatic rules and DSGs, can be difficult to comprehend, and subsequently may result in ambiguous interpretations of the model. This, in turn, may lead to incorrectly implemented storage systems, which do not conform to the correct specifications of the intended consistency models or intended isolation levels which the systems claim to provide. Further, state-of-the-art definitions of consistency and isolation models are tied to specific storage system implementations; making it impossible to apply a particular definition to the context of a different storage system, which is built according to different design principles.
-%\par Further, axiomatic rules in state-of-the-art consistency and isolation definitions specify the valid order of execution among operations in terms of dependency relations, like write-write (ww), write-read (wr) dependency, etc. Such dependency relations belong to two categories - explicit dependencies, like ww dependency, and implicit dependencies, like read-write (rw) dependency, that are expressed in terms of one or more explicit dependencies. An axiomatic rule in a state-of-the-art definition specifies a combination of valid dependency relations comprising operations on storage system objects. These dependency relations are not apparent from the statement of consistency and isolation definition, especially implicit dependencies, since those are further described in terms of explicit dependencies. The anomaly DSGs in a state-of-the-art definition depict proscribed anomalies. Each DSG depicts the proscribed dependency relations among operations in a specific invalid execution sequence. Each operation in a proscribed execution sequence is represented as a vertex in the DSG, and the edge labels specify the proscribed dependency relations. Such anomaly DSGs can not be derived directly from consistency definitions of consistency and isolation.
-%\par However, a given consistency or isolation level specifies a valid relative temporal order among operations. Such temporal order can be directly expressed using LTL operators, like next, eventually, etc.
-%We argue that consistency and isolation levels can be readily expressed in term of LTL-like expressions
-% that specify required temporal order among operations according to given consistency or isolation level.
-% Hence, we follow in the footsteps of \cite{DBLP:journals/corr/EhlersR14} to develop a specification language
-% \emph{ConSpec} that is an extension of Linear Temporal Logic (LTL). LTL is a natural choice for specifying relative temporal ordering among operations in different consistency and isolation definitions. ConSpec uses LTL-like semantics to express the rules that specify the allowed order in which results of operations can be visible to a client application, with respect to an observed session trace. ConSpec acts as a  unified modelling language that
-%can be used to specify any consistency model or isolation level that is not specific to any particular target storage system. For a given consistency model or isolation level, we derive
-% a single ConSpec expression that specifies the order in which results of operations invoked from a given client application can be observed from a client application. The ConSpec expressions specify the allowed temporal order (i.e., ``happens before" order \cite{Bailis:2013:BCC:2463676.2465279}) in which operations within a client application return results, and restricts the manner in which these results are visible to subsequent operations in the client application.
-% \par We argue that our specifications are much easier to reason about than the state-of-the-art definitions, which require an understanding
-% of the various dependency relationships; the implicit dependencies can be particularly complex to express and
-% comprehend. Further, we also prove that the complexity of the analysis of session histories and verification of models
-%  specified using ConSpec beats the state-of-the-art.
-% Traditional \emph{server trace analysis} approaches perform trace analysis on server level execution traces, i.e.,
-% execution traces collected from the server nodes comprising the underlying storage system.  Since the such approaches
-% analyze \emph{server traces} (i.e., server level execution traces), they are dependent on the implementation and configuration
-%  of a specific storage system instance, such as replication factor, partitioning scheme, etc. They analyze server traces to
-%  check if any portion of the server traces matches the specified anomalies that a given consistency model or isolation
-%  level proscribes; process terminates with a failure once a match is found against any of the proscribed anomalies.
-%  Contrastingly, our approach analyzes session traces, making it completely implementation agnostic.
 
-% %If every path in a given execution trace can be mapped to a path in the dependency graph corresponding to the given consistency model or isolation level, the execution trace is said to satisfy the above model.
-% If every path in a given session trace can be mapped to the ConSpec formula corresponding to the given consistency model or isolation level, the session trace is said to satisfy the above model.
-
-  \section{Syntax of ConSpec}
+ \section{Syntax of ConSpec}
   Using the ConSpec modelling language, we develop specifications for commonly used consistency models and standardised
   isolation levels.  The ConSpec specification for each consistency model imposes restrictive conditions on the precedence
   or  results observed for operations performed from client applications on the underlying storage system. Such a
@@ -603,76 +365,13 @@ if there exists a partial order
    levels are  specified in terms of a conjunction of logical constraints on the given global execution comprising operations performed from
    concurrent clients on the system. Hence, such specifications also impose a partial order of the form Definition \ref{def:form0},  thus satisfying Conditions 1 and 2 of Definition \ref{def:form0}.  These consistency models are specified in the form $E^s = C =  {\mathit{Op}^i}^{'}, {\mathit{Op}^j}^{'}, {\mathit{Op}^k}^{'}, {\mathit{Op}^l}^{'}  \in \mathit{St} \\
          \left( {\mathit{Op}^i}^{'} R {\mathit{Op}^j}^{'} \wedge ... \wedge  {\mathit{Op}^k}^{'} R^{'} {\mathit{Op}^l}^{'} \right)$.
-   %Thus, $E^s$ comprises to forms - \textbf{form-1} and \textbf{form-2};
-%    \textbf{form-1} is a conjunction
-%   of constraints  imposed on the global execution comprised of operations performed from concurrent clients, and
-%   \textbf{form-2} is a conjunction of constraints on an equivalent legal serialization for operations comprising the above
-%   global execution. In the former format of specification, the global execution is represented by the set
-%   $\mathit{St}$.
-%   \par
-%  % \begin{definition}(Generalized Specification)
-%   %A ConSpec specification is a logical expression of the general form $E^s$ = $E,$ %; \mathcal{C}$,
-%    %where $E$ is a conjunction of one or more propositional expression.
-%     The \textbf{form-1} format of ConSpec specifications is expressed in the general format $E^s = A \rightarrow B$, where $A$ and $B$ are LTL-like expressions comprising propositional logic variables, composed with both traditional LTL operators and specialised LTL-like operators. $\rightarrow$ is  the traditional ``implies" operator.
-%     $A$ is a precondition on the observed results or precedence of conflicting operations observed in a session trace $\mathit{st}$. Thus, $A$ is denoted by
-%    an LTL expression of the form
-%    $A$ = ${\mathit{Op}^i}^{'} R {\mathit{Op}^j}^{'} \wedge ... \wedge {\mathit{Op}^k}^{'} R {\mathit{Op}^l}^{'}$, where
-%    ${\mathit{Op}^i}^{'}$, ${\mathit{Op}^j}^{'}$,  ${\mathit{Op}^k}^{'}$, and  ${\mathit{Op}^l}^{'}$ are LTL expressions denoting the temporal event of execution of operations $\mathit{op}^j$,
-%     $\mathit{op}^j$, $\mathit{op}^k$, and $\mathit{op}^l$, respectively. $R$ and $R^{'}$ is an LTL operator. $B$ is a postcondition that comprises a conjunction of one more constraints on the results or precedence of operations  in an equivalent legal serialization for a global execution comprised of operations performed by one or more concurrent clients. Thus, the postcondition $B$ is  expressed in the form $B$ = $\exists \mathit{Ser} \mathit{
-%                                        {\mathit{Op}^i}^{'} R^{'} {\mathit{Op}^j}^{'} \in  \mathit{Ser}}$, where $\mathit{Ser}$ is a legal serialization
-%     belonging to any of the formats specified in Definitions \ref{def:ser}, \ref{def:clientser}, or \ref{def:parser}.
-%     $R^{'}$ is an LTL operator, and $\wedge$ is the logical conjunction operator.
-%    Thus, the generic syntax of \textbf{form-1} is
-%    \begin{align}\label{form-1}
-%    \begin{split}
-%    E^s = \left( {\mathit{Op}^i}^{'} R {\mathit{Op}^j}^{'} \in \mathit{st} \wedge ... \wedge {\mathit{Op}^k}^{'} R {\mathit{Op}^l}^{'} \in \mathit{st}
-%     \right)\; \rightarrow \\
-%      \exists \mathit{Ser} \; \left( {\mathit{Op}^i}^{'} R^{'} {\mathit{Op}^j}^{'} \in  \mathit{Ser} \right).
-%    \end{split}
-%    \end{align} %, and $<...>$ is a qualifier which denotes that the expression enclosed within the qualifier is optional, i.e., the condition represented by  enclosed expression is not a necessary condition.
-%     The \textbf{form-2} format of ConSpec specifications is expressed as $E^s$ = $C$, where $C$ is a conjunction of
-%     several LTL expressions, each of which imposes constraints on the results and precedence of operations in the
-%     global execution $\mathit{St}$. Thus, $C$ is expressed in the form $C$ = $\mathit{\wedge
-%                                        {\mathit{Op}^i}^{'} R {\mathit{Op}^j}^{'} \in \mathit{St}}$.
-%     Thus, \textbf{form-2} format of ConSpec specifications is expressed as
-%     \begin{align}\label{form-2}
-%     \begin{split}
-%    E^s = C =  {\mathit{Op}^i}^{'}, {\mathit{Op}^j}^{'}, {\mathit{Op}^k}^{'}, {\mathit{Op}^l}^{'}  \in \mathit{St} \\
-%         \left( {\mathit{Op}^i}^{'} R {\mathit{Op}^j}^{'} \wedge ... \wedge  {\mathit{Op}^k}^{'} R^{'} {\mathit{Op}^l}^{'} \right)
-%    \end{split}
-%    \end{align}
-%     \par Here, we show that the specification formats form-1 and form 2, defined in Equations \ref{form-1} and \ref{form-2},
-%    are special instances of Definition \ref{def:form0}. %The condition 2 for Definition \ref{def:form0} can be derived from the Equations \ref{form-1}
-%   %and \ref{form-2} as follows.
-%    First, we consider that $E^s$ is of the form specified according to {form-1 given in
-%    Equation \ref{form-1}.  Instead of $\mathit{St}$, form-1 is expressed in terms of an equivalent legal serialization
-%    $\mathit{Ser}$ comprising all operations in $\mathit{St}$. Since $\mathit{Ser}$ is a reordering of the operations in
-%    $\mathit{St}$, $\mathit{Ser}$ can be expressed as a partial order $\preccurlyeq^{'}$ on $\mathit{St}$, i.e.,
-%    $\mathit{Ser} \; \equiv \; \left( \mathit{St}, \preccurlyeq^{'} \right)$. Thus, the term $\mathit{Ser}$ in  form-1 is a subset of
-%    the partial order set $ \preccurlyeq , \mathit{St}$. Further, by definition, the binary relations $R, ... ,R^{'}$,
-%    are a specialized instance of the partial order $\preccurlyeq$ (refer to Condition 1 in Definition \ref{def:form0}).
-%    Hence, the terms ${\mathit{Op}^i}^{'} R {\mathit{Op}^j}^{'} \in \mathit{st} \wedge ... \wedge {\mathit{Op}^k}^{'} R {\mathit{Op}^l}^{'} \in \mathit{st}$
-%   in the LHS of form-1  and the term ${\mathit{Op}^i}^{'} R^{'} {\mathit{Op}^j}^{'}$ in RHS of  form-1 satisfy the
-%   partial order $\preccurlyeq$. Combining the above conditions, it is trivially observed that LHS and RHS of form-1
-%   satisfy $\preccurlyeq$.
-%   Following the same line of reasoning we can prove that form-2 (refer to Equation \ref{form-2}) satisfies $\preccurlyeq$;
-%   this, in turn, proves Condition 2.
-   \par  In the next section, we specify each consistency or isolation level in terms of an expression $E^s$ corresponding to each consistency or isolation level.
-%Let $\wedge$ be the logical operator for conjunction. An expression $A \wedge B$ denotes that both the conditions represented by the propositional logic variables $A$ and $B$ must hold.
-%Some
-%consistency levels, like TSO, and all isolation levels, that may not be
-%expressed in the form of $B \rightarrow C$,
-%because of the absence of notions of $B$ and $C$. Those consistency models are specified as a conjunction of multiple restricting conditions.
-  The consistency model Strict
+     \par  In the next section, we specify each consistency or isolation level in terms of an expression $E^s$ corresponding to each consistency or isolation level.
+ The consistency model Strict
    Serializability is defined in terms of LTL constraints on the order among all operations performed each client in a global
    execution (represented by the global session trace $\mathit{St}$) with respect to an equivalent legal serialization of a client $S_c$. For Strict serializablity, $E^s$ is
    represented by a
    conjunction of one
-   or more LTL constraints on operations comprised in $S_c$. Since $S_c$ comprises all operations from all clients in $\mathit{St}$, the strict serializability constraint is a \emph{total order} relation over concurrent clients executing on the underlying storage system.  In other words, strict serializability imposes a total order over a global execution comprising all clients, thus imposing a total order with respect to the global session trace $\mathit{St}$.  %Montonic Write consistency is defined in terms of LTL
-%   constraints on an equivalent legal serialization $S$, comprising all operations in the global execution $\mathit{St}$
-%   composed of operations performed by all concurrent clients. Hence, for Monotonic Write, $B$ is represented by LTL
-%   constraints on operations comprised in $S$.
- Processor consistency and Total Store Order, which are not defined in terms
+   or more LTL constraints on operations comprised in $S_c$. Since $S_c$ comprises all operations from all clients in $\mathit{St}$, the strict serializability constraint is a \emph{total order} relation over concurrent clients executing on the underlying storage system.  In other words, strict serializability imposes a total order over a global execution comprising all clients, thus imposing a total order with respect to the global session trace $\mathit{St}$.   Processor consistency and Total Store Order, which are not defined in terms
    of legal serialization, impose constraints on operations comprised in the global execution composed of operations
    performed by one or more concurrent clients. Hence, for Processor consistency and Total Store Order, the specifications $E^s$ comprise a
    conjunction of LTL constraints on operations comprised in the global execution $\mathit{St}$. This, in turn, implies that all of the the above mentioned consistency models can be regarded as total orders over operations performed by all clients executing on the storage system, expressed in terms of total order relations on the global session trace  $\mathit{St}$ in their respective specifications $E^s$ . 
@@ -682,101 +381,7 @@ if there exists a partial order
   a given client, along with only write operations from other clients. Specifications of these consistency models, $E^s$, comprise a
    conjunction of one or more LTL constraints on operations comprised in $S_p$. Since $S_p$ %comprises only write operations performed by other clients apart from operations performed by a given client, and
    does not comprise read operations performed by other concurrent clients, consistency models which impose constraints on $S_p$ can only be regarded as \emph{partial orders} over a global execution comprising operations performed by all concurrent clients on the underlying storage system. An LTL formula representing the specification of such a consistency model can not be regarded as a total order over operations performed by all clients (represented by the global session trace $\mathit{St}$). By definition, an LTL formulas satisfies the following properties: 1) irreflexivity, since LTL defines a linear order over time, and this linearity implies that there can not be any cyclic relation in LTL formulas, 2)  transitivity, which follows trivially from the linear order imposed by LTL, and 3) asymmetric, which follows directly from conditions 1 and 2. Since the above group of consistency models are specified in terms of LTL constraints, they, in turn, are irreflexive, transitive, and asymmetric. Hence, by definition, such consistency models are regarded as \emph{strict partial orders} over all clients.    
-   % \end{definition}\label{def:long}
-    %In a given specification $\mathcal{E}$, all operations referred to in  $A$ and $B$ are invoked from the same client application.
-    %$A$ and $B$ can be thought of as the pre-condition and post-condition for a specification $\mathcal{E}$.
-    %In the above generalized expression $\mathcal{E}$, $B$ is a precondition expressed in terms of the of precedence relation among operations observed in a given session trace, $C$ is the necessary and sufficient postcondition that specifies a valid legal serialization for the given consistency or isolation level, and alternatively $\mathcal{A}$ represents the anomaly proscribed by the concerned consistency or isolation level. In other words, $A$ expresses some conditions
-    %regarding the order of storage operations in an observed session trace. $B$
-    %expresses conditions regarding a valid legal serialization order comprising the storage operations observed in a given session trace.
-  %, and $C$, respectively.
-    % Alternatively, since the condition $E^s$ is both necessary and sufficient to specify a consistency model, the
-%      specification $\mathcal{E}$ in Definition \ref{def:long} can be rewritten to include only the condition
-%      $\mathcal{E}^{s}$, omitting the condition $C$. On the other hand, it might suffice to consider only the anomaly condition $C$
-%      if there is an anomaly present in a given session trace.
-     %\begin{definition}(Shorter Specification)
-%      The shorter form of specification for a consistency or isolation level is given by an expression
-%      $\mathcal{E}^{s}$ = $A \rightarrow B$, where $A$ is a precondition regarding a session trace,  and $B$ is a postcondition that imposes restriction
-%     that specifies a legal serialization for the given consistency or isolation level.
-%     \end{definition}\label{def:short}
-     %Typically, the length of the expression $C$ is considerably larger than that of $E^s$. As shown below, for some consistency models,
-%     like Total Store Order (TSO) or Processor Consistency (PC), the length of $C$ is 4 or 5 times that of $E^s$. Hence,
-%      there is a tradeoff that needs to be considered to decide whether to use $E^s$ or $C$ for specifying a given
-%      consistency model or isolation level. The expression
-%      $\mathcal{C}$ in  Definition \ref{def:long} is a conjunction of multiple restricting conditions, and the
-%      verification process terminates as soon as just one of the above restrictions fail on a given session trace.
-%  Thus, in presence of anomalies in a session trace, the verification terminates earlier when $C$ instead of using $E^s$.
-%  Hence, the anomaly condition $C$ can be used for verification of a given session trace
-%      as the complexity of verification (time complexity) is better while considering $C$ instead of $E^s$.
-%, are specified using a \emph{restrictive} form of specification, given below.
-  %\begin{definition}(Restrictive Specification)
-%  The restrictive form of specification for a consistency or isolation level is given by an expression
-%      $\mathcal{E}^r$ = $C$, where $A$ is a precondition regarding a session trace,  and $B$ is a postcondition that imposes restriction
-%     that specifies a legal serialization for the given consistency or isolation level.
-%     \end{definition}\label{def:restrict}
- %\par A serialization is a sequence in which a group of storage operations are  executed on a storage system. A serialization is said to be legal if every read operation returns the value written by the latest write operation preceding it in the serialization. Chockler et al. \cite{Chockler2000} define a consistency model in terms of a legal serialization,
-% comprising a linear arrangement of the operations performed by a client application, that the model allows.
-%   Following Chockler et al., we also define consistency models with respect to a \emph{legal serialization} of a
-%  given sequence of operations executed in a session trace. We use the notation $\mathit{Si}$ to denote a legal serialization comprising all operations
-%  executed from a given client application.
-%   Let the symbol $\mathit{st}$ denotes a given session trace for a given client application. Let $\mathit{St}$ denote the set of all
-%   session traces, which is equivalent to the global execution order $\sigma$ of Chockler et al. $\mathit{St}$ is a partial order comprising
-%   all session traces executed in a system. The operations executed in each individual session trace comprised in ordered in $\mathit{St}$ are ordered in $\mathit{St}$ according to
-%   their temporal order of execution. Let the propositional variable ${\mathit{Op}^i}^{'}$ denote an execution of the
-%   i\textquotesingle th operation executed from a given client application in a session trace.
-%   \begin{definition}(Serialization)
-%   Formally, we define $\mathit{Si}$ as
-%   a sequence of propositional variables ${\mathit{Op}^i}^{'}$, each variable ${\mathit{Op}^i}$ denoting an execution of a
-%   specific operation ${\mathit{op}}^i$ in a session trace $\mathit{st} \in \mathit{St}$, as follows.
-%    $\mathit{Si}$ = $\left( {\mathit{Op}^i}^{'} \right),$ ${\mathit{Op}^i}^{'} \in \mathit{st}$, such that
-%  $\forall \left( {\mathit{Op}^i}^{'} = {W^i}^{'} \wedge {\mathit{Op}^j}^{'} = {R^j}^{'} \right)
-%  \big( \left( {\mathit{Op}^i}^{'} F {\mathit{Op}^j}^{'} \right) \wedge \\
-%  \big(\not\exists {\mathit{Op}^k}^{'} = {W^k}^{'} \left( {\mathit{Op}^i}^{'}  F {\mathit{Op}^k}^{'} F {\mathit{Op}^j}^{'} \right) \big) \wedge \left( {v_j}^{'} = {v_i}^{'} \right) \big)$.
-%   \end{definition}\label{def:ser}
-%   \begin{definition}(Serialization of a Partial Execution)
-%   The notation $\mathit{Si}_p$ is used to denote a legal serialization of a partial execution comprising all    operations
-%   performed by a given client application and all write
-%  operations  executed from all other concurrent client applications; the above partial execution is denoted as $\sigma |i + w$ by Chockler et al.. Thus, we formally denote $\mathit{Si}_p$ as
-%  \\ $\mathit{Si}_p$ = $\left( {\mathit{Op}^i}^{'} \right),$ $\left( {\mathit{Op}^i}^{'} \in \mathit{st} \right) \vee \left(
-%  {\mathit{Op}^i}^{'} = {W^i}^{'} \wedge {\mathit{Op}^i}^{'} \not\in \mathit{st} \right),$ such that
-%  $\forall \left( {\mathit{Op}^i}^{'} = {W^i}^{'} \wedge {\mathit{Op}^j}^{'} = {R^j}^{'} \right)
-%  \big( \left( {\mathit{Op}^i}^{'} F {\mathit{Op}^j}^{'} \right) \wedge \\
-%  \big( \not\exists {\mathit{Op}^k}^{'} = {W^k}^{'} \left( {\mathit{Op}^i}^{'}  F {\mathit{Op}^k}^{'} F {\mathit{Op}^j}^{'} \right) \big) \wedge \left( {v_j}^{'} = {v_i}^{'} \right) \big)$.
-%  \end{definition}\label{def:parser}
-   %We use the notation $S$ to denote a legal
-%  serialization comprising execution of all operations executed from all client applications on a system.
-%   Let the symbol $\mathit{st}$ denotes a given session trace for a given client application. %Let $\mathit{St}$ denote the set of all
-%   session traces, which is equivalent to the global execution order $\sigma$ of Chockler et al. $\mathit{St}$ is a total
-%    order comprising all session traces collected from all clients executing in a system. The operations executed in each individual session
-%   trace comprised in ordered in $\mathit{St}$ are ordered in $\mathit{St}$ according to
-%   their temporal order of execution.
- %Let the propositional variable ${\mathit{Op}^i}^{'}$ denote an execution of the
-%   i\textquotesingle th operation executed from a given client application in a session trace.
-%   \begin{definition}(Serialization)
-%   Formally, we define $S$ as
-%   a sequence of propositional variables ${\mathit{Op}^i}^{'}$, each variable ${\mathit{Op}^i}$ denoting an execution of an
-%    operation ${\mathit{op}}^i$ in a global session trace $\mathit{St}$, as follows.
-%    $S$ = $\left( {\mathit{Op}^i}^{'} \right),$ ${\mathit{Op}^i}^{'} \in \mathit{St}$, such that
-%  $\forall \left( {\mathit{Op}^i}^{'} = {W^i}^{'} \wedge {\mathit{Op}^j}^{'} = {R^j}^{'} \right)
-%  \big( \left( {\mathit{Op}^i}^{'} F {\mathit{Op}^j}^{'} \right) \wedge \\
-%  \big(\not\exists {\mathit{Op}^k}^{'} = {W^k}^{'} \left( {\mathit{Op}^i}^{'}  F {\mathit{Op}^k}^{'} F {\mathit{Op}^j}^{'} \right) \big) \wedge \left( {v_j}^{'} = {v_i}^{'} \right) \big)$.
-%   \end{definition}\label{def:ser}
-%   \begin{definition}(Serialization of a Client)
-%   We formally define serialization of a client, $S_c$, as the restriction of the serialization to  the operations invoked by a particular client application, which in turn,
-%   corresponds to operations observed in a particular session trace $\mathit{st}$.
-%    $S_c$ = $\left( {\mathit{Op}^i}^{'} \right),$ \\
-%     $\left( {\mathit{Op}^i}^{'} \in S \wedge {\mathit{Op}^i}^{'} \in \mathit{st} \right)$.
-%   \end{definition}\label{def:clientser}
-%   \begin{definition}(Serialization of a Partial Execution)
-%   The notation $S_p$ is used to denote a legal serialization of a partial execution comprising all    operations
-%   performed by a given client application and all write
-%  operations  executed from all other concurrent client applications; the above partial execution is denoted as $\sigma |i + w$ by Chockler et al.. Thus, we formally denote $S_p$ as
-%  \\ $S_p$ = $\left( {\mathit{Op}^i}^{'} \right),$ $\left( {\mathit{Op}^i}^{'} \in \mathit{st} \right) \vee \left(
-%  {\mathit{Op}^i}^{'} = {W^i}^{'} \wedge {\mathit{Op}^i}^{'} \not\in \mathit{st} \right),$ such that
-%  $\forall \left( {\mathit{Op}^i}^{'} = {W^i}^{'} \wedge {\mathit{Op}^j}^{'} = {R^j}^{'} \right)
-%  \big( \left( {\mathit{Op}^i}^{'} F {\mathit{Op}^j}^{'} \right) \wedge \\
-%  \big( \not\exists {\mathit{Op}^k}^{'} = {W^k}^{'} \left( {\mathit{Op}^i}^{'}  F {\mathit{Op}^k}^{'} F {\mathit{Op}^j}^{'} \right) \big) \wedge \left( {v_j}^{'} = {v_i}^{'} \right) \big)$.
-%  \end{definition}\label{def:parser}
-
+  
  \section{List of ConSpec Specifications for Various Consistency Models and Isolation Levels}
   Here, we present the ConSpec specifications for most common consistency models and isolation levels documented till date in the literature \cite{Chockler2000, Terry:1994:SGW:645792.668302, Burckhardt:2014:PEC:2693641.2693642}. We provide the detailed derivation of these specifications later in Section \ref{sec:derive}.
   \subsection{Specifications for Consistency Models}
@@ -1456,356 +1061,8 @@ comprised of all operations in a global execution. Thus, Strict serializability 
  TSO 
  imposes restrictions on the execution order and observed results among all operations performed by different concurrent clients observed in a global session trace $\mathit{St}$. Hence, it directly follows from the definitions that TSO imposes a partial order on  $\mathit{St}$, where each operation performed. by a given client in $\mathit{St}$ is bounded by a partial order relation with an operation in $\mathit{St}$ performed by another concurrent clienr.
  Hence, these consistency models require strict synchronization among operations from different clients, such that
- operations from each client must  be executed in isolation from other concurrent clients.   %Under these consistency models,
-% a pair of concurrent clients, namely $\mathit{Cl}_1$ and $\mathit{Cl}_2$, fails to provide high availability guarantees in a partitioned network, where there
-% all communication between $\mathit{Cl}_1$  and  $\mathit{Cl}_2$ are lost; hence, they are CAP-strong.
-% Thus, CAP-strong consistency models either restrict the observed results or execution order among operations in
-% a given global execution (represented by global session trace $\mathit{St}$), or in an equivalent legal serialization $\mathit{Ser}$
-% comprising all operations from all concurrent clients.
-% Generalizing from the above discussion, a consistency model is CAP-strong whenever it imposes constraints on the
-% observed results or execution order among operations in a global execution comprising operations from all clients, or
-% in an equivalent legal serialization for a given global execution.
- %For MW, $E^s$ imposes constraints on operations comprised in an equivalent legal serializatiosn $S$,
-%consisting of all operations performed by all concurrent clients in a given global execution.
- %PC and TSO
-%imposes LTL constraints on operations comprised in the global execution composed of all operations performed
-%by all concurrent clients, represented by the global session trace $\mathit{St}$.
-%Thus, Strict Serialization, PC, and TSO imposes constraints on the order among operations in a
-% global execution  comprising all operations performed by all clients in the storage system,
-%  or in an equivalent legal serialization for a global execution.
- % Following the above line of reasoning, we rewrite CAP theorem as follows.
-%\begin{figure*}[htpb]
-%\centering
-%%\noindent
-%\subfigure[RYW]{ \includegraphics[width=0.45\linewidth,height=6cm]{RYW.eps}\label{fig:label-ryw}}\hfill
-%\subfigure[MR]{\includegraphics[width=0.45\linewidth,height=6cm]{MR.eps}\label{fig:label-mr}}\hfill
-%\subfigure[Causal]{\includegraphics[width=0.45\linewidth,height=6cm]{Causal.eps}\label{fig:label-causal}}\hfill
-%\subfigure[Strict Serializability]{ \includegraphics[width=0.45\linewidth,height=6cm]{Strict.eps}\label{fig:label-strict}}\hfill
-%\subfigure[WFR]{ \includegraphics[width=0.45\linewidth,height=6cm]{WFR.eps}\label{fig:label-wfr}}\hfill
-%\subfigure[MW]{ \includegraphics[width=0.45\linewidth,height=6cm]{MW.eps}\label{fig:label-mw}}\hfill
-%\caption{Violation Examples}
-%%Manually chosen weak read-write consistency levels ONE/ANY are optimal (i.e., satisfy the subSLA) for low read proportions (i.e, in $<=55$\% cases) (Figures \ref{fig:label-8}, \ref{fig:label-9},
-%%\ref{fig:label-10}, \ref{fig:label-11}, \ref{fig:label-12}, \ref{fig:label-13}, and \ref{fig:label-14}). Manually chosen strong read-write consistency levels
-%%satisfy the subSLA for high read proportions (i.e, in $<=75$\% cases) (Figures \ref{fig:label-4}, \ref{fig:label-5}, \ref{fig:label-6}, and
-%%\ref{fig:label-7}).
-%%OptCon %is at least as effective as the optimal fixed consistency settings
-%% satisfies the subSLA (Figure \ref{fig:label-15}) for all possible read proportions by choosing the optimal consistency levels for each given read proportion.}
-%\end{figure*}
-%
-%\begin{figure*}[htpb]
-%\centering
-%%\noindent
-%\subfigure[TSO]{ \includegraphics[width=0.45\linewidth,height=6cm]{TSO.eps}\label{fig:label-tso}}\hfill
-%\subfigure[PC]{\includegraphics[width=0.45\linewidth,height=6cm]{PC.eps}\label{fig:label-pc}}\hfill
-%\subfigure[PL-1]{\includegraphics[width=0.45\linewidth,height=6cm]{PL1.eps}\label{fig:label-1}}\hfill
-%\subfigure[PL-2]{ \includegraphics[width=0.45\linewidth,height=6cm]{PL2.eps}\label{fig:label-2}}\hfill
-%\subfigure[PL-3]{ \includegraphics[width=0.45\linewidth,height=6cm]{PL3.eps}\label{fig:label-3}}\hfill
-%\subfigure[PL-2.99]{ \includegraphics[width=0.45\linewidth,height=6cm]{PL299.eps}\label{fig:label-299}}\hfill
-%\caption{More Violation Examples}
-%%Manually chosen weak read-write consistency levels ONE/ANY are optimal (i.e., satisfy the subSLA) for low read proportions (i.e, in $<=55$\% cases) (Figures \ref{fig:label-8}, \ref{fig:label-9},
-%%\ref{fig:label-10}, \ref{fig:label-11}, \ref{fig:label-12}, \ref{fig:label-13}, and \ref{fig:label-14}). Manually chosen strong read-write consistency levels
-%%satisfy the subSLA for high read proportions (i.e, in $<=75$\% cases) (Figures \ref{fig:label-4}, \ref{fig:label-5}, \ref{fig:label-6}, and
-%%\ref{fig:label-7}).
-%%OptCon %is at least as effective as the optimal fixed consistency settings
-%% satisfies the subSLA (Figure \ref{fig:label-15}) for all possible read proportions by choosing the optimal consistency levels for each given read proportion.}
-%\end{figure*}
-
-%\section{Violation Examples: Verified \\ Against ConSpec Specifications}
-%  Using example session traces, we illustrate situations where a given consistency model is violated. Let us consider a
-%session trace $\mathit{st}_1$: $w^1(x,1), w^2(x,2), r^1(x){2}, r^2(x){1}$ to demonstrate how violation of RYW consistency can occur.
-% From the session trace $\mathit{st}_1$, the following LTL expression  \\ $W^1 F W^2 F R^1 F R^2$ follows
-% directly from the temporal order of execution as per the session trace. In $\mathit{st}_1$, the read operation $r^1(x){2}$
-% follows the write operation $w^1(x,1)$ can be expressed by the LTL expression $W^1 F R^1$; which satisfies the
-% condition given in LHS of the shorter specification $E^{s}$ in Equation \ref{eqn:MR} if $W^i$ = $W^1$, $R^j$ = $R^1$. The session trace
-% $\mathit{st}_1$ can be transformed into the following partial legal serializations (that also comprises all write operations from other
-% clients: $S_p^1$ = $W^1 F R^2 F W^2 F R^1$, $S_p^2$ = $W^2 F R^1 F W^1 F R^2$,
-%  and $S_p^3$ = $R^1 F W^2 F W^1 F R^2$.
-% Only for $S_p^1$, the condition $W^1 F R^2 \in S_p^1$ holds, which does not hold for $S_p^2$ and $S_p^3$.
-% thus the condition corresponding to the RHS of the implies operator $\rightarrow$ in $E^{s}$ , given in Equation \ref{eqn:RYW}, holds.
-%  %$W^k$ preceding  $W^1$ such that the above LTL condition holds.
-%  Next, we consider the sequence in the session trace where the
-%   write operation $w^1(x,1)$ is followed by the read operation  $r^2(x){1}$, expressed by the LTL expression $W^1 F R^2$. As discussed before a partial
-%  serialization $S_p^1$ exists for the session trace such that $W^1 F R^2 \in S_p^1$, satisfying the first
-%  condition in the RHS of Equation \ref{eqn:RYW}.
-%  %Also, following the same argument as
-%%   above, there does not exist a $w^k$ such that the temporal order represented by the LTL condition $W^k F^x W^1 F^x R^2$ holds.
-%  Next, we consider the sequence write operation $W^2$ followed by $R^1$ in the session trace, given as $W^2 F R^1$.
-%  This implies that the condition $W^i F^x R^j$ in the LHS of the $E^{s}$ condition in Equation \ref{eqn:RYW} holds, where $W^i$ = $W^2$ and
-%  $R^j$ = $R^1$. Again a legal partial serialization $S_p^1$ exists such that $W^2 F R^1 \in S_p^1$.
-%%  Regarding the second condition in the RHS of  Equation \ref{eqn:RYW}, there does not exist
-%%  a write operation $W^k$ such that the LTL conditions $W^k F^x W^i F^x R^j$ and $v_j=v_k$ hold, where $W^i$ = $W^2$
-%%  and $R^j$ = $R^1$. Thus, the condition $\not\exists W^k \in \mathit{st} \left( W^k F^x W^i F^x R^j \in \mathit{st} \right) %\wedge \left( W^k F W^i \in \mathit{st} \right)
-%% \wedge \left( v^j = v^k \right)$ does not hold, where $\mathit{st}$ = $\mathit{st}_1$.
-%  %$R^1$ returns a value 2 was written by the write operation $W^1$ which precedes $W^2$.
-%%   Thus the condition
-%%  $\not\exists W^k \in \mathit{st} \left( W^k F^x W^i F^x R^j \in \mathit{st} \right) %\wedge \left( W^k F W^i \in \mathit{st} \right)
-%% \wedge \left( v^j = v^k \right)$ holds, where $\mathit{st}$ = $\mathit{st}_1$.
-%  Next, we consider the sequence write operation $W^2$ followed by $R^2$ in the session trace, given as $W^2 F R^2$.
-%  This implies that the condition $W^i F^x R^j$ in the LHS of $E^{s}$ in Equation \ref{eqn:RYW} holds, where $W^i$ = $W^2$ and
-%  $R^j$ = $R^2$. $S_p^1$ is the only legal partial serialization that satisfies the condition $W^i F R^j \in S_p$
-%   in the RHS of Equation \ref{eqn:RYW} for all the above write-read operation sequences. However, $S_p$ does not satisfy
-%  $W^i F R^j \in S_p$ for the write-read sequence $W^2 F R^2$.
-%  %Regarding the second condition in the RHS of  Equation \ref{eqn:RYW}, there does exist
-%%  a write operation $W^k$ = $W^1$ such that the LTL condition $W^k F^x W^i F^x R^j$ holds,  where $W^i$ = $W^2$ and
-%%  $R^j$ = $R^2$. Further, the read operation
-%%  $R^2$ returns a value 1 which was written by the write operation $W^1$ that precedes $W^2$. Thus the condition $v_j=v_k$
-%%  holds, and thus, in turn, the condition $\not\exists W^k \in \mathit{st} \left( W^k F^x W^i F^x R^j \in \mathit{st} \right) %\wedge \left( W^k F W^i \in \mathit{st} \right)
-%% \wedge \left( v^j = v^k \right)$ does not hold, where $\mathit{st}$ = $\mathit{st}_1$.
-%  For anomaly
-%  condition $C$  in Equation \ref{eqn:RYW} to hold, their cannot exist in the global session trace a read operation $r^k$ preceding the read operation
-%  $r^j$ (which is $r^2(x){1}$) and a write operation $w^l$ preceding $w^i$ (which is $w^2(x,2)$ in this case)
-%   such that the LTL condition $\left(  {v^k}^{'} = {v^i}^{'} \right) \wedge \big(\left( {v^j}^{'} = {v^l}^{'} \right) \vee
-%\big( \left( {W^l}^{'} F {R^j}^{'} \in \mathit{St} \right) \wedge \left( \not\exists {W^l}^{'} F {W^m}^{'} F {R^j}^{'} \in \mathit{St} \right) \big) \big)$ hold.
-%However, in the given session trace  $\mathit{st}_1$, there does exist a read $r^1(x){2}$ and a write $w^1(x,1)$, such that
-%conditions $\left(  {v^k}^{'} = {v^i}^{'} \right) $ and $\left( {v^j}^{'} = {v^l}^{'} \right)$ hold, thus, in turn,
-%violating the anomaly condition.
-%  Hence, the RYW condition is violated for the given session trace.
-% %In $\mathit{st}_1$, read operations $r^1(x){2}$ and $r^2(x){1}$ follow the $w^2(x,2)$, the latest write operation on $x$,
-%%   satisfying the RHS of Equation \ref{eqn:RYW}. However, the value returned by $r^2(x){1}$ is 1, which does not match the
-%%    value written by the latest write operation $w^2(x,2)$ preceding $r^2(x){1}$; hence, $S_1 $does not satisfy the
-%%    condition $v_m = v_l$ in Equation \ref{eqn:RYW}.  Further, the value written by $w^2(x,2)$ is not overwritten by any
-%%     subsequent write preceding $r^2(x){1}$; hence, $S_1$ does not satisfy the condition
-%%     $W^j(v_l) F^{o} W^p(v_q) F^{o} R^k{v_m}$ in  Equation \ref{eqn:RYW}. Thus $S_1$ does not satisfy Equation
-%%     \ref{eqn:RYW}.
-% \par Let us consider a session trace $\mathit{st}_2$:  $w^1(x,1)$, $\mathit{st}_2^{'}$: $w^2(x,2)$, and $\mathit{st}_2^{''}$: $r^1(x){1}, r^2(x){2}, r^3(x){1}$ to illustrate how
-% violation of MR consistency can occur. Since the above session traces comprise write operations followed by read on the same object, as well
-% as multiple read operations on same object x, they satisfy the conditions given in LHS of Equation \ref{eqn:MR}.
-% First, let us consider the sequence of read operations $r^1(x){1}$ and $r^2(x){2}$ in $\mathit{st}^2$, given by the LTL expression $R^1 F^x R^2$.
-% If and only if $R^i$ = $R^1$ and $R^j$ = $R^2$, the above sequence of reads can satisfy the LHS of the condition  $E^{s}$ in Equation \ref{eqn:MR}.
-%  The above traces can be transformed into legal partial serialization order $S_p$ =
-% $W^1 F R^1 F R^3 F W^2 F R^2$, such that $R^1 F R^2 \in S_p$ holds, thus satisfying
-% the first condition the RHS of the implies operator $\rightarrow$
-% in  $E^{s}$ in Equation \ref{eqn:MR}.
-%   Next, we consider the sequence $r^1(x){1}$ followed by $r^3(x){1}$ in the above traces, given as the LTL expression $R^1 F R^3$. The above condition satisfies the LHS of $E^s$ Equation
-%   \ref{eqn:MR}, given that
-%  $R^i$ = $R^1$ and $R^j$ = $R^3$, which, in turn, implies $v_i$ = $v_1$ = 1 and $v_j$ = $v_2$ =1. As discussed above, a
-%  legal partial serialization $S_p$ exists for the above trace, such that $R^1 F R^3 \in S_p$
-%  holds; the condition $E^s$  in the RHS of Equation \ref{eqn:MR} holds for the above sequence of reads.
-%  %Also, $W^m$ and $W^n$ are the only write operations
-%%  that can satisfy the condition $W^m F^x W^n F^x R^i F^x R^j \in \mathit{st}$. Hence,
-%%  the second condition in the RHS requires that $W^m$ = $W^1$ and $W^n$ = $W^2$, and thus $v_m$ = $v_1$ = 1 and $v_n$ = $v_2$ = 2.
-%%  Hence,  $v_n \not= v_i$, which, in turn, implies that the condition $\left( v^i = v^n \right) \wedge \left( v^j = v^m \right)$
-%%  $\left( v^i = v^n \right) \wedge \left( v^j = v^m \right)$ holds. This, in turn, second condition in the RHS of
-%%  Equation \ref{eqn:MR} holds.
-%   Next, we consider the sequence $r^2(x){2}$ followed by $r^3(x){1}$ in the above traces, given
-%  as $R^2 F R^3$. However, the above sequence of reads does not match the order among these reads in the serialization  $S_p$, i.e.,
-%  $R^2 F R^3 \in S_p$ holds;
-%    thus it does not satisfy the first condition in the RHS of Equation \ref{eqn:MR}.
-%    Further, for the LHS of Equation \ref{eqn:MR} to hold for the above sequence of reads,   $R^i$ = $R^2$ and $R^j$ = $R^3$,
-%   which, in turn, implies $v_i$ = $v_2$ = 2 and $v_j$ = $v_3$ =1.
-%   For the anomaly condition $C$ in Equation \ref{eqn:MR} to hold for the sequence of read operations $r^1(x){1}$ followed by $r^3(x){1}$, there cannot exist write
-%  operations $w^m$ and $w^n$ corresponding to the reads $r^i$ and $r^j$  such that the LTL condition
-%  $\left( {v^i}^{'} = {v^n}^{''} \right) \wedge \big( \left( {v^j}^{'} = {v^m}^{''} \right) \vee \big( \left( {W^m}^{'} F {R^j}^{'} \in \mathit{St} \right) \wedge \\ \left( \not\exists {W^m}^{'} F {W^p}^{'} F {R^j}^{'} \in \mathit{St} \right) \big)$ holds.
-%   Here, $W^m$ = $W^1$ and $W^n$ = $W^2$, since $W^m$ and $W^n$ are the only write operations in the given session history.
-%   Hence, $v_m$ = $v_1$ = 1 and $v_n$ = $v_2$ = 2. Also, it is given that
-%  $v_i$ = $v_1$ = 1 and $v_j$ = $v_2$ =2. Hence, the conditions $\left( v^i = v^n \right)$ and $ \left( v^j = v^m \right)$
-%  is satisfied; thus, in turn, the above LTL condition is also satisfied. Thus, the violation condition $C$
-%  in Equation \ref{eqn:MR} holds.
-%   %Also, $W^m$ = $W^1$ and $W^n$ = $W^2$. Hence,
-%%   $v_n$ = $v_i$ and $v_m$ = $v_j$. Thus, the second condition does not hold here.
-%    Hence, the above traces violate the MR condition.
-%   %\par
-% % In $S_2$, $r^1(x){1}$ returns a value 1, whereas it should have returned 2, which is the value written by the latest write operation $w^2(x,2)$ preceding $r^1(x){1}$. Thus, $S_2$ does not satisfy the condition $v_l = v_m$. Since there are not write operations overwriting the latest write operation $w^2(x,2)$ preceding each read, the condition $W^j(v_l) F^{o} W^x(v_y) F^{o} R^k(v_m)$ holds. Following the same line of argument, we can show that $S_2$ does not
-%% satisfy any of the  conditions in RHS of Equation \ref{eqn:MR}. Hence, $S_2$ does not satisfy Equation \ref{eqn:MR}.
-% \par Let us consider a session trace \\ $\mathit{st}_3$: $w^1(x,1), r^1(x){2}$, $\mathit{st}_3^{'}$: $r^2(x){1} w^2(x,2), r^3(x){1}$, and $\mathit{st}_3^{''}$: $r^4(x){2}, r^5(x){1}$ to demonstrate
-% a violation of Causal consistency. Since, there are successive operations with direct precedence relation on the object x, $\mathit{st}_3$
-% satisfies LHS of the $E^s$ condition in Equation \ref{eqn:Causal}.  We can transform
-% the above session traces into a partial serialization $S_p$ =
-% $W^1 F R^2 F R^3 F R^5 F W^2 F R^1 F R^4$. First, let us consider the sequence of operations
-% $w^1(x,1)$ and $r^1(x){2}$ in the above traces, given by the LTL expression $W^1 F R^1$. The above expression satisfies
-% the condition $\mathit{Op}^i F^x \mathit{Op}^j$, where $\mathit{Op}^i$ = $W^1$ and $\mathit{Op}^j$ = $R^1$;
-% thus satisfying the LHS of the implies operator $\rightarrow$ in $E^s$ in Equation \ref{eqn:Causal}. The above sequence of
-% writes and reads satisfies the condition $W^1 F R^1 \in S_p$, thus satisfying the first condition the RHS of
-% the implies operator $\rightarrow$ in $E^s$ in Equation \ref{eqn:Causal}.
-% %For the second condition in the RHS of
-%% Equation \ref{eqn:Causal} to hold, there cannot exist write  operations $W^m$ such that the LTL conditions
-%%   $W^m F^x \mathit{Op}^i F^x \mathit{Op}^j \in \mathit{st}$ and $v^j = v^m$ hold.
-%% Since there is no such $W^m$ preceding $\mathit{Op}^i$, the second condition in the RHS of Equation \ref{eqn:Causal}
-%% holds for the above sequence of operations.
-% Following the same line of argument, the sequence of operations
-%  $w^1(x,1)$ and $r^2(x){1}$, $w^1(x,1)$ and $r^3(x){1}$, $w^1(x,1)$ and $r^4(x){2}$, $w^1(x,1)$ and $r^5(x){1}$
-%  and $w^1(x,1)$ and  $w^2(x,2)$ satisfy the LHS and RHS of $E^s$ in the Equation \ref{eqn:Causal}. Next, let us consider
-%  the sequence of operations $w^2(x,2)$ and $r^3(x){1}$, which is expressed using LTL condition $W^2 F^x R^3$.
-%  Thus, the above sequence satisfies LHS of $E^s$ in the Equation \ref{eqn:Causal}. The above sequence of
-% writes and reads do not satisfies the condition $W^2 F R^3 \in S_p$, violating the RHS of $E^s$ in Equation \ref{eqn:RYW}.
-%  Let us consider the anomaly condition $C$ in Equation \ref{eqn:Causal} for the write and read operations $w^2(x,2)$ (which is
-%  $w^i$ in this case) and $r^3(x){1}$ (which is $r^j$ in this case). Since  $w^2(x,2)$ is followed by $r^3(x){1}$ in the session trace, they satisfy the LHS of the condition
-%  $C$. For the RHS of $C$ to hold, there cannot a exist write operations $w^m$ preceding the write $w^2(x,2)$ such that the
-%  LTL condition $\left( {v^j}^{'} = {v^m}^{''} \right) \vee
-% \big( \left( {W^m}^{'} F {\mathit{Op}^j}^{'} \in \mathit{st} \right) \wedge
-%\left( \not\exists {W^m}^{'} F {W^n}^{'} F {\mathit{Op}^j}^{'} \in \mathit{st} \right) \big)$
-% holds.
-% We can assign $W^m = W^1$ since $w^1(x,1)$ precedes $w^2(x,2)$. Subsequently the condition $\left( {v^j}^{'} = {v^m}^{''} \right)$
-% holds (since $R^j$ = $R^3$ and $v_j$ = 1 in this case). Hence, the RHS of $C$ is satisfied for Equation \ref{eqn:Causal} for the above sequence of operations.
-% %Also, we can assign $W^m$ = $W^1$,
-%%   $\mathit{Op}^i$ = $W^2$, and $\mathit{Op}^j$ = $R^3$, such that the LTL conditions
-%%   $W^m F^x \mathit{Op}^i F^x \mathit{Op}^j \in \mathit{st}$ holds. Further, $v_j$ = $v_m$ = 1, violating
-%%   the condition $\not\exists  \mathit{st} \left( W^m F^x \mathit{Op}^i F^x \mathit{Op}^j \in \mathit{st}
-%%   \right) \wedge \left( v^j = v^m \right)$, violating the RHS of Equation \ref{eqn:Causal}.
-% It results in
-%   violation of Causal consistency condition.
-%% \forall i, j, k, o, \mathit{st} \big( \exists \mathit{Op}^k \in  \mathit{st}
-%%\big( \mathit{Op}^i F \mathit{Op}^j \vee \\ \left( \mathit{Op}^i F \mathit{Op}^k  \wedge
-%%\mathit{Op}^k F \mathit{Op}^j \right)
-%%\vee \big( \left( \mathit{Op}^i = W^i \right) \wedge \left( \mathit{Op}^j = R^j \right) \wedge \\
-%%\left( \left( v_i = v_j \right) \vee \left( \left( v_i = v_k \right)
-%% \wedge \left( v_k = v_j \right) \right) \big) \right) \big)
-%%\\ \rightarrow \exists S_p \left( \forall \mathit{Op}^i F \mathit{Op}^j \in S_p \right)
-%%\wedge \not\exists  \mathit{st} \left( W^m F \mathit{Op}^i F \mathit{Op}^j \in \mathit{st} \right) \\
-%%\wedge \left( v^j = v^m \right) \big)
-%
-% %The operation $r^1(x){2}$ returns 2, which does not match the write operation
-%% $w^1(x,1)$ that directly preceded $r^1(x){2}$. Similarly, $r^3(x){1}$  does not return the correct value written by
-%% the latest write $w^2(x,2)$ which directly precedes $r^3(x){1}$. Thus, $S_3$ does not satisfy the conditions in Equation
-%% \ref{eqn:Causal}.
-% All the above session traces violate the specification of Strict Serializability, given in Equation
-% \ref{eqn:Strict}. Consider the session traces $\mathit{st}_3$, $\mathit{st}_3^{'}$, and $\mathit{st}_3^{''}$, which can be transformed into the legal
-% serialization $S$, which is, in this case, equivalent to  $S_p$ in absence of writes from other
-% client applications in the given session history (see above). The sequence of operations $w^1(x,1)$ and
-% $r^1(x){2}$ in the above session trace satisfies the LHS of the condition $E^s$ (i.e., the condition
-% $\mathit{Op}^i X \mathit{Op}^j$). Since $v_i \not= v_j$, the above sequence of write and read operations
-% do not satisfy the condition  in the RHS of $E^s$, i.e., it violates the condition $W^1 X R^1 \in S$.
-% For the anomaly condition $C$ to hold for the above sequence of operations, let us consider the
-% sequence of operations $w^2(x,2)$ and $r^3(x)1$. For the RHS of $C$ to hold, there cannot a exist write operations $r^k$ following the read $r^3(x)1$ such that the
-%  LTL condition $\big(  \left( {v^k}^{''} = {v^i}^{'} \right) \wedge   \left( {v^j}^{'} \not= {v^i}^{'} \right) \big) \wedge
-% \not\exists \big(  \left( {\mathit{Op}^i}^{'} = {W^i}^{'}  \oplus {R^i}^{'}  \right) \wedge  \left( {\mathit{Op}^i}^{'}  F {W^j}^{'} F  {R^k}^{'} \in \mathit{st} \right) \wedge \left( {\mathit{Op}^i}^{'} F {W^j}^{''}   F  {R^k}^{'}  F  {R^l}^{'} \in \mathit{St} \right) \big) \\
-% \big(  \left( {v^l}^{''} = {v^j}^{'} \right) \wedge   \left( {v^k}^{''} = {v^i}^{'} \right) \big)$
-% holds.
-% We can assign $r^k = r^4$ since $r^4(x)2$ follows $r^3(x)1$. Subsequently the conditions $\left( {v^k}^{''} = {v^i}^{''} \right)$
-%and $\left( {v^j}^{'} \not= {v^i}^{'} \right)$ holds, since $r^j$ yields $v_j$ = 1, and
-% $r^k$ yields $v_k$ = 2.
-% Thus, it also violates the anomaly condition in Equation \ref{eqn:Strict}, violating strict serializability.
-% \par  We consider the session traces \\ $\mathit{st}_4$: $w^1(x,1)$, $\mathit{st}_4^{'}$: $r^1(x){1}, w^2(x,2)$, and
-% $\mathit{st}_4^{''}$: $r^2(x){2}, r^3(x){1}$ to show how
-% WFR consistency can be violated. The above session traces can be transformed into a legal serialization
-% $S_p$  = $W^1 F R^1 F R^2 F W^2$. The write operation $w^1(x,1)$ follows
-%  the read operation $r^1(x){1}$, and can be expressed as $W^1 F^x R^1$. The above expression satisfies
-% the condition $W^i F R^j$, where $W^i$ = $W^1$ and $R^j$ = $R^1$. Hence, the above traces satisfy the
-% condition in the LHS of Equation \ref{eqn:WFR}. Further, by observation, the above sequence of write-read
-% operations satisfies the condition  $W^1 F R^1 \in S_p$. Thus, the condition $E^s$ in the RHS of
-% Equation \ref{eqn:WFR} holds. According to the anomaly condition $C$ in Equation \ref{eqn:WFR}, there must not
-% exist a read operation $r^n(x)$ such that the conditions $\left( R^i F^x W^j F^x R^n \in \mathit{st} \right) \wedge
-%\left( W^j F^x R^n \in \mathit{st} \right)$ and $v^n = v^i$ are satisfied. Since $r^2(x){1}$ succeeds  $w^2(x,2)$, we can
-%assign $R^n$ = $R^2$. But, the read operation $r^2(x){1}$ returns a value 1 which was written by $w^1(x,1)$; thus
-%the condition $v^n = v^i$ holds. Thus, $\mathit{st}_4$ violates the second condition in
-% RHS of Equation \ref{eqn:WFR}; hence, it violates WFR consistency.
-% \par Let us consider the session traces \\ $\mathit{st}_5$: $w^1(x,1), r^1(x){2}, w^2(x,2)$, $\mathit{st}_5^{'}$: $r^2(x){2}$, and
-% $\mathit{st}_5^{''}$: $r^3(x){1}, r^4(x){2}$, and demonstrate violation of
-%  MW consistency with it. The above session traces can be transformed in a legal serialization
-%  $S$ = $W^1 F W^2 F R^1 F R^2$.
-%   Since the above session traces comprise a sequence of successive writes $w^1(x,1), w^2(x,2)$ on same object x,
-%   it can be expressed as $W^i F W^j$, thus satisfying the LHS of $E^s$ in Equation \ref{eqn:MW}, where $W^i$ = $W^1$ and $W^j$ = $W^2$.
-%  Also, the above sequence of write operations satisfies the first condition of the RHS of Equation \ref{eqn:MW},
-%  i.e., $W^i F W^j \in S$. The above traces can be transformed into a legal serialization order $S$ =
-%   $w^1(x,1), r^2(x){1}, w^2(x,2), r^1(x){2}$, thus satisfying the first condition in the RHS of Equation \ref{eqn:WFR}.
-%   For the anomaly condition $C$ to hold, there cannot exist a sequence of write operations $w^1(x,1)$ and
-%    $w^2(x,2)$ followed by a sequence of read operations $r^k$ and $r^l$ such that the following condition holds:
-%  $\left( \not\exists  {R^k}^{'} F  {R^l}^{'} \in \mathit{St} \right)
-%   \wedge  \left( {v_k}^{'} = {v_j}^{'} \right) \wedge \\
-%   \left( {v_l}^{'} = {v_i}^{'} \right)$. For the above session trace,
-%  we assign the operations $r^2(x){2}$ and $r^3(x){1}$ to the read operation $r^k$ and $r^l$. However, the above
-%  read operations $r^k$ yields $v_k$ = 2, and $r^l$ yields $v_l$ = 1, such that the condition
-%  $\left( {v_k}^{'} = {v_j}^{'} \right) \wedge \\
-%   \left( {v_l}^{'} = {v_i}^{'} \right)$ holds.
-%   %According to the RHS of Equation \ref{eqn:MW},  there must not exist a read operation $r^n(x)$ that satisfies the
-%%   conditions $ W^i F^x W^j F^x R^n \in \mathit{st}$ and $v^n = v^i$. In other words, any operation that
-%%   follows the above write sequence must not return a value updated by a write operation that precedes the latest write.
-%%   Since the read operation $r^1(x){1}$ succeeds the sequence of writes $W^1 F^x W^2$, $R^n$ = $R^1$. But, $r^1(x){1}$
-%%   returns the value 1; thus, the condition $v^n = v^i$ holds. Thus, $\mathit{st}_5$ violates the RHS of Equation \ref{eqn:MW},
-%%    and, in turn, violates MW consistency.
-%  \par Consider a group of 2 clients (or processors), namely $\mathit{Cl}_1$ and $\mathit{Cl}^2$, respectively.  Let us
-%  consider  that operations are invoked from the above 2 clients, and a session trace  $\mathit{st}_6$ is
-%  collected as follows.
-%  $\mathit{st}_6$: $w^1(x,1), r^1(y){1}$, $\mathit{st}_6^{'}$: $w^2(y,1), r^2(x){2}$. % In
-%%   $\mathit{st}_6$, the order of write operations $w^1(x,1)$ and $w^2(y,1)$ are different in each of the
-%%  2 session traces. In $\mathit{st}^2$, $r^2(x){1}$ returned while $w^1(x,1)$ did not yet execute. In
-%%  $\mathit{st}_1$, $w^1(x,1)$ executed but $r^2(x){1}$ did not execute.
-%  For the above session trace to satisfy TSO consistency, the condition
-%  $\left( {W^i}^{'}(x) F {R^j}^{''}(x) \in \mathit{St}  \right) \wedge \\
-%    \left( {v_j}^{''} \not= {v_i}^{'} \right)  \wedge
-%  %\big( \not\exists \big( \left({R^k}(x)^{'} \in \mathit{st}^{'} \right) \wedge  \\
-%  \left( {R^k}^{''}(x) F {R^j}^{''}(x) \in \mathit{St}  \right)
-%     \wedge \left( {v_k}^{''} \not= {v_i}^{'} \right)  \\
-%     \wedge
-% %\not\exists  \big( %\left( {W^i}^{'} F {R^j}^{'} \in \mathit{st} \right) \wedge
-%\left( {R^k}^{'} F {R^j}^{'} \in \mathit{st} \right)  \wedge
-%%\left(  \mathit{st}^{'} \in \mathit{St} \right) \wedge
-%\left( {W^l}^{'} F {W^i}^{'} \in \mathit{St} \right) %\big) \\
-%\wedge \left(  {v^k}^{'} = {v^i}^{'} \right) \wedge \\
-%\big( \left( {v^j}^{'} = {v^l}^{'} \right) \vee
-%\big( \left( {W^l}^{'} F {R^j}^{'} \in \mathit{St} \right)  \wedge \\
-% \not\exists  {W^m}^{'} \left( {W^l}^{'} F {W^m}^{'} F {R^j}^{'} \in \mathit{St} \right) \big) \big)$
-%  must hold. In the above session traces, let us assign the operation  $w^1(x,1)$ as $w^i$. $r^2(x){2}$ occurs in another session trace, and thus invoked was from a different client. Further,
-%  $r^2(x){2}$ follows $w^1(x,1)$ in the global session order. Hence we can assign the operation
-%  $r^2(x){2}$ as $r^j$. Since $r^2(x){2}$ returns 2 instead of 1, the condition ${v_j}^{''} \not= {v_i}^{'} $ does not hold.
-%  Also, there doesn't exist an operation $r^k$ preceding $r^2(x){2}$ that satisfies the condition ${v_k}^{''} \not= {v_i}^{'} $.
-%  Thus, the given session trace violates Equation \ref{eqn:TSO}.
-%    \par  Consider two client applications (or processors), namely $\mathit{Cl}_1$ and $\mathit{Cl}^2$,
-%  respectively. Consider a session trace collected by executing operations on the above client  applications as follows.
-%   $\mathit{st}_7$: $w^1(x,1), w^2(y,1)$,    $\mathit{st}_7^{'}$: $r^1(x){1}$,  $\mathit{st}_7^{''}$:
-%  $r^2(y){1}, r(x){1}$. To satisfy the PC consistency, any sequence of write operations $w^i$ and $w^j$ invoked by a client must satisfy
-%  the condition $\big(\not\exists \left( {W^i}^{'} F {W^j}^{'} \in \mathit{st} \right) \wedge
-%  \left( \mathit{st}^{'} \in \mathit{St} \right) \wedge
-%  \left( {R^k}^{'} F {R^l}^{'} \in \mathit{st}^{'} \right) \big)
-% \big( \left( v_k^{''} = v_j^{'} \right) \wedge \left( v_l^{'} = v_i^{'} \right)\big)$. Thus, there must not exists a sequence of
-% reads $r^k$ and $r^l$ such that the condition  $\left( v_k^{''} = v_j^{'} \right) \wedge \left( v_l^{'} = v_i^{'} \right)$
-% holds. In the above session traces, the write operations  are executed according to the precedence order
-%  $w^1(x,1)$ followed by $ w^2(y,1)$, hence we assign $w^1(x,1)$ and $ w^2(y,1)$ as $w^i$ and $w^j$. Also, let us assign
-%  the sequence of read operations $r(x){1}$  and $r^2(y){1}$ as $r^k$ and $r^l$, respectively. According to the
-%   above condition, reads against the above writes should view the results of the above write operations
-%  according to the invocation order of these writes. However, in the given session trace, the client application
-%  $\mathit{Cl}_2$ observes the above writes out of order. Since  $r^2(y){1}$ executes before ,$r(x){1}$ in the above session
-%  traces, $\mathit{Cl}_2$ observes the result of $w^2(y,1)$ before observing result of $w^1(x,1)$.  Thus,
-%   the above traces violate Equation \ref{eqn:PC}.
-% \par Consider a session trace $\mathit{st}_8$: $w^1_{tx}(x,2), w^2_{ty}(x,5),  w^1_{ty}(y,5), \\ c_{ty},
-% w^2_{tx}(y,8), r^1_{ty}(x){5}, r^2_{ty}(y){8}, c_{tx}$. According to the  specification of PL-1 isolation level
-% (refer to Equation \ref{eqn:PL1}), there cannot exist read operations $r^m_\mathit{ty}$ and $r^n_\mathit{ty}$ such that they satisfy the condition
-% $\left( \left( v_n^{'} = v_l^{'} \right) \wedge \left( v_m^{'} = v_i^{'} \right) \right) \\ \vee \left( \left( v_n^{'} = v_j^{'} \right) \wedge \left( v_m^{'} = v_k^{'} \right) \right) $.
-% In the session trace $\mathit{st}_8$, the write operations $w^1_{tx}(x,2)$,  $w^2_{tx}(y,8)$, $w^2_{ty}(x,5)$, and $w^1_{ty}(y,5)$
-% are $W^i_{tx}$,  $W^j_{tx}$,  $W^k_{ty}$, and  $W^l_{ty}$, respectively. Also, we can assign the read operations $r^1_{ty}(x){5}$ and $r^2_{ty}(y)8$ as $r^m_\mathit{ty}$
-% and $r^n_\mathit{ty}$, respectively. Under the above assignment, we have $v_m$ = 8 and $v_n$ = 5, which in turn,
-% satisfies the conditions $\left( v_n^{'} = v_j^{'} \right) \wedge \left( v_m^{'} = v_k^{'}\right)$.
-%  % The observed execution order in transactions $tx$ and $ty$ are given as
-%%  $w^1_{tx}(o_1,5)$, $w^2_{tx}(o_2,8)$ and $w^1_{ty}(o_1,5)$, $w^2_{ty}(o_2,5)$, respectively. In $\mathit{st}_8$,
-%%  write operations in transaction $tx$ execute in the order $w^1_{tx}(o_1,5)$, $w^2_{tx}(o_2,8)$.
-%%  However,  the write operations in transaction $ty$ execute in the order $w^2_{ty}(o_1,5),  w^1_{ty}(o_2,5)$.
-%  This, in turn, satisfies the anomaly condition for PL-1. Thus, $\mathit{st}_8$ violates
-%  PL-1.
-%  \par Let us consider a session trace \\ $\mathit{st}_9$: $w^1_{tx}(x,1), r^1_{t_y}(x){1}, w^2_{tx}(x,2), c_{ty}, c_{tx}$.
-%  According to PL-2 (refer to Equation \ref{eqn:PL2}), a transaction never must read a value from an operation
-%  if the transaction executing above operation has not yet committed. In other words there must not exist a read operation
-% $r^k(x)_\mathit{ty}$ such that $r^k(x)_\mathit{ty}$ reads a value written by a write operation  $w^i(x)_\mathit{tx}$
-% that does not write the final (committed) version of the object $x$ for the transaction $\mathit{tx}$, i.e., the condition
-%  $\not\exists \big( \big(
-% {W^i}(x)^{'}_\mathit{tx}  F {W^j}(x)^{'}_\mathit{tx} F  c_\mathit{tx} \in  \mathit{st} \big)
-%   \wedge \left( v_k^{'} = v_i^{'} \right)  \big) \wedge
-%   \not\exists \big( \big(
-% {W^i}(x)^{'}_\mathit{ty}  F {W^j}(x)^{'}_\mathit{ty} F  c_\mathit{ty} \in  \mathit{st} \big)
-%   \wedge \left( v_k^{'} = v_i^{'} \right)  \big)$ does not hold. In the session trace $\mathit{st}_9$, the read operation
-%   $r^1_{ty}(x){1}$ returns a value 1 written by the operation $w^1_{tx}(x,1)$ in transaction $tx$. However, the write
-%   operation $w^2_{tx}(x,2)$, which follows $w^1_{tx}(x,1)$ in $\mathit{st}_9$, writes the committed version (i.e., the
-%   final version) of $x$, which is 2. Thus, the above condition does not hold for  $\mathit{st}_9$, resulting in violation of PL-2.
-%  \par Consider a session trace \\ $\mathit{st}_{10}$: $r^1_{tx}(\mathit{tx}){50}, r^1_{\mathit{ty}}(x){-50}, r^2_{\mathit{ty}}(y){100},
-%  w^1_{\mathit{ty}}(x,100), w^2_{\mathit{ty}}(y,50), \\
-%   c_{\mathit{ty}},  w^1_{\mathit{tx}}(y,-50), r^2_{\mathit{ty}}(x){100}, r^2_{\mathit{tx}}(y){-50}, c_{\mathit{tx}}$.
-%  In $\mathit{st}_{10}$, the read operation $r^1_{\mathit{tx}}(x){50}$ on object $x$ in $\mathit{tx}$ is followed by write
-%  operation  $w^1_{\mathit{ty}}(x,100)$.
-%    The read operation $r^2_{\mathit{ty}}(x){100}$ following the commit $c_{\mathit{ty}}$ returns the value 100, indicating a rw
-%    dependency between transactions $\mathit{tx}$ and $\mathit{ty}$. Similarly, the read operation $r^2_{\mathit{ty}}(y){100}$
-%     on object $y$ in $\mathit{ty}$ is followed by write
-%  operation  $w^1_{\mathit{tx}}(y,50)$.
-%    The read operation $r^2_{\mathit{tx}}(y){-50}$ following the commit $c_{\mathit{ty}}$ returns the value -50, implying
-%    a read-write dependency between  $\mathit{ty}$ and $\mathit{tx}$.
-%    %This causes anomaly DSGs comprising of anti-dependency edges
-%   %(r-w dependencies) between operations $r^1_{tx}(x){50}$ and $w^1_{ty}(x,100)$, and between $ w^2_{ty}(y,50)$
-%  % and $r^2_{tx}(y){-50}$, which are proscribed by PL-3.
-%  Thus, there is a read-write dependency cycle in $S_{11}$, violating PL-3 specifications. Let us consider a session trace
-%   $\mathit{st}_{11}$: $r^1_{tx}(\mathit{tx}){50}, r^1_{\mathit{ty}}(x){-50}, \\
-%   r^2_{\mathit{ty}}(x){100}, w^1_{\mathit{ty}}(x,100),  w^2_{\mathit{ty}}(y,50), c_{\mathit{ty}},
-%    w^1_{\mathit{tx}}(x,-50), r^2_{\mathit{ty}}(x){100}, \\ r^2_{\mathit{tx}}(x){-50}, c_{\mathit{tx}}$
-%   Following similar line of reasoning, we can
-%   observe that the session trace   $\mathit{st}_{11}$ violates the isolation level PL-2.99, given in Equation \ref{eqn:PL299}.
-
+ operations from each client must  be executed in isolation from other concurrent clients.   
+ 
 \section{Deriving ConSpec Specifications From the State-of-the-Art Definitions}\label{sec:derive}
  Here we show how the ConSpec specifications can be directly derived from state-of-the-art specifications of
  consistency and isolation level \cite{Chockler2000, Terry:1994:SGW:645792.668302}. As already discussed,
