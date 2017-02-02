@@ -45,6 +45,11 @@ J.~L. Hennessy and D.~A. Patterson.
 \newblock Morgan Kaufmann Publishers Inc., San Francisco, CA, USA, 5th edition,
   2011.
 
+\bibitem{Holzmann:2003:SMC:1405716}
+G.~Holzmann.
+\newblock {\em Spin Model Checker, the: Primer and Reference Manual}.
+\newblock Addison-Wesley Professional, first edition, 2003.
+
 \bibitem{Lamport:1994:TLA:177492.177726}
 L.~Lamport.
 \newblock The temporal logic of actions.
