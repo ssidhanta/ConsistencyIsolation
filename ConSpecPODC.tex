@@ -48,7 +48,7 @@ escapeinside={\%*}{*)},         % if you want to add a comment within your code
 %morekeywords={Definition, Theorem, Fixpoint}            % if you want to add more keywords to the set
 }
 \begin{document}
-\title{A Generalized Model of Consistency and Isolation Levels}
+\title{A Consistent Understanding of Consistency} 
 \numberofauthors{3} %  in this sample file, there are a *total*
 %% of EIGHT authors. SIX appear on the 'first-page' (for formatting
 %% reasons) and the remaining two appear in the \additionalauthors section.
@@ -120,18 +120,28 @@ Rodrigo Rodrigues\\ %one who did all the really hard work.}\\
 
 \maketitle
 \begin{abstract}
- The main contribution of this paper is a specification language \emph{ConSpec}, that enables formalization of
- any possible consistency model or isolation level that a storage system may provide, in a uniform syntax and form,
-  irrespective of the design and implementation of the target storage system.   Prior to ConSpec, definitions of
-  consistency models were tightly coupled with the specific design and implementation of the target storage system.
-  Each new storage system would redefine a consistency model in terms of its design and implementation. The absence of a uniform
-   definition makes it impossible to compare and verify the consistency provided by a given target storage system. Existing
-   definitions of consistency models and isolation levels either use textual descriptions or graphical representation of
-   proscribed anomalies and allowed dependencies between operations, making
-   automated verification even more difficult. To the best of our knowledge, this is the first work that expresses both
-   consistency and isolation levels in terms of ConSpec, a language that extends Linear Temporal Logic (LTL). Use
-   of LTL ushers in the possibility of leveraging existing tools like satisfiability solvers and theorem provers to build
-   automated verifiers. Finally, using insights derived from our analysis, we restate the CAP theorem to take into account the plethora of possible consistency models, in contrast with the original definition which only considered linearizability. %We present SpecCheck, an  automated verification tool that is used %leverages of static analysis techniques
+ We propose a specification language named \emph{ConSpec}, which enables the formalization of
+ different consistency semantics that a storage system may provide, using a simple and uniform syntax, which is independent
+ of the design and implementation of the target storage system. ConSpec addresses the recent profusion of consistency definitions,
+ which are often accompanied by either informal definitions, or definitions that are tied to implementation-level details.
+ Furthermore, even in the case of consistency models that have a precise definition associated with them, 
+%  Prior to ConSpec, definitions of
+%  consistency models were tightly coupled with the specific design and implementation of the target storage system.
+%  Each new storage system would redefine a consistency model in terms of its design and implementation. T
+   the absence of a uniform notation for describing different models 
+   makes it difficult to compare different proposals.
+%  Existing
+%  definitions of consistency models and isolation levels either use textual descriptions or graphical representation of
+%  proscribed anomalies and allowed dependencies between operations, making
+%   automated verification even more difficult. To the best of our knowledge, this is the first work that expresses both
+%   consistency and isolation levels in terms of ConSpec, a language that
+To enable a simple and uniform description of various existing proposals, ConSpec builds on recent proposals that view weak consistency
+definitions as partial orderings between operations forming a visibility graph, which reduces the consistency definition to a set of
+restrictions on those partial orders, described using Linear Temporal Logic (LTL). We use ConSpec to revisit several existing models in light 
+of a common way to define and compare them. Furthermore, the use 
+of LTL enabled us to leverage existing automatic checkers to build a tool for validiting whether a given trace of the execution of a system meets
+a certain consistency semantics. 
+Finally, using our generic definitions and the insights from analyzing different models, we restate the CAP theorem to precisely define the class of consistency definitions that can and cannot be implemented in a highly-available, partition-tolerant way, in contrast with the original definition which only considered linearizability. %We present SpecCheck, an  automated verification tool that is used %leverages of static analysis techniques
   %to  verify whether a storage system satisfies a consistency model or isolation level, specified using ConSpec.
   %Using the following approach, specifications derived using ConSpec can be used to subsequently  verify whether a given storage system satisfies a given consistency model or isolation level.
  %SpecCheck accepts as input: 1) a ConSpec expression corresponding to a consistency model or isolation level that a
