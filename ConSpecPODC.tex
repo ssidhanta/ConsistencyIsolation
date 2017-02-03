@@ -124,12 +124,12 @@ Rodrigo Rodrigues\\ %one who did all the really hard work.}\\
  different consistency semantics that a storage system may provide, using a simple and uniform syntax, which is independent
  of the design and implementation of the target storage system. ConSpec addresses the recent profusion of consistency definitions,
  which are often accompanied by either informal definitions, or definitions that are tied to implementation-level details.
- Furthermore, even in the case of consistency models that have a precise definition associated with them, 
+% Furthermore, even in the case of consistency models that have a precise definition associated with them, 
 %  Prior to ConSpec, definitions of
 %  consistency models were tightly coupled with the specific design and implementation of the target storage system.
 %  Each new storage system would redefine a consistency model in terms of its design and implementation. T
-   the absence of a uniform notation for describing different models 
-   makes it difficult to compare different proposals.
+%   the absence of a uniform notation for describing different models 
+%   makes it difficult to compare different proposals.
 %  Existing
 %  definitions of consistency models and isolation levels either use textual descriptions or graphical representation of
 %  proscribed anomalies and allowed dependencies between operations, making
@@ -154,54 +154,86 @@ Finally, using our generic definitions and the insights from analyzing different
 \end{abstract}
 
 \section{Introduction}
-   Development of modern internet-based applications and services requires application developers to take into
-   account the consistency \cite{Burckhardt:2014:PEC:2693641.2693642} and isolation level \cite{DBLP:conf/icde/AdyaLO00} provided by the underlying storage system, to ensure correctness and performance
-   guarantees.  Currently, there is a large number of possible consistency models and isolation levels, many of which are not
-    clearly defined using formal semantics. The universe of consistency models and isolation levels is, in fact, expanding
-     constantly. Newer consistency models are coming up regularly to address specific QOS (quality of service) and
-     performance  requirement of different applications and services. Existing consistency definitions are tied to
-     specific storage system implementations, and not generic enough to be used in the context of a different (newer) storage system.
-      It is important for consistency and isolation definitions to be implementation-independent, because a particular
-      storage system implementation may not be suitable for different application domains. A relational storage system, like MySQL
-      or Oracle, may be unsuitable for an application that operates in the scale of millions of concurrent executions,
-      serving clients that are geographically distributed across different continents. In the latter case, a
-      geo-distributed storage system like Cassandra may prove to be more be more efficient, producing lower latency, while
-      compromising on serializabilty and strict isolation.  Hence, research papers and projects often end up  re-defining
-       existing consistency models using disparate semantics and notations.
-       \par Disparities among multiple definitions of the
-      same model may result in ambiguities and confusion, which in turn, may result in incorrect design and implementations
-        of applications built upon such definitions.
- Also, with such ambiguous definitions, it is difficult to compare consistency models of different storage systems, and choose
- a suitable storage system for a given application. Though Adya et al. claim that their definitions are implementation agnostic,
- they assume that the system is able to track version histories of each object; hence, we argue that these definitions
- will not be applicable to systems that do not persist version histories.
- Further, they use graphical representation of proscribed
-   anomalies and allowed dependencies between operations; making it difficult to automatically verify such definitions.
-   Existing definitions of consistency models  used either textual descriptions or graphical representations, making
-   automated verification even more difficult. The goal of this paper is to specify consistency and isolation definitions
-    using a uniform syntax in an implementation agnostic manner.
-   \par Traditionally, specifications of consistency models or isolation levels are comprised of the following components:
-   \emph{rules} that restrict the order in which results of operations can be observed, specified using axiomatic expressions,
-   \emph{anomalies} precluded by the models, expressed using directed serialization graphs (DSGs), where vertices in a DSG
-   represent operations, and edges represent the dependency relations among operations corresponding to the connecting
-   vertices. 
- The rules in state-of-the-art consistency and isolation definitions specify the valid order of execution among operations
-  in terms of dependency relations, like write-write (ww), write-read (wr) dependency, etc. Such dependency relations
-  belong to two categories - explicit dependencies, like ww dependency, and implicit dependencies, like read-write (rw)
-  dependency, that are expressed in terms of one or more explicit dependencies. 
- These dependency relations are not apparent from the statement of consistency and isolation definition, especially
- implicit dependencies, since those are further described in terms of explicit dependencies. 
-\par However, a given consistency or isolation level specifies a valid relative temporal order among operations. Such
-temporal order can be directly expressed using LTL \cite{Lamport:1994:TLA:177492.177726} operators, like next, eventually, etc.
-We argue that consistency and isolation levels can be readily expressed in term of LTL-like expressions
- that specify required temporal order among operations according to given consistency or isolation level.
- Hence, we follow in the footsteps of \cite{DBLP:journals/corr/EhlersR14} to develop a specification language
- \emph{ConSpec} that is an extension of Linear Temporal Logic (LTL). LTL is a natural choice for specifying relative
- temporal ordering among operations in different consistency and isolation definitions. ConSpec uses LTL-like semantics to
-  express the rules that specify the allowed order in which results of operations can be visible to a client application.   The ConSpec expressions specify the allowed temporal order (i.e., ``happens before" order \cite{Bailis:2013:BCC:2463676.2465279}) in which operations within a client application return results, and restricts the manner in which these results are visible to subsequent operations in the client application.
-  \par We argue that specifications expressed in terms of ConSpec are much easier to reason about than the state-of-the-art definitions, which require an understanding
- of the various dependency relationships; the implicit dependencies can be particularly complex to express and
- comprehend. The main contributions of this paper are as follows.
+
+   The development of modern Internet-based applications and services requires application developers to take into account the semantics of the 
+%consistency \cite{Burckhardt:2014:PEC:2693641.2693642} and isolation level \cite{DBLP:conf/icde/AdyaLO00} provided by the 
+underlying storage system, to ensure correctness and acceptable performance.
+In fact, there is evidence that the lack of a good comprehension of these
+semantics can lead programmers to unintendedly break the application semantics~\cite{bailis:feral}. 
+
+However, the task of understanding and comparing the semantics provided by storage systems, normally encapsulated in a consistency definition (or an isolation definition, in case of a transactional interface), is made difficult by several factors. First, the current set of possible consistency models is not only large but alse expanding, as new storage systems often coin new terms for the consistency semantics that they offer~\cite{pnuts, cops, cassandra}.
+% http://docs.datastax.com/en/archived/cassandra/2.0/cassandra/dml/dml_config_consistency_c.html
+Second, existing consistency semantics have definitions that are often imprecise and/or are tied to implementation specifics (such as versioning~\cite{DBLP:conf/icde/AdyaLO00} or the existence of replicas at different sites~\cite{redblue}).
+%% , and not generic enough to be used in the context of a different (newer) storage system.
+%%       It is important for consistency and isolation definitions to be implementation-independent, because a particular
+%%       storage system implementation may not be suitable for different application domains. A relational storage system, like MySQL
+%%       or Oracle, may be unsuitable for an application that operates in the scale of millions of concurrent executions,
+%%       serving clients that are geographically distributed across different continents. In the latter case, a
+%%       geo-distributed storage system like Cassandra may prove to be more be more efficient, producing lower latency, while
+%%       compromising on serializabilty and strict isolation.  Hence, research papers and projects often end up  re-defining
+%%        existing consistency models using disparate semantics and notations.
+%%        \par Disparities among multiple definitions of the
+%%       same model may result in ambiguities and confusion, which in turn, may result in incorrect design and implementations
+%%         of applications built upon such definitions.
+%%  Also, with such ambiguous definitions, it is difficult to compare consistency models of different storage systems, and choose
+%%  a suitable storage system for a given application. Though Adya et al. claim that their definitions are implementation agnostic,
+%%  they assume that the system is able to track version histories of each object; hence, we argue that these definitions
+%%  will not be applicable to systems that do not persist version histories.
+%%  Further, they use graphical representation of proscribed
+%%    anomalies and allowed dependencies between operations; making it difficult to automatically verify such definitions.
+%%    Existing definitions of consistency models  used either textual descriptions or graphical representations, making
+%%    automated verification even more difficult. The goal of this paper is to specify consistency and isolation definitions
+%%     using a uniform syntax in an implementation agnostic manner.
+%%    \par Traditionally, specifications of consistency models or isolation levels are comprised of the following components:
+%%    \emph{rules} that restrict the order in which results of operations can be observed, specified using axiomatic expressions,
+%%    \emph{anomalies} precluded by the models, expressed using directed serialization graphs (DSGs), where vertices in a DSG
+%%    represent operations, and edges represent the dependency relations among operations corresponding to the connecting
+%%    vertices. 
+%%  The rules in state-of-the-art consistency and isolation definitions specify the valid order of execution among operations
+%%   in terms of dependency relations, like write-write (ww), write-read (wr) dependency, etc. Such dependency relations
+%%   belong to two categories - explicit dependencies, like ww dependency, and implicit dependencies, like read-write (rw)
+%%   dependency, that are expressed in terms of one or more explicit dependencies. 
+%%  These dependency relations are not apparent from the statement of consistency and isolation definition, especially
+%%  implicit dependencies, since those are further described in terms of explicit dependencies. 
+%% \par However, a given consistency or isolation level specifies a valid relative temporal order among operations. Such
+%% temporal order can be directly expressed using LTL \cite{Lamport:1994:TLA:177492.177726} operators, like next, eventually, etc.
+%% We argue that consistency and isolation levels can be readily expressed in term of LTL-like expressions
+%%  that specify required temporal order among operations according to given consistency or isolation level.
+Third, even in the cases for which precise definitions exist, it is difficult to compare different definitions, since they are written using different formalisms and using community-specific terms or notations. 
+
+To address these issues, we propose a specification language called
+\emph{ConSpec}, a generic definition for consistency models, which can
+be easily parameterized to obtain precise definitions of a variety of
+semantics. ConSpec builds on the observations made by recent proposals
+that it is possible to define weak consistency semantics in terms of
+partial orders over the set of operations that were executed in the
+system, which comprise a visibility graph~\cite{redblue, gotsman:popl, chengli:por}. This allows us to reduce
+the configurable part of the consistency definition to a set of restrictions,
+written in Linear Temporal Logic (LTL), to a generic partial order.
+%% . LTL is a natural choice for specifying relative
+%%  temporal ordering among operations in different consistency and isolation definitions. ConSpec uses LTL-like semantics to
+Intuitively, this allows us to express a set of rules that specify the allowed order in which results of operations can be visible to a client application. 
+%  The ConSpec expressions specify the allowed temporal order (i.e., ``happens before" order \cite{Bailis:2013:BCC:2463676.2465279}) in which operations within a client application return results, and restricts the manner in which these results are visible to subsequent operations in the client application.
+
+
+With this framework in place, we were able to express several existing
+consistency definitions in a common language, and compare them in a precise
+way, thereby defining a hierarchy of consisency models. In addition, our
+variants of the definitions for these
+consistency models were linked to their original definitions by proving their
+equivalence.
+
+Another contribution of this paper is that we built a tool, which is available online, to check whether a given trace violates a certain consistency model. This tool leverages our LTL based syntax, which allowed us to reuse existing automatic checkers and adapt them to our constructs in a direct way.
+
+Our final contribution is that we were able to restate in much broader terms the CAP theorem~\cite{cap}, whose original proof used linearizability as synonym for the strong consistency captured by the ``C'' property. In our new formulation of this theorem, we are able to define necessary and sufficient conditions for a given consistency model to be \emph{CAP-strong}, i.e., bound by the impossibility of being implemented in a highly available, partition-tolerant way.
+
+The remainder of this paper is organized as follows. ...
+
+ %%  \par We argue that specifications expressed in terms of ConSpec are much easier to reason about than the state-of-the-art definitions, which require an understanding
+ %% of the various dependency relationships; the implicit dependencies can be particularly complex to express and
+ %% comprehend. 
+
+%The main contributions of this paper are as follows.
    %\section{Contributions}
     %In this paper, we propose a generalized semantics for formally defining consistency models and isolation levels,
 %   which can be used to unify definitions of all possible consistency models and isolation levels under a single
@@ -213,14 +245,14 @@ We argue that consistency and isolation levels can be readily expressed in term 
   %Apart from eliminating the risks with ambiguous definitions, this approach further allows
 % us to build a automated framework for verifying whether a system satisfies the definition of a given consistency model or i
 % solation level.
- \begin{itemize}
- \item
- It presents the syntax and design of ConSpec, a language for formally specifying the consistency
- models and isolation levels that a storage system supports.
- ConSpec specifications are expressed in terms of Linear Temporal Logic (LTL), thus enabling us to leverage
-   existing body of Satisfiability solvers and Theorem provers to build automated verifiers.
-   \item It restates the CAP theorem, which originally used to imply linearizability when talking about consistency, taking into account the different possible consistency models. We show how the extended CAP statement segregates the lattice of consistency models into \emph{CAP-strong} and \emph{CAP-weak} consistency models, i.e., into consistency models which can be implemented while simultaneously providing high availability and partition tolerance, and which can not be implemented in the above manner, respectively.
-   \end{itemize}
+ %% \begin{itemize}
+ %% \item
+ %% It presents the syntax and design of ConSpec, a language for formally specifying the consistency
+ %% models and isolation levels that a storage system supports.
+ %% ConSpec specifications are expressed in terms of Linear Temporal Logic (LTL), thus enabling us to leverage
+ %%   existing body of Satisfiability solvers and Theorem provers to build automated verifiers.
+ %%   \item It restates the CAP theorem, which originally used to imply linearizability when talking about consistency, taking into account the different possible consistency models. We show how the extended CAP statement segregates the lattice of consistency models into \emph{CAP-strong} and \emph{CAP-weak} consistency models, i.e., into consistency models which can be implemented while simultaneously providing high availability and partition tolerance, and which can not be implemented in the above manner, respectively.
+%%   \end{itemize}
     %Definitions specified with ConSpec are simpler, easier to
 % understand, verifiable, thus making lives of application developers and database developers easier.
   % \item It also presents SpecCheck, a prototype  automated verification tool that is used %leverages of static analysis techniques
