@@ -22,7 +22,7 @@ int wic  = 9999, rjc  = 9999, wis = 9999, rjs = 9999, k = 9999, kk = 9999;
 /*ltl c { wic -> <> rjc };
 ltl s { wis -> <> rjs };
 ltl ryw { wic -> <> rjc -> wis -> <> rjs };*/
-ltl ryw {  [] ( flagsercheck == true) };
+ltl ryw {  []<> (flagsercheck) };
 bool flagst, flagser;
 
 proctype checkcond(int size, sersize){

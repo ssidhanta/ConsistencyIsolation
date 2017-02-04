@@ -17,13 +17,68 @@ typedef Ser {
 Op st[4];
 Ser ser[2];
 chan STDIN;
-bool check = false, flagsercheck = true; 
+bool check = false, flagsercheck = false; 
 int wic  = 9999, rjc  = 9999, wis = 9999, rjs = 9999, k = 9999, kk = 9999;
 /*ltl c { wic -> <> rjc };
 ltl s { wis -> <> rjs };
 ltl ryw { wic -> <> rjc -> wis -> <> rjs };*/
-ltl ryw {  [] ( flagsercheck == true) };
+ltl ryw {  [] (wic!=0 && rjc!=0 -> flagsercheck)  };
 bool flagst, flagser;
+
+proctype checkltl(int size, sersize){
+	int i = 0;
+	do
+	:: (i  < size && st[i].optype == w) -> 	
+		wic = st[i].val; printf("checkltl res =%d %d\n", i, wic); i++; 
+	:: (i  < size && st[i].optype == r) -> 	
+		rjc = st[i].val; printf("checkltl 11 res =%d %d\n", i, rjc); i++; run validateser(size, sersize, wic, rjc); wic = 9999; rjc = 9999
+	:: i >= size ->
+			break;
+	od
+
+}
+
+proctype validateser(int size, sersize, wicparam, rjcparam){
+	int ii = 0, j = 0;
+	do
+		:: j < sersize ->
+			if
+			:: ii >= size ->
+				{ii = 0; j++}
+			:: (ii < size && wis == 9999 && ser[j].st[ii].optype ==  w && ser[j].st[ii].val == wicparam) -> 
+			{
+				wis = ser[j].st[ii].val; 
+				ii++;
+				wis = 9999
+			}
+			:: (ii < size && wis == 9999 && ser[j].st[ii].optype ==  w && ser[j].st[ii].val != wicparam) -> 
+			{
+				ii++
+			}
+			:: (ii < size && wis != 9999 && ser[j].st[ii].optype ==  w) -> 
+			{
+				ii++
+			}
+			:: (ii < size && rjs == 9999 &&  ser[j].st[ii].optype == r && ser[j].st[ii].val == rjcparam) -> 
+				rjs = ser[j].st[ii].val; ii++; rjs = 9999; 
+				flagsercheck = true
+			:: (ii < size && rjs != 9999 &&  ser[j].st[ii].optype == r) -> 
+			{	 
+				ii++
+			}
+			:: (ii < size && rjs == 9999 &&  ser[j].st[ii].optype == r && ser[j].st[ii].val != rjcparam) -> 
+			{	 
+				ii++
+			}			
+			else -> 	
+			fi	
+		:: j >= sersize ->
+			break
+	od
+	/*:: counter >	}*/
+}
+
+
 
 proctype checkcond(int size, sersize){
 	bool writeFlag, readFlag = false;
@@ -235,6 +290,7 @@ init {
                   
                   fi; 
          od;
-	run checkcond(size, i)
+	run checkltl(size, i)
+	/*run checkcond(size, i)*/
 	
 }	
