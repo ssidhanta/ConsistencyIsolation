@@ -159,19 +159,10 @@ Finally, using our generic definitions and the insights from analyzing different
 %consistency \cite{Burckhardt:2014:PEC:2693641.2693642} and isolation level \cite{DBLP:conf/icde/AdyaLO00} provided by the 
 underlying storage system, to ensure correctness and acceptable performance.
 In fact, there is evidence that the lack of a good comprehension of these
-<<<<<<< HEAD
 semantics can lead programmers to unintendedly break the application semantics \cite{Bailis:2015:FCC:2723372.2737784}. 
-
-However, the task of understanding and comparing the semantics provided by storage systems, normally encapsulated in a consistency definition (or an isolation definition, in case of a transactional interface), is made difficult by several factors. First, the current set of possible consistency models is not only large but alse expanding, as new storage systems often coin new terms for the consistency semantics that they offer \cite{Cooper:2008:PYH:1454159.1454167, Lloyd:2011:DSE:2043556.2043593, Lakshman:2010:CDS:1773912.1773922}.
+However, the task of understanding and comparing the semantics provided by storage systems, normally encapsulated in a consistency definition (or an isolation definition, in case of a transactional interface), is made difficult by several factors. First, the current set of possible consistency models is not only large but also expanding, as new storage systems often coin new terms for the consistency semantics that they offer \cite{Cooper:2008:PYH:1454159.1454167, Lloyd:2011:DSE:2043556.2043593, Lakshman:2010:CDS:1773912.1773922}.
 % http://docs.datastax.com/en/archived/cassandra/2.0/cassandra/dml/dml_config_consistency_c.html
 Second, existing consistency semantics have definitions that are often imprecise and/or are tied to implementation specifics (such as versioning \cite{DBLP:conf/icde/AdyaLO00} or the existence of replicas at different sites \cite{Li:2012:MGS:2387880.2387906}).
-=======
-semantics can lead programmers to unintendedly break the application semantics~\cite{bailis:feral}. 
-
-However, the task of understanding and comparing the semantics provided by storage systems, normally encapsulated in a consistency definition (or an isolation definition, in case of a transactional interface), is made difficult by several factors. First, the current set of possible consistency models is not only large but alse expanding, as new storage systems often coin new terms for the consistency semantics that they offer~\cite{pnuts, cops, cassandra}.
-% http://docs.datastax.com/en/archived/cassandra/2.0/cassandra/dml/dml_config_consistency_c.html
-Second, existing consistency semantics have definitions that are often imprecise and/or are tied to implementation specifics (such as versioning~\cite{DBLP:conf/icde/AdyaLO00} or the existence of replicas at different sites~\cite{redblue}).
->>>>>>> origin/master
 %% , and not generic enough to be used in the context of a different (newer) storage system.
 %%       It is important for consistency and isolation definitions to be implementation-independent, because a particular
 %%       storage system implementation may not be suitable for different application domains. A relational storage system, like MySQL
@@ -215,12 +206,8 @@ be easily parameterized to obtain precise definitions of a variety of
 semantics. ConSpec builds on the observations made by recent proposals
 that it is possible to define weak consistency semantics in terms of
 partial orders over the set of operations that were executed in the
-<<<<<<< HEAD
 system, which comprise a visibility graph 
 \cite{Li:2012:MGS:2387880.2387906, Gotsman:2016:CIS:2837614.2837625, Li:2012:MGS:2387880.2387906}. This allows us to reduce
-=======
-system, which comprise a visibility graph~\cite{redblue, gotsman:popl, chengli:por}. This allows us to reduce
->>>>>>> origin/master
 the configurable part of the consistency definition to a set of restrictions,
 written in Linear Temporal Logic (LTL), to a generic partial order.
 %% . LTL is a natural choice for specifying relative
@@ -238,15 +225,10 @@ equivalence.
 
 Another contribution of this paper is that we built a tool, which is available online, to check whether a given trace violates a certain consistency model. This tool leverages our LTL based syntax, which allowed us to reuse existing automatic checkers and adapt them to our constructs in a direct way.
 
-<<<<<<< HEAD
 Our final contribution is that we were able to restate in much broader terms the CAP theorem \cite{brew:cap, Gilbert:2002:BCF:564585.564601}, whose original proof used linearizability as synonym for the strong consistency captured by the ``C'' property. In our new formulation of this theorem, we are able to define necessary and sufficient conditions for a given consistency model to be \emph{CAP-strong}, i.e., bound by the impossibility of being implemented in a highly available, partition-tolerant way.
 
 The remainder of this paper is organized as follows. Section  \ref{sec:definitions} presents the system model, and the basic definitions and terminology used in the paper.  Section \ref{sec:syntax} presents the syntax of ConSpec, and the general format of ConSpec specifications. Section \ref{sec:list} lists down the specifications of various  consistency models and isolation levels, expressed as ConSpec expressions. Section \ref{sec:hierarchy} discusses how the lattice of consistency models can be hierarchically organized.  Section \ref{sec:cap} presents a restatement of the CAP theorem, and proves the same. Section \ref{sec:capanalyze} analyzes the lattice of consistency models in terms of the restated CAP theorem. Section \ref{sec:derive} proves the equivalence of the ConSpec specifications with the state-of-the-art definitions, by deriving the ConSpec specification for each of the consistency models and isolation levels.  Section \ref{sec:impl} briefly presents the design of a prototype automated verification tool that can validate a session trace with respect to a ConSpec specification. Finally Section \ref{sec:equiv} illustrates the equivalence between the ConSpec expressions and the dependency graphs used by the state-of-the-art definitions.  We have also include a discussion of examples of session traces that cause violations of ConSpec specifications in the appendix. 
-=======
-Our final contribution is that we were able to restate in much broader terms the CAP theorem~\cite{cap}, whose original proof used linearizability as synonym for the strong consistency captured by the ``C'' property. In our new formulation of this theorem, we are able to define necessary and sufficient conditions for a given consistency model to be \emph{CAP-strong}, i.e., bound by the impossibility of being implemented in a highly available, partition-tolerant way.
 
-The remainder of this paper is organized as follows. ...
->>>>>>> origin/master
 
  %%  \par We argue that specifications expressed in terms of ConSpec are much easier to reason about than the state-of-the-art definitions, which require an understanding
  %% of the various dependency relationships; the implicit dependencies can be particularly complex to express and
@@ -305,36 +287,23 @@ The remainder of this paper is organized as follows. ...
         \label{fig:System}
 \end{figure}
 
-<<<<<<< HEAD
   \section{Basic Definitions} \label{sec:definitions}
-=======
-  \section{Basic Definitions}
->>>>>>> origin/master
+
  % We do not assume anything regarding the internal organisation of the storage system. As such, focusing on the interface of the storage system, 
 
 We assume a set of clients that access the storage system by invoking operations. A very large class of consistency definitions (namely those describing the behavior of loads and stores on computer hardware) assume that these operations are partitioned into two classes, namely read operations that do not affect the result of subsequent operations and write operations that do. Given that these consistency definitions are based on the existence of these two classes of operations, we will assume that the space of possible operations is partitioned in this way, but we develop our definitions such that they can be generalized in a straightforward way to other models. (For example, databases make a similar distinction between queries and updates, and the state machine replication model distinguishes between read-only and read-write requests.)
 
-<<<<<<< HEAD
 Similarly, many consistency definitions reason about an interface that exposes the existence of multiple objects (e.g., different memory addresses seen by a CPU or different keys in a key-value store). As such, we assume that the interface allows the programmer to specify objects that are associated with each operation, where we define object $o_j$ to comprise: 1) a unique name, given by the string $o_j$, and 2) a value $v_j$, which can be of any datatype, such as float, double, string, etc. %(A special case of this is a system with a single object whose datatype can be as complex as an entire file system or database, thus encompassing other models such as the state machine replication model~\cite{schneider:smr:tutorial}.) {\bf [RR: Note that the existence of a value does not match the SMR/DB model, since the operations do not return/overwrite the entire state of the state machine/database. How to make this analogy hold?]}
-=======
-Similarly, many consistency definitions reason about an interface that exposes the existence of multiple objects (e.g., different memory addresses seen by a CPU or different keys in a key-value store). As such, we assume that the interface allows the programmer to specify objects that are associated with each operation, where we define object $o_j$ to comprise: 1) a unique name, given by the string $o_j$, and 2) a value $v_j$, which can be of any datatype, such as float, double, string, etc. (A special case of this is a system with a single object whose datatype can be as complex as an entire file system or database, thus encompassing other models such as the state machine replication model~\cite{schneider:smr:tutorial}.) {\bf [RR: Note that the existence of a value does not match the SMR/DB model, since the operations do not return/overwrite the entire state of the state machine/database. How to make this analogy hold?]}
->>>>>>> origin/master
 
   A \emph{session trace} $\mathit{st}$ is a sequence of operations executed by the same client, ordered by the real-time instant when they were invoked. In this paper we assume that a client only invokes an operation after the preceding operation has returned its response value.
 % comprising the results of a local execution, i.e., results of operations invoked from  a client application, observed from  the client machine. A given client application is executed on a target storage system. In the course of execution of the client application, we collect session traces over a pre-defined sliding window over time from the client machine (i.e., the machine that hosts the client application). %We perform \emph{session trace analysis} on the above session traces to determine whether the target system satisfies a given consistency model or an isolation level.
 % Let $j$ be the index of the read operation in the execution sequence of  $\mathit{Cl}$ observed in a session trace.
-<<<<<<< HEAD
+
 Under the above assumption that the set of possible operations is partitioned into two classes, we define that a write operation $\mathit{op}$, which writes a value $v$ to an object $o$, is denoted as $w(o,v)$. Similarly, a read operation $\mathit{op}$ on object $o$ that outputs a value $v$ is denoted $r(o){v}$. %{\bf [RR: I am inclined to remove the subscript $j$ and $k$.]}
  \def\tuple#1{\langle #1\rangle}
 This allows us to define a session trace $\mathit{st}$ as a sequence of tuples  $\tuple{w, {v}^{'}}$ or
  $\tuple{r, {v}^{'}}$. %, where the index $i$ corresponds to the position of the operation in the sequence, and therefore allows us to uniquely identify each operation within a sequence. {\bf [RR: This is not great because then we cannot identify this across sequences, and if it's not a sequence number then again I propose we remove this from these definitions]}
-=======
-Under the above assumption that the set of possible operations is partitioned into two classes, we define that a write operation $\mathit{op}_j$, which writes a value $v$ to an object $o$, is denoted as $w^j(o,v)$. Similarly, a read operation $\mathit{op}_k$ on object $o$ that outputs a value $v$ is denoted $r^k(o){v}$. {\bf [RR: I am inclined to remove the subscript $j$ and $k$.]}
- \def\tuple#1{\langle #1\rangle}
-This allows us to define a session trace $\mathit{st}$ as a sequence of tuples  $\tuple{w^i, {v_i}^{'}}$ or
- $\tuple{r^i, {v_i}^{'}}$, where the index $i$ corresponds to the position of the operation in the sequence, and therefore allows us to uniquely identify each operation within a sequence. {\bf [RR: This is not great because then we cannot identify this across sequences, and if it's not a sequence number then again I propose we remove this from these definitions]}
 
->>>>>>> origin/master
 %. The fields comprising each tuple $\mathit{tup}_i$ are: 1) $w^i$  and $r^i$ are abbreviated signatures of write and read
 % operations performed from a client application $\mathit{Cl}$, 2) ${v_i}^{'}$ is the value written or read by the above operation,
 % 3) $T^j$ is the timestamp of the operation execution, i.e., the timestamp when the operation was logged in the
@@ -346,11 +315,9 @@ The \emph{global session trace} $\mathit{St}$ denotes the set of all
 %    according to their temporal order of execution.  $\mathit{St}$ collates
 %    all the tuples  $\mathit{tup}_i$ from all individual session  traces, and orders the tuples according to
 %   according to descending order of the timestamp field $T^j$.
-<<<<<<< HEAD
+
     Figure \ref{fig:System} illustrates the above system model.
-=======
-    %Figure \ref{fig:System} illustrates the above system model.
->>>>>>> origin/master
+
 
 %We do not assume anything regarding how these operations are internally handled by the storage system. For all intents and purposes, the storage system is a black box component on which read and write operations get executed. A client application executes these storage operations as high level API methods invoked from the application code. These API methods are translated into storage system specific native commands by the storage system driver which acts as an interface between the client application and the underlying storage system. %Within a given application scope, operations are invoked by the client application in a synchronous manner, i.e., an operation is invoked only once the result from the previous operation in the execution sequence is received.
 %    Optionally, read and write operations invoked from a transaction $tx$ are denoted as $r^k_{tx}(o){v_m}$ and $w^j_{tx}(o,v_l)$, respectively. %, passing values of objects as method parameters.
@@ -366,7 +333,6 @@ Our notation defines special purpose LTL operators as shorthands to longer expre
     %%  storage operation.
      E.g., an expression ${w^j} X^{o} {r^k}$ denotes that among operations performed on the object
      ${o}$, the execution of the operation $r^k(o){v_m}$ immediately follows the execution operation $w^j(o,v_l)$.
-<<<<<<< HEAD
 
 %% ; the
 %%       superscript $'$ denotes an instance of execution of a given operation in a session trace. We also use the  LTL
@@ -382,50 +348,7 @@ Finally, we assume the system has a sequential specification, which is a correct
   %%  consistency levels in terms of valid legal serialization orders equivalent to a given execution. Similar to Chockler et al., ConSpec defines different consistency models in terms of different specialized forms of legal serialization, which have been defined below. ConSpec defines those consistency models, which can not be expressed in terms of legal serialization, in terms of constraints on the global execution order,  represented by the global session trace $\mathit{St}$.
   %%  Let the propositional variable ${\mathit{Op}^i}^{'}$ denote an execution of the
   %%  i\textquotesingle th operation comprised in the set $mathcal{O}$ of operations executed from a given client application in a session trace.
-=======
 
-%% ; the
-%%       superscript $'$ denotes an instance of execution of a given operation in a session trace. We also use the  LTL
-%%       operator ``eventually", i.e., $F$, do denote that an operation is preceded by the another operation in a given
-%%       execution sequence. The superscript ${o}$ in the above operator is used to specify that the operator defines the  LTL relationship ``eventually" among only the operations performed specifically on the object ${o}$.
-
-Finally, we assume the system has a sequential specification, which is a correctness condition, corresponding to the output of the operations in centralized system that executes operation in sequence, one at a time. In the case of the sequential specification of a system whose interface are read and write operations, the read operation to object $o$ must output the value associated with the most recent write operation to the same object $o$.
-
-  %% A \emph{serialization} is a linear sequence comprising all operations comprising a global  execution on a
-  %% storage system.
-  %% A serialization is said to be \emph{legal} if every read operation returns the value written by the latest write
-  %%  operation preceding it in the serialization.  Following Chockler et al. \cite{Chockler2000}, ConSpec defines
-  %%  consistency levels in terms of valid legal serialization orders equivalent to a given execution. Similar to Chockler et al., ConSpec defines different consistency models in terms of different specialized forms of legal serialization, which have been defined below. ConSpec defines those consistency models, which can not be expressed in terms of legal serialization, in terms of constraints on the global execution order,  represented by the global session trace $\mathit{St}$.
-  %%  Let the propositional variable ${\mathit{Op}^i}^{'}$ denote an execution of the
-  %%  i\textquotesingle th operation comprised in the set $mathcal{O}$ of operations executed from a given client application in a session trace.
-
-  %%   \newtheorem{definition}{Definition}
-  %%    \begin{definition}(Legal Serialization)
-  %%  We represent a global execution, comprising concurrent operations executed from multiple clients on a system, with a global session trace $\mathit{St}$, which is a set of operations from all clients. A legal serialization $\mathit{Ser}$ of a given global execution is represented by a sequence of propositional variables ${\mathit{Op}^i}^{'}$, each variable ${\mathit{Op}^i}$ denoting an execution of an
-  %%   operation ${\mathit{op}}^i$, comprised in the set of operations $\mathcal{O}$ executed by a given client, observed a global session trace $\mathit{St}$, as follows.
-  %%  $\mathit{Ser}$ = $\Set{ {\mathit{Op}^i}^{'} } {{\mathit{Op}^i}^{'} \in \mathit{st}}, $ such that
-  %%  $\forall {\mathit{op}^i}^{'}, {\mathit{op}^j}^{'} \in \mathcal{O} \\ \big( {\mathit{Op}^i}^{'} = {W^i}^{'} \wedge {\mathit{Op}^j}^{'} = {R^j}^{'}  \wedge \exists \mathit{st} \in \mathit{St}  \; \big( \big( {\mathit{Op}^i}^{'} F {\mathit{Op}^j}^{'} \in \mathit{st}  \; \wedge \\
-  %%  \not\exists {\mathit{Op}^k}^{'} = {W^k}^{'} \left( {\mathit{Op}^i}^{'}  F {\mathit{Op}^k}^{'} F {\mathit{Op}^j}^{'} \in \mathit{St}  \right) \big)
-  %% \rightarrow \left( {v_j}^{'} = {v_i}^{'} \right) \big) \big)$.
-  %%   \end{definition}\label{def:ser}
-
-  %%  \begin{definition}(Serialization of a Client)
-  %%  We  represent a local execution of a given client observed at a client machine, with a local session trace $\mathit{st} $, comprising results observed for operations executed by a given client application, comprised in the set of operations $\mathcal{O}$.  We formally define \emph{serialization of a client}, $S_c$, as the restriction of a legal serialization of a global execution
-  %%   to  the operations invoked by a particular client application, which in turn,
-  %%  corresponds to operations observed in a particular session trace $\mathit{st}$.
-  %%   $S_c$ = $ \Set{ {\mathit{op}^i}^{'}, {\mathit{op}^j}^{'} \in \mathcal{O} \wedge {\mathit{Op}^i}^{'} } {{\mathit{Op}^i}^{'} \in \mathit{Ser} \wedge {\mathit{Op}^i}^{'} \in \mathit{st} } $.
-  %%  \end{definition}\label{def:clientser}
-  %%  \begin{definition}(Serialization of a Partial Execution)
-  %%  The notation $S_p$ is used to denote a legal serialization of a partial execution comprising all    operations from the set of operations $\mathcal{O}$
-  %%  performed by a given client application, represented by a local session trace $\mathit{st}$, and all write
-  %% operations  executed from all other concurrent client applications, comprised in the global session trace $\mathit{St}$. The above partial execution is denoted as $\sigma |i + w$ by Chockler et al. Thus, we formally denote $S_p$ as
-  %%  \\ $S_p$ = $\Set{ {\mathit{Op}^i}^{'} } { \left( {\mathit{Op}^i}^{'} \in \mathit{st} \right) \vee \left(
-  %% {\mathit{Op}^i}^{'} = {W^i}^{'} \wedge {\mathit{Op}^i}^{'} \not\in \mathit{st} \right)}, $ such that
-  %% $\forall {\mathit{op}^i}^{'}, {\mathit{op}^j}^{'} \in \mathcal{O} \big( {\mathit{Op}^i}^{'} = {W^i}^{'} \wedge {\mathit{Op}^j}^{'} = {R^j}^{'}  \wedge \\ \exists \mathit{st} \in \mathit{St}  \; \big( \big( {\mathit{Op}^i}^{'} F {\mathit{Op}^j}^{'} \in \mathit{st}  \; \wedge \not\exists {\mathit{Op}^k}^{'} = {W^k}^{'} \\ \left( {\mathit{Op}^i}^{'}  F {\mathit{Op}^k}^{'} F {\mathit{Op}^j}^{'} \in \mathit{St}  \right) \big)
-  %% \rightarrow \left( {v_j}^{'} = {v_i}^{'} \right) \big) \big)$.
-  %% \end{definition}\label{def:parser}
-  %% The above legal serialization does not comprise read operations from other clients, hence its a  serialization of a partial execution.
->>>>>>> origin/master
 
   %%   \newtheorem{definition}{Definition}
   %%    \begin{definition}(Legal Serialization)
