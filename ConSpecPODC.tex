@@ -456,7 +456,9 @@ In this section, we present the ConSpec specifications for several common consis
 
 We start by specifying a series of session guarantees, which were originally proposed by Terry et al.\ in the context of a mobile computing storage system called Bayou~\cite{Terry:1994:SGW:645792.668302}. These are four guarantees that apply to individual sessions, allowing applications to see a view of the storage system that is consistent with their previous operations. Their original definition is implementation-dependent, since it is stated, for instance, in terms of the order in which writes are applied at various server replicas. Subsequently there were authors who wrote implementation-independent definition for these session guarantees~\cite{Chockler2000, Burckhardt:2014:PEC:2693641.2693642}. 
 
-Starting with the Read Your Writes (RYW) session guarantee, this is informally stated as follows. Let us consider that a client application performs
+We start with the Read Your Writes (RYW) session guarantee, which informally precludes a read operation $r$ from reading a value 
+
+ stated as follows. Let us consider that a client application performs
     a write operation followed by a read operation on an object $o$, observed in any given session trace, obtained by executing the above client application.
     According to RYW, given a session trace,  a read operation within that trace must not observe the result of an earlier write
     operation, i.e., it may not observe a value written before the occurrence of the write operation which
