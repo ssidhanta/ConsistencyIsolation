@@ -371,70 +371,79 @@ Finally, we assume the system has a sequential specification, which is a correct
   %% \end{definition}\label{def:parser}
   %% The above legal serialization does not comprise read operations from other clients, hence its a  serialization of a partial execution.
 
- \section{Syntax of ConSpec}\label{sec:syntax}
-  Using the ConSpec modelling language, we develop specifications for commonly used consistency models and standardised
-  isolation levels.  The ConSpec specification for each consistency model imposes restrictive conditions on the precedence
-  or  results observed for operations performed from client applications on the underlying storage system. Such a
-  restrictive condition is expressed as an LTL expression $E^s$, which is
-  a conjunction of constraints, composed of conditions that restrict the precedence or
-  observed results for operations performed on the system. The generalized syntax of the specification $E^s$ for a given consistency model or an isolation
-  level is defined as follows.
+ \section{ConSpec}\label{sec:syntax}
+In this section we present our generic ConSpec definition, which can be parameterized to obtain specifications for commonly used consistency models and 
+  isolation levels. 
+
+ConSpec builds on recent proposals for consistency definitions that treat a subset of the operations in a given trace differently (e.g., operations labeled as being ``strongly consistent''), since they only enforce visibility among those specific operations~\cite{Li:2012:MGS:2387880.2387906, Gotsman:2016:CIS:2837614.2837625, Li:2012:MGS:2387880.2387906}. We can similarly see different consistency definitions as enforcing different visibility relationships only among a subset of the system operations, often depending on their types (e.g., reads versus writes).
+
+As such, the generic definition of ConSpec requires the existence of a partial order that intuitively forms a ``visibility graph'', i.e., the output of each operation must reflect the effects of the operations that precede it according to that partial order. This allows us to see different consistency or isolation models as imposing different restrictive conditions on this precedence.
+ Such a
+  restrictive condition is then expressed as an LTL expression $E^s$. 
+%, which is  a conjunction of constraints, composed of conditions that restrict the precedence or
+%  observed results for operations performed on the system. The generalized syntax of the specification $E^s$ for a given consistency model or an isolation
+%  level is defined as follows.
 %\section{Generalized Specification of Consistency Condition}
   %Generalizing from Equations \ref{form-1} and \ref{form-2}, we observe the following.
  \begin{definition}{Generalized form of ConSpec:}\label{def:form0}
-Given a global session trace $\mathit{St}$ representing a global execution of all concurrent clients on a given storage
-system, we say  that $\mathit{St}$ satisfies a consistency model $\mathcal{C}$,
+Given a global session trace $\mathit{St}$,
+% representing a global execution of all concurrent clients on a given storage
+%system, 
+we say  that $\mathit{St}$ satisfies a consistency model $\mathcal{C}$
 if there exists a partial order
  $\left( \mathit{St}, \preccurlyeq \right)$ over the elements of all sequences (i.e., all local session traces)
   in $\mathit{St}$,
- such that 1) every operation $\mathit{op}^i$ in $\mathit{St}$ produces an output that corresponds to the result of executing sequentially a linear extension of the operations preceding $\mathit{op}^i$ in $\preccurlyeq$,
+ such that 1) for every operation $\mathit{op}^i$ in $\mathit{St}$, its output is equal to the one obtain by executing the sequential specification of a linear extension of the operations preceding $\mathit{op}^i$ in $\preccurlyeq$,
 % the same irrespective of the
  %%among operations preceding it in $\preccurlyeq$, %$\exists {\mathit{Op}^i}^{'}, {\mathit{Op}^j}^{'} \in \mathit{St}:
  %{\mathit{Op}^i}^{'} \preccurlyeq {\mathit{Op}^j}^{'}\; \rightarrow \;{\mathit{Op}^i}^{'} R {\mathit{Op}^j}^{'}$, %\; \vee \; v_i \sim v_j$,
  and 2) $\left( \mathit{St}, \preccurlyeq \right)$ obeys $E^s$, which is an LTL expression restricting $\left( \mathit{St}, \preccurlyeq \right)$.
 \end{definition}
-  The condition 1 for the Definition \ref{def:form0} follows directly from the definition of $\mathit{St}$. Each element in
-  the set $\mathit{St}$ represents the event that the result of execution of an operation is observed from a client.
-  Thus, there exists a temporal relation between at least two elements in $\mathit{St}$, denoting the temporal order among
-   the operations, represented by a temporal operator $R$ (which may be the temporal operator eventually $F$, the
-   special-purpose next operator $X^o$, or a propositional relation between values returned by the operations). %Alternatively, there exists an equivalence relation $\sim$ between the results $v_i$ and $v_j$ observed by
+
+%  The condition 1 for the Definition \ref{def:form0} follows directly from the definition of $\mathit{St}$. Each element in
+%  the set $\mathit{St}$ represents the event that the result of execution of an operation is observed from a client.
+%  Thus, there exists a temporal relation between at least two elements in $\mathit{St}$, denoting the temporal order among
+%   the operations, represented by a temporal operator $R$ (which may be the temporal operator eventually $F$, the
+%   special-purpose next operator $X^o$, or a propositional relation between values returned by the operations). %Alternatively, there exists an equivalence relation $\sim$ between the results $v_i$ and $v_j$ observed by
 %  operations $\mathit{op}^i$ and $\mathit{op}^j$, respectively, i.e., either $v_i = v_j$ or $v_i \not= v_j$.
   Condition 2 can be expressed as $ E^s\; \vDash \; \left( \mathit{St}, \preccurlyeq \right),$ where %$R$ is a temporal operator,
-  $E^s$ is the ConSpec specification for the
+  $E^s$ is the ConSpec parameterizattion for each
  consistency model $\mathcal{C}$,
  %$\sim$ is an equivalence relation between the results $v_i$ and $v_j$ observed by a pair of
    %operations $\mathit{op}^i$ and $\mathit{op}^j$, and
-   $\vDash$ is the satisfies operator, respectively.
-  This implies that the consistency specification for a particular
-  consistency model  $\mathcal{C}$ must satisfy the conditions of the generalized partial order relation, i.e., Condition 1 of Definition \ref{def:form0}.
-    \par Chockler et al. \cite{Chockler2000} define a consistency model in terms of an equivalent legal serialization,
- comprising a linear arrangement of the operations performed by a client application, that the model allows.
-   Following Chockler et al., wherever possible, we also define consistency models in terms of conditions imposed with
-   respect to a \emph{legal serialization} equivalent to a given sequence of operations executed in a session trace.  By definition \ref{def:ser}, an equivalent legal serialization is a special instance of the partial order $\preccurlyeq$ in Definition \ref{def:form0}, thus satisfying Conditions 1 and 2 of Definition \ref{def:form0}.  Such consistency models are specified in the form $E^s = \left( {\mathit{Op}^i}^{'} R {\mathit{Op}^j}^{'} \in \mathit{st} \wedge ... \wedge {\mathit{Op}^k}^{'} R {\mathit{Op}^l}^{'} \in \mathit{st}
-     \right)\; \rightarrow \\
-      \exists \mathit{Ser} \; \left( {\mathit{Op}^i}^{'} R^{'} {\mathit{Op}^j}^{'} \in  \mathit{Ser} \right).$
-   However, some consistency models, like Total store order, Processor consistency and all isolation levels, can not be
-   expressed in terms of an equivalent legal serialization, because of the absence of notions of legal serialization in
-   the original  definitions of these consistency models and isolation levels. With ConSpec, those consistency models and isolation
-   levels are  specified in terms of a conjunction of logical constraints on the given global execution comprising operations performed from
-   concurrent clients on the system. Hence, such specifications also impose a partial order of the form Definition \ref{def:form0},  thus satisfying Conditions 1 and 2 of Definition \ref{def:form0}.  These consistency models are specified in the form $E^s = C =  {\mathit{Op}^i}^{'}, {\mathit{Op}^j}^{'}, {\mathit{Op}^k}^{'}, {\mathit{Op}^l}^{'}  \in \mathit{St} \\
-         \left( {\mathit{Op}^i}^{'} R {\mathit{Op}^j}^{'} \wedge ... \wedge  {\mathit{Op}^k}^{'} R^{'} {\mathit{Op}^l}^{'} \right)$.
-     \par  In the next section, we specify each consistency or isolation level in terms of an expression $E^s$ corresponding to each consistency or isolation level.
- The consistency model Strict
-   Serializability is defined in terms of LTL constraints on the order among all operations performed each client in a global
-   execution (represented by the global session trace $\mathit{St}$) with respect to an equivalent legal serialization of a client $S_c$. For Strict serializablity, $E^s$ is
-   represented by a
-   conjunction of one
-   or more LTL constraints on operations comprised in $S_c$. Since $S_c$ comprises all operations from all clients in $\mathit{St}$, the strict serializability constraint is a \emph{total order} relation over concurrent clients executing on the underlying storage system.  In other words, strict serializability imposes a total order over a global execution comprising all clients, thus imposing a total order with respect to the global session trace $\mathit{St}$.   Processor consistency and Total Store Order, which are not defined in terms
-   of legal serialization, impose constraints on operations comprised in the global execution composed of operations
-   performed by one or more concurrent clients. Hence, for Processor consistency and Total Store Order, the specifications $E^s$ comprise a
-   conjunction of LTL constraints on operations comprised in the global execution $\mathit{St}$. This, in turn, implies that all of the the above mentioned consistency models can be regarded as total orders over operations performed by all clients executing on the storage system, expressed in terms of total order relations on the global session trace  $\mathit{St}$ in their respective specifications $E^s$ . 
-   \par On the other side of the consistency spectrum, the consistency models, namely Read Your Write, Monotonic Read, Causal consistency, Write Follows Read, and Monotonic
-   Write are
-  defined in terms of constraints on an equivalent legal serialization of a partial execution $S_p$ (refer to Definition \ref{def:parser}), which comprises all operations performed by
-  a given client, along with only write operations from other clients. Specifications of these consistency models, $E^s$, comprise a
-   conjunction of one or more LTL constraints on operations comprised in $S_p$. Since $S_p$ %comprises only write operations performed by other clients apart from operations performed by a given client, and
-   does not comprise read operations performed by other concurrent clients, consistency models which impose constraints on $S_p$ can only be regarded as \emph{partial orders} over a global execution comprising operations performed by all concurrent clients on the underlying storage system. An LTL formula representing the specification of such a consistency model can not be regarded as a total order over operations performed by all clients (represented by the global session trace $\mathit{St}$). By definition, an LTL formulas satisfies the following properties: 1) irreflexivity, since LTL defines a linear order over time, and this linearity implies that there can not be any cyclic relation in LTL formulas, 2)  transitivity, which follows trivially from the linear order imposed by LTL, and 3) asymmetric, which follows directly from conditions 1 and 2. Since the above group of consistency models are specified in terms of LTL constraints, they, in turn, are irreflexive, transitive, and asymmetric. Hence, by definition, such consistency models are regarded as \emph{strict partial orders} over all clients.    
+ and  $\vDash$ is the satisfies operator.
+
+
+ %%  This implies that the consistency specification for a particular
+ %%  consistency model  $\mathcal{C}$ must satisfy the conditions of the generalized partial order relation, i.e., Condition 1 of Definition \ref{def:form0}.
+ %%    \par Chockler et al. \cite{Chockler2000} define a consistency model in terms of an equivalent legal serialization,
+ %% comprising a linear arrangement of the operations performed by a client application, that the model allows.
+ %%   Following Chockler et al., wherever possible, we also define consistency models in terms of conditions imposed with
+ %%   respect to a \emph{legal serialization} equivalent to a given sequence of operations executed in a session trace.  By definition \ref{def:ser}, an equivalent legal serialization is a special instance of the partial order $\preccurlyeq$ in Definition \ref{def:form0}, thus satisfying Conditions 1 and 2 of Definition \ref{def:form0}.  Such consistency models are specified in the form $E^s = \left( {\mathit{Op}^i}^{'} R {\mathit{Op}^j}^{'} \in \mathit{st} \wedge ... \wedge {\mathit{Op}^k}^{'} R {\mathit{Op}^l}^{'} \in \mathit{st}
+ %%     \right)\; \rightarrow \\
+ %%      \exists \mathit{Ser} \; \left( {\mathit{Op}^i}^{'} R^{'} {\mathit{Op}^j}^{'} \in  \mathit{Ser} \right).$
+ %%   However, some consistency models, like Total store order, Processor consistency and all isolation levels, can not be
+ %%   expressed in terms of an equivalent legal serialization, because of the absence of notions of legal serialization in
+ %%   the original  definitions of these consistency models and isolation levels. With ConSpec, those consistency models and isolation
+ %%   levels are  specified in terms of a conjunction of logical constraints on the given global execution comprising operations performed from
+ %%   concurrent clients on the system. Hence, such specifications also impose a partial order of the form Definition \ref{def:form0},  thus satisfying Conditions 1 and 2 of Definition \ref{def:form0}.  These consistency models are specified in the form $E^s = C =  {\mathit{Op}^i}^{'}, {\mathit{Op}^j}^{'}, {\mathit{Op}^k}^{'}, {\mathit{Op}^l}^{'}  \in \mathit{St} \\
+ %%         \left( {\mathit{Op}^i}^{'} R {\mathit{Op}^j}^{'} \wedge ... \wedge  {\mathit{Op}^k}^{'} R^{'} {\mathit{Op}^l}^{'} \right)$.
+ %%     \par  In the next section, we specify each consistency or isolation level in terms of an expression $E^s$ corresponding to each consistency or isolation level.
+ %% The consistency model Strict
+ %%   Serializability is defined in terms of LTL constraints on the order among all operations performed each client in a global
+ %%   execution (represented by the global session trace $\mathit{St}$) with respect to an equivalent legal serialization of a client $S_c$. For Strict serializablity, $E^s$ is
+ %%   represented by a
+ %%   conjunction of one
+ %%   or more LTL constraints on operations comprised in $S_c$. Since $S_c$ comprises all operations from all clients in $\mathit{St}$, the strict serializability constraint is a \emph{total order} relation over concurrent clients executing on the underlying storage system.  In other words, strict serializability imposes a total order over a global execution comprising all clients, thus imposing a total order with respect to the global session trace $\mathit{St}$.   Processor consistency and Total Store Order, which are not defined in terms
+ %%   of legal serialization, impose constraints on operations comprised in the global execution composed of operations
+ %%   performed by one or more concurrent clients. Hence, for Processor consistency and Total Store Order, the specifications $E^s$ comprise a
+ %%   conjunction of LTL constraints on operations comprised in the global execution $\mathit{St}$. This, in turn, implies that all of the the above mentioned consistency models can be regarded as total orders over operations performed by all clients executing on the storage system, expressed in terms of total order relations on the global session trace  $\mathit{St}$ in their respective specifications $E^s$ . 
+ %%   \par On the other side of the consistency spectrum, the consistency models, namely Read Your Write, Monotonic Read, Causal consistency, Write Follows Read, and Monotonic
+ %%   Write are
+ %%  defined in terms of constraints on an equivalent legal serialization of a partial execution $S_p$ (refer to Definition \ref{def:parser}), which comprises all operations performed by
+ %%  a given client, along with only write operations from other clients. Specifications of these consistency models, $E^s$, comprise a
+ %%   conjunction of one or more LTL constraints on operations comprised in $S_p$. Since $S_p$ %comprises only write operations performed by other clients apart from operations performed by a given client, and
+ %%   does not comprise read operations performed by other concurrent clients, consistency models which impose constraints on $S_p$ can only be regarded as \emph{partial orders} over a global execution comprising operations performed by all concurrent clients on the underlying storage system. An LTL formula representing the specification of such a consistency model can not be regarded as a total order over operations performed by all clients (represented by the global session trace $\mathit{St}$). By definition, an LTL formulas satisfies the following properties: 1) irreflexivity, since LTL defines a linear order over time, and this linearity implies that there can not be any cyclic relation in LTL formulas, 2)  transitivity, which follows trivially from the linear order imposed by LTL, and 3) asymmetric, which follows directly from conditions 1 and 2. Since the above group of consistency models are specified in terms of LTL constraints, they, in turn, are irreflexive, transitive, and asymmetric. Hence, by definition, such consistency models are regarded as \emph{strict partial orders} over all clients.    
   
  \section{List of ConSpec Specifications for Various Consistency Models and Isolation Levels}\label{sec:list}
   Here, we present the ConSpec specifications for most common consistency models and isolation levels documented till date in the literature \cite{Chockler2000, Terry:1994:SGW:645792.668302, Burckhardt:2014:PEC:2693641.2693642}. We provide the detailed derivation of these specifications later in Section \ref{sec:derive}.
