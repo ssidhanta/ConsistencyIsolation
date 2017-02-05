@@ -218,7 +218,7 @@ Intuitively, this allows us to express a set of rules that specify the allowed o
 
 With this framework in place, we were able to express several existing
 consistency definitions in a common language, and compare them in a precise
-way, thereby defining a hierarchy of consisency models. In addition, our
+way, thereby defining a hierarchy of consistency models. In addition, our
 variants of the definitions for these
 consistency models were linked to their original definitions by proving their
 equivalence.
@@ -293,7 +293,7 @@ The remainder of this paper is organized as follows. Section  \ref{sec:definitio
 
  % We do not assume anything regarding the internal organisation of the storage system. As such, focusing on the interface of the storage system, 
 
-We assume a set of clients that access the storage system by invoking operations. A very large class of consistency definitions (namely those describing the behavior of loads and stores on computer hardware) assume that these operations are partitioned into two classes, namely read operations that do not affect the result of subsequent operations and write operations that do. Given that these consistency definitions are based on the existence of these two classes of operations, we will assume that the space of possible operations is partitioned in this way, but we develop our definitions such that they can be generalized in a straightforward way to other models. (For example, databases make a similar distinction between queries and updates, and the state machine replication model distinguishes between read-only and read-write requests.)
+We assume a set of clients that access the storage system by invoking operations. A very large class of consistency definitions (namely those describing the behaviour of loads and stores on computer hardware) assume that these operations are partitioned into two classes, namely read operations that do not affect the result of subsequent operations and write operations that do. Given that these consistency definitions are based on the existence of these two classes of operations, we will assume that the space of possible operations is partitioned in this way, but we develop our definitions such that they can be generalized in a straightforward way to other models. (For example, databases make a similar distinction between queries and updates, and the state machine replication model distinguishes between read-only and read-write requests.)
 
 Similarly, many consistency definitions reason about an interface that exposes the existence of multiple objects (e.g., different memory addresses seen by a CPU or different keys in a key-value store). As such, we assume that the interface allows the programmer to specify objects that are associated with each operation, where we define object $o_j$ to comprise: 1) a unique name, given by the string $o_j$, and 2) a value $v_j$, which can be of any datatype, such as float, double, string, etc. %(A special case of this is a system with a single object whose datatype can be as complex as an entire file system or database, thus encompassing other models such as the state machine replication model~\cite{schneider:smr:tutorial}.) {\bf [RR: Note that the existence of a value does not match the SMR/DB model, since the operations do not return/overwrite the entire state of the state machine/database. How to make this analogy hold?]}
 
@@ -391,13 +391,13 @@ Given a global session trace $\mathit{St}$,
 %system, 
 we say  that $\mathit{St}$ satisfies a consistency model $\mathcal{C}$
 if there exists a partial order
- $\left( \mathit{St}, \preccurlyeq \right)$ over the elements of all sequences (i.e., all local session traces)
-  in $\mathit{St}$,
+
+ $\left( \mathcal{O}, \preccurlyeq \right)$ over the set $\mathcal{O}$ comprising operations  present in all session traces in $\mathit{St}$, where  $\mathcal{O} = \bigcup_{st \in St} \{ o^i \mid o^i \in st \},$  
  such that 1) for every operation $\mathit{op}^i$ in $\mathit{St}$, its output is equal to the one obtain by executing the sequential specification of a linear extension of the operations preceding $\mathit{op}^i$ in $\preccurlyeq$,
 % the same irrespective of the
  %%among operations preceding it in $\preccurlyeq$, %$\exists {\mathit{Op}^i}^{'}, {\mathit{Op}^j}^{'} \in \mathit{St}:
- %{\mathit{Op}^i}^{'} \preccurlyeq {\mathit{Op}^j}^{'}\; \rightarrow \;{\mathit{Op}^i}^{'} R {\mathit{Op}^j}^{'}$, %\; \vee \; v_i \sim v_j$,
- and 2) $\left( \mathit{St}, \preccurlyeq \right)$ obeys $E^s$, which is an LTL expression restricting $\left( \mathit{St}, \preccurlyeq \right)$.
+ %{\mathit{Op}^i}^{'} \preccurlyeq {\mathit{Op}^j}^{'}\; \rightarrow \;{\mathit{Op}^i}^{'} R {\mathit{Op}^j}^{'}$, %\; \vee \; v_i \sim v_j$,\mathcal{O}, \preccurlyeq
+ and 2) $\left( \mathcal{O}, \preccurlyeq \right)$ obeys $E^s$, which is an LTL expression restricting $\left( \mathcal{O}, \preccurlyeq \right)$.
 \end{definition}
 
 %  The condition 1 for the Definition \ref{def:form0} follows directly from the definition of $\mathit{St}$. Each element in
@@ -410,7 +410,7 @@ if there exists a partial order
 
 
 Condition 1, when applied to a system whose interface consists only of read and write, translates to a requirement that every read operation in $St$ must return the value of the most recent write according to $\preccurlyeq$.
-  Condition 2 can be expressed as $ E^s\; \vDash \; \left( \mathit{St}, \preccurlyeq \right),$ where %$R$ is a temporal operator,
+  Condition 2 can be expressed as $ E^s\; \vDash \; \left( \mathcal{O}, \preccurlyeq \right),$ where %$R$ is a temporal operator, 
   $E^s$ is the ConSpec parameterizattion for each
  consistency model $\mathcal{C}$,
  %$\sim$ is an equivalence relation between the results $v_i$ and $v_j$ observed by a pair of
@@ -460,12 +460,12 @@ We start with the Read Your Writes (RYW) session guarantee, which informally pre
 
  stated as follows. Let us consider that a client application performs
     a write operation followed by a read operation on an object $o$, observed in any given session trace, obtained by executing the above client application.
-    According to RYW, given a session trace,  a read operation within that trace must not observe the result of an earlier write
-    operation, i.e., it may not observe a value written before the occurrence of the write operation which
-    immediately precedes the read. In other words, RYW specifies: if an operation $r^j$ reads an object $o$
-    that was written by a  write $w^i$,  the $r^j$ must not return the value written by write operation $w^k$ that
-    may have preceded $w^i$.
-     In other words, it requires that $v_i \not= v_k$, where $\not=$ denotes the traditional arithmetic operator not equals.
+%    According to RYW, given a session trace,  a read operation within that trace must not observe the result of an earlier write
+%    operation, i.e., it may not observe a value written before the occurrence of the write operation which
+%    immediately precedes the read. In other words, RYW specifies: if an operation $r^j$ reads an object $o$
+%    that was written by a  write $w^i$,  the $r^j$ must not return the value written by write operation $w^k$ that
+%    may have preceded $w^i$.
+%     In other words, it requires that $v_i \not= v_k$, where $\not=$ denotes the traditional arithmetic operator not equals.
   %Let $\wedge$ be the logical operator for conjunction. An expression $A \wedge B$ denotes that both the conditions represented by the propositional logic variables $A$ and $B$ must hold.
   %Similarly, let $\oplus$ be the logical operator ``exclusive-or" (x-or). An expression $C \oplus D$ denotes that either $C$ is true or $D$ is true, but both $C$ and $D$ can not be true or false simultaneously.
     %RYW states: if there exist multiple writes in the session trace preceding the read $r^k(o){v_m}$, $r^k(o){v_m}$ must reflect the result of the most recent write $w^j(o,v_l)$ preceding $r^k(o){v_m}$. Let the propositional logic variables $W^j(v_l)$ and $R^k{v_m}$ represent the events that results of a write operation $w^j(o,v_l)$ and a read operation $r^k(o){v_m}$, respectively, are either observed (or not) in a session trace or the above operations occur in a program order (indicated by the value of the above variables being TRUE or FALSE). Let the wild card character $\star$ is a ``placeholder" for any combination of propositional variables (or none). For example, the expression $* A$ denotes that the propositional variable $A$ maybe preceded by any number of propositional variables, or maybe preceded by nothing.
@@ -507,7 +507,7 @@ We start with the Read Your Writes (RYW) session guarantee, which informally pre
 %\big( \left( {W^l}^{'} F {R^j}^{'} \in \mathit{St} \right)  \wedge
 %  \not\exists {W^m}^{'} \left( {W^l}^{'} F {W^m}^{'} F {R^j}^{'} \in \mathit{St} \right) \big) \big).
   \end{split}
-  \end{align}\label{eqn:RYW} where the partial order $\left( \mathit{St}, \preccurlyeq \right)$ restricts the   order among conflicts pair of writes and reads in an equivalent serialization of a partial execution $S_p$, defined in Definition \ref{def:parser}.
+  \end{align}\label{eqn:RYW} where the partial order $\left( \mathcal{O}, \preccurlyeq \right)$ restricts the   order among conflicts pair of writes and reads in an equivalent serialization of a partial execution $S_p$, defined in Definition \ref{def:parser}.
    %where $G$ is the LTL operator globally.
     %The superscript $\mathit{st}$ specifies that the enclosed relation is given in the context of a session trace. %, representing the application scope of $\mathit{Cl}$.
 \par Read/Session Monotonic (MR) specifies: read operations on a storage system object invoked from a client application or a session must always return results in an increasing order of recency as per their mutual order in the session trace.
@@ -525,7 +525,7 @@ We start with the Read Your Writes (RYW) session guarantee, which informally pre
 %  \wedge \left( {v^i}^{'} = {v^n}^{''} \right) \wedge \big( \left( {v^j}^{'} = {v^m}^{''} \right) \\ \vee \big( \left( {W^m}^{'} F {R^j}^{'} \in \mathit{St} \right)
 % \wedge  \not\exists {W^p}^{'} \left( {W^m}^{'} F {W^p}^{'} F {R^j}^{'} \in \mathit{St} \right) \big) \big)
 \end{split}
-\end{align} where $\left( \mathit{St}, \preccurlyeq \right)$ constrains  the order among conflicting reads in an equivalent $S_p$.
+\end{align} where $\left( \mathcal{O}, \preccurlyeq \right)$ constrains  the order among conflicting reads in an equivalent $S_p$.
  %According to the above equation, a session trace comprising an execution sequence that follows MR must return a value according to either of the following conditions: 1) according to the first expression $\left( R^k{v_m}F^{o}R^s{v_t} \right)$ comprising the exclusive-or in the RHS of the operator $\rightarrow$, it must return the value written by the latest write preceding the operation $r^s(o)v_t$, i.e., the value $v_q$ written by $w^n(o,v_q)$, or 2) according to the second expression $W^n(v_q) F^{o} W^u(v_x) X^{o} R^s v_t$ comprising the exclusive-or in the RHS, it must return the value $v_x$ written by the latest write $W^u(v_x)$ which overwrites $o$.
 %\begin{align*}
 %\begin{split}
@@ -550,11 +550,11 @@ We start with the Read Your Writes (RYW) session guarantee, which informally pre
 %  \end{align}
 \begin{align}\label{eqn:Causal}
 \begin{split}
-%E^{s} = \forall \mathit{st} \in \mathit{St}, {\mathit{Op}^i}^{'}, {\mathit{Op}^j}^{'} \in \mathit{st} \\ \big( \left( {\mathit{Op}^i}^{'} F {\mathit{Op}^j}^{'} \in \mathit{st} \right)
-% \vee \big( \left( {\mathit{Op}^i}^{'} = {W^i}^{'} \right) \wedge \\
-%\left( {\mathit{Op}^j}^{'} = {R^j}^{'} \right) \wedge
-%   \left( v_i = v_j \right) \big) \rightarrow \exists S_p \left( {\mathit{Op}^i}^{'} F {\mathit{Op}^j}^{'} \in S_p \right) \big). 
-   E^{s} = \forall \mathit{st} \in \mathit{St}, {\mathit{Op}^i}^{'}, {\mathit{Op}^j}^{'} \in \mathit{st} \\ \big( \left( {\mathit{Op}^i}^{'} F {\mathit{Op}^j}^{'} \in \mathit{st} \right)
+E^{s} = \forall \mathit{st} \in \mathit{St}, {\mathit{Op}^i}^{'}, {\mathit{Op}^j}^{'} \in \mathit{st} \\ \big( \left( {\mathit{Op}^i}^{'} F {\mathit{Op}^j}^{'} \in \mathit{st} \right)
+ \vee \big( \left( {\mathit{Op}^i}^{'} = {W^i}^{'} \right) \wedge \\
+\left( {\mathit{Op}^j}^{'} = {R^j}^{'} \right) \wedge
+   \left( v_i = v_j \right) \big) %\rightarrow \exists S_p \left( {\mathit{Op}^i}^{'} F {\mathit{Op}^j}^{'} \in S_p \right) \big). 
+%   E^{s} = \forall \mathit{st} \in \mathit{St}, {\mathit{Op}^i}^{'}, {\mathit{Op}^j}^{'} \in \mathit{st} \\ \big( \left( {\mathit{Op}^i}^{'} F {\mathit{Op}^j}^{'} \in \mathit{st} \right)
 % \vee \big( \left( {\mathit{Op}^i}^{'} = {W^i}^{'} \right) \wedge \\
 %\left( {\mathit{Op}^j}^{'} = {R^j}^{'} \right) \wedge
 %   \left( v_i = v_j \right) \big)
@@ -568,14 +568,13 @@ We start with the Read Your Writes (RYW) session guarantee, which informally pre
 % \big( \left( {W^m}^{'} F {\mathit{Op}^j}^{'} \in \mathit{st} \right) \\ \wedge
 %\not\exists  {W^n}^{'} \in \mathit{St} \left( {W^m}^{'} F {W^n}^{'} F {\mathit{Op}^j}^{'} \in \mathit{st} \right) \big) \big) \big)
  \end{split}
-  \end{align} where the partial order $\left( \mathit{St}, \preccurlyeq \right)$ enforces order among conflicting operations in an equivalent $S_p$ to follow the causal order.
+  \end{align} where the partial order $\left( \mathcal{O}, \preccurlyeq \right)$ enforces order among conflicting operations in an equivalent $S_p$ to follow the causal order.
  %\begin{align*}
 %\forall i, j, k, l, m, n, q, t, u, x, y, z, a \\
 % \big(\star W^j(v_l) F^{o}  \left( W^n(v_q) X^{o} R^z{v_a}\oplus R^k{v_m} \right) \star \big)_{o}^\mathit{po} \\
 %\rightarrow \big(G\; \star \left( v_q = v_l \right) \oplus \left( W^j(v_l) F^{o} W^t(v_u) F^{o} W^n(v_q)  \right) \\ \oplus \left( v_l = v_m \right) \oplus \left( W^j(v_l) F^{o} W^x(v_y) F^{o} R^k(v_m)  \right) \star \big)_{o}^\mathit{st}.
 %  \end{align*}\label{eqn:Causal} %where $\oplus$ is the logical operator exclusive or (x-or). An expression $a \oplus b$ denotes that either $a$ is true or $b$ is true, but both $a$ and $b$ can not be true or false simultaneously.
-  \par Strict Serializability specifies: any session trace must observe latest result of all operations in a client application. Using the notion of serialization of a client, given in Equation \ref{def:clientser},
-  Strict Serializability is expressed as follows. \\
+  \par Strict Serializability \cite{Herlihy:1990:LCC:78969.78972} is a consistency model (not to be confused with the isolation level which goes by the same name) adds the restriction of linearizability to serializability. In addition to the existential quantification over an equivalent legal serialization over the global session trace, it further specifies: any session trace must observe latest result of all operations in a client application. Using the notion of serialization of a client, given in Equation \ref{def:clientser},  Strict Serializability is expressed as follows. \\
  %\begin{align}\label{eqn:Strict}
 %\begin{split}
 %\forall{i,j}\; \left(\star \mathit{op}_iX^{o}\mathit{op}_j \star \right)_{{o},{o_j}}^\mathit{po} \vdash \bigcap_{\mathit{st}\in \mathcal{S}} \left(G\; \star \mathit{op}_iX^{o}\mathit{op}_j \star \right)_{{o},{o_j}}^\mathit{st}c,
@@ -616,7 +615,7 @@ E^{s} =  \forall \mathit{st} \in \mathit{St}, {\mathit{Op}^i}^{'}, {\mathit{Op}^
 % \left( W^n(y) F W^l(y) F R^j(x) \in \mathit{st} \right) \wedge \left( v_k = v_l \right) \wedge \\
 % \left( v_j = v_m \vee v_i = v_l \right) \big) \big) \big)  %\left( \mathit{Op}^i X^o \mathit{Op}^j \in S \right) \\ \wedge \forall \mathit{st}  \left( \mathit{Op}^j X^o R^k \in \mathit{st} \right) \wedge \left( v^k = v^j  \right) \big)
  \end{split}
-  \end{align} where the partial order $\left( \mathit{St}, \preccurlyeq \right)$ restricts an equivalent serialization of a client $S_c$, defined in Definition \ref{def:clientser}, to respect the order of sucessive operations in a given session trace. %where $\mathit{op}_i$ is any operation (read or write), and $\mathcal{S}$ is the set of all session traces for a given client application. % scope.
+  \end{align} where the partial order $\left( \mathcal{O}, \preccurlyeq \right)$ restricts an equivalent serialization of a client $S_c$, defined in Definition \ref{def:clientser}, to respect the order of sucessive operations in a given session trace. %where $\mathit{op}_i$ is any operation (read or write), and $\mathcal{S}$ is the set of all session traces for a given client application. % scope.
   \par Write Follows Read (WFR) specifies: a write operation, that follows a read operation on a common storage system object, must happen while the object contains a value that is at least as old as the one  that was read by the preceding read operation. WFR is expressed as follow. \\
  \begin{align}\label{eqn:WFR}
 \begin{split}
@@ -649,7 +648,7 @@ E^{s} =  \forall \mathit{st} \in \mathit{St}, {R^i}^{'}, {W^j}^{'} \in \mathit{s
  %C = \not\exists \left( \mathit{st}^{'} \in \mathit{St} \; \wedge \; {R^n}^{''} \in \mathit{st}^{'} \right) \\
 % \left( \left( {W^j}^{'} F {R^n}^{''} \in \mathit{St} \right) \wedge \left( {v^n}^{''} = {v^i}^{'} \right) \right)
 \end{split}
-  \end{align} where the partial order $\left( \mathit{St}, \preccurlyeq \right)$ constrains the order among conflicting pairs of reads and writes  in an equivalent $S_p$.
+  \end{align} where the partial order $\left( \mathcal{O}, \preccurlyeq \right)$ constrains the order among conflicting pairs of reads and writes  in an equivalent $S_p$.
  %\begin{align}\label{eqn:WFR}
 %\begin{split}
 %\forall i \left( \star r(o)X^{o}w(o,v)F^{o}w^{'}(o,v^{'}) \star \right)_{o}^\mathit{po} \\
@@ -684,7 +683,7 @@ E^{s} = \forall \mathit{st} \in \mathit{St}, {W^i}^{'}, {W^j}^{'} \in \mathit{st
 %\big( \left( {W^i}^{'} = {W^m(x)}^{'} \wedge {W^j}^{'} =  {W^n(y)}^{'} \right) \\ \wedge \left( {R^p(y)}^{''} F {R^q(x)}^{''} \in \mathit{St} \right) \wedge
 %\left( \left( {v_q}^{''} = {v_n}^{'} \right) \wedge \left( {v_p}^{''} =  {v_t}^{'''} \right) \right) \big)
 \end{split}
-  \end{align} where the partial order $\left( \mathit{St}, \preccurlyeq \right)$ restricts the order among conflicting writes  in an equivalent $S_p$.
+  \end{align} where the partial order $\left( \mathcal{O}, \preccurlyeq \right)$ restricts the order among conflicting writes  in an equivalent $S_p$.
    %\begin{align}\label{eqn:MW}
 %\begin{split}
 %\forall i \left(\star w(o,v)F^{o}w^{'}(o,v^{'}) \star \right)_{o}^\mathit{po} \rightarrow \left(G\; \star w(o,v)F^{o}w^{'}(o,v^{'}) \star \right)_{o}^\mathit{st}.
@@ -721,7 +720,7 @@ E^{s} = \forall \mathit{st} \in \mathit{St}, {W^i}^{'}, {W^j}^{'} \in \mathit{st
 %\big( \left( {v^j}^{'} = {v^l}^{'} \right) \vee
 %\big( \left( {W^l}^{'} F {R^j}^{'} \in \mathit{St} \right)  \wedge \\
 % \not\exists  {W^m}^{'} \left( {W^l}^{'} F {W^m}^{'} F {R^j}^{'} \in \mathit{St} \right) \big) \big) \big)
- \\ $E^s = \forall x, \mathit{st} \in \mathit{St} \not\exists {\mathit{op}^i}(x), {\mathit{op}^j}(x) \in \mathcal{O}  \\ \left( {\mathit{Op}^i}^{'}(x) F {\mathit{Op}^j}^{'} (x) \in \mathit{St} \right) \rightarrow  
+ \\ $E^s = \forall x, \mathit{st} \in \mathit{St} \not\exists {\mathit{op}^i}(x), {\mathit{op}^j}(x) \in \mathcal{O}  \\ \left( {\mathit{Op}^i}^{'}(x) F {\mathit{Op}^j}^{'} (x) \in \mathit{st} \right) \rightarrow  
  \left(  {\mathit{Op}^j}^{''}(x) F {\mathit{Op}^i}^{''} (x) \in \mathit{st} \right)$,   \\
  %E^r = C = \\
 % \forall \mathit{st}, \mathit{St} \; \big( \left( {W^i}(x)^{'} F {W^k}^{'}(y) \in \mathit{st} \right) \wedge \left( {W^l}(y)^{'} F {W^j}^{'}(x) \in \mathit{st} \right) \wedge \\
@@ -774,7 +773,7 @@ E^{s} = \forall \mathit{st} \in \mathit{St}, {W^i}^{'}, {W^j}^{'} \in \mathit{st
 % \left(  {v^k}^{'} = {v^i}^{'} \right) \wedge \big( \left( {v^j}^{'} = {v^l}^{'} \right) \vee \\
 %\big( \left( {W^l}^{'} F {R^j}^{'} \in \mathit{St} \right) \wedge
 % \left( \not\exists {W^l}^{'} F {W^m}^{'} F {R^j}^{'} \in \mathit{St} \right) \big) \big) \big)
-%E^s = \left( \mathit{St}, \preccurlyeq \right), 
+%E^s = \left( \mathcal{O}, \preccurlyeq \right), 
 \forall x, y, \mathit{st} \in \mathit{St}  \left( {\mathit{Op}^i}^{'}(x) F {\mathit{Op}^j}^{'} (y) \in \mathit{st} \right) \rightarrow \\ \left( {\mathit{Op}^i}^{'}(x) \preccurlyeq {\mathit{Op}^j}^{'} (y) \right),
 \end{split}
   \end{align}  where $ \preccurlyeq$ is a partial order over operations across all data objects with respect to a given global session trace $ \mathit{St}$.
@@ -1581,7 +1580,7 @@ Consider that a given client observes operations ${\mathit{op}^i}(x), {\mathit{o
 % \left(  {v^k}^{'} = {v^i}^{'} \right) \wedge \big( \left( {v^j}^{'} = {v^l}^{'} \right) \vee \\
 %\big( \left( {W^l}^{'} F {R^j}^{'} \in \mathit{St} \right) \wedge
 % \left( \not\exists {W^l}^{'} F {W^m}^{'} F {R^j}^{'} \in \mathit{St} \right) \big) \big) \big)
-%E^s = \left( \mathit{St}, \preccurlyeq \right), 
+%E^s = \left( \mathcal{O}, \preccurlyeq \right), 
 $\forall x, y, \mathit{st} \in \mathit{St} \\ \left( {\mathit{Op}^i}^{'}(x) F {\mathit{Op}^j}^{'} (y) \in \mathit{st} \right) \rightarrow \\ \left( {\mathit{Op}^i}^{'}(x) \preccurlyeq {\mathit{Op}^j}^{'} (y) \right),$  where $ \preccurlyeq$ is a partial order over operations across all data objects with respect to a given global session trace $ \mathit{St}$. %Also, the ConSpec expression for strict
 % serializability follows directly from its definition.
 %It states that  any serialization of a sequence of operations

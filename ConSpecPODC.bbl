@@ -1,0 +1,117 @@
+\begin{thebibliography}{10}
+
+\bibitem{DBLP:conf/icde/AdyaLO00}
+A.~Adya, B.~Liskov, and P.~E. O'Neil.
+\newblock Generalized isolation level definitions.
+\newblock In {\em {ICDE}}, pages 67--78, 2000.
+
+\bibitem{Bailis:2015:FCC:2723372.2737784}
+P.~Bailis, A.~Fekete, M.~J. Franklin, A.~Ghodsi, J.~M. Hellerstein, and
+  I.~Stoica.
+\newblock Feral concurrency control: An empirical investigation of modern
+  application integrity.
+\newblock In {\em Proceedings of the 2015 ACM SIGMOD International Conference
+  on Management of Data}, SIGMOD '15, pages 1327--1342, New York, NY, USA,
+  2015. ACM.
+
+\bibitem{Bailis:2013:BCC:2463676.2465279}
+P.~Bailis, A.~Ghodsi, J.~M. Hellerstein, and I.~Stoica.
+\newblock Bolt-on causal consistency.
+\newblock In {\em SIGMOD '13}.
+
+\bibitem{brew:cap}
+E.~A. Brewer.
+\newblock Towards robust distributed systems {(Invited Talk)}.
+\newblock In {\em Proc. of the 19th ACM SIGACT-SIGOPS Symposium on Principles
+  of Distributed Computing}, 2000.
+
+\bibitem{Burckhardt:2014:PEC:2693641.2693642}
+S.~Burckhardt.
+\newblock Principles of eventual consistency.
+\newblock {\em Found. Trends Program. Lang.}, 1(1-2):1--150, Oct. 2014.
+
+\bibitem{Chockler2000}
+G.~Chockler, R.~Friedman, and R.~Vitenberg.
+\newblock {\em Consistency Conditions for a CORBA Caching Service}, pages
+  374--388.
+\newblock Springer Berlin Heidelberg, Berlin, Heidelberg, 2000.
+
+\bibitem{Cooper:2008:PYH:1454159.1454167}
+B.~F. Cooper, R.~Ramakrishnan, U.~Srivastava, A.~Silberstein, P.~Bohannon,
+  H.-A. Jacobsen, N.~Puz, D.~Weaver, and R.~Yerneni.
+\newblock Pnuts: Yahoo!'s hosted data serving platform.
+\newblock {\em Proc. VLDB Endow.}, 1(2):1277--1288, Aug. 2008.
+
+\bibitem{Gilbert:2002:BCF:564585.564601}
+S.~Gilbert and N.~Lynch.
+\newblock Brewer's conjecture and the feasibility of consistent, available,
+  partition-tolerant web services.
+\newblock {\em SIGACT News}, 33(2):51--59, June 2002.
+
+\bibitem{Gotsman:2016:CIS:2837614.2837625}
+A.~Gotsman, H.~Yang, C.~Ferreira, M.~Najafzadeh, and M.~Shapiro.
+\newblock 'cause i'm strong enough: Reasoning about consistency choices in
+  distributed systems.
+\newblock In {\em Proceedings of the 43rd Annual ACM SIGPLAN-SIGACT Symposium
+  on Principles of Programming Languages}, POPL '16, pages 371--384, New York,
+  NY, USA, 2016. ACM.
+
+\bibitem{Hennessy:2011:CAF:1999263}
+J.~L. Hennessy and D.~A. Patterson.
+\newblock {\em Computer Architecture, Fifth Edition: A Quantitative Approach}.
+\newblock Morgan Kaufmann Publishers Inc., San Francisco, CA, USA, 5th edition,
+  2011.
+
+\bibitem{Herlihy:1990:LCC:78969.78972}
+M.~P. Herlihy and J.~M. Wing.
+\newblock Linearizability: A correctness condition for concurrent objects.
+\newblock {\em ACM Trans. Program. Lang. Syst.}, 12(3):463--492, July 1990.
+
+\bibitem{Holzmann:2003:SMC:1405716}
+G.~Holzmann.
+\newblock {\em Spin Model Checker, the: Primer and Reference Manual}.
+\newblock Addison-Wesley Professional, first edition, 2003.
+
+\bibitem{Lakshman:2010:CDS:1773912.1773922}
+A.~Lakshman and P.~Malik.
+\newblock Cassandra: A decentralized structured storage system.
+\newblock {\em SIGOPS Oper. Syst. Rev.}, 44(2):35--40, Apr. 2010.
+
+\bibitem{Li:2012:MGS:2387880.2387906}
+C.~Li, D.~Porto, A.~Clement, J.~Gehrke, N.~Pregui\c{c}a, and R.~Rodrigues.
+\newblock Making geo-replicated systems fast as possible, consistent when
+  necessary.
+\newblock In {\em Proc. of the 10th USENIX conference on Operating Systems
+  Design and Implementation}, OSDI'12, pages 265--278, Berkeley, CA, USA, 2012.
+  USENIX Association.
+
+\bibitem{Lloyd:2011:DSE:2043556.2043593}
+W.~Lloyd, M.~J. Freedman, M.~Kaminsky, and D.~G. Andersen.
+\newblock Don't settle for eventual: Scalable causal consistency for wide-area
+  storage with cops.
+\newblock In {\em Proceedings of the Twenty-Third ACM Symposium on Operating
+  Systems Principles}, SOSP '11, pages 401--416, New York, NY, USA, 2011. ACM.
+
+\bibitem{Manna:1990:HTP:93385.93442}
+Z.~Manna and A.~Pnueli.
+\newblock A hierarchy of temporal properties (invited paper, 1989).
+\newblock In {\em Proceedings of the Ninth Annual ACM Symposium on Principles
+  of Distributed Computing}, PODC '90, pages 377--410, New York, NY, USA, 1990.
+  ACM.
+
+\bibitem{Owens:2009:BXM:1616077.1616107}
+S.~Owens, S.~Sarkar, and P.~Sewell.
+\newblock A better x86 memory model: X86-tso.
+\newblock In {\em Proceedings of the 22Nd International Conference on Theorem
+  Proving in Higher Order Logics}, TPHOLs '09, pages 391--407, Berlin,
+  Heidelberg, 2009. Springer-Verlag.
+
+\bibitem{Terry:1994:SGW:645792.668302}
+D.~B. Terry, A.~J. Demers, K.~Petersen, M.~Spreitzer, M.~Theimer, and B.~W.
+  Welch.
+\newblock Session guarantees for weakly consistent replicated data.
+\newblock In {\em Proceedings of the Third International Conference on Parallel
+  and Distributed Information Systems}, PDIS '94, pages 140--149, Washington,
+  DC, USA, 1994. IEEE Computer Society.
+
+\end{thebibliography}
