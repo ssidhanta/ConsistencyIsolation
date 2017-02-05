@@ -315,7 +315,6 @@ The \emph{global session trace} $\mathit{St}$ denotes the set of all
 %    according to their temporal order of execution.  $\mathit{St}$ collates
 %    all the tuples  $\mathit{tup}_i$ from all individual session  traces, and orders the tuples according to
 %   according to descending order of the timestamp field $T^j$.
-
     Figure \ref{fig:System} illustrates the above system model.
 
 
@@ -331,8 +330,8 @@ Our notation defines special purpose LTL operators as shorthands to longer expre
     %% The
     %% superscript $o$ specifies the context of an object $o$ for the enclosed relation; $o$ is equivalent to an operand for a
     %%  storage operation.
-     E.g., an expression ${w^j} X^{o} {r^k}$ denotes that among operations performed on the object
-     ${o}$, the execution of the operation $r^k(o){v_m}$ immediately follows the execution operation $w^j(o,v_l)$.
+     E.g., an expression ${w} X^{o} {r}$ denotes that among operations performed on the object
+     ${o}$, the execution of the operation $r(o){v_m}$ immediately follows the execution operation $w(o,v_l)$.
 
 %% ; the
 %%       superscript $'$ denotes an instance of execution of a given operation in a session trace. We also use the  LTL
