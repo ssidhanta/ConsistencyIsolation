@@ -406,6 +406,10 @@ if there exists a partial order
 %   the operations, represented by a temporal operator $R$ (which may be the temporal operator eventually $F$, the
 %   special-purpose next operator $X^o$, or a propositional relation between values returned by the operations). %Alternatively, there exists an equivalence relation $\sim$ between the results $v_i$ and $v_j$ observed by
 %  operations $\mathit{op}^i$ and $\mathit{op}^j$, respectively, i.e., either $v_i = v_j$ or $v_i \not= v_j$.
+
+
+
+Condition 1, when applied to a system whose interface consists only of read and write, translates to a requirement that every read operation in $St$ must return the value of the most recent write according to $\preccurlyeq$.
   Condition 2 can be expressed as $ E^s\; \vDash \; \left( \mathit{St}, \preccurlyeq \right),$ where %$R$ is a temporal operator,
   $E^s$ is the ConSpec parameterizattion for each
  consistency model $\mathcal{C}$,
@@ -445,13 +449,17 @@ if there exists a partial order
  %%   conjunction of one or more LTL constraints on operations comprised in $S_p$. Since $S_p$ %comprises only write operations performed by other clients apart from operations performed by a given client, and
  %%   does not comprise read operations performed by other concurrent clients, consistency models which impose constraints on $S_p$ can only be regarded as \emph{partial orders} over a global execution comprising operations performed by all concurrent clients on the underlying storage system. An LTL formula representing the specification of such a consistency model can not be regarded as a total order over operations performed by all clients (represented by the global session trace $\mathit{St}$). By definition, an LTL formulas satisfies the following properties: 1) irreflexivity, since LTL defines a linear order over time, and this linearity implies that there can not be any cyclic relation in LTL formulas, 2)  transitivity, which follows trivially from the linear order imposed by LTL, and 3) asymmetric, which follows directly from conditions 1 and 2. Since the above group of consistency models are specified in terms of LTL constraints, they, in turn, are irreflexive, transitive, and asymmetric. Hence, by definition, such consistency models are regarded as \emph{strict partial orders} over all clients.    
   
- \section{List of ConSpec Specifications for Various Consistency Models and Isolation Levels}\label{sec:list}
-  Here, we present the ConSpec specifications for most common consistency models and isolation levels documented till date in the literature \cite{Chockler2000, Terry:1994:SGW:645792.668302, Burckhardt:2014:PEC:2693641.2693642}. We provide the detailed derivation of these specifications later in Section \ref{sec:derive}.
+ \section{Specifying existing models}\label{sec:list}
+In this section, we present the ConSpec specifications for several common consistency models and isolation levels documented in the literature~\cite{Chockler2000, Terry:1994:SGW:645792.668302, Burckhardt:2014:PEC:2693641.2693642}. Subsequently, in Section~\ref{sec:derive}, we prove the equivalence between these definitions and their original counterparts.
+
   \subsection{Specifications for Consistency Models}
-  The Read Your Writes (RYW) model is stated as follows. Let us consider that a client application performs
+
+We start by specifying a series of session guarantees, which were originally proposed by Terry et al.\ in the context of a mobile computing storage system called Bayou~\cite{Terry:1994:SGW:645792.668302}. These are four guarantees that apply to individual sessions, allowing applications to see a view of the storage system that is consistent with their previous operations. Their original definition is implementation-dependent, since it is stated, for instance, in terms of the order in which writes are applied at various server replicas. Subsequently there were authors who wrote implementation-independent definition for these session guarantees~\cite{Chockler2000, Burckhardt:2014:PEC:2693641.2693642}. 
+
+Starting with the Read Your Writes (RYW) session guarantee, this is informally stated as follows. Let us consider that a client application performs
     a write operation followed by a read operation on an object $o$, observed in any given session trace, obtained by executing the above client application.
-    According to RYW, a read operation in the session trace must not observe the result of an earlier write
-    operation, ie., it may not observe a value written before the occurrence of the write operation which
+    According to RYW, given a session trace,  a read operation within that trace must not observe the result of an earlier write
+    operation, i.e., it may not observe a value written before the occurrence of the write operation which
     immediately precedes the read. In other words, RYW specifies: if an operation $r^j$ reads an object $o$
     that was written by a  write $w^i$,  the $r^j$ must not return the value written by write operation $w^k$ that
     may have preceded $w^i$.
