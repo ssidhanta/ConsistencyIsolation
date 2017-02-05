@@ -317,13 +317,11 @@ The \emph{global session trace} $\mathit{St}$ denotes the set of all
 %    according to their temporal order of execution.  $\mathit{St}$ collates
 %    all the tuples  $\mathit{tup}_i$ from all individual session  traces, and orders the tuples according to
 %   according to descending order of the timestamp field $T^j$.
-    Figure \ref{fig:System} illustrates the above system model.
-
+   Figure \ref{fig:System} illustrates the above system model.
 
 %We do not assume anything regarding how these operations are internally handled by the storage system. For all intents and purposes, the storage system is a black box component on which read and write operations get executed. A client application executes these storage operations as high level API methods invoked from the application code. These API methods are translated into storage system specific native commands by the storage system driver which acts as an interface between the client application and the underlying storage system. %Within a given application scope, operations are invoked by the client application in a synchronous manner, i.e., an operation is invoked only once the result from the previous operation in the execution sequence is received.
 %    Optionally, read and write operations invoked from a transaction $tx$ are denoted as $r^k_{tx}(o){v_m}$ and $w^j_{tx}(o,v_l)$, respectively. %, passing values of objects as method parameters.
 %  Further, we do not assume anything regarding the nature of the storage system --- whether it is a standalone database, a transactional store, or a distributed storage system. Also, we do not make any assumptions regarding the configuration of the storage system, e.g., we do not assume what partitioning scheme or what normalization form (in case of RDBMS) a storage system follows. Our specifications restrict how client applications view results of storage operations, and is independent of how the underlying storage system internally processes storage operations. By not assuming anything regarding the implementation details, we render our specifications implementation independent, i.e., not specific to any particular storage system implementation. We further assume that a read operation $r^k_{tx}(o){v_m}$ always returns a unique value $v_m$ for an object $o$, and a write operation $w^j_{tx}(o,v_l)$ updates the value of an object $o$ to a unique value $v_l$.  This allows us to identify the particular write operation responsible for a particular value observed from a client application.
-
 Our notation defines special purpose LTL operators as shorthands to longer expressions. These correspond to scope operators
    that specify the context within which the expression is 
   restricted. For example, we define a special-purpose operator  $X^{o}$, which is derived
@@ -332,14 +330,12 @@ Our notation defines special purpose LTL operators as shorthands to longer expre
     %% The
     %% superscript $o$ specifies the context of an object $o$ for the enclosed relation; $o$ is equivalent to an operand for a
     %%  storage operation.
-     E.g., an expression ${w} X^{o} {r}$ denotes that among operations performed on the object
+  E.g., an expression ${w} X^{o} {r}$ denotes that among operations performed on the object
      ${o}$, the execution of the operation $r(o){v_m}$ immediately follows the execution operation $w(o,v_l)$.
-
 %% ; the
 %%       superscript $'$ denotes an instance of execution of a given operation in a session trace. We also use the  LTL
 %%       operator ``eventually", i.e., $F$, do denote that an operation is preceded by the another operation in a given
 %%       execution sequence. The superscript ${o}$ in the above operator is used to specify that the operator defines the  LTL relationship ``eventually" among only the operations performed specifically on the object ${o}$.
-
 Finally, we assume the system has a sequential specification, which is a correctness condition, corresponding to the output of the operations in centralized system that executes operation in sequence, one at a time. In the case of the sequential specification of a system whose interface are read and write operations, the read operation to object $o$ must output the value associated with the most recent write operation to the same object $o$.
 \newtheorem{definition}{Definition}
   %% A \emph{serialization} is a linear sequence comprising all operations comprising a global  execution on a
@@ -349,8 +345,6 @@ Finally, we assume the system has a sequential specification, which is a correct
   %%  consistency levels in terms of valid legal serialization orders equivalent to a given execution. Similar to Chockler et al., ConSpec defines different consistency models in terms of different specialized forms of legal serialization, which have been defined below. ConSpec defines those consistency models, which can not be expressed in terms of legal serialization, in terms of constraints on the global execution order,  represented by the global session trace $\mathit{St}$.
   %%  Let the propositional variable ${\mathit{Op}^i}^{'}$ denote an execution of the
   %%  i\textquotesingle th operation comprised in the set $mathcal{O}$ of operations executed from a given client application in a session trace.
-
-
   %%   \newtheorem{definition}{Definition}
   %%    \begin{definition}(Legal Serialization)
   %%  We represent a global execution, comprising concurrent operations executed from multiple clients on a system, with a global session trace $\mathit{St}$, which is a set of operations from all clients. A legal serialization $\mathit{Ser}$ of a given global execution is represented by a sequence of propositional variables ${\mathit{Op}^i}^{'}$, each variable ${\mathit{Op}^i}$ denoting an execution of an
@@ -360,7 +354,6 @@ Finally, we assume the system has a sequential specification, which is a correct
   %%  \not\exists {\mathit{Op}^k}^{'} = {W^k}^{'} \left( {\mathit{Op}^i}^{'}  F {\mathit{Op}^k}^{'} F {\mathit{Op}^j}^{'} \in \mathit{St}  \right) \big)
   %% \rightarrow \left( {v_j}^{'} = {v_i}^{'} \right) \big) \big)$.
   %%   \end{definition}\label{def:ser}
-
   %%  \begin{definition}(Serialization of a Client)
   %%  We  represent a local execution of a given client observed at a client machine, with a local session trace $\mathit{st} $, comprising results observed for operations executed by a given client application, comprised in the set of operations $\mathcal{O}$.  We formally define \emph{serialization of a client}, $S_c$, as the restriction of a legal serialization of a global execution
   %%   to  the operations invoked by a particular client application, which in turn,
