@@ -456,10 +456,9 @@ In this section, we present the ConSpec specifications for several common consis
 
 We start by specifying a series of session guarantees, which were originally proposed by Terry et al.\ in the context of a mobile computing storage system called Bayou~\cite{Terry:1994:SGW:645792.668302}. These are four guarantees that apply to individual sessions, allowing applications to see a view of the storage system that is consistent with their previous operations. Their original definition is implementation-dependent, since it is stated, for instance, in terms of the order in which writes are applied at various server replicas. Subsequently there were authors who wrote implementation-independent definition for these session guarantees~\cite{Chockler2000, Burckhardt:2014:PEC:2693641.2693642}. 
 
-We start with the Read Your Writes (RYW) session guarantee, which informally precludes a read operation $r$ from reading a value 
-
- stated as follows. Let us consider that a client application performs
-    a write operation followed by a read operation on an object $o$, observed in any given session trace, obtained by executing the above client application.
+We start with the Read Your Writes (RYW) session guarantee, which informally precludes a read operation $r$ from reading a value for object $o$ that precedes a value the same client previously wrote to the same object in the same session.
+% stated as follows. Let us consider that a client application performs
+%    a write operation followed by a read operation on an object $o$, observed in any given session trace, obtained by executing the above client application.
 %    According to RYW, given a session trace,  a read operation within that trace must not observe the result of an earlier write
 %    operation, i.e., it may not observe a value written before the occurrence of the write operation which
 %    immediately precedes the read. In other words, RYW specifies: if an operation $r^j$ reads an object $o$
@@ -469,9 +468,12 @@ We start with the Read Your Writes (RYW) session guarantee, which informally pre
   %Let $\wedge$ be the logical operator for conjunction. An expression $A \wedge B$ denotes that both the conditions represented by the propositional logic variables $A$ and $B$ must hold.
   %Similarly, let $\oplus$ be the logical operator ``exclusive-or" (x-or). An expression $C \oplus D$ denotes that either $C$ is true or $D$ is true, but both $C$ and $D$ can not be true or false simultaneously.
     %RYW states: if there exist multiple writes in the session trace preceding the read $r^k(o){v_m}$, $r^k(o){v_m}$ must reflect the result of the most recent write $w^j(o,v_l)$ preceding $r^k(o){v_m}$. Let the propositional logic variables $W^j(v_l)$ and $R^k{v_m}$ represent the events that results of a write operation $w^j(o,v_l)$ and a read operation $r^k(o){v_m}$, respectively, are either observed (or not) in a session trace or the above operations occur in a program order (indicated by the value of the above variables being TRUE or FALSE). Let the wild card character $\star$ is a ``placeholder" for any combination of propositional variables (or none). For example, the expression $* A$ denotes that the propositional variable $A$ maybe preceded by any number of propositional variables, or maybe preceded by nothing.
-  We use serialization of a partial execution $S_p$, specified in Definition \ref{def:parser}, to denote a legal serialization of all operations comprising a given client
-  application, as well as all write
-  operations  executed from all other concurrent client applications. Following the format of Definition \ref{def:form0}, the above RYW definitions are reduced to LTL-like expression, as follows.
+%  We use serialization of a partial execution $S_p$, specified in Definition \ref{def:parser}, to denote a legal serialization of all operations comprising a given client
+%  application, as well as all write
+%  operations  executed from all other concurrent client applications. 
+
+Following the format of Definition \ref{def:form0}, RYW can be defined by the following restrictions on $\preccurlyeq$.
+
   %\begin{align}\label{eqn:RYW}
 %\begin{split}
 % \forall i \left(\star w^j_{tx}(o,v_l)X^{o}r^k_{tx}(o){v_m} \star \right)_{o}^\mathit{po} \vdash \left(G\; \star w(o,v)X^{o}r(o) \star \right)_{o}^\mathit{st},
@@ -495,10 +497,10 @@ We start with the Read Your Writes (RYW) session guarantee, which informally pre
 %  \big( \left( {W^i}^{'} F {R^j}^{'} \in \mathit{st} \right)
 % \rightarrow \; \exists S_p \\
 % \left(  {W^i}^{'} F {R^j}^{'} \in S_p \right)\big).
- \mathcal{E}^{s} = \forall  \mathit{st} \in \mathit{St}, {W^i}^{'}, {R^j}^{'} \in \mathit{st}
+ \mathcal{E}^{s} = \forall  {W^i}^{'}, {R^j}^{'} \in \mathit{st}
   \big( \left( {W^i}^{'} F {R^j}^{'} \in \mathit{st} \right)
  \rightarrow \\
- \left(  {W^i}^{'} \preccurlyeq {R^j}^{'} \right)\big),
+ \left(  {W^i}^{'} \preccurlyeq_{st+w} {R^j}^{'} \right)\big),
  %C = \left( \not\exists {R^k}^{'}, {W^l}^{'} \in \mathit{St} \right)   \big( %\left( {W^i}^{'} F {R^j}^{'} \in \mathit{st} \right) \wedge
 %\left( {R^k}^{'} F {R^j}^{'} \in \mathit{st} \right)   \\ \wedge
 %%\left(  \mathit{st}^{'} \in \mathit{St} \right) \wedge
@@ -507,7 +509,10 @@ We start with the Read Your Writes (RYW) session guarantee, which informally pre
 %\big( \left( {W^l}^{'} F {R^j}^{'} \in \mathit{St} \right)  \wedge
 %  \not\exists {W^m}^{'} \left( {W^l}^{'} F {W^m}^{'} F {R^j}^{'} \in \mathit{St} \right) \big) \big).
   \end{split}
-  \end{align}\label{eqn:RYW} where the partial order $\left( \mathcal{O}, \preccurlyeq \right)$ restricts the   order among conflicts pair of writes and reads in an equivalent serialization of a partial execution $S_p$, defined in Definition \ref{def:parser}.
+  \end{align}\label{eqn:RYW} where $st$ is the session from the stanpoint of which the session guarantees are being upheld, and $\preccurlyeq_{st+w}$ denotes the restriction of $\preccurlyeq$ to the elements of $st$ and the write operations of all other clients.
+
+
+%% restricts the   order among conflicts pair of writes and reads in an equivalent serialization of a partial execution $S_p$, defined in Definition \ref{def:parser}.
    %where $G$ is the LTL operator globally.
     %The superscript $\mathit{st}$ specifies that the enclosed relation is given in the context of a session trace. %, representing the application scope of $\mathit{Cl}$.
 \par Read/Session Monotonic (MR) specifies: read operations on a storage system object invoked from a client application or a session must always return results in an increasing order of recency as per their mutual order in the session trace.
