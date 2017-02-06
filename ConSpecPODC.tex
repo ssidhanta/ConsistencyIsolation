@@ -1731,26 +1731,26 @@ proscribes $ww$ cycles. % In
   $w \xrightarrow{wr} r$,  $w \xrightarrow{ww} w^{'}$, and  $w \xrightarrow{wr} r$ dependency, respectively
   \cite{Hennessy:2011:CAF:1999263}.  The $w \xrightarrow{wr} r$ dependency can be translated to the form
   $\exists \big( %\left(  \mathit{st}, \mathit{st}^{'} \in \mathit{St} \right) \wedge
-  \left( W^i \in \mathit{st} \right)
-  \wedge \left(  R^j \in \mathit{St} \right) \big) \\ \left( {v^i}^{'} = {v^j}^{''} \right)$, where we represent the write and read operations $w$ and $r$
-  involved in the  dependency relation with the propositional variable $W^i$ and $R^j$, respectively. Denoting
-  $w$, and $w^{'}$ with propositional variables $W^i$ and $W^j$, the
+  \left( W^{'} \in \mathit{st} \right)
+  \wedge \left(  R^{''} \in \mathit{St} \right) \big) \\ \left( v  = {v}^{'} \right)$, where we represent the write and read operations $w$ and $r$
+  involved in the  dependency relation with the propositional variable $W^{'}$ and $R^{''}$, respectively. Denoting
+  $w$, and $w^{'}$ with propositional variables $W^{'}$ and $W^{''}$, the
   dependency relation $w \xrightarrow{ww} w^{'}$ is translated into ConSpec form as follows.
   \begin{align}\label{eqn:ww}
 \begin{split}
    \exists \big( %\left( \mathit{st}, \mathit{st}^{'} \in \mathit{St} \right) \wedge
-   \left( {W^i}^{'} \in \mathit{st} \right)
-   \wedge \left( {W^j}^{'}  \in  \mathit{St} \right)  \big)
+   \left( {W}^{'} \in \mathit{st} \right)
+   \wedge \left( {W}^{''}  \in  \mathit{St} \right)  \big)
    \big( %\wedge
  % \left( {W^i}^{'} \in \mathit{st} \right)
   \exists %\big(  %\left( \mathit{st}^{''} \in \mathit{St} \right) \wedge
-  \left( { R^l}^{''} \in \mathit{St} \right) %\big)
+  \left( { R}^{''''} \in \mathit{St} \right) %\big)
   %\exists \left( \mathit{st}, \mathit{st}^{'} \in \mathit{St} \right)  %{W^i}^{'}  F { R^k}^{''} \in \mathit{st}^{''}  \wedge \\
   %\wedge {R^l}^{'''} F { R^k}^{'''} \in \mathit{st}^{''} \wedge
-   \left( {v_l}^{''} = {v_j}^{''} \right) \\
-   \wedge \big( \left(  {v_l}^{'} = {v_i}^{'} \right) \vee
+   \left( {v}^{'''} = {v}^{'} \right) \\
+   \wedge \big( \left(  {v}^{'''} = v \right) \vee
   \big( \left( {W^i}^{''} F { R^l}^{''} \in \mathit{St} \right) \wedge \\
-   \left(  \not\exists {W^i}^{''} F {W^m}^{''} F { R^l}^{''} \in \mathit{St} \right)  \big) \big) \big) %\left( \not\exists {W^j}^{''} F {W^m}^{''} F { R^l}^{''} \in \mathit{st}^{'} \; \wedge \; {v_l}^{'} = {v_j}^{'}
+   \left(  \not\exists {W}^{'} F {W}^{'''''} F { R}^{''''} \in \mathit{St} \right)  \big) \big) \big) %\left( \not\exists {W^j}^{''} F {W^m}^{''} F { R^l}^{''} \in \mathit{st}^{'} \; \wedge \; {v_l}^{'} = {v_j}^{'}
 %  \right) \\
 %  \vee \left( \exists {W^j}^{''} F {W^m}^{''} F { R^l}^{''} \in \mathit{st}^{'} \right) \left({v_l}^{'} = {v_m}^{'}  \right) \big) % \\
   %\not\exists {W^i}^{'} F {W^n}^{'} F { R^l}^{'} \in \mathit{st}  \big)
@@ -1759,19 +1759,19 @@ proscribes $ww$ cycles. % In
    %\left( {v_k}^{'} = {v_m}^{'}  \right) \big).
    \end{split}
    \end{align}
-   Similarly, denoting  $r$, and $w$ with propositional variables $R^i$ and $W^j$, the
+   Similarly, denoting  $r$, and $w$ with propositional variables $R^{'}$ and $W^{''}$, the
    $r \xrightarrow{rw} w$ dependency is translated into ConSpec form as follows.
      \begin{align}\label{eqn:rw}
 \begin{split}
 \exists \big( %\left( \mathit{st}, \mathit{st}^{'}, \mathit{st}^{''}  \in \mathit{St} \right)  \wedge
-\left( {R^i}^{'} \in \mathit{st} \right)
-   \wedge \left( {W^j}^{'}  \in  \mathit{St} \right) \wedge
-   \left( \exists  {W^k}^{''} \in \mathit{st}  \right) \\
-   \left( {v_i}^{'} = {v_k}^{'} \right) \wedge
-  \left( \exists {R^l}^{''} \in \mathit{St}  \right) \left( {v_l}^{'} = {v_j}^{'} \right)  \big)
- \big( \left( {v_k}^{'} = {v_l}^{'} \right) \vee \\
-  \big(  \left( {W^k}^{''} F { R^l}^{''} \in \mathit{St} \right) \wedge
-    \left(  \not\exists {W^k}^{''} F {W^m}^{''} F { R^l}^{''} \in \mathit{St}  \right) \big) \big)
+\left( {R}^{'} \in \mathit{st} \right)
+   \wedge \left( {W}^{''}  \in  \mathit{St} \right) \wedge
+   \left( \exists  {W}^{'''} \in \mathit{st}  \right) \\
+   \left( v = {v}^{''} \right) \wedge
+  \left( \exists {R}^{''''} \in \mathit{St}  \right) \left( {v}^{'''} = {v}^{'} \right)  \big)
+ \big( \left( {v}^{''} = {v}^{'''} \right) \vee \\
+  \big(  \left( {W}^{'''} F { R}^{''''} \in \mathit{St} \right) \wedge
+    \left(  \not\exists {W}^{'''} F {W}^{'''''} F { R}^{''''} \in \mathit{St}  \right) \big) \big)
    %\left( {W^j}^{''} F { R^l}^{''} \in \mathit{st}^{'} \right) \wedge
 % \left( \not\exists {W^m}^{'} F {R^i}^{'} \in \mathit{st}^{''} \right) \left( {v_l}^{'} = {v_m}^{'} \right) \big)
  % \big( {v_l}^{'} = {v_j}^{'}
@@ -1783,25 +1783,25 @@ proscribes $ww$ cycles. % In
    $w \xrightarrow{ww} w^{'}$, and  $w \xrightarrow{wr} r$  dependencies among transactions
    \cite{DBLP:conf/icde/AdyaLO00}. The $wr$ dependency relation of the dependency graph can be translated into
    ConSpec form \\ $\exists \big( %\left(  \mathit{st}, \mathit{st}^{'} \in \mathit{St} \right) \wedge
-   \left( W^i_\mathit{tx} \in \mathit{st} \right)
-  \wedge \left(  R^j_\mathit{ty} \in \mathit{St} \right) \big) \left( {v^i}^{'} = {v^j}^{''} \right) $. The $ww$ dependency relation
+   \left( W^{'}_\mathit{tx} \in \mathit{st} \right)
+  \wedge \left(  R^{''}_\mathit{ty} \in \mathit{St} \right) \big) \left( v = {v}^{'} \right) $. The $ww$ dependency relation
     between transactions $\mathit{tx}$ and $\mathit{ty}$ can be translated to \begin{align}\label{eqn:ww}
 \begin{split}
  \exists \big( %\left( \mathit{st}, \mathit{st}^{'} \in \mathit{St} \right) \wedge
- \left( {W^i}^{'}_\mathit{tx} \in \mathit{st} \right)
-   \wedge \left( {W^j}^{'}_\mathit{yx}  \in  \mathit{St} \right)  \big)
+ \left( {W}^{''}_\mathit{tx} \in \mathit{st} \right)
+   \wedge \left( {W}^{''}_\mathit{tx}  \in  \mathit{St} \right)  \big)
    \big( %\wedge
  % \left( {W^i}^{'} \in \mathit{st} \right)
   \exists %\big( % \left( \mathit{st}^{''} \in \mathit{St} \right) \wedge
-  \left( { R^l}^{''}\mathit{ty} \in \mathit{St} \right) %\big)
+  \left( { R}^{''''}\mathit{ty} \in \mathit{St} \right) %\big)
   %\exists \left( \mathit{st}, \mathit{st}^{'} \in \mathit{St} \right)  %{W^i}^{'}  F { R^k}^{''} \in \mathit{st}^{''}  \wedge \\
   %\wedge {R^l}^{'''} F { R^k}^{'''} \in \mathit{st}^{''} \wedge
-   \\ \left( {v_l}^{''} = {v_j}^{''} \right)
+   \\ \left( {v}^{'''} = {v}^{'} \right)
    \wedge
-   \big( \left(  {v_l}^{'} = {v_i}^{'} \right) \vee
-  \big( \left( {W^i}^{''} F { R^l}^{''}_\mathit{ty} \in \mathit{St} \right) \wedge \\
-   \big( \left(  \not\exists {W^i}^{''}_\mathit{tx} F {W^m}^{''}_\mathit{tx} F { R^l}^{''}_\mathit{ty} \in \mathit{St} \right)  \\
-  \wedge  \left(  \not\exists {W^i}^{''}_\mathit{tx} F {W^m}^{''}_\mathit{ty} F { R^l}^{''}_\mathit{ty} \in \mathit{St} \right) \big) \big) \big) \big)
+   \big( \left(  {v}^{'''} = v \right) \vee
+  \big( \left( {W}^{''} F { R}^{''''}_\mathit{ty} \in \mathit{St} \right) \wedge \\
+   \big( \left(  \not\exists {W}^{'}_\mathit{tx} F {W}^{'''''}_\mathit{tx} F { R}^{''''}_\mathit{ty} \in \mathit{St} \right)  \\
+  \wedge  \left(  \not\exists {W}^{'}_\mathit{tx} F {W}^{'''''}_\mathit{ty} F { R}^{''''}_\mathit{ty} \in \mathit{St} \right) \big) \big) \big) \big)
   %\left( \not\exists {W^j}^{''} F {W^m}^{''} F { R^l}^{''} \in \mathit{st}^{'} \; \wedge \; {v_l}^{'} = {v_j}^{'}
   % \exists \big( \mathit{st}, \mathit{st}^{'}, \mathit{st}^{''} \in \mathit{St} \wedge
 %  {W^i}^{'}_\mathit{tx} F { R^l}^{'}_\mathit{tx} \in \mathit{st}
@@ -1818,15 +1818,15 @@ proscribes $ww$ cycles. % In
   \begin{align}\label{eqn:rw}
 \begin{split}
 \exists \big( %\left( \mathit{st}, \mathit{st}^{'}, \mathit{st}^{''}  \in \mathit{St} \right)  \wedge
-\left( {R^i}^{'}_\mathit{tx} \in \mathit{st} \right)
-   \wedge \left( {W^j}^{'}_\mathit{ty}  \in  \mathit{St} \right) \wedge
-   \left( \exists  {W^k}^{''}_\mathit{tx} \in \mathit{st}  \right) \\
-   \left( {v_i}^{'} = {v_k}^{'} \right)  \wedge 
-  \left( \exists {R^l}^{''}_\mathit{ty} \in \mathit{St}  \right) \left( {v_l}^{'} = {v_j}^{'} \right)  \big)
-  \big( \left( {v_k}^{'} = {v_l}^{'} \right) \\
-   \vee  \big(  \left( {W^k}^{''}_\mathit{tx} F { R^l}^{''}_\mathit{ty} \in \mathit{st}^{''} \right)  \wedge
-    \big( \left(  \not\exists {W^k}^{''}_\mathit{tx} F {W^m}^{''}_\mathit{tx} F { R^l}^{''}_\mathit{ty} \in \mathit{St} \right)  \\\wedge
-   \left(  \not\exists {W^k}^{''}_\mathit{tx} F {W^m}^{''}_\mathit{ty} F { R^l}^{''}_\mathit{ty} \in \mathit{St} \right) \big) \big)
+\left( {R}^{'}_\mathit{tx} \in \mathit{st} \right)
+   \wedge \left( {W}^{''}_\mathit{ty}  \in  \mathit{St} \right) \wedge
+   \left( \exists  {W}^{'''}_\mathit{tx} \in \mathit{st}  \right) \\
+   \left( v = {v}^{''} \right)  \wedge 
+  \left( \exists {R}^{''''}_\mathit{ty} \in \mathit{St}  \right) \left( {v}^{'''} = {v}^{'} \right)  \big)
+  \big( \left( {v}^{''} = {v}^{'''} \right) \\
+   \vee  \big(  \left( {W}^{'''}_\mathit{tx} F { R}^{''''}_\mathit{ty} \in \mathit{st}^{''} \right)  \wedge
+    \big( \left(  \not\exists {W}^{'''}_\mathit{tx} F {W}^{'''''}_\mathit{tx} F { R}^{''''}_\mathit{ty} \in \mathit{St} \right)  \\\wedge
+   \left(  \not\exists {W}^{'''}_\mathit{tx} F {W}^{'''''}_\mathit{ty} F { R}^{''''}_\mathit{ty} \in \mathit{St} \right) \big) \big)
 %\left( \exists \mathit{st}, \mathit{st}^{'}, \mathit{st}^{''}  \in \mathit{St} \right) \big(
 %  \left( {R^i}^{'}_\mathit{tx} F {W^j}^{''}_\mathit{ty} \in \mathit{st} \right) \wedge \\
 %   \left( {W^j}^{''}_\mathit{ty} F { R^l}^{''}_\mathit{ty} \in \mathit{st}^{'} \right) \wedge
