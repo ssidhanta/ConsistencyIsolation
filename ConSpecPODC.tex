@@ -553,6 +553,80 @@ Following the format of Definition \ref{def:form0}, RYW can be defined by the fo
 %  \end{align}
 %. the operator $F$ is the LTL operator eventually.
  %In other words, Equation \ref{eqn:MR} mandates that $r^s(o){v_t}$ returns the value $v_q$ written by the latest write operation $w^n(o,v_q)$, or that written by another write $w^u(o,v_x)$ that overwrites $w^n(o,v_q)$). It does not allow $r^s(o){v_t}$ to return a value $v_l$ written by an earlier write operation  $w^j(o,v_l)$ which was invoked earlier than $w^n(o,v_q)$. The above constraint ensures that a read operation always views the latest version of the object $o$.
+ \par Write Follows Read (WFR) specifies: a write operation, that follows a read operation on a common storage system object, must happen while the object contains a value that is at least as old as the one  that was read by the preceding read operation. WFR is expressed as follow. \\
+ \begin{align}\label{eqn:WFR}
+\begin{split}
+%E^{s} =  \forall \mathit{st} \in \mathit{St}, {R^i}^{'}, {W^j}^{'} \in \mathit{st} \big( \left( {R^i}^{'} F {W^j }^{'} \in \mathit{st} \right)
+% \rightarrow \exists S_p \\ \left(  {R^i}^{'} F {W^j}^{'} \in S_p \right) \big). 
+E^{s} =  \forall \mathit{st} \in \mathit{St}, {R}^{'}, {W}^{'} \in \mathit{st} \big( \left( {R}^{'} F {W}^{'} \in \mathit{st} \right)
+ \rightarrow \\ \left(  {R}^{'} \preccurlyeq_{st+w} {W}^{'} \right) \big), %; \\
+ %C = \not\exists \left( {R^k}^{'}, {W^l}^{'} \in \mathit{St} \right)   \big(%\left( {W^i}^{'} F {R^j}^{'} \in \mathit{st} \right) \wedge
+%\left( {R^i}^{'} F {R^k}^{'} \in \mathit{st} \right)   \wedge
+%%\left(  \mathit{st}^{'} \in \mathit{St} \right) \wedge
+%\left( {W^l}^{'} F {W^j}^{'} \in \mathit{St} \right) \\ %\big) \\
+%\big( \left(  {v^k}^{'} = {v^l}^{'} \right)  \wedge
+%\big( \left( {v^i}^{'} = {v^l}^{'} \right) \vee  \
+%\big( \left( {R^i}^{'} F {W^j}^{'} \in \mathit{St} \right)  \wedge
+% \not\exists  {W^m}^{'} \\ \left( {W^l}^{'} F {W^m}^{'} F {R^i}^{'} \in \mathit{St} \right)  \big) \big)  \wedge
+% \left( \not\exists {R^i}^{''}, {W^j}^{''}, {R^k}^{''}, {W^m}^{''} \in \mathit{St} \right) \\ \big(
+%  \left( {R^i}^{''} F {W^j}^{''} F {R^k}^{''} \in \mathit{St} \right)
+%  \wedge \left(  {W^m}^{''}  F  {R^k}^{''} \in \mathit{St} \right) \wedge \\
+% \left( {v^j}^{''} = {v^i}^{''} \right)
+%  \wedge \left( {v^m}^{''} = {v^k}^{''} \right)
+%   \wedge \left( {v^l}^{''} = {v^i}^{''} \right)  \wedge  \left( {v^m}^{''} = {v^l}^{''} \right) \\
+%  \vee \big( \left( {W^m}^{''} F { R^l}^{''} \in \mathit{St} \right)  \wedge
+%     \not\exists {W^n}^{''}  \left( {W^m}^{''} F {W^n}^{''} F { R^l}^{''} \in \mathit{St}  \right)  \big)  \big)
+ %\big( %\left( \mathit{st}^{'}, \mathit{st}^{''} \in \mathit{St} \right) \wedge
+% \left( {R^i}^{''} F {W^j}^{''} \in \mathit{st} \right) \wedge \left( {W^k}^{'} \in \mathit{St}  \right) \wedge \\
+%  \left( {v^k}^{''} = {v^i}^{'} \right) \wedge \left( {W^m}^{''} F {W^k}^{''} F {R^i}^{''} \in \mathit{st} \right) \big) \left( {v^m}^{'} = {v^i}^{'} \right) \\
+%   \wedge \not\exists \big( \left( {R^i}^{'} F {R^n}^{'} \in \mathit{St} \right)  \wedge
+%   \left( {W^p}^{''} F {W^j}^{''} \in \mathit{St} \right)  \wedge \left( {v^i}^{'} = {v^j}^{'} \right)   \big) \\
+%     \left( {v^p}^{''} = {v^n}^{''} \right)
+ %C = \not\exists \left( \mathit{st}^{'} \in \mathit{St} \; \wedge \; {R^n}^{''} \in \mathit{st}^{'} \right) \\
+% \left( \left( {W^j}^{'} F {R^n}^{''} \in \mathit{St} \right) \wedge \left( {v^n}^{''} = {v^i}^{'} \right) \right)
+\end{split}
+  \end{align} %where the partial order $\left( \mathcal{O}, \preccurlyeq \right)$ constrains the order among conflicting pairs of reads and writes  in an equivalent $S_p$.
+  where $st$ denotes the session in context of the session guarantees, and $\preccurlyeq_{st+w}$ denotes the restriction of $\preccurlyeq$ in the context of the elements of $st$ and the write operations performed by all other clients.
+ %\begin{align}\label{eqn:WFR}
+%\begin{split}
+%\forall i \left( \star r(o)X^{o}w(o,v)F^{o}w^{'}(o,v^{'}) \star \right)_{o}^\mathit{po} \\
+%\rightarrow \left(\star w(o,v)F^{o}w^{'}(o,v^{'}) \star \right)_{o}^\mathit{st}.
+%\end{split}
+%  \end{align}
+ \par Monotonic Writes (MW) model is specified as: successive write operations invoked from a client application on a storage system object must occur according to their mutual order in the session trace.  MW is expressed as follows, in
+ terms of a legal serialization for the given execution, specified in Definition \label{def:parser}.
+  \begin{align}\label{eqn:MW}
+\begin{split}
+%E^{s} = \forall \mathit{st} \in \mathit{St}, {W^i}^{'}, {W^j}^{'} \in \mathit{st} \big( {W^i}^{'} F {W^j}^{'} \in \mathit{st}  \rightarrow
+%  \exists S_p \\ \left( {W^i}^{'} F {W^j}^{'} \in S_p \right) \big).
+E^{s} = \forall \mathit{st} \in \mathit{St}, {W}^{'}, {W}^{''} \in \mathit{st} \big( {W}^{'} F {W}^{''} \in \mathit{st}  \rightarrow \\ \left( {W}^{'} \preccurlyeq_{st+w} {W}^{''} \right) \big), %; \\
+  %C = \left( \not\exists {R^k}^{''}, {R^l}^{''}, {R^m}^{'} \in \mathit{St} \right)
+%   \big( \left( {W^j}^{'} F  {R^m}^{'} \in \mathit{st} \right) \wedge \\
+%   \left( {v_m}^{'} = {v_i}^{'} \right)
+%  \wedge \left( \not\exists  {R^k}^{'} F  {R^l}^{'} \in \mathit{St} \right) \big(
+%     \left( {v_k}^{'} = {v_j}^{'} \right) \wedge \\
+%   \left( {v_l}^{'} = {v_i}^{'} \right)  \big) \wedge
+%    \left( \not\exists  {W^p}^{'}, {R^n}^{'} \in \mathit{St}  \right)
+%    \big(  \left( {v_p}^{'} = {v_k}^{'} \right) \\
+%    \wedge  \left( {W^p}(x)^{'} F {R^k}(x)^{'} \in \mathit{St}  \right) \wedge
+%   \left(  {W^i}(x)^{'} F {R^n}(x)^{'} \in \mathit{St} \right) \\
+%    \wedge \left( {v_i}^{'} = {v_n}^{'} \right)   \wedge
+%    \left( {W^i}(x)^{'} F  {W^j}(y)^{'} \in \mathit{st} \right)  \wedge \\
+%    \left( {R^l}(y)^{'} F  {R^k}(x)^{'} \in \mathit{St} \right) \wedge
+% \big(  \left( {v_p}^{''} = {v_n}^{''} \right)  \vee \\
+% \big( \left( {W^p}^{'} F {R^n}^{'} \in \mathit{St} \right)  \wedge
+%      \not\exists {W^q}^{'} \left( {W^p}^{'} F {W^q}^{'} F {R^n}^{'} \in \mathit{St} \right)   \big) \big) \big)%\wedge \\
+%\not\exists \left( %\mathit{st}^{'}, \mathit{st}^{''} \in \mathit{St} \; \wedge \;
+% {W^t}^{'''} \in \mathit{St} \right)
+%\big( \left( {W^i}^{'} = {W^m(x)}^{'} \wedge {W^j}^{'} =  {W^n(y)}^{'} \right) \\ \wedge \left( {R^p(y)}^{''} F {R^q(x)}^{''} \in \mathit{St} \right) \wedge
+%\left( \left( {v_q}^{''} = {v_n}^{'} \right) \wedge \left( {v_p}^{''} =  {v_t}^{'''} \right) \right) \big)
+\end{split}
+  \end{align} where $st$ denotes the local session trace, and $\preccurlyeq_{st+w}$ denotes the restriction of $\preccurlyeq$ to the elements of $st$ and the write operations of all other clients. %where the partial order $\left( \mathcal{O}, \preccurlyeq \right)$ restricts the order among conflicting writes  in an equivalent $S_p$.
+   %\begin{align}\label{eqn:MW}
+%\begin{split}
+%\forall i \left(\star w(o,v)F^{o}w^{'}(o,v^{'}) \star \right)_{o}^\mathit{po} \rightarrow \left(G\; \star w(o,v)F^{o}w^{'}(o,v^{'}) \star \right)_{o}^\mathit{st}.
+%\end{split}
+%  \end{align}
  \par Causal Consistency specifies: results of operations (in a given client application) that are bound by a causal relationship \cite{Bailis:2013:BCC:2463676.2465279} must be  visible in the session trace according to their mutual execution order with respect to an observed session trace. The ConSpec expression for Causal Consistency is given below.
  %\begin{align}\label{eqn:Causal}
 %\begin{split}
@@ -570,7 +644,7 @@ E^{s} = \forall \mathit{st} \in \mathit{St}, {\mathit{Op}}^{'}, {\mathit{Op}}^{'
 % \vee \big( \left( {\mathit{Op}^i}^{'} = {W^i}^{'} \right) \wedge \\
 %\left( {\mathit{Op}^j}^{'} = {R^j}^{'} \right) \wedge
 %   \left( v_i = v_j \right) \big)
- \rightarrow \left( {\mathit{Op}}^{'} \preccurlyeq {\mathit{Op}}^{''} \right) \big), 
+ \rightarrow \left( {\mathit{Op}}^{'} \preccurlyeq_{st+w} {\mathit{Op}}^{''} \right) \big), 
    %; \\
  %C = \not\exists \left( {W^m}^{'} \in \mathit{St} \right) \big( %\left( \mathit{st}^{'} \in \mathit{St} \right) \wedge
 %   \left( {\mathit{Op}^i}^{'} F {\mathit{Op}^j}^{'} \in \mathit{st} \right) %\left( {W^m}^{''} \in \mathit{St} \right)  \\
@@ -580,7 +654,8 @@ E^{s} = \forall \mathit{st} \in \mathit{St}, {\mathit{Op}}^{'}, {\mathit{Op}}^{'
 % \big( \left( {W^m}^{'} F {\mathit{Op}^j}^{'} \in \mathit{st} \right) \\ \wedge
 %\not\exists  {W^n}^{'} \in \mathit{St} \left( {W^m}^{'} F {W^n}^{'} F {\mathit{Op}^j}^{'} \in \mathit{st} \right) \big) \big) \big)
  \end{split}
-  \end{align} where the partial order $\left( \mathcal{O}, \preccurlyeq \right)$ enforces order among conflicting operations in an equivalent $S_p$ to follow the causal order.
+  \end{align} %where the partial order $\left( \mathcal{O}, \preccurlyeq \right)$ enforces order among conflicting operations in an equivalent $S_p$ to follow the causal order. 
+  where $st$ is the session in context of session guarantees, and $\preccurlyeq_{st+w}$ denotes the restriction of $\preccurlyeq$ to the elements of $st$ and the write operations of all other clients. 
  %\begin{align*}
 %\forall i, j, k, l, m, n, q, t, u, x, y, z, a \\
 % \big(\star W^j(v_l) F^{o}  \left( W^n(v_q) X^{o} R^z{v_a}\oplus R^k{v_m} \right) \star \big)_{o}^\mathit{po} \\
@@ -628,79 +703,6 @@ E^{s} =  \forall \mathit{st} \in \mathit{St}, {\mathit{Op}}^{'}, {\mathit{Op}}^{
 % \left( v_j = v_m \vee v_i = v_l \right) \big) \big) \big)  %\left( \mathit{Op}^i X^o \mathit{Op}^j \in S \right) \\ \wedge \forall \mathit{st}  \left( \mathit{Op}^j X^o R^k \in \mathit{st} \right) \wedge \left( v^k = v^j  \right) \big)
  \end{split}
   \end{align} where the partial order $\left( \mathcal{O}, \preccurlyeq \right)$ restricts an equivalent serialization of a client $S_c$, defined in Definition \ref{def:clientser}, to respect the order of sucessive operations in a given session trace. %where $\mathit{op}_i$ is any operation (read or write), and $\mathcal{S}$ is the set of all session traces for a given client application. % scope.
-  \par Write Follows Read (WFR) specifies: a write operation, that follows a read operation on a common storage system object, must happen while the object contains a value that is at least as old as the one  that was read by the preceding read operation. WFR is expressed as follow. \\
- \begin{align}\label{eqn:WFR}
-\begin{split}
-%E^{s} =  \forall \mathit{st} \in \mathit{St}, {R^i}^{'}, {W^j}^{'} \in \mathit{st} \big( \left( {R^i}^{'} F {W^j }^{'} \in \mathit{st} \right)
-% \rightarrow \exists S_p \\ \left(  {R^i}^{'} F {W^j}^{'} \in S_p \right) \big). 
-E^{s} =  \forall \mathit{st} \in \mathit{St}, {R}^{'}, {W}^{'} \in \mathit{st} \big( \left( {R}^{'} F {W}^{'} \in \mathit{st} \right)
- \rightarrow \\ \left(  {R}^{'} \preccurlyeq {W}^{'} \right) \big), %; \\
- %C = \not\exists \left( {R^k}^{'}, {W^l}^{'} \in \mathit{St} \right)   \big(%\left( {W^i}^{'} F {R^j}^{'} \in \mathit{st} \right) \wedge
-%\left( {R^i}^{'} F {R^k}^{'} \in \mathit{st} \right)   \wedge
-%%\left(  \mathit{st}^{'} \in \mathit{St} \right) \wedge
-%\left( {W^l}^{'} F {W^j}^{'} \in \mathit{St} \right) \\ %\big) \\
-%\big( \left(  {v^k}^{'} = {v^l}^{'} \right)  \wedge
-%\big( \left( {v^i}^{'} = {v^l}^{'} \right) \vee  \
-%\big( \left( {R^i}^{'} F {W^j}^{'} \in \mathit{St} \right)  \wedge
-% \not\exists  {W^m}^{'} \\ \left( {W^l}^{'} F {W^m}^{'} F {R^i}^{'} \in \mathit{St} \right)  \big) \big)  \wedge
-% \left( \not\exists {R^i}^{''}, {W^j}^{''}, {R^k}^{''}, {W^m}^{''} \in \mathit{St} \right) \\ \big(
-%  \left( {R^i}^{''} F {W^j}^{''} F {R^k}^{''} \in \mathit{St} \right)
-%  \wedge \left(  {W^m}^{''}  F  {R^k}^{''} \in \mathit{St} \right) \wedge \\
-% \left( {v^j}^{''} = {v^i}^{''} \right)
-%  \wedge \left( {v^m}^{''} = {v^k}^{''} \right)
-%   \wedge \left( {v^l}^{''} = {v^i}^{''} \right)  \wedge  \left( {v^m}^{''} = {v^l}^{''} \right) \\
-%  \vee \big( \left( {W^m}^{''} F { R^l}^{''} \in \mathit{St} \right)  \wedge
-%     \not\exists {W^n}^{''}  \left( {W^m}^{''} F {W^n}^{''} F { R^l}^{''} \in \mathit{St}  \right)  \big)  \big)
- %\big( %\left( \mathit{st}^{'}, \mathit{st}^{''} \in \mathit{St} \right) \wedge
-% \left( {R^i}^{''} F {W^j}^{''} \in \mathit{st} \right) \wedge \left( {W^k}^{'} \in \mathit{St}  \right) \wedge \\
-%  \left( {v^k}^{''} = {v^i}^{'} \right) \wedge \left( {W^m}^{''} F {W^k}^{''} F {R^i}^{''} \in \mathit{st} \right) \big) \left( {v^m}^{'} = {v^i}^{'} \right) \\
-%   \wedge \not\exists \big( \left( {R^i}^{'} F {R^n}^{'} \in \mathit{St} \right)  \wedge
-%   \left( {W^p}^{''} F {W^j}^{''} \in \mathit{St} \right)  \wedge \left( {v^i}^{'} = {v^j}^{'} \right)   \big) \\
-%     \left( {v^p}^{''} = {v^n}^{''} \right)
- %C = \not\exists \left( \mathit{st}^{'} \in \mathit{St} \; \wedge \; {R^n}^{''} \in \mathit{st}^{'} \right) \\
-% \left( \left( {W^j}^{'} F {R^n}^{''} \in \mathit{St} \right) \wedge \left( {v^n}^{''} = {v^i}^{'} \right) \right)
-\end{split}
-  \end{align} where the partial order $\left( \mathcal{O}, \preccurlyeq \right)$ constrains the order among conflicting pairs of reads and writes  in an equivalent $S_p$.
- %\begin{align}\label{eqn:WFR}
-%\begin{split}
-%\forall i \left( \star r(o)X^{o}w(o,v)F^{o}w^{'}(o,v^{'}) \star \right)_{o}^\mathit{po} \\
-%\rightarrow \left(\star w(o,v)F^{o}w^{'}(o,v^{'}) \star \right)_{o}^\mathit{st}.
-%\end{split}
-%  \end{align}
- \par Monotonic Writes (MW) model is specified as: successive write operations invoked from a client application on a storage system object must occur according to their mutual order in the session trace.  MW is expressed as follows, in
- terms of a legal serialization for the given execution, specified in Definition \label{def:parser}.
-  \begin{align}\label{eqn:MW}
-\begin{split}
-%E^{s} = \forall \mathit{st} \in \mathit{St}, {W^i}^{'}, {W^j}^{'} \in \mathit{st} \big( {W^i}^{'} F {W^j}^{'} \in \mathit{st}  \rightarrow
-%  \exists S_p \\ \left( {W^i}^{'} F {W^j}^{'} \in S_p \right) \big).
-E^{s} = \forall \mathit{st} \in \mathit{St}, {W}^{'}, {W}^{''} \in \mathit{st} \big( {W}^{'} F {W}^{''} \in \mathit{st}  \rightarrow \\ \left( {W}^{'} \preccurlyeq {W}^{''} \right) \big), %; \\
-  %C = \left( \not\exists {R^k}^{''}, {R^l}^{''}, {R^m}^{'} \in \mathit{St} \right)
-%   \big( \left( {W^j}^{'} F  {R^m}^{'} \in \mathit{st} \right) \wedge \\
-%   \left( {v_m}^{'} = {v_i}^{'} \right)
-%  \wedge \left( \not\exists  {R^k}^{'} F  {R^l}^{'} \in \mathit{St} \right) \big(
-%     \left( {v_k}^{'} = {v_j}^{'} \right) \wedge \\
-%   \left( {v_l}^{'} = {v_i}^{'} \right)  \big) \wedge
-%    \left( \not\exists  {W^p}^{'}, {R^n}^{'} \in \mathit{St}  \right)
-%    \big(  \left( {v_p}^{'} = {v_k}^{'} \right) \\
-%    \wedge  \left( {W^p}(x)^{'} F {R^k}(x)^{'} \in \mathit{St}  \right) \wedge
-%   \left(  {W^i}(x)^{'} F {R^n}(x)^{'} \in \mathit{St} \right) \\
-%    \wedge \left( {v_i}^{'} = {v_n}^{'} \right)   \wedge
-%    \left( {W^i}(x)^{'} F  {W^j}(y)^{'} \in \mathit{st} \right)  \wedge \\
-%    \left( {R^l}(y)^{'} F  {R^k}(x)^{'} \in \mathit{St} \right) \wedge
-% \big(  \left( {v_p}^{''} = {v_n}^{''} \right)  \vee \\
-% \big( \left( {W^p}^{'} F {R^n}^{'} \in \mathit{St} \right)  \wedge
-%      \not\exists {W^q}^{'} \left( {W^p}^{'} F {W^q}^{'} F {R^n}^{'} \in \mathit{St} \right)   \big) \big) \big)%\wedge \\
-%\not\exists \left( %\mathit{st}^{'}, \mathit{st}^{''} \in \mathit{St} \; \wedge \;
-% {W^t}^{'''} \in \mathit{St} \right)
-%\big( \left( {W^i}^{'} = {W^m(x)}^{'} \wedge {W^j}^{'} =  {W^n(y)}^{'} \right) \\ \wedge \left( {R^p(y)}^{''} F {R^q(x)}^{''} \in \mathit{St} \right) \wedge
-%\left( \left( {v_q}^{''} = {v_n}^{'} \right) \wedge \left( {v_p}^{''} =  {v_t}^{'''} \right) \right) \big)
-\end{split}
-  \end{align} where the partial order $\left( \mathcal{O}, \preccurlyeq \right)$ restricts the order among conflicting writes  in an equivalent $S_p$.
-   %\begin{align}\label{eqn:MW}
-%\begin{split}
-%\forall i \left(\star w(o,v)F^{o}w^{'}(o,v^{'}) \star \right)_{o}^\mathit{po} \rightarrow \left(G\; \star w(o,v)F^{o}w^{'}(o,v^{'}) \star \right)_{o}^\mathit{st}.
-%\end{split}
-%  \end{align}
  \par Owen et al. \cite{Owens:2009:BXM:1616077.1616107} specifies Total Store Order (TSO) as: read operations performed on the same storage system object by
   client applications can not return a subsequent (or newer) value unless the result of a given write is observed by all client applications, i.e., observed in all  session traces.
  A session trace for a client application can not view results of a sequence of write operations in an
@@ -1841,6 +1843,9 @@ proscribes $ww$ cycles. % In
 %  \left( {v_j}^{'} = {v_m}^{'} \right) \big).
   \end{split}
   \end{align}
+
+\section{Conclusions}
+In this paper, we presented precise formal definitions of existing body of consistency semantics and isolation levels using a generalized specification language, ConSpec. In contrast with the existing definitions which are tied to the specific syntax, protocols, and implementation-level details of a particular class of storage systems, our definitions are implementation-agnostic and flexible.  Thus, our definitions can be used as a standard baseline for  verifying the consistency and isolation levels of existing storage systems, as well as for developing correct implementations of new prototype storage systems. From the above generalized definitions, we have presented a  technique of organizing  consistency models into a hierarchical arrangement, based on their degree of strength. We have extended the CAP theorem to state the property which makes a it possible for  a consistency model to be implemented in a manner that can achieve both high availability and partition tolerance, and formally proved the same.  We also provided formal  proofs showing the equivalence of each our consistency and isolation definitions with the existing state-of-the-art definitions.  We also presented an automated tool for verifying whether a given session trace satisfies a given consistency model or isolation level according to the generalized specification.  We have shown how verification tools based on ConSpec specifications (like the one we presented) should perform better and more reliably than current state-of-the-art tools. In future, we plan to keep working in this direction, and build an end-to-end framework for building and verifying correct applications and storage systems, based on ConSpec .  
 
 %\section{SpecCheck: Automated Verification With ConSpec}
 
