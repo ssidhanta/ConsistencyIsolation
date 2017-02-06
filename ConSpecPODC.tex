@@ -535,7 +535,7 @@ Following the format of Definition \ref{def:form0}, RYW can be defined by the fo
 %  \wedge \left( {v^i}^{'} = {v^n}^{''} \right) \wedge \big( \left( {v^j}^{'} = {v^m}^{''} \right) \\ \vee \big( \left( {W^m}^{'} F {R^j}^{'} \in \mathit{St} \right)
 % \wedge  \not\exists {W^p}^{'} \left( {W^m}^{'} F {W^p}^{'} F {R^j}^{'} \in \mathit{St} \right) \big) \big)
 \end{split}
-\end{align} where $st$ is the session from the standpoint of which the session guarantees are being upheld, and $\preccurlyeq_{st+w}$ denotes the restriction of $\preccurlyeq$ to the elements of $st$ and the write operations of all other clients.
+\end{align} with the same meaning for $st$ and $\preccurlyeq_{st+w}$ as in the previous definition.
 
 %where $\left( \mathcal{O}, \preccurlyeq \right)$ constrains  the order among conflicting reads in an equivalent $S_p$.
  %According to the above equation, a session trace comprising an execution sequence that follows MR must return a value according to either of the following conditions: 1) according to the first expression $\left( R^k{v_m}F^{o}R^s{v_t} \right)$ comprising the exclusive-or in the RHS of the operator $\rightarrow$, it must return the value written by the latest write preceding the operation $r^s(o)v_t$, i.e., the value $v_q$ written by $w^n(o,v_q)$, or 2) according to the second expression $W^n(v_q) F^{o} W^u(v_x) X^{o} R^s v_t$ comprising the exclusive-or in the RHS, it must return the value $v_x$ written by the latest write $W^u(v_x)$ which overwrites $o$.
@@ -553,12 +553,12 @@ Following the format of Definition \ref{def:form0}, RYW can be defined by the fo
 %  \end{align}
 %. the operator $F$ is the LTL operator eventually.
  %In other words, Equation \ref{eqn:MR} mandates that $r^s(o){v_t}$ returns the value $v_q$ written by the latest write operation $w^n(o,v_q)$, or that written by another write $w^u(o,v_x)$ that overwrites $w^n(o,v_q)$). It does not allow $r^s(o){v_t}$ to return a value $v_l$ written by an earlier write operation  $w^j(o,v_l)$ which was invoked earlier than $w^n(o,v_q)$. The above constraint ensures that a read operation always views the latest version of the object $o$.
- \par Write Follows Read (WFR) specifies: a write operation, that follows a read operation on a common storage system object, must happen while the object contains a value that is at least as old as the one  that was read by the preceding read operation. WFR is expressed as follow. \\
+\par Write Follows Read (WFR) specifies the following: a write operation that follows a read operation in the same session must be ordered after the write operation seen by that read. WFR is expressed in ConSpec as follows. \\
  \begin{align}\label{eqn:WFR}
 \begin{split}
 %E^{s} =  \forall \mathit{st} \in \mathit{St}, {R^i}^{'}, {W^j}^{'} \in \mathit{st} \big( \left( {R^i}^{'} F {W^j }^{'} \in \mathit{st} \right)
 % \rightarrow \exists S_p \\ \left(  {R^i}^{'} F {W^j}^{'} \in S_p \right) \big). 
-E^{s} =  \forall \mathit{st} \in \mathit{St}, {R}^{'}, {W}^{'} \in \mathit{st} \big( \left( {R}^{'} F {W}^{'} \in \mathit{st} \right)
+E^{s} =  \forall  {R}^{'}, {W}^{'} \in \mathit{st} \big( \left( {R}^{'} F {W}^{'} \in \mathit{st} \right)
  \rightarrow \\ \left(  {R}^{'} \preccurlyeq_{st+w} {W}^{'} \right) \big), %; \\
  %C = \not\exists \left( {R^k}^{'}, {W^l}^{'} \in \mathit{St} \right)   \big(%\left( {W^i}^{'} F {R^j}^{'} \in \mathit{st} \right) \wedge
 %\left( {R^i}^{'} F {R^k}^{'} \in \mathit{st} \right)   \wedge
@@ -586,20 +586,20 @@ E^{s} =  \forall \mathit{st} \in \mathit{St}, {R}^{'}, {W}^{'} \in \mathit{st} \
 % \left( \left( {W^j}^{'} F {R^n}^{''} \in \mathit{St} \right) \wedge \left( {v^n}^{''} = {v^i}^{'} \right) \right)
 \end{split}
   \end{align} %where the partial order $\left( \mathcal{O}, \preccurlyeq \right)$ constrains the order among conflicting pairs of reads and writes  in an equivalent $S_p$.
-  where $st$ denotes the session in context of the session guarantees, and $\preccurlyeq_{st+w}$ denotes the restriction of $\preccurlyeq$ in the context of the elements of $st$ and the write operations performed by all other clients.
+with the same meaning for $st$ and $\preccurlyeq_{st+w}$ as in RYW.
+% where $st$ denotes the session in context of the session guarantees, and $\preccurlyeq_{st+w}$ denotes the restriction of $\preccurlyeq$ in the context of the elements of $st$ and the write operations performed by all other clients.
  %\begin{align}\label{eqn:WFR}
 %\begin{split}
 %\forall i \left( \star r(o)X^{o}w(o,v)F^{o}w^{'}(o,v^{'}) \star \right)_{o}^\mathit{po} \\
 %\rightarrow \left(\star w(o,v)F^{o}w^{'}(o,v^{'}) \star \right)_{o}^\mathit{st}.
 %\end{split}
 %  \end{align}
- \par Monotonic Writes (MW) model is specified as: successive write operations invoked from a client application on a storage system object must occur according to their mutual order in the session trace.  MW is expressed as follows, in
- terms of a legal serialization for the given execution, specified in Definition \label{def:parser}.
+ \par Finally, the last session guarantee is the Monotonic Writes (MW) model, which is specified as follows: successive write operations invoked from the same session must be applied in the order in which they appear in the session trace.  MW is expressed in ConSpec as follows. \label{def:parser}.
   \begin{align}\label{eqn:MW}
 \begin{split}
 %E^{s} = \forall \mathit{st} \in \mathit{St}, {W^i}^{'}, {W^j}^{'} \in \mathit{st} \big( {W^i}^{'} F {W^j}^{'} \in \mathit{st}  \rightarrow
 %  \exists S_p \\ \left( {W^i}^{'} F {W^j}^{'} \in S_p \right) \big).
-E^{s} = \forall \mathit{st} \in \mathit{St}, {W}^{'}, {W}^{''} \in \mathit{st} \big( {W}^{'} F {W}^{''} \in \mathit{st}  \rightarrow \\ \left( {W}^{'} \preccurlyeq_{st+w} {W}^{''} \right) \big), %; \\
+E^{s} = \forall  {W}^{'}, {W}^{''} \in \mathit{st} \big( {W}^{'} F {W}^{''} \in \mathit{st}  \rightarrow \\ \left( {W}^{'} \preccurlyeq_{st+w} {W}^{''} \right) \big), %; \\
   %C = \left( \not\exists {R^k}^{''}, {R^l}^{''}, {R^m}^{'} \in \mathit{St} \right)
 %   \big( \left( {W^j}^{'} F  {R^m}^{'} \in \mathit{st} \right) \wedge \\
 %   \left( {v_m}^{'} = {v_i}^{'} \right)
@@ -621,7 +621,8 @@ E^{s} = \forall \mathit{st} \in \mathit{St}, {W}^{'}, {W}^{''} \in \mathit{st} \
 %\big( \left( {W^i}^{'} = {W^m(x)}^{'} \wedge {W^j}^{'} =  {W^n(y)}^{'} \right) \\ \wedge \left( {R^p(y)}^{''} F {R^q(x)}^{''} \in \mathit{St} \right) \wedge
 %\left( \left( {v_q}^{''} = {v_n}^{'} \right) \wedge \left( {v_p}^{''} =  {v_t}^{'''} \right) \right) \big)
 \end{split}
-  \end{align} where $st$ denotes the local session trace, and $\preccurlyeq_{st+w}$ denotes the restriction of $\preccurlyeq$ to the elements of $st$ and the write operations of all other clients. %where the partial order $\left( \mathcal{O}, \preccurlyeq \right)$ restricts the order among conflicting writes  in an equivalent $S_p$.
+  \end{align} with the same meaning for $st$ and $\preccurlyeq_{st+w}$ as in RYW.
+%where $st$ denotes the local session trace, and $\preccurlyeq_{st+w}$ denotes the restriction of $\preccurlyeq$ to the elements of $st$ and the write operations of all other clients. %where the partial order $\left( \mathcal{O}, \preccurlyeq \right)$ restricts the order among conflicting writes  in an equivalent $S_p$.
    %\begin{align}\label{eqn:MW}
 %\begin{split}
 %\forall i \left(\star w(o,v)F^{o}w^{'}(o,v^{'}) \star \right)_{o}^\mathit{po} \rightarrow \left(G\; \star w(o,v)F^{o}w^{'}(o,v^{'}) \star \right)_{o}^\mathit{st}.
