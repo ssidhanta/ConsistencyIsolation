@@ -301,9 +301,9 @@ Similarly, many consistency definitions reason about an interface that exposes t
 % comprising the results of a local execution, i.e., results of operations invoked from  a client application, observed from  the client machine. A given client application is executed on a target storage system. In the course of execution of the client application, we collect session traces over a pre-defined sliding window over time from the client machine (i.e., the machine that hosts the client application). %We perform \emph{session trace analysis} on the above session traces to determine whether the target system satisfies a given consistency model or an isolation level.
 % Let $j$ be the index of the read operation in the execution sequence of  $\mathit{Cl}$ observed in a session trace.
 
-Under the above assumption that the set of possible operations is partitioned into two classes, we define that a write operation $\mathit{op}$, which writes a value $v$ to an object $o$, is denoted as $w(o,v)$. Similarly, a read operation $\mathit{op}$ on object $o$ that outputs a value $v$ is denoted $r(o){v}$. %{\bf [RR: I am inclined to remove the subscript $j$ and $k$.]}
+Under the above assumption that the set of possible operations is partitioned into two classes, we define that a write operation $\mathit{op}$, which writes a value $v$ to an object $o$, is denoted as $w(o,v)$. Similarly, a read operation $\mathit{op}^{'}$ on object $o$ that outputs a value $v^{'}$ is denoted $r(o){v^{'}}$. %{\bf [RR: I am inclined to remove the subscript $j$ and $k$.]}
  \def\tuple#1{\langle #1\rangle}
-This allows us to define a session trace $\mathit{st}$ as a sequence of tuples  $\tuple{w, {v}^{'}}$ or
+This allows us to define a session trace $\mathit{st}$ as a sequence of tuples  $\tuple{w, {v}}$ or
  $\tuple{r, {v}^{'}}$. %, where the index $i$ corresponds to the position of the operation in the sequence, and therefore allows us to uniquely identify each operation within a sequence. {\bf [RR: This is not great because then we cannot identify this across sequences, and if it's not a sequence number then again I propose we remove this from these definitions]}
 
 %. The fields comprising each tuple $\mathit{tup}_i$ are: 1) $w^i$  and $r^i$ are abbreviated signatures of write and read
@@ -331,7 +331,7 @@ Our notation defines special purpose LTL operators as shorthands to longer expre
     %% superscript $o$ specifies the context of an object $o$ for the enclosed relation; $o$ is equivalent to an operand for a
     %%  storage operation.
   E.g., an expression ${w} X^{o} {r}$ denotes that among operations performed on the object
-     ${o}$, the execution of the operation $r(o){v_m}$ immediately follows the execution operation $w(o,v_l)$.
+     ${o}$, the execution of the operation $r(o){v}$ immediately follows the execution operation $w(o,v)$.
 %% ; the
 %%       superscript $'$ denotes an instance of execution of a given operation in a session trace. We also use the  LTL
 %%       operator ``eventually", i.e., $F$, do denote that an operation is preceded by the another operation in a given
@@ -392,8 +392,8 @@ Given a global session trace $\mathit{St}$,
 we say  that $\mathit{St}$ satisfies a consistency model $\mathcal{C}$
 if there exists a partial order
 
- $\left( \mathcal{O}, \preccurlyeq \right)$ over the set $\mathcal{O}$ comprising operations  present in all session traces in $\mathit{St}$, where  $\mathcal{O} = \bigcup_{st \in St} \{ o^i \mid o^i \in st \},$  
- such that 1) for every operation $\mathit{op}^i$ in $\mathit{St}$, its output is equal to the one obtain by executing the sequential specification of a linear extension of the operations preceding $\mathit{op}^i$ in $\preccurlyeq$,
+ $\left( \mathcal{O}, \preccurlyeq \right)$ over the set $\mathcal{O}$ comprising operations  present in all session traces in $\mathit{St}$, where  $\mathcal{O} = \bigcup_{st \in St} \{ o \mid o^{'} \in st \},$  
+ such that 1) for every operation $\mathit{op}$ in $\mathit{St}$, its output is equal to the one obtain by executing the sequential specification of a linear extension of the operations preceding $\mathit{op}$ in $\preccurlyeq$,
 % the same irrespective of the
  %%among operations preceding it in $\preccurlyeq$, %$\exists {\mathit{Op}^i}^{'}, {\mathit{Op}^j}^{'} \in \mathit{St}:
  %{\mathit{Op}^i}^{'} \preccurlyeq {\mathit{Op}^j}^{'}\; \rightarrow \;{\mathit{Op}^i}^{'} R {\mathit{Op}^j}^{'}$, %\; \vee \; v_i \sim v_j$,\mathcal{O}, \preccurlyeq
@@ -497,10 +497,14 @@ Following the format of Definition \ref{def:form0}, RYW can be defined by the fo
 %  \big( \left( {W^i}^{'} F {R^j}^{'} \in \mathit{st} \right)
 % \rightarrow \; \exists S_p \\
 % \left(  {W^i}^{'} F {R^j}^{'} \in S_p \right)\big).
- \mathcal{E}^{s} = \forall  {W^i}^{'}, {R^j}^{'} \in \mathit{st}
-  \big( \left( {W^i}^{'} F {R^j}^{'} \in \mathit{st} \right)
+% \mathcal{E}^{s} = \forall  {W^i}^{'}, {R^j}^{'} \in \mathit{st}
+%  \big( \left( {W^i}^{'} F {R^j}^{'} \in \mathit{st} \right)
+% \rightarrow \\
+% \left(  {W^i}^{'} \preccurlyeq_{st+w} {R^j}^{'} \right)\big),
+  \mathcal{E}^{s} = \forall  {W}^{'}, {R}^{'} \in \mathit{st}
+  \big( \left( {W}^{'} F {R}^{'} \in \mathit{st} \right)
  \rightarrow \\
- \left(  {W^i}^{'} \preccurlyeq_{st+w} {R^j}^{'} \right)\big),
+ \left(  {W}^{'} \preccurlyeq_{st+w} {R}^{'} \right)\big),
  %C = \left( \not\exists {R^k}^{'}, {W^l}^{'} \in \mathit{St} \right)   \big( %\left( {W^i}^{'} F {R^j}^{'} \in \mathit{st} \right) \wedge
 %\left( {R^k}^{'} F {R^j}^{'} \in \mathit{st} \right)   \\ \wedge
 %%\left(  \mathit{st}^{'} \in \mathit{St} \right) \wedge
@@ -509,7 +513,7 @@ Following the format of Definition \ref{def:form0}, RYW can be defined by the fo
 %\big( \left( {W^l}^{'} F {R^j}^{'} \in \mathit{St} \right)  \wedge
 %  \not\exists {W^m}^{'} \left( {W^l}^{'} F {W^m}^{'} F {R^j}^{'} \in \mathit{St} \right) \big) \big).
   \end{split}
-  \end{align}\label{eqn:RYW} where $st$ is the session from the stanpoint of which the session guarantees are being upheld, and $\preccurlyeq_{st+w}$ denotes the restriction of $\preccurlyeq$ to the elements of $st$ and the write operations of all other clients.
+  \end{align}\label{eqn:RYW} where $st$ is the session from the standpoint of which the session guarantees are being upheld, and $\preccurlyeq_{st+w}$ denotes the restriction of $\preccurlyeq$ to the elements of $st$ and the write operations of all other clients.
 
 
 %% restricts the   order among conflicts pair of writes and reads in an equivalent serialization of a partial execution $S_p$, defined in Definition \ref{def:parser}.
@@ -522,8 +526,8 @@ Following the format of Definition \ref{def:form0}, RYW can be defined by the fo
 \begin{split}
 %\mathcal{E}^{s} = \forall  \mathit{st} \in \mathit{St}, {R^i}^{'}, {R^j}^{'} \in \mathit{st} \big( {R^i}^{'} F {R^j}^{'} \in \mathit{st}
 % \rightarrow \;  \exists S_p \\ \left( {R^i}^{'} F {R^j}^{'} \in S_p \right) \big). 
- \mathcal{E}^{s} = \forall  \mathit{st} \in \mathit{St}, {R^i}^{'}, {R^j}^{'} \in \mathit{st} \big( {R^i}^{'} F {R^j}^{'} \in \mathit{st}
- \rightarrow \\ \left( {R^i}^{'} \preccurlyeq {R^j}^{'} \right) \big), 
+ \mathcal{E}^{s} = \forall  \mathit{st} \in \mathit{St}, {R}^{'}, {R}^{''} \in \mathit{st} \big( {R}^{'} F {R}^{''} \in \mathit{st}
+ \rightarrow \\ \left( {R}^{'} \preccurlyeq {R}^{''} \right) \big), 
  %; \\
  %C = \left( \not\exists {W^m}^{''}, {W^n}^{''} \in \mathit{St} \right) \big( \left( {R^i}^{'} F {R^j}^{'} \in \mathit{st} \right) \\ %\left( {\mathit{st}}^{'} \in \mathit{St} \right) \wedge
 % \wedge \left( {W^m}^{''} F {W^n}^{''}  \in \mathit{St} \right) %\left( {W^m}^{''} F {W^n}^{''} F {R^i}^{'} F {R^j}^{'} \in \mathit{St} \right) \wedge \\
@@ -555,15 +559,15 @@ Following the format of Definition \ref{def:form0}, RYW can be defined by the fo
 %  \end{align}
 \begin{align}\label{eqn:Causal}
 \begin{split}
-E^{s} = \forall \mathit{st} \in \mathit{St}, {\mathit{Op}^i}^{'}, {\mathit{Op}^j}^{'} \in \mathit{st} \\ \big( \left( {\mathit{Op}^i}^{'} F {\mathit{Op}^j}^{'} \in \mathit{st} \right)
- \vee \big( \left( {\mathit{Op}^i}^{'} = {W^i}^{'} \right) \wedge \\
-\left( {\mathit{Op}^j}^{'} = {R^j}^{'} \right) \wedge
-   \left( v_i = v_j \right) \big) %\rightarrow \exists S_p \left( {\mathit{Op}^i}^{'} F {\mathit{Op}^j}^{'} \in S_p \right) \big). 
+E^{s} = \forall \mathit{st} \in \mathit{St}, {\mathit{Op}}^{'}, {\mathit{Op}}^{''} \in \mathit{st} \\ \big( \left( {\mathit{Op}}^{'} F {\mathit{Op}}^{''} \in \mathit{st} \right)
+ \vee \big( \left( {\mathit{Op}}^{'} = {W}^{'} \right) \wedge \\
+\left( {\mathit{Op}}^{''} = {R}^{'} \right) \wedge
+   \left( v = v^{'} \right) \big) %\rightarrow \exists S_p \left( {\mathit{Op}^i}^{'} F {\mathit{Op}^j}^{'} \in S_p \right) \big). 
 %   E^{s} = \forall \mathit{st} \in \mathit{St}, {\mathit{Op}^i}^{'}, {\mathit{Op}^j}^{'} \in \mathit{st} \\ \big( \left( {\mathit{Op}^i}^{'} F {\mathit{Op}^j}^{'} \in \mathit{st} \right)
 % \vee \big( \left( {\mathit{Op}^i}^{'} = {W^i}^{'} \right) \wedge \\
 %\left( {\mathit{Op}^j}^{'} = {R^j}^{'} \right) \wedge
 %   \left( v_i = v_j \right) \big)
- \rightarrow \left( {\mathit{Op}^i}^{'} \preccurlyeq {\mathit{Op}^j}^{'} \right) \big), 
+ \rightarrow \left( {\mathit{Op}}^{'} \preccurlyeq {\mathit{Op}}^{''} \right) \big), 
    %; \\
  %C = \not\exists \left( {W^m}^{'} \in \mathit{St} \right) \big( %\left( \mathit{st}^{'} \in \mathit{St} \right) \wedge
 %   \left( {\mathit{Op}^i}^{'} F {\mathit{Op}^j}^{'} \in \mathit{st} \right) %\left( {W^m}^{''} \in \mathit{St} \right)  \\
@@ -590,8 +594,8 @@ E^{s} = \forall \mathit{st} \in \mathit{St}, {\mathit{Op}^i}^{'}, {\mathit{Op}^j
 %E^{s} =  \forall \mathit{st} \in \mathit{St}, {\mathit{Op}^i}^{'}, {\mathit{Op}^j}^{'} \in \mathit{st} \big( \mathit{Op}^i X^o {\mathit{Op}^j}^{'} \in \mathit{st}
 %\rightarrow
 %\exists S_c \\ \left( {\mathit{Op}^i}^{'} X^o {\mathit{Op}^j}^{'} \in S_c \right) \big).
-E^{s} =  \forall \mathit{st} \in \mathit{St}, {\mathit{Op}^i}^{'}, {\mathit{Op}^j}^{'} \in \mathit{st} \big( \mathit{Op}^i X^o {\mathit{Op}^j}^{'} \in \mathit{st}
-\rightarrow \\ \left( {\mathit{Op}^i}^{'} \preccurlyeq {\mathit{Op}^j}^{'} \right) \big), %; \\
+E^{s} =  \forall \mathit{st} \in \mathit{St}, {\mathit{Op}}^{'}, {\mathit{Op}}^{''} \in \mathit{st} \big( \mathit{Op}^{'} X^o {\mathit{Op}}^{''} \in \mathit{st}
+\rightarrow \\ \left( {\mathit{Op}}^{'} \preccurlyeq {\mathit{Op}}^{''} \right) \big), %; \\
 %\vee \exists \left( \mathit{st}^{'} \in \mathit{St} \; \wedge \;  {\mathit{Op}^k}^{''} \in \mathit{st}^{'} \right)
 % \\ \left( {\mathit{Op}^i}^{'} F {\mathit{Op}^k}^{''} F {\mathit{Op}^j}^{'} \in S \right) \big) \big) \\
  %C =  \left( \not\exists {R^k}^{''} \in \mathit{St} \right)
@@ -626,8 +630,8 @@ E^{s} =  \forall \mathit{st} \in \mathit{St}, {\mathit{Op}^i}^{'}, {\mathit{Op}^
 \begin{split}
 %E^{s} =  \forall \mathit{st} \in \mathit{St}, {R^i}^{'}, {W^j}^{'} \in \mathit{st} \big( \left( {R^i}^{'} F {W^j }^{'} \in \mathit{st} \right)
 % \rightarrow \exists S_p \\ \left(  {R^i}^{'} F {W^j}^{'} \in S_p \right) \big). 
-E^{s} =  \forall \mathit{st} \in \mathit{St}, {R^i}^{'}, {W^j}^{'} \in \mathit{st} \big( \left( {R^i}^{'} F {W^j }^{'} \in \mathit{st} \right)
- \rightarrow \\ \left(  {R^i}^{'} \preccurlyeq {W^j}^{'} \right) \big), %; \\
+E^{s} =  \forall \mathit{st} \in \mathit{St}, {R}^{'}, {W}^{'} \in \mathit{st} \big( \left( {R}^{'} F {W}^{'} \in \mathit{st} \right)
+ \rightarrow \\ \left(  {R}^{'} \preccurlyeq {W}^{'} \right) \big), %; \\
  %C = \not\exists \left( {R^k}^{'}, {W^l}^{'} \in \mathit{St} \right)   \big(%\left( {W^i}^{'} F {R^j}^{'} \in \mathit{st} \right) \wedge
 %\left( {R^i}^{'} F {R^k}^{'} \in \mathit{st} \right)   \wedge
 %%\left(  \mathit{st}^{'} \in \mathit{St} \right) \wedge
@@ -666,7 +670,7 @@ E^{s} =  \forall \mathit{st} \in \mathit{St}, {R^i}^{'}, {W^j}^{'} \in \mathit{s
 \begin{split}
 %E^{s} = \forall \mathit{st} \in \mathit{St}, {W^i}^{'}, {W^j}^{'} \in \mathit{st} \big( {W^i}^{'} F {W^j}^{'} \in \mathit{st}  \rightarrow
 %  \exists S_p \\ \left( {W^i}^{'} F {W^j}^{'} \in S_p \right) \big).
-E^{s} = \forall \mathit{st} \in \mathit{St}, {W^i}^{'}, {W^j}^{'} \in \mathit{st} \big( {W^i}^{'} F {W^j}^{'} \in \mathit{st}  \rightarrow \\ \left( {W^i}^{'} \preccurlyeq {W^j}^{'} \right) \big), %; \\
+E^{s} = \forall \mathit{st} \in \mathit{St}, {W}^{'}, {W}^{''} \in \mathit{st} \big( {W}^{'} F {W}^{''} \in \mathit{st}  \rightarrow \\ \left( {W}^{'} \preccurlyeq {W}^{''} \right) \big), %; \\
   %C = \left( \not\exists {R^k}^{''}, {R^l}^{''}, {R^m}^{'} \in \mathit{St} \right)
 %   \big( \left( {W^j}^{'} F  {R^m}^{'} \in \mathit{st} \right) \wedge \\
 %   \left( {v_m}^{'} = {v_i}^{'} \right)
@@ -725,8 +729,8 @@ E^{s} = \forall \mathit{st} \in \mathit{St}, {W^i}^{'}, {W^j}^{'} \in \mathit{st
 %\big( \left( {v^j}^{'} = {v^l}^{'} \right) \vee
 %\big( \left( {W^l}^{'} F {R^j}^{'} \in \mathit{St} \right)  \wedge \\
 % \not\exists  {W^m}^{'} \left( {W^l}^{'} F {W^m}^{'} F {R^j}^{'} \in \mathit{St} \right) \big) \big) \big)
- \\ $E^s = \forall x, \mathit{st}, \mathit{st}^{'} \in \mathit{St} \not\exists {\mathit{op}^i}(x), {\mathit{op}^j}(x), {\mathit{op}^k}(x), {\mathit{op}^l}(x) \in \mathcal{O}  \\ \big( \left( {\mathit{Op}^i}^{'}(x) F {\mathit{Op}^j}^{'} (x) \in \mathit{st} \right)  \vee \big(  \left( {\mathit{Op}^i}^{'}(x) F {\mathit{Op}^k}^{'} (x) \in \mathit{st} \right)  \wedge \\ \left( {\mathit{Op}^j}^{'}(x) F {\mathit{Op}^l}^{'} (x) \in \mathit{st}^{'} \right)  \wedge \left( {v^k}^{'} = {v^i}^{'} \right) \wedge \left( {v^j}^{'} = {v^l}^{'} \right)  \big) \big) \rightarrow  
- \left(  {\mathit{Op}^j}^{''}(x) F {\mathit{Op}^i}^{''} (x) \in \mathit{Si} \right)$,   \\
+ \\ $E^s = \forall x, \mathit{st}, \mathit{st}^{'} \in \mathit{St} \not\exists {\mathit{op}}(x), {\mathit{op}^{'}}(x), {\mathit{op}^{''}}(x), {\mathit{op}^{'''}}(x) \in \mathcal{O}  \\ \big( \left( {\mathit{Op}}^{'}(x) F {\mathit{Op}}^{''} (x) \in \mathit{st} \right)  \vee \big(  \left( {\mathit{Op}}^{'}(x) F {\mathit{Op}}^{'''} (x) \in \mathit{st} \right)  \wedge \\ \left( {\mathit{Op}}^{''}(x) F {\mathit{Op}}^{''''} (x) \in \mathit{st}^{'} \right)  \wedge \left( {v}^{''} = {v} \right) \wedge \left( {v}^{'} = {v}^{'''} \right)  \big) \big) \\ \rightarrow  
+ \left(  {\mathit{Op}}^{''}(x) F {\mathit{Op}}^{'} (x) \in \mathit{Si} \right)$,   \\
  %E^r = C = \\
 % \forall \mathit{st}, \mathit{St} \; \big( \left( {W^i}(x)^{'} F {W^k}^{'}(y) \in \mathit{st} \right) \wedge \left( {W^l}(y)^{'} F {W^j}^{'}(x) \in \mathit{st} \right) \wedge \\
 % \not\exists \left( %\mathit{st}^{'} \in \mathit{St} \; \wedge \;
@@ -750,7 +754,8 @@ E^{s} = \forall \mathit{st} \in \mathit{St}, {W^i}^{'}, {W^j}^{'} \in \mathit{st
   which can be rewritten as follows. 
   \begin{align}\label{eqn:TSO}
 \begin{split}
-\forall x, \mathit{st}, \mathit{st}^{'} \in \mathit{St} \not\exists {\mathit{op}^i}(x), {\mathit{op}^j}(x), {\mathit{op}^k}(x), {\mathit{op}^l}(x) \in \mathcal{O}  \\ \big( \left( {\mathit{Op}^i}^{'}(x) F {\mathit{Op}^j}^{'} (x) \in \mathit{st} \right)  \vee \big(  \left( {\mathit{Op}^i}^{'}(x) F {\mathit{Op}^k}^{'} (x) \in \mathit{st} \right)  \wedge \\ \left( {\mathit{Op}^j}^{'}(x) F {\mathit{Op}^l}^{'} (x) \in \mathit{st}^{'} \right)  \wedge \left( {v^k}^{'} = {v^i}^{'} \right) \wedge \left( {v^j}^{'} = {v^l}^{'} \right)  \big) \big) \rightarrow \\ \left( {\mathit{Op}^i}^{'}(x) \preccurlyeq(x) {\mathit{Op}^j}^{'} (x) \right),
+E^s = \forall x, \mathit{st}, \mathit{st}^{'} \in \mathit{St} \not\exists \mathit{op}(x), \mathit{op}^{'}(x), \mathit{op}^{''}(x), \mathit{op}^{'''}(x) \in \mathcal{O}  \\ \big( \left( \mathit{Op}^{'}(x) F \mathit{Op}^{''} (x) \in \mathit{st} \right)  \vee \big(  \left( \mathit{Op}^{'}(x) F \mathit{Op}^{'''} (x) \in \mathit{st} \right)  \wedge \\
+ \left( \mathit{Op}^{''}(x) F \mathit{Op}^{''''} (x) \in \mathit{st}^{'} \right)  \wedge \left( v^{''} = v \right) \wedge \left( v^{'} = v^{'''} \right)  \big) \big) \rightarrow   \\ \left( \mathit{Op}^{'}(x) \preccurlyeq(x) \mathit{Op}^{''} (x) \right),
 \end{split}
   \end{align}  where $ \preccurlyeq(x)$ is a partial order over a given object $x$ with respect to a given global session trace $ \mathit{St}$, and $ \mathit{Si}$ is an equivalent legal serialization of a global execution defined in Equation \ref{def:ser}.
   %$\preccurlyeq$ is given as a composition $\preccurlyeq =  \preccurlyeq^{'}(x) \circ  ... \circ^{'} \preccurlyeq^{''}(x)$,  and $\circ, ... \circ^{''}$ are composition operators, like $\cap$ or $\cup$, over partial order sets (posets) $\preccurlyeq^{'}(x), ... \preccurlyeq^{''}(x)$ comprising partial orders defined over a given object $x$.
@@ -761,8 +766,8 @@ E^{s} = \forall \mathit{st} \in \mathit{St}, {W^i}^{'}, {W^j}^{'} \in \mathit{st
 % total number of processors. We can express the condition the propositional logic variable $A$ must hold for any store
 % $\mathit{store}_n$ with the expression  $\bigcap_{\mathit{processor}_n}^{\mathit{processors}} A$.
   Thus, Processor Consistency can be expressed as 
-  \\ $E^s = \forall x, y, \mathit{st}, \mathit{st}^{'} \in \mathit{St} \not\exists {\mathit{op}^i}(x), {\mathit{op}^j}(y) \in \mathcal{O} \\
- \left( {\mathit{Op}^i}^{'}(x) F {\mathit{Op}^j}^{'} (y) \in \mathit{st} \right) \rightarrow \left( {\mathit{Op}^j}^{''}(y) F {\mathit{Op}^i}^{''} (x) \in \mathit{st}^{'} \right)$,   \\
+  \\ $E^s = \forall x, y, \mathit{st}, \mathit{st}^{'} \in \mathit{St} \not\exists {\mathit{op}}(x), {\mathit{op}^{'}}(y) \in \mathcal{O} \\
+ \left( {\mathit{Op}}^{'}(x) F {\mathit{Op}}^{''} (y) \in \mathit{st} \right) \rightarrow \left( {\mathit{Op}}^{''}(y) F {\mathit{Op}}^{'} (x) \in \mathit{st}^{'} \right)$,   \\
  which can be rewritten as follows.
  \begin{align}\label{eqn:PC}
 \begin{split}
@@ -779,7 +784,7 @@ E^{s} = \forall \mathit{st} \in \mathit{St}, {W^i}^{'}, {W^j}^{'} \in \mathit{st
 %\big( \left( {W^l}^{'} F {R^j}^{'} \in \mathit{St} \right) \wedge
 % \left( \not\exists {W^l}^{'} F {W^m}^{'} F {R^j}^{'} \in \mathit{St} \right) \big) \big) \big)
 %E^s = \left( \mathcal{O}, \preccurlyeq \right), 
-\forall x, y, \mathit{st} \in \mathit{St}  \left( {\mathit{Op}^i}^{'}(x) F {\mathit{Op}^j}^{'} (y) \in \mathit{st} \right) \rightarrow \\ \left( {\mathit{Op}^i}^{'}(x) \preccurlyeq {\mathit{Op}^j}^{'} (y) \right),
+\forall x, y, \mathit{st} \in \mathit{St}  \left( {\mathit{Op}}^{'}(x) F {\mathit{Op}}^{''} (y) \in \mathit{st} \right) \rightarrow \\ \left( {\mathit{Op}}^{'}(x) \preccurlyeq {\mathit{Op}}^{''} (y) \right),
 \end{split}
   \end{align}  where $ \preccurlyeq$ is a partial order over operations across all data objects with respect to a given global session trace $ \mathit{St}$.
  %\forall \big( %\left( \mathit{st} \in \mathit{St} \right) \wedge
@@ -825,13 +830,13 @@ E^{s} = \forall \mathit{st} \in \mathit{St}, {W^i}^{'}, {W^j}^{'} \in \mathit{st
 %\forall i, j, o, \mathit{st}, \mathit{tx} \big( \left( W^i_\mathit{tx} F W^j_\mathit{tx} \in \mathit{st} \right) \; \rightarrow \; \exists S_p \left(  W^i_\mathit{tx} F W^j_\mathit{tx} \in S_p \right)
 %\\ \wedge  \not\exists R^k_\mathit{tx} \in \mathit{st} \left( W^i_\mathit{tx} F W^j_\mathit{tx} F R^k_\mathit{tx} \in \mathit{st} \right) \wedge \left( W^j_\mathit{tx} F R^k_\mathit{tx} \in \mathit{st} \right) \\ \wedge \left( v^k = v^i \right) \big),
  E^s = \forall  \mathit{st} \in \mathit{St}, \mathit{tx}, \mathit{ty} \in \mathit{St}, x, y,\\
-  {W^i}(x)^{'}_\mathit{tx},  {W^j}(y)^{'}_\mathit{tx},
-  {W^k}(x)^{'}_\mathit{ty}, {W^l}(y)^{'}_\mathit{ty} \in  \mathit{St} \\
+  {W}(x)^{'}_\mathit{tx},  {W}(y)^{''}_\mathit{tx},
+  {W}(x)^{'''}_\mathit{ty}, {W}(y)^{''''}_\mathit{ty} \in  \mathit{St} \\
  %\mathit{tx} F \mathit{ty} \rightarrow
-  \big( \left( \not\exists {R^m}(x)^{'}_\mathit{tx}, {R^n}(y)^{'}_\mathit{ty} \in \mathit{St} \right) \\
+  \big( \left( \not\exists {R^{'''''}}(x)_\mathit{tx}, {R^{''''''}}(y)_\mathit{ty} \in \mathit{St} \right) \\
   % \big( \left( {W^i}(x)^{'}_\mathit{tx} F c_\mathit{tx} F  {W^k}(x)^{'}_\mathit{ty} F {R^m}(x)^{'}_\mathit{ty} \in \mathit{st} \right) \\
 %\wedge \left( {W^j}(y)^{'}_\mathit{tx} F c_\mathit{tx} F {W^l}(y)^{'}_\mathit{ty} F {R^n}(y)^{'}_\mathit{ty} \in \mathit{St} \right) \wedge \\
-\big( \left( \left( v_n^{'} = v_l^{'} \right) \wedge \left( v_m^{'} = v_i^{'} \right) \right) \vee \left( \left( v_n^{'} = v_j^{'} \right) \wedge \left( v_m^{'} = v_k^{'} \right) \right)  \big) \big)
+\big( \left( \left( v^{'''''}= v^{'''} \right) \wedge \left( v^{''''} = v \right) \right) \vee \\ \left( \left( v^{'''''} = v^{'} \right) \wedge \left( v^{''''} = v^{''}  \right) \right)  \big) \big)
 \end{split}
   \end{align} where $\mathit{tx}$ and $\mathit{ty}$  are consecutive transactions.
 
@@ -862,23 +867,23 @@ that proscribes write-write and write-read dependency cycles \cite{DBLP:conf/icd
 E^{r} = \forall  \mathit{st}, \mathit{st}^{'} \in  \mathit{St}, \mathit{tx}, \mathit{ty} \in  \mathit{St} \\ \big(
  % \mathit{tx} F \mathit{ty} \rightarrow
  \big( \big( \not\exists a_\mathit{tx} \in \mathit{st}
- \big(  {W^i}(x)^{'}_\mathit{tx} F {R^j}(x)^{'}_\mathit{ty} \in \mathit{st} \big) \\
+ \big(  {W}(x)^{'}_\mathit{tx} F {R}(x)^{''}_\mathit{ty} \in \mathit{st} \big) \\
   \wedge  \not\exists a_\mathit{ty} \in \mathit{st}
- \big( {W^k}(y)^{'}_\mathit{ty} F {R^l}(y)^{'}_\mathit{tx} \in \mathit{st}  \big) \big) \wedge
+ \big( {W}(y)^{'''}_\mathit{ty} F {R}(y)^{''''}_\mathit{tx} \in \mathit{st}  \big) \big) \wedge
 %\not\exists \left( c_{ty} F c_{tx} \in \mathit{st} \right)  \wedge \\
- \big( \not\exists  {W^i}(x)^{'}_\mathit{tx}, {W^j}(x)^{'}_\mathit{tx}, \\ {R^k}(x)^{'}_\mathit{ty} \in  \mathit{st}  \big)
- \big( \left( {W^i}(x)^{'}_\mathit{tx}  F {W^j}(x)^{'}_\mathit{tx} F  c_\mathit{tx} \in  \mathit{st} \right) \\
-   \wedge \left( v_k^{'} = v_i^{'} \right)  \big)  \wedge
-   \not\exists \left( {W^i}(x)^{'}_\mathit{ty}, {W^j}(x)^{'}_\mathit{ty}, {R^k}(x)^{'}_\mathit{tx} \in  \mathit{st} \right) \\
+ \big( \not\exists  {W}(x)^{'}_\mathit{tx}, {W}(x)^{''}_\mathit{tx}, \\ {R}(x)^{'''}_\mathit{ty} \in  \mathit{st}  \big)
+ \big( \left( {W}(x)^{'}_\mathit{tx}  F {W}(x)^{''}_\mathit{tx} F  c_\mathit{tx} \in  \mathit{st} \right) \\
+   \wedge \left( v^{''} = v \right)  \big)  \wedge
+   \not\exists \left( {W}(x)^{'}_\mathit{ty}, {W}(x)^{''}_\mathit{ty}, {R}(x)^{'''}_\mathit{tx} \in  \mathit{st} \right) \\
     \big( \left(
- {W^i}(x)^{'}_\mathit{ty}  F {W^j}(x)^{'}_\mathit{ty} F  c_\mathit{ty} \in  \mathit{st} \right)
-   \wedge \left( v_k^{'} = v_i^{'} \right)  \big) \wedge
+ {W}(x)^{'}_\mathit{ty}  F {W}(x)^{''}_\mathit{ty} F  c_\mathit{ty} \in  \mathit{st} \right)
+   \wedge \left( v^{''} = v \right)  \big) \wedge
  %\mathit{tx} F \mathit{ty} \rightarrow
-  \big( \\ \not\exists {W^i}(x)^{'}_\mathit{tx},  {W^j}(y)^{'}_\mathit{tx},
-  {W^k}(x)^{'}_\mathit{ty}, {W^l}(y)^{'}_\mathit{ty}, {R^m}(x)^{'}_\mathit{tx}, {R^n}(y)^{'}_\mathit{ty} \in \mathit{St} \\ \big)
+  \big( \\ \not\exists {W}(x)^{'}_\mathit{tx},  {W}(y)^{''}_\mathit{tx},
+  {W}(x)^{'''}_\mathit{ty}, {W}(y)^{''''}_\mathit{ty}, {R}(x)^{'''''}_\mathit{tx}, {R}(y)^{''''''}_\mathit{ty} \in \mathit{St} \\ \big)
 % \big( \left( {W^i}(x)^{'}_\mathit{tx} F c_\mathit{tx} F  {W^k}(x)^{'}_\mathit{ty} F {R^m}(x)^{'}_\mathit{ty} \in \mathit{st} \right) \\
 %\wedge \left( {W^j}(y)^{'}_\mathit{tx} F c_\mathit{tx} F {W^l}(y)^{'}_\mathit{ty} F {R^n}(y)^{'}_\mathit{ty} \in \mathit{St} \right) \wedge \\
-\big( \left( \left( v_n^{'} = v_l^{'} \right) \wedge \left( v_m^{'} = v_i^{'} \right) \right) \vee \left( \left( v_n^{'} = v_j^{'} \right) \wedge \left( v_m^{'} = v_k^{'} \right) \right)  \big) \big) %\wedge \\
+\big( \left( \left( v^{''''} = v^{'''} \right) \wedge \left( v^{'''''} = v \right) \right) \vee \\ \left( \left( v^{'''''} = v^{'} \right) \wedge \left( v^{''''} = v^{''} \right) \right)  \big) \big) %\wedge \\
 %\left( \not\exists {R^m}(x)^{'}_\mathit{tx}, {R^n}(y)^{'}_\mathit{ty} \in \mathit{St} \right) \c\
 %   \big( \left( {W^i}(x)^{'}_\mathit{tx} F c_\mathit{tx} F  {W^k}(x)^{'}_\mathit{ty} F {R^m}(x)^{'}_\mathit{ty} \in \mathit{st} \right) \wedge \\
 %   \left( {W^j}(y)^{'}_\mathit{tx} F c_\mathit{tx} F {W^l}(y)^{'}_\mathit{ty} F {R^n}(y)^{'}_\mathit{ty} \in \mathit{St} \right) \wedge \\
@@ -968,32 +973,32 @@ E^{r} = \forall  \mathit{st}, \mathit{st}^{'} \in  \mathit{St}, \mathit{tx}, \ma
 E^{r} = C = \forall \mathit{st}, \mathit{st}^{'} \in \mathit{St}, \mathit{tx}, \mathit{ty} \in \mathit{St} \\ \big(
  % \mathit{tx} F \mathit{ty} \rightarrow
  \big( \big( \not\exists a_\mathit{tx} \in \mathit{st}
- \big(  {W^i}(x)^{'}_\mathit{tx} F {R^j}(x)^{'}_\mathit{ty} \in \mathit{st} \big) \\
+ \big(  {W}(x)^{'}_\mathit{tx} F {R}(x)^{''}_\mathit{ty} \in \mathit{st} \big) \\
   \wedge  \not\exists a_\mathit{ty} \in \mathit{st}
- \big( {W^k}(y)^{'}_\mathit{ty} F {R^l}(y)^{'}_\mathit{tx} \in \mathit{st}  \big) \big) \wedge
+ \big( {W}(y)^{'''}_\mathit{ty} F {R}(y)^{''''}_\mathit{tx} \in \mathit{st}  \big) \big) \wedge
 %\not\exists \left( c_{ty} F c_{tx} \in \mathit{st} \right)  \wedge \\
- \big( \not\exists  {W^i}(x)^{'}_\mathit{tx}, {W^j}(x)^{'}_\mathit{tx}, \\ {R^k}(x)^{'}_\mathit{ty} \in  \mathit{st}  \big)
- \big( \left( {W^i}(x)^{'}_\mathit{tx}  F {W^j}(x)^{'}_\mathit{tx} F  c_\mathit{tx} \in  \mathit{st} \right) \\
-   \wedge \left( v_k^{'} = v_i^{'} \right)  \big)  \wedge
-   \not\exists \left( {W^i}(x)^{'}_\mathit{ty}, {W^j}(x)^{'}_\mathit{ty}, {R^k}(x)^{'}_\mathit{tx} \in  \mathit{st} \right) \\
+ \big( \not\exists  {W}(x)^{'}_\mathit{tx}, {W}(x)^{''}_\mathit{tx}, \\ {R}(x)^{'''}_\mathit{ty} \in  \mathit{st}  \big)
+ \big( \left( {W}(x)^{'}_\mathit{tx}  F {W}(x)^{''}_\mathit{tx} F  c_\mathit{tx} \in  \mathit{st} \right) \\
+   \wedge \left( v^{''} = v \right)  \big)  \wedge
+   \not\exists \left( {W}(x)^{'}_\mathit{ty}, {W}(x)^{''}_\mathit{ty}, {R}(x)^{'''}_\mathit{tx} \in  \mathit{st} \right) \\
     \big( \left(
- {W^i}(x)^{'}_\mathit{ty}  F {W^j}(x)^{'}_\mathit{ty} F  c_\mathit{ty} \in  \mathit{st} \right)
-   \wedge \left( v_k^{'} = v_i^{'} \right)  \big) \wedge
+ {W}(x)^{'}_\mathit{ty}  F {W}(x)^{''}_\mathit{ty} F  c_\mathit{ty} \in  \mathit{st} \right)
+   \wedge \left( v^{''} = v \right)  \big) \wedge
  %\mathit{tx} F \mathit{ty} \rightarrow
-  \big( \\ \not\exists {W^i}(x)^{'}_\mathit{tx},  {W^j}(y)^{'}_\mathit{tx},
-  {W^k}(x)^{'}_\mathit{ty}, {W^l}(y)^{'}_\mathit{ty}, {R^m}(x)^{'}_\mathit{tx}, {R^n}(y)^{'}_\mathit{ty} \in \mathit{St} \\ \big)
+  \big( \\ \not\exists {W}(x)^{'}_\mathit{tx},  {W}(y)^{''}_\mathit{tx},
+  {W}(x)^{'''}_\mathit{ty}, {W}(y)^{''''}_\mathit{ty}, {R}(x)^{'''''}_\mathit{tx}, {R}(y)^{''''''}_\mathit{ty} \in \mathit{St} \\ \big)
 % \big( \left( {W^i}(x)^{'}_\mathit{tx} F c_\mathit{tx} F  {W^k}(x)^{'}_\mathit{ty} F {R^m}(x)^{'}_\mathit{ty} \in \mathit{st} \right) \\
 %\wedge \left( {W^j}(y)^{'}_\mathit{tx} F c_\mathit{tx} F {W^l}(y)^{'}_\mathit{ty} F {R^n}(y)^{'}_\mathit{ty} \in \mathit{St} \right) \wedge \\
-\big( \left( \left( v_n^{'} = v_l^{'} \right) \wedge \left( v_m^{'} = v_i^{'} \right) \right) \vee \left( \left( v_n^{'} = v_j^{'} \right) \wedge \left( v_m^{'} = v_k^{'} \right) \right)  \big) \wedge \\
+\big( \left( \left( v^{''''} = v^{'''} \right) \wedge \left( v^{''''} = v \right) \right) \vee \\ \left( \left( v^{''''} = v^{'} \right) \wedge \left( v^{''''} = v^{''} \right) \right)  \big) \wedge \\
 %\left( \not\exists {R^m}(x)^{'}_\mathit{tx}, {R^n}(y)^{'}_\mathit{ty} \in \mathit{St} \right) \c\
 %   \big( \left( {W^i}(x)^{'}_\mathit{tx} F c_\mathit{tx} F  {W^k}(x)^{'}_\mathit{ty} F {R^m}(x)^{'}_\mathit{ty} \in \mathit{st} \right) \wedge \\
 %   \left( {W^j}(y)^{'}_\mathit{tx} F c_\mathit{tx} F {W^l}(y)^{'}_\mathit{ty} F {R^n}(y)^{'}_\mathit{ty} \in \mathit{St} \right) \wedge \\
 % \left( v_n^{'} = v_k^{'} \right) \wedge \left( v_m^{'} = v_i^{'} \right)  \big) \wedge \\
-    \big( \not\exists {R^i}(x)^{'}_\mathit{tx}, {W^j}(x)^{'}_\mathit{ty}, {R^k}(x)^{'}_\mathit{ty}, {R^l}(y)^{'}_\mathit{ty}, {W^m}(y)^{'}_\mathit{tx}, {R^n}(y)^{'}_\mathit{tx} \in \mathit{St} \big)  \\
-     \big( \big( {R^i}(x)^{'}_\mathit{tx} F {W^j}(x)^{'}_\mathit{ty} F {R^k}(x)^{'}_\mathit{ty} \in \mathit{St} \big) \wedge \\
-  \big(  {R^l}(y)^{'}_\mathit{ty} F {W^m}(y)^{'}_\mathit{tx} F {R^n}(y)^{'}_\mathit{tx} \in \mathit{St} \big)  \big)  \\
-  \big(  \left( v_k^{'} = v_j^{'} \right) \wedge
- \left( v_n^{'} = v_m^{'} \right) \big) \big) \big)
+    \big( \not\exists {R}(x)^{'}_\mathit{tx}, {W}(x)^{''}_\mathit{ty}, {R}(x)^{'''}_\mathit{ty}, {R}(y)^{''''}_\mathit{ty}, {W}(y)^{'''''}_\mathit{tx}, {R}(y)^{''''''}_\mathit{tx} \in \mathit{St} \big)  \\
+     \big( \big( {R}(x)^{'}_\mathit{tx} F {W}(x)^{''}_\mathit{ty} F {R}(x)^{'''}_\mathit{ty} \in \mathit{St} \big) \wedge \\
+  \big(  {R}(y)^{''''}_\mathit{ty} F {W}(y)^{'''''}_\mathit{tx} F {R}(y)^{''''''}_\mathit{tx} \in \mathit{St} \big)  \big)  \\
+  \big(  \left( v^{''} = v^{'} \right) \wedge
+ \left( v^{'''''} = v^{''''} \right) \big) \big) \big)
 %\left( \mathit{Op}^i_\mathit{tx} X^o \mathit{Op}^j_\mathit{tx} \in \mathit{st} \right) \wedge
 % \left( \mathit{Op}^k_\mathit{ty} X^o \mathit{Op}^l_\mathit{ty} \in \mathit{st} \right)
 %\\ \rightarrow \exists S \left( \mathit{Op}^i_\mathit{tx} X^o \mathit{Op}^j_\mathit{tx} F c_\mathit{tx} F \mathit{Op}^k_\mathit{ty} X^o \mathit{Op}^l_\mathit{ty} F c_\mathit{ty}  \in S \right)  \wedge \\
@@ -1019,32 +1024,32 @@ E^{r} = C = \forall \mathit{st}, \mathit{st}^{'} \in \mathit{St}, \mathit{tx}, \
 E^{r} = C = \forall \mathit{st}, \mathit{st}^{'} \in \mathit{St}, \mathit{tx}, \mathit{ty} \in \mathit{St} \\ \big(
  % \mathit{tx} F \mathit{ty} \rightarrow
  \big( \big( \not\exists a_\mathit{tx} \in \mathit{st}
- \big(  {W^i}(x)^{'}_\mathit{tx} F {R^j}(x)^{'}_\mathit{ty} \in \mathit{st} \big) \\
+ \big(  {W}(x)^{'}_\mathit{tx} F {R}(x)^{''}_\mathit{ty} \in \mathit{st} \big) \\
   \wedge  \not\exists a_\mathit{ty} \in \mathit{st}
- \big( {W^k}(y)^{'}_\mathit{ty} F {R^l}(y)^{'}_\mathit{tx} \in \mathit{st}  \big) \big) \wedge
+ \big( {W}(y)^{'''}_\mathit{ty} F {R}(y)^{''''}_\mathit{tx} \in \mathit{st}  \big) \big) \wedge
 %\not\exists \left( c_{ty} F c_{tx} \in \mathit{st} \right)  \wedge \\
- \big( \not\exists  {W^i}(x)^{'}_\mathit{tx}, {W^j}(x)^{'}_\mathit{tx}, \\ {R^k}(x)^{'}_\mathit{ty} \in  \mathit{st}  \big)
- \big( \left( {W^i}(x)^{'}_\mathit{tx}  F {W^j}(x)^{'}_\mathit{tx} F  c_\mathit{tx} \in  \mathit{st} \right) \\
-   \wedge \left( v_k^{'} = v_i^{'} \right)  \big)  \wedge
-   \not\exists \left( {W^i}(x)^{'}_\mathit{ty}, {W^j}(x)^{'}_\mathit{ty}, {R^k}(x)^{'}_\mathit{tx} \in  \mathit{st} \right) \\
+ \big( \not\exists  {W}(x)^{'}_\mathit{tx}, {W}(x)^{''}_\mathit{tx}, \\ {R}(x)^{'''}_\mathit{ty} \in  \mathit{st}  \big)
+ \big( \left( {W}(x)^{'}_\mathit{tx}  F {W}(x)^{''}_\mathit{tx} F  c_\mathit{tx} \in  \mathit{st} \right) \\
+   \wedge \left( v^{''} = v \right)  \big)  \wedge
+   \not\exists \left( {W}(x)^{'}_\mathit{ty}, {W}(x)^{''}_\mathit{ty}, {R}(x)^{'''}_\mathit{tx} \in  \mathit{st} \right) \\
     \big( \left(
- {W^i}(x)^{'}_\mathit{ty}  F {W^j}(x)^{'}_\mathit{ty} F  c_\mathit{ty} \in  \mathit{st} \right)
-   \wedge \left( v_k^{'} = v_i^{'} \right)  \big) \wedge
+ {W}(x)^{'}_\mathit{ty}  F {W}(x)^{''}_\mathit{ty} F  c_\mathit{ty} \in  \mathit{st} \right)
+   \wedge \left( v^{''} = v \right)  \big) \wedge
  %\mathit{tx} F \mathit{ty} \rightarrow
-  \big( \\ \not\exists {W^i}(x)^{'}_\mathit{tx},  {W^j}(y)^{'}_\mathit{tx},
-  {W^k}(x)^{'}_\mathit{ty}, {W^l}(y)^{'}_\mathit{ty}, {R^m}(x)^{'}_\mathit{tx}, {R^n}(y)^{'}_\mathit{ty} \in \mathit{St} \\ \big)
+  \big( \\ \not\exists {W}(x)^{'}_\mathit{tx},  {W}(y)^{''}_\mathit{tx},
+  {W}(x)^{'''}_\mathit{ty}, {W}(y)^{''''}_\mathit{ty}, {R}(x)^{'''''}_\mathit{tx}, {R}(y)^{''''''}_\mathit{ty} \in \mathit{St} \\ \big)
 % \big( \left( {W^i}(x)^{'}_\mathit{tx} F c_\mathit{tx} F  {W^k}(x)^{'}_\mathit{ty} F {R^m}(x)^{'}_\mathit{ty} \in \mathit{st} \right) \\
 %\wedge \left( {W^j}(y)^{'}_\mathit{tx} F c_\mathit{tx} F {W^l}(y)^{'}_\mathit{ty} F {R^n}(y)^{'}_\mathit{ty} \in \mathit{St} \right) \wedge \\
-\big( \left( \left( v_n^{'} = v_l^{'} \right) \wedge \left( v_m^{'} = v_i^{'} \right) \right) \vee \left( \left( v_n^{'} = v_j^{'} \right) \wedge \left( v_m^{'} = v_k^{'} \right) \right)  \big) \wedge \\
+\big( \left( \left( v^{'''''} = v^{''''} \right) \wedge \left( v^{'''''} = v \right) \right) \vee \\ \left( \left( v^{'''''} = v^{'} \right) \wedge \left( v^{''''} = v^{''} \right) \right)  \big) \wedge \\
 %\left( \not\exists {R^m}(x)^{'}_\mathit{tx}, {R^n}(y)^{'}_\mathit{ty} \in \mathit{St} \right) \c\
 %   \big( \left( {W^i}(x)^{'}_\mathit{tx} F c_\mathit{tx} F  {W^k}(x)^{'}_\mathit{ty} F {R^m}(x)^{'}_\mathit{ty} \in \mathit{st} \right) \wedge \\
 %   \left( {W^j}(y)^{'}_\mathit{tx} F c_\mathit{tx} F {W^l}(y)^{'}_\mathit{ty} F {R^n}(y)^{'}_\mathit{ty} \in \mathit{St} \right) \wedge \\
 % \left( v_n^{'} = v_k^{'} \right) \wedge \left( v_m^{'} = v_i^{'} \right)  \big) \wedge \\
-    \big( \not\exists {R^i}(x)^{'}_\mathit{tx}, {W^j}(x)^{'}_\mathit{ty}, {R^k}(x)^{'}_\mathit{ty}, {R^l}(x)^{'}_\mathit{ty}, {W^m}(x)^{'}_\mathit{tx}, {R^n}(x)^{'}_\mathit{tx} \in \mathit{St} \big)  \\
-     \big( \big( {R^i}(x)^{'}_\mathit{tx} F {W^j}(x)^{'}_\mathit{ty} F {R^k}(x)^{'}_\mathit{ty} \in \mathit{St} \big) \wedge \\
-  \big(  {R^l}(x)^{'}_\mathit{ty} F {W^m}(x)^{'}_\mathit{tx} F {R^n}(x)^{'}_\mathit{tx} \in \mathit{St} \big)  \big)  \\
-  \big(  \left( v_k^{'} = v_j^{'} \right) \wedge
- \left( v_n^{'} = v_m^{'} \right) \big) \big) \big)
+    \big( \not\exists {R}(x)^{'}_\mathit{tx}, {W}(x)^{''}_\mathit{ty}, {R}(x)^{'''}_\mathit{ty}, {R}(x)^{''''}_\mathit{ty}, {W}(x)^{'''''}_\mathit{tx}, {R}(x)^{''''''}_\mathit{tx} \in \mathit{St} \big)  \\
+     \big( \big( {R}(x)^{'}_\mathit{tx} F {W}(x)^{''}_\mathit{ty} F {R}(x)^{'''}_\mathit{ty} \in \mathit{St} \big) \wedge \\
+  \big(  {R}(x)^{''''}_\mathit{ty} F {W}(x)^{'''''}_\mathit{tx} F {R}(x)^{''''''}_\mathit{tx} \in \mathit{St} \big)  \big)  \\
+  \big(  \left( v^{''} = v^{'} \right) \wedge
+ \left( v^{'''''} = v^{''''} \right) \big) \big) \big)
 %E = C = \forall i, j, k, l, o, \mathit{st}, \mathit{tx}, \mathit{ty} \big( \left( \mathit{tx} F \mathit{ty} \right) \wedge \left( R^i_\mathit{tx} F W^j_\mathit{tx} \in \mathit{st} \right) \\
 %\wedge \left( R^k_\mathit{ty} F W^l_\mathit{ty} \in \mathit{st} \right)
 %\\ \rightarrow \; \exists S \left( R^i_\mathit{tx} F W^j_\mathit{tx} F c_\mathit{tx}  F R^k_\mathit{ty} F W^l_\mathit{ty} F c_\mathit{ty}\in S \right) \\
@@ -1716,26 +1721,7 @@ proscribes $ww$ cycles. % In
  In the current state-of-the-art, a consistency model or isolation level is typically represented by two components: 1) axiomatic rules, given by a group of first order logic expressions, representing the allowed execution order among operations, and 2)  DSGs representing the anomalies proscribed by the given consistency model or isolation level. On the other hand, our approach uses only a single LTL-like expression to express the same consistency model or isolation level. Thus, the server trace analysis approach compares each element in an  execution trace with two components. Contrastingly, with our approach, each element in a session trace is compared with only a single ConSpec expression. Hence, the complexity of the server trace analysis approach (refer to Section \ref{sec:complex}) is roughly twice the complexity with our approach, particularly in the case of absence of anomaly in a given trace. In the presence of anomalies in a session trace, the comparison between complexities of the two approaches is more complicated; we need to consider the position of the first occurrence of an anomaly with respect to the size of the trace.
 \par Moreover, the traditional approach of server trace analysis involves analysis of execution traces collected from server nodes comprising the storage system cluster. It analyzes whether the results of operations observed at the system end, i.e., at the end of the storage system, matches the results expected as per a given consistency model or isolation level. Thus, this approach considers a system-centric view of a given consistency model or isolation level. On the other hand, we analyze whether a session trace, observed from a client application, satisfies the specification for a given consistency model or isolation level, i.e., whether the results in the session trace follow an order that is allowed by the above specification. Hence, our approach is concerned with client-centric view of a given consistency model or isolation level. Further, the traditional approach has the disadvantage of having to deal with much longer traces, comprising execution of operations performed from multiple applications or sessions on storage system servers. Extracting a session trace from a server trace is a computationally expensive task by itself, since it requires an exhaustive search on the server trace to identify portions that are relevant to a given application. Contrastingly, our approach directly analyzes session traces, collected from the client machines.
  
- \section{Complexity of Verification: Comparison with the State-of-the-art}\label{sec:complex}
- A session trace is comprised of results of execution of storage operations invoked from a client application on a target storage system, observed from a client machine. Let $\mathit{op}$ be signature of an 
-$i^\mathit{th}$ operation invoked from a given client application. $\mathit{op}$ can be a read or write operation that reads (or writes) a unique value from (or to) a storage system object $o$; signature of a read and write operation are of the form $r(o){v_m}$ and $w(o,v_l)$, respectively.
- Let $v_k$ be the current value observed against the operation $\mathit{op}$ on an object $o$. Let the length of the given session trace be denoted by the integer term $s_t$. A a session trace $\mathcal{S}_t$ can be expressed as a collection of tuples, where each tuple comprises: 1) the unique signature of the operation, 2) the name of the storage system object that the operation accesses, 3) the value written by the operation. Using the above notations, a session trace $\mathcal{S}_t$ is given as $\mathcal{S}_t$ = \[ \Set{\tuple{\mathit{op},o,v_k}} {1\le i \le s_t, 1\le j\le m, 1\le k\le n}{.} \]
-Let the ConSpec expression for a given consistency
- guarantee or an isolation level be given as $\mathcal{E}_c$ =\[ \Set{e_i} {1\le i\le s_c}{,} \] where
- $e_i$ is the $i^\mathit{th}$ character in the ConSpec expression, and the length of a given ConSpec expression is $s_c$.
- %$\tuple{\mathit{op}_i,o_j,v_k}$
-It can be verified whether a storage system actually supports a consistency guarantee or an isolation level by analyzing a session trace with respect to the ConSpec specification for the above consistency guarantee or isolation level. Verifying a given session trace $\mathcal{S}_t$ against a specification $\mathcal{E}_c$  involves comparing the observed result of each operation in
-  $\mathcal{S}_t$ against each expression in $\mathcal{E}_c$. The complexity (here we consider time complexity) of comparing each character in a session trace $\mathcal{S}_t$ against the specification $\mathcal{E}_c$ is equivalent to the length of the specification, i.e., $s_c$. For verification, the above step is repeated for all characters in the session trace (in the absence of anomalies). Thus, the total complexity  of verifying a session trace against a given ConSpec specification is $s_t \times s_c$.
-\par  As already discussed in Section \ref{sec:compare}, state-of-the-art definitions of consistency models and isolation levels comprise a combination of axiomatic rules and anomaly DSGs. Let the total number of axiomatic rules in a state-of-the-art consistency specification  be $n_e$. Let the length of the expression for each axiomatic rule comprising a state-of-the-art specification  be $s_1$, $s_2$, ..., $s_{n_e}$, respectively. Thus, the total length of such expressions in a state-of-the-art specification
- is given as $\mathcal{E}_s$ =\[ \Set{\mathcal{E}^{i}_s}{1\le i\le n_e}{,}{,}\] where $\mathcal{E}^{i}_s$ is the $i^\mathit{th}$
- expression in the given specification. The process of verifying a given session trace against a specification involves comparing each expression in the given specification with each character in the session trace. The complexity (time complexity) of comparing the expression $\mathcal{E}^{i}_s$ against the session trace can be given as $s_t \times s_i$, where $s_i$ is the length of $\mathcal{E}^{i}_s$. The total complexity of verifying the given session trace against the above expressions comprising the given specification involves carrying out the above step for all expressions in the specification, which in turn, can be given as $s_t \times \left(s_1+s_2+...+s_{n_e}\right)$. Now, let us consider verifying the given session trace against the anomaly DSGs for the given specification. Let the number of anomaly DSGs for a given specification be $n_g$. Let the size of each anomaly DSG be $g_1$, $g_2$, ...., $g_{n_g}$. Verifying a given session trace against an anomaly DSG involves performing
- a pattern search in each of the DGSs with the session trace. The complexity $\mathcal{C}$ of the above search, using any algorithm based on Depth First Search,  can be given as $\mathcal{C}$ = $V+E$, where $V$ and $E$ are the number of vertices and edges in each DSG,
- respectively. Considering each DSG to be fully connected, the number of edges approximately equals the number of vertices
-  -1, i.e., $E \approx V - 1$. Hence, $\mathcal{C}$ can be further rewritten as $\mathcal{C}=V+E\approx 2V -1$. Thus, the complexity of a graph search algorithm can be given $\approx 2V -1$. The total complexity
-  of verifying he given session trace against anomaly DSGs involves performing the above pattern search for all anomaly DSGs comprising the given specification. Thus, the total complexity of verifying against anomaly DSGs can be given as
-  $s_t \times 2 \times \left( g_1 + g_2 ... + g_{n_g} \right) - n_g$.  Combining the complexity of verifying against the expressions and the complexity of verifying against the anomaly DSGs, the total complexity of verification
-   as per the state-of-the-art can be given as
-   $s_t \times \left( s_1+s_2+...+s_{n_e} + 2 \times g_1 + 2 \times g_2 ... + 2 \times g_{n_g} - n_g \right).$
+ 
 
  \section{Equivalence between Dependency Relations and LTL Relations of ConSpec} \label{sec:equiv}
  State-of-the-art definitions specify consistency levels in terms of dependency relations, namely
@@ -2364,6 +2350,27 @@ A serialization is said to be \emph{legal} if every read operation returns the v
    \end{definition}\label{def:parser}
    The above legal serialization does not comprise read operations from other clients, hence its a  serialization of a partial execution.
 
+\subsection{Complexity of Verification: Comparison with the State-of-the-art}\label{sec:complex}
+ A session trace is comprised of results of execution of storage operations invoked from a client application on a target storage system, observed from a client machine. Let $\mathit{op}$ be signature of an 
+$i^\mathit{th}$ operation invoked from a given client application. $\mathit{op}$ can be a read or write operation that reads (or writes) a unique value from (or to) a storage system object $o$; signature of a read and write operation are of the form $r(o){v_m}$ and $w(o,v_l)$, respectively.
+ Let $v_k$ be the current value observed against the operation $\mathit{op}$ on an object $o$. Let the length of the given session trace be denoted by the integer term $s_t$. A a session trace $\mathcal{S}_t$ can be expressed as a collection of tuples, where each tuple comprises: 1) the unique signature of the operation, 2) the name of the storage system object that the operation accesses, 3) the value written by the operation. Using the above notations, a session trace $\mathcal{S}_t$ is given as $\mathcal{S}_t$ = \[ \Set{\tuple{\mathit{op},o,v_k}} {1\le i \le s_t, 1\le j\le m, 1\le k\le n}{.} \]
+Let the ConSpec expression for a given consistency
+ guarantee or an isolation level be given as $\mathcal{E}_c$ =\[ \Set{e_i} {1\le i\le s_c}{,} \] where
+ $e_i$ is the $i^\mathit{th}$ character in the ConSpec expression, and the length of a given ConSpec expression is $s_c$.
+ %$\tuple{\mathit{op}_i,o_j,v_k}$
+It can be verified whether a storage system actually supports a consistency guarantee or an isolation level by analyzing a session trace with respect to the ConSpec specification for the above consistency guarantee or isolation level. Verifying a given session trace $\mathcal{S}_t$ against a specification $\mathcal{E}_c$  involves comparing the observed result of each operation in
+  $\mathcal{S}_t$ against each expression in $\mathcal{E}_c$. The complexity (here we consider time complexity) of comparing each character in a session trace $\mathcal{S}_t$ against the specification $\mathcal{E}_c$ is equivalent to the length of the specification, i.e., $s_c$. For verification, the above step is repeated for all characters in the session trace (in the absence of anomalies). Thus, the total complexity  of verifying a session trace against a given ConSpec specification is $s_t \times s_c$.
+\par  As already discussed in Section \ref{sec:compare}, state-of-the-art definitions of consistency models and isolation levels comprise a combination of axiomatic rules and anomaly DSGs. Let the total number of axiomatic rules in a state-of-the-art consistency specification  be $n_e$. Let the length of the expression for each axiomatic rule comprising a state-of-the-art specification  be $s_1$, $s_2$, ..., $s_{n_e}$, respectively. Thus, the total length of such expressions in a state-of-the-art specification
+ is given as $\mathcal{E}_s$ =\[ \Set{\mathcal{E}^{i}_s}{1\le i\le n_e}{,}{,}\] where $\mathcal{E}^{i}_s$ is the $i^\mathit{th}$
+ expression in the given specification. The process of verifying a given session trace against a specification involves comparing each expression in the given specification with each character in the session trace. The complexity (time complexity) of comparing the expression $\mathcal{E}^{i}_s$ against the session trace can be given as $s_t \times s_i$, where $s_i$ is the length of $\mathcal{E}^{i}_s$. The total complexity of verifying the given session trace against the above expressions comprising the given specification involves carrying out the above step for all expressions in the specification, which in turn, can be given as $s_t \times \left(s_1+s_2+...+s_{n_e}\right)$. Now, let us consider verifying the given session trace against the anomaly DSGs for the given specification. Let the number of anomaly DSGs for a given specification be $n_g$. Let the size of each anomaly DSG be $g_1$, $g_2$, ...., $g_{n_g}$. Verifying a given session trace against an anomaly DSG involves performing
+ a pattern search in each of the DGSs with the session trace. The complexity $\mathcal{C}$ of the above search, using any algorithm based on Depth First Search,  can be given as $\mathcal{C}$ = $V+E$, where $V$ and $E$ are the number of vertices and edges in each DSG,
+ respectively. Considering each DSG to be fully connected, the number of edges approximately equals the number of vertices
+  -1, i.e., $E \approx V - 1$. Hence, $\mathcal{C}$ can be further rewritten as $\mathcal{C}=V+E\approx 2V -1$. Thus, the complexity of a graph search algorithm can be given $\approx 2V -1$. The total complexity
+  of verifying he given session trace against anomaly DSGs involves performing the above pattern search for all anomaly DSGs comprising the given specification. Thus, the total complexity of verifying against anomaly DSGs can be given as
+  $s_t \times 2 \times \left( g_1 + g_2 ... + g_{n_g} \right) - n_g$.  Combining the complexity of verifying against the expressions and the complexity of verifying against the anomaly DSGs, the total complexity of verification
+   as per the state-of-the-art can be given as
+   $s_t \times \left( s_1+s_2+...+s_{n_e} + 2 \times g_1 + 2 \times g_2 ... + 2 \times g_{n_g} - n_g \right).$
+   
 \subsection{Violation Examples: Verified \\ Against ConSpec Specifications}\label{sec:examples}
   Using example session traces, we illustrate situations where a given consistency model is violated. Let us consider a
 session trace $\mathit{st}_1$: $w^1(x,1), w^2(x,2), r^1(x){2}, r^2(x){1}$ to demonstrate how violation of RYW consistency can occur.
