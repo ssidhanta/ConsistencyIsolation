@@ -519,22 +519,25 @@ Following the format of Definition \ref{def:form0}, RYW can be defined by the fo
 %% restricts the   order among conflicts pair of writes and reads in an equivalent serialization of a partial execution $S_p$, defined in Definition \ref{def:parser}.
    %where $G$ is the LTL operator globally.
     %The superscript $\mathit{st}$ specifies that the enclosed relation is given in the context of a session trace. %, representing the application scope of $\mathit{Cl}$.
-\par Read/Session Monotonic (MR) specifies: read operations on a storage system object invoked from a client application or a session must always return results in an increasing order of recency as per their mutual order in the session trace.
+%\par Read/Session Monotonic (MR) specifies: read operations on a storage system object invoked from a client application or a session must always return results in an increasing order of recency as per their mutual order in the session trace.
  %Let $\gets$ be a logical operator which denotes the function ``returns", i.e., an expression $\mathit{val}_a \gets A$ denotes that an operation $\mathit{op}_A$, represented by the prostsitional variable $A$, returns a value $\mathit{val}_a$. For example, the expression $v_q \gets R^k(o){v_m}$ denotes that the read operation $r^k(o){v_m}$, represented by the propositional logic variable $R^k{v_m}$, returns a value $v_m$.
-   MR is formally represented by the following expression.
+\par The Read (or Session) Monotonic, or Monotonic Reads guarantee (MR) specifies intuitively that read operations on a given object invoked from the same session must always return results in an increasing order of recency.   MR is formally represented by the following expression constraining the partial order defined by ConSpec.
 \begin{align}\label{eqn:MR}
 \begin{split}
 %\mathcal{E}^{s} = \forall  \mathit{st} \in \mathit{St}, {R^i}^{'}, {R^j}^{'} \in \mathit{st} \big( {R^i}^{'} F {R^j}^{'} \in \mathit{st}
 % \rightarrow \;  \exists S_p \\ \left( {R^i}^{'} F {R^j}^{'} \in S_p \right) \big). 
- \mathcal{E}^{s} = \forall  \mathit{st} \in \mathit{St}, {R}^{'}, {R}^{''} \in \mathit{st} \big( {R}^{'} F {R}^{''} \in \mathit{st}
- \rightarrow \\ \left( {R}^{'} \preccurlyeq {R}^{''} \right) \big), 
+% \mathit{st} \in \mathit{St},
+ \mathcal{E}^{s} = \forall   {R}^{'}, {R}^{''} \in \mathit{st} \big( {R}^{'} F {R}^{''} \in \mathit{st}
+ \rightarrow \\ \left( {R}^{'} \preccurlyeq_{st+w} {R}^{''} \right) \big), 
  %; \\
  %C = \left( \not\exists {W^m}^{''}, {W^n}^{''} \in \mathit{St} \right) \big( \left( {R^i}^{'} F {R^j}^{'} \in \mathit{st} \right) \\ %\left( {\mathit{st}}^{'} \in \mathit{St} \right) \wedge
 % \wedge \left( {W^m}^{''} F {W^n}^{''}  \in \mathit{St} \right) %\left( {W^m}^{''} F {W^n}^{''} F {R^i}^{'} F {R^j}^{'} \in \mathit{St} \right) \wedge \\
 %  \wedge \left( {v^i}^{'} = {v^n}^{''} \right) \wedge \big( \left( {v^j}^{'} = {v^m}^{''} \right) \\ \vee \big( \left( {W^m}^{'} F {R^j}^{'} \in \mathit{St} \right)
 % \wedge  \not\exists {W^p}^{'} \left( {W^m}^{'} F {W^p}^{'} F {R^j}^{'} \in \mathit{St} \right) \big) \big)
 \end{split}
-\end{align} where $\left( \mathcal{O}, \preccurlyeq \right)$ constrains  the order among conflicting reads in an equivalent $S_p$.
+\end{align} where $st$ is the session from the standpoint of which the session guarantees are being upheld, and $\preccurlyeq_{st+w}$ denotes the restriction of $\preccurlyeq$ to the elements of $st$ and the write operations of all other clients.
+
+%where $\left( \mathcal{O}, \preccurlyeq \right)$ constrains  the order among conflicting reads in an equivalent $S_p$.
  %According to the above equation, a session trace comprising an execution sequence that follows MR must return a value according to either of the following conditions: 1) according to the first expression $\left( R^k{v_m}F^{o}R^s{v_t} \right)$ comprising the exclusive-or in the RHS of the operator $\rightarrow$, it must return the value written by the latest write preceding the operation $r^s(o)v_t$, i.e., the value $v_q$ written by $w^n(o,v_q)$, or 2) according to the second expression $W^n(v_q) F^{o} W^u(v_x) X^{o} R^s v_t$ comprising the exclusive-or in the RHS, it must return the value $v_x$ written by the latest write $W^u(v_x)$ which overwrites $o$.
 %\begin{align*}
 %\begin{split}
