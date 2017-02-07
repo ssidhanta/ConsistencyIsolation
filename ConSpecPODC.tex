@@ -742,7 +742,7 @@ E^{s} =  \forall \mathit{st} \in \mathit{St}, {\mathit{Op}}^{'}, {\mathit{Op}}^{
 % \left( W^n(y) F W^l(y) F R^j(x) \in \mathit{st} \right) \wedge \left( v_k = v_l \right) \wedge \\
 % \left( v_j = v_m \vee v_i = v_l \right) \big) \big) \big)  %\left( \mathit{Op}^i X^o \mathit{Op}^j \in S \right) \\ \wedge \forall \mathit{st}  \left( \mathit{Op}^j X^o R^k \in \mathit{st} \right) \wedge \left( v^k = v^j  \right) \big)
  \end{split}
-  \end{align} where the partial order $\left( \mathcal{O}, \preccurlyeq \right)$ restricts an equivalent serialization of a client $S_c$, defined in Definition \ref{def:clientser}, to respect the order of sucessive operations in a given session trace. %where $\mathit{op}_i$ is any operation (read or write), and $\mathcal{S}$ is the set of all session traces for a given client application. % scope.
+  \end{align} where the partial order $\left( \mathcal{O}, \preccurlyeq \right)$ is a partial order over operations in a global execution comprising operations executed by all clients executing on the system. %It restricts an equivalent serialization of a client $S_c$, defined in Definition \ref{def:clientser}, to respect the order of sucessive operations in a given session trace. %where $\mathit{op}_i$ is any operation (read or write), and $\mathcal{S}$ is the set of all session traces for a given client application. % scope.
  \par Owen et al. \cite{Owens:2009:BXM:1616077.1616107} specifies Total Store Order (TSO) as: read operations performed on the same storage system object by
   client applications can not return a subsequent (or newer) value unless the result of a given write is observed by all client applications, i.e., observed in all  session traces.
  A session trace for a client application can not view results of a sequence of write operations in an
@@ -774,8 +774,8 @@ E^{s} =  \forall \mathit{st} \in \mathit{St}, {\mathit{Op}}^{'}, {\mathit{Op}}^{
 %\big( \left( {v^j}^{'} = {v^l}^{'} \right) \vee
 %\big( \left( {W^l}^{'} F {R^j}^{'} \in \mathit{St} \right)  \wedge \\
 % \not\exists  {W^m}^{'} \left( {W^l}^{'} F {W^m}^{'} F {R^j}^{'} \in \mathit{St} \right) \big) \big) \big)
- \\ $E^s = \forall x, \mathit{st}, \mathit{st}^{'} \in \mathit{St} \not\exists {\mathit{op}}(x), {\mathit{op}^{'}}(x), {\mathit{op}^{''}}(x), {\mathit{op}^{'''}}(x) \in \mathcal{O} \big( \left( {\mathit{Op}}^{'}(x) F {\mathit{Op}}^{''} (x) \in \mathit{st} \right)  \vee \big(  \left( {\mathit{Op}}^{'}(x) F {\mathit{Op}}^{'''} (x) \in \mathit{st} \right)  \wedge \\ \left( {\mathit{Op}}^{''}(x) F {\mathit{Op}}^{''''} (x) \in \mathit{st}^{'} \right)  \wedge \left( {v}^{''} = {v} \right) \wedge \left( {v}^{'} = {v}^{'''} \right)  \big) \big)  \rightarrow  
- \left(  {\mathit{Op}}^{''}(x) F {\mathit{Op}}^{'} (x) \in \mathit{Si} \right)$,   
+% \\ $E^s = \forall x, \mathit{st}, \mathit{st}^{'} \in \mathit{St} \not\exists {\mathit{op}}(x), {\mathit{op}^{'}}(x), {\mathit{op}^{''}}(x), {\mathit{op}^{'''}}(x) \in \mathcal{O} \big( \left( {\mathit{Op}}^{'}(x) F {\mathit{Op}}^{''} (x) \in \mathit{st} \right)  \vee \big(  \left( {\mathit{Op}}^{'}(x) F {\mathit{Op}}^{'''} (x) \in \mathit{st} \right)  \wedge \\ \left( {\mathit{Op}}^{''}(x) F {\mathit{Op}}^{''''} (x) \in \mathit{st}^{'} \right)  \wedge \left( {v}^{''} = {v} \right) \wedge \left( {v}^{'} = {v}^{'''} \right)  \big) \big)  \rightarrow  
+% \left(  {\mathit{Op}}^{'}(x) F {\mathit{Op}}^{''} (x) \in \mathit{Si} \right)$,   
  %E^r = C = \\
 % \forall \mathit{st}, \mathit{St} \; \big( \left( {W^i}(x)^{'} F {W^k}^{'}(y) \in \mathit{st} \right) \wedge \left( {W^l}(y)^{'} F {W^j}^{'}(x) \in \mathit{st} \right) \wedge \\
 % \not\exists \left( %\mathit{st}^{'} \in \mathit{St} \; \wedge \;
@@ -796,13 +796,13 @@ E^{s} =  \forall \mathit{st} \in \mathit{St}, {\mathit{Op}}^{'}, {\mathit{Op}}^{
 % \vee \left( \left( v^m = v^j \in \mathit{st}_x  \right) \wedge \left( v^m = v^i \in \mathit{st}_y \right) \right) \big) \big)
 %\end{split}
 %  \end{align} 
-  which can be rewritten as follows. 
+  %which can be rewritten as follows. 
   \begin{align}\label{eqn:TSO}
 \begin{split}
 E^s = \forall x, \mathit{st}, \mathit{st}^{'} \in \mathit{St} \not\exists \mathit{op}(x), \mathit{op}^{'}(x), \mathit{op}^{''}(x), \mathit{op}^{'''}(x) \in \mathcal{O}  \big( \left( \mathit{Op}^{'}(x) F \mathit{Op}^{''} (x) \in \mathit{st} \right)  \vee \big(  \left( \mathit{Op}^{'}(x) F \mathit{Op}^{'''} (x) \in \mathit{st} \right)  \\ \wedge 
  \left( \mathit{Op}^{''}(x) F \mathit{Op}^{''''} (x) \in \mathit{st}^{'} \right)  \wedge\ \left( v^{''} = v \right) \wedge \left( v^{'} = v^{'''} \right)  \big) \big) \rightarrow   \left( \mathit{Op}^{'}(x) \preccurlyeq(x) \mathit{Op}^{''} (x) \right),
 \end{split}
-  \end{align}  where $ \preccurlyeq(x)$ is a partial order over a given object $x$ with respect to a given global session trace $ \mathit{St}$, and $ \mathit{Si}$ is an equivalent legal serialization of a global execution defined in Equation \ref{def:ser}.
+  \end{align}  where $ \preccurlyeq(x)$ is a partial order  over  all operations on a given object $x$ comprised in a given global execution, i.e., comprising all clients executing on a system. %and $ \mathit{Si}$ is an equivalent legal serialization of a global execution defined in Equation \ref{def:ser}.
   %$\preccurlyeq$ is given as a composition $\preccurlyeq =  \preccurlyeq^{'}(x) \circ  ... \circ^{'} \preccurlyeq^{''}(x)$,  and $\circ, ... \circ^{''}$ are composition operators, like $\cap$ or $\cup$, over partial order sets (posets) $\preccurlyeq^{'}(x), ... \preccurlyeq^{''}(x)$ comprising partial orders defined over a given object $x$.
  \par Processor Consistency specifies: operations in a client application must execute according to the invocation order with respect to a given processor (client); i.e., result of a preceding operation invoked from a given client must be observed in all processors before result of a
  succeeding operation can be observed in any processor (or client application). Reads against  write operations should
@@ -831,7 +831,7 @@ E^s = \forall x, \mathit{st}, \mathit{st}^{'} \in \mathit{St} \not\exists \mathi
 %E^s = \left( \mathcal{O}, \preccurlyeq \right), 
 \forall x, y, \mathit{st} \in \mathit{St}  \left( {\mathit{Op}}^{'}(x) F {\mathit{Op}}^{''} (y) \in \mathit{st} \right) \rightarrow  \left( {\mathit{Op}}^{'}(x) \preccurlyeq {\mathit{Op}}^{''} (y) \right),
 \end{split}
-  \end{align}  where $ \preccurlyeq$ is a partial order over operations across all data objects with respect to a given global session trace $ \mathit{St}$.
+  \end{align}  where $ \preccurlyeq$ is a partial order over operations across all data objects with respect to a given global execution.
  %\forall \big( %\left( \mathit{st} \in \mathit{St} \right) \wedge
 % \left( {W^i}(x)^{'} F {W^j}(z)^{'} F {R^k}(y)^{'} \in \mathit{st} \right) \wedge \\
 %  \left( {W^l}(y)^{'} F {W^m}(z)^{'} F {R^n}(x)^{'} \in \mathit{st} \right) \big) \\
@@ -1435,7 +1435,7 @@ $\mathit{op} \xrightarrow{\sigma}\mathit{op}^{'} $ exists. The former part of th
 must exist for a direct precedence relation $\xRightarrow{\sigma}$, i.e., $\xRightarrow{\star}$ must exist, i.,e.,
 the condition $ {\mathit{Op}}^{'} F {\mathit{Op}}^{''} \vee
  \left( \left( {\mathit{Op}}^{'} = {W}^{'} \right) \wedge \left( {\mathit{Op}}^{''} = {R}^{''} \right) \wedge
-   \left( v_i = v_j \right) \right)$ must hold. % The precondition specifies that operations $\mathit{op}^j$  and $\mathit{op}^k$ are comprised in the execution
+   \left( v_i = v_j \right) \right)$ must hold. From the condition 1 in Definition \ref{def:form0}, every operation must reflect results of prior operations being performed in an equivalent sequence; hence, the above precondition can be rewritten as ${\mathit{Op}}^{'}  F {\mathit{Op}}^{''}  \in \mathit{st}$. % The precondition specifies that operations $\mathit{op}^j$  and $\mathit{op}^k$ are comprised in the execution
 %order $\sigma$.  The second precondition which claims
 % closure under transitivity of direct precedence relations, we can specify that if $\mathit{op}^i$ directly precedes
 % $\mathit{op}^k$, and $\mathit{op}^k$ directly precedes $\mathit{op}^j$, $\mathit{op}^i$ directly precedes
@@ -1448,13 +1448,12 @@ the condition $ {\mathit{Op}}^{'} F {\mathit{Op}}^{''} \vee
 %\left( \left( v_i = v_k \right)
 % \wedge \left( v_k = v_j \right) \right) \big) \right) \big)$.
 % The above expression matches the LHS of Equation \ref{eqn:Causal}.
- Chockler et al. specifies that for causal consistency, if the above
+ Chockler et al. specifies that for each client, if the above
 precondition holds, the condition $\mathit{op} \xrightarrow{S}\mathit{op}^{'} $ must hold,
 i.e., an occurrence of $\mathit{op}$ must be followed by an occurrence of $\mathit{op}^{'} $ in any
- legal serialization ${S_i}$.
+ legal serialization ${S_p}$. 
  The above postcondition can be expressed in terms of LTL as \\ $\exists S_p \left( \forall \mathit{Op}^{'} F \mathit{Op}^{''} \in
-S_p \right)$.  The operation $\mathit{op}$ precedes $\mathit{op}^{'} $ such
-  that the condition ${\mathit{Op}}^{'}  F {\mathit{Op}}^{''}  \in \mathit{st}$ is satisfied. Since ${\mathit{Op}}^{'}  F {\mathit{Op}}^{''}   \in S_p$ denotes a partial order among ${\mathit{Op}}^{'} $ and ${\mathit{Op}}^{''} $, we can rewrite the above expression as  ${\mathit{Op}}^{'}  \preccurlyeq {\mathit{Op}}^{''}  $. Thus, Chockler's definition reduces into the specification given in Equation \ref{eqn:Causal}. 
+S_p \right)$, for each client.  ${\mathit{Op}}^{'}  F {\mathit{Op}}^{''}   \in S_p$ denotes a partial order among ${\mathit{Op}}^{'} $ and ${\mathit{Op}}^{''} $ with respect to each client. Since the above condition must hold for each client, it directly follows that there must exist a partial order $\preccurlyeq$ comprising all operations in the global session trace which respects the order specified in each session trace for each client. Thus, we can rewrite the above expression as  ${\mathit{Op}}^{'}  \preccurlyeq {\mathit{Op}}^{''}  $. Thus, Chockler's definition reduces into the specification given in Equation \ref{eqn:Causal}. 
 % Additionally, the definition of  Causal consistency requires that the operation $\mathit{op}^j$ must not
 % read the result of an earlier write operations $w^m$  instead of $\mathit{op}^i$ such that either of the following
 %  conditions are satisfied. The first condition specifies that $r^j$ returns the result of $w^m$, i.e., the condition
@@ -1515,8 +1514,8 @@ S_p \right)$.  The operation $\mathit{op}$ precedes $\mathit{op}^{'} $ such
  a pair of operations on a common storage system object $x$ must be executed in the same precedence order.  %serializations ${S_i}_i$ and ${S_i}_j$, the write operations on common storage system objects in ${S_i}_i$ and
 % ${S_i}_j$ must be executed in the same order, i.e., ${S_i}_i|w$ = ${S_i}_j|w$.
  The above condition implies that any session trace $\mathit{st}$ must comprise write-read sequences
-${\mathit{op}}(x), {\mathit{op}^{'}}(x)$  on an object $x$ in the temporal order specified in the global session trace $\mathit{St}$. Thus, $E^s = \forall x, \mathit{st}, \mathit{st}^{'} \in \mathit{St} \not\exists {\mathit{op}}(x), {\mathit{op}^{'}}(x), {\mathit{op}^{''}}(x), {\mathit{op}^{'''}}(x) \in \mathcal{O}  \big( \left( {\mathit{Op}}^{'}(x) F {\mathit{Op}}^{''} (x) \in \mathit{st} \right)  \vee \big(  \left( {\mathit{Op}}^{'}(x) F {\mathit{Op}}^{'''} (x) \in \mathit{st} \right)  \wedge \\ \left( {\mathit{Op}}^{''}(x) F {\mathit{Op}}^{''''} (x) \in \mathit{st}^{'} \right)  \wedge \left( {v}^{''} = {v} \right) \wedge \left( {v}^{'} = {v}^{'''} \right)  \big) \big) \rightarrow  
- \left(  {\mathit{Op}}^{''}(x) F {\mathit{Op}}^{'} (x) \in \mathit{Si} \right)$ %, i.e., there must exist a common serialization comprising all operations executed from the
+${\mathit{op}}(x), {\mathit{op}^{'}}(x)$  on an object $x$ in the temporal order specified in the global session trace $\mathit{St}$.  This, in turn,  implies there must exist a partial order $\preccurlyeq$ over all operations comprised in  $\mathit{St}$. Thus, $E^s = \forall x, \mathit{st}, \mathit{st}^{'} \in \mathit{St} \not\exists {\mathit{op}}(x), {\mathit{op}^{'}}(x), {\mathit{op}^{''}}(x), {\mathit{op}^{'''}}(x) \in \mathcal{O}  \big( \left( {\mathit{Op}}^{'}(x) F {\mathit{Op}}^{''} (x) \in \mathit{st} \right)  \vee \big(  \left( {\mathit{Op}}^{'}(x) F {\mathit{Op}}^{'''} (x) \in \mathit{st} \right)  \wedge \\ \left( {\mathit{Op}}^{''}(x) F {\mathit{Op}}^{''''} (x) \in \mathit{st}^{'} \right)  \wedge \left( {v}^{''} = {v} \right) \wedge \left( {v}^{'} = {v}^{'''} \right)  \big) \big) \rightarrow  
+ \left(  {\mathit{Op}}^{'}(x) \preccurlyeq {\mathit{Op}}^{''} (x) \right)$. %, i.e., there must exist a common serialization comprising all operations executed from the
 % client applications which contains the above writes executed in a particular order. This condition can be expressed in terms of LTL as
 % $W^i F W^j \in \mathit{st}_x, \mathit{st}_y \rightarrow  \exists S \left( W^i F W^j \in S \right)$.
 % Let us consider a given sequence of operations $w^i$ and $r^j$ in any given session trace, whee $r^j$ does not return
@@ -1561,7 +1560,7 @@ ${\mathit{op}}(x), {\mathit{op}^{'}}(x)$  on an object $x$ in the temporal order
 % \left( \not\exists {W^l}^{'} \preccurlyeq^{'''''}(x) {W^m}^{'} \preccurlyeq^{''''''}(x) {R^j}^{'} \right) \big) \big) \big),$
 % where each of the temporal and first order logic operators in the above expression are replaced by equivalent partial orders $\preccurlyeq^{'}(x), \preccurlyeq^{''}(x)...$  over $\mathit{St}$, defined with respect to a given object $x$. The above expression can be further rewritten as $E^s = \left( \mathit{St}, \preccurlyeq^{'}(x) \right) R ... R^{'} \left( \mathit{St}, \preccurlyeq^{''}(x)\right), $ where $R, R^{'}, ... $ are binary relations, like $\vee, 
 % \wedge, $ etc., composing the above partial order orders.  This expression can again be rewritten as 
-where $ \mathit{Si} $ is an equivalent legal serialization for a global execution comprising all clients executing in the system, defined in Equation \ref{def:ser}. The above expression can be trivially rewritten as Equation \ref{eqn:TSO}. % further rewritten in terms of a partial order $ \preccurlyeq(x)$ over a given object $x$ as $E^s = \forall x, \mathit{st}, \mathit{st}^{'} \in \mathit{St} \not\exists \mathit{op}(x), \mathit{op}^{'}(x), \mathit{op}^{''}(x), \mathit{op}^{'''}(x) \in \mathcal{O}  \big( \left( \mathit{Op}^{'}(x) F \mathit{Op}^{''} (x) \in \mathit{st} \right)  \vee \big(  \left( \mathit{Op}^{'}(x) F \mathit{Op}^{'''} (x) \in \mathit{st} \right)  \wedge \\
+%where $ \mathit{Si} $ is an equivalent legal serialization for a global execution comprising all clients executing in the system, defined in Equation \ref{def:ser}. The above expression can be trivially rewritten as Equation \ref{eqn:TSO}. % further rewritten in terms of a partial order $ \preccurlyeq(x)$ over a given object $x$ as $E^s = \forall x, \mathit{st}, \mathit{st}^{'} \in \mathit{St} \not\exists \mathit{op}(x), \mathit{op}^{'}(x), \mathit{op}^{''}(x), \mathit{op}^{'''}(x) \in \mathcal{O}  \big( \left( \mathit{Op}^{'}(x) F \mathit{Op}^{''} (x) \in \mathit{st} \right)  \vee \big(  \left( \mathit{Op}^{'}(x) F \mathit{Op}^{'''} (x) \in \mathit{st} \right)  \wedge \\
 % \left( \mathit{Op}^{''}(x) F \mathit{Op}^{''''} (x) \in \mathit{st}^{'} \right)  \wedge \left( v^{''} = v \right) \wedge \left( v^{'} = v^{'''} \right)  \big) \big) \rightarrow   \left( \mathit{Op}^{'}(x) \preccurlyeq(x) \mathit{Op}^{''} (x) \right),$
   % where $ \preccurlyeq(x)$ is a partial order over a given object $x$ with respect to a given global session trace $ \mathit{St}$.
   %Thus, the ConSpec expression for TSO is derived as follows.
@@ -1576,9 +1575,9 @@ where $ \mathit{Si} $ is an equivalent legal serialization for a global executio
 %\rightarrow \\ \forall S \left( \mathit{Op}^i X W^j \in S \right)
 %\wedge \not\exists R^k  \left( \mathit{Op}^i X^o W^j X^o R^k \in \mathit{st} \right) \\ \wedge \left( v^k = v^i  \right) \big)
 %$.
- Similarly, the specification for Processor consistency (PC) model can be directly derived using the above line of reasoning. 
+ The specification for Processor consistency (PC) can be directly derived using the above line of reasoning. 
  %PC talks about preserving the order of operations executed by individual processors (or client applications). 
- PC specifies: operations in a client application must execute according to the invocation order with respect to a given processor (client); i.e., result of a preceding operation invoked from a given client must be observed in all processors before result of a
+ PC specifies: result of a preceding operation invoked from a given client must be observed in all processors before result of a
  succeeding operation can be observed in any processor (or client application). %Reads against  write operations should
   %view the results of the writes
   %according to the invocation order of these writes in a client application. % Let $\mathit{processors}$ be an  integer term that denotes the
@@ -1586,8 +1585,7 @@ where $ \mathit{Si} $ is an equivalent legal serialization for a global executio
 % $\mathit{store}_n$ with the expression  $\bigcap_{\mathit{processor}_n}^{\mathit{processors}} A$.
 Consider that a given client observes operations ${\mathit{op}}(x), {\mathit{op}^{'}}(y)$ in a temporal order ${\mathit{Op}}^{'}(x) F {\mathit{Op}}^{''} (y)$ observed in a session trace $\mathit{st}$. Then, no other session trace $\mathit{st}^{'}$ observed by any other concurrent client may observe the operations in an order which violates the temporal order in $\mathit{st}$. Thus, Processor Consistency can be expressed as 
    $E^s = \forall x, y, \mathit{st}, \mathit{st}^{'} \in \mathit{St} \not\exists {\mathit{op}}(x), {\mathit{op}^{'}}(y) \in \mathcal{O} 
- \left( {\mathit{Op}}^{'}(x) F {\mathit{Op}}^{''} (y) \in \mathit{st} \right) \rightarrow \left( {\mathit{Op}}^{''}(y) F {\mathit{Op}}^{'} (x) \in \mathit{st}^{'} \right)$,   
- which can be rewritten into Equation \ref{eqn:PC}. %\\
+ \left( {\mathit{Op}}^{'}(x) F {\mathit{Op}}^{''} (y) \in \mathit{st} \right) \rightarrow \left( {\mathit{Op}}^{''}(y) \preccurlyeq {\mathit{Op}}^{'} (x)  \right)$. %\\
 %E^{s} = C =   \forall \mathit{st} \in \mathit{St} \not\exists \big( \left(  {W^i}^{'}, {W^j}^{'} \in \mathit{st}  \right)
 %\wedge \left( {R^k}^{'}, {R^l}^{'} \in \mathit{St} \right) \big) \\
 %\big( \left( {W^i}^{'} F {W^j}^{'} \in \mathit{st} \right) \wedge
@@ -2670,19 +2668,19 @@ the condition $v^n = v^i$ holds. Thus, $\mathit{st}_4$ violates the second condi
   $\mathit{Cl}_2$ observes the above writes out of order. Since  $r^2(y){1}$ executes before ,$r(x){1}$ in the above session
   traces, $\mathit{Cl}_2$ observes the result of $w^2(y,1)$ before observing result of $w^1(x,1)$.  Thus,
    the above traces violate Equation \ref{eqn:PC}.
- \par Consider a session trace $\mathit{st}_8$: $w^1_{tx}(x,2), w^2_{ty}(x,5),  w^1_{ty}(y,5), \\ c_{ty},
- w^2_{tx}(y,8), r^1_{ty}(x){5}, r^2_{ty}(y){8}, c_{tx}$. According to the  specification of PL-1 isolation level
- (refer to Equation \ref{eqn:PL1}), there cannot exist read operations $r^m_\mathit{ty}$ and $r^n_\mathit{ty}$ such that they satisfy the condition
- $\left( \left( v_n^{'} = v_l^{'} \right) \wedge \left( v_m^{'} = v_i^{'} \right) \right) \\ \vee \left( \left( v_n^{'} = v_j^{'} \right) \wedge \left( v_m^{'} = v_k^{'} \right) \right) $.
- In the session trace $\mathit{st}_8$, the write operations $w^1_{tx}(x,2)$,  $w^2_{tx}(y,8)$, $w^2_{ty}(x,5)$, and $w^1_{ty}(y,5)$
- are $W^i_{tx}$,  $W^j_{tx}$,  $W^k_{ty}$, and  $W^l_{ty}$, respectively. Also, we can assign the read operations $r^1_{ty}(x){5}$ and $r^2_{ty}(y)8$ as $r^m_\mathit{ty}$
- and $r^n_\mathit{ty}$, respectively. Under the above assignment, we have $v_m$ = 8 and $v_n$ = 5, which in turn,
- satisfies the conditions $\left( v_n^{'} = v_j^{'} \right) \wedge \left( v_m^{'} = v_k^{'}\right)$.
-  % The observed execution order in transactions $tx$ and $ty$ are given as
-%  $w^1_{tx}(o_1,5)$, $w^2_{tx}(o_2,8)$ and $w^1_{ty}(o_1,5)$, $w^2_{ty}(o_2,5)$, respectively. In $\mathit{st}_8$,
-%  write operations in transaction $tx$ execute in the order $w^1_{tx}(o_1,5)$, $w^2_{tx}(o_2,8)$.
-%  However,  the write operations in transaction $ty$ execute in the order $w^2_{ty}(o_1,5),  w^1_{ty}(o_2,5)$.
-  This, in turn, satisfies the anomaly condition for PL-1. Thus, $\mathit{st}_8$ violates
+% \par Consider a session trace $\mathit{st}_8$: $w^1_{tx}(x,2), w^2_{ty}(x,5),  w^1_{ty}(y,5), \\ c_{ty},
+% w^2_{tx}(y,8), r^1_{ty}(x){5}, r^2_{ty}(y){8}, c_{tx}$. According to the  specification of PL-1 isolation level
+% (refer to Equation \ref{eqn:PL1}), there cannot exist read operations $r^m_\mathit{ty}$ and $r^n_\mathit{ty}$ such that they satisfy the condition
+% $\left( \left( v_n^{'} = v_l^{'} \right) \wedge \left( v_m^{'} = v_i^{'} \right) \right) \\ \vee \left( \left( v_n^{'} = v_j^{'} \right) \wedge \left( v_m^{'} = v_k^{'} \right) \right) $.
+% In the session trace $\mathit{st}_8$, the write operations $w^1_{tx}(x,2)$,  $w^2_{tx}(y,8)$, $w^2_{ty}(x,5)$, and $w^1_{ty}(y,5)$
+% are $W^i_{tx}$,  $W^j_{tx}$,  $W^k_{ty}$, and  $W^l_{ty}$, respectively. Also, we can assign the read operations $r^1_{ty}(x){5}$ and $r^2_{ty}(y)8$ as $r^m_\mathit{ty}$
+% and $r^n_\mathit{ty}$, respectively. Under the above assignment, we have $v_m$ = 8 and $v_n$ = 5, which in turn,
+% satisfies the conditions $\left( v_n^{'} = v_j^{'} \right) \wedge \left( v_m^{'} = v_k^{'}\right)$.
+%  % The observed execution order in transactions $tx$ and $ty$ are given as
+%%  $w^1_{tx}(o_1,5)$, $w^2_{tx}(o_2,8)$ and $w^1_{ty}(o_1,5)$, $w^2_{ty}(o_2,5)$, respectively. In $\mathit{st}_8$,
+%%  write operations in transaction $tx$ execute in the order $w^1_{tx}(o_1,5)$, $w^2_{tx}(o_2,8)$.
+%%  However,  the write operations in transaction $ty$ execute in the order $w^2_{ty}(o_1,5),  w^1_{ty}(o_2,5)$.
+%  This, in turn, satisfies the anomaly condition for PL-1. Thus, $\mathit{st}_8$ violates
 %  PL-1.
 %  \par Let us consider a session trace \\ $\mathit{st}_9$: $w^1_{tx}(x,1), r^1_{t_y}(x){1}, w^2_{tx}(x,2), c_{ty}, c_{tx}$.
 %  According to PL-2 (refer to Equation \ref{eqn:PL2}), a transaction never must read a value from an operation
