@@ -1,18 +1,22 @@
-\documentclass{sig-alternate-05-2015}
+%\documentclass{sig-alternate-05-2015}
+\documentclass[manuscript, review, screen]{acmart}
+%\citestyle{acmauthoryear}
+%\usepackage{booktabs} % For formal tables
+\usepackage[ruled]{algorithm2e} % For algorithms
 \usepackage{subfigure}
 \usepackage{marvosym}
 \usepackage{mathtools}
 \usepackage{caption}
 \usepackage{algpseudocode}
-\usepackage{algorithm}
+%\usepackage{algorithm}
 \usepackage{graphicx}
 \usepackage[T1]{fontenc}
 \usepackage{tikz}
 \usepackage{listings}
 \usepackage{amsmath,bm,times,amssymb}
 \usepackage{textcomp}
- \newtheorem {theorem} {Theorem}
- \newtheorem{corollary} {corollary} [theorem] 
+ %\newtheorem {theorem} {Theorem}
+ %\newtheorem{corollary} {corollary} [theorem] 
 \DeclarePairedDelimiterX\Set[2]{\lbrace}{\rbrace}%
 { #1 \,\delimsize|\,\mathopen{} #2 }
 \newsavebox{\ieeealgbox}
@@ -49,63 +53,96 @@ escapeinside={\%*}{*)},         % if you want to add a comment within your code
 }
 \begin{document}
 \title{A Consistent Understanding of Consistency} 
-\numberofauthors{3} %  in this sample file, there are a *total*
+%\numberofauthors{3} %  in this sample file, there are a *total*
 %% of EIGHT authors. SIX appear on the 'first-page' (for formatting
 %% reasons) and the remaining two appear in the \additionalauthors section.
 %%
-\author{
-% You can go ahead and credit any number of authors here,
-% e.g. one 'row of three' or two rows (consisting of one row of three
-% and a second row of one, two or three).
-%
-% The command \alignauthor (no curly braces needed) should
-% precede each author name, affiliation/snail-mail address and
-% e-mail address. Additionally, tag each line of
-% affiliation/address with \affaddr, and tag the
-% e-mail address with \email.
-%
-% 1st. author
-\alignauthor
-Subhajit Sidhanta\\%\titlenote{Dr.~Trovato insisted his name be first.}\\
-       \affaddr{INESC-ID/IST}\\
-       %\affaddr{1932 Wallamaloo Lane}\\
-       %\affaddr{Wallamaloo, New Zealand}\\
-       %\email{ssidhanta@gsd.inesc-id.pt}
-% 2nd. author
-\alignauthor
-Ricardo Dias\\%Tobin\titlenote{The secretary disavows
-%any knowledge of this author's actions.}\\
-       \affaddr{SUSE Linux GmbH}\\
-       %\affaddr{P.O. Box 1212}\\
-       %\affaddr{Dublin, Ohio 43017-6221}\\
-       %\email{ricardo.dias@gmail.com}
-% 3rd. author
-\alignauthor %Lars Th{\o}rv{\"a}ld\titlenote{This author is the
-Rodrigo Rodrigues\\ %one who did all the really hard work.}\\
-       \affaddr{INESC-ID/IST}\\
-       %\affaddr{1 Th{\o}rv{\"a}ld Circle}\\
-       %\affaddr{Hekla, Iceland}\\
-       %\email{rodrigo.miragaia.rodrigues@tecnico.ulisboa.pt}
-%\and  % use '\and' if you need 'another row' of author names
-%% 4th. author
-%\alignauthor Lawrence P. Leipuner\\
-%       \affaddr{Brookhaven Laboratories}\\
-%       \affaddr{Brookhaven National Lab}\\
-%       \affaddr{P.O. Box 5000}\\
-%       \email{lleipuner@researchlabs.org}
-%% 5th. author
-%\alignauthor Sean Fogarty\\
-%       \affaddr{NASA Ames Research Center}\\
-%       \affaddr{Moffett Field}\\
-%       \affaddr{California 94035}\\
-%       \email{fogartys@amesres.org}
-%% 6th. author
-%\alignauthor Charles Palmer\\
-%       \affaddr{Palmer Research Laboratories}\\
-%       \affaddr{8600 Datapoint Drive}\\
-%       \affaddr{San Antonio, Texas 78229}\\
-%       \email{cpalmer@prl.com}
+\author{Subhajit Sidhanta}
+\authornote{The corresponding author}
+%\orcid{1234-5678-9012-3456}
+\email{ssidhanta@gsd.inesc-id.pt}
+\affiliation{%
+  \institution{INESC-ID}
+%  \department{School of Engineering}
+%  \city{Charlottesville}
+%  \state{VA}
+%  \postcode{22903}
+  \country{Portugal}
 }
+\author{Ricardo Dias}
+\email{ricardo.dias@gmail.com}
+\affiliation{%
+  \institution{SUSE Linux GmbH}
+%  \city{Prague}
+%  \country{Czech Republic}}
+%\author{Tian He}
+%\affiliation{%
+%  \institution{University of Minnesota}
+  \country{Portugal}}
+\author{Rodrigo Miragaia Rodrigues}
+\email{rdias@gsd.inesc-id.pt}
+\affiliation{%
+  \institution{INESC-ID/IST}
+%  \city{Charlottesville}
+%  \state{VA}
+%  \postcode{22903}
+  \country{Portugal}
+}
+  
+%\author{
+%% You can go ahead and credit any number of authors here,
+%% e.g. one 'row of three' or two rows (consisting of one row of three
+%% and a second row of one, two or three).
+%%
+%% The command \alignauthor (no curly braces needed) should
+%% precede each author name, affiliation/snail-mail address and
+%% e-mail address. Additionally, tag each line of
+%% affiliation/address with \affaddr, and tag the
+%% e-mail address with \email.
+%%
+%% 1st. author
+%
+%\alignauthor
+%Subhajit Sidhanta\\%\titlenote{Dr.~Trovato insisted his name be first.}\\
+%       \affaddr{INESC-ID/IST}\\
+%       %\affaddr{1932 Wallamaloo Lane}\\
+%       %\affaddr{Wallamaloo, New Zealand}\\
+%       %\email{ssidhanta@gsd.inesc-id.pt}
+%% 2nd. author
+%\alignauthor
+%Ricardo Dias\\%Tobin\titlenote{The secretary disavows
+%%any knowledge of this author's actions.}\\
+%       \affaddr{SUSE Linux GmbH}\\
+%       %\affaddr{P.O. Box 1212}\\
+%       %\affaddr{Dublin, Ohio 43017-6221}\\
+%       %\email{ricardo.dias@gmail.com}
+%% 3rd. author
+%\alignauthor %Lars Th{\o}rv{\"a}ld\titlenote{This author is the
+%Rodrigo Rodrigues\\ %one who did all the really hard work.}\\
+%       \affaddr{INESC-ID/IST}\\
+%       %\affaddr{1 Th{\o}rv{\"a}ld Circle}\\
+%       %\affaddr{Hekla, Iceland}\\
+%       %\email{rodrigo.miragaia.rodrigues@tecnico.ulisboa.pt}
+%%\and  % use '\and' if you need 'another row' of author names
+%%% 4th. author
+%%\alignauthor Lawrence P. Leipuner\\
+%%       \affaddr{Brookhaven Laboratories}\\
+%%       \affaddr{Brookhaven National Lab}\\
+%%       \affaddr{P.O. Box 5000}\\
+%%       \email{lleipuner@researchlabs.org}
+%%% 5th. author
+%%\alignauthor Sean Fogarty\\
+%%       \affaddr{NASA Ames Research Center}\\
+%%       \affaddr{Moffett Field}\\
+%%       \affaddr{California 94035}\\
+%%       \email{fogartys@amesres.org}
+%%% 6th. author
+%%\alignauthor Charles Palmer\\
+%%       \affaddr{Palmer Research Laboratories}\\
+%%       \affaddr{8600 Datapoint Drive}\\
+%%       \affaddr{San Antonio, Texas 78229}\\
+%%       \email{cpalmer@prl.com}
+%}
 % There's nothing stopping you putting the seventh, eighth, etc.
 % author on the opening page (as the 'third row') but we ask,
 % for aesthetic reasons that you place these 'additional authors'
@@ -227,9 +264,9 @@ Another contribution of this paper is that we built a tool, which is available o
 
 Our final contribution is that we were able to restate in much broader terms the CAP theorem \cite{brew:cap, Gilbert:2002:BCF:564585.564601}, whose original proof used linearizability as synonym for the strong consistency captured by the ``C'' property. In our new formulation of this theorem, we are able to define necessary and sufficient conditions for a given consistency model to be \emph{CAP-strong}, i.e., bound by the impossibility of being implemented in a highly available, partition-tolerant way.
 
-The remainder of this paper is organized as follows. Section  \ref{sec:definitions} presents the system model, and the basic definitions and terminology used in the paper.  Section \ref{sec:syntax} presents the syntax of ConSpec, and the general format of ConSpec specifications. Section \ref{sec:list} lists down the specifications of various  consistency models and isolation levels, expressed as ConSpec expressions. Section \ref{sec:hierarchy} discusses how the lattice of consistency models can be hierarchically organized.  Section \ref{sec:cap} presents a restatement of the CAP theorem, and proves the same. Section \ref{sec:capanalyze} analyzes the lattice of consistency models in terms of the restated CAP theorem. Section \ref{sec:derive} proves the equivalence of the ConSpec specifications with the state-of-the-art definitions, by deriving the ConSpec specification for each of the consistency models and isolation levels.  Section \ref{sec:impl} briefly presents the design of a prototype automated verification tool that can validate a session trace with respect to a ConSpec specification. Finally Section \ref{sec:equiv} illustrates the equivalence between the ConSpec expressions and the dependency graphs used by the state-of-the-art definitions.  We have also include a discussion of examples of session traces that cause violations of ConSpec specifications in the appendix. 
-
-
+The remainder of this paper is organized as follows. Section  \ref{sec:definitions} presents the assumed system model, and basic definitions and terminology used in the paper.  Section \ref{sec:syntax} presents the syntax of the ConSpec language, and the general format of specifications based on ConSpec. Section \ref{sec:list} lists the specifications of various  consistency models, expressed using ConSpec.  Section \ref{sec:cap} presents a reformulation of the CAP theorem, and formally proves the same.  Section \ref{sec:impl} presents the design of a prototype automated verification tool that can validate a session trace with respect to a ConSpec specification. In Section \ref{sec:derive}, we prove equivalence of each of the listed ConSpec specifications with their orginal definitions.    Because of lack of space, we include in the appendix a section (Section \ref{sec:hierarchy}) that presents a hierarchical organizaton of the lattice of consistency models. Section \ref{sec:capanalyze} analyzes the lattice of consistency models in terms of the restated CAP theorem.  Section \ref{sec:ser} comprises ConSpec expressions for the various serialization definitions used in the original consistency definitions of Chockler et al.  Section \ref{sec:equiv} illustrates the equivalence between the syntax of ConSpec expressions and the syntax of state-of-the-art isolation and consistency definitions, based on dependency graph.  Section \ref{sec:complex} in the appendix comprises a comparison of the complexity of verification using ConSpec with the state-of-the-art verification techniques. 
+ Section  \ref{sec:examples}  comprises a detailed analysis of the process of verification of ConSpec specifications with respect to sample session traces that cause violations of the specifications. 
+ 
  %%  \par We argue that specifications expressed in terms of ConSpec are much easier to reason about than the state-of-the-art definitions, which require an understanding
  %% of the various dependency relationships; the implicit dependencies can be particularly complex to express and
  %% comprehend. 
@@ -279,13 +316,13 @@ The remainder of this paper is organized as follows. Section  \ref{sec:definitio
 % For transactional storage systems, we consider only committed transactions; analyzing uncommitted transactions is beyond the scope of this paper.
 %\end{itemize}
 %We specify any given consistency model or isolation level with a dependency graph, where vertices represent operations and edges represent dependency relations. We derive a dependency graph for the given consistency model or isolation level, depicting the possible dependency relations between storage operations.
-\begin{figure}[!htbp]
-        \centering
-        \includegraphics[width=3in,height=2in]
-                    {system.eps}
-        \caption{System Model}
-        \label{fig:System}
-\end{figure}
+%\begin{figure}[!htbp]
+%        \centering
+%        \includegraphics[width=3in,height=2in]
+%                    {system.eps}
+%        \caption{System Model}
+%        \label{fig:System}
+%\end{figure}
 
 
   \section{Basic Definitions} \label{sec:definitions}
@@ -317,8 +354,7 @@ The \emph{global session trace} $\mathit{St}$ denotes the set of all
 %    according to their temporal order of execution.  $\mathit{St}$ collates
 %    all the tuples  $\mathit{tup}_i$ from all individual session  traces, and orders the tuples according to
 %   according to descending order of the timestamp field $T^j$.
-   Figure \ref{fig:System} illustrates the above system model.
-
+ %  Figure \ref{fig:System} illustrates the above system model.
 %We do not assume anything regarding how these operations are internally handled by the storage system. For all intents and purposes, the storage system is a black box component on which read and write operations get executed. A client application executes these storage operations as high level API methods invoked from the application code. These API methods are translated into storage system specific native commands by the storage system driver which acts as an interface between the client application and the underlying storage system. %Within a given application scope, operations are invoked by the client application in a synchronous manner, i.e., an operation is invoked only once the result from the previous operation in the execution sequence is received.
 %    Optionally, read and write operations invoked from a transaction $tx$ are denoted as $r^k_{tx}(o){v_m}$ and $w^j_{tx}(o,v_l)$, respectively. %, passing values of objects as method parameters.
 %  Further, we do not assume anything regarding the nature of the storage system --- whether it is a standalone database, a transactional store, or a distributed storage system. Also, we do not make any assumptions regarding the configuration of the storage system, e.g., we do not assume what partitioning scheme or what normalization form (in case of RDBMS) a storage system follows. Our specifications restrict how client applications view results of storage operations, and is independent of how the underlying storage system internally processes storage operations. By not assuming anything regarding the implementation details, we render our specifications implementation independent, i.e., not specific to any particular storage system implementation. We further assume that a read operation $r^k_{tx}(o){v_m}$ always returns a unique value $v_m$ for an object $o$, and a write operation $w^j_{tx}(o,v_l)$ updates the value of an object $o$ to a unique value $v_l$.  This allows us to identify the particular write operation responsible for a particular value observed from a client application.
@@ -337,7 +373,7 @@ Our notation defines special purpose LTL operators as shorthands to longer expre
 %%       operator ``eventually", i.e., $F$, do denote that an operation is preceded by the another operation in a given
 %%       execution sequence. The superscript ${o}$ in the above operator is used to specify that the operator defines the  LTL relationship ``eventually" among only the operations performed specifically on the object ${o}$.
 Finally, we assume the system has a sequential specification, which is a correctness condition, corresponding to the output of the operations in centralized system that executes operation in sequence, one at a time. In the case of the sequential specification of a system whose interface are read and write operations, the read operation to object $o$ must output the value associated with the most recent write operation to the same object $o$.
-\newtheorem{definition}{Definition}
+%\newtheorem{definition}{Definition}
   %% A \emph{serialization} is a linear sequence comprising all operations comprising a global  execution on a
   %% storage system.
   %% A serialization is said to be \emph{legal} if every read operation returns the value written by the latest write
@@ -503,7 +539,7 @@ Following the format of Definition \ref{def:form0}, RYW can be defined by the fo
 % \left(  {W^i}^{'} \preccurlyeq_{st+w} {R^j}^{'} \right)\big),
   \mathcal{E}^{s} = \forall  {W}^{'}, {R}^{'} \in \mathit{st}
   \big( \left( {W}^{'} F {R}^{'} \in \mathit{st} \right)
- \rightarrow \\
+ \rightarrow 
  \left(  {W}^{'} \preccurlyeq_{st+w} {R}^{'} \right)\big),
  %C = \left( \not\exists {R^k}^{'}, {W^l}^{'} \in \mathit{St} \right)   \big( %\left( {W^i}^{'} F {R^j}^{'} \in \mathit{st} \right) \wedge
 %\left( {R^k}^{'} F {R^j}^{'} \in \mathit{st} \right)   \\ \wedge
@@ -528,7 +564,7 @@ Following the format of Definition \ref{def:form0}, RYW can be defined by the fo
 % \rightarrow \;  \exists S_p \\ \left( {R^i}^{'} F {R^j}^{'} \in S_p \right) \big). 
 % \mathit{st} \in \mathit{St},
  \mathcal{E}^{s} = \forall   {R}^{'}, {R}^{''} \in \mathit{st} \big( {R}^{'} F {R}^{''} \in \mathit{st}
- \rightarrow \\ \left( {R}^{'} \preccurlyeq_{st+w} {R}^{''} \right) \big), 
+ \rightarrow \left( {R}^{'} \preccurlyeq_{st+w} {R}^{''} \right) \big), 
  %; \\
  %C = \left( \not\exists {W^m}^{''}, {W^n}^{''} \in \mathit{St} \right) \big( \left( {R^i}^{'} F {R^j}^{'} \in \mathit{st} \right) \\ %\left( {\mathit{st}}^{'} \in \mathit{St} \right) \wedge
 % \wedge \left( {W^m}^{''} F {W^n}^{''}  \in \mathit{St} \right) %\left( {W^m}^{''} F {W^n}^{''} F {R^i}^{'} F {R^j}^{'} \in \mathit{St} \right) \wedge \\
@@ -559,7 +595,7 @@ Following the format of Definition \ref{def:form0}, RYW can be defined by the fo
 %E^{s} =  \forall \mathit{st} \in \mathit{St}, {R^i}^{'}, {W^j}^{'} \in \mathit{st} \big( \left( {R^i}^{'} F {W^j }^{'} \in \mathit{st} \right)
 % \rightarrow \exists S_p \\ \left(  {R^i}^{'} F {W^j}^{'} \in S_p \right) \big). 
 E^{s} =  \forall  {R}^{'}, {W}^{'} \in \mathit{st} \big( \left( {R}^{'} F {W}^{'} \in \mathit{st} \right)
- \rightarrow \\ \left(  {R}^{'} \preccurlyeq_{st+w} {W}^{'} \right) \big), %; \\
+ \rightarrow \left(  {R}^{'} \preccurlyeq_{st+w} {W}^{'} \right) \big), %; \\
  %C = \not\exists \left( {R^k}^{'}, {W^l}^{'} \in \mathit{St} \right)   \big(%\left( {W^i}^{'} F {R^j}^{'} \in \mathit{st} \right) \wedge
 %\left( {R^i}^{'} F {R^k}^{'} \in \mathit{st} \right)   \wedge
 %%\left(  \mathit{st}^{'} \in \mathit{St} \right) \wedge
@@ -599,7 +635,7 @@ with the same meaning for $st$ and $\preccurlyeq_{st+w}$ as in RYW.
 \begin{split}
 %E^{s} = \forall \mathit{st} \in \mathit{St}, {W^i}^{'}, {W^j}^{'} \in \mathit{st} \big( {W^i}^{'} F {W^j}^{'} \in \mathit{st}  \rightarrow
 %  \exists S_p \\ \left( {W^i}^{'} F {W^j}^{'} \in S_p \right) \big).
-E^{s} = \forall  {W}^{'}, {W}^{''} \in \mathit{st} \big( {W}^{'} F {W}^{''} \in \mathit{st}  \rightarrow \\ \left( {W}^{'} \preccurlyeq_{st+w} {W}^{''} \right) \big), %; \\
+E^{s} = \forall  {W}^{'}, {W}^{''} \in \mathit{st} \big( {W}^{'} F {W}^{''} \in \mathit{st}  \rightarrow \left( {W}^{'} \preccurlyeq_{st+w} {W}^{''} \right) \big), %; \\
   %C = \left( \not\exists {R^k}^{''}, {R^l}^{''}, {R^m}^{'} \in \mathit{St} \right)
 %   \big( \left( {W^j}^{'} F  {R^m}^{'} \in \mathit{st} \right) \wedge \\
 %   \left( {v_m}^{'} = {v_i}^{'} \right)
@@ -637,10 +673,10 @@ E^{s} = \forall  {W}^{'}, {W}^{''} \in \mathit{st} \big( {W}^{'} F {W}^{''} \in 
 %  \end{align}
 \begin{align}\label{eqn:Causal}
 \begin{split}
-E^{s} = \forall \mathit{st} \in \mathit{St}, {\mathit{Op}}^{'}, {\mathit{Op}}^{''} \in \mathit{st} \\ \big( \left( {\mathit{Op}}^{'} F {\mathit{Op}}^{''} \in \mathit{st} \right)
- \vee \big( \left( {\mathit{Op}}^{'} = {W}^{'} \right) \wedge \\
-\left( {\mathit{Op}}^{''} = {R}^{'} \right) \wedge
-   \left( v = v^{'} \right) \big) %\rightarrow \exists S_p \left( {\mathit{Op}^i}^{'} F {\mathit{Op}^j}^{'} \in S_p \right) \big). 
+E^{s} = \forall \mathit{st} \in \mathit{St}, {\mathit{Op}}^{'}, {\mathit{Op}}^{''} \in \mathit{st} \big( \left( {\mathit{Op}}^{'} F {\mathit{Op}}^{''} \in \mathit{st} \right)
+% \vee \big( \left( {\mathit{Op}}^{'} = {W}^{'} \right) \wedge \\
+%\left( {\mathit{Op}}^{''} = {R}^{'} \right) \wedge
+  % \left( v = v^{'} \right) \big) %\rightarrow \exists S_p \left( {\mathit{Op}^i}^{'} F {\mathit{Op}^j}^{'} \in S_p \right) \big). 
 %   E^{s} = \forall \mathit{st} \in \mathit{St}, {\mathit{Op}^i}^{'}, {\mathit{Op}^j}^{'} \in \mathit{st} \\ \big( \left( {\mathit{Op}^i}^{'} F {\mathit{Op}^j}^{'} \in \mathit{st} \right)
 % \vee \big( \left( {\mathit{Op}^i}^{'} = {W^i}^{'} \right) \wedge \\
 %\left( {\mathit{Op}^j}^{'} = {R^j}^{'} \right) \wedge
@@ -674,7 +710,7 @@ E^{s} = \forall \mathit{st} \in \mathit{St}, {\mathit{Op}}^{'}, {\mathit{Op}}^{'
 %\rightarrow
 %\exists S_c \\ \left( {\mathit{Op}^i}^{'} X^o {\mathit{Op}^j}^{'} \in S_c \right) \big).
 E^{s} =  \forall \mathit{st} \in \mathit{St}, {\mathit{Op}}^{'}, {\mathit{Op}}^{''} \in \mathit{st} \big( \mathit{Op}^{'} X^o {\mathit{Op}}^{''} \in \mathit{st}
-\rightarrow \\ \left( {\mathit{Op}}^{'} \preccurlyeq {\mathit{Op}}^{''} \right) \big), %; \\
+\rightarrow \left( {\mathit{Op}}^{'} \preccurlyeq {\mathit{Op}}^{''} \right) \big), %; \\
 %\vee \exists \left( \mathit{st}^{'} \in \mathit{St} \; \wedge \;  {\mathit{Op}^k}^{''} \in \mathit{st}^{'} \right)
 % \\ \left( {\mathit{Op}^i}^{'} F {\mathit{Op}^k}^{''} F {\mathit{Op}^j}^{'} \in S \right) \big) \big) \\
  %C =  \left( \not\exists {R^k}^{''} \in \mathit{St} \right)
@@ -735,8 +771,8 @@ E^{s} =  \forall \mathit{st} \in \mathit{St}, {\mathit{Op}}^{'}, {\mathit{Op}}^{
 %\big( \left( {v^j}^{'} = {v^l}^{'} \right) \vee
 %\big( \left( {W^l}^{'} F {R^j}^{'} \in \mathit{St} \right)  \wedge \\
 % \not\exists  {W^m}^{'} \left( {W^l}^{'} F {W^m}^{'} F {R^j}^{'} \in \mathit{St} \right) \big) \big) \big)
- \\ $E^s = \forall x, \mathit{st}, \mathit{st}^{'} \in \mathit{St} \not\exists {\mathit{op}}(x), {\mathit{op}^{'}}(x), {\mathit{op}^{''}}(x), {\mathit{op}^{'''}}(x) \in \mathcal{O}  \\ \big( \left( {\mathit{Op}}^{'}(x) F {\mathit{Op}}^{''} (x) \in \mathit{st} \right)  \vee \big(  \left( {\mathit{Op}}^{'}(x) F {\mathit{Op}}^{'''} (x) \in \mathit{st} \right)  \wedge \\ \left( {\mathit{Op}}^{''}(x) F {\mathit{Op}}^{''''} (x) \in \mathit{st}^{'} \right)  \wedge \left( {v}^{''} = {v} \right) \wedge \left( {v}^{'} = {v}^{'''} \right)  \big) \big) \\ \rightarrow  
- \left(  {\mathit{Op}}^{''}(x) F {\mathit{Op}}^{'} (x) \in \mathit{Si} \right)$,   \\
+ \\ $E^s = \forall x, \mathit{st}, \mathit{st}^{'} \in \mathit{St} \not\exists {\mathit{op}}(x), {\mathit{op}^{'}}(x), {\mathit{op}^{''}}(x), {\mathit{op}^{'''}}(x) \in \mathcal{O} \big( \left( {\mathit{Op}}^{'}(x) F {\mathit{Op}}^{''} (x) \in \mathit{st} \right)  \vee \big(  \left( {\mathit{Op}}^{'}(x) F {\mathit{Op}}^{'''} (x) \in \mathit{st} \right)  \wedge \\ \left( {\mathit{Op}}^{''}(x) F {\mathit{Op}}^{''''} (x) \in \mathit{st}^{'} \right)  \wedge \left( {v}^{''} = {v} \right) \wedge \left( {v}^{'} = {v}^{'''} \right)  \big) \big)  \rightarrow  
+ \left(  {\mathit{Op}}^{''}(x) F {\mathit{Op}}^{'} (x) \in \mathit{Si} \right)$,   
  %E^r = C = \\
 % \forall \mathit{st}, \mathit{St} \; \big( \left( {W^i}(x)^{'} F {W^k}^{'}(y) \in \mathit{st} \right) \wedge \left( {W^l}(y)^{'} F {W^j}^{'}(x) \in \mathit{st} \right) \wedge \\
 % \not\exists \left( %\mathit{st}^{'} \in \mathit{St} \; \wedge \;
@@ -760,8 +796,8 @@ E^{s} =  \forall \mathit{st} \in \mathit{St}, {\mathit{Op}}^{'}, {\mathit{Op}}^{
   which can be rewritten as follows. 
   \begin{align}\label{eqn:TSO}
 \begin{split}
-E^s = \forall x, \mathit{st}, \mathit{st}^{'} \in \mathit{St} \not\exists \mathit{op}(x), \mathit{op}^{'}(x), \mathit{op}^{''}(x), \mathit{op}^{'''}(x) \in \mathcal{O}  \\ \big( \left( \mathit{Op}^{'}(x) F \mathit{Op}^{''} (x) \in \mathit{st} \right)  \vee \big(  \left( \mathit{Op}^{'}(x) F \mathit{Op}^{'''} (x) \in \mathit{st} \right)  \wedge \\
- \left( \mathit{Op}^{''}(x) F \mathit{Op}^{''''} (x) \in \mathit{st}^{'} \right)  \wedge \left( v^{''} = v \right) \wedge \left( v^{'} = v^{'''} \right)  \big) \big) \rightarrow   \\ \left( \mathit{Op}^{'}(x) \preccurlyeq(x) \mathit{Op}^{''} (x) \right),
+E^s = \forall x, \mathit{st}, \mathit{st}^{'} \in \mathit{St} \not\exists \mathit{op}(x), \mathit{op}^{'}(x), \mathit{op}^{''}(x), \mathit{op}^{'''}(x) \in \mathcal{O}  \big( \left( \mathit{Op}^{'}(x) F \mathit{Op}^{''} (x) \in \mathit{st} \right)  \vee \big(  \left( \mathit{Op}^{'}(x) F \mathit{Op}^{'''} (x) \in \mathit{st} \right)  \\ \wedge 
+ \left( \mathit{Op}^{''}(x) F \mathit{Op}^{''''} (x) \in \mathit{st}^{'} \right)  \wedge\ \left( v^{''} = v \right) \wedge \left( v^{'} = v^{'''} \right)  \big) \big) \rightarrow   \left( \mathit{Op}^{'}(x) \preccurlyeq(x) \mathit{Op}^{''} (x) \right),
 \end{split}
   \end{align}  where $ \preccurlyeq(x)$ is a partial order over a given object $x$ with respect to a given global session trace $ \mathit{St}$, and $ \mathit{Si}$ is an equivalent legal serialization of a global execution defined in Equation \ref{def:ser}.
   %$\preccurlyeq$ is given as a composition $\preccurlyeq =  \preccurlyeq^{'}(x) \circ  ... \circ^{'} \preccurlyeq^{''}(x)$,  and $\circ, ... \circ^{''}$ are composition operators, like $\cap$ or $\cup$, over partial order sets (posets) $\preccurlyeq^{'}(x), ... \preccurlyeq^{''}(x)$ comprising partial orders defined over a given object $x$.
@@ -772,8 +808,8 @@ E^s = \forall x, \mathit{st}, \mathit{st}^{'} \in \mathit{St} \not\exists \mathi
 % total number of processors. We can express the condition the propositional logic variable $A$ must hold for any store
 % $\mathit{store}_n$ with the expression  $\bigcap_{\mathit{processor}_n}^{\mathit{processors}} A$.
   Thus, Processor Consistency can be expressed as 
-  \\ $E^s = \forall x, y, \mathit{st}, \mathit{st}^{'} \in \mathit{St} \not\exists {\mathit{op}}(x), {\mathit{op}^{'}}(y) \in \mathcal{O} \\
- \left( {\mathit{Op}}^{'}(x) F {\mathit{Op}}^{''} (y) \in \mathit{st} \right) \rightarrow \left( {\mathit{Op}}^{''}(y) F {\mathit{Op}}^{'} (x) \in \mathit{st}^{'} \right)$,   \\
+  $E^s = \forall x, y, \mathit{st}, \mathit{st}^{'} \in \mathit{St} \not\exists {\mathit{op}}(x), {\mathit{op}^{'}}(y) \in \mathcal{O} 
+ \left( {\mathit{Op}}^{'}(x) F {\mathit{Op}}^{''} (y) \in \mathit{st} \right) \rightarrow \left( {\mathit{Op}}^{''}(y) F {\mathit{Op}}^{'} (x) \in \mathit{st}^{'} \right)$,   
  which can be rewritten as follows.
  \begin{align}\label{eqn:PC}
 \begin{split}
@@ -790,7 +826,7 @@ E^s = \forall x, \mathit{st}, \mathit{st}^{'} \in \mathit{St} \not\exists \mathi
 %\big( \left( {W^l}^{'} F {R^j}^{'} \in \mathit{St} \right) \wedge
 % \left( \not\exists {W^l}^{'} F {W^m}^{'} F {R^j}^{'} \in \mathit{St} \right) \big) \big) \big)
 %E^s = \left( \mathcal{O}, \preccurlyeq \right), 
-\forall x, y, \mathit{st} \in \mathit{St}  \left( {\mathit{Op}}^{'}(x) F {\mathit{Op}}^{''} (y) \in \mathit{st} \right) \rightarrow \\ \left( {\mathit{Op}}^{'}(x) \preccurlyeq {\mathit{Op}}^{''} (y) \right),
+\forall x, y, \mathit{st} \in \mathit{St}  \left( {\mathit{Op}}^{'}(x) F {\mathit{Op}}^{''} (y) \in \mathit{st} \right) \rightarrow  \left( {\mathit{Op}}^{'}(x) \preccurlyeq {\mathit{Op}}^{''} (y) \right),
 \end{split}
   \end{align}  where $ \preccurlyeq$ is a partial order over operations across all data objects with respect to a given global session trace $ \mathit{St}$.
  %\forall \big( %\left( \mathit{st} \in \mathit{St} \right) \wedge
@@ -809,158 +845,214 @@ E^s = \forall x, \mathit{st}, \mathit{st}^{'} \in \mathit{St} \not\exists \mathi
 %\wedge \forall \mathit{st} \not\exists R^k, R^l \left( \mathit{Op}^i X^o R^k F \mathit{Op}^j X^o R^l \in \mathit{st} \right) \\ \wedge \left( v^k \not= v^i  \right) \wedge \left( v^l = v^j \right) \big)
 %\end{split}
 %  \end{align}, where $\preccurlyeq$ is a composition   $\preccurlyeq =  \preccurlyeq^{'} \circ  ... \circ^{'} \preccurlyeq^{''}$and $\circ, ... \circ^{''}$ are again composition operators, like $\cap$ or $\cup$, over partial order sets (posets) $\preccurlyeq^{'}, ...  \preccurlyeq^{''}$ comprising partial orders defined over all data objects.
- \subsection{Specification of Isolation Levels}
-  For specifying isolation levels, we consider only the isolation levels defined by Adya et al. \cite{DBLP:conf/icde/AdyaLO00}. We show the equivalence between the graphical representation of the dependency relations used by Adya et al. and the LTL specifications of ConSpec in Section \ref{sec:equiv}.
- The isolation level PL-1 mandates that write operations in  a transaction must be executed such that write-write
- dependency cycles among transactions are proscribed. %before any write from a different transaction executes.
- Following Definition \ref{def:form0}, PL-1 is specified %in the \textbf{form-2} format, given in Equation \ref{form-2},
- as follow.
- % \begin{align}\label{eqn:PL1}
+% \subsection{Specification of Isolation Levels}
+%  For specifying isolation levels, we consider only the isolation levels defined by Adya et al. \cite{DBLP:conf/icde/AdyaLO00}. We show the equivalence between the graphical representation of the dependency relations used by Adya et al. and the LTL specifications of ConSpec in Section \ref{sec:equiv}.
+% The isolation level PL-1 mandates that write operations in  a transaction must be executed such that write-write
+% dependency cycles among transactions are proscribed. %before any write from a different transaction executes.
+% Following Definition \ref{def:form0}, PL-1 is specified %in the \textbf{form-2} format, given in Equation \ref{form-2},
+% as follow.
+% % \begin{align}\label{eqn:PL1}
+%%\begin{split}
+%%\forall i,j,k,l,m, tx, ty \left( tx F ty \; \wedge \; \star w^i_{tx} F w^j_{tx} \star \; \wedge \; \star w^k_{ty} F w^l_{ty} \star \right)^\mathit{po}_{o_m} \\
+%%\rightarrow \left(\star w^i_{tx} F w^j_{tx} \star \; \wedge \; \star w^k_{ty} F w^l_{ty} \star  \right)^\mathit{st}_{o_m},
+%%\end{split}
+%%  \end{align}
+% %\begin{align}\label{eqn:PL1}
+%%\begin{split}
+%%\forall i,j, m, tx \left( \star w^i_{tx} F^{o} w^j_{tx} \star \right)^\mathit{po}_{o_m}
+%%\rightarrow \left(\star w^i_{tx} F^{o} w^j_{tx} \star  \right)^\mathit{st}_{o_m},
+%%\end{split}
+%%  \end{align}
+%  \begin{align}\label{eqn:PL1}
 %\begin{split}
-%\forall i,j,k,l,m, tx, ty \left( tx F ty \; \wedge \; \star w^i_{tx} F w^j_{tx} \star \; \wedge \; \star w^k_{ty} F w^l_{ty} \star \right)^\mathit{po}_{o_m} \\
-%\rightarrow \left(\star w^i_{tx} F w^j_{tx} \star \; \wedge \; \star w^k_{ty} F w^l_{ty} \star  \right)^\mathit{st}_{o_m},
-%\end{split}
-%  \end{align}
- %\begin{align}\label{eqn:PL1}
-%\begin{split}
-%\forall i,j, m, tx \left( \star w^i_{tx} F^{o} w^j_{tx} \star \right)^\mathit{po}_{o_m}
-%\rightarrow \left(\star w^i_{tx} F^{o} w^j_{tx} \star  \right)^\mathit{st}_{o_m},
-%\end{split}
-%  \end{align}
-  \begin{align}\label{eqn:PL1}
-\begin{split}
-%\forall i, j, k, l, m, n, p, q, u, z, tx \\ \big( \star W^j_{tx}(v_l) F^{o} W^m_{tx}(v_q) X^{o} R^p_{tx}{v_n} \star \big)^\mathit{po}_{o} \\
-%\rightarrow \big(G \star \left( v_n = v_q \right) \oplus \\ \left( W^j_{tx}(v_l) F^{o} W^m_{tx}(v_q) X^{o} W^u_{tx}(v_z)  X^{o} R^p_{tx}{v_n}  \right) \star  \big)^\mathit{st}_{o},
-%\forall i, j, tx \\ \big( \star W^i_{tx} F^{o} W^j_{tx}(v_q) X^{o} R^p_{tx}{v_n} \star \big)^\mathit{po}_{o} \\
-%\rightarrow \big(G \star \left( v_n = v_q \right) \oplus \\ \left( W^j_{tx}(v_l) F^{o} W^m_{tx}(v_q) X^{o} W^u_{tx}(v_z)  X^{o} R^p_{tx}{v_n}  \right) \star  \big)^\mathit{st}_{o},
-%\forall i, j, o, \mathit{st}, \mathit{tx} \big( \left( W^i_\mathit{tx} F W^j_\mathit{tx} \in \mathit{st} \right) \; \rightarrow \; \exists S_p \left(  W^i_\mathit{tx} F W^j_\mathit{tx} \in S_p \right)
-%\\ \wedge  \not\exists R^k_\mathit{tx} \in \mathit{st} \left( W^i_\mathit{tx} F W^j_\mathit{tx} F R^k_\mathit{tx} \in \mathit{st} \right) \wedge \left( W^j_\mathit{tx} F R^k_\mathit{tx} \in \mathit{st} \right) \\ \wedge \left( v^k = v^i \right) \big),
- E^s = \forall  \mathit{st} \in \mathit{St}, \mathit{tx}, \mathit{ty} \in \mathit{St}, x, y,\\
-  {W}(x)^{'}_\mathit{tx},  {W}(y)^{''}_\mathit{tx},
-  {W}(x)^{'''}_\mathit{ty}, {W}(y)^{''''}_\mathit{ty} \in  \mathit{St} \\
- %\mathit{tx} F \mathit{ty} \rightarrow
-  \big( \left( \not\exists {R^{'''''}}(x)_\mathit{tx}, {R^{''''''}}(y)_\mathit{ty} \in \mathit{St} \right) \\
-  % \big( \left( {W^i}(x)^{'}_\mathit{tx} F c_\mathit{tx} F  {W^k}(x)^{'}_\mathit{ty} F {R^m}(x)^{'}_\mathit{ty} \in \mathit{st} \right) \\
-%\wedge \left( {W^j}(y)^{'}_\mathit{tx} F c_\mathit{tx} F {W^l}(y)^{'}_\mathit{ty} F {R^n}(y)^{'}_\mathit{ty} \in \mathit{St} \right) \wedge \\
-\big( \left( \left( v^{'''''}= v^{'''} \right) \wedge \left( v^{''''} = v \right) \right) \vee \\ \left( \left( v^{'''''} = v^{'} \right) \wedge \left( v^{''''} = v^{''}  \right) \right)  \big) \big)
-\end{split}
-  \end{align} where $\mathit{tx}$ and $\mathit{ty}$  are consecutive transactions.
-
-The isolation level PL-2 states that operations from a transaction can not read a value that was not the final value that was
-committed by a transaction. Further, a transaction cannot read values written by aborted transactions. Additionally,
-operations in a transaction must be executed in an order
-that proscribes write-write and write-read dependency cycles \cite{DBLP:conf/icde/AdyaLO00} among transactions. PL-2 is given as
- % \begin{align}\label{eqn:PL2}
-%\begin{split}
-%\forall i, j, tx, ty \left( tx F ty \right)^\mathit{po}_{\mathit{op}_j} \rightarrow \left(\star c_{tx} F \mathit{op}^i_{ty} F c_{ty} \star \right)^\mathit{st}_{\mathit{op}_j},
-%\end{split}
-%  \end{align}
-%\begin{align}\label{eqn:PL2}
-%\begin{split}
-%\forall i, j, m, tx, ty \left( tx F^{o} ty \; \wedge w^i_{ty} F^{o} r^j_{ty} \right)^\mathit{po}_{\mathit{o}_m} \rightarrow \\ \left(\star c_{tx} F^{o} w^i_{ty} F^{o} r^j_{ty} F^{o} c_{ty} \star \right)^\mathit{st}_{\mathit{o}_m},
-%\end{split}
-%  \end{align}
-  \begin{align}\label{eqn:PL2}
-\begin{split}
-%\forall i, j, k, l, m, n, p, q, u, a, b, c, tx, ty \big( \left( tx F ty \right) \\ \wedge \left( \star W^j_{tx}(v_l)X^{o} R^k_{tx}{v_m} \star \right) \wedge \left( \star W^n_{ty}(v_q)X^{o} R^s_{ty}{v_u} \star \right) \big)^\mathit{po}_{\mathit{o}_i} \\
-%\rightarrow \big( G \; \left( \left( v_m = v_l \right) \oplus \left( W^j_{tx}(v_l) F^{o} W^p_{tx}(v_a) X^{o} R^k_{tx}{v_m} \right) \right) F \;  c_{tx} \\ F \; \left( \left( v_u = v_q \right) \oplus \left( W^n_{ty}(v_q) F^{o} W^b_{ty}(v_c) X^{o} R^s_{ty}{v_u} \right) \right) \; F \; c_{ty} \star \big)^\mathit{st}_{\mathit{o}_i},
-%\forall i, j, k, l, o, \mathit{st}, \mathit{tx}, \mathit{ty} \big( \left( \mathit{tx} F \mathit{ty} \right) \wedge \left( W^i_\mathit{tx} F R^j_\mathit{tx} \in \mathit{st} \right) \\
-%\wedge \left( W^k_\mathit{ty} F R^l_\mathit{ty} \in \mathit{st} \right)
-%\; \rightarrow \; \exists S \left( W^i_\mathit{tx} F R^j_\mathit{tx} F c_\mathit{tx} \in S \right) \\
-%\wedge \left(  c_\mathit{tx} F W^k_\mathit{ty} F R^l_\mathit{ty} F c_\mathit{ty} \in S_p \right)
-%\\ \wedge  \not\exists W^m_\mathit{tx} \in \mathit{st} \left( W^m_\mathit{tx} F W^i_\mathit{tx} F R^j_\mathit{tx} \in \mathit{st} \right) \wedge \left( v^j = v^m \right) \\
-%\wedge \not\exists W^n_\mathit{ty} \in \mathit{st} \left( W^n_\mathit{ty} F W^k_\mathit{ty} F R^l_\mathit{ty} \in \mathit{st} \right)  \wedge \left( v^l = v^n \right) \big)
-E^{r} = \forall  \mathit{st}, \mathit{st}^{'} \in  \mathit{St}, \mathit{tx}, \mathit{ty} \in  \mathit{St} \\ \big(
- % \mathit{tx} F \mathit{ty} \rightarrow
- \big( \big( \not\exists a_\mathit{tx} \in \mathit{st}
- \big(  {W}(x)^{'}_\mathit{tx} F {R}(x)^{''}_\mathit{ty} \in \mathit{st} \big) \\
-  \wedge  \not\exists a_\mathit{ty} \in \mathit{st}
- \big( {W}(y)^{'''}_\mathit{ty} F {R}(y)^{''''}_\mathit{tx} \in \mathit{st}  \big) \big) \wedge
-%\not\exists \left( c_{ty} F c_{tx} \in \mathit{st} \right)  \wedge \\
- \big( \not\exists  {W}(x)^{'}_\mathit{tx}, {W}(x)^{''}_\mathit{tx}, \\ {R}(x)^{'''}_\mathit{ty} \in  \mathit{st}  \big)
- \big( \left( {W}(x)^{'}_\mathit{tx}  F {W}(x)^{''}_\mathit{tx} F  c_\mathit{tx} \in  \mathit{st} \right) \\
-   \wedge \left( v^{''} = v \right)  \big)  \wedge
-   \not\exists \left( {W}(x)^{'}_\mathit{ty}, {W}(x)^{''}_\mathit{ty}, {R}(x)^{'''}_\mathit{tx} \in  \mathit{st} \right) \\
-    \big( \left(
- {W}(x)^{'}_\mathit{ty}  F {W}(x)^{''}_\mathit{ty} F  c_\mathit{ty} \in  \mathit{st} \right)
-   \wedge \left( v^{''} = v \right)  \big) \wedge
- %\mathit{tx} F \mathit{ty} \rightarrow
-  \big( \\ \not\exists {W}(x)^{'}_\mathit{tx},  {W}(y)^{''}_\mathit{tx},
-  {W}(x)^{'''}_\mathit{ty}, {W}(y)^{''''}_\mathit{ty}, {R}(x)^{'''''}_\mathit{tx}, {R}(y)^{''''''}_\mathit{ty} \in \mathit{St} \\ \big)
-% \big( \left( {W^i}(x)^{'}_\mathit{tx} F c_\mathit{tx} F  {W^k}(x)^{'}_\mathit{ty} F {R^m}(x)^{'}_\mathit{ty} \in \mathit{st} \right) \\
-%\wedge \left( {W^j}(y)^{'}_\mathit{tx} F c_\mathit{tx} F {W^l}(y)^{'}_\mathit{ty} F {R^n}(y)^{'}_\mathit{ty} \in \mathit{St} \right) \wedge \\
-\big( \left( \left( v^{''''} = v^{'''} \right) \wedge \left( v^{'''''} = v \right) \right) \vee \\ \left( \left( v^{'''''} = v^{'} \right) \wedge \left( v^{''''} = v^{''} \right) \right)  \big) \big) %\wedge \\
-%\left( \not\exists {R^m}(x)^{'}_\mathit{tx}, {R^n}(y)^{'}_\mathit{ty} \in \mathit{St} \right) \c\
-%   \big( \left( {W^i}(x)^{'}_\mathit{tx} F c_\mathit{tx} F  {W^k}(x)^{'}_\mathit{ty} F {R^m}(x)^{'}_\mathit{ty} \in \mathit{st} \right) \wedge \\
-%   \left( {W^j}(y)^{'}_\mathit{tx} F c_\mathit{tx} F {W^l}(y)^{'}_\mathit{ty} F {R^n}(y)^{'}_\mathit{ty} \in \mathit{St} \right) \wedge \\
-% \left( v_n^{'} = v_k^{'} \right) \wedge \left( v_m^{'} = v_i^{'} \right)  \big) \wedge \\
-% \big( \not\exists  \left({R^i}(x)^{'}_\mathit{tx} F {W^j}(x)^{'}_\mathit{ty} F {R^k}(x)^{'}_\mathit{ty} \in \mathit{St} \right) \wedge \\
-%  \left({R^l}(y)^{'}_\mathit{ty} F {W^m}(y)^{'}_\mathit{tx} F {R^n}(y)^{'}_\mathit{tx} \in \mathit{St} \right)  \big) \big(  \left( v_k^{'} = v_j^{'} \right) \wedge \\
-% \left( v_n^{'} = v_m^{'} \right) \big)
- %\big)
-  %\left( {W^k}(x)^{'}_\mathit{tx} \in \mathit{st}  \right) \right) \\
-%  \left( {R^j}(x)^{'}_\mathit{ty} F {W^k}(x)^{'}_\mathit{tx} F c_\mathit{tx} \in  \mathit{st} \right) \wedge \\
-%   \not\exists \big( \left( {W^i}(x)^{'}_\mathit{tx} F {R^k}(x)^{'}_\mathit{tx} \in  \mathit{st}  \right) \wedge
-%  \left( {W^j}(x)^{'}_\mathit{ty} F {R^l}(x)^{'}_\mathit{ty} \in  \mathit{st} \right) \wedge \\
-%  \left( {W^m}(y)^{'}_\mathit{tx} F {R^p}(y)^{'}_\mathit{tx} \in  \mathit{st}  \right) \wedge
-%  \left( {W^n}(y)^{'}_\mathit{ty} F {R^q}(y)^{'}_\mathit{ty} \in  \mathit{st} \right)\big) \\
-%  \left( \left( v_l^{'} = v_k^{'} \right) \wedge \left( v_q^{'} = v_m^{'} \right) \right)  \big) \big)
- %\left( c_{ty} F {\mathit{Op}^i}^{'}_\mathit{tx} \in \mathit{st} \right) \big) \wedge \\
-% \not\exists \big( \left( {W^i}(x)^{'}_\mathit{tx}, {W^j}(y)^{'}_\mathit{tx}, {W^k}(x)^{'}_\mathit{ty}, {W^l}(y)^{'}_\mathit{ty} \in  \mathit{St} \right) \wedge  \\
-%  \left( {R^m}(x)^{'}_\mathit{tx}, {R^n}(y)^{'}_\mathit{ty} \in \mathit{st} \right) \big)
-%  \big( \left( v_m^{'} = v_j^{'} \right) \wedge \left( v_n^{'} = v_k^{'} \right) \big)  \wedge \\
-%  \forall \left( {W^i}(x)^{'}_\mathit{tx} F {R^j}(x)^{'}_\mathit{tx} \in \mathit{st} \right) \left( {v_i}^{'} = {v_j}^{'} \right) \big)
-\end{split}
-  \end{align} where $c_{tx}$ and $c_{ty}$ are the commit statements for the transactions $\mathit{tx}$ and $\mathit{ty}$, respectively. F is the traditional LTL next operator.
-
- The isolation level  PL-3 specifies that, on top of PL-2,  read-write dependency cycles \cite{DBLP:conf/icde/AdyaLO00}
-  must also be proscribed among transactions. PL-3 is given as
- %\begin{align}\label{eqn:PL3}
-%\begin{split}
-%\forall i,j,k,l,m, tx, ty \left( tx F^{o} ty \; \wedge \; \star \mathit{op}^i_{tx} F^{o} \mathit{op}^j_{tx} \star \; \wedge \; \star \mathit{op}^k_{ty} F^{o} \mathit{op}^l_{ty} \star \right)^\mathit{po}_{o_m} \\
-%\rightarrow \left(\star \mathit{op}^i_{tx} F^{o} \mathit{op}^j_{tx} F^{o} c_{tx} F^{o} \mathit{op}^k_{ty} F^{o} \mathit{op}^l_{ty} F^{o} c_{ty}  \right)^\mathit{st}_{o_m}.
-%\end{split}
-%  \end{align}
-  \begin{align}\label{eqn:PL3}
-\begin{split}
-%\forall i, j, k, l, m, n, q, s, t, u, w, x, z, a, b, c, d, e, f, g, h, tx, ty \\
-%\big( \left( tx F ty \right) \wedge \left( \mathit{Op}^j =  \left(W^j_{tx}(v_l) \oplus R^k_{tx}{v_m} \right) \right) \wedge \\
-%\left( \mathit{Op}^n = \left( W^n_{tx}(v_q) \oplus R^s_{tx}{v_t} \right) \right)  \wedge \left( \star  \mathit{Op}^j X^{o} \mathit{Op}^n \star \right) \wedge \\
-%\left( \mathit{Op}^u = \left(W^u_{ty}(v_w) \oplus R^x_{ty}{v_z} \right) \right) \wedge \left( \mathit{Op}^a = \left( W^a_{ty}(v_b) \oplus R^c_{ty}{v_d} \right) \right) \\
-%\left( \star \mathit{Op}^u X^{o} \mathit{Op}^a   \star \right) \big)^\mathit{po}_{o} \\
-%\rightarrow \big(G \; \left( v_f = v_q \right)  \oplus \left( v_t = v_l \right) \oplus \left( v_t = v_m \right) \big)  \\
-%  F c_{tx} F \big( \left( v_h = v_b \right) \oplus \left( v_d = v_b \right) \oplus \left( v_d = v_z \right) \big) F c_{ty}  \big)^\mathit{st}_{o}.
-%E^{r} = C = \big( \not\exists \left( a_\mathit{tx} \oplus a_\mathit{ty} \in \mathit{st} \right)
-% \left( {W^i}(x)^{'}_\mathit{tx} F {R^j}(x)^{'}_\mathit{ty} \in \mathit{st} \right)  \wedge
-%%\not\exists \left( c_{ty} F c_{tx} \in \mathit{st} \right)  \wedge \\
-% \not\exists \big( \big( \\
-% {W^i}(x)^{'}_\mathit{tx}  F {W^j}(x)^{'}_\mathit{tx} F  c_\mathit{tx} F {R^k}(x)^{'}_\mathit{ty} \in  \mathit{st} \big)
-%   \wedge \left( v_k^{'} = v_i^{'} \right)  \big) \wedge \\
+%%\forall i, j, k, l, m, n, p, q, u, z, tx \\ \big( \star W^j_{tx}(v_l) F^{o} W^m_{tx}(v_q) X^{o} R^p_{tx}{v_n} \star \big)^\mathit{po}_{o} \\
+%%\rightarrow \big(G \star \left( v_n = v_q \right) \oplus \\ \left( W^j_{tx}(v_l) F^{o} W^m_{tx}(v_q) X^{o} W^u_{tx}(v_z)  X^{o} R^p_{tx}{v_n}  \right) \star  \big)^\mathit{st}_{o},
+%%\forall i, j, tx \\ \big( \star W^i_{tx} F^{o} W^j_{tx}(v_q) X^{o} R^p_{tx}{v_n} \star \big)^\mathit{po}_{o} \\
+%%\rightarrow \big(G \star \left( v_n = v_q \right) \oplus \\ \left( W^j_{tx}(v_l) F^{o} W^m_{tx}(v_q) X^{o} W^u_{tx}(v_z)  X^{o} R^p_{tx}{v_n}  \right) \star  \big)^\mathit{st}_{o},
+%%\forall i, j, o, \mathit{st}, \mathit{tx} \big( \left( W^i_\mathit{tx} F W^j_\mathit{tx} \in \mathit{st} \right) \; \rightarrow \; \exists S_p \left(  W^i_\mathit{tx} F W^j_\mathit{tx} \in S_p \right)
+%%\\ \wedge  \not\exists R^k_\mathit{tx} \in \mathit{st} \left( W^i_\mathit{tx} F W^j_\mathit{tx} F R^k_\mathit{tx} \in \mathit{st} \right) \wedge \left( W^j_\mathit{tx} F R^k_\mathit{tx} \in \mathit{st} \right) \\ \wedge \left( v^k = v^i \right) \big),
+% E^s = \forall  \mathit{st} \in \mathit{St}, \mathit{tx}, \mathit{ty} \in \mathit{St}, x, y,\\
+%  {W}(x)^{'}_\mathit{tx},  {W}(y)^{''}_\mathit{tx},
+%  {W}(x)^{'''}_\mathit{ty}, {W}(y)^{''''}_\mathit{ty} \in  \mathit{St} \\
 % %\mathit{tx} F \mathit{ty} \rightarrow
-%  \left( \not\exists {W^i}(x)^{'}_\mathit{tx},  {W^j}(y)^{'}_\mathit{tx},
-%  {W^k}(x)^{'}_\mathit{ty}, {W^l}(y)^{'}_\mathit{ty}, {R^m}(x)^{'}_\mathit{tx}, {R^n}(y)^{'}_\mathit{ty} \in \mathit{St} \right) \\
+%  \big( \left( \not\exists {R^{'''''}}(x)_\mathit{tx}, {R^{''''''}}(y)_\mathit{ty} \in \mathit{St} \right) \\
+%  % \big( \left( {W^i}(x)^{'}_\mathit{tx} F c_\mathit{tx} F  {W^k}(x)^{'}_\mathit{ty} F {R^m}(x)^{'}_\mathit{ty} \in \mathit{st} \right) \\
+%%\wedge \left( {W^j}(y)^{'}_\mathit{tx} F c_\mathit{tx} F {W^l}(y)^{'}_\mathit{ty} F {R^n}(y)^{'}_\mathit{ty} \in \mathit{St} \right) \wedge \\
+%\big( \left( \left( v^{'''''}= v^{'''} \right) \wedge \left( v^{''''} = v \right) \right) \vee \\ \left( \left( v^{'''''} = v^{'} \right) \wedge \left( v^{''''} = v^{''}  \right) \right)  \big) \big)
+%\end{split}
+%  \end{align} where $\mathit{tx}$ and $\mathit{ty}$  are consecutive transactions.
+%
+%The isolation level PL-2 states that operations from a transaction can not read a value that was not the final value that was
+%committed by a transaction. Further, a transaction cannot read values written by aborted transactions. Additionally,
+%operations in a transaction must be executed in an order
+%that proscribes write-write and write-read dependency cycles \cite{DBLP:conf/icde/AdyaLO00} among transactions. PL-2 is given as
+% % \begin{align}\label{eqn:PL2}
+%%\begin{split}
+%%\forall i, j, tx, ty \left( tx F ty \right)^\mathit{po}_{\mathit{op}_j} \rightarrow \left(\star c_{tx} F \mathit{op}^i_{ty} F c_{ty} \star \right)^\mathit{st}_{\mathit{op}_j},
+%%\end{split}
+%%  \end{align}
+%%\begin{align}\label{eqn:PL2}
+%%\begin{split}
+%%\forall i, j, m, tx, ty \left( tx F^{o} ty \; \wedge w^i_{ty} F^{o} r^j_{ty} \right)^\mathit{po}_{\mathit{o}_m} \rightarrow \\ \left(\star c_{tx} F^{o} w^i_{ty} F^{o} r^j_{ty} F^{o} c_{ty} \star \right)^\mathit{st}_{\mathit{o}_m},
+%%\end{split}
+%%  \end{align}
+%  \begin{align}\label{eqn:PL2}
+%\begin{split}
+%%\forall i, j, k, l, m, n, p, q, u, a, b, c, tx, ty \big( \left( tx F ty \right) \\ \wedge \left( \star W^j_{tx}(v_l)X^{o} R^k_{tx}{v_m} \star \right) \wedge \left( \star W^n_{ty}(v_q)X^{o} R^s_{ty}{v_u} \star \right) \big)^\mathit{po}_{\mathit{o}_i} \\
+%%\rightarrow \big( G \; \left( \left( v_m = v_l \right) \oplus \left( W^j_{tx}(v_l) F^{o} W^p_{tx}(v_a) X^{o} R^k_{tx}{v_m} \right) \right) F \;  c_{tx} \\ F \; \left( \left( v_u = v_q \right) \oplus \left( W^n_{ty}(v_q) F^{o} W^b_{ty}(v_c) X^{o} R^s_{ty}{v_u} \right) \right) \; F \; c_{ty} \star \big)^\mathit{st}_{\mathit{o}_i},
+%%\forall i, j, k, l, o, \mathit{st}, \mathit{tx}, \mathit{ty} \big( \left( \mathit{tx} F \mathit{ty} \right) \wedge \left( W^i_\mathit{tx} F R^j_\mathit{tx} \in \mathit{st} \right) \\
+%%\wedge \left( W^k_\mathit{ty} F R^l_\mathit{ty} \in \mathit{st} \right)
+%%\; \rightarrow \; \exists S \left( W^i_\mathit{tx} F R^j_\mathit{tx} F c_\mathit{tx} \in S \right) \\
+%%\wedge \left(  c_\mathit{tx} F W^k_\mathit{ty} F R^l_\mathit{ty} F c_\mathit{ty} \in S_p \right)
+%%\\ \wedge  \not\exists W^m_\mathit{tx} \in \mathit{st} \left( W^m_\mathit{tx} F W^i_\mathit{tx} F R^j_\mathit{tx} \in \mathit{st} \right) \wedge \left( v^j = v^m \right) \\
+%%\wedge \not\exists W^n_\mathit{ty} \in \mathit{st} \left( W^n_\mathit{ty} F W^k_\mathit{ty} F R^l_\mathit{ty} \in \mathit{st} \right)  \wedge \left( v^l = v^n \right) \big)
+%E^{r} = \forall  \mathit{st}, \mathit{st}^{'} \in  \mathit{St}, \mathit{tx}, \mathit{ty} \in  \mathit{St} \\ \big(
+% % \mathit{tx} F \mathit{ty} \rightarrow
+% \big( \big( \not\exists a_\mathit{tx} \in \mathit{st}
+% \big(  {W}(x)^{'}_\mathit{tx} F {R}(x)^{''}_\mathit{ty} \in \mathit{st} \big) \\
+%  \wedge  \not\exists a_\mathit{ty} \in \mathit{st}
+% \big( {W}(y)^{'''}_\mathit{ty} F {R}(y)^{''''}_\mathit{tx} \in \mathit{st}  \big) \big) \wedge
+%%\not\exists \left( c_{ty} F c_{tx} \in \mathit{st} \right)  \wedge \\
+% \big( \not\exists  {W}(x)^{'}_\mathit{tx}, {W}(x)^{''}_\mathit{tx}, \\ {R}(x)^{'''}_\mathit{ty} \in  \mathit{st}  \big)
+% \big( \left( {W}(x)^{'}_\mathit{tx}  F {W}(x)^{''}_\mathit{tx} F  c_\mathit{tx} \in  \mathit{st} \right) \\
+%   \wedge \left( v^{''} = v \right)  \big)  \wedge
+%   \not\exists \left( {W}(x)^{'}_\mathit{ty}, {W}(x)^{''}_\mathit{ty}, {R}(x)^{'''}_\mathit{tx} \in  \mathit{st} \right) \\
+%    \big( \left(
+% {W}(x)^{'}_\mathit{ty}  F {W}(x)^{''}_\mathit{ty} F  c_\mathit{ty} \in  \mathit{st} \right)
+%   \wedge \left( v^{''} = v \right)  \big) \wedge
+% %\mathit{tx} F \mathit{ty} \rightarrow
+%  \big( \\ \not\exists {W}(x)^{'}_\mathit{tx},  {W}(y)^{''}_\mathit{tx},
+%  {W}(x)^{'''}_\mathit{ty}, {W}(y)^{''''}_\mathit{ty}, {R}(x)^{'''''}_\mathit{tx}, {R}(y)^{''''''}_\mathit{ty} \in \mathit{St} \\ \big)
 %% \big( \left( {W^i}(x)^{'}_\mathit{tx} F c_\mathit{tx} F  {W^k}(x)^{'}_\mathit{ty} F {R^m}(x)^{'}_\mathit{ty} \in \mathit{st} \right) \\
 %%\wedge \left( {W^j}(y)^{'}_\mathit{tx} F c_\mathit{tx} F {W^l}(y)^{'}_\mathit{ty} F {R^n}(y)^{'}_\mathit{ty} \in \mathit{St} \right) \wedge \\
-%\big( \left( \left( v_n^{'} = v_l^{'} \right) \wedge \left( v_m^{'} = v_i^{'} \right) \right) \vee \left( \left( v_n^{'} = v_j^{'} \right) \wedge \left( v_m^{'} = v_k^{'} \right) \right)  \big) \wedge \\
+%\big( \left( \left( v^{''''} = v^{'''} \right) \wedge \left( v^{'''''} = v \right) \right) \vee \\ \left( \left( v^{'''''} = v^{'} \right) \wedge \left( v^{''''} = v^{''} \right) \right)  \big) \big) %\wedge \\
 %%\left( \not\exists {R^m}(x)^{'}_\mathit{tx}, {R^n}(y)^{'}_\mathit{ty} \in \mathit{St} \right) \c\
 %%   \big( \left( {W^i}(x)^{'}_\mathit{tx} F c_\mathit{tx} F  {W^k}(x)^{'}_\mathit{ty} F {R^m}(x)^{'}_\mathit{ty} \in \mathit{st} \right) \wedge \\
 %%   \left( {W^j}(y)^{'}_\mathit{tx} F c_\mathit{tx} F {W^l}(y)^{'}_\mathit{ty} F {R^n}(y)^{'}_\mathit{ty} \in \mathit{St} \right) \wedge \\
 %% \left( v_n^{'} = v_k^{'} \right) \wedge \left( v_m^{'} = v_i^{'} \right)  \big) \wedge \\
-% \left( \not\exists {W^i}(x)^{'}_\mathit{tx}, {W^j}(x)^{'}_\mathit{ty}, {R^p}(x)^{'}_\mathit{tx}, {R^q}(x)^{'}_\mathit{ty} \in \mathit{st} \right) \big(  \left( v_p^{'} = v_j^{'} \right) \wedge \\
-% \left( v_q^{'} = v_i^{'} \right) \big)
-%   \big) \big) \wedge
-%%\forall  \mathit{St}, \mathit{st}, \mathit{st}^{'}, \mathit{tx}, \mathit{ty} \big(
-%%  \mathit{tx} F \mathit{ty} \rightarrow \\
-%% \big( \not\exists \left( \left( a_\mathit{tx} \in \mathit{st} \right) \wedge \left( a_\mathit{ty} \in \mathit{st} \right) \right) \wedge \\
-%% %\not\exists \left( c_{ty} F c_{tx} \in \mathit{st} \right)  \wedge \\
-%% \not\exists \left( \left( {W^i}(x)^{'}_\mathit{tx} F {W^j}(x)^{'}_\mathit{tx} F {R^k}(x)^{'}_\mathit{ty} \in  \mathit{st} \right)  \wedge \left( v_k^{'} = v_i^{'} \right)  \right) \wedge \\
-%%  \left( \not\exists {R^m}(x)^{'}_\mathit{tx}, {R^n}(y)^{'}_\mathit{ty} \in \mathit{St} \right) \\
-%%   \big( \left( {W^i}(x)^{'}_\mathit{tx} F c_\mathit{tx} F  {W^k}(x)^{'}_\mathit{ty} F {R^m}(x)^{'}_\mathit{ty} \in \mathit{st} \right) \\
-%%\wedge \left( {W^j}(y)^{'}_\mathit{tx} F c_\mathit{tx} F {W^l}(y)^{'}_\mathit{ty} F {R^n}(y)^{'}_\mathit{ty} \in \mathit{St} \right) \wedge \\
-%% \left( v_n^{'} = v_k^{'} \right) \wedge \left( v_m^{'} = v_i^{'} \right)  \big) \wedge \\
+%% \big( \not\exists  \left({R^i}(x)^{'}_\mathit{tx} F {W^j}(x)^{'}_\mathit{ty} F {R^k}(x)^{'}_\mathit{ty} \in \mathit{St} \right) \wedge \\
+%%  \left({R^l}(y)^{'}_\mathit{ty} F {W^m}(y)^{'}_\mathit{tx} F {R^n}(y)^{'}_\mathit{tx} \in \mathit{St} \right)  \big) \big(  \left( v_k^{'} = v_j^{'} \right) \wedge \\
+%% \left( v_n^{'} = v_m^{'} \right) \big)
+% %\big)
+%  %\left( {W^k}(x)^{'}_\mathit{tx} \in \mathit{st}  \right) \right) \\
+%%  \left( {R^j}(x)^{'}_\mathit{ty} F {W^k}(x)^{'}_\mathit{tx} F c_\mathit{tx} \in  \mathit{st} \right) \wedge \\
+%%   \not\exists \big( \left( {W^i}(x)^{'}_\mathit{tx} F {R^k}(x)^{'}_\mathit{tx} \in  \mathit{st}  \right) \wedge
+%%  \left( {W^j}(x)^{'}_\mathit{ty} F {R^l}(x)^{'}_\mathit{ty} \in  \mathit{st} \right) \wedge \\
+%%  \left( {W^m}(y)^{'}_\mathit{tx} F {R^p}(y)^{'}_\mathit{tx} \in  \mathit{st}  \right) \wedge
+%%  \left( {W^n}(y)^{'}_\mathit{ty} F {R^q}(y)^{'}_\mathit{ty} \in  \mathit{st} \right)\big) \\
+%%  \left( \left( v_l^{'} = v_k^{'} \right) \wedge \left( v_q^{'} = v_m^{'} \right) \right)  \big) \big)
+% %\left( c_{ty} F {\mathit{Op}^i}^{'}_\mathit{tx} \in \mathit{st} \right) \big) \wedge \\
+%% \not\exists \big( \left( {W^i}(x)^{'}_\mathit{tx}, {W^j}(y)^{'}_\mathit{tx}, {W^k}(x)^{'}_\mathit{ty}, {W^l}(y)^{'}_\mathit{ty} \in  \mathit{St} \right) \wedge  \\
+%%  \left( {R^m}(x)^{'}_\mathit{tx}, {R^n}(y)^{'}_\mathit{ty} \in \mathit{st} \right) \big)
+%%  \big( \left( v_m^{'} = v_j^{'} \right) \wedge \left( v_n^{'} = v_k^{'} \right) \big)  \wedge \\
+%%  \forall \left( {W^i}(x)^{'}_\mathit{tx} F {R^j}(x)^{'}_\mathit{tx} \in \mathit{st} \right) \left( {v_i}^{'} = {v_j}^{'} \right) \big)
+%\end{split}
+%  \end{align} where $c_{tx}$ and $c_{ty}$ are the commit statements for the transactions $\mathit{tx}$ and $\mathit{ty}$, respectively. F is the traditional LTL next operator.
+%
+% The isolation level  PL-3 specifies that, on top of PL-2,  read-write dependency cycles \cite{DBLP:conf/icde/AdyaLO00}
+%  must also be proscribed among transactions. PL-3 is given as
+% %\begin{align}\label{eqn:PL3}
+%%\begin{split}
+%%\forall i,j,k,l,m, tx, ty \left( tx F^{o} ty \; \wedge \; \star \mathit{op}^i_{tx} F^{o} \mathit{op}^j_{tx} \star \; \wedge \; \star \mathit{op}^k_{ty} F^{o} \mathit{op}^l_{ty} \star \right)^\mathit{po}_{o_m} \\
+%%\rightarrow \left(\star \mathit{op}^i_{tx} F^{o} \mathit{op}^j_{tx} F^{o} c_{tx} F^{o} \mathit{op}^k_{ty} F^{o} \mathit{op}^l_{ty} F^{o} c_{ty}  \right)^\mathit{st}_{o_m}.
+%%\end{split}
+%%  \end{align}
+%  \begin{align}\label{eqn:PL3}
+%\begin{split}
+%%\forall i, j, k, l, m, n, q, s, t, u, w, x, z, a, b, c, d, e, f, g, h, tx, ty \\
+%%\big( \left( tx F ty \right) \wedge \left( \mathit{Op}^j =  \left(W^j_{tx}(v_l) \oplus R^k_{tx}{v_m} \right) \right) \wedge \\
+%%\left( \mathit{Op}^n = \left( W^n_{tx}(v_q) \oplus R^s_{tx}{v_t} \right) \right)  \wedge \left( \star  \mathit{Op}^j X^{o} \mathit{Op}^n \star \right) \wedge \\
+%%\left( \mathit{Op}^u = \left(W^u_{ty}(v_w) \oplus R^x_{ty}{v_z} \right) \right) \wedge \left( \mathit{Op}^a = \left( W^a_{ty}(v_b) \oplus R^c_{ty}{v_d} \right) \right) \\
+%%\left( \star \mathit{Op}^u X^{o} \mathit{Op}^a   \star \right) \big)^\mathit{po}_{o} \\
+%%\rightarrow \big(G \; \left( v_f = v_q \right)  \oplus \left( v_t = v_l \right) \oplus \left( v_t = v_m \right) \big)  \\
+%%  F c_{tx} F \big( \left( v_h = v_b \right) \oplus \left( v_d = v_b \right) \oplus \left( v_d = v_z \right) \big) F c_{ty}  \big)^\mathit{st}_{o}.
+%%E^{r} = C = \big( \not\exists \left( a_\mathit{tx} \oplus a_\mathit{ty} \in \mathit{st} \right)
+%% \left( {W^i}(x)^{'}_\mathit{tx} F {R^j}(x)^{'}_\mathit{ty} \in \mathit{st} \right)  \wedge
+%%%\not\exists \left( c_{ty} F c_{tx} \in \mathit{st} \right)  \wedge \\
+%% \not\exists \big( \big( \\
+%% {W^i}(x)^{'}_\mathit{tx}  F {W^j}(x)^{'}_\mathit{tx} F  c_\mathit{tx} F {R^k}(x)^{'}_\mathit{ty} \in  \mathit{st} \big)
+%%   \wedge \left( v_k^{'} = v_i^{'} \right)  \big) \wedge \\
+%% %\mathit{tx} F \mathit{ty} \rightarrow
+%%  \left( \not\exists {W^i}(x)^{'}_\mathit{tx},  {W^j}(y)^{'}_\mathit{tx},
+%%  {W^k}(x)^{'}_\mathit{ty}, {W^l}(y)^{'}_\mathit{ty}, {R^m}(x)^{'}_\mathit{tx}, {R^n}(y)^{'}_\mathit{ty} \in \mathit{St} \right) \\
+%%% \big( \left( {W^i}(x)^{'}_\mathit{tx} F c_\mathit{tx} F  {W^k}(x)^{'}_\mathit{ty} F {R^m}(x)^{'}_\mathit{ty} \in \mathit{st} \right) \\
+%%%\wedge \left( {W^j}(y)^{'}_\mathit{tx} F c_\mathit{tx} F {W^l}(y)^{'}_\mathit{ty} F {R^n}(y)^{'}_\mathit{ty} \in \mathit{St} \right) \wedge \\
+%%\big( \left( \left( v_n^{'} = v_l^{'} \right) \wedge \left( v_m^{'} = v_i^{'} \right) \right) \vee \left( \left( v_n^{'} = v_j^{'} \right) \wedge \left( v_m^{'} = v_k^{'} \right) \right)  \big) \wedge \\
+%%%\left( \not\exists {R^m}(x)^{'}_\mathit{tx}, {R^n}(y)^{'}_\mathit{ty} \in \mathit{St} \right) \c\
+%%%   \big( \left( {W^i}(x)^{'}_\mathit{tx} F c_\mathit{tx} F  {W^k}(x)^{'}_\mathit{ty} F {R^m}(x)^{'}_\mathit{ty} \in \mathit{st} \right) \wedge \\
+%%%   \left( {W^j}(y)^{'}_\mathit{tx} F c_\mathit{tx} F {W^l}(y)^{'}_\mathit{ty} F {R^n}(y)^{'}_\mathit{ty} \in \mathit{St} \right) \wedge \\
+%%% \left( v_n^{'} = v_k^{'} \right) \wedge \left( v_m^{'} = v_i^{'} \right)  \big) \wedge \\
 %% \left( \not\exists {W^i}(x)^{'}_\mathit{tx}, {W^j}(x)^{'}_\mathit{ty}, {R^p}(x)^{'}_\mathit{tx}, {R^q}(x)^{'}_\mathit{ty} \in \mathit{st} \right) \big(  \left( v_p^{'} = v_j^{'} \right) \wedge \\
-%% \left( v_q^{'} = v_j^{'} \right) \big) \wedge
-%%   \big) \big)
+%% \left( v_q^{'} = v_i^{'} \right) \big)
+%%   \big) \big) \wedge
+%%%\forall  \mathit{St}, \mathit{st}, \mathit{st}^{'}, \mathit{tx}, \mathit{ty} \big(
+%%%  \mathit{tx} F \mathit{ty} \rightarrow \\
+%%% \big( \not\exists \left( \left( a_\mathit{tx} \in \mathit{st} \right) \wedge \left( a_\mathit{ty} \in \mathit{st} \right) \right) \wedge \\
+%%% %\not\exists \left( c_{ty} F c_{tx} \in \mathit{st} \right)  \wedge \\
+%%% \not\exists \left( \left( {W^i}(x)^{'}_\mathit{tx} F {W^j}(x)^{'}_\mathit{tx} F {R^k}(x)^{'}_\mathit{ty} \in  \mathit{st} \right)  \wedge \left( v_k^{'} = v_i^{'} \right)  \right) \wedge \\
+%%%  \left( \not\exists {R^m}(x)^{'}_\mathit{tx}, {R^n}(y)^{'}_\mathit{ty} \in \mathit{St} \right) \\
+%%%   \big( \left( {W^i}(x)^{'}_\mathit{tx} F c_\mathit{tx} F  {W^k}(x)^{'}_\mathit{ty} F {R^m}(x)^{'}_\mathit{ty} \in \mathit{st} \right) \\
+%%%\wedge \left( {W^j}(y)^{'}_\mathit{tx} F c_\mathit{tx} F {W^l}(y)^{'}_\mathit{ty} F {R^n}(y)^{'}_\mathit{ty} \in \mathit{St} \right) \wedge \\
+%%% \left( v_n^{'} = v_k^{'} \right) \wedge \left( v_m^{'} = v_i^{'} \right)  \big) \wedge \\
+%%% \left( \not\exists {W^i}(x)^{'}_\mathit{tx}, {W^j}(x)^{'}_\mathit{ty}, {R^p}(x)^{'}_\mathit{tx}, {R^q}(x)^{'}_\mathit{ty} \in \mathit{st} \right) \big(  \left( v_p^{'} = v_j^{'} \right) \wedge \\
+%%% \left( v_q^{'} = v_j^{'} \right) \big) \wedge
+%%%   \big) \big)
+%%%E^s =  \forall  \mathit{St}, \mathit{st} \in \mathit{St}, \mathit{tx}, \mathit{ty} \big(
+%%%  \mathit{tx} F \mathit{ty} \rightarrow \\
+%%% \big( \not\exists \left( a_\mathit{ty} F a_\mathit{tx} \in \mathit{st} \right) \wedge \not\exists \left( c_{ty} F c_{tx} \in \mathit{st} \right)  \wedge \\
+%%% \not\exists \left( \left( {W^i}(x)^{'}_\mathit{tx} F {R^j}(x)^{'}_\mathit{ty} \in  \mathit{st} \right) \wedge \left( {W^k}(x)^{'}_\mathit{tx} \in \mathit{st}  \right) \right) \\
+%%%  \left( {R^j}(x)^{'}_\mathit{ty} F {W^k}(x)^{'}_\mathit{tx} F c_\mathit{tx} \in  \mathit{st} \right) \wedge \\
+%%%   \not\exists \big( \left( {W^i}(x)^{'}_\mathit{tx} F {R^k}(x)^{'}_\mathit{tx} \in  \mathit{st}  \right) \wedge
+%%%  \left( {W^j}(x)^{'}_\mathit{ty} F {R^l}(x)^{'}_\mathit{ty} \in  \mathit{st} \right) \wedge \\
+%%%  \left( {W^m}(y)^{'}_\mathit{tx} F {R^p}(y)^{'}_\mathit{tx} \in  \mathit{st}  \right) \wedge
+%%%  \left( {W^n}(y)^{'}_\mathit{ty} F {R^q}(y)^{'}_\mathit{ty} \in  \mathit{st} \right)\big) \\
+%%%  \left( \left( v_l^{'} = v_k^{'} \right) \wedge \left( v_q^{'} = v_m^{'} \right) \right) \wedge \\
+%%   \not\exists \big( \left( {R^i}(x)^{'}_\mathit{tx} \in  \mathit{st}  \right) \wedge
+%%  \left( {W^j}(x)^{'}_\mathit{ty} F {R^k}(x)^{'}_\mathit{ty} \in  \mathit{st} \right) \wedge \\
+%%  \left( {W^m}(y)^{'}_\mathit{tx} F {R^p}(y)^{'}_\mathit{tx} \in  \mathit{st}  \right) \wedge
+%%  \left( {W^n}(y)^{'}_\mathit{ty} F {R^q}(y)^{'}_\mathit{ty} \in  \mathit{st} \right) \big) \\
+%%  \big( \left( \left( v_k^{'} = v_j^{'} \right)  \wedge \left( v_p^{'} = v_m^{'} \right) \right)  \big) \big) \big) \big)
+%E^{r} = C = \forall \mathit{st}, \mathit{st}^{'} \in \mathit{St}, \mathit{tx}, \mathit{ty} \in \mathit{St} \\ \big(
+% % \mathit{tx} F \mathit{ty} \rightarrow
+% \big( \big( \not\exists a_\mathit{tx} \in \mathit{st}
+% \big(  {W}(x)^{'}_\mathit{tx} F {R}(x)^{''}_\mathit{ty} \in \mathit{st} \big) \\
+%  \wedge  \not\exists a_\mathit{ty} \in \mathit{st}
+% \big( {W}(y)^{'''}_\mathit{ty} F {R}(y)^{''''}_\mathit{tx} \in \mathit{st}  \big) \big) \wedge
+%%\not\exists \left( c_{ty} F c_{tx} \in \mathit{st} \right)  \wedge \\
+% \big( \not\exists  {W}(x)^{'}_\mathit{tx}, {W}(x)^{''}_\mathit{tx}, \\ {R}(x)^{'''}_\mathit{ty} \in  \mathit{st}  \big)
+% \big( \left( {W}(x)^{'}_\mathit{tx}  F {W}(x)^{''}_\mathit{tx} F  c_\mathit{tx} \in  \mathit{st} \right) \\
+%   \wedge \left( v^{''} = v \right)  \big)  \wedge
+%   \not\exists \left( {W}(x)^{'}_\mathit{ty}, {W}(x)^{''}_\mathit{ty}, {R}(x)^{'''}_\mathit{tx} \in  \mathit{st} \right) \\
+%    \big( \left(
+% {W}(x)^{'}_\mathit{ty}  F {W}(x)^{''}_\mathit{ty} F  c_\mathit{ty} \in  \mathit{st} \right)
+%   \wedge \left( v^{''} = v \right)  \big) \wedge
+% %\mathit{tx} F \mathit{ty} \rightarrow
+%  \big( \\ \not\exists {W}(x)^{'}_\mathit{tx},  {W}(y)^{''}_\mathit{tx},
+%  {W}(x)^{'''}_\mathit{ty}, {W}(y)^{''''}_\mathit{ty}, {R}(x)^{'''''}_\mathit{tx}, {R}(y)^{''''''}_\mathit{ty} \in \mathit{St} \\ \big)
+%% \big( \left( {W^i}(x)^{'}_\mathit{tx} F c_\mathit{tx} F  {W^k}(x)^{'}_\mathit{ty} F {R^m}(x)^{'}_\mathit{ty} \in \mathit{st} \right) \\
+%%\wedge \left( {W^j}(y)^{'}_\mathit{tx} F c_\mathit{tx} F {W^l}(y)^{'}_\mathit{ty} F {R^n}(y)^{'}_\mathit{ty} \in \mathit{St} \right) \wedge \\
+%\big( \left( \left( v^{''''} = v^{'''} \right) \wedge \left( v^{''''} = v \right) \right) \vee \\ \left( \left( v^{''''} = v^{'} \right) \wedge \left( v^{''''} = v^{''} \right) \right)  \big) \wedge \\
+%%\left( \not\exists {R^m}(x)^{'}_\mathit{tx}, {R^n}(y)^{'}_\mathit{ty} \in \mathit{St} \right) \c\
+%%   \big( \left( {W^i}(x)^{'}_\mathit{tx} F c_\mathit{tx} F  {W^k}(x)^{'}_\mathit{ty} F {R^m}(x)^{'}_\mathit{ty} \in \mathit{st} \right) \wedge \\
+%%   \left( {W^j}(y)^{'}_\mathit{tx} F c_\mathit{tx} F {W^l}(y)^{'}_\mathit{ty} F {R^n}(y)^{'}_\mathit{ty} \in \mathit{St} \right) \wedge \\
+%% \left( v_n^{'} = v_k^{'} \right) \wedge \left( v_m^{'} = v_i^{'} \right)  \big) \wedge \\
+%    \big( \not\exists {R}(x)^{'}_\mathit{tx}, {W}(x)^{''}_\mathit{ty}, {R}(x)^{'''}_\mathit{ty}, {R}(y)^{''''}_\mathit{ty}, {W}(y)^{'''''}_\mathit{tx}, {R}(y)^{''''''}_\mathit{tx} \in \mathit{St} \big)  \\
+%     \big( \big( {R}(x)^{'}_\mathit{tx} F {W}(x)^{''}_\mathit{ty} F {R}(x)^{'''}_\mathit{ty} \in \mathit{St} \big) \wedge \\
+%  \big(  {R}(y)^{''''}_\mathit{ty} F {W}(y)^{'''''}_\mathit{tx} F {R}(y)^{''''''}_\mathit{tx} \in \mathit{St} \big)  \big)  \\
+%  \big(  \left( v^{''} = v^{'} \right) \wedge
+% \left( v^{'''''} = v^{''''} \right) \big) \big) \big)
+%%\left( \mathit{Op}^i_\mathit{tx} X^o \mathit{Op}^j_\mathit{tx} \in \mathit{st} \right) \wedge
+%% \left( \mathit{Op}^k_\mathit{ty} X^o \mathit{Op}^l_\mathit{ty} \in \mathit{st} \right)
+%%\\ \rightarrow \exists S \left( \mathit{Op}^i_\mathit{tx} X^o \mathit{Op}^j_\mathit{tx} F c_\mathit{tx} F \mathit{Op}^k_\mathit{ty} X^o \mathit{Op}^l_\mathit{ty} F c_\mathit{ty}  \in S \right)  \wedge \\
+%% \forall \mathit{st}  \left( \mathit{Op}^j_\mathit{tx} X^o R^m_\mathit{tx} \in \mathit{st} \right) \wedge \left( v^m = v^j  \right) \wedge \\
+%% \forall \mathit{st}  \left( \mathit{Op}^k_\mathit{ty} X^o R^n_\mathit{ty} \in \mathit{st} \right) \wedge \left( v^n = v^k  \right) \big) \big)
+%\end{split}
+%  \end{align}
+%  The isolation level  PL-2.99 specifies that, on top of PL-2, read-write item-dependency cycles must be proscribed among transactions. PL-2.99 is given as
+%  \begin{align}\label{eqn:PL299}
+%\begin{split}
+%%\forall i, j, k, l, m, n, p, q, s, t, u, a, b, c, d, e, f, tx, ty \\ \big( \left( tx F ty \right) \wedge \left( \left( \star R^j_{tx}{v_l} F^{o} W^k_{tx}(v_m) X^{o} R^p_{tx}{v_t} \star \right) \right) \\ \wedge \left( \left( \star R^n_{ty}{v_s} F^{o} W^q_{ty}(v_u) X^{o} R^a_{ty}{v_b} \star \right) \right) \big)^\mathit{po}_{o_m} \\
+%%\rightarrow \big( G \left( v_t = v_m \right) \oplus \left( R^j_{tx}{v_l} F^{o} W^c_{tx}(v_d) F^{o} W^k_{tx}(v_m) X^{o} R^p_{tx}{v_t} \right) \\ F \;  c_{tx} \; F \; \\  \left( v_b = v_u \right) \oplus \left( R^n_{ty}{v_s} F^{o} W^q_{ty}(v_u) F^{o} W^e_{ty}(v_f) X^{o} R^a_{ty}{v_b} \right) \\ F \;  c_{ty} \big)^\mathit{st}_{o_m}.
 %%E^s =  \forall  \mathit{St}, \mathit{st} \in \mathit{St}, \mathit{tx}, \mathit{ty} \big(
 %%  \mathit{tx} F \mathit{ty} \rightarrow \\
 %% \big( \not\exists \left( a_\mathit{ty} F a_\mathit{tx} \in \mathit{st} \right) \wedge \not\exists \left( c_{ty} F c_{tx} \in \mathit{st} \right)  \wedge \\
@@ -971,103 +1063,44 @@ E^{r} = \forall  \mathit{st}, \mathit{st}^{'} \in  \mathit{St}, \mathit{tx}, \ma
 %%  \left( {W^m}(y)^{'}_\mathit{tx} F {R^p}(y)^{'}_\mathit{tx} \in  \mathit{st}  \right) \wedge
 %%  \left( {W^n}(y)^{'}_\mathit{ty} F {R^q}(y)^{'}_\mathit{ty} \in  \mathit{st} \right)\big) \\
 %%  \left( \left( v_l^{'} = v_k^{'} \right) \wedge \left( v_q^{'} = v_m^{'} \right) \right) \wedge \\
-%   \not\exists \big( \left( {R^i}(x)^{'}_\mathit{tx} \in  \mathit{st}  \right) \wedge
-%  \left( {W^j}(x)^{'}_\mathit{ty} F {R^k}(x)^{'}_\mathit{ty} \in  \mathit{st} \right) \wedge \\
-%  \left( {W^m}(y)^{'}_\mathit{tx} F {R^p}(y)^{'}_\mathit{tx} \in  \mathit{st}  \right) \wedge
-%  \left( {W^n}(y)^{'}_\mathit{ty} F {R^q}(y)^{'}_\mathit{ty} \in  \mathit{st} \right) \big) \\
-%  \big( \left( \left( v_k^{'} = v_j^{'} \right)  \wedge \left( v_p^{'} = v_m^{'} \right) \right)  \big) \big) \big) \big)
-E^{r} = C = \forall \mathit{st}, \mathit{st}^{'} \in \mathit{St}, \mathit{tx}, \mathit{ty} \in \mathit{St} \\ \big(
- % \mathit{tx} F \mathit{ty} \rightarrow
- \big( \big( \not\exists a_\mathit{tx} \in \mathit{st}
- \big(  {W}(x)^{'}_\mathit{tx} F {R}(x)^{''}_\mathit{ty} \in \mathit{st} \big) \\
-  \wedge  \not\exists a_\mathit{ty} \in \mathit{st}
- \big( {W}(y)^{'''}_\mathit{ty} F {R}(y)^{''''}_\mathit{tx} \in \mathit{st}  \big) \big) \wedge
-%\not\exists \left( c_{ty} F c_{tx} \in \mathit{st} \right)  \wedge \\
- \big( \not\exists  {W}(x)^{'}_\mathit{tx}, {W}(x)^{''}_\mathit{tx}, \\ {R}(x)^{'''}_\mathit{ty} \in  \mathit{st}  \big)
- \big( \left( {W}(x)^{'}_\mathit{tx}  F {W}(x)^{''}_\mathit{tx} F  c_\mathit{tx} \in  \mathit{st} \right) \\
-   \wedge \left( v^{''} = v \right)  \big)  \wedge
-   \not\exists \left( {W}(x)^{'}_\mathit{ty}, {W}(x)^{''}_\mathit{ty}, {R}(x)^{'''}_\mathit{tx} \in  \mathit{st} \right) \\
-    \big( \left(
- {W}(x)^{'}_\mathit{ty}  F {W}(x)^{''}_\mathit{ty} F  c_\mathit{ty} \in  \mathit{st} \right)
-   \wedge \left( v^{''} = v \right)  \big) \wedge
- %\mathit{tx} F \mathit{ty} \rightarrow
-  \big( \\ \not\exists {W}(x)^{'}_\mathit{tx},  {W}(y)^{''}_\mathit{tx},
-  {W}(x)^{'''}_\mathit{ty}, {W}(y)^{''''}_\mathit{ty}, {R}(x)^{'''''}_\mathit{tx}, {R}(y)^{''''''}_\mathit{ty} \in \mathit{St} \\ \big)
-% \big( \left( {W^i}(x)^{'}_\mathit{tx} F c_\mathit{tx} F  {W^k}(x)^{'}_\mathit{ty} F {R^m}(x)^{'}_\mathit{ty} \in \mathit{st} \right) \\
-%\wedge \left( {W^j}(y)^{'}_\mathit{tx} F c_\mathit{tx} F {W^l}(y)^{'}_\mathit{ty} F {R^n}(y)^{'}_\mathit{ty} \in \mathit{St} \right) \wedge \\
-\big( \left( \left( v^{''''} = v^{'''} \right) \wedge \left( v^{''''} = v \right) \right) \vee \\ \left( \left( v^{''''} = v^{'} \right) \wedge \left( v^{''''} = v^{''} \right) \right)  \big) \wedge \\
-%\left( \not\exists {R^m}(x)^{'}_\mathit{tx}, {R^n}(y)^{'}_\mathit{ty} \in \mathit{St} \right) \c\
-%   \big( \left( {W^i}(x)^{'}_\mathit{tx} F c_\mathit{tx} F  {W^k}(x)^{'}_\mathit{ty} F {R^m}(x)^{'}_\mathit{ty} \in \mathit{st} \right) \wedge \\
-%   \left( {W^j}(y)^{'}_\mathit{tx} F c_\mathit{tx} F {W^l}(y)^{'}_\mathit{ty} F {R^n}(y)^{'}_\mathit{ty} \in \mathit{St} \right) \wedge \\
-% \left( v_n^{'} = v_k^{'} \right) \wedge \left( v_m^{'} = v_i^{'} \right)  \big) \wedge \\
-    \big( \not\exists {R}(x)^{'}_\mathit{tx}, {W}(x)^{''}_\mathit{ty}, {R}(x)^{'''}_\mathit{ty}, {R}(y)^{''''}_\mathit{ty}, {W}(y)^{'''''}_\mathit{tx}, {R}(y)^{''''''}_\mathit{tx} \in \mathit{St} \big)  \\
-     \big( \big( {R}(x)^{'}_\mathit{tx} F {W}(x)^{''}_\mathit{ty} F {R}(x)^{'''}_\mathit{ty} \in \mathit{St} \big) \wedge \\
-  \big(  {R}(y)^{''''}_\mathit{ty} F {W}(y)^{'''''}_\mathit{tx} F {R}(y)^{''''''}_\mathit{tx} \in \mathit{St} \big)  \big)  \\
-  \big(  \left( v^{''} = v^{'} \right) \wedge
- \left( v^{'''''} = v^{''''} \right) \big) \big) \big)
-%\left( \mathit{Op}^i_\mathit{tx} X^o \mathit{Op}^j_\mathit{tx} \in \mathit{st} \right) \wedge
-% \left( \mathit{Op}^k_\mathit{ty} X^o \mathit{Op}^l_\mathit{ty} \in \mathit{st} \right)
-%\\ \rightarrow \exists S \left( \mathit{Op}^i_\mathit{tx} X^o \mathit{Op}^j_\mathit{tx} F c_\mathit{tx} F \mathit{Op}^k_\mathit{ty} X^o \mathit{Op}^l_\mathit{ty} F c_\mathit{ty}  \in S \right)  \wedge \\
-% \forall \mathit{st}  \left( \mathit{Op}^j_\mathit{tx} X^o R^m_\mathit{tx} \in \mathit{st} \right) \wedge \left( v^m = v^j  \right) \wedge \\
-% \forall \mathit{st}  \left( \mathit{Op}^k_\mathit{ty} X^o R^n_\mathit{ty} \in \mathit{st} \right) \wedge \left( v^n = v^k  \right) \big) \big)
-\end{split}
-  \end{align}
-  The isolation level  PL-2.99 specifies that, on top of PL-2, read-write item-dependency cycles must be proscribed among transactions. PL-2.99 is given as
-  \begin{align}\label{eqn:PL299}
-\begin{split}
-%\forall i, j, k, l, m, n, p, q, s, t, u, a, b, c, d, e, f, tx, ty \\ \big( \left( tx F ty \right) \wedge \left( \left( \star R^j_{tx}{v_l} F^{o} W^k_{tx}(v_m) X^{o} R^p_{tx}{v_t} \star \right) \right) \\ \wedge \left( \left( \star R^n_{ty}{v_s} F^{o} W^q_{ty}(v_u) X^{o} R^a_{ty}{v_b} \star \right) \right) \big)^\mathit{po}_{o_m} \\
-%\rightarrow \big( G \left( v_t = v_m \right) \oplus \left( R^j_{tx}{v_l} F^{o} W^c_{tx}(v_d) F^{o} W^k_{tx}(v_m) X^{o} R^p_{tx}{v_t} \right) \\ F \;  c_{tx} \; F \; \\  \left( v_b = v_u \right) \oplus \left( R^n_{ty}{v_s} F^{o} W^q_{ty}(v_u) F^{o} W^e_{ty}(v_f) X^{o} R^a_{ty}{v_b} \right) \\ F \;  c_{ty} \big)^\mathit{st}_{o_m}.
-%E^s =  \forall  \mathit{St}, \mathit{st} \in \mathit{St}, \mathit{tx}, \mathit{ty} \big(
-%  \mathit{tx} F \mathit{ty} \rightarrow \\
-% \big( \not\exists \left( a_\mathit{ty} F a_\mathit{tx} \in \mathit{st} \right) \wedge \not\exists \left( c_{ty} F c_{tx} \in \mathit{st} \right)  \wedge \\
-% \not\exists \left( \left( {W^i}(x)^{'}_\mathit{tx} F {R^j}(x)^{'}_\mathit{ty} \in  \mathit{st} \right) \wedge \left( {W^k}(x)^{'}_\mathit{tx} \in \mathit{st}  \right) \right) \\
-%  \left( {R^j}(x)^{'}_\mathit{ty} F {W^k}(x)^{'}_\mathit{tx} F c_\mathit{tx} \in  \mathit{st} \right) \wedge \\
-%   \not\exists \big( \left( {W^i}(x)^{'}_\mathit{tx} F {R^k}(x)^{'}_\mathit{tx} \in  \mathit{st}  \right) \wedge
-%  \left( {W^j}(x)^{'}_\mathit{ty} F {R^l}(x)^{'}_\mathit{ty} \in  \mathit{st} \right) \wedge \\
-%  \left( {W^m}(y)^{'}_\mathit{tx} F {R^p}(y)^{'}_\mathit{tx} \in  \mathit{st}  \right) \wedge
-%  \left( {W^n}(y)^{'}_\mathit{ty} F {R^q}(y)^{'}_\mathit{ty} \in  \mathit{st} \right)\big) \\
-%  \left( \left( v_l^{'} = v_k^{'} \right) \wedge \left( v_q^{'} = v_m^{'} \right) \right) \wedge \\
-E^{r} = C = \forall \mathit{st}, \mathit{st}^{'} \in \mathit{St}, \mathit{tx}, \mathit{ty} \in \mathit{St} \\ \big(
- % \mathit{tx} F \mathit{ty} \rightarrow
- \big( \big( \not\exists a_\mathit{tx} \in \mathit{st}
- \big(  {W}(x)^{'}_\mathit{tx} F {R}(x)^{''}_\mathit{ty} \in \mathit{st} \big) \\
-  \wedge  \not\exists a_\mathit{ty} \in \mathit{st}
- \big( {W}(y)^{'''}_\mathit{ty} F {R}(y)^{''''}_\mathit{tx} \in \mathit{st}  \big) \big) \wedge
-%\not\exists \left( c_{ty} F c_{tx} \in \mathit{st} \right)  \wedge \\
- \big( \not\exists  {W}(x)^{'}_\mathit{tx}, {W}(x)^{''}_\mathit{tx}, \\ {R}(x)^{'''}_\mathit{ty} \in  \mathit{st}  \big)
- \big( \left( {W}(x)^{'}_\mathit{tx}  F {W}(x)^{''}_\mathit{tx} F  c_\mathit{tx} \in  \mathit{st} \right) \\
-   \wedge \left( v^{''} = v \right)  \big)  \wedge
-   \not\exists \left( {W}(x)^{'}_\mathit{ty}, {W}(x)^{''}_\mathit{ty}, {R}(x)^{'''}_\mathit{tx} \in  \mathit{st} \right) \\
-    \big( \left(
- {W}(x)^{'}_\mathit{ty}  F {W}(x)^{''}_\mathit{ty} F  c_\mathit{ty} \in  \mathit{st} \right)
-   \wedge \left( v^{''} = v \right)  \big) \wedge
- %\mathit{tx} F \mathit{ty} \rightarrow
-  \big( \\ \not\exists {W}(x)^{'}_\mathit{tx},  {W}(y)^{''}_\mathit{tx},
-  {W}(x)^{'''}_\mathit{ty}, {W}(y)^{''''}_\mathit{ty}, {R}(x)^{'''''}_\mathit{tx}, {R}(y)^{''''''}_\mathit{ty} \in \mathit{St} \\ \big)
-% \big( \left( {W^i}(x)^{'}_\mathit{tx} F c_\mathit{tx} F  {W^k}(x)^{'}_\mathit{ty} F {R^m}(x)^{'}_\mathit{ty} \in \mathit{st} \right) \\
-%\wedge \left( {W^j}(y)^{'}_\mathit{tx} F c_\mathit{tx} F {W^l}(y)^{'}_\mathit{ty} F {R^n}(y)^{'}_\mathit{ty} \in \mathit{St} \right) \wedge \\
-\big( \left( \left( v^{'''''} = v^{''''} \right) \wedge \left( v^{'''''} = v \right) \right) \vee \\ \left( \left( v^{'''''} = v^{'} \right) \wedge \left( v^{''''} = v^{''} \right) \right)  \big) \wedge \\
-%\left( \not\exists {R^m}(x)^{'}_\mathit{tx}, {R^n}(y)^{'}_\mathit{ty} \in \mathit{St} \right) \c\
-%   \big( \left( {W^i}(x)^{'}_\mathit{tx} F c_\mathit{tx} F  {W^k}(x)^{'}_\mathit{ty} F {R^m}(x)^{'}_\mathit{ty} \in \mathit{st} \right) \wedge \\
-%   \left( {W^j}(y)^{'}_\mathit{tx} F c_\mathit{tx} F {W^l}(y)^{'}_\mathit{ty} F {R^n}(y)^{'}_\mathit{ty} \in \mathit{St} \right) \wedge \\
-% \left( v_n^{'} = v_k^{'} \right) \wedge \left( v_m^{'} = v_i^{'} \right)  \big) \wedge \\
-    \big( \not\exists {R}(x)^{'}_\mathit{tx}, {W}(x)^{''}_\mathit{ty}, {R}(x)^{'''}_\mathit{ty}, {R}(x)^{''''}_\mathit{ty}, {W}(x)^{'''''}_\mathit{tx}, {R}(x)^{''''''}_\mathit{tx} \in \mathit{St} \big)  \\
-     \big( \big( {R}(x)^{'}_\mathit{tx} F {W}(x)^{''}_\mathit{ty} F {R}(x)^{'''}_\mathit{ty} \in \mathit{St} \big) \wedge \\
-  \big(  {R}(x)^{''''}_\mathit{ty} F {W}(x)^{'''''}_\mathit{tx} F {R}(x)^{''''''}_\mathit{tx} \in \mathit{St} \big)  \big)  \\
-  \big(  \left( v^{''} = v^{'} \right) \wedge
- \left( v^{'''''} = v^{''''} \right) \big) \big) \big)
-%E = C = \forall i, j, k, l, o, \mathit{st}, \mathit{tx}, \mathit{ty} \big( \left( \mathit{tx} F \mathit{ty} \right) \wedge \left( R^i_\mathit{tx} F W^j_\mathit{tx} \in \mathit{st} \right) \\
-%\wedge \left( R^k_\mathit{ty} F W^l_\mathit{ty} \in \mathit{st} \right)
-%\\ \rightarrow \; \exists S \left( R^i_\mathit{tx} F W^j_\mathit{tx} F c_\mathit{tx}  F R^k_\mathit{ty} F W^l_\mathit{ty} F c_\mathit{ty}\in S \right) \\
-%\\ \wedge  \not\exists R^m_\mathit{tx} \in \mathit{st} \left( R^i_\mathit{tx} F W^j_\mathit{tx} F R^m_\mathit{tx} \in \mathit{st} \right)  \wedge \left( v^i = v^m \right) \\
-%\wedge  \not\exists R^n_\mathit{ty} \in \mathit{st} \left( R^k_\mathit{ty} F W^l_\mathit{ty} F R^n_\mathit{ty} \in \mathit{st} \right) \wedge \left( v^k = v^n \right) \big)
-\end{split}
-  \end{align}
-  
-\section{A Hierarchy of ConSpec Specifications }\label{sec:hierarchy}
-Definitions of consistency models are specified using ConSpec in the form of LTL properties. Hence, ConSpec specifications can be classified using the same basic principles by which LTL properties are categorised \cite{Manna:1990:HTP:93385.93442}. There are four broad categories of  LTL properties: safety, guarantee, recurrence, and persistence. Consider that $\phi$ is a given LTL property, which may be a conjunction or disjunction of multiple LTL properties. A safety property is expressed in a generic format $\forall \phi$, whereas a guarantee property is expressed as $\exists \phi$; recurrence and persistence properties are expressed as $R \phi$ and $P \phi,$ respectively.  The specification $\mathcal{E}^{s} $  for each of the consistency models RYW, MR, Causal, WFR, and MW can be expressed in the form $\forall p \rightarrow \exists q, $ which can be rewritten as $\forall F p \rightarrow F q.$ This form of LTL specification is called the conditional guarantee form of LTL property. The specifications for the TSO and PC consistency models can be expressed in the form  $\forall p_1 \circ  p_2 \circ^{'}  ... \circ^{''}  p_k, $  where $\circ, \circ^{'}, ... , \circ^{''}$ are conjunction or disjunction operators of first order logic over LTL constraints $p_1, p_2, .... , p_k$. The above expression can be transformed into the form $\forall p,$ which is called the safety form of LTL property.  Thus, the ConSpec specifications can be broadly classified as conditional guarantee and safety properties. 
- \par Now, let us further analyze the consistency models belonging to the conditional guarantee form. The specifications $\mathcal{E}^{s} $ of RYW, MR, Causal, WFR, and MW can be expressed in the form  $\mathcal{E}^{s} = A \rightarrow B$ (refer to Defintion \ref{def:form0}), where the precondition $A$ is specified as $A$ =$ {\mathit{Op}}^{'} F {\mathit{Op}}^{''} \in \mathit{st} $ .  The precondition $A$  in the specification $\mathcal{E}^{s} $ for Causal consistency  (refer to Equation \ref{eqn:Causal}) imposes an LTL constraint  on any  pair of operations $ {\mathit{op}}$ and  ${\mathit{op}^{'}}$  comprised in a given session trace.  Since the above operations $ {\mathit{op}}$ and  ${\mathit{op}^{'}}$ can be both read and write operations, precondition $A$ for Causal consistency is more restrictive than others. Thus, in turn, the set of session traces that satisfies the precondition $A$ for Causal consistency is smaller in size than the set that satisfies RYW, MR, WFR, and MW.  However, the postcondition $B$ for RYW, MR, Causal WFR, MW uniformly defines an existential quantification on the serialization of a partial execution for a given client.  The strength (degree of the strength) of a consistency model can be quantified by the size of the set of session traces that consistency model; smaller size  implies more restrictive condition, which, in turn, implies stronger the consistency model. Hence, Causal consistency is stronger than the rest of the above consistency models, namely RYW, MR, Causal WFR, and MW.  The precondition $A$ for RYW (refer to Equation \ref{eqn:RYW}) comprises an LTL constraint ${W}^{'} F {R}^{''}$ on successive write and read operations ${w}$ and ${r}^{'}$.  On the other hand, WFR (refer to Equation \ref{eqn:WFR}) comprises an LTL constraint ${R}^{'} F {W}^{''}$ on successive read and write operations ${r}$ and ${w}^{'}$. However the writes ${w}^{'}$ have no meaning in the observed session traces, unless viewed in company of a succeeding read  ${r}^{''}$.  Thus, the precondition $A$ for WFR can be expressed as ${W}^{'} F {R}^{''} F {R}^{'''}$, making it more restrictive; thus the set of traces which satisfy WFR is smaller than that of RYW and MR. Hence, WFR is stronger than the precondition $A = {R}^{'} F {R}^{''}$ for MR, as well as the precondition $A = {W}^{'} F {R}^{''}$. Similarly, the precondition $A$ =  ${W}^{'} F {W}^{''}$  for MW can be expressed as   $A$ =  ${W}^{'} F {W}^{''} F {R}^{'''} $, making it also stronger than RYW and MR.  Strict serializability model, on the other hand, specifies the precondition $A$ as an LTL constraint on any pair of operations; particularly,  it specifies $A$ as  $A$ =  ${\mathit{Op}}^{'} X {\mathit{Op}}^{''}$. The LTL operator next $X$ implies that the set of session traces satisfies the above precondition is even smaller than the set that satisfies Causal consistency. Hence Strict Serializability is stronger than the rest of the consistency models of the conditional guarantee form. 
-
+%E^{r} = C = \forall \mathit{st}, \mathit{st}^{'} \in \mathit{St}, \mathit{tx}, \mathit{ty} \in \mathit{St} \\ \big(
+% % \mathit{tx} F \mathit{ty} \rightarrow
+% \big( \big( \not\exists a_\mathit{tx} \in \mathit{st}
+% \big(  {W}(x)^{'}_\mathit{tx} F {R}(x)^{''}_\mathit{ty} \in \mathit{st} \big) \\
+%  \wedge  \not\exists a_\mathit{ty} \in \mathit{st}
+% \big( {W}(y)^{'''}_\mathit{ty} F {R}(y)^{''''}_\mathit{tx} \in \mathit{st}  \big) \big) \wedge
+%%\not\exists \left( c_{ty} F c_{tx} \in \mathit{st} \right)  \wedge \\
+% \big( \not\exists  {W}(x)^{'}_\mathit{tx}, {W}(x)^{''}_\mathit{tx}, \\ {R}(x)^{'''}_\mathit{ty} \in  \mathit{st}  \big)
+% \big( \left( {W}(x)^{'}_\mathit{tx}  F {W}(x)^{''}_\mathit{tx} F  c_\mathit{tx} \in  \mathit{st} \right) \\
+%   \wedge \left( v^{''} = v \right)  \big)  \wedge
+%   \not\exists \left( {W}(x)^{'}_\mathit{ty}, {W}(x)^{''}_\mathit{ty}, {R}(x)^{'''}_\mathit{tx} \in  \mathit{st} \right) \\
+%    \big( \left(
+% {W}(x)^{'}_\mathit{ty}  F {W}(x)^{''}_\mathit{ty} F  c_\mathit{ty} \in  \mathit{st} \right)
+%   \wedge \left( v^{''} = v \right)  \big) \wedge
+% %\mathit{tx} F \mathit{ty} \rightarrow
+%  \big( \\ \not\exists {W}(x)^{'}_\mathit{tx},  {W}(y)^{''}_\mathit{tx},
+%  {W}(x)^{'''}_\mathit{ty}, {W}(y)^{''''}_\mathit{ty}, {R}(x)^{'''''}_\mathit{tx}, {R}(y)^{''''''}_\mathit{ty} \in \mathit{St} \\ \big)
+%% \big( \left( {W^i}(x)^{'}_\mathit{tx} F c_\mathit{tx} F  {W^k}(x)^{'}_\mathit{ty} F {R^m}(x)^{'}_\mathit{ty} \in \mathit{st} \right) \\
+%%\wedge \left( {W^j}(y)^{'}_\mathit{tx} F c_\mathit{tx} F {W^l}(y)^{'}_\mathit{ty} F {R^n}(y)^{'}_\mathit{ty} \in \mathit{St} \right) \wedge \\
+%\big( \left( \left( v^{'''''} = v^{''''} \right) \wedge \left( v^{'''''} = v \right) \right) \vee \\ \left( \left( v^{'''''} = v^{'} \right) \wedge \left( v^{''''} = v^{''} \right) \right)  \big) \wedge \\
+%%\left( \not\exists {R^m}(x)^{'}_\mathit{tx}, {R^n}(y)^{'}_\mathit{ty} \in \mathit{St} \right) \c\
+%%   \big( \left( {W^i}(x)^{'}_\mathit{tx} F c_\mathit{tx} F  {W^k}(x)^{'}_\mathit{ty} F {R^m}(x)^{'}_\mathit{ty} \in \mathit{st} \right) \wedge \\
+%%   \left( {W^j}(y)^{'}_\mathit{tx} F c_\mathit{tx} F {W^l}(y)^{'}_\mathit{ty} F {R^n}(y)^{'}_\mathit{ty} \in \mathit{St} \right) \wedge \\
+%% \left( v_n^{'} = v_k^{'} \right) \wedge \left( v_m^{'} = v_i^{'} \right)  \big) \wedge \\
+%    \big( \not\exists {R}(x)^{'}_\mathit{tx}, {W}(x)^{''}_\mathit{ty}, {R}(x)^{'''}_\mathit{ty}, {R}(x)^{''''}_\mathit{ty}, {W}(x)^{'''''}_\mathit{tx}, {R}(x)^{''''''}_\mathit{tx} \in \mathit{St} \big)  \\
+%     \big( \big( {R}(x)^{'}_\mathit{tx} F {W}(x)^{''}_\mathit{ty} F {R}(x)^{'''}_\mathit{ty} \in \mathit{St} \big) \wedge \\
+%  \big(  {R}(x)^{''''}_\mathit{ty} F {W}(x)^{'''''}_\mathit{tx} F {R}(x)^{''''''}_\mathit{tx} \in \mathit{St} \big)  \big)  \\
+%  \big(  \left( v^{''} = v^{'} \right) \wedge
+% \left( v^{'''''} = v^{''''} \right) \big) \big) \big)
+%%E = C = \forall i, j, k, l, o, \mathit{st}, \mathit{tx}, \mathit{ty} \big( \left( \mathit{tx} F \mathit{ty} \right) \wedge \left( R^i_\mathit{tx} F W^j_\mathit{tx} \in \mathit{st} \right) \\
+%%\wedge \left( R^k_\mathit{ty} F W^l_\mathit{ty} \in \mathit{st} \right)
+%%\\ \rightarrow \; \exists S \left( R^i_\mathit{tx} F W^j_\mathit{tx} F c_\mathit{tx}  F R^k_\mathit{ty} F W^l_\mathit{ty} F c_\mathit{ty}\in S \right) \\
+%%\\ \wedge  \not\exists R^m_\mathit{tx} \in \mathit{st} \left( R^i_\mathit{tx} F W^j_\mathit{tx} F R^m_\mathit{tx} \in \mathit{st} \right)  \wedge \left( v^i = v^m \right) \\
+%%\wedge  \not\exists R^n_\mathit{ty} \in \mathit{st} \left( R^k_\mathit{ty} F W^l_\mathit{ty} F R^n_\mathit{ty} \in \mathit{st} \right) \wedge \left( v^k = v^n \right) \big)
+%\end{split}
+%  \end{align}
+ 
+ 
 \section{Rewriting CAP Theorem in terms of ConSpec}\label{sec:cap}
  CAP theorem \cite{brew:cap, Gilbert:2002:BCF:564585.564601} states that it is impossible to simultaneously achieve atomic consistency (linearizability), availability (i.e.,
  the property that there must be a response against every request), and partition tolerance (i.e., tolerance of network partitions)
@@ -1116,50 +1149,16 @@ Following the approach of the proof to Theorem \ref{th:cap}, the above theorem i
 Let us consider that the underlying storage system satisfies a consistency model $\mathcal{C}$ that imposes a partial order $\preccurlyeq$ on a global execution comprising operations performed by all clients (represented by a global session trace $\mathit{St}$).  %must, by definition of a strict partial order, satisfy the following properties: 1)  irreflexivity, 2) transitivity, and 3) asymmetry. The results in each of the above  global session traces $\mathit{St}$ are resulting from a linear execution of operations from each client $\mathit{Cl}_1$ and $\mathit{Cl}_2$, i.e., each client executes its operations according to the sequence specified in its respective program order.  Thus each operation can not loop into itself (state diagram for an execution must be devoid of self loops); hence, condition 1 is trivially satisfied in the above execution.  Since the operations performed by clients $\mathit{Cl}_1$ and $\mathit{Cl}_2$ are executed in  a linear temporal order which follows from the program order of each client, there can not be any cycle among the operations in each of the above session traces; hence, condition 2 also holds for the above execution. 
  The global session traces observed by clients $\mathit{Cl}_1$ and $\mathit{Cl}_2$ comprise sequences of operations, given as  $\alpha, \beta$ and  $\alpha, \gamma$, respectively. Because of the lack of communication of updates between the servers $N_1$ and $N_2$ serving $\mathit{Cl}_1$ and $\mathit{Cl}_2$ in presence of a partition, the global session trace observed by $\mathit{Cl}_1$  satisfies the partial order  $\preccurlyeq$ = $\alpha  \preccurlyeq \beta$ or $\beta  \preccurlyeq \alpha$; whereas the global session trace observed by $\mathit{Cl}_2$ satisfies a different partial order $\preccurlyeq^{'}$ = $\alpha \preccurlyeq \gamma$ or $ \gamma \preccurlyeq \alpha$.  Since $\beta \not= \gamma$, each of the above session traces satisfies a partial order $\preccurlyeq$ and  $\preccurlyeq^{'}$. Hence, in presence of partitions, the above system remains available, while satisfying a partial order on the global session trace $\mathit{St}$. Thus, such a consistency model can be implemented in a manner which simultaneously achieves high availability and partition tolerance.  
  
-\section{Analysis of Consistency Models With Respect To CAP}\label{sec:capanalyze}
- For RYW, MR, Causal consistency, WFR, and MW, $E^s$ imposes restrictive conditions on operations comprised in an
-equivalent legal serialization of a partial order $\preccurlyeq_{st+w}$, composed of operations performed by the given client, along with only
-writes from other concurrent clients. Since $\preccurlyeq_{st+w}$ does not comprise read operations from all clients in   $\mathit{St}$, the above consistency models impose only a strict partial order with respect to  operations in $\mathit{St}$. Thus, writes from concurrent clients are allowed to overwrite results of writes from
-a given client as long as there exists an equivalent legal serialization comprising the combination of
-operations from the given client and the concurrent writes. It only restricts that the partial order, i.e., precedence, among the operations from
-each client is maintained. Similarly, Processor consistency (PC) restricts that the order among operations in a given client must be preserved in all executions, i.e., no client may observe the operations from a given client in a different order than the invocation order. Hence, PC does not enforce a partial order  across operations from different concurrent clients, it only imposes a strict partial order on all operations from a given client.  Thus, these comprise a weaker class of consistency models that can be satisfied without synchronization
-among clients, i.e., these consistency models are not dependent among reliable communication among concurrent clients (like broadcasting
-of results on common data objects, or blocking of conflicting operations). % Under these consistency models,
-% a pair of concurrent clients, namely $\mathit{Cl}_1$ and $\mathit{Cl}_2$, can continue providing high availability guarantees in a partitioned network, where there
-% all communication between $\mathit{Cl}_1$  and  $\mathit{Cl}_2$ are lost. Hence, the above consistency models are CAP-relaxed.
- %For Strict Serialization, $E^s$ imposes a restrictive conditions that mutual order among operations performed by each client
-% in a global execution must be preserved in an equivalent legal serialization $S_c$, where $S_c$ is a restriction of the
-% legal serialization $\mathit{Ser}$ with respect to a given
-%client $\mathit{Cl}$.
-% Using the expression for $S_c$ from Definition \ref{def:clientser} in Equation \ref{eqn:Strict}, the specification for Strict
-% Serializability can be given in the same manner as Chockler et al., as follows.  
-% $E^{s} =  \forall \mathit{st} \big( \mathit{Op}^{'} X^o {\mathit{Op}}^{''} \in \mathit{st}
-%\\ \rightarrow
-%\exists \left( {\mathit{Op}^i}^{'}, {\mathit{Op}}^{''} \in \mathit{Ser} \wedge {\mathit{Op}}^{'}, {\mathit{Op}}^{''} \in \mathit{st} \right) \\ 
-%\left( {\mathit{Op}}^{'} X^o {\mathit{Op}}^{''} \in S_c \right) \big).$
-%Since, $ \mathit{S_c} \subset \mathit{Ser}$, ${\mathit{Op}}^{'} X^o {\mathit{Op}}^{''} \in \mathit{S_c}$ implies ${\mathit{Op}}^{'} X^o {\mathit{Op}}^{''} \in \mathit{Ser}$
-%Hence, moving the existential quantifier out of the enclosing scope of the universal quantifier, the above expression can be rewritten as
-%\\ $E^{s} =  \exists \left( {\mathit{Op}}^{'}, {\mathit{Op}}^{''} \in \mathit{Ser} \right) \forall \mathit{st} \big( \mathit{Op} X^o {\mathit{Op}}^{''} \in \mathit{st}
-%\\ \rightarrow \left( {\mathit{Op}}^{'} X^o {\mathit{Op}}^{''} \in \mathit{Ser} \right) \big).$
-% Thus, 
- Strict Serializability restricts that the mutual execution order among operations
-performed by each client in a global execution must be preserved in a partial order $\preccurlyeq$ comprising all operations in  in a global execution (similar to an equivalent  legal serialization $\mathit{Ser}$ in the definitions of Chockler et al. defined in Equation \ref{def:ser}). Thus, Strict serializability imposes a partial order among  operations from all clients comprised in  $\mathit{St}$.
- %Legal serialization $\mathit{Ser}$ strictly orders results of all operations from all clients
-% such that each read operation performed by each client returns the result of the preceding write performed by the same client.
- %Hence, Strict Serializability imposes strong restrictions on the execution order and observed results for each clients, such that
-% a concurrent client may not overwrite the results of an operation performed by a given client. %In Equation \ref{form-1},
-% the LTL operators $R$ and $R^{'}$ can imply constraints
-% either on the observed results (in the form of equality relation among values observed) or precedence relation (denoted by
-% eventually operator $F$ or special-purpose next operator $X^o$) among each pair of operations.
- TSO 
- imposes restrictions on the execution order and observed results among all operations performed by different concurrent clients observed in a global session trace $\mathit{St}$. Hence, it directly follows from the definitions that TSO imposes a partial order on  $\mathit{St}$, where each operation performed. by a given client in $\mathit{St}$ is bounded by a partial order relation with an operation in $\mathit{St}$ performed by another concurrent client.
- Hence, these consistency models require strict synchronization among operations from different clients, such that
- operations from each client must  be executed in isolation from other concurrent clients.   
+
+ \section{Implementation}\label{sec:impl}
+ We provide an open source automated verification tool built using Spin, an open source software verification tool  \cite{Holzmann:2003:SMC:1405716}. Our tool can verify whether a given session trace satisfies a given consistency model or a given isolation level, specified in terms of a ConSpec expression. The source code and instructions for running the ConSpec tool is provided in an open source github repository \url{https://github.com/ssidhanta/ConSpecTool}. The tool accepts specifications of a given ConSpec definition in the form of an LTL expression. The behaviour of the clients acting on the underlying storage system is provided as an interaction of processes specified using the  PROMELA meta language. It runs the Spin model checker over the session trace, and the serialization list, and determines whether the session trace satisfies the specified consistency model or not. 
+ From the  PROMELA specification, Spin captures the specified semantics of a given storage system. The PROMELA specifications are translated into C code. Spin acts as a driver that verifies the generated C code  against the  ConSpec definitions expressed in terms of LTL formulas. Spin parses the given session trace and the set of equivalent serializations generated for a given storage system.   The LTL model checker embedded within Spin verifies whether a given session trace satisfies a given ConSpec specifications. The github repository comprises a PROMELA specification for each of the consistency models and isolation levels, the Spin-based main source file, and the code for generating the list of  equivalent serializations.
  
 \section{Deriving ConSpec Specifications From the State-of-the-Art Definitions}\label{sec:derive}
- Here we show how the ConSpec specifications can be directly derived from state-of-the-art specifications of
- consistency and isolation level \cite{Chockler2000, Terry:1994:SGW:645792.668302}. As already discussed,
- state-of-the-art consistency specifications define axiomatic rules for consistency models using first order
+ %Here we show how the ConSpec specifications can be directly derived from state-of-the-art specifications of
+ %consistency \cite{Chockler2000, Terry:1994:SGW:645792.668302}. 
+ As already discussed,
+ state-of-the-art consistency specifications  \cite{Chockler2000, Terry:1994:SGW:645792.668302} define axiomatic rules for consistency models using first order
  logic expressions.  Consistency definitions are specified by Chockler et al. \cite{Chockler2000} as follows.
  They use the following formalization syntax in their definitions. Consider two operations $\mathit{op}^1$ and
  $\mathit{op}^2$ invoked from a client application, such that $\mathit{op}^1$ is a write operation that updates
@@ -1513,7 +1512,7 @@ S_p \right)$.  The operation $\mathit{op}$ precedes $\mathit{op}^{'} $ such
  a pair of operations on a common storage system object $x$ must be executed in the same precedence order.  %serializations ${S_i}_i$ and ${S_i}_j$, the write operations on common storage system objects in ${S_i}_i$ and
 % ${S_i}_j$ must be executed in the same order, i.e., ${S_i}_i|w$ = ${S_i}_j|w$.
  The above condition implies that any session trace $\mathit{st}$ must comprise write-read sequences
-${\mathit{op}}(x), {\mathit{op}^{'}}(x)$  on an object $x$ in the temporal order specified in the global session trace $\mathit{St}$. Thus, $E^s = \forall x, \mathit{st}, \mathit{st}^{'} \in \mathit{St} \not\exists {\mathit{op}}(x), {\mathit{op}^{'}}(x), {\mathit{op}^{''}}(x), {\mathit{op}^{'''}}(x) \in \mathcal{O}  \\ \big( \left( {\mathit{Op}}^{'}(x) F {\mathit{Op}}^{''} (x) \in \mathit{st} \right)  \vee \big(  \left( {\mathit{Op}}^{'}(x) F {\mathit{Op}}^{'''} (x) \in \mathit{st} \right)  \wedge \\ \left( {\mathit{Op}}^{''}(x) F {\mathit{Op}}^{''''} (x) \in \mathit{st}^{'} \right)  \wedge \left( {v}^{''} = {v} \right) \wedge \left( {v}^{'} = {v}^{'''} \right)  \big) \big) \\ \rightarrow  
+${\mathit{op}}(x), {\mathit{op}^{'}}(x)$  on an object $x$ in the temporal order specified in the global session trace $\mathit{St}$. Thus, $E^s = \forall x, \mathit{st}, \mathit{st}^{'} \in \mathit{St} \not\exists {\mathit{op}}(x), {\mathit{op}^{'}}(x), {\mathit{op}^{''}}(x), {\mathit{op}^{'''}}(x) \in \mathcal{O}  \big( \left( {\mathit{Op}}^{'}(x) F {\mathit{Op}}^{''} (x) \in \mathit{st} \right)  \vee \big(  \left( {\mathit{Op}}^{'}(x) F {\mathit{Op}}^{'''} (x) \in \mathit{st} \right)  \wedge \\ \left( {\mathit{Op}}^{''}(x) F {\mathit{Op}}^{''''} (x) \in \mathit{st}^{'} \right)  \wedge \left( {v}^{''} = {v} \right) \wedge \left( {v}^{'} = {v}^{'''} \right)  \big) \big) \rightarrow  
  \left(  {\mathit{Op}}^{''}(x) F {\mathit{Op}}^{'} (x) \in \mathit{Si} \right)$ %, i.e., there must exist a common serialization comprising all operations executed from the
 % client applications which contains the above writes executed in a particular order. This condition can be expressed in terms of LTL as
 % $W^i F W^j \in \mathit{st}_x, \mathit{st}_y \rightarrow  \exists S \left( W^i F W^j \in S \right)$.
@@ -1559,9 +1558,9 @@ ${\mathit{op}}(x), {\mathit{op}^{'}}(x)$  on an object $x$ in the temporal order
 % \left( \not\exists {W^l}^{'} \preccurlyeq^{'''''}(x) {W^m}^{'} \preccurlyeq^{''''''}(x) {R^j}^{'} \right) \big) \big) \big),$
 % where each of the temporal and first order logic operators in the above expression are replaced by equivalent partial orders $\preccurlyeq^{'}(x), \preccurlyeq^{''}(x)...$  over $\mathit{St}$, defined with respect to a given object $x$. The above expression can be further rewritten as $E^s = \left( \mathit{St}, \preccurlyeq^{'}(x) \right) R ... R^{'} \left( \mathit{St}, \preccurlyeq^{''}(x)\right), $ where $R, R^{'}, ... $ are binary relations, like $\vee, 
 % \wedge, $ etc., composing the above partial order orders.  This expression can again be rewritten as 
-where $ \mathit{Si} $ is an equivalent legal serialization for a global execution comprising all clients executing in the system, defined in Equation \ref{def:ser}.. The above expression can be further rewritten in terms of a partial order $ \preccurlyeq(x)$ over a given object $x$ as $E^s = \forall x, \mathit{st}, \mathit{st}^{'} \in \mathit{St} \not\exists \mathit{op}(x), \mathit{op}^{'}(x), \mathit{op}^{''}(x), \mathit{op}^{'''}(x) \in \mathcal{O}  \\ \big( \left( \mathit{Op}^{'}(x) F \mathit{Op}^{''} (x) \in \mathit{st} \right)  \vee \big(  \left( \mathit{Op}^{'}(x) F \mathit{Op}^{'''} (x) \in \mathit{st} \right)  \wedge \\
- \left( \mathit{Op}^{''}(x) F \mathit{Op}^{''''} (x) \in \mathit{st}^{'} \right)  \wedge \left( v^{''} = v \right) \wedge \left( v^{'} = v^{'''} \right)  \big) \big) \rightarrow   \\ \left( \mathit{Op}^{'}(x) \preccurlyeq(x) \mathit{Op}^{''} (x) \right),$
-   where $ \preccurlyeq(x)$ is a partial order over a given object $x$ with respect to a given global session trace $ \mathit{St}$.
+where $ \mathit{Si} $ is an equivalent legal serialization for a global execution comprising all clients executing in the system, defined in Equation \ref{def:ser}. The above expression can be trivially rewritten as Equation \ref{eqn:TSO}. % further rewritten in terms of a partial order $ \preccurlyeq(x)$ over a given object $x$ as $E^s = \forall x, \mathit{st}, \mathit{st}^{'} \in \mathit{St} \not\exists \mathit{op}(x), \mathit{op}^{'}(x), \mathit{op}^{''}(x), \mathit{op}^{'''}(x) \in \mathcal{O}  \big( \left( \mathit{Op}^{'}(x) F \mathit{Op}^{''} (x) \in \mathit{st} \right)  \vee \big(  \left( \mathit{Op}^{'}(x) F \mathit{Op}^{'''} (x) \in \mathit{st} \right)  \wedge \\
+% \left( \mathit{Op}^{''}(x) F \mathit{Op}^{''''} (x) \in \mathit{st}^{'} \right)  \wedge \left( v^{''} = v \right) \wedge \left( v^{'} = v^{'''} \right)  \big) \big) \rightarrow   \left( \mathit{Op}^{'}(x) \preccurlyeq(x) \mathit{Op}^{''} (x) \right),$
+  % where $ \preccurlyeq(x)$ is a partial order over a given object $x$ with respect to a given global session trace $ \mathit{St}$.
   %Thus, the ConSpec expression for TSO is derived as follows.
 %   Any
 %  two write operations with read operations following them must occur in the same order for all executions,
@@ -1574,17 +1573,18 @@ where $ \mathit{Si} $ is an equivalent legal serialization for a global executio
 %\rightarrow \\ \forall S \left( \mathit{Op}^i X W^j \in S \right)
 %\wedge \not\exists R^k  \left( \mathit{Op}^i X^o W^j X^o R^k \in \mathit{st} \right) \\ \wedge \left( v^k = v^i  \right) \big)
 %$.
- Similarly, the specification for Processor consistency (PC) model can be directly derived using the above line of reasoning;
- PC talks about preserving the order of operations executed by individual processors (or client applications).  Processor Consistency specifies: operations in a client application must execute according to the invocation order with respect to a given processor (client); i.e., result of a preceding operation invoked from a given client must be observed in all processors before result of a
- succeeding operation can be observed in any processor (or client application). Reads against  write operations should
-  view the results of the writes
-  according to the invocation order of these writes in a client application. % Let $\mathit{processors}$ be an  integer term that denotes the
+ Similarly, the specification for Processor consistency (PC) model can be directly derived using the above line of reasoning. 
+ %PC talks about preserving the order of operations executed by individual processors (or client applications). 
+ PC specifies: operations in a client application must execute according to the invocation order with respect to a given processor (client); i.e., result of a preceding operation invoked from a given client must be observed in all processors before result of a
+ succeeding operation can be observed in any processor (or client application). %Reads against  write operations should
+  %view the results of the writes
+  %according to the invocation order of these writes in a client application. % Let $\mathit{processors}$ be an  integer term that denotes the
 % total number of processors. We can express the condition the propositional logic variable $A$ must hold for any store
 % $\mathit{store}_n$ with the expression  $\bigcap_{\mathit{processor}_n}^{\mathit{processors}} A$.
 Consider that a given client observes operations ${\mathit{op}}(x), {\mathit{op}^{'}}(y)$ in a temporal order ${\mathit{Op}}^{'}(x) F {\mathit{Op}}^{''} (y)$ observed in a session trace $\mathit{st}$. Then, no other session trace $\mathit{st}^{'}$ observed by any other concurrent client may observe the operations in an order which violates the temporal order in $\mathit{st}$. Thus, Processor Consistency can be expressed as 
-  \\ $E^s = \forall x, y, \mathit{st}, \mathit{st}^{'} \in \mathit{St} \not\exists {\mathit{op}}(x), {\mathit{op}^{'}}(y) \in \mathcal{O} \\
+   $E^s = \forall x, y, \mathit{st}, \mathit{st}^{'} \in \mathit{St} \not\exists {\mathit{op}}(x), {\mathit{op}^{'}}(y) \in \mathcal{O} 
  \left( {\mathit{Op}}^{'}(x) F {\mathit{Op}}^{''} (y) \in \mathit{st} \right) \rightarrow \left( {\mathit{Op}}^{''}(y) F {\mathit{Op}}^{'} (x) \in \mathit{st}^{'} \right)$,   
- which can be rewritten as follows. \\
+ which can be rewritten into Equation \ref{eqn:PC}. %\\
 %E^{s} = C =   \forall \mathit{st} \in \mathit{St} \not\exists \big( \left(  {W^i}^{'}, {W^j}^{'} \in \mathit{st}  \right)
 %\wedge \left( {R^k}^{'}, {R^l}^{'} \in \mathit{St} \right) \big) \\
 %\big( \left( {W^i}^{'} F {W^j}^{'} \in \mathit{st} \right) \wedge
@@ -1598,271 +1598,126 @@ Consider that a given client observes operations ${\mathit{op}}(x), {\mathit{op}
 %\big( \left( {W^l}^{'} F {R^j}^{'} \in \mathit{St} \right) \wedge
 % \left( \not\exists {W^l}^{'} F {W^m}^{'} F {R^j}^{'} \in \mathit{St} \right) \big) \big) \big)
 %E^s = \left( \mathcal{O}, \preccurlyeq \right), 
-$\forall x, y, \mathit{st} \in \mathit{St}  \left( {\mathit{Op}}^{'}(x) F {\mathit{Op}}^{''} (y) \in \mathit{st} \right)  \rightarrow \left( {\mathit{Op}}^{'}(x) \preccurlyeq {\mathit{Op}}^{''} (y) \right),$  where $ \preccurlyeq$ is a partial order over operations across all data objects with respect to a given global session trace $ \mathit{St}$. %Also, the ConSpec expression for strict
+%$\forall x, y, \mathit{st} \in \mathit{St}  \left( {\mathit{Op}}^{'}(x) F {\mathit{Op}}^{''} (y) \in \mathit{st} \right)  \rightarrow \left( {\mathit{Op}}^{'}(x) \preccurlyeq {\mathit{Op}}^{''} (y) \right),$  where $ \preccurlyeq$ is a partial order over operations across all data objects with respect to a given global session trace $ \mathit{St}$. %Also, the ConSpec expression for strict
 % serializability follows directly from its definition.
 %It states that  any serialization of a sequence of operations
 %  executed by a processor must observe an identical order of execution among operations. This, in turn, is expressed using Equation
  %\ref{eqn:Strict}.
   %The specification for Write Follows Read consistency (see Equation \ref{eqn:WFR}) is also derived using similar line of reasoning.
-\par The ConSpec specifications for the isolation levels are derived from the definitions by Adya et al.
-\cite{DBLP:conf/icde/AdyaLO00}.  Here, we show that the isolation specifications in ConSpec, given in
-Equations \ref{eqn:PL1}, \ref{eqn:PL2}, \ref{eqn:PL3}, and \ref{eqn:PL299}, follow directly from the
-definitions of isolation levels PL-1, PL-2, PL-3, and PL-2.99 \cite{DBLP:conf/icde/AdyaLO00}. We analyze the
-ConSpec Equations, and demonstrate their equivalence to the definitions of  \cite{DBLP:conf/icde/AdyaLO00}, as
-follows.
-\par  The PL-1 specification states that the anomaly G0 must be proscribed in any session trace collected
-for the execution of a client application. G0 specifies that there can not be any directed cycle in the
-dependency graph corresponding to an execution of a pair of transactions, comprising entirely of write dependency edges.
-%The
-% condition can be avoided if the write dependencies are preserved in any execution of a given client
-% application, i.e., if any pair of write operations are executed in order. The LHS of
-%  Equation \ref{eqn:PL1}, i.e., the expression $W^i_\mathit{tx} F W^j_\mathit{tx} \in \mathit{st}$
-%  denotes the above precondition with respect to a given session trace $\mathit{st}$ comprising any two
-%  write operations $w^i_{tx}$ and $w^j_{tx}$. PL-1 specifies that any session trace must
-%  comprise the above write operations in the same order. This, in turn, implies that the write operation
-%  $w^j_{tx}$ in the session trace $\mathit{st}$ must overwrite the value written by the write operation $w^i_{tx}$, i.e.,
-%  $r^k_{tx}$ that follows the write operation $w^j_{tx}$ must not return the value $v_i$ written by an earlier
-%   write. The above condition can be expressed as $\not\exists R^k_\mathit{tx} \in \mathit{st} \left( W^i_\mathit{tx} F W^j_\mathit{tx} F R^k_\mathit{tx} \in \mathit{st} \right) \wedge \left( W^j_\mathit{tx} F R^k_\mathit{tx} \in \mathit{st} \right) \\ \wedge \left( v^k = v^i \right)$.
-%  Thus, the above condition can be reduced to the RHS of Equation \ref{eqn:PL1} using ConSpec operators.
- Let us consider a pair of transactions $\mathit{tx}$ and $\mathit{ty}$. Let us consider that write operations
- $w(x)_\mathit{tx}$ and $w^{'}(y)_\mathit{tx}$ write to objects $x$ and $y$ from transaction $\mathit{tx}$, and
- $w^{''}(x)_\mathit{ty}$ and $w^{'''}(y)_\mathit{ty}$ write to objects $x$ and $y$ from transaction $\mathit{ty}$.
- According to PL-1 there can not exist a pair of read operations $r^{''''}(x)_\mathit{tx}$ and $r^{'''''}(y)_\mathit{ty}$
- invoked from transactions  $\mathit{tx}$ and $\mathit{ty}$  such that the following conditions are simultaneously
- satisfied: 1) $r^{''''}(x)_\mathit{tx}$ reads the result of the
- write operation $w(x)_\mathit{tx}$ causing a $ww$ dependency from  $\mathit{tx}$ to $\mathit{ty}$, i.e.,
- $v^{''''}= v$ must not hold, and 2)
-  $r^{'''''}(y)_\mathit{ty}$ reads the result of the
- write operation $w^{'''}(y)_\mathit{ty}$ causing a $ww$ dependency between  $\mathit{ty}$ to $\mathit{tx}$, i.e.,
- $v^{'''''} = v^{'''} $ must not hold. Simultaneous
- satisfaction of conditions 1 and 2 results in a cycle comprising $ww$ dependencies between $\mathit{tx}$ and $\mathit{ty}$.
- Thus, we can express the specification of PL-1 as
-$C = \forall \mathit{St}, \mathit{st}, \mathit{tx}, \mathit{ty}, x, y,
-  {W}(x)^{'}_\mathit{tx},  {W}(y)^{''}_\mathit{tx},
-  {W}(x)^{'''}_\mathit{ty}, {W}(y)^{''''}_\mathit{ty} \in  \mathit{St} \\
- %\mathit{tx} F \mathit{ty} \rightarrow
-  \left( \not\exists {R}(x)^{'''''}_\mathit{tx}, {R}(y)^{''''''}_\mathit{ty} \in \mathit{St} \right)
-  % \big( \left( {W^i}(x)^{'}_\mathit{tx} F c_\mathit{tx} F  {W^k}(x)^{'}_\mathit{ty} F {R^m}(x)^{'}_\mathit{ty} \in \mathit{st} \right) \\
-%\wedge \left( {W^j}(y)^{'}_\mathit{tx} F c_\mathit{tx} F {W^l}(y)^{'}_\mathit{ty} F {R^n}(y)^{'}_\mathit{ty} \in \mathit{St} \right) \wedge \\
-\big( \left( \left( v^{'''''} = v^{''''} \right) \wedge \left( v^{''''} = v \right) \right) \vee \\
-\left( \left( v^{'''''} = v^{'} \right) \wedge \left( v^{''''} = v^{''} \right) \right)  \big)$
- which is identical to Equation \ref{eqn:PL1}. %It can be trivially observed that the above expression for PL-1 proscribes the anomaly G0, and thus satisfies PL-1 specifications.
-\par The isolation level PL-2 proscribes the anomalies G1-a, G1-b, and G1-c \cite{DBLP:conf/icde/AdyaLO00}. We show that
-the ConSpec specification for PL-2, given in Equation \ref{eqn:PL2}, disallows the above anomalies as follows.
-\textbf{G1-a}: According to G1-a, a transaction can not observe a value written by an aborted transaction.
- In other words, if either transaction  $\mathit{tx}$ or transaction $\mathit{ty}$ aborts, i.e., either of the conditions $a_\mathit{tx} \in \mathit{st}$ or $a_\mathit{ty} \in \mathit{st}$ hold,
- then there can not exist a read operation that reads the value written by an aborted transaction, i.e., the conditions
- ${W}(x)^{'}_\mathit{tx} F {R}(x)^{''}_\mathit{ty} \in \mathit{st}$ or $ {W}(y)^{'''}_\mathit{ty} F {R}(y)^{''''}_\mathit{tx} \in \mathit{st}$
- can not hold.
-Thus, the G1-a condition ca be directly translated to the expression $\not\exists a_\mathit{tx} \in \mathit{st} \;
- \left( {W}(x)^{'}_\mathit{tx} F {R}(x)^{''}_\mathit{ty} \in \mathit{st} \right) \wedge \\
-  \not\exists a_\mathit{ty} \in \mathit{st} \;
- \left( {W}(y)^{'''}_\mathit{ty} F {R}(y)^{''''}_\mathit{tx} \in \mathit{st} \right)$ in Equation \ref{eqn:PL2}.
-  \textbf{G1-b}: According to G1-b, a transaction must always read the final committed version of an object.
-  Let us consider consecutive write operations  $w(x)_\mathit{tx}$ and  $w^{'}(x)_\mathit{tx}$ invoked from transaction $\mathit{tx}$
-   followed by the commit statement $c_\mathit{tx}$, and a read operation $r^k(x)_\mathit{ty}$ invoked from transaction $\mathit{ty}$, i.e.,
-   $ {W}(x)^{'}_\mathit{tx}  F {W}(x)^{''}_\mathit{tx} F  c_\mathit{tx} F {R}(x)^{'''}_\mathit{ty} \in  \mathit{st}$.
- According to G1-b, $\mathit{ty}$ can never read a value written by an operation in $\mathit{tx}$ that was not finally committed by $tx$.
- Thus, $r^{''}(x)_\mathit{ty}$ cannot return the result of $w(x)_\mathit{tx}$ since it was overwritten by another write
-  $w^{'}(x)_\mathit{tx}$ before the commit $c_\mathit{tx}$.
- The above condition can be expressed as $\not\exists \big( \big(
- {W}(x)^{'}_\mathit{tx}  F {W}(x)^{''}_\mathit{tx} F  c_\mathit{tx} F {R}(x)^{'''}_\mathit{ty} \in  \mathit{st} \big)
-   \wedge \left( v^{''} = v \right)  \big) \wedge
-   \not\exists \big( \big(
- {W}(x)^{'}_\mathit{ty}  F {W}(x)^{''}_\mathit{ty} F  c_\mathit{ty} F {R}(x)^{'''}_\mathit{tx} \in  \mathit{st} \big)
-   \wedge \left( v^{''} = v \right)  \big)$.
- \textbf{G1-c}: %PL-2 orders all operations according to their w-r dependency, i.e., if their is a write
-% followed by a read in an execution sequence, all executions must contain the above write and read in the same order.
-  G1-c specifies that there can be no direct cycle comprising dependency edges, i.e., $wr$ and $ww$ dependencies, between
-  transactions in a given execution. The condition \\ 
-  $\not\exists \big(
- {W}(x)^{'}_\mathit{tx}, {R}(y)^{''}_\mathit{tx}, {W}(y)^{'''}_\mathit{ty}, {R}(x)^{''''}_\mathit{ty} \in  \mathit{St} \big)
-   \big( \left( v^{'''} = v \right) \\ 
-   \wedge \left( v^{''} = v^{'} \right) \big)$ proscribes $wr$ dependency cycles. The expression
-   \\ $\big( \not\exists {W}(x)^{'}_\mathit{tx},  {W}(y)^{''}_\mathit{tx},
-  {W}(x)^{'''}_\mathit{ty}, {W}(y)^{''''}_\mathit{ty}, {R}(x)^{'''''}_\mathit{tx}, {R}(y)^{''''''}_\mathit{ty} \\ \in \mathit{St} \big)  
-% \big( \left( {W^i}(x)^{'}_\mathit{tx} F c_\mathit{tx} F  {W^k}(x)^{'}_\mathit{ty} F {R^m}(x)^{'}_\mathit{ty} \in \mathit{st} \right) \\
-%\wedge \left( {W^j}(y)^{'}_\mathit{tx} F c_\mathit{tx} F {W^l}(y)^{'}_\mathit{ty} F {R^n}(y)^{'}_\mathit{ty} \in \mathit{St} \right) \wedge \\
-\big( \left( \left( v^{'''''} = v^{''''} \right) \wedge \left( v^{''''} = v \right) \right) \vee  \\ \left( \left( v^{'''''} = v^{'} \right) \wedge \left( v^{''''} = v^{''} \right) \right)  \big)$
-proscribes $ww$ cycles. % In
-%  the LHS of Equation \ref{eqn:PL2}, the expressions
-%  $ \left( \mathit{tx} F \mathit{ty} \right) \wedge \left( W^i_\mathit{tx} F R^j_\mathit{tx} \in \mathit{st} \right) \\
-%\wedge \left( W^k_\mathit{ty} F R^l_\mathit{ty} \in \mathit{st} \right)
-%$ denotes the condition that there are write operations followed by read operations in the execution order of
-% transactions $tx$ and $ty$, respectively. Similarly, the RHS of Equation \ref{eqn:PL2} indicates the
-% following. Let us consider that the above condition holds for a given session trace. Then, read operations
-%   that follow the operations $w^i_{tx}$ and $r^j_{tx}$, or $w^k_{ty}$ and $r^l_{ty}$, respectively, in the respective transactions
-% $tx$ and $ty$, must not observe results of write operations that occurred earlier than $w^i_{tx}$ or $w^k_{ty}$
-% according in the session trace $\mathit{st}$.   This, in turn, implies that \\
-%  $\not\exists W^m_\mathit{tx} \in \mathit{st} \left( W^m_\mathit{tx} F W^i_\mathit{tx} F R^j_\mathit{tx} \in \mathit{st} \right) \wedge \left( W^m_\mathit{tx} F W^i_\mathit{tx} \in \mathit{st} \right) \\ \wedge \left( v^j = v^m \right) \\
-%\wedge \not\exists W^n_\mathit{ty} \in \mathit{st} \left( W^n_\mathit{ty} F W^k_\mathit{ty} F R^l_\mathit{ty} \in \mathit{st} \right) \wedge \left( W^n_\mathit{ty} F W^k_\mathit{ty} \in \mathit{st} \right) \\ \wedge \left( v^l = v^n \right)$,
-%   thus Equation \ref{eqn:PL2} proscribes G1-c.
-%     Further, in the RHS, all operations in $tx$ occur before the commit
-%   operation $c_{tx}$ is executed in the session trace $\mathit{st}$. The above condition is true for operations in
-%   transaction $ty$ as well, thus proscribing G1-a. Further, we can observe that in the RHS, $tx F ty$, i.e., an
-%   operation in $ty$ can only occur after all operations in $tx$ have finished, proscribing G1-b.
- Thus, the ConSpec
-   specification of PL-2 in  Equation \ref{eqn:PL2} proscribes G1-a, G1-b, and G1-c; thus, Equation \ref{eqn:PL2} is
-   equivalent to PL-2 specifications by Adya et al.
-% \begin{align}\label{eqn:PL2}
-%\begin{split}
-%\forall i, j, k, l, m, n, q, s, t, u, tx, ty \big( tx F ty \; \wedge \left( w^j_{tx}(o,v_l)X^{o} r^k_{tx}(o){v_m} \right) \\ \wedge \left( w^n_{ty}(o,v_q)X^{o} r^s_{tx}(o){v_u} \right)  \big)^\mathit{po}_{\mathit{o}_i} \\ \rightarrow \big(\left( v_l \gets (\left( w^j_{tx}(o,v_l) \; X^{o} \; r^k_{tx}(o){v_m} \right) \right) F \;  c_{tx} \\ F \; \left( v_q \gets \left( w^n_{ty}(o,v_q) \; X^{o} \; r^s_{ty}(o){v_u} \right) \right) \; F \; c_{ty} \star \big)^\mathit{st}_{\mathit{o}_i},
-%\end{split}
-%  \end{align}
- \par  The isolation level PL-3 proscribes the anomaly G-2 \cite{DBLP:conf/icde/AdyaLO00}. According to the
- ConSpec specification for PL-3 (refer to Equation \ref{eqn:PL3}), apart from proscribing G1 anomalies, G2 anomalies are
-  also disallowed. According to G2, their can be
- effectively no cycle comprising anti-dependency edges between transactions. The expression \\
- $\big( \not\exists  \left({R}(x)^{'}_\mathit{tx} F {W}(x)^{''}_\mathit{ty} F {R}(x)^{'''}_\mathit{ty} \in \mathit{St} \right) \wedge \\
-  \big( {R}(x)^{''''}_\mathit{ty} F {W}(x)^{'''''}_\mathit{tx} F {R}(x)^{''''''}_\mathit{tx} \in \mathit{St} \big)  \big) \big(  \left( v^{''} = v^{'} \right) \wedge \\ 
- \left( v^{'''''} = v^{''''} \right) \big) \big)$ proscribes anti-dependency cycles. Thus, the
- ConSpec expression disallows G2, and effectively follows PL-3. Following the same line of reasoning, we can
-  prove that the ConSpec expression in Equation \ref{eqn:PL299} effectively  specifies PL-2.99.
-
- \section{Implementation}\label{sec:impl}
- We provide an open source automated verification tool built using Spin, an open source software verification tool  \cite{Holzmann:2003:SMC:1405716}. Our tool can verify whether a given session trace satisfies a given consistency model or a given isolation level, specified in terms of a ConSpec expression. The source code and instructions for running the ConSpec tool is provided in an open source github repository \url{https://github.com/ssidhanta/ConSpecTool}. The tool is run from the  shell command line with a session trace as input argument. It accepts specifications of a given ConSpec definition in the form of an LTL expression, provided as an input to the command line or as a file input. First, it  generates a set of equivalent legal serializations for a given session trace. Then, it runs the Spin model checker over the session trace, and the serialization list, and determines whether the session trace satisfies the specified consistency model or not. 
- \par Using the  PROMELA meta language, the Spin tool captures the semantics of a given storage system. It parses a given session trace and the set of equivalent serializations generated for a given storage system. The PROMELA specifications are translated into C code. Spin acts as a driver that verifies the generated C code  against the  ConSpec definitions expressed in terms of LTL formulas.  The LTL model checker embedded within Spin verifies whether a given session trace satisfies a given ConSpec specifications. The github repository comprises a PROMELA specification for each of the consistency models and isolation levels, the Spin-based main source file, and the code for generating the list of  equivalent serializations.
- 
- \section{Comparison of ConSpec Tool With the State-of-the-art}\label{sec:compare}
- Here, we compare our approach of analyzing session traces against ConSpec specification with the traditional approach of analyzing server traces \cite{DBLP:conf/icde/AdyaLO00, Chockler2000, Terry:1994:SGW:645792.668302, Burckhardt:2014:PEC:2693641.2693642}. %Let us start by assuming that both approaches use a single expression to represent a given consistency model or isolation level. Let us also assume that session traces used in our approach, and server traces used in traditional approaches, are equivalent in the context of complexity analysis.  Under the above assumptions, complexity of trace analysis with our approach can be potentially worse than the server trace analysis approach if anomaly exists in a given trace. This can be attributed to the fact that, with the server trace analysis approach, the analysis terminates as soon as an anomaly is found in any portion of a given execution trace.  Contrastingly, with our approach, the analysis may continue till the very end of the trace, since it checks if all portions of the trace conforms to the ConSpec specifications. Thus a trace analysis may terminate earlier with the server trace analysis approach. However, we fix the problem by modifying our approach to indirectly detect anomalies (see later part of this Section), thus enabling it to terminate early, similar to the server trace analysis approach.
-%\par On the other hand, in absence of anomalies in a given execution, i.e., in both the session trace and the server trace for the execution, the complexity of our approach matches the server trace analysis approach; since, in this case, the analysis with both approaches terminate at the very end of the trace. We further reduce the search space of session trace for session trace analysis, by considering only the session traces comprising operations performed on a concerned object.
- In the current state-of-the-art, a consistency model or isolation level is typically represented by two components: 1) axiomatic rules, given by a group of first order logic expressions, representing the allowed execution order among operations, and 2)  DSGs representing the anomalies proscribed by the given consistency model or isolation level. On the other hand, our approach uses only a single LTL-like expression to express the same consistency model or isolation level. Thus, the server trace analysis approach compares each element in an  execution trace with two components. Contrastingly, with our approach, each element in a session trace is compared with only a single ConSpec expression. Hence, the complexity of the server trace analysis approach (refer to Section \ref{sec:complex}) is roughly twice the complexity with our approach, particularly in the case of absence of anomaly in a given trace. In the presence of anomalies in a session trace, the comparison between complexities of the two approaches is more complicated; we need to consider the position of the first occurrence of an anomaly with respect to the size of the trace.
-\par Moreover, the traditional approach of server trace analysis involves analysis of execution traces collected from server nodes comprising the storage system cluster. It analyzes whether the results of operations observed at the system end, i.e., at the end of the storage system, matches the results expected as per a given consistency model or isolation level. Thus, this approach considers a system-centric view of a given consistency model or isolation level. On the other hand, we analyze whether a session trace, observed from a client application, satisfies the specification for a given consistency model or isolation level, i.e., whether the results in the session trace follow an order that is allowed by the above specification. Hence, our approach is concerned with client-centric view of a given consistency model or isolation level. Further, the traditional approach has the disadvantage of having to deal with much longer traces, comprising execution of operations performed from multiple applications or sessions on storage system servers. Extracting a session trace from a server trace is a computationally expensive task by itself, since it requires an exhaustive search on the server trace to identify portions that are relevant to a given application. Contrastingly, our approach directly analyzes session traces, collected from the client machines.
- 
- \section{Complexity of Verification: Comparison with the State-of-the-art}\label{sec:complex}
- %A session trace is comprised of results of execution of storage operations invoked from a client application on a target storage system, observed from a client machine. 
-% Let $\mathit{op}$ be signature of an 
-%$i^\mathit{th}$ operation invoked from a given client application. $\mathit{op}$ can be a read or write operation that reads (or writes) a unique value from (or to) a storage system object $o$; signature of a read and write operation are of the form $r(o){v_m}$ and $w(o,v_l)$, respectively.
-% Let $v_k$ be the current value observed against the operation $\mathit{op}$ on an object $o$. Let the length of the given session trace be denoted by the integer term $s_t$. A a session trace $\mathcal{S}_t$ can be expressed as a collection of tuples, where each tuple comprises: 1) the unique signature of the operation, 2) the name of the storage system object that the operation accesses, 3) the value written by the operation. Using the above notations, a session trace $\mathcal{S}_t$ is given as $\mathcal{S}_t$ = \[ \Set{\tuple{\mathit{op},o,v_k}} {1\le i \le s_t, 1\le j\le m, 1\le k\le n}{.} \]
-%Let the ConSpec expression for a given consistency
-% guarantee or an isolation level be given as $\mathcal{E}_c$ =\[ \Set{e_i} {1\le i\le s_c}{,} \] where
-% $e_i$ is the $i^\mathit{th}$ character in the ConSpec expression, and the length of a given ConSpec expression is $s_c$.
- %$\tuple{\mathit{op}_i,o_j,v_k}$
-It can be verified whether a storage system actually supports a consistency guarantee or an isolation level by analyzing a session trace with respect to a ConSpec specification $\mathcal{E}^s$ for the above consistency guarantee or isolation level. Verifying a given session trace $\mathcal{s}_t$ against a specification $\mathcal{E}^s$  involves comparing the observed result of each operation in
-  $\mathcal{s}_t$ against each expression in $\mathcal{E}^s$. The complexity (here we consider time complexity) of comparing each character in a session trace $\mathcal{s}_t$ against the specification $\mathcal{E}^s$ is equivalent to the length of the specification, i.e., $s_c$. For verification, the above step is repeated for all characters in the session trace (in the absence of anomalies). Thus, the total complexity  of verifying a session trace against a given ConSpec specification is $s_t \times s_c$.
-\par  As already discussed in Section \ref{sec:compare}, state-of-the-art definitions of consistency models and isolation levels comprise a combination of axiomatic rules and anomaly DSGs. Let the total number of axiomatic rules in a state-of-the-art consistency specification  be $n_e$. Let the length of the expression for each axiomatic rule comprising a state-of-the-art specification  be $s_1$, $s_2$, ..., $s_{n_e}$, respectively. Thus, the total length of such expressions in a state-of-the-art specification
- is given as $\mathcal{E}^s$ =\[ \Set{\mathcal{E}^{i}_s}{1\le i\le n_e}{,}{,}\] where $\mathcal{E}^{i}_s$ is the $i^\mathit{th}$
- expression in the given specification. The process of verifying a given session trace against a specification involves comparing each expression in the given specification with each character in the session trace. The complexity (time complexity) of comparing the expression $\mathcal{E}^{i}_s$ against the session trace can be given as $s_t \times s_i$, where $s_i$ is the length of $\mathcal{E}^{i}_s$. The total complexity of verifying the given session trace against the above expressions comprising the given specification involves carrying out the above step for all expressions in the specification, which in turn, can be given as $s_t \times \left(s_1+s_2+...+s_{n_e}\right)$. Now, let us consider verifying the given session trace against the anomaly DSGs for the given specification. Let the number of anomaly DSGs for a given specification be $n_g$. Let the size of each anomaly DSG be $g_1$, $g_2$, ...., $g_{n_g}$. Verifying a given session trace against an anomaly DSG involves performing
- a pattern search in each of the DGSs with the session trace. The complexity $\mathcal{C}$ of the above search, using any algorithm based on Depth First Search,  can be given as $\mathcal{C}$ = $V+E$, where $V$ and $E$ are the number of vertices and edges in each DSG,
- respectively. Considering each DSG to be fully connected, the number of edges approximately equals the number of vertices
-  -1, i.e., $E \approx V - 1$. Hence, $\mathcal{C}$ can be further rewritten as $\mathcal{C}=V+E\approx 2V -1$. Thus, the complexity of a graph search algorithm can be given $\approx 2V -1$. The total complexity
-  of verifying he given session trace against anomaly DSGs involves performing the above pattern search for all anomaly DSGs comprising the given specification. Thus, the total complexity of verifying against anomaly DSGs can be given as
-  $s_t \times 2 \times \left( g_1 + g_2 ... + g_{n_g} \right) - n_g$.  Combining the complexity of verifying against the expressions and the complexity of verifying against the anomaly DSGs, the total complexity of verification
-   as per the state-of-the-art can be given as
-   $s_t \times \left( s_1+s_2+...+s_{n_e} + 2 \times g_1 + 2 \times g_2 ... + 2 \times g_{n_g} - n_g \right).$
-
- \section{Equivalence between Dependency Relations and LTL Relations of ConSpec} \label{sec:equiv}
- State-of-the-art definitions specify consistency levels in terms of dependency relations, namely
-  $w \xrightarrow{wr} r$,  $w \xrightarrow{ww} w^{'}$, and  $w \xrightarrow{wr} r$ dependency, respectively
-  \cite{Hennessy:2011:CAF:1999263}.  The $w \xrightarrow{wr} r$ dependency can be translated to the form
-  $\exists \big( %\left(  \mathit{st}, \mathit{st}^{'} \in \mathit{St} \right) \wedge
-  \left( W^{'} \in \mathit{st} \right)
-  \wedge \left(  R^{''} \in \mathit{St} \right) \big) \\ \left( v  = {v}^{'} \right)$, where we represent the write and read operations $w$ and $r$
-  involved in the  dependency relation with the propositional variable $W^{'}$ and $R^{''}$, respectively. Denoting
-  $w$, and $w^{'}$ with propositional variables $W^{'}$ and $W^{''}$, the
-  dependency relation $w \xrightarrow{ww} w^{'}$ is translated into ConSpec form as follows.
-  \begin{align}\label{eqn:ww}
-\begin{split}
-   \exists \big( %\left( \mathit{st}, \mathit{st}^{'} \in \mathit{St} \right) \wedge
-   \left( {W}^{'} \in \mathit{st} \right)
-   \wedge \left( {W}^{''}  \in  \mathit{St} \right)  \big)
-   \big( %\wedge
- % \left( {W^i}^{'} \in \mathit{st} \right)
-  \exists %\big(  %\left( \mathit{st}^{''} \in \mathit{St} \right) \wedge
-  \left( { R}^{''''} \in \mathit{St} \right) %\big)
-  %\exists \left( \mathit{st}, \mathit{st}^{'} \in \mathit{St} \right)  %{W^i}^{'}  F { R^k}^{''} \in \mathit{st}^{''}  \wedge \\
-  %\wedge {R^l}^{'''} F { R^k}^{'''} \in \mathit{st}^{''} \wedge
-   \left( {v}^{'''} = {v}^{'} \right) \\
-   \wedge \big( \left(  {v}^{'''} = v \right) \vee
-  \big( \left( {W^i}^{''} F { R^l}^{''} \in \mathit{St} \right) \wedge \\
-   \left(  \not\exists {W}^{'} F {W}^{'''''} F { R}^{''''} \in \mathit{St} \right)  \big) \big) \big) %\left( \not\exists {W^j}^{''} F {W^m}^{''} F { R^l}^{''} \in \mathit{st}^{'} \; \wedge \; {v_l}^{'} = {v_j}^{'}
-%  \right) \\
-%  \vee \left( \exists {W^j}^{''} F {W^m}^{''} F { R^l}^{''} \in \mathit{st}^{'} \right) \left({v_l}^{'} = {v_m}^{'}  \right) \big) % \\
-  %\not\exists {W^i}^{'} F {W^n}^{'} F { R^l}^{'} \in \mathit{st}  \big)
-   %\big( \left( {v_k}^{'} = {v_j}^{'}  \right) \vee \\
-   %\exists \left( \mathit{st}^{'''} \in \mathit{St} \wedge {W^j}^{''''} F {W^m}^{''''} F { R^k}^{''''}  \in \mathit{st}^{'''} \right)
-   %\left( {v_k}^{'} = {v_m}^{'}  \right) \big).
-   \end{split}
-   \end{align}
-   Similarly, denoting  $r$, and $w$ with propositional variables $R^{'}$ and $W^{''}$, the
-   $r \xrightarrow{rw} w$ dependency is translated into ConSpec form as follows.
-     \begin{align}\label{eqn:rw}
-\begin{split}
-\exists \big( %\left( \mathit{st}, \mathit{st}^{'}, \mathit{st}^{''}  \in \mathit{St} \right)  \wedge
-\left( {R}^{'} \in \mathit{st} \right)
-   \wedge \left( {W}^{''}  \in  \mathit{St} \right) \wedge
-   \left( \exists  {W}^{'''} \in \mathit{st}  \right) \\
-   \left( v = {v}^{''} \right) \wedge
-  \left( \exists {R}^{''''} \in \mathit{St}  \right) \left( {v}^{'''} = {v}^{'} \right)  \big)
- \big( \left( {v}^{''} = {v}^{'''} \right) \vee \\
-  \big(  \left( {W}^{'''} F { R}^{''''} \in \mathit{St} \right) \wedge
-    \left(  \not\exists {W}^{'''} F {W}^{'''''} F { R}^{''''} \in \mathit{St}  \right) \big) \big)
-   %\left( {W^j}^{''} F { R^l}^{''} \in \mathit{st}^{'} \right) \wedge
-% \left( \not\exists {W^m}^{'} F {R^i}^{'} \in \mathit{st}^{''} \right) \left( {v_l}^{'} = {v_m}^{'} \right) \big)
- % \big( {v_l}^{'} = {v_j}^{'}
-  %\; \vee \left( \exists {W^j}^{''} F {W^n}^{'} \in \mathit{st}^{'} \right) \\
-  %\left( {v_j}^{'} = {v_n}^{'} \right) \big).
-  \end{split}
-  \end{align}
-   \par Adya et al. define isolation  levels in terms of $w \xrightarrow{wr} r$,
-   $w \xrightarrow{ww} w^{'}$, and  $w \xrightarrow{wr} r$  dependencies among transactions
-   \cite{DBLP:conf/icde/AdyaLO00}. The $wr$ dependency relation of the dependency graph can be translated into
-   ConSpec form \\ $\exists \big( %\left(  \mathit{st}, \mathit{st}^{'} \in \mathit{St} \right) \wedge
-   \left( W^{'}_\mathit{tx} \in \mathit{st} \right)
-  \wedge \left(  R^{''}_\mathit{ty} \in \mathit{St} \right) \big) \left( v = {v}^{'} \right) $. The $ww$ dependency relation
-    between transactions $\mathit{tx}$ and $\mathit{ty}$ can be translated to \begin{align}\label{eqn:ww}
-\begin{split}
- \exists \big( %\left( \mathit{st}, \mathit{st}^{'} \in \mathit{St} \right) \wedge
- \left( {W}^{''}_\mathit{tx} \in \mathit{st} \right)
-   \wedge \left( {W}^{''}_\mathit{tx}  \in  \mathit{St} \right)  \big)
-   \big( %\wedge
- % \left( {W^i}^{'} \in \mathit{st} \right)
-  \exists %\big( % \left( \mathit{st}^{''} \in \mathit{St} \right) \wedge
-  \left( { R}^{''''}\mathit{ty} \in \mathit{St} \right) %\big)
-  %\exists \left( \mathit{st}, \mathit{st}^{'} \in \mathit{St} \right)  %{W^i}^{'}  F { R^k}^{''} \in \mathit{st}^{''}  \wedge \\
-  %\wedge {R^l}^{'''} F { R^k}^{'''} \in \mathit{st}^{''} \wedge
-   \\ \left( {v}^{'''} = {v}^{'} \right)
-   \wedge
-   \big( \left(  {v}^{'''} = v \right) \vee
-  \big( \left( {W}^{''} F { R}^{''''}_\mathit{ty} \in \mathit{St} \right) \wedge \\
-   \big( \left(  \not\exists {W}^{'}_\mathit{tx} F {W}^{'''''}_\mathit{tx} F { R}^{''''}_\mathit{ty} \in \mathit{St} \right)  \\
-  \wedge  \left(  \not\exists {W}^{'}_\mathit{tx} F {W}^{'''''}_\mathit{ty} F { R}^{''''}_\mathit{ty} \in \mathit{St} \right) \big) \big) \big) \big)
-  %\left( \not\exists {W^j}^{''} F {W^m}^{''} F { R^l}^{''} \in \mathit{st}^{'} \; \wedge \; {v_l}^{'} = {v_j}^{'}
-  % \exists \big( \mathit{st}, \mathit{st}^{'}, \mathit{st}^{''} \in \mathit{St} \wedge
-%  {W^i}^{'}_\mathit{tx} F { R^l}^{'}_\mathit{tx} \in \mathit{st}
-%  \wedge {W^j}^{''}_\mathit{ty} F { R^k}^{''}_\mathit{ty} \in \mathit{st}^{'} \\
-%  \wedge {R^l}^{'''}_\mathit{tx} F { R^k}^{'''}_\mathit{ty} \in \mathit{st}^{''} \wedge
-%  \not\exists {W^j}^{''}_\mathit{ty} F {W^m}^{''}_\mathit{ty} F { R^k}^{''}_\mathit{ty} \in \mathit{st}^{'} \wedge \\
-%  \not\exists {W^i}^{'}_\mathit{tx} F {W^n}^{'}_\mathit{tx} F { R^l}^{'}_\mathit{tx} \in \mathit{st}  \big)
-%   \big( \left( {v_k}^{'} = {v_j}^{'}  \right) \vee \\
-%   \exists \left( \mathit{st}^{'''} \in \mathit{St} \wedge {W^j}^{''''}_\mathit{ty} F {W^m}^{''''}_\mathit{ty} F { R^k}^{''''}_\mathit{tx}  \in \mathit{st}^{'''} \right)
-%   \left( {v_k}^c{'} = {v_m}^{'}  \right) \big).
-   \end{split}
-   \end{align}
- The $rw$ dependency relation between transactions $\mathit{tx}$ and $\mathit{ty}$ can be translated into ConSpec form
-  \begin{align}\label{eqn:rw}
-\begin{split}
-\exists \big( %\left( \mathit{st}, \mathit{st}^{'}, \mathit{st}^{''}  \in \mathit{St} \right)  \wedge
-\left( {R}^{'}_\mathit{tx} \in \mathit{st} \right)
-   \wedge \left( {W}^{''}_\mathit{ty}  \in  \mathit{St} \right) \wedge
-   \left( \exists  {W}^{'''}_\mathit{tx} \in \mathit{st}  \right) \\
-   \left( v = {v}^{''} \right)  \wedge 
-  \left( \exists {R}^{''''}_\mathit{ty} \in \mathit{St}  \right) \left( {v}^{'''} = {v}^{'} \right)  \big)
-  \big( \left( {v}^{''} = {v}^{'''} \right) \\
-   \vee  \big(  \left( {W}^{'''}_\mathit{tx} F { R}^{''''}_\mathit{ty} \in \mathit{st}^{''} \right)  \wedge
-    \big( \left(  \not\exists {W}^{'''}_\mathit{tx} F {W}^{'''''}_\mathit{tx} F { R}^{''''}_\mathit{ty} \in \mathit{St} \right)  \\\wedge
-   \left(  \not\exists {W}^{'''}_\mathit{tx} F {W}^{'''''}_\mathit{ty} F { R}^{''''}_\mathit{ty} \in \mathit{St} \right) \big) \big)
-%\left( \exists \mathit{st}, \mathit{st}^{'}, \mathit{st}^{''}  \in \mathit{St} \right) \big(
-%  \left( {R^i}^{'}_\mathit{tx} F {W^j}^{''}_\mathit{ty} \in \mathit{st} \right) \wedge \\
-%   \left( {W^j}^{''}_\mathit{ty} F { R^l}^{''}_\mathit{ty} \in \mathit{st}^{'} \right) \wedge
-% \left( \not\exists {W^m}^{'}_\mathit{tx} F {R^i}^{'}_\mathit{tx} \in \mathit{st}^{''} \right) \left( {v_l}^{'} = {v_m}^{'} \right) \big).
-%\exists \big( \mathit{st}, \mathit{st}^{'} \in \mathit{St} \wedge
-%  {W^k}^{'}_\mathit{tx} F { R^i}^{'}_\mathit{tx} \in \mathit{st} \wedge {W^j}^{''}_\mathit{ty} F { R^l}^{''}_\mathit{ty} \in \mathit{st}^{'} \wedge \\
-%  \not\exists {W^k}^{'}_\mathit{tx} F {R^l}^{'}_\mathit{ty} F { R^i}^{'}_\mathit{tx} \in \mathit{st} \big) \big( {v_l}^{'} = {v_j}^{'}
-%  \; \vee \left( \exists {W^j}^{''}_\mathit{ty} F {W^m}^{'}_\mathit{ty} \in \mathit{st}^{'} \right) \\
-%  \left( {v_j}^{'} = {v_m}^{'} \right) \big).
-  \end{split}
-  \end{align}
+%\par The ConSpec specifications for the isolation levels are derived from the definitions by Adya et al.
+%\cite{DBLP:conf/icde/AdyaLO00}.  Here, we show that the isolation specifications in ConSpec, given in
+%Equations \ref{eqn:PL1}, \ref{eqn:PL2}, \ref{eqn:PL3}, and \ref{eqn:PL299}, follow directly from the
+%definitions of isolation levels PL-1, PL-2, PL-3, and PL-2.99 \cite{DBLP:conf/icde/AdyaLO00}. We analyze the
+%ConSpec Equations, and demonstrate their equivalence to the definitions of  \cite{DBLP:conf/icde/AdyaLO00}, as
+%follows.
+%\par  The PL-1 specification states that the anomaly G0 must be proscribed in any session trace collected
+%for the execution of a client application. G0 specifies that there can not be any directed cycle in the
+%dependency graph corresponding to an execution of a pair of transactions, comprising entirely of write dependency edges.
+%%The
+%% condition can be avoided if the write dependencies are preserved in any execution of a given client
+%% application, i.e., if any pair of write operations are executed in order. The LHS of
+%%  Equation \ref{eqn:PL1}, i.e., the expression $W^i_\mathit{tx} F W^j_\mathit{tx} \in \mathit{st}$
+%%  denotes the above precondition with respect to a given session trace $\mathit{st}$ comprising any two
+%%  write operations $w^i_{tx}$ and $w^j_{tx}$. PL-1 specifies that any session trace must
+%%  comprise the above write operations in the same order. This, in turn, implies that the write operation
+%%  $w^j_{tx}$ in the session trace $\mathit{st}$ must overwrite the value written by the write operation $w^i_{tx}$, i.e.,
+%%  $r^k_{tx}$ that follows the write operation $w^j_{tx}$ must not return the value $v_i$ written by an earlier
+%%   write. The above condition can be expressed as $\not\exists R^k_\mathit{tx} \in \mathit{st} \left( W^i_\mathit{tx} F W^j_\mathit{tx} F R^k_\mathit{tx} \in \mathit{st} \right) \wedge \left( W^j_\mathit{tx} F R^k_\mathit{tx} \in \mathit{st} \right) \\ \wedge \left( v^k = v^i \right)$.
+%%  Thus, the above condition can be reduced to the RHS of Equation \ref{eqn:PL1} using ConSpec operators.
+% Let us consider a pair of transactions $\mathit{tx}$ and $\mathit{ty}$. Let us consider that write operations
+% $w(x)_\mathit{tx}$ and $w^{'}(y)_\mathit{tx}$ write to objects $x$ and $y$ from transaction $\mathit{tx}$, and
+% $w^{''}(x)_\mathit{ty}$ and $w^{'''}(y)_\mathit{ty}$ write to objects $x$ and $y$ from transaction $\mathit{ty}$.
+% According to PL-1 there can not exist a pair of read operations $r^{''''}(x)_\mathit{tx}$ and $r^{'''''}(y)_\mathit{ty}$
+% invoked from transactions  $\mathit{tx}$ and $\mathit{ty}$  such that the following conditions are simultaneously
+% satisfied: 1) $r^{''''}(x)_\mathit{tx}$ reads the result of the
+% write operation $w(x)_\mathit{tx}$ causing a $ww$ dependency from  $\mathit{tx}$ to $\mathit{ty}$, i.e.,
+% $v^{''''}= v$ must not hold, and 2)
+%  $r^{'''''}(y)_\mathit{ty}$ reads the result of the
+% write operation $w^{'''}(y)_\mathit{ty}$ causing a $ww$ dependency between  $\mathit{ty}$ to $\mathit{tx}$, i.e.,
+% $v^{'''''} = v^{'''} $ must not hold. Simultaneous
+% satisfaction of conditions 1 and 2 results in a cycle comprising $ww$ dependencies between $\mathit{tx}$ and $\mathit{ty}$.
+% Thus, we can express the specification of PL-1 as
+%$C = \forall \mathit{St}, \mathit{st}, \mathit{tx}, \mathit{ty}, x, y,
+%  {W}(x)^{'}_\mathit{tx},  {W}(y)^{''}_\mathit{tx},
+%  {W}(x)^{'''}_\mathit{ty}, {W}(y)^{''''}_\mathit{ty} \in  \mathit{St} \\
+% %\mathit{tx} F \mathit{ty} \rightarrow
+%  \left( \not\exists {R}(x)^{'''''}_\mathit{tx}, {R}(y)^{''''''}_\mathit{ty} \in \mathit{St} \right)
+%  % \big( \left( {W^i}(x)^{'}_\mathit{tx} F c_\mathit{tx} F  {W^k}(x)^{'}_\mathit{ty} F {R^m}(x)^{'}_\mathit{ty} \in \mathit{st} \right) \\
+%%\wedge \left( {W^j}(y)^{'}_\mathit{tx} F c_\mathit{tx} F {W^l}(y)^{'}_\mathit{ty} F {R^n}(y)^{'}_\mathit{ty} \in \mathit{St} \right) \wedge \\
+%\big( \left( \left( v^{'''''} = v^{''''} \right) \wedge \left( v^{''''} = v \right) \right) \vee \\
+%\left( \left( v^{'''''} = v^{'} \right) \wedge \left( v^{''''} = v^{''} \right) \right)  \big)$
+% which is identical to Equation \ref{eqn:PL1}. %It can be trivially observed that the above expression for PL-1 proscribes the anomaly G0, and thus satisfies PL-1 specifications.
+%\par The isolation level PL-2 proscribes the anomalies G1-a, G1-b, and G1-c \cite{DBLP:conf/icde/AdyaLO00}. We show that
+%the ConSpec specification for PL-2, given in Equation \ref{eqn:PL2}, disallows the above anomalies as follows.
+%\textbf{G1-a}: According to G1-a, a transaction can not observe a value written by an aborted transaction.
+% In other words, if either transaction  $\mathit{tx}$ or transaction $\mathit{ty}$ aborts, i.e., either of the conditions $a_\mathit{tx} \in \mathit{st}$ or $a_\mathit{ty} \in \mathit{st}$ hold,
+% then there can not exist a read operation that reads the value written by an aborted transaction, i.e., the conditions
+% ${W}(x)^{'}_\mathit{tx} F {R}(x)^{''}_\mathit{ty} \in \mathit{st}$ or $ {W}(y)^{'''}_\mathit{ty} F {R}(y)^{''''}_\mathit{tx} \in \mathit{st}$
+% can not hold.
+%Thus, the G1-a condition ca be directly translated to the expression $\not\exists a_\mathit{tx} \in \mathit{st} \;
+% \left( {W}(x)^{'}_\mathit{tx} F {R}(x)^{''}_\mathit{ty} \in \mathit{st} \right) \wedge \\
+%  \not\exists a_\mathit{ty} \in \mathit{st} \;
+% \left( {W}(y)^{'''}_\mathit{ty} F {R}(y)^{''''}_\mathit{tx} \in \mathit{st} \right)$ in Equation \ref{eqn:PL2}.
+%  \textbf{G1-b}: According to G1-b, a transaction must always read the final committed version of an object.
+%  Let us consider consecutive write operations  $w(x)_\mathit{tx}$ and  $w^{'}(x)_\mathit{tx}$ invoked from transaction $\mathit{tx}$
+%   followed by the commit statement $c_\mathit{tx}$, and a read operation $r^k(x)_\mathit{ty}$ invoked from transaction $\mathit{ty}$, i.e.,
+%   $ {W}(x)^{'}_\mathit{tx}  F {W}(x)^{''}_\mathit{tx} F  c_\mathit{tx} F {R}(x)^{'''}_\mathit{ty} \in  \mathit{st}$.
+% According to G1-b, $\mathit{ty}$ can never read a value written by an operation in $\mathit{tx}$ that was not finally committed by $tx$.
+% Thus, $r^{''}(x)_\mathit{ty}$ cannot return the result of $w(x)_\mathit{tx}$ since it was overwritten by another write
+%  $w^{'}(x)_\mathit{tx}$ before the commit $c_\mathit{tx}$.
+% The above condition can be expressed as $\not\exists \big( \big(
+% {W}(x)^{'}_\mathit{tx}  F {W}(x)^{''}_\mathit{tx} F  c_\mathit{tx} F {R}(x)^{'''}_\mathit{ty} \in  \mathit{st} \big)
+%   \wedge \left( v^{''} = v \right)  \big) \wedge
+%   \not\exists \big( \big(
+% {W}(x)^{'}_\mathit{ty}  F {W}(x)^{''}_\mathit{ty} F  c_\mathit{ty} F {R}(x)^{'''}_\mathit{tx} \in  \mathit{st} \big)
+%   \wedge \left( v^{''} = v \right)  \big)$.
+% \textbf{G1-c}: %PL-2 orders all operations according to their w-r dependency, i.e., if their is a write
+%% followed by a read in an execution sequence, all executions must contain the above write and read in the same order.
+%  G1-c specifies that there can be no direct cycle comprising dependency edges, i.e., $wr$ and $ww$ dependencies, between
+%  transactions in a given execution. The condition \\ 
+%  $\not\exists \big(
+% {W}(x)^{'}_\mathit{tx}, {R}(y)^{''}_\mathit{tx}, {W}(y)^{'''}_\mathit{ty}, {R}(x)^{''''}_\mathit{ty} \in  \mathit{St} \big)
+%   \big( \left( v^{'''} = v \right) \\ 
+%   \wedge \left( v^{''} = v^{'} \right) \big)$ proscribes $wr$ dependency cycles. The expression
+%   \\ $\big( \not\exists {W}(x)^{'}_\mathit{tx},  {W}(y)^{''}_\mathit{tx},
+%  {W}(x)^{'''}_\mathit{ty}, {W}(y)^{''''}_\mathit{ty}, {R}(x)^{'''''}_\mathit{tx}, {R}(y)^{''''''}_\mathit{ty} \\ \in \mathit{St} \big)  
+%% \big( \left( {W^i}(x)^{'}_\mathit{tx} F c_\mathit{tx} F  {W^k}(x)^{'}_\mathit{ty} F {R^m}(x)^{'}_\mathit{ty} \in \mathit{st} \right) \\
+%%\wedge \left( {W^j}(y)^{'}_\mathit{tx} F c_\mathit{tx} F {W^l}(y)^{'}_\mathit{ty} F {R^n}(y)^{'}_\mathit{ty} \in \mathit{St} \right) \wedge \\
+%\big( \left( \left( v^{'''''} = v^{''''} \right) \wedge \left( v^{''''} = v \right) \right) \vee  \\ \left( \left( v^{'''''} = v^{'} \right) \wedge \left( v^{''''} = v^{''} \right) \right)  \big)$
+%proscribes $ww$ cycles. % In
+%%  the LHS of Equation \ref{eqn:PL2}, the expressions
+%%  $ \left( \mathit{tx} F \mathit{ty} \right) \wedge \left( W^i_\mathit{tx} F R^j_\mathit{tx} \in \mathit{st} \right) \\
+%%\wedge \left( W^k_\mathit{ty} F R^l_\mathit{ty} \in \mathit{st} \right)
+%%$ denotes the condition that there are write operations followed by read operations in the execution order of
+%% transactions $tx$ and $ty$, respectively. Similarly, the RHS of Equation \ref{eqn:PL2} indicates the
+%% following. Let us consider that the above condition holds for a given session trace. Then, read operations
+%%   that follow the operations $w^i_{tx}$ and $r^j_{tx}$, or $w^k_{ty}$ and $r^l_{ty}$, respectively, in the respective transactions
+%% $tx$ and $ty$, must not observe results of write operations that occurred earlier than $w^i_{tx}$ or $w^k_{ty}$
+%% according in the session trace $\mathit{st}$.   This, in turn, implies that \\
+%%  $\not\exists W^m_\mathit{tx} \in \mathit{st} \left( W^m_\mathit{tx} F W^i_\mathit{tx} F R^j_\mathit{tx} \in \mathit{st} \right) \wedge \left( W^m_\mathit{tx} F W^i_\mathit{tx} \in \mathit{st} \right) \\ \wedge \left( v^j = v^m \right) \\
+%%\wedge \not\exists W^n_\mathit{ty} \in \mathit{st} \left( W^n_\mathit{ty} F W^k_\mathit{ty} F R^l_\mathit{ty} \in \mathit{st} \right) \wedge \left( W^n_\mathit{ty} F W^k_\mathit{ty} \in \mathit{st} \right) \\ \wedge \left( v^l = v^n \right)$,
+%%   thus Equation \ref{eqn:PL2} proscribes G1-c.
+%%     Further, in the RHS, all operations in $tx$ occur before the commit
+%%   operation $c_{tx}$ is executed in the session trace $\mathit{st}$. The above condition is true for operations in
+%%   transaction $ty$ as well, thus proscribing G1-a. Further, we can observe that in the RHS, $tx F ty$, i.e., an
+%%   operation in $ty$ can only occur after all operations in $tx$ have finished, proscribing G1-b.
+% Thus, the ConSpec
+%   specification of PL-2 in  Equation \ref{eqn:PL2} proscribes G1-a, G1-b, and G1-c; thus, Equation \ref{eqn:PL2} is
+%   equivalent to PL-2 specifications by Adya et al.
+%% \begin{align}\label{eqn:PL2}
+%%\begin{split}
+%%\forall i, j, k, l, m, n, q, s, t, u, tx, ty \big( tx F ty \; \wedge \left( w^j_{tx}(o,v_l)X^{o} r^k_{tx}(o){v_m} \right) \\ \wedge \left( w^n_{ty}(o,v_q)X^{o} r^s_{tx}(o){v_u} \right)  \big)^\mathit{po}_{\mathit{o}_i} \\ \rightarrow \big(\left( v_l \gets (\left( w^j_{tx}(o,v_l) \; X^{o} \; r^k_{tx}(o){v_m} \right) \right) F \;  c_{tx} \\ F \; \left( v_q \gets \left( w^n_{ty}(o,v_q) \; X^{o} \; r^s_{ty}(o){v_u} \right) \right) \; F \; c_{ty} \star \big)^\mathit{st}_{\mathit{o}_i},
+%%\end{split}
+%%  \end{align}
+% \par  The isolation level PL-3 proscribes the anomaly G-2 \cite{DBLP:conf/icde/AdyaLO00}. According to the
+% ConSpec specification for PL-3 (refer to Equation \ref{eqn:PL3}), apart from proscribing G1 anomalies, G2 anomalies are
+%  also disallowed. According to G2, their can be
+% effectively no cycle comprising anti-dependency edges between transactions. The expression \\
+% $\big( \not\exists  \left({R}(x)^{'}_\mathit{tx} F {W}(x)^{''}_\mathit{ty} F {R}(x)^{'''}_\mathit{ty} \in \mathit{St} \right) \wedge \\
+%  \big( {R}(x)^{''''}_\mathit{ty} F {W}(x)^{'''''}_\mathit{tx} F {R}(x)^{''''''}_\mathit{tx} \in \mathit{St} \big)  \big) \big(  \left( v^{''} = v^{'} \right) \wedge \\ 
+% \left( v^{'''''} = v^{''''} \right) \big) \big)$ proscribes anti-dependency cycles. Thus, the
+% ConSpec expression disallows G2, and effectively follows PL-3. Following the same line of reasoning, we can
+%  prove that the ConSpec expression in Equation \ref{eqn:PL299} effectively  specifies PL-2.99.
 
 \section{Conclusions}
 In this paper, we presented precise formal definitions for the existing body of consistency semantics and isolation levels using a generalized specification language, ConSpec. In contrast with the existing definitions which are tied to the specific syntax, protocols, and implementation-level details of a particular class of storage systems, our definitions are implementation-agnostic and flexible.  Thus, our definitions can be used as a standard baseline for  verifying the consistency and isolation levels of existing storage systems, as well as for correctly implementing new prototype storage systems. Based on the above generalized definitions, we have developed a  technique for organizing  consistency models into a hierarchical arrangement, based on their degree of strength. We have extended the CAP theorem to state a property which makes it possible for  a consistency model to be implemented in a manner that can achieve both high availability and partition tolerance; we also provided a formal proof of the above theorem.  We also provided formal  proofs showing the equivalence of each our consistency and isolation definitions with the existing state-of-the-art definitions.  We also presented an automated tool for verifying whether a given session trace satisfies a given consistency model or isolation level, specified using ConSpec.  We believe that verification tools based on ConSpec specifications (like the one we presented) should perform better and more reliably than current state-of-the-art tools. In future, we plan to keep working in this direction, and aim to develop an end-to-end framework for building and verifying correct applications and storage systems, based on our generalized specifications.  
@@ -2348,11 +2203,54 @@ In this paper, we presented precise formal definitions for the existing body of 
 %
 %\end{lstlisting}
 \section{Appendix}
-\subsection{Serialization Definitions}\label{sec:ser}
+\subsection{A Hierarchy of ConSpec Specifications }\label{sec:hierarchy}
+Definitions of consistency models are specified using ConSpec in the form of LTL properties. Hence, ConSpec specifications can be classified using the same basic principles by which LTL properties are categorised \cite{Manna:1990:HTP:93385.93442}. There are four broad categories of  LTL properties: safety, guarantee, recurrence, and persistence. Consider that $\phi$ is a given LTL property, which may be a conjunction or disjunction of multiple LTL properties. A safety property is expressed in a generic format $\forall \phi$, whereas a guarantee property is expressed as $\exists \phi$; recurrence and persistence properties are expressed as $R \phi$ and $P \phi,$ respectively.  The specification $\mathcal{E}^{s} $  for each of the consistency models RYW, MR, Causal, WFR, and MW can be expressed in the form $\forall p \rightarrow \exists q, $ which can be rewritten as $\forall F p \rightarrow F q.$ This form of LTL specification is called the conditional guarantee form of LTL property. The specifications for the TSO and PC consistency models can be expressed in the form  $\forall p_1 \circ  p_2 \circ^{'}  ... \circ^{''}  p_k, $  where $\circ, \circ^{'}, ... , \circ^{''}$ are conjunction or disjunction operators of first order logic over LTL constraints $p_1, p_2, .... , p_k$. The above expression can be transformed into the form $\forall p,$ which is called the safety form of LTL property.  Thus, the ConSpec specifications can be broadly classified as conditional guarantee and safety properties. 
+ \par Now, let us further analyze the consistency models belonging to the conditional guarantee form. The specifications $\mathcal{E}^{s} $ of RYW, MR, Causal, WFR, and MW can be expressed in the form  $\mathcal{E}^{s} = A \rightarrow B$ (refer to Defintion \ref{def:form0}), where the precondition $A$ is specified as $A$ =$ {\mathit{Op}}^{'} F {\mathit{Op}}^{''} \in \mathit{st} $ .  The precondition $A$  in the specification $\mathcal{E}^{s} $ for Causal consistency  (refer to Equation \ref{eqn:Causal}) imposes an LTL constraint  on any  pair of operations $ {\mathit{op}}$ and  ${\mathit{op}^{'}}$  comprised in a given session trace.  Since the above operations $ {\mathit{op}}$ and  ${\mathit{op}^{'}}$ can be both read and write operations, precondition $A$ for Causal consistency is more restrictive than others. Thus, in turn, the set of session traces that satisfies the precondition $A$ for Causal consistency is smaller in size than the set that satisfies RYW, MR, WFR, and MW.  However, the postcondition $B$ for RYW, MR, Causal WFR, MW uniformly defines an existential quantification on the serialization of a partial execution for a given client.  The strength (degree of the strength) of a consistency model can be quantified by the size of the set of session traces that consistency model; smaller size  implies more restrictive condition, which, in turn, implies stronger the consistency model. Hence, Causal consistency is stronger than the rest of the above consistency models, namely RYW, MR, Causal WFR, and MW.  The precondition $A$ for RYW (refer to Equation \ref{eqn:RYW}) comprises an LTL constraint ${W}^{'} F {R}^{''}$ on successive write and read operations ${w}$ and ${r}^{'}$.  On the other hand, WFR (refer to Equation \ref{eqn:WFR}) comprises an LTL constraint ${R}^{'} F {W}^{''}$ on successive read and write operations ${r}$ and ${w}^{'}$. However the writes ${w}^{'}$ have no meaning in the observed session traces, unless viewed in company of a succeeding read  ${r}^{''}$.  Thus, the precondition $A$ for WFR can be expressed as ${W}^{'} F {R}^{''} F {R}^{'''}$, making it more restrictive; thus the set of traces which satisfy WFR is smaller than that of RYW and MR. Hence, WFR is stronger than the precondition $A = {R}^{'} F {R}^{''}$ for MR, as well as the precondition $A = {W}^{'} F {R}^{''}$. Similarly, the precondition $A$ =  ${W}^{'} F {W}^{''}$  for MW can be expressed as   $A$ =  ${W}^{'} F {W}^{''} F {R}^{'''} $, making it also stronger than RYW and MR.  Strict serializability model, on the other hand, specifies the precondition $A$ as an LTL constraint on any pair of operations; particularly,  it specifies $A$ as  $A$ =  ${\mathit{Op}}^{'} X {\mathit{Op}}^{''}$. The LTL operator next $X$ implies that the set of session traces satisfies the above precondition is even smaller than the set that satisfies Causal consistency. Hence Strict Serializability is stronger than the rest of the consistency models of the conditional guarantee form. 
+\subsection{Analysis of Consistency Models With Respect To CAP}\label{sec:capanalyze}
+ For RYW, MR, Causal consistency, WFR, and MW, $E^s$ imposes restrictive conditions on operations comprised in an
+equivalent legal serialization of a partial order $\preccurlyeq_{st+w}$, composed of operations performed by the given client, along with only
+writes from other concurrent clients. Since $\preccurlyeq_{st+w}$ does not comprise read operations from all clients in   $\mathit{St}$, the above consistency models impose only a strict partial order with respect to  operations in $\mathit{St}$. Thus, writes from concurrent clients are allowed to overwrite results of writes from
+a given client as long as there exists an equivalent legal serialization comprising the combination of
+operations from the given client and the concurrent writes. It only restricts that the partial order, i.e., precedence, among the operations from
+each client is maintained. Similarly, Processor consistency (PC) restricts that the order among operations in a given client must be preserved in all executions, i.e., no client may observe the operations from a given client in a different order than the invocation order. Hence, PC does not enforce a partial order  across operations from different concurrent clients, it only imposes a strict partial order on all operations from a given client.  Thus, these comprise a weaker class of consistency models that can be satisfied without synchronization
+among clients, i.e., these consistency models are not dependent among reliable communication among concurrent clients (like broadcasting
+of results on common data objects, or blocking of conflicting operations). % Under these consistency models,
+% a pair of concurrent clients, namely $\mathit{Cl}_1$ and $\mathit{Cl}_2$, can continue providing high availability guarantees in a partitioned network, where there
+% all communication between $\mathit{Cl}_1$  and  $\mathit{Cl}_2$ are lost. Hence, the above consistency models are CAP-relaxed.
+ %For Strict Serialization, $E^s$ imposes a restrictive conditions that mutual order among operations performed by each client
+% in a global execution must be preserved in an equivalent legal serialization $S_c$, where $S_c$ is a restriction of the
+% legal serialization $\mathit{Ser}$ with respect to a given
+%client $\mathit{Cl}$.
+% Using the expression for $S_c$ from Definition \ref{def:clientser} in Equation \ref{eqn:Strict}, the specification for Strict
+% Serializability can be given in the same manner as Chockler et al., as follows.  
+% $E^{s} =  \forall \mathit{st} \big( \mathit{Op}^{'} X^o {\mathit{Op}}^{''} \in \mathit{st}
+%\\ \rightarrow
+%\exists \left( {\mathit{Op}^i}^{'}, {\mathit{Op}}^{''} \in \mathit{Ser} \wedge {\mathit{Op}}^{'}, {\mathit{Op}}^{''} \in \mathit{st} \right) \\ 
+%\left( {\mathit{Op}}^{'} X^o {\mathit{Op}}^{''} \in S_c \right) \big).$
+%Since, $ \mathit{S_c} \subset \mathit{Ser}$, ${\mathit{Op}}^{'} X^o {\mathit{Op}}^{''} \in \mathit{S_c}$ implies ${\mathit{Op}}^{'} X^o {\mathit{Op}}^{''} \in \mathit{Ser}$
+%Hence, moving the existential quantifier out of the enclosing scope of the universal quantifier, the above expression can be rewritten as
+%\\ $E^{s} =  \exists \left( {\mathit{Op}}^{'}, {\mathit{Op}}^{''} \in \mathit{Ser} \right) \forall \mathit{st} \big( \mathit{Op} X^o {\mathit{Op}}^{''} \in \mathit{st}
+%\\ \rightarrow \left( {\mathit{Op}}^{'} X^o {\mathit{Op}}^{''} \in \mathit{Ser} \right) \big).$
+% Thus, 
+ Strict Serializability restricts that the mutual execution order among operations
+performed by each client in a global execution must be preserved in a partial order $\preccurlyeq$ comprising all operations in  in a global execution (similar to an equivalent  legal serialization $\mathit{Ser}$ in the definitions of Chockler et al. defined in Equation \ref{def:ser}). Thus, Strict serializability imposes a partial order among  operations from all clients comprised in  $\mathit{St}$.
+ %Legal serialization $\mathit{Ser}$ strictly orders results of all operations from all clients
+% such that each read operation performed by each client returns the result of the preceding write performed by the same client.
+ %Hence, Strict Serializability imposes strong restrictions on the execution order and observed results for each clients, such that
+% a concurrent client may not overwrite the results of an operation performed by a given client. %In Equation \ref{form-1},
+% the LTL operators $R$ and $R^{'}$ can imply constraints
+% either on the observed results (in the form of equality relation among values observed) or precedence relation (denoted by
+% eventually operator $F$ or special-purpose next operator $X^o$) among each pair of operations.
+ TSO 
+ imposes restrictions on the execution order and observed results among all operations performed by different concurrent clients observed in a global session trace $\mathit{St}$. Hence, it directly follows from the definitions that TSO imposes a partial order on  $\mathit{St}$, where each operation performed. by a given client in $\mathit{St}$ is bounded by a partial order relation with an operation in $\mathit{St}$ performed by another concurrent client.
+ Hence, these consistency models require strict synchronization among operations from different clients, such that
+ operations from each client must  be executed in isolation from other concurrent clients.   
+ 
+\subsection{Serialization Definitions}\label{sec:ser}  
  A \emph{serialization} is a linear sequence comprising all operations comprising a global  execution on a
-   storage system.
+   storage system. Here, we demonstrate how various flavours of serialization used in the original definitions of Chockler et al.  \cite{Chockler2000} can be expressed in terms of the ConSpec language. 
 A serialization is said to be \emph{legal} if every read operation returns the value written by the latest write
-    operation preceding it in the serialization.  Following Chockler et al. \cite{Chockler2000}, ConSpec defines
+    operation preceding it in the serialization.  Following Chockler et al., ConSpec defines
   consistency levels in terms of valid legal serialization orders equivalent to a given execution. Similar to Chockler et al., ConSpec defines different consistency models in terms of different specialized forms of legal serialization, which have been defined below. ConSpec defines those consistency models, which can not be expressed in terms of legal serialization, in terms of constraints on the global execution order,  represented by the global session trace $\mathit{St}$.
     Let the propositional variable ${\mathit{Op}^i}^{'}$ denote an execution of the
     i\textquotesingle th operation comprised in the set $mathcal{O}$ of operations executed from a given client application in a session trace.
@@ -2380,8 +2278,147 @@ A serialization is said to be \emph{legal} if every read operation returns the v
    \rightarrow \left( {v_j}^{'} = {v_i}^{'} \right) \big) \big)$.
    \end{definition}\label{def:parser}
    The above legal serialization does not comprise read operations from other clients, hence its a  serialization of a partial execution.
+   
+    \subsection{Equivalence between Dependency Relations and LTL Relations of ConSpec} \label{sec:equiv}
+ State-of-the-art definitions specify consistency levels in terms of dependency relations, namely
+  $w \xrightarrow{wr} r$,  $w \xrightarrow{ww} w^{'}$, and  $w \xrightarrow{wr} r$ dependency, respectively
+  \cite{Hennessy:2011:CAF:1999263}.  The $w \xrightarrow{wr} r$ dependency can be translated to the form
+  $\exists \big( %\left(  \mathit{st}, \mathit{st}^{'} \in \mathit{St} \right) \wedge
+  \left( W^{'} \in \mathit{st} \right)
+  \wedge \left(  R^{''} \in \mathit{St} \right) \big) \\ \left( v  = {v}^{'} \right)$, where we represent the write and read operations $w$ and $r$
+  involved in the  dependency relation with the propositional variable $W^{'}$ and $R^{''}$, respectively. Denoting
+  $w$, and $w^{'}$ with propositional variables $W^{'}$ and $W^{''}$, the
+  dependency relation $w \xrightarrow{ww} w^{'}$ is translated into ConSpec form as follows.
+  \begin{align}\label{eqn:ww}
+\begin{split}
+   \exists \big( %\left( \mathit{st}, \mathit{st}^{'} \in \mathit{St} \right) \wedge
+   \left( {W}^{'} \in \mathit{st} \right)
+   \wedge \left( {W}^{''}  \in  \mathit{St} \right)  \big)
+   \big( %\wedge
+ % \left( {W^i}^{'} \in \mathit{st} \right)
+  \exists %\big(  %\left( \mathit{st}^{''} \in \mathit{St} \right) \wedge
+  \left( { R}^{''''} \in \mathit{St} \right) %\big)
+  %\exists \left( \mathit{st}, \mathit{st}^{'} \in \mathit{St} \right)  %{W^i}^{'}  F { R^k}^{''} \in \mathit{st}^{''}  \wedge \\
+  %\wedge {R^l}^{'''} F { R^k}^{'''} \in \mathit{st}^{''} \wedge
+   \left( {v}^{'''} = {v}^{'} \right) \\
+   \wedge \big( \left(  {v}^{'''} = v \right) \vee
+  \big( \left( {W^i}^{''} F { R^l}^{''} \in \mathit{St} \right) \wedge \\
+   \left(  \not\exists {W}^{'} F {W}^{'''''} F { R}^{''''} \in \mathit{St} \right)  \big) \big) \big) %\left( \not\exists {W^j}^{''} F {W^m}^{''} F { R^l}^{''} \in \mathit{st}^{'} \; \wedge \; {v_l}^{'} = {v_j}^{'}
+%  \right) \\
+%  \vee \left( \exists {W^j}^{''} F {W^m}^{''} F { R^l}^{''} \in \mathit{st}^{'} \right) \left({v_l}^{'} = {v_m}^{'}  \right) \big) % \\
+  %\not\exists {W^i}^{'} F {W^n}^{'} F { R^l}^{'} \in \mathit{st}  \big)
+   %\big( \left( {v_k}^{'} = {v_j}^{'}  \right) \vee \\
+   %\exists \left( \mathit{st}^{'''} \in \mathit{St} \wedge {W^j}^{''''} F {W^m}^{''''} F { R^k}^{''''}  \in \mathit{st}^{'''} \right)
+   %\left( {v_k}^{'} = {v_m}^{'}  \right) \big).
+   \end{split}
+   \end{align}
+   Similarly, denoting  $r$, and $w$ with propositional variables $R^{'}$ and $W^{''}$, the
+   $r \xrightarrow{rw} w$ dependency is translated into ConSpec form as follows.
+     \begin{align}\label{eqn:rw}
+\begin{split}
+\exists \big( %\left( \mathit{st}, \mathit{st}^{'}, \mathit{st}^{''}  \in \mathit{St} \right)  \wedge
+\left( {R}^{'} \in \mathit{st} \right)
+   \wedge \left( {W}^{''}  \in  \mathit{St} \right) \wedge
+   \left( \exists  {W}^{'''} \in \mathit{st}  \right) \\
+   \left( v = {v}^{''} \right) \wedge
+  \left( \exists {R}^{''''} \in \mathit{St}  \right) \left( {v}^{'''} = {v}^{'} \right)  \big)
+ \big( \left( {v}^{''} = {v}^{'''} \right) \vee \\
+  \big(  \left( {W}^{'''} F { R}^{''''} \in \mathit{St} \right) \wedge
+    \left(  \not\exists {W}^{'''} F {W}^{'''''} F { R}^{''''} \in \mathit{St}  \right) \big) \big)
+   %\left( {W^j}^{''} F { R^l}^{''} \in \mathit{st}^{'} \right) \wedge
+% \left( \not\exists {W^m}^{'} F {R^i}^{'} \in \mathit{st}^{''} \right) \left( {v_l}^{'} = {v_m}^{'} \right) \big)
+ % \big( {v_l}^{'} = {v_j}^{'}
+  %\; \vee \left( \exists {W^j}^{''} F {W^n}^{'} \in \mathit{st}^{'} \right) \\
+  %\left( {v_j}^{'} = {v_n}^{'} \right) \big).
+  \end{split}
+  \end{align}
+   \par Adya et al. define isolation  levels in terms of $w \xrightarrow{wr} r$,
+   $w \xrightarrow{ww} w^{'}$, and  $w \xrightarrow{wr} r$  dependencies among transactions
+   \cite{DBLP:conf/icde/AdyaLO00}. The $wr$ dependency relation of the dependency graph can be translated into
+   ConSpec form \\ $\exists \big( %\left(  \mathit{st}, \mathit{st}^{'} \in \mathit{St} \right) \wedge
+   \left( W^{'}_\mathit{tx} \in \mathit{st} \right)
+  \wedge \left(  R^{''}_\mathit{ty} \in \mathit{St} \right) \big) \left( v = {v}^{'} \right) $. The $ww$ dependency relation
+    between transactions $\mathit{tx}$ and $\mathit{ty}$ can be translated to \begin{align}\label{eqn:ww}
+\begin{split}
+ \exists \big( %\left( \mathit{st}, \mathit{st}^{'} \in \mathit{St} \right) \wedge
+ \left( {W}^{''}_\mathit{tx} \in \mathit{st} \right)
+   \wedge \left( {W}^{''}_\mathit{tx}  \in  \mathit{St} \right)  \big)
+   \big( %\wedge
+ % \left( {W^i}^{'} \in \mathit{st} \right)
+  \exists %\big( % \left( \mathit{st}^{''} \in \mathit{St} \right) \wedge
+  \left( { R}^{''''}\mathit{ty} \in \mathit{St} \right) %\big)
+  %\exists \left( \mathit{st}, \mathit{st}^{'} \in \mathit{St} \right)  %{W^i}^{'}  F { R^k}^{''} \in \mathit{st}^{''}  \wedge \\
+  %\wedge {R^l}^{'''} F { R^k}^{'''} \in \mathit{st}^{''} \wedge
+   \\ \left( {v}^{'''} = {v}^{'} \right)
+   \wedge
+   \big( \left(  {v}^{'''} = v \right) \vee
+  \big( \left( {W}^{''} F { R}^{''''}_\mathit{ty} \in \mathit{St} \right) \wedge \\
+   \big( \left(  \not\exists {W}^{'}_\mathit{tx} F {W}^{'''''}_\mathit{tx} F { R}^{''''}_\mathit{ty} \in \mathit{St} \right)  \\
+  \wedge  \left(  \not\exists {W}^{'}_\mathit{tx} F {W}^{'''''}_\mathit{ty} F { R}^{''''}_\mathit{ty} \in \mathit{St} \right) \big) \big) \big) \big)
+  %\left( \not\exists {W^j}^{''} F {W^m}^{''} F { R^l}^{''} \in \mathit{st}^{'} \; \wedge \; {v_l}^{'} = {v_j}^{'}
+  % \exists \big( \mathit{st}, \mathit{st}^{'}, \mathit{st}^{''} \in \mathit{St} \wedge
+%  {W^i}^{'}_\mathit{tx} F { R^l}^{'}_\mathit{tx} \in \mathit{st}
+%  \wedge {W^j}^{''}_\mathit{ty} F { R^k}^{''}_\mathit{ty} \in \mathit{st}^{'} \\
+%  \wedge {R^l}^{'''}_\mathit{tx} F { R^k}^{'''}_\mathit{ty} \in \mathit{st}^{''} \wedge
+%  \not\exists {W^j}^{''}_\mathit{ty} F {W^m}^{''}_\mathit{ty} F { R^k}^{''}_\mathit{ty} \in \mathit{st}^{'} \wedge \\
+%  \not\exists {W^i}^{'}_\mathit{tx} F {W^n}^{'}_\mathit{tx} F { R^l}^{'}_\mathit{tx} \in \mathit{st}  \big)
+%   \big( \left( {v_k}^{'} = {v_j}^{'}  \right) \vee \\
+%   \exists \left( \mathit{st}^{'''} \in \mathit{St} \wedge {W^j}^{''''}_\mathit{ty} F {W^m}^{''''}_\mathit{ty} F { R^k}^{''''}_\mathit{tx}  \in \mathit{st}^{'''} \right)
+%   \left( {v_k}^c{'} = {v_m}^{'}  \right) \big).
+   \end{split}
+   \end{align}
+ The $rw$ dependency relation between transactions $\mathit{tx}$ and $\mathit{ty}$ can be translated into ConSpec form
+  \begin{align}\label{eqn:rw}
+\begin{split}
+\exists \big( %\left( \mathit{st}, \mathit{st}^{'}, \mathit{st}^{''}  \in \mathit{St} \right)  \wedge
+\left( {R}^{'}_\mathit{tx} \in \mathit{st} \right)
+   \wedge \left( {W}^{''}_\mathit{ty}  \in  \mathit{St} \right) \wedge
+   \left( \exists  {W}^{'''}_\mathit{tx} \in \mathit{st}  \right) \\
+   \left( v = {v}^{''} \right)  \wedge 
+  \left( \exists {R}^{''''}_\mathit{ty} \in \mathit{St}  \right) \left( {v}^{'''} = {v}^{'} \right)  \big)
+  \big( \left( {v}^{''} = {v}^{'''} \right) \\
+   \vee  \big(  \left( {W}^{'''}_\mathit{tx} F { R}^{''''}_\mathit{ty} \in \mathit{st}^{''} \right)  \wedge
+    \big( \left(  \not\exists {W}^{'''}_\mathit{tx} F {W}^{'''''}_\mathit{tx} F { R}^{''''}_\mathit{ty} \in \mathit{St} \right)  \\\wedge
+   \left(  \not\exists {W}^{'''}_\mathit{tx} F {W}^{'''''}_\mathit{ty} F { R}^{''''}_\mathit{ty} \in \mathit{St} \right) \big) \big)
+%\left( \exists \mathit{st}, \mathit{st}^{'}, \mathit{st}^{''}  \in \mathit{St} \right) \big(
+%  \left( {R^i}^{'}_\mathit{tx} F {W^j}^{''}_\mathit{ty} \in \mathit{st} \right) \wedge \\
+%   \left( {W^j}^{''}_\mathit{ty} F { R^l}^{''}_\mathit{ty} \in \mathit{st}^{'} \right) \wedge
+% \left( \not\exists {W^m}^{'}_\mathit{tx} F {R^i}^{'}_\mathit{tx} \in \mathit{st}^{''} \right) \left( {v_l}^{'} = {v_m}^{'} \right) \big).
+%\exists \big( \mathit{st}, \mathit{st}^{'} \in \mathit{St} \wedge
+%  {W^k}^{'}_\mathit{tx} F { R^i}^{'}_\mathit{tx} \in \mathit{st} \wedge {W^j}^{''}_\mathit{ty} F { R^l}^{''}_\mathit{ty} \in \mathit{st}^{'} \wedge \\
+%  \not\exists {W^k}^{'}_\mathit{tx} F {R^l}^{'}_\mathit{ty} F { R^i}^{'}_\mathit{tx} \in \mathit{st} \big) \big( {v_l}^{'} = {v_j}^{'}
+%  \; \vee \left( \exists {W^j}^{''}_\mathit{ty} F {W^m}^{'}_\mathit{ty} \in \mathit{st}^{'} \right) \\
+%  \left( {v_j}^{'} = {v_m}^{'} \right) \big).
+  \end{split}
+  \end{align}
 
 
+ \subsection{Comparison of ConSpec Tool With the State-of-the-art}\label{sec:compare}
+ Here, we compare our approach of analyzing session traces against ConSpec specification with the traditional approach of analyzing server traces \cite{DBLP:conf/icde/AdyaLO00, Chockler2000, Terry:1994:SGW:645792.668302, Burckhardt:2014:PEC:2693641.2693642}. %Let us start by assuming that both approaches use a single expression to represent a given consistency model or isolation level. Let us also assume that session traces used in our approach, and server traces used in traditional approaches, are equivalent in the context of complexity analysis.  Under the above assumptions, complexity of trace analysis with our approach can be potentially worse than the server trace analysis approach if anomaly exists in a given trace. This can be attributed to the fact that, with the server trace analysis approach, the analysis terminates as soon as an anomaly is found in any portion of a given execution trace.  Contrastingly, with our approach, the analysis may continue till the very end of the trace, since it checks if all portions of the trace conforms to the ConSpec specifications. Thus a trace analysis may terminate earlier with the server trace analysis approach. However, we fix the problem by modifying our approach to indirectly detect anomalies (see later part of this Section), thus enabling it to terminate early, similar to the server trace analysis approach.
+%\par On the other hand, in absence of anomalies in a given execution, i.e., in both the session trace and the server trace for the execution, the complexity of our approach matches the server trace analysis approach; since, in this case, the analysis with both approaches terminate at the very end of the trace. We further reduce the search space of session trace for session trace analysis, by considering only the session traces comprising operations performed on a concerned object.
+ In the current state-of-the-art, a consistency model or isolation level is typically represented by two components: 1) axiomatic rules, given by a group of first order logic expressions, representing the allowed execution order among operations, and 2)  DSGs representing the anomalies proscribed by the given consistency model or isolation level. On the other hand, our approach uses only a single LTL-like expression to express the same consistency model or isolation level. Thus, the server trace analysis approach compares each element in an  execution trace with two components. Contrastingly, with our approach, each element in a session trace is compared with only a single ConSpec expression. Hence, the complexity of the server trace analysis approach (refer to Section \ref{sec:complex}) is roughly twice the complexity with our approach, particularly in the case of absence of anomaly in a given trace. In the presence of anomalies in a session trace, the comparison between complexities of the two approaches is more complicated; we need to consider the position of the first occurrence of an anomaly with respect to the size of the trace.
+\par Moreover, the traditional approach of server trace analysis involves analysis of execution traces collected from server nodes comprising the storage system cluster. It analyzes whether the results of operations observed at the system end, i.e., at the end of the storage system, matches the results expected as per a given consistency model or isolation level. Thus, this approach considers a system-centric view of a given consistency model or isolation level. On the other hand, we analyze whether a session trace, observed from a client application, satisfies the specification for a given consistency model or isolation level, i.e., whether the results in the session trace follow an order that is allowed by the above specification. Hence, our approach is concerned with client-centric view of a given consistency model or isolation level. Further, the traditional approach has the disadvantage of having to deal with much longer traces, comprising execution of operations performed from multiple applications or sessions on storage system servers. Extracting a session trace from a server trace is a computationally expensive task by itself, since it requires an exhaustive search on the server trace to identify portions that are relevant to a given application. Contrastingly, our approach directly analyzes session traces, collected from the client machines.
+\subsection{Complexity of Verification: Comparison with the State-of-the-art}\label{sec:complex}
+ %A session trace is comprised of results of execution of storage operations invoked from a client application on a target storage system, observed from a client machine. 
+% Let $\mathit{op}$ be signature of an 
+%$i^\mathit{th}$ operation invoked from a given client application. $\mathit{op}$ can be a read or write operation that reads (or writes) a unique value from (or to) a storage system object $o$; signature of a read and write operation are of the form $r(o){v_m}$ and $w(o,v_l)$, respectively.
+% Let $v_k$ be the current value observed against the operation $\mathit{op}$ on an object $o$. Let the length of the given session trace be denoted by the integer term $s_t$. A a session trace $\mathcal{S}_t$ can be expressed as a collection of tuples, where each tuple comprises: 1) the unique signature of the operation, 2) the name of the storage system object that the operation accesses, 3) the value written by the operation. Using the above notations, a session trace $\mathcal{S}_t$ is given as $\mathcal{S}_t$ = \[ \Set{\tuple{\mathit{op},o,v_k}} {1\le i \le s_t, 1\le j\le m, 1\le k\le n}{.} \]
+%Let the ConSpec expression for a given consistency
+% guarantee or an isolation level be given as $\mathcal{E}_c$ =\[ \Set{e_i} {1\le i\le s_c}{,} \] where
+% $e_i$ is the $i^\mathit{th}$ character in the ConSpec expression, and the length of a given ConSpec expression is $s_c$.
+ %$\tuple{\mathit{op}_i,o_j,v_k}$
+It can be verified whether a storage system actually supports a consistency guarantee or an isolation level by analyzing a session trace with respect to a ConSpec specification $\mathcal{E}^s$ for the above consistency guarantee or isolation level. Verifying a given session trace $\mathcal{s}_t$ against a specification $\mathcal{E}^s$  involves comparing the observed result of each operation in
+  $\mathcal{s}_t$ against each expression in $\mathcal{E}^s$. The complexity (here we consider time complexity) of comparing each character in a session trace $\mathcal{s}_t$ against the specification $\mathcal{E}^s$ is equivalent to the length of the specification, i.e., $s_c$. For verification, the above step is repeated for all characters in the session trace (in the absence of anomalies). Thus, the total complexity  of verifying a session trace against a given ConSpec specification is $s_t \times s_c$.
+\par  As already discussed in Section \ref{sec:compare}, state-of-the-art definitions of consistency models and isolation levels comprise a combination of axiomatic rules and anomaly DSGs. Let the total number of axiomatic rules in a state-of-the-art consistency specification  be $n_e$. Let the length of the expression for each axiomatic rule comprising a state-of-the-art specification  be $s_1$, $s_2$, ..., $s_{n_e}$, respectively. Thus, the total length of such expressions in a state-of-the-art specification
+ is given as $\mathcal{E}^s$ =\[ \Set{\mathcal{E}^{i}_s}{1\le i\le n_e}{,}{,}\] where $\mathcal{E}^{i}_s$ is the $i^\mathit{th}$
+ expression in the given specification. The process of verifying a given session trace against a specification involves comparing each expression in the given specification with each character in the session trace. The complexity (time complexity) of comparing the expression $\mathcal{E}^{i}_s$ against the session trace can be given as $s_t \times s_i$, where $s_i$ is the length of $\mathcal{E}^{i}_s$. The total complexity of verifying the given session trace against the above expressions comprising the given specification involves carrying out the above step for all expressions in the specification, which in turn, can be given as $s_t \times \left(s_1+s_2+...+s_{n_e}\right)$. Now, let us consider verifying the given session trace against the anomaly DSGs for the given specification. Let the number of anomaly DSGs for a given specification be $n_g$. Let the size of each anomaly DSG be $g_1$, $g_2$, ...., $g_{n_g}$. Verifying a given session trace against an anomaly DSG involves performing
+ a pattern search in each of the DGSs with the session trace. The complexity $\mathcal{C}$ of the above search, using any algorithm based on Depth First Search,  can be given as $\mathcal{C}$ = $V+E$, where $V$ and $E$ are the number of vertices and edges in each DSG,
+ respectively. Considering each DSG to be fully connected, the number of edges approximately equals the number of vertices
+  -1, i.e., $E \approx V - 1$. Hence, $\mathcal{C}$ can be further rewritten as $\mathcal{C}=V+E\approx 2V -1$. Thus, the complexity of a graph search algorithm can be given $\approx 2V -1$. The total complexity
+  of verifying he given session trace against anomaly DSGs involves performing the above pattern search for all anomaly DSGs comprising the given specification. Thus, the total complexity of verifying against anomaly DSGs can be given as
+  $s_t \times 2 \times \left( g_1 + g_2 ... + g_{n_g} \right) - n_g$.  Combining the complexity of verifying against the expressions and the complexity of verifying against the anomaly DSGs, the total complexity of verification
+   as per the state-of-the-art can be given as
+   $s_t \times \left( s_1+s_2+...+s_{n_e} + 2 \times g_1 + 2 \times g_2 ... + 2 \times g_{n_g} - n_g \right).$
    
 \subsection{Violation Examples: Verified \\ Against ConSpec Specifications}\label{sec:examples}
   Using example session traces, we illustrate situations where a given consistency model is violated. Let us consider a
@@ -2643,39 +2680,39 @@ the condition $v^n = v^i$ holds. Thus, $\mathit{st}_4$ violates the second condi
 %  write operations in transaction $tx$ execute in the order $w^1_{tx}(o_1,5)$, $w^2_{tx}(o_2,8)$.
 %  However,  the write operations in transaction $ty$ execute in the order $w^2_{ty}(o_1,5),  w^1_{ty}(o_2,5)$.
   This, in turn, satisfies the anomaly condition for PL-1. Thus, $\mathit{st}_8$ violates
-  PL-1.
-  \par Let us consider a session trace \\ $\mathit{st}_9$: $w^1_{tx}(x,1), r^1_{t_y}(x){1}, w^2_{tx}(x,2), c_{ty}, c_{tx}$.
-  According to PL-2 (refer to Equation \ref{eqn:PL2}), a transaction never must read a value from an operation
-  if the transaction executing above operation has not yet committed. In other words there must not exist a read operation
- $r^k(x)_\mathit{ty}$ such that $r^k(x)_\mathit{ty}$ reads a value written by a write operation  $w^i(x)_\mathit{tx}$
- that does not write the final (committed) version of the object $x$ for the transaction $\mathit{tx}$, i.e., the condition \\
-  $\not\exists \big( \big(
- {W^i}(x)^{'}_\mathit{tx}  F {W^j}(x)^{'}_\mathit{tx} F  c_\mathit{tx} \in  \mathit{st} \big)
-   \wedge \left( v_k^{'} = v_i^{'} \right)  \big) \wedge \\
-   \not\exists \big( \big(
- {W^i}(x)^{'}_\mathit{ty}  F {W^j}(x)^{'}_\mathit{ty} F  c_\mathit{ty} \in  \mathit{st} \big)
-   \wedge \left( v_k^{'} = v_i^{'} \right)  \big)$ does not hold. In the session trace $\mathit{st}_9$, the read operation
-   $r^1_{ty}(x){1}$ returns a value 1 written by the operation $w^1_{tx}(x,1)$ in transaction $tx$. However, the write
-   operation $w^2_{tx}(x,2)$, which follows $w^1_{tx}(x,1)$ in $\mathit{st}_9$, writes the committed version (i.e., the
-   final version) of $x$, which is 2. Thus, the above condition does not hold for  $\mathit{st}_9$, resulting in violation of PL-2.
-  \par Consider a session trace \\ $\mathit{st}_{10}$: $r^1_{tx}(\mathit{tx}){50}, r^1_{\mathit{ty}}(x){-50}, r^2_{\mathit{ty}}(y){100},
-  w^1_{\mathit{ty}}(x,100), w^2_{\mathit{ty}}(y,50), \\
-   c_{\mathit{ty}},  w^1_{\mathit{tx}}(y,-50), r^2_{\mathit{ty}}(x){100}, r^2_{\mathit{tx}}(y){-50}, c_{\mathit{tx}}$.
-  In $\mathit{st}_{10}$, the read operation $r^1_{\mathit{tx}}(x){50}$ on object $x$ in $\mathit{tx}$ is followed by write
-  operation  $w^1_{\mathit{ty}}(x,100)$.
-    The read operation $r^2_{\mathit{ty}}(x){100}$ following the commit $c_{\mathit{ty}}$ returns the value 100, indicating a rw
-    dependency between transactions $\mathit{tx}$ and $\mathit{ty}$. Similarly, the read operation $r^2_{\mathit{ty}}(y){100}$
-     on object $y$ in $\mathit{ty}$ is followed by write
-  operation  $w^1_{\mathit{tx}}(y,50)$.
-    The read operation $r^2_{\mathit{tx}}(y){-50}$ following the commit $c_{\mathit{ty}}$ returns the value -50, implying
-    a read-write dependency between  $\mathit{ty}$ and $\mathit{tx}$.
-    %This causes anomaly DSGs comprising of anti-dependency edges
-   %(r-w dependencies) between operations $r^1_{tx}(x){50}$ and $w^1_{ty}(x,100)$, and between $ w^2_{ty}(y,50)$
-  % and $r^2_{tx}(y){-50}$, which are proscribed by PL-3.
-  Thus, there is a read-write dependency cycle in $S_{11}$, violating PL-3 specifications. Let us consider a session trace
-   $\mathit{st}_{11}$: $r^1_{tx}(\mathit{tx}){50}, r^1_{\mathit{ty}}(x){-50}, \\
-   r^2_{\mathit{ty}}(x){100}, w^1_{\mathit{ty}}(x,100),  w^2_{\mathit{ty}}(y,50), c_{\mathit{ty}},
-    w^1_{\mathit{tx}}(x,-50), r^2_{\mathit{ty}}(x){100}, \\ r^2_{\mathit{tx}}(x){-50}, c_{\mathit{tx}}$
-   Following similar line of reasoning, we can
-   observe that the session trace   $\mathit{st}_{11}$ violates the isolation level PL-2.99, given in Equation \ref{eqn:PL299}.
+%  PL-1.
+%  \par Let us consider a session trace \\ $\mathit{st}_9$: $w^1_{tx}(x,1), r^1_{t_y}(x){1}, w^2_{tx}(x,2), c_{ty}, c_{tx}$.
+%  According to PL-2 (refer to Equation \ref{eqn:PL2}), a transaction never must read a value from an operation
+%  if the transaction executing above operation has not yet committed. In other words there must not exist a read operation
+% $r^k(x)_\mathit{ty}$ such that $r^k(x)_\mathit{ty}$ reads a value written by a write operation  $w^i(x)_\mathit{tx}$
+% that does not write the final (committed) version of the object $x$ for the transaction $\mathit{tx}$, i.e., the condition \\
+%  $\not\exists \big( \big(
+% {W^i}(x)^{'}_\mathit{tx}  F {W^j}(x)^{'}_\mathit{tx} F  c_\mathit{tx} \in  \mathit{st} \big)
+%   \wedge \left( v_k^{'} = v_i^{'} \right)  \big) \wedge \\
+%   \not\exists \big( \big(
+% {W^i}(x)^{'}_\mathit{ty}  F {W^j}(x)^{'}_\mathit{ty} F  c_\mathit{ty} \in  \mathit{st} \big)
+%   \wedge \left( v_k^{'} = v_i^{'} \right)  \big)$ does not hold. In the session trace $\mathit{st}_9$, the read operation
+%   $r^1_{ty}(x){1}$ returns a value 1 written by the operation $w^1_{tx}(x,1)$ in transaction $tx$. However, the write
+%   operation $w^2_{tx}(x,2)$, which follows $w^1_{tx}(x,1)$ in $\mathit{st}_9$, writes the committed version (i.e., the
+%   final version) of $x$, which is 2. Thus, the above condition does not hold for  $\mathit{st}_9$, resulting in violation of PL-2.
+%  \par Consider a session trace \\ $\mathit{st}_{10}$: $r^1_{tx}(\mathit{tx}){50}, r^1_{\mathit{ty}}(x){-50}, r^2_{\mathit{ty}}(y){100},
+%  w^1_{\mathit{ty}}(x,100), w^2_{\mathit{ty}}(y,50), \\
+%   c_{\mathit{ty}},  w^1_{\mathit{tx}}(y,-50), r^2_{\mathit{ty}}(x){100}, r^2_{\mathit{tx}}(y){-50}, c_{\mathit{tx}}$.
+%  In $\mathit{st}_{10}$, the read operation $r^1_{\mathit{tx}}(x){50}$ on object $x$ in $\mathit{tx}$ is followed by write
+%  operation  $w^1_{\mathit{ty}}(x,100)$.
+%    The read operation $r^2_{\mathit{ty}}(x){100}$ following the commit $c_{\mathit{ty}}$ returns the value 100, indicating a rw
+%    dependency between transactions $\mathit{tx}$ and $\mathit{ty}$. Similarly, the read operation $r^2_{\mathit{ty}}(y){100}$
+%     on object $y$ in $\mathit{ty}$ is followed by write
+%  operation  $w^1_{\mathit{tx}}(y,50)$.
+%    The read operation $r^2_{\mathit{tx}}(y){-50}$ following the commit $c_{\mathit{ty}}$ returns the value -50, implying
+%    a read-write dependency between  $\mathit{ty}$ and $\mathit{tx}$.
+%    %This causes anomaly DSGs comprising of anti-dependency edges
+%   %(r-w dependencies) between operations $r^1_{tx}(x){50}$ and $w^1_{ty}(x,100)$, and between $ w^2_{ty}(y,50)$
+%  % and $r^2_{tx}(y){-50}$, which are proscribed by PL-3.
+%  Thus, there is a read-write dependency cycle in $S_{11}$, violating PL-3 specifications. Let us consider a session trace
+%   $\mathit{st}_{11}$: $r^1_{tx}(\mathit{tx}){50}, r^1_{\mathit{ty}}(x){-50}, \\
+%   r^2_{\mathit{ty}}(x){100}, w^1_{\mathit{ty}}(x,100),  w^2_{\mathit{ty}}(y,50), c_{\mathit{ty}},
+%    w^1_{\mathit{tx}}(x,-50), r^2_{\mathit{ty}}(x){100}, \\ r^2_{\mathit{tx}}(x){-50}, c_{\mathit{tx}}$
+%   Following similar line of reasoning, we can
+%   observe that the session trace   $\mathit{st}_{11}$ violates the isolation level PL-2.99, given in Equation \ref{eqn:PL299}.
 \end{document}
