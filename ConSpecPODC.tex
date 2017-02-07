@@ -664,7 +664,10 @@ E^{s} = \forall  {W}^{'}, {W}^{''} \in \mathit{st} \big( {W}^{'} F {W}^{''} \in 
 %\forall i \left(\star w(o,v)F^{o}w^{'}(o,v^{'}) \star \right)_{o}^\mathit{po} \rightarrow \left(G\; \star w(o,v)F^{o}w^{'}(o,v^{'}) \star \right)_{o}^\mathit{st}.
 %\end{split}
 %  \end{align}
- \par Causal Consistency specifies: results of operations (in a given client application) that are bound by a causal relationship \cite{Bailis:2013:BCC:2463676.2465279} must be  visible in the session trace according to their mutual execution order with respect to an observed session trace. The ConSpec expression for Causal Consistency is given below.
+
+Our generic formulation allows for an interesting perspective on the definition of causal consistency, which can be clearly seen as the union of the previous session guarantees for all sessions. As such, any pair of operations in the same session need to be constrained by the partial order of the ConSpec definition:
+
+%  \par Causal Consistency specifies: results of operations (in a given client application) that are bound by a causal relationship \cite{Bailis:2013:BCC:2463676.2465279} must be  visible in the session trace according to their mutual execution order with respect to an observed session trace. The ConSpec expression for Causal Consistency is given below.
  %\begin{align}\label{eqn:Causal}
 %\begin{split}
 %\forall i \left(\star w(o,v)F^{o}(w^{'}(o,v^{'})\oplus r(o)) \star \right)_{o}^\mathit{po} \\
@@ -681,7 +684,7 @@ E^{s} = \forall \mathit{st} \in \mathit{St}, {\mathit{Op}}^{'}, {\mathit{Op}}^{'
 % \vee \big( \left( {\mathit{Op}^i}^{'} = {W^i}^{'} \right) \wedge \\
 %\left( {\mathit{Op}^j}^{'} = {R^j}^{'} \right) \wedge
 %   \left( v_i = v_j \right) \big)
- \rightarrow \left( {\mathit{Op}}^{'} \preccurlyeq_{st+w} {\mathit{Op}}^{''} \right) \big), 
+ \rightarrow {\mathit{Op}}^{'} \preccurlyeq {\mathit{Op}}^{''} \big) , 
    %; \\
  %C = \not\exists \left( {W^m}^{'} \in \mathit{St} \right) \big( %\left( \mathit{st}^{'} \in \mathit{St} \right) \wedge
 %   \left( {\mathit{Op}^i}^{'} F {\mathit{Op}^j}^{'} \in \mathit{st} \right) %\left( {W^m}^{''} \in \mathit{St} \right)  \\
@@ -692,7 +695,7 @@ E^{s} = \forall \mathit{st} \in \mathit{St}, {\mathit{Op}}^{'}, {\mathit{Op}}^{'
 %\not\exists  {W^n}^{'} \in \mathit{St} \left( {W^m}^{'} F {W^n}^{'} F {\mathit{Op}^j}^{'} \in \mathit{st} \right) \big) \big) \big)
  \end{split}
   \end{align} %where the partial order $\left( \mathcal{O}, \preccurlyeq \right)$ enforces order among conflicting operations in an equivalent $S_p$ to follow the causal order. 
-  where $st$ is the session in context of session guarantees, and $\preccurlyeq_{st+w}$ denotes the restriction of $\preccurlyeq$ to the elements of $st$ and the write operations of all other clients. 
+  where $st$ is the session in context of session guarantees, and $ \preccurlyeq$ is a partial order over operations across all data objects with respect to a given global session trace $ \mathit{St}$. 
  %\begin{align*}
 %\forall i, j, k, l, m, n, q, t, u, x, y, z, a \\
 % \big(\star W^j(v_l) F^{o}  \left( W^n(v_q) X^{o} R^z{v_a}\oplus R^k{v_m} \right) \star \big)_{o}^\mathit{po} \\
