@@ -335,7 +335,7 @@ We assume a set of clients that access the storage system by invoking operations
 
 Similarly, many consistency definitions reason about an interface that exposes the existence of multiple objects (e.g., different memory addresses seen by a CPU or different keys in a key-value store). As such, we assume that the interface allows the programmer to specify objects that are associated with each operation, where we define object $o_j$ to comprise: 1) a unique name, given by the string $o_j$, and 2) a value $v_j$, which can be of any datatype, such as float, double, string, etc. %(A special case of this is a system with a single object whose datatype can be as complex as an entire file system or database, thus encompassing other models such as the state machine replication model~\cite{schneider:smr:tutorial}.) {\bf [RR: Note that the existence of a value does not match the SMR/DB model, since the operations do not return/overwrite the entire state of the state machine/database. How to make this analogy hold?]}
 
-  A \emph{session trace} $\mathit{st}$ is a sequence of operations executed by the same client, ordered by the real-time instant when they were invoked. In this paper we assume that a client only invokes an operation after the preceding operation has returned its response value.
+  A \emph{session trace} $\mathit{st}$ is a sequence of operations executed by the same client, ordered by the real-time instant when they were invoked. In this paper we assume that a client only invokes an operation after the preceding operation has returned its response value. We denote the set of all possible session traces as $\mathcal{S}_t$.
 % comprising the results of a local execution, i.e., results of operations invoked from  a client application, observed from  the client machine. A given client application is executed on a target storage system. In the course of execution of the client application, we collect session traces over a pre-defined sliding window over time from the client machine (i.e., the machine that hosts the client application). %We perform \emph{session trace analysis} on the above session traces to determine whether the target system satisfies a given consistency model or an isolation level.
 % Let $j$ be the index of the read operation in the execution sequence of  $\mathit{Cl}$ observed in a session trace.
 
@@ -426,12 +426,12 @@ Given a global session trace $\mathit{St}$,
 % representing a global execution of all concurrent clients on a given storage
 %system, 
 we say  that $\mathit{St}$ satisfies a consistency model $\mathcal{C}$
-if there exists a partial order $\left( \mathcal{O}, \preccurlyeq \right)$ over the set $\mathcal{O}$ comprising operations  present in all session traces in $\mathit{St}$, where  $\mathcal{O} = \bigcup_{st \in St} \{ o \mid o^{'} \in st \},$  
+if there exists a partial order $\left( \mathcal{O}_{St}, \preccurlyeq \right)$ over the set $\mathcal{O}_{St}$ comprising operations  present in all session traces in $\mathit{St}$, where  $\mathcal{O}_{St} = \bigcup_{st \in St} \{ o \mid o^{'} \in st \},$  
  such that 1) for every operation $\mathit{op}$ in $\mathit{St}$, its output is equal to the one obtain by executing the sequential specification of a linear extension of the operations preceding $\mathit{op}$ in $\preccurlyeq$,
 % the same irrespective of the
  %%among operations preceding it in $\preccurlyeq$, %$\exists {\mathit{Op}^i}^{'}, {\mathit{Op}^j}^{'} \in \mathit{St}:
  %{\mathit{Op}^i}^{'} \preccurlyeq {\mathit{Op}^j}^{'}\; \rightarrow \;{\mathit{Op}^i}^{'} R {\mathit{Op}^j}^{'}$, %\; \vee \; v_i \sim v_j$,\mathcal{O}, \preccurlyeq
- and 2) $\left( \mathcal{O}, \preccurlyeq \right)$ obeys $E^s$, which is an LTL expression restricting $\left( \mathcal{O}, \preccurlyeq \right)$.
+ and 2) $\left( \mathcal{O}_{St}, \preccurlyeq \right)$ obeys $E^s$, which is an LTL expression restricting $\left( \mathcal{O}_{St}, \preccurlyeq \right)$.
 \end{definition}
 
 %  The condition 1 for the Definition \ref{def:form0} follows directly from the definition of $\mathit{St}$. Each element in
@@ -444,7 +444,7 @@ if there exists a partial order $\left( \mathcal{O}, \preccurlyeq \right)$ over 
 
 
 Condition 1, when applied to a system whose interface consists only of read and write, translates to a requirement that every read operation in $St$ must return the value of the most recent write according to $\preccurlyeq$.
-  Condition 2 can be expressed as $ E^s\; \vDash \; \left( \mathcal{O}, \preccurlyeq \right),$ where %$R$ is a temporal operator, 
+  Condition 2 can be expressed as $ E^s\; \vDash \; \left( \mathcal{O}_{St}, \preccurlyeq \right),$ where %$R$ is a temporal operator, 
   $E^s$ is the ConSpec parameterizattion for each
  consistency model $\mathcal{C}$,
  %$\sim$ is an equivalence relation between the results $v_i$ and $v_j$ observed by a pair of
@@ -1126,9 +1126,31 @@ The fact that the original proof of CAP is restricted to linearizability raises 
  In this section, we rewrite the CAP theorem in terms of ConSpec to precisely define the class of consistency models that can and cannot be implemented in a highly-available, partition-tolerant way.
 
 
---
 
-To begin with, we need a helper definition to enumerate all
+
+To begin with, we need a helper definition to enumerate all admissible partial orders for a given restriction condition $E^s$ and set of operations in a global session trace $St$.
+
+\begin{definition}{Partial order enumeration}\label{def:allpos}
+Given a global session trace $St$ and a restrictive condition $E^s$
+for a ConSpec definition, we define the partial order enumeration
+of this session trace and condition, $\Pi(St,E^s)$ as
+the set of partial orders over the elements of $St$ that are valid
+under $E^s$, i.e.:
+
+$\Pi(St,E^s) \equiv  \{\preccurlyeq:  E^s\; \vDash \; \left( \mathcal{O}_{St}, \preccurlyeq \right)\}$
+\end{definition}
+
+This allows us to define the following necessary and sufficient condition
+for a consistency model to have an available and partition tolerant
+implementation.
+
+\begin{theorem}[Extended CAP theorem] 
+It is possible for a storage system to satisfy a consistency model $E^s$ while simultaneously providing high availability and partition tolerance if and only if for any global session trace $St$, there exists a corresponding partial order enumeration that does not constrain elements of different sessions according to the respective partial order, i.e.:
+
+$\forall St \in \mathcal{S}_t ~ \exists \prec \in \Pi(St,E^s) ~ \forall o, o' \in St (o \in st \wedge o' \in st' \wedge st \not= st' \rightarrow o \not\prec o' \wedge o' \not\prec o)$
+
+ \end{theorem} \label{thrm:cap}
+
 
 --
 
