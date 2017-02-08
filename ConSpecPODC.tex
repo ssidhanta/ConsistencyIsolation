@@ -774,13 +774,13 @@ E^{s} = \forall \mathit{st} \in \mathit{St}, {\mathit{Op}}^{'}, {\mathit{Op}}^{'
 %\big( \left( {W^l}^{'} F {R^j}^{'} \in \mathit{St} \right) \wedge
 % \left( \not\exists {W^l}^{'} F {W^m}^{'} F {R^j}^{'} \in \mathit{St} \right) \big) \big) \big)
 %E^s = \left( \mathcal{O}, \preccurlyeq \right), 
-\forall x, y, \mathit{st}, \mathit{st}^{'} \in \mathit{St}  \left( {\mathit{Op}}^{'}(x) F {\mathit{Op}}^{''} (y) \in \mathit{st} \right) \rightarrow  \left(  \left( {\mathit{Op}}^{'}(x) \preccurlyeq_{st} {\mathit{Op}}^{''} (y)   \right) \wedge  \left( {\mathit{Op}}^{'}(x)  \preccurlyeq_{{st}^{'}}  {\mathit{Op}}^{''} (y)  \right) \right),
+\forall x, y, \mathit{st}, \mathit{st}^{'} \in \mathit{St}  \left( {\mathit{Op}}^{'}(x) F {\mathit{Op}}^{''} (y) \in \mathit{st} \right) \rightarrow  \left(  \left( {\mathit{Op}}^{'}(x) \preccurlyeq_{st+w} {\mathit{Op}}^{''} (y)   \right) \wedge  \left( {\mathit{Op}}^{'}(x)  \preccurlyeq_{{st}^{'}+w}  {\mathit{Op}}^{''} (y)  \right) \right),
 \end{split}
   \end{align}
 %  \forall x, y, \mathit{st}, \mathit{st}^{'} \in \mathit{St}  \left( {\mathit{Op}}^{'}(x) F {\mathit{Op}}^{''} (y) \in \mathit{st} \right) \rightarrow  \left( {\mathit{Op}}^{'}(x) F {\mathit{Op}}^{''} (y)  \in \left( \mathcal{O}, \preccurlyeq_{st} \right) \wedge {\mathit{Op}}^{'}(x) F {\mathit{Op}}^{''} (y)  \in \left( \mathcal{O}, \preccurlyeq_{{st}^{'}} \right)  \right),
 %\end{split}
 %  \end{align} 
-   where $ \preccurlyeq_{st}$ and $ \preccurlyeq_{{st}^{'}}$ are partial orders restricted to operations performed by clients $\mathit{Cl}$ and $\mathit{Cl}^{'}$, respectively, observed in the respective local session traces $\mathit{st}$ and $\mathit{st}^{'}$. % all data objects with respect to a given global execution.
+   where $ \preccurlyeq_{st+w}$ and $ \preccurlyeq_{{st}^{'}+w}$ are partial orders restricted to operations performed by clients $\mathit{Cl}$ and $\mathit{Cl}^{'}$ and writes from all other clients, respectively, observed in the respective local session traces $\mathit{st}$ and $\mathit{st}^{'}$. % all data objects with respect to a given global execution.
  %\forall \big( %\left( \mathit{st} \in \mathit{St} \right) \wedge
 % \left( {W^i}(x)^{'} F {W^j}(z)^{'} F {R^k}(y)^{'} \in \mathit{st} \right) \wedge \\
 %  \left( {W^l}(y)^{'} F {W^m}(z)^{'} F {R^n}(x)^{'} \in \mathit{st} \right) \big) \\
@@ -2016,8 +2016,8 @@ S_p \right)$, for each client.  ${\mathit{Op}}^{'}  F {\mathit{Op}}^{''}   \in S
   %according to the invocation order of these writes in a client application. % Let $\mathit{processors}$ be an  integer term that denotes the
 % total number of processors. We can express the condition the propositional logic variable $A$ must hold for any store
 % $\mathit{store}_n$ with the expression  $\bigcap_{\mathit{processor}_n}^{\mathit{processors}} A$.
-Consider that a given client observes operations ${\mathit{op}}(x), {\mathit{op}^{'}}(y)$ in a temporal order ${\mathit{Op}}^{'}(x) F {\mathit{Op}}^{''} (y)$ observed in a session trace $\mathit{st}$. Then, no other session trace $\mathit{st}^{'}$ observed by any other concurrent client may observe the operations in an order which violates the temporal order in $\mathit{st}$. This, in turn, implies that the precedence ${\mathit{Op}}^{'}(x) F {\mathit{Op}}^{''} (y)$  must be respected in partial order sets   $\left( \mathcal{O}, \preccurlyeq_{st} \right)$ and $\left( \mathcal{O}, \preccurlyeq_{st} \right)$ for session traces $\mathit{st}$ and $\mathit{st}^{'}$, respectively. Thus, Processor Consistency can be expressed as 
-   $\forall x, y, \mathit{st}, \mathit{st}^{'} \in \mathit{St}  \left( {\mathit{Op}}^{'}(x) F {\mathit{Op}}^{''} (y) \in \mathit{st} \right) \rightarrow  \left( {\mathit{Op}}^{'}(x) F {\mathit{Op}}^{''} (y)  \in \left( \mathcal{O}, \preccurlyeq_{st} \right) \wedge {\mathit{Op}}^{'}(x) F {\mathit{Op}}^{''} (y)  \in \left( \mathcal{O}, \preccurlyeq_{st}^{'} \right)  \right)$. %\\
+Consider that a given client observes operations ${\mathit{op}}(x), {\mathit{op}^{'}}(y)$ in a temporal order ${\mathit{Op}}^{'}(x) F {\mathit{Op}}^{''} (y)$ observed in a session trace $\mathit{st}$. Then, no other session trace $\mathit{st}^{'}$ observed by any other concurrent client may observe the operations in an order which violates the temporal order in $\mathit{st}$. This, in turn, implies that the precedence ${\mathit{Op}}^{'}(x) F {\mathit{Op}}^{''} (y)$  must be respected in partial order sets   $\left( \mathcal{O}, \preccurlyeq_{{st}^{'}+w} \right)$ and $\left( \mathcal{O}, \preccurlyeq_{st+w} \right)$ for session traces $\mathit{st}$ and $\mathit{st}^{'}$, respectively. Thus, Processor Consistency can be expressed as 
+   $\forall x, y, \mathit{st}, \mathit{st}^{'} \in \mathit{St}  \left( {\mathit{Op}}^{'}(x) F {\mathit{Op}}^{''} (y) \in \mathit{st} \right) \rightarrow  \left(  \left( {\mathit{Op}}^{'}(x) \preccurlyeq_{st+w} {\mathit{Op}}^{''} (y)   \right) \wedge  \left( {\mathit{Op}}^{'}(x)  \preccurlyeq_{{st}^{'}+w}  {\mathit{Op}}^{''} (y)  \right) \right)$. %\\
 %E^{s} = C =   \forall \mathit{st} \in \mathit{St} \not\exists \big( \left(  {W^i}^{'}, {W^j}^{'} \in \mathit{st}  \right)
 %\wedge \left( {R^k}^{'}, {R^l}^{'} \in \mathit{St} \right) \big) \\
 %\big( \left( {W^i}^{'} F {W^j}^{'} \in \mathit{st} \right) \wedge
