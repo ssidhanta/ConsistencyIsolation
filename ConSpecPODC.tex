@@ -264,8 +264,8 @@ Another contribution of this paper is that we built a tool, which is available o
 
 Our final contribution is that we were able to restate in much broader terms the CAP theorem \cite{brew:cap, Gilbert:2002:BCF:564585.564601}, whose original proof used linearizability as synonym for the strong consistency captured by the ``C'' property. In our new formulation of this theorem, we are able to define necessary and sufficient conditions for a given consistency model to be \emph{CAP-strong}, i.e., bound by the impossibility of being implemented in a highly available, partition-tolerant way.
 
-The remainder of this paper is organized as follows. Section  \ref{sec:definitions} presents the assumed system model, and basic definitions and terminology used in the paper.  Section \ref{sec:syntax} presents the syntax of the ConSpec language, and the general format of specifications based on ConSpec. Section \ref{sec:list} lists the specifications of various  consistency models, expressed using ConSpec.  Section \ref{sec:cap} presents a reformulation of the CAP theorem, and formally proves the same.  Section \ref{sec:impl} presents the design of a prototype automated verification tool that can validate a session trace with respect to a ConSpec specification. In Section \ref{sec:derive}, we prove equivalence of each of the listed ConSpec specifications with their orginal definitions.    Because of lack of space, we include in the appendix a section (Section \ref{sec:hierarchy}) that presents a hierarchical organizaton of the lattice of consistency models. Section \ref{sec:capanalyze} analyzes the lattice of consistency models in terms of the restated CAP theorem.  Section \ref{sec:ser} comprises ConSpec expressions for the various serialization definitions used in the original consistency definitions of Chockler et al.  Section \ref{sec:equiv} illustrates the equivalence between the syntax of ConSpec expressions and the syntax of state-of-the-art isolation and consistency definitions, based on dependency graph.  Section \ref{sec:complex} in the appendix comprises a comparison of the complexity of verification using ConSpec with the state-of-the-art verification techniques. 
- Section  \ref{sec:examples}  comprises a detailed analysis of the process of verification of ConSpec specifications with respect to sample session traces that cause violations of the specifications. 
+The remainder of this paper is organized as follows. Section  \ref{sec:definitions} presents the assumed system model, and basic definitions and terminology used in the paper.  Section \ref{sec:syntax} presents the syntax of the ConSpec language, and the general format of specifications based on ConSpec. Section \ref{sec:list} lists the specifications of various  consistency models, expressed using ConSpec.  Section \ref{sec:cap} presents a reformulation of the CAP theorem, and formally proves the same.  Section \ref{sec:impl} presents the design of a prototype automated verification tool that can validate a session trace with respect to a ConSpec specification. In Section \ref{sec:derive}, we prove equivalence of each of the listed ConSpec specifications with their orginal definitions.    Because of lack of space, we include in the appendix a section (Section \ref{sec:hierarchy}) that presents a hierarchical organizaton of the lattice of consistency models. Section \ref{sec:capanalyze} analyzes the lattice of consistency models in terms of the restated CAP theorem.  Section \ref{sec:ser} comprises ConSpec expressions for the various serialization definitions used in the original consistency definitions of Chockler et al.  Section \ref{sec:equiv} illustrates the equivalence between the syntax of ConSpec expressions and the syntax of state-of-the-art isolation and consistency definitions, based on dependency graph.  %Section \ref{sec:complex} in the appendix comprises a comparison of the complexity of verification using ConSpec with the state-of-the-art verification techniques. 
+% Section  \ref{sec:examples}  comprises a detailed analysis of the process of verification of ConSpec specifications with respect to sample session traces that cause violations of the specifications. 
  
  %%  \par We argue that specifications expressed in terms of ConSpec are much easier to reason about than the state-of-the-art definitions, which require an understanding
  %% of the various dependency relationships; the implicit dependencies can be particularly complex to express and
@@ -750,7 +750,7 @@ E^{s} = \forall \mathit{st} \in \mathit{St}, {\mathit{Op}}^{'}, {\mathit{Op}}^{'
 % \left( v_j = v_m \vee v_i = v_l \right) \big) \big) \big)  %\left( \mathit{Op}^i X^o \mathit{Op}^j \in S \right) \\ \wedge \forall \mathit{st}  \left( \mathit{Op}^j X^o R^k \in \mathit{st} \right) \wedge \left( v^k = v^j  \right) \big)
 % \end{split}
 %  \end{align} where the partial order $\left( \mathcal{O}, \preccurlyeq \right)$ is a partial order over operations in a global execution comprising operations executed by all clients executing on the system. %It restricts an equivalent serialization of a client $S_c$, defined in Definition \ref{def:clientser}, to respect the order of sucessive operations in a given session trace. %where $\mathit{op}_i$ is any operation (read or write), and $\mathcal{S}$ is the set of all session traces for a given client application. % scope.
- \par Processor Consistency \cite{Ahamad:1993:PPC:165231.165264} specifies: operations performed from each client application must be observed by all clients (i.e., must occur in all  session traces) according to their invocation orders. In other words, the order in which any pair of  operations, invoked from a particular client, are observed in session traces of all other clients must always respect the invocation order of the above operations. Reads against  write operations should
+ \par Processor Consistency \cite{Ahamad:1993:PPC:165231.165264} specifies: write operations performed from each client application must be observed by all clients (i.e., must occur in all  session traces) according to their invocation orders. In other words, the order in which any pair of  writes, invoked from a particular client, are observed in session traces of all other clients must always respect the invocation order of the above operations. Reads against  write operations should
   view the results of the writes
   according to the invocation order of these writes in a client application. % Let $\mathit{processors}$ be an  integer term that denotes the
 % total number of processors. We can express the condition the propositional logic variable $A$ must hold for any store
@@ -774,7 +774,7 @@ E^{s} = \forall \mathit{st} \in \mathit{St}, {\mathit{Op}}^{'}, {\mathit{Op}}^{'
 %\big( \left( {W^l}^{'} F {R^j}^{'} \in \mathit{St} \right) \wedge
 % \left( \not\exists {W^l}^{'} F {W^m}^{'} F {R^j}^{'} \in \mathit{St} \right) \big) \big) \big)
 %E^s = \left( \mathcal{O}, \preccurlyeq \right), 
-\forall x, y, \mathit{st}, \mathit{st}^{'} \in \mathit{St}  \left( {\mathit{Op}}^{'}(x) F {\mathit{Op}}^{''} (y) \in \mathit{st} \right) \rightarrow  \left(  \left( {\mathit{Op}}^{'}(x) \preccurlyeq_{st+w} {\mathit{Op}}^{''} (y)   \right) \wedge  \left( {\mathit{Op}}^{'}(x)  \preccurlyeq_{{st}^{'}+w}  {\mathit{Op}}^{''} (y)  \right) \right),
+\forall x, y, \mathit{st}, \mathit{st}^{'} \in \mathit{St}  \big( \left( W^{'}(x) F W^{''} (y) \in \mathit{st} \right) \rightarrow  \left(  \left( W^{'}(x) \preccurlyeq_{st+w} W^{''} (y)   \right) \wedge  \left( W^{'}(x)  \preccurlyeq_{{st}^{'}+w}  W^{''} (y)  \right) \right) \big),
 \end{split}
   \end{align}
 %  \forall x, y, \mathit{st}, \mathit{st}^{'} \in \mathit{St}  \left( {\mathit{Op}}^{'}(x) F {\mathit{Op}}^{''} (y) \in \mathit{st} \right) \rightarrow  \left( {\mathit{Op}}^{'}(x) F {\mathit{Op}}^{''} (y)  \in \left( \mathcal{O}, \preccurlyeq_{st} \right) \wedge {\mathit{Op}}^{'}(x) F {\mathit{Op}}^{''} (y)  \in \left( \mathcal{O}, \preccurlyeq_{{st}^{'}} \right)  \right),
@@ -797,7 +797,7 @@ E^{s} = \forall \mathit{st} \in \mathit{St}, {\mathit{Op}}^{'}, {\mathit{Op}}^{'
 %\wedge \forall \mathit{st} \not\exists R^k, R^l \left( \mathit{Op}^i X^o R^k F \mathit{Op}^j X^o R^l \in \mathit{st} \right) \\ \wedge \left( v^k \not= v^i  \right) \wedge \left( v^l = v^j \right) \big)
 %\end{split}
 %  \end{align}, where $\preccurlyeq$ is a composition   $\preccurlyeq =  \preccurlyeq^{'} \circ  ... \circ^{'} \preccurlyeq^{''}$and $\circ, ... \circ^{''}$ are again composition operators, like $\cap$ or $\cup$, over partial order sets (posets) $\preccurlyeq^{'}, ...  \preccurlyeq^{''}$ comprising partial orders defined over all data objects.
- \par Owen et al. \cite{Owens:2009:BXM:1616077.1616107} specifies Total Store Order (TSO) as follows. Consider an operation $\mathit{op}(x)$ performed by a given client application  on a given data object $x$ in a storage system. In a given global execution, no client can observe a ``later'' operation  on the same object $x$ before  it observes the result of the operation $\mathit{op}(x)$. This constraint can be interpreted in terms of local session traces as follows. If either of the following conditions hold, there must exist an equivalent serialization for given the global execution that orders  $\mathit{op}(x)$ before $\mathit{op}^{'}(x)$: condition 1: the operation $\mathit{op}^{'}(x)$ is succeeded by another operation $\mathit{op}^{'}(x)$ on the same object  $x$, or condition 2: if there is another pair of operations $\mathit{op}^{''}(x)$ and $\mathit{op}^{'''}(x)$ on $x$ such that $\mathit{op}^{''}(x)$  is followed by $\mathit{op}^{'''}(x)$ in invocation order of a given client,$ and \mathit{op}^{''}(x)$  and $\mathit{op}^{'''}(x)$ are invoked by two  clients after  $\mathit{op}(x)$ and  $\mathit{op}^{'}(x)$ respectively.  The equivalent serialization in the above definition can be replaced by a  partial order  $\preccurlyeq(x)$  over  all operations on a given object $x$ comprised in a given global execution, i.e., comprising all clients executing on a system  %This operation can not succeeded by another operation on the same  object   can not be observed  by any given client (i.e., can not occur in a  given session trace) return a subsequent (or newer) value unless the result of a given write is observed by all client applications, i.e., observed in all  session traces. 
+ \par Owen et al. \cite{Owens:2009:BXM:1616077.1616107} specifies Total Store Order (TSO) as: a read operation performed by a given client on a given data object can not return the result of write on the same object by a different client unless the former write has been observed by all clients. To understand this, consider an execution comprising write operation $w(x,v)$ performed by a given client application (observed in a local session trace $\mathit{st}^{'}$) on a given data object $x$ in a storage system, followed by a read $r^{'}(x,v^{'})$ on $x$. Another client invokes a read operation $r^{''}(x)$ on the same object $x$  followed by a write $w^{'''}(x,v^{'''})$ on $x$, observed in the session trace $\mathit{st}^{'}$). Under TSO, the read $r^{'}(x,v^{'})$ can not observe the result of $w^{'''}(x,v^{'''})$ before the read $r^{''}(x)$ observes the result of $w(x,v)$. For such an execution must there must exist an equivalent serialization for the operations from each client that orders  $w(x,v)$ before $w^{'''}(x,v^{'''})$. In terms of ConSpec, the above constraint can be restated as:  there must exist partial orders $\preccurlyeq(x)_{{st}^{'}}$ and $\preccurlyeq(x)_{{st}}$ over the operations in the session traces $\mathit{st}$ and $\mathit{st}^{'}$ which preserves the above order among writes to each data object.  %This operation can not succeeded by another operation on the same  object   can not be observed  by any given client (i.e., can not occur in a  given session trace) return a subsequent (or newer) value unless the result of a given write is observed by all client applications, i.e., observed in all  session traces. 
 % A session trace for a client application can not view results of a sequence of write operations in an
  %order which differs from the invocation order. \mathit{op}(x), \mathit{op}^{'}(x), \mathit{op}^{''}(x), \mathit{op}^{'''}(x)  %Let $\mathit{stores}$ be an integer term that denotes the total number of stores.
 %  $\bigcap$ is equivalent to the logical operator union; an expression $\bigcap_{\mathit{store}_n}^{\mathit{stores}} A$
@@ -852,9 +852,7 @@ E^{s} = \forall \mathit{st} \in \mathit{St}, {\mathit{Op}}^{'}, {\mathit{Op}}^{'
   %which can be rewritten as follows. 
   \begin{align}\label{eqn:TSO}
 \begin{split}
-E^s = \forall x, \mathit{st}, \mathit{st}^{'} \in \mathit{St} \not\exists \mathit{op}(x), \mathit{op}^{'}(x), \mathit{op}^{''}(x), \mathit{op}^{'''}(x) \in \mathcal{O}  \big( \left( \mathit{Op}^{'}(x) F \mathit{Op}^{''} (x) \in \mathit{st} \right)  \vee \big(  \left( \mathit{Op}^{'}(x) F \mathit{Op}^{'''} (x) \in \mathit{st} \right)  \\ \wedge 
- \left( \mathit{Op}^{''}(x) F \mathit{Op}^{''''} (x) \in \mathit{st}^{'} \right) \wedge \left( \mathit{Op}^{'''}(x) F \mathit{Op}^{''''} (x) \in \mathit{st}^{'} \right) % \wedge\ \left( v^{''} = v \right) \wedge \left( v^{'} = v^{'''} \right)  
- \big) \big) \rightarrow   \left( \mathit{Op}^{'}(x) \preccurlyeq(x) \mathit{Op}^{''} (x) \right),
+E^s = \forall x, \mathit{st}, \mathit{st}^{'} \in \mathit{St}, w(x,v), r^{'}(x,v^{'}), r^{''}(x), w^{'''}(x,v^{'''}) \in \mathcal{O}  \big( \left( W^{'}(x) F R^{''} (x) \in \mathit{st} \right)  \wedge  \left( \mathit{R}^{'''}(x) F W^{''''} (x) \in \mathit{st}^{'} \right) \\ \wedge \left( v^{''} = v \right) \wedge \left( v^{'''} = v^{'} \right)  \big) \rightarrow   \big( \left( W^{'}(x) \preccurlyeq(x)_{st} W^{'''} (x) \right) \wedge \left( W^{'}(x) \preccurlyeq(x)_{{st}^{'}} W^{'''} (x) \right)  \big) \big)
 \end{split}
   \end{align}. % where $ \preccurlyeq(x)$ is a partial order  over  all operations on a given object $x$ comprised in a given global execution, i.e., comprising all clients executing on a system. %and $ \mathit{Si}$ is an equivalent legal serialization of a global execution defined in Equation \ref{def:ser}.
   %$\preccurlyeq$ is given as a composition $\preccurlyeq =  \preccurlyeq^{'}(x) \circ  ... \circ^{'} \preccurlyeq^{''}(x)$,  and $\circ, ... \circ^{''}$ are composition operators, like $\cap$ or $\cup$, over partial order sets (posets) $\preccurlyeq^{'}(x), ... \preccurlyeq^{''}(x)$ comprising partial orders defined over a given object $x$.
@@ -2016,8 +2014,8 @@ S_p \right)$, for each client.  ${\mathit{Op}}^{'}  F {\mathit{Op}}^{''}   \in S
   %according to the invocation order of these writes in a client application. % Let $\mathit{processors}$ be an  integer term that denotes the
 % total number of processors. We can express the condition the propositional logic variable $A$ must hold for any store
 % $\mathit{store}_n$ with the expression  $\bigcap_{\mathit{processor}_n}^{\mathit{processors}} A$.
-Consider that a given client observes operations ${\mathit{op}}(x), {\mathit{op}^{'}}(y)$ in a temporal order ${\mathit{Op}}^{'}(x) F {\mathit{Op}}^{''} (y)$ observed in a session trace $\mathit{st}$. Then, no other session trace $\mathit{st}^{'}$ observed by any other concurrent client may observe the operations in an order which violates the temporal order in $\mathit{st}$. This, in turn, implies that the precedence ${\mathit{Op}}^{'}(x) F {\mathit{Op}}^{''} (y)$  must be respected in partial order sets   $\left( \mathcal{O}, \preccurlyeq_{{st}^{'}+w} \right)$ and $\left( \mathcal{O}, \preccurlyeq_{st+w} \right)$ for session traces $\mathit{st}$ and $\mathit{st}^{'}$, respectively. Thus, Processor Consistency can be expressed as 
-   $\forall x, y, \mathit{st}, \mathit{st}^{'} \in \mathit{St}  \left( {\mathit{Op}}^{'}(x) F {\mathit{Op}}^{''} (y) \in \mathit{st} \right) \rightarrow  \left(  \left( {\mathit{Op}}^{'}(x) \preccurlyeq_{st+w} {\mathit{Op}}^{''} (y)   \right) \wedge  \left( {\mathit{Op}}^{'}(x)  \preccurlyeq_{{st}^{'}+w}  {\mathit{Op}}^{''} (y)  \right) \right)$. %\\
+Consider that a given client observes write operations $w(x,v), w^{'}(y,v^{'})$ according to a temporal order $W^{'}(x) F W^{''} (y)$ observed in a session trace $\mathit{st}$. Then, no other session trace $\mathit{st}^{'}$ observed by any other concurrent client may observe the operations in an order which violates the temporal order in $\mathit{st}$. This, in turn, implies that the precedence $W^{'}(x) F W^{''} (y)$  must be respected in partial order sets   $\left( \mathcal{O}, \preccurlyeq_{{st}^{'}+w} \right)$ and $\left( \mathcal{O}, \preccurlyeq_{st+w} \right)$ for session traces $\mathit{st}$ and $\mathit{st}^{'}$, respectively. Thus, Processor Consistency can be expressed as 
+   $\forall x, y, \mathit{st}, \mathit{st}^{'} \in \mathit{St}  \left( W^{'}(x) F W^{''} (y) \in \mathit{st} \right) \rightarrow  \left(  \left( W^{'}(x) \preccurlyeq_{st+w} W^{''} (y)   \right) \wedge  \left( W^{'}(x)  \preccurlyeq_{{st}^{'}+w}  W^{''} (y)  \right) \right)$. %\\
 %E^{s} = C =   \forall \mathit{st} \in \mathit{St} \not\exists \big( \left(  {W^i}^{'}, {W^j}^{'} \in \mathit{st}  \right)
 %\wedge \left( {R^k}^{'}, {R^l}^{'} \in \mathit{St} \right) \big) \\
 %\big( \left( {W^i}^{'} F {W^j}^{'} \in \mathit{st} \right) \wedge
@@ -2036,10 +2034,8 @@ Consider that a given client observes operations ${\mathit{op}}(x), {\mathit{op}
  as follows. In any two executions of a sequence of operations by two processors (or client applications),
  a pair of operations on a common storage system object $x$ must be executed in the same precedence order.  %serializations ${S_i}_i$ and ${S_i}_j$, the write operations on common storage system objects in ${S_i}_i$ and
 % ${S_i}_j$ must be executed in the same order, i.e., ${S_i}_i|w$ = ${S_i}_j|w$.
- The above condition implies that any session trace $\mathit{st}$ must comprise write-read sequences
-${\mathit{op}}(x), {\mathit{op}^{'}}(x)$  on an object $x$ in the temporal order specified in the global session trace $\mathit{St}$.  This, in turn,  implies there must exist a partial order $\preccurlyeq$ over all operations comprised in  $\mathit{St}$. Thus, $E^s = \forall x, \mathit{st}, \mathit{st}^{'} \in \mathit{St} \not\exists \mathit{op}(x), \mathit{op}^{'}(x), \mathit{op}^{''}(x), \mathit{op}^{'''}(x) \in \mathcal{O}  \big( \left( \mathit{Op}^{'}(x) F \mathit{Op}^{''} (x) \in \mathit{st} \right)  \vee \big(  \left( \mathit{Op}^{'}(x) F \mathit{Op}^{'''} (x) \in \mathit{st} \right)  \\ \wedge 
- \left( \mathit{Op}^{''}(x) F \mathit{Op}^{''''} (x) \in \mathit{st}^{'} \right) \wedge \left( \mathit{Op}^{'''}(x) F \mathit{Op}^{''''} (x) \in \mathit{st}^{'} \right) % \wedge\ \left( v^{''} = v \right) \wedge \left( v^{'} = v^{'''} \right)  
- \big) \big) \rightarrow   \left( \mathit{Op}^{'}(x) \preccurlyeq(x) \mathit{Op}^{''} (x) \right)$. %, i.e., there must exist a common serialization comprising all operations executed from the
+ The above condition implies that partial orders for any session trace $\mathit{st}$ and $\mathit{st}^{'}$ must preserve the precedence among writes $ w(x,v)$  and $w^{'''}(x,v^{'''}$ to a  common data object $x$ with resect to succeeding reads.  Thus, $E^s = \forall x, \mathit{st}, \mathit{st}^{'} \in \mathit{St}, w(x,v), r^{'}(x,v^{'}), r^{''}(x), w^{'''}(x,v^{'''}) \in \mathcal{O}  \big( \left( W^{'}(x) F R^{''} (x) \in \mathit{st} \right)  \wedge  \left( \mathit{R}^{'''}(x) F W^{''''} (x) \in \mathit{st}^{'} \right) \\ \wedge \left( v^{''} = v \right) \wedge \left( v^{'''} = v^{'} \right)  \big) \rightarrow   \big( \left( W^{'}(x) \preccurlyeq(x)_{st} W^{'''} (x) \right) \wedge \left( W^{'}(x) \preccurlyeq(x)_{{st}^{'}} W^{'''} (x) \right)  \big)
+$. %, i.e., there must exist a common serialization comprising all operations executed from the
 % client applications which contains the above writes executed in a particular order. This condition can be expressed in terms of LTL as
 % $W^i F W^j \in \mathit{st}_x, \mathit{st}_y \rightarrow  \exists S \left( W^i F W^j \in S \right)$.
 % Let us consider a given sequence of operations $w^i$ and $r^j$ in any given session trace, whee $r^j$ does not return
@@ -2410,280 +2406,280 @@ A serialization is said to be \emph{legal} if every read operation returns the v
   \end{align}
 
 
- \subsection{Comparison of ConSpec Tool With the State-of-the-art}\label{sec:compare}
- Here, we compare our approach of analyzing session traces against ConSpec specification with the traditional approach of analyzing server traces \cite{DBLP:conf/icde/AdyaLO00, Chockler2000, Terry:1994:SGW:645792.668302, Burckhardt:2014:PEC:2693641.2693642}. %Let us start by assuming that both approaches use a single expression to represent a given consistency model or isolation level. Let us also assume that session traces used in our approach, and server traces used in traditional approaches, are equivalent in the context of complexity analysis.  Under the above assumptions, complexity of trace analysis with our approach can be potentially worse than the server trace analysis approach if anomaly exists in a given trace. This can be attributed to the fact that, with the server trace analysis approach, the analysis terminates as soon as an anomaly is found in any portion of a given execution trace.  Contrastingly, with our approach, the analysis may continue till the very end of the trace, since it checks if all portions of the trace conforms to the ConSpec specifications. Thus a trace analysis may terminate earlier with the server trace analysis approach. However, we fix the problem by modifying our approach to indirectly detect anomalies (see later part of this Section), thus enabling it to terminate early, similar to the server trace analysis approach.
-%\par On the other hand, in absence of anomalies in a given execution, i.e., in both the session trace and the server trace for the execution, the complexity of our approach matches the server trace analysis approach; since, in this case, the analysis with both approaches terminate at the very end of the trace. We further reduce the search space of session trace for session trace analysis, by considering only the session traces comprising operations performed on a concerned object.
- In the current state-of-the-art, a consistency model or isolation level is typically represented by two components: 1) axiomatic rules, given by a group of first order logic expressions, representing the allowed execution order among operations, and 2)  DSGs representing the anomalies proscribed by the given consistency model or isolation level. On the other hand, our approach uses only a single LTL-like expression to express the same consistency model or isolation level. Thus, the server trace analysis approach compares each element in an  execution trace with two components. Contrastingly, with our approach, each element in a session trace is compared with only a single ConSpec expression. Hence, the complexity of the server trace analysis approach (refer to Section \ref{sec:complex}) is roughly twice the complexity with our approach, particularly in the case of absence of anomaly in a given trace. In the presence of anomalies in a session trace, the comparison between complexities of the two approaches is more complicated; we need to consider the position of the first occurrence of an anomaly with respect to the size of the trace.
-\par Moreover, the traditional approach of server trace analysis involves analysis of execution traces collected from server nodes comprising the storage system cluster. It analyzes whether the results of operations observed at the system end, i.e., at the end of the storage system, matches the results expected as per a given consistency model or isolation level. Thus, this approach considers a system-centric view of a given consistency model or isolation level. On the other hand, we analyze whether a session trace, observed from a client application, satisfies the specification for a given consistency model or isolation level, i.e., whether the results in the session trace follow an order that is allowed by the above specification. Hence, our approach is concerned with client-centric view of a given consistency model or isolation level. Further, the traditional approach has the disadvantage of having to deal with much longer traces, comprising execution of operations performed from multiple applications or sessions on storage system servers. Extracting a session trace from a server trace is a computationally expensive task by itself, since it requires an exhaustive search on the server trace to identify portions that are relevant to a given application. Contrastingly, our approach directly analyzes session traces, collected from the client machines.
-%\subsection{Complexity of Verification: Comparison with the State-of-the-art}\label{sec:complex}
-% %A session trace is comprised of results of execution of storage operations invoked from a client application on a target storage system, observed from a client machine. 
-%% Let $\mathit{op}$ be signature of an 
-%%$i^\mathit{th}$ operation invoked from a given client application. $\mathit{op}$ can be a read or write operation that reads (or writes) a unique value from (or to) a storage system object $o$; signature of a read and write operation are of the form $r(o){v_m}$ and $w(o,v_l)$, respectively.
-%% Let $v_k$ be the current value observed against the operation $\mathit{op}$ on an object $o$. Let the length of the given session trace be denoted by the integer term $s_t$. A a session trace $\mathcal{S}_t$ can be expressed as a collection of tuples, where each tuple comprises: 1) the unique signature of the operation, 2) the name of the storage system object that the operation accesses, 3) the value written by the operation. Using the above notations, a session trace $\mathcal{S}_t$ is given as $\mathcal{S}_t$ = \[ \Set{\tuple{\mathit{op},o,v_k}} {1\le i \le s_t, 1\le j\le m, 1\le k\le n}{.} \]
-%%Let the ConSpec expression for a given consistency
-%% guarantee or an isolation level be given as $\mathcal{E}_c$ =\[ \Set{e_i} {1\le i\le s_c}{,} \] where
-%% $e_i$ is the $i^\mathit{th}$ character in the ConSpec expression, and the length of a given ConSpec expression is $s_c$.
-% %$\tuple{\mathit{op}_i,o_j,v_k}$
-%It can be verified whether a storage system actually supports a consistency guarantee or an isolation level by analyzing a session trace with respect to a ConSpec specification $\mathcal{E}^s$ for the above consistency guarantee or isolation level. Verifying a given session trace $\mathcal{s}_t$ against a specification $\mathcal{E}^s$  involves comparing the observed result of each operation in
-%  $\mathcal{s}_t$ against each expression in $\mathcal{E}^s$. The complexity (here we consider time complexity) of comparing each character in a session trace $\mathcal{s}_t$ against the specification $\mathcal{E}^s$ is equivalent to the length of the specification, i.e., $s_c$. For verification, the above step is repeated for all characters in the session trace (in the absence of anomalies). Thus, the total complexity  of verifying a session trace against a given ConSpec specification is $s_t \times s_c$.
-%\par  As already discussed in Section \ref{sec:compare}, state-of-the-art definitions of consistency models and isolation levels comprise a combination of axiomatic rules and anomaly DSGs. Let the total number of axiomatic rules in a state-of-the-art consistency specification  be $n_e$. Let the length of the expression for each axiomatic rule comprising a state-of-the-art specification  be $s_1$, $s_2$, ..., $s_{n_e}$, respectively. Thus, the total length of such expressions in a state-of-the-art specification
-% is given as $\mathcal{E}^s$ =\[ \Set{\mathcal{E}^{i}_s}{1\le i\le n_e}{,}{,}\] where $\mathcal{E}^{i}_s$ is the $i^\mathit{th}$
-% expression in the given specification. The process of verifying a given session trace against a specification involves comparing each expression in the given specification with each character in the session trace. The complexity (time complexity) of comparing the expression $\mathcal{E}^{i}_s$ against the session trace can be given as $s_t \times s_i$, where $s_i$ is the length of $\mathcal{E}^{i}_s$. The total complexity of verifying the given session trace against the above expressions comprising the given specification involves carrying out the above step for all expressions in the specification, which in turn, can be given as $s_t \times \left(s_1+s_2+...+s_{n_e}\right)$. Now, let us consider verifying the given session trace against the anomaly DSGs for the given specification. Let the number of anomaly DSGs for a given specification be $n_g$. Let the size of each anomaly DSG be $g_1$, $g_2$, ...., $g_{n_g}$. Verifying a given session trace against an anomaly DSG involves performing
-% a pattern search in each of the DGSs with the session trace. The complexity $\mathcal{C}$ of the above search, using any algorithm based on Depth First Search,  can be given as $\mathcal{C}$ = $V+E$, where $V$ and $E$ are the number of vertices and edges in each DSG,
-% respectively. Considering each DSG to be fully connected, the number of edges approximately equals the number of vertices
-%  -1, i.e., $E \approx V - 1$. Hence, $\mathcal{C}$ can be further rewritten as $\mathcal{C}=V+E\approx 2V -1$. Thus, the complexity of a graph search algorithm can be given $\approx 2V -1$. The total complexity
-%  of verifying he given session trace against anomaly DSGs involves performing the above pattern search for all anomaly DSGs comprising the given specification. Thus, the total complexity of verifying against anomaly DSGs can be given as
-%  $s_t \times 2 \times \left( g_1 + g_2 ... + g_{n_g} \right) - n_g$.  Combining the complexity of verifying against the expressions and the complexity of verifying against the anomaly DSGs, the total complexity of verification
-%   as per the state-of-the-art can be given as
-%   $s_t \times \left( s_1+s_2+...+s_{n_e} + 2 \times g_1 + 2 \times g_2 ... + 2 \times g_{n_g} - n_g \right).$
-   
-\subsection{Violation Examples: Verified \\ Against ConSpec Specifications}\label{sec:examples}
-  Using example session traces, we illustrate situations where a given consistency model is violated. Let us consider a
-session trace $\mathit{st}_1$: $w^1(x,1), w^2(x,2), r^1(x){2}, r^2(x){1}$ to demonstrate how violation of RYW consistency can occur.
- From the session trace $\mathit{st}_1$, the following LTL expression  \\ $W^1 F W^2 F R^1 F R^2$ follows
- directly from the temporal order of execution as per the session trace. In $\mathit{st}_1$, the read operation $r^1(x){2}$
- follows the write operation $w^1(x,1)$ can be expressed by the LTL expression $W^1 F R^1$; which satisfies the
- condition given in LHS of the shorter specification $E^{s}$ in Equation \ref{eqn:MR} if $W^i$ = $W^1$, $R^j$ = $R^1$. The session trace
- $\mathit{st}_1$ can be transformed into the following partial legal serializations (that also comprises all write operations from other
- clients: $\mathit{Si}_p^1$ = $W^1 F R^2 F W^2 F R^1$, $\mathit{Si}_p^2$ = $W^2 F R^1 F W^1 F R^2$,
-  and $\mathit{Si}_p^3$ = $R^1 F W^2 F W^1 F R^2$.
- Only for $\mathit{Si}_p^1$, the condition $W^1 F R^2 \in \mathit{Si}_p^1$ holds, which does not hold for $\mathit{Si}_p^2$ and $\mathit{Si}_p^3$.
- thus the condition corresponding to the RHS of the implies operator $\rightarrow$ in $E^{s}$ , given in Equation \ref{eqn:RYW}, holds.
-  %$W^k$ preceding  $W^1$ such that the above LTL condition holds.
-  Next, we consider the sequence in the session trace where the
-   write operation $w^1(x,1)$ is followed by the read operation  $r^2(x){1}$, expressed by the LTL expression $W^1 F R^2$. As discussed before a partial
-  serialization $\mathit{Si}_p^1$ exists for the session trace such that $W^1 F R^2 \in \mathit{Si}_p^1$, satisfying the first
-  condition in the RHS of Equation \ref{eqn:RYW}.
-  %Also, following the same argument as
-%   above, there does not exist a $w^k$ such that the temporal order represented by the LTL condition $W^k F^x W^1 F^x R^2$ holds.
-  Next, we consider the sequence write operation $W^2$ followed by $R^1$ in the session trace, given as $W^2 F R^1$.
-  This implies that the condition $W^i F^x R^j$ in the LHS of the $E^{s}$ condition in Equation \ref{eqn:RYW} holds, where $W^i$ = $W^2$ and
-  $R^j$ = $R^1$. Again a legal partial serialization $\mathit{Si}_p^1$ exists such that $W^2 F R^1 \in \mathit{Si}_p^1$.
-%  Regarding the second condition in the RHS of  Equation \ref{eqn:RYW}, there does not exist
-%  a write operation $W^k$ such that the LTL conditions $W^k F^x W^i F^x R^j$ and $v_j=v_k$ hold, where $W^i$ = $W^2$
-%  and $R^j$ = $R^1$. Thus, the condition $\not\exists W^k \in \mathit{st} \left( W^k F^x W^i F^x R^j \in \mathit{st} \right) %\wedge \left( W^k F W^i \in \mathit{st} \right)
-% \wedge \left( v^j = v^k \right)$ does not hold, where $\mathit{st}$ = $\mathit{st}_1$.
-  %$R^1$ returns a value 2 was written by the write operation $W^1$ which precedes $W^2$.
-%   Thus the condition
-%  $\not\exists W^k \in \mathit{st} \left( W^k F^x W^i F^x R^j \in \mathit{st} \right) %\wedge \left( W^k F W^i \in \mathit{st} \right)
-% \wedge \left( v^j = v^k \right)$ holds, where $\mathit{st}$ = $\mathit{st}_1$.
-  Next, we consider the sequence write operation $W^2$ followed by $R^2$ in the session trace, given as $W^2 F R^2$.
-  This implies that the condition $W^i F^x R^j$ in the LHS of $E^{s}$ in Equation \ref{eqn:RYW} holds, where $W^i$ = $W^2$ and
-  $R^j$ = $R^2$. $\mathit{Si}_p^1$ is the only legal partial serialization that satisfies the condition $W^i F R^j \in \mathit{Si}_p$
-   in the RHS of Equation \ref{eqn:RYW} for all the above write-read operation sequences. However, $\mathit{Si}_p$ does not satisfy
-  $W^i F R^j \in \mathit{Si}_p$ for the write-read sequence $W^2 F R^2$.
-  %Regarding the second condition in the RHS of  Equation \ref{eqn:RYW}, there does exist
-%  a write operation $W^k$ = $W^1$ such that the LTL condition $W^k F^x W^i F^x R^j$ holds,  where $W^i$ = $W^2$ and
-%  $R^j$ = $R^2$. Further, the read operation
-%  $R^2$ returns a value 1 which was written by the write operation $W^1$ that precedes $W^2$. Thus the condition $v_j=v_k$
-%  holds, and thus, in turn, the condition $\not\exists W^k \in \mathit{st} \left( W^k F^x W^i F^x R^j \in \mathit{st} \right) %\wedge \left( W^k F W^i \in \mathit{st} \right)
-% \wedge \left( v^j = v^k \right)$ does not hold, where $\mathit{st}$ = $\mathit{st}_1$.
-  For anomaly
-  condition $C$  in Equation \ref{eqn:RYW} to hold, their cannot exist in the global session trace a read operation $r^k$ preceding the read operation
-  $r^j$ (which is $r^2(x){1}$) and a write operation $w^l$ preceding $w^i$ (which is $w^2(x,2)$ in this case)
-   such that the LTL condition $\left(  {v^k}^{'} = {v^i}^{'} \right) \wedge \big(\left( {v^j}^{'} = {v^l}^{'} \right) \vee
-\big( \left( {W^l}^{'} F {R^j}^{'} \in \mathit{St} \right) \wedge \left( \not\exists {W^l}^{'} F {W^m}^{'} F {R^j}^{'} \in \mathit{St} \right) \big) \big)$ hold.
-However, in the given session trace  $\mathit{st}_1$, there does exist a read $r^1(x){2}$ and a write $w^1(x,1)$, such that
-conditions $\left(  {v^k}^{'} = {v^i}^{'} \right) $ and $\left( {v^j}^{'} = {v^l}^{'} \right)$ hold, thus, in turn,
-violating the anomaly condition.
-  Hence, the RYW condition is violated for the given session trace.
- %In $\mathit{st}_1$, read operations $r^1(x){2}$ and $r^2(x){1}$ follow the $w^2(x,2)$, the latest write operation on $x$,
-%   satisfying the RHS of Equation \ref{eqn:RYW}. However, the value returned by $r^2(x){1}$ is 1, which does not match the
-%    value written by the latest write operation $w^2(x,2)$ preceding $r^2(x){1}$; hence, $S_1 $does not satisfy the
-%    condition $v_m = v_l$ in Equation \ref{eqn:RYW}.  Further, the value written by $w^2(x,2)$ is not overwritten by any
-%     subsequent write preceding $r^2(x){1}$; hence, $S_1$ does not satisfy the condition
-%     $W^j(v_l) F^{o} W^p(v_q) F^{o} R^k{v_m}$ in  Equation \ref{eqn:RYW}. Thus $S_1$ does not satisfy Equation
-%     \ref{eqn:RYW}.
- \par Let us consider a session trace $\mathit{st}_2$:  $w^1(x,1)$, $\mathit{st}_2^{'}$: $w^2(x,2)$, and $\mathit{st}_2^{''}$: $r^1(x){1}, r^2(x){2}, r^3(x){1}$ to illustrate how
- violation of MR consistency can occur. Since the above session traces comprise write operations followed by read on the same object, as well
- as multiple read operations on same object x, they satisfy the conditions given in LHS of Equation \ref{eqn:MR}.
- First, let us consider the sequence of read operations $r^1(x){1}$ and $r^2(x){2}$ in $\mathit{st}^2$, given by the LTL expression $R^1 F^x R^2$.
- If and only if $R^i$ = $R^1$ and $R^j$ = $R^2$, the above sequence of reads can satisfy the LHS of the condition  $E^{s}$ in Equation \ref{eqn:MR}.
-  The above traces can be transformed into legal partial serialization order $\mathit{Si}_p$ =
- $W^1 F R^1 F R^3 F W^2 F R^2$, such that $R^1 F R^2 \in \mathit{Si}_p$ holds, thus satisfying
- the first condition the RHS of the implies operator $\rightarrow$
- in  $E^{s}$ in Equation \ref{eqn:MR}.
-   Next, we consider the sequence $r^1(x){1}$ followed by $r^3(x){1}$ in the above traces, given as the LTL expression $R^1 F R^3$. The above condition satisfies the LHS of $E^s$ Equation
-   \ref{eqn:MR}, given that
-  $R^i$ = $R^1$ and $R^j$ = $R^3$, which, in turn, implies $v_i$ = $v_1$ = 1 and $v_j$ = $v_2$ =1. As discussed above, a
-  legal partial serialization $\mathit{Si}_p$ exists for the above trace, such that $R^1 F R^3 \in \mathit{Si}_p$
-  holds; the condition $E^s$  in the RHS of Equation \ref{eqn:MR} holds for the above sequence of reads.
-  %Also, $W^m$ and $W^n$ are the only write operations
-%  that can satisfy the condition $W^m F^x W^n F^x R^i F^x R^j \in \mathit{st}$. Hence,
-%  the second condition in the RHS requires that $W^m$ = $W^1$ and $W^n$ = $W^2$, and thus $v_m$ = $v_1$ = 1 and $v_n$ = $v_2$ = 2.
-%  Hence,  $v_n \not= v_i$, which, in turn, implies that the condition $\left( v^i = v^n \right) \wedge \left( v^j = v^m \right)$
-%  $\left( v^i = v^n \right) \wedge \left( v^j = v^m \right)$ holds. This, in turn, second condition in the RHS of
-%  Equation \ref{eqn:MR} holds.
-   Next, we consider the sequence $r^2(x){2}$ followed by $r^3(x){1}$ in the above traces, given
-  as $R^2 F R^3$. However, the above sequence of reads does not match the order among these reads in the serialization  $\mathit{Si}_p$, i.e.,
-  $R^2 F R^3 \in \mathit{Si}_p$ holds;
-    thus it does not satisfy the first condition in the RHS of Equation \ref{eqn:MR}.
-    Further, for the LHS of Equation \ref{eqn:MR} to hold for the above sequence of reads,   $R^i$ = $R^2$ and $R^j$ = $R^3$,
-   which, in turn, implies $v_i$ = $v_2$ = 2 and $v_j$ = $v_3$ =1.
-   For the anomaly condition $C$ in Equation \ref{eqn:MR} to hold for the sequence of read operations $r^1(x){1}$ followed by $r^3(x){1}$, there cannot exist write
-  operations $w^m$ and $w^n$ corresponding to the reads $r^i$ and $r^j$  such that the LTL condition
-  $\left( {v^i}^{'} = {v^n}^{''} \right) \wedge \big( \left( {v^j}^{'} = {v^m}^{''} \right) \vee \big( \left( {W^m}^{'} F {R^j}^{'} \in \mathit{St} \right) \wedge \\ \left( \not\exists {W^m}^{'} F {W^p}^{'} F {R^j}^{'} \in \mathit{St} \right) \big)$ holds.
-   Here, $W^m$ = $W^1$ and $W^n$ = $W^2$, since $W^m$ and $W^n$ are the only write operations in the given session history.
-   Hence, $v_m$ = $v_1$ = 1 and $v_n$ = $v_2$ = 2. Also, it is given that
-  $v_i$ = $v_1$ = 1 and $v_j$ = $v_2$ =2. Hence, the conditions $\left( v^i = v^n \right)$ and $ \left( v^j = v^m \right)$
-  is satisfied; thus, in turn, the above LTL condition is also satisfied. Thus, the violation condition $C$
-  in Equation \ref{eqn:MR} holds.
-   %Also, $W^m$ = $W^1$ and $W^n$ = $W^2$. Hence,
-%   $v_n$ = $v_i$ and $v_m$ = $v_j$. Thus, the second condition does not hold here.
-    Hence, the above traces violate the MR condition.
-   %\par
- % In $S_2$, $r^1(x){1}$ returns a value 1, whereas it should have returned 2, which is the value written by the latest write operation $w^2(x,2)$ preceding $r^1(x){1}$. Thus, $S_2$ does not satisfy the condition $v_l = v_m$. Since there are not write operations overwriting the latest write operation $w^2(x,2)$ preceding each read, the condition $W^j(v_l) F^{o} W^x(v_y) F^{o} R^k(v_m)$ holds. Following the same line of argument, we can show that $S_2$ does not
-% satisfy any of the  conditions in RHS of Equation \ref{eqn:MR}. Hence, $S_2$ does not satisfy Equation \ref{eqn:MR}.
- \par Let us consider a session trace \\ $\mathit{st}_3$: $w^1(x,1), r^1(x){2}$, $\mathit{st}_3^{'}$: $r^2(x){1} w^2(x,2), r^3(x){1}$, and \\ $\mathit{st}_3^{''}$: $r^4(x){2}, r^5(x){1}$ to demonstrate
- a violation of Causal consistency. Since, there are successive operations with direct precedence relation on the object x, $\mathit{st}_3$
- satisfies LHS of the $E^s$ condition in Equation \ref{eqn:Causal}.  We can transform
- the above session traces into a partial serialization $\mathit{Si}_p$ =
- $W^1 F R^2 F R^3 F R^5 F W^2 F R^1 F R^4$. First, let us consider the sequence of operations
- $w^1(x,1)$ and $r^1(x){2}$ in the above traces, given by the LTL expression $W^1 F R^1$. The above expression satisfies
- the condition $\mathit{Op}^i F^x \mathit{Op}^j$, where $\mathit{Op}^i$ = $W^1$ and $\mathit{Op}^j$ = $R^1$;
- thus satisfying the LHS of the implies operator $\rightarrow$ in $E^s$ in Equation \ref{eqn:Causal}. The above sequence of
- writes and reads satisfies the condition $W^1 F R^1 \in \mathit{Si}_p$, thus satisfying the first condition the RHS of
- the implies operator $\rightarrow$ in $E^s$ in Equation \ref{eqn:Causal}.
- %For the second condition in the RHS of
-% Equation \ref{eqn:Causal} to hold, there cannot exist write  operations $W^m$ such that the LTL conditions
-%   $W^m F^x \mathit{Op}^i F^x \mathit{Op}^j \in \mathit{st}$ and $v^j = v^m$ hold.
-% Since there is no such $W^m$ preceding $\mathit{Op}^i$, the second condition in the RHS of Equation \ref{eqn:Causal}
-% holds for the above sequence of operations.
- Following the same line of argument, the sequence of operations
-  $w^1(x,1)$ and $r^2(x){1}$, $w^1(x,1)$ and $r^3(x){1}$, $w^1(x,1)$ and $r^4(x){2}$, $w^1(x,1)$ and $r^5(x){1}$
-  and $w^1(x,1)$ and  $w^2(x,2)$ satisfy the LHS and RHS of $E^s$ in the Equation \ref{eqn:Causal}. Next, let us consider
-  the sequence of operations $w^2(x,2)$ and $r^3(x){1}$, which is expressed using LTL condition $W^2 F^x R^3$.
-  Thus, the above sequence satisfies LHS of $E^s$ in the Equation \ref{eqn:Causal}. The above sequence of
- writes and reads do not satisfies the condition $W^2 F R^3 \in \mathit{Si}_p$, violating the RHS of $E^s$ in Equation \ref{eqn:RYW}.
-  Let us consider the anomaly condition $C$ in Equation \ref{eqn:Causal} for the write and read operations $w^2(x,2)$ (which is
-  $w^i$ in this case) and $r^3(x){1}$ (which is $r^j$ in this case). Since  $w^2(x,2)$ is followed by $r^3(x){1}$ in the session trace, they satisfy the LHS of the condition
-  $C$. For the RHS of $C$ to hold, there cannot a exist write operations $w^m$ preceding the write $w^2(x,2)$ such that the
-  LTL condition $\left( {v^j}^{'} = {v^m}^{''} \right) \vee
- \big( \left( {W^m}^{'} F {\mathit{Op}^j}^{'} \in \mathit{st} \right) \wedge
-\left( \not\exists {W^m}^{'} F {W^n}^{'} F {\mathit{Op}^j}^{'} \in \mathit{st} \right) \big)$
- holds.
- We can assign $W^m = W^1$ since $w^1(x,1)$ precedes $w^2(x,2)$. Subsequently the condition \\ $\left( {v^j}^{'} = {v^m}^{''} \right)$
- holds (since $R^j$ = $R^3$ and $v_j$ = 1 in this case). Hence, the RHS of $C$ is satisfied for Equation \ref{eqn:Causal} for the above sequence of operations.
- %Also, we can assign $W^m$ = $W^1$,
-%   $\mathit{Op}^i$ = $W^2$, and $\mathit{Op}^j$ = $R^3$, such that the LTL conditions
-%   $W^m F^x \mathit{Op}^i F^x \mathit{Op}^j \in \mathit{st}$ holds. Further, $v_j$ = $v_m$ = 1, violating
-%   the condition $\not\exists  \mathit{st} \left( W^m F^x \mathit{Op}^i F^x \mathit{Op}^j \in \mathit{st}
-%   \right) \wedge \left( v^j = v^m \right)$, violating the RHS of Equation \ref{eqn:Causal}.
- It results in
-   violation of Causal consistency condition.
-% \forall i, j, k, o, \mathit{st} \big( \exists \mathit{Op}^k \in  \mathit{st}
-%\big( \mathit{Op}^i F \mathit{Op}^j \vee \\ \left( \mathit{Op}^i F \mathit{Op}^k  \wedge
-%\mathit{Op}^k F \mathit{Op}^j \right)
-%\vee \big( \left( \mathit{Op}^i = W^i \right) \wedge \left( \mathit{Op}^j = R^j \right) \wedge \\
-%\left( \left( v_i = v_j \right) \vee \left( \left( v_i = v_k \right)
-% \wedge \left( v_k = v_j \right) \right) \big) \right) \big)
-%\\ \rightarrow \exists \mathit{Si}_p \left( \forall \mathit{Op}^i F \mathit{Op}^j \in \mathit{Si}_p \right)
-%\wedge \not\exists  \mathit{st} \left( W^m F \mathit{Op}^i F \mathit{Op}^j \in \mathit{st} \right) \\
-%\wedge \left( v^j = v^m \right) \big)
-
- %The operation $r^1(x){2}$ returns 2, which does not match the write operation
-% $w^1(x,1)$ that directly preceded $r^1(x){2}$. Similarly, $r^3(x){1}$  does not return the correct value written by
-% the latest write $w^2(x,2)$ which directly precedes $r^3(x){1}$. Thus, $S_3$ does not satisfy the conditions in Equation
-% \ref{eqn:Causal}.
- All the above session traces violate the specification of Strict Serializability, given in Equation
- \ref{eqn:Strict}. Consider the session traces $\mathit{st}_3$, $\mathit{st}_3^{'}$, and $\mathit{st}_3^{''}$, which can be transformed into the legal
- serialization $\mathit{Si}$, which is, in this case, equivalent to  $\mathit{Si}_p$ in absence of writes from other
- client applications in the given session history (see above). The sequence of operations $w^1(x,1)$ and
- $r^1(x){2}$ in the above session trace satisfies the LHS of the condition $E^s$ (i.e., the condition
- $\mathit{Op}^i X \mathit{Op}^j$). Since $v_i \not= v_j$, the above sequence of write and read operations
- do not satisfy the condition  in the RHS of $E^s$, i.e., it violates the condition $W^1 X R^1 \in \mathit{Si}$.
- For the anomaly condition $C$ to hold for the above sequence of operations, let us consider the
- sequence of operations $w^2(x,2)$ and $r^3(x)1$. For the RHS of $C$ to hold, there cannot a exist write operations $r^k$ following the read $r^3(x)1$ such that the
-  LTL condition $\big(  \left( {v^k}^{''} = {v^i}^{'} \right) \wedge   \left( {v^j}^{'} \not= {v^i}^{'} \right) \big) \wedge
- \not\exists \big(  \left( {\mathit{Op}^i}^{'} = {W^i}^{'}  \oplus {R^i}^{'}  \right) \wedge  \left( {\mathit{Op}^i}^{'}  F {W^j}^{'} F  {R^k}^{'} \in \mathit{st} \right) \wedge \left( {\mathit{Op}^i}^{'} F {W^j}^{''}   F  {R^k}^{'}  F  {R^l}^{'} \in \mathit{St} \right) \big) \\
- \big(  \left( {v^l}^{''} = {v^j}^{'} \right) \wedge   \left( {v^k}^{''} = {v^i}^{'} \right) \big)$
- holds.
- We can assign $r^k = r^4$ since $r^4(x)2$ follows $r^3(x)1$. Subsequently the conditions \\ $\left( {v^k}^{''} = {v^i}^{''} \right)$
-and $\left( {v^j}^{'} \not= {v^i}^{'} \right)$ holds, since $r^j$ yields $v_j$ = 1, and
- $r^k$ yields $v_k$ = 2.
- Thus, it also violates the anomaly condition in Equation \ref{eqn:Strict}, violating strict serializability.
- \par  We consider the session traces \\ $\mathit{st}_4$: $w^1(x,1)$, $\mathit{st}_4^{'}$: $r^1(x){1}, w^2(x,2)$, and
- $\mathit{st}_4^{''}$: $r^2(x){2}, r^3(x){1}$ to show how
- WFR consistency can be violated. The above session traces can be transformed into a legal serialization \\
- $\mathit{Si}_p$  = $W^1 F R^1 F R^2 F W^2$. The write operation $w^1(x,1)$ follows
-  the read operation $r^1(x){1}$, and can be expressed as $W^1 F^x R^1$. The above expression satisfies
- the condition $W^i F R^j$, where $W^i$ = $W^1$ and $R^j$ = $R^1$. Hence, the above traces satisfy the
- condition in the LHS of Equation \ref{eqn:WFR}. Further, by observation, the above sequence of write-read
- operations satisfies the condition  $W^1 F R^1 \in \mathit{Si}_p$. Thus, the condition $E^s$ in the RHS of
- Equation \ref{eqn:WFR} holds. According to the anomaly condition $C$ in Equation \ref{eqn:WFR}, there must not
- exist a read operation $r^n(x)$ such that the conditions $\left( R^i F^x W^j F^x R^n \in \mathit{st} \right) \wedge
-\left( W^j F^x R^n \in \mathit{st} \right)$ and $v^n = v^i$ are satisfied. Since $r^2(x){1}$ succeeds  $w^2(x,2)$, we can
-assign $R^n$ = $R^2$. But, the read operation $r^2(x){1}$ returns a value 1 which was written by $w^1(x,1)$; thus
-the condition $v^n = v^i$ holds. Thus, $\mathit{st}_4$ violates the second condition in
- RHS of Equation \ref{eqn:WFR}; hence, it violates WFR consistency.
- \par Let us consider the session traces \\ $\mathit{st}_5$: $w^1(x,1), r^1(x){2}, w^2(x,2)$, $\mathit{st}_5^{'}$: $r^2(x){2}$, and \\
- $\mathit{st}_5^{''}$: $r^3(x){1}, r^4(x){2}$, and demonstrate violation of
-  MW consistency with it. The above session traces can be transformed in a legal serialization
-  $\mathit{Si}$ = $W^1 F W^2 F R^1 F R^2$.
-   Since the above session traces comprise a sequence of successive writes $w^1(x,1), w^2(x,2)$ on same object x,
-   it can be expressed as $W^i F W^j$, thus satisfying the LHS of $E^s$ in Equation \ref{eqn:MW}, where $W^i$ = $W^1$ and $W^j$ = $W^2$.
-  Also, the above sequence of write operations satisfies the first condition of the RHS of Equation \ref{eqn:MW},
-  i.e., $W^i F W^j \in \mathit{Si}$. The above traces can be transformed into a legal serialization order $\mathit{Si}$ =
-   $w^1(x,1), r^2(x){1}, w^2(x,2), r^1(x){2}$, thus satisfying the first condition in the RHS of Equation \ref{eqn:WFR}.
-   For the anomaly condition $C$ to hold, there cannot exist a sequence of write operations $w^1(x,1)$ and
-    $w^2(x,2)$ followed by a sequence of read operations $r^k$ and $r^l$ such that the following condition holds:
-  $\left( \not\exists  {R^k}^{'} F  {R^l}^{'} \in \mathit{St} \right)
-   \wedge  \left( {v_k}^{'} = {v_j}^{'} \right) \wedge \\
-   \left( {v_l}^{'} = {v_i}^{'} \right)$. For the above session trace,
-  we assign the operations $r^2(x){2}$ and $r^3(x){1}$ to the read operation $r^k$ and $r^l$. However, the above
-  read operations $r^k$ yields $v_k$ = 2, and $r^l$ yields $v_l$ = 1, such that the condition
-  $\left( {v_k}^{'} = {v_j}^{'} \right) \wedge \\
-   \left( {v_l}^{'} = {v_i}^{'} \right)$ holds.
-   %According to the RHS of Equation \ref{eqn:MW},  there must not exist a read operation $r^n(x)$ that satisfies the
-%   conditions $ W^i F^x W^j F^x R^n \in \mathit{st}$ and $v^n = v^i$. In other words, any operation that
-%   follows the above write sequence must not return a value updated by a write operation that precedes the latest write.
-%   Since the read operation $r^1(x){1}$ succeeds the sequence of writes $W^1 F^x W^2$, $R^n$ = $R^1$. But, $r^1(x){1}$
-%   returns the value 1; thus, the condition $v^n = v^i$ holds. Thus, $\mathit{st}_5$ violates the RHS of Equation \ref{eqn:MW},
-%    and, in turn, violates MW consistency.
-  \par Consider a group of 2 clients (or processors), namely $\mathit{Cl}_1$ and $\mathit{Cl}^2$, respectively.  Let us
-  consider  that operations are invoked from the above 2 clients, and a session trace  $\mathit{st}_6$ is
-  collected as follows.
-  $\mathit{st}_6$: $w^1(x,1), r^1(y){1}$, $\mathit{st}_6^{'}$: $w^2(y,1), r^2(x){2}$. % In
-%   $\mathit{st}_6$, the order of write operations $w^1(x,1)$ and $w^2(y,1)$ are different in each of the
-%  2 session traces. In $\mathit{st}^2$, $r^2(x){1}$ returned while $w^1(x,1)$ did not yet execute. In
-%  $\mathit{st}_1$, $w^1(x,1)$ executed but $r^2(x){1}$ did not execute.
-  For the above session trace to satisfy TSO consistency, the condition \\
-  $\left( {W^i}^{'}(x) F {R^j}^{''}(x) \in \mathit{St}  \right) \wedge 
-    \left( {v_j}^{''} \not= {v_i}^{'} \right)  \wedge \\
-  %\big( \not\exists \big( \left({R^k}(x)^{'} \in \mathit{st}^{'} \right) \wedge  \\
-  \left( {R^k}^{''}(x) F {R^j}^{''}(x) \in \mathit{St}  \right)
-     \wedge \left( {v_k}^{''} \not= {v_i}^{'} \right)  \\
-     \wedge
- %\not\exists  \big( %\left( {W^i}^{'} F {R^j}^{'} \in \mathit{st} \right) \wedge
-\left( {R^k}^{'} F {R^j}^{'} \in \mathit{st} \right)  \wedge
-%\left(  \mathit{st}^{'} \in \mathit{St} \right) \wedge
-\left( {W^l}^{'} F {W^i}^{'} \in \mathit{St} \right) %\big) \\
-\wedge \left(  {v^k}^{'} = {v^i}^{'} \right) \wedge \\
-\big( \left( {v^j}^{'} = {v^l}^{'} \right) \vee
-\big( \left( {W^l}^{'} F {R^j}^{'} \in \mathit{St} \right)  \wedge \\
- \not\exists  {W^m}^{'} \left( {W^l}^{'} F {W^m}^{'} F {R^j}^{'} \in \mathit{St} \right) \big) \big)$
-  must hold. In the above session traces, let us assign the operation  $w^1(x,1)$ as $w^i$. $r^2(x){2}$ occurs in another session trace, and thus invoked was from a different client. Further,
-  $r^2(x){2}$ follows $w^1(x,1)$ in the global session order. Hence we can assign the operation
-  $r^2(x){2}$ as $r^j$. Since $r^2(x){2}$ returns 2 instead of 1, the condition ${v_j}^{''} \not= {v_i}^{'} $ does not hold.
-  Also, there doesn't exist an operation $r^k$ preceding $r^2(x){2}$ that satisfies the condition ${v_k}^{''} \not= {v_i}^{'} $.
-  Thus, the given session trace violates Equation \ref{eqn:TSO}.
-    \par  Consider two client applications (or processors), namely $\mathit{Cl}_1$ and $\mathit{Cl}^2$,
-  respectively. Consider a session trace collected by executing operations on the above client  applications as follows.
-   $\mathit{st}_7$: $w^1(x,1), w^2(y,1)$,    $\mathit{st}_7^{'}$: $r^1(x){1}$,  $\mathit{st}_7^{''}$:
-  $r^2(y){1}, r(x){1}$. To satisfy the PC consistency, any sequence of write operations $w^i$ and $w^j$ invoked by a client must satisfy
-  the condition $\big(\not\exists \left( {W^i}^{'} F {W^j}^{'} \in \mathit{st} \right) \wedge
-  \left( \mathit{st}^{'} \in \mathit{St} \right) \wedge
-  \left( {R^k}^{'} F {R^l}^{'} \in \mathit{st}^{'} \right) \big)
- \big( \left( v_k^{''} = v_j^{'} \right) \wedge \left( v_l^{'} = v_i^{'} \right)\big)$. Thus, there must not exists a sequence of
- reads $r^k$ and $r^l$ such that the condition  $\left( v_k^{''} = v_j^{'} \right) \wedge \left( v_l^{'} = v_i^{'} \right)$
- holds. In the above session traces, the write operations  are executed according to the precedence order
-  $w^1(x,1)$ followed by $ w^2(y,1)$, hence we assign $w^1(x,1)$ and $ w^2(y,1)$ as $w^i$ and $w^j$. Also, let us assign
-  the sequence of read operations $r(x){1}$  and $r^2(y){1}$ as $r^k$ and $r^l$, respectively. According to the
-   above condition, reads against the above writes should view the results of the above write operations
-  according to the invocation order of these writes. However, in the given session trace, the client application
-  $\mathit{Cl}_2$ observes the above writes out of order. Since  $r^2(y){1}$ executes before ,$r(x){1}$ in the above session
-  traces, $\mathit{Cl}_2$ observes the result of $w^2(y,1)$ before observing result of $w^1(x,1)$.  Thus,
-   the above traces violate Equation \ref{eqn:PC}.
+% \subsection{Comparison of ConSpec Tool With the State-of-the-art}\label{sec:compare}
+% Here, we compare our approach of analyzing session traces against ConSpec specification with the traditional approach of analyzing server traces \cite{DBLP:conf/icde/AdyaLO00, Chockler2000, Terry:1994:SGW:645792.668302, Burckhardt:2014:PEC:2693641.2693642}. %Let us start by assuming that both approaches use a single expression to represent a given consistency model or isolation level. Let us also assume that session traces used in our approach, and server traces used in traditional approaches, are equivalent in the context of complexity analysis.  Under the above assumptions, complexity of trace analysis with our approach can be potentially worse than the server trace analysis approach if anomaly exists in a given trace. This can be attributed to the fact that, with the server trace analysis approach, the analysis terminates as soon as an anomaly is found in any portion of a given execution trace.  Contrastingly, with our approach, the analysis may continue till the very end of the trace, since it checks if all portions of the trace conforms to the ConSpec specifications. Thus a trace analysis may terminate earlier with the server trace analysis approach. However, we fix the problem by modifying our approach to indirectly detect anomalies (see later part of this Section), thus enabling it to terminate early, similar to the server trace analysis approach.
+%%\par On the other hand, in absence of anomalies in a given execution, i.e., in both the session trace and the server trace for the execution, the complexity of our approach matches the server trace analysis approach; since, in this case, the analysis with both approaches terminate at the very end of the trace. We further reduce the search space of session trace for session trace analysis, by considering only the session traces comprising operations performed on a concerned object.
+% In the current state-of-the-art, a consistency model or isolation level is typically represented by two components: 1) axiomatic rules, given by a group of first order logic expressions, representing the allowed execution order among operations, and 2)  DSGs representing the anomalies proscribed by the given consistency model or isolation level. On the other hand, our approach uses only a single LTL-like expression to express the same consistency model or isolation level. Thus, the server trace analysis approach compares each element in an  execution trace with two components. Contrastingly, with our approach, each element in a session trace is compared with only a single ConSpec expression. Hence, the complexity of the server trace analysis approach (refer to Section \ref{sec:complex}) is roughly twice the complexity with our approach, particularly in the case of absence of anomaly in a given trace. In the presence of anomalies in a session trace, the comparison between complexities of the two approaches is more complicated; we need to consider the position of the first occurrence of an anomaly with respect to the size of the trace.
+%\par Moreover, the traditional approach of server trace analysis involves analysis of execution traces collected from server nodes comprising the storage system cluster. It analyzes whether the results of operations observed at the system end, i.e., at the end of the storage system, matches the results expected as per a given consistency model or isolation level. Thus, this approach considers a system-centric view of a given consistency model or isolation level. On the other hand, we analyze whether a session trace, observed from a client application, satisfies the specification for a given consistency model or isolation level, i.e., whether the results in the session trace follow an order that is allowed by the above specification. Hence, our approach is concerned with client-centric view of a given consistency model or isolation level. Further, the traditional approach has the disadvantage of having to deal with much longer traces, comprising execution of operations performed from multiple applications or sessions on storage system servers. Extracting a session trace from a server trace is a computationally expensive task by itself, since it requires an exhaustive search on the server trace to identify portions that are relevant to a given application. Contrastingly, our approach directly analyzes session traces, collected from the client machines.
+%%\subsection{Complexity of Verification: Comparison with the State-of-the-art}\label{sec:complex}
+%% %A session trace is comprised of results of execution of storage operations invoked from a client application on a target storage system, observed from a client machine. 
+%%% Let $\mathit{op}$ be signature of an 
+%%%$i^\mathit{th}$ operation invoked from a given client application. $\mathit{op}$ can be a read or write operation that reads (or writes) a unique value from (or to) a storage system object $o$; signature of a read and write operation are of the form $r(o){v_m}$ and $w(o,v_l)$, respectively.
+%%% Let $v_k$ be the current value observed against the operation $\mathit{op}$ on an object $o$. Let the length of the given session trace be denoted by the integer term $s_t$. A a session trace $\mathcal{S}_t$ can be expressed as a collection of tuples, where each tuple comprises: 1) the unique signature of the operation, 2) the name of the storage system object that the operation accesses, 3) the value written by the operation. Using the above notations, a session trace $\mathcal{S}_t$ is given as $\mathcal{S}_t$ = \[ \Set{\tuple{\mathit{op},o,v_k}} {1\le i \le s_t, 1\le j\le m, 1\le k\le n}{.} \]
+%%%Let the ConSpec expression for a given consistency
+%%% guarantee or an isolation level be given as $\mathcal{E}_c$ =\[ \Set{e_i} {1\le i\le s_c}{,} \] where
+%%% $e_i$ is the $i^\mathit{th}$ character in the ConSpec expression, and the length of a given ConSpec expression is $s_c$.
+%% %$\tuple{\mathit{op}_i,o_j,v_k}$
+%%It can be verified whether a storage system actually supports a consistency guarantee or an isolation level by analyzing a session trace with respect to a ConSpec specification $\mathcal{E}^s$ for the above consistency guarantee or isolation level. Verifying a given session trace $\mathcal{s}_t$ against a specification $\mathcal{E}^s$  involves comparing the observed result of each operation in
+%%  $\mathcal{s}_t$ against each expression in $\mathcal{E}^s$. The complexity (here we consider time complexity) of comparing each character in a session trace $\mathcal{s}_t$ against the specification $\mathcal{E}^s$ is equivalent to the length of the specification, i.e., $s_c$. For verification, the above step is repeated for all characters in the session trace (in the absence of anomalies). Thus, the total complexity  of verifying a session trace against a given ConSpec specification is $s_t \times s_c$.
+%%\par  As already discussed in Section \ref{sec:compare}, state-of-the-art definitions of consistency models and isolation levels comprise a combination of axiomatic rules and anomaly DSGs. Let the total number of axiomatic rules in a state-of-the-art consistency specification  be $n_e$. Let the length of the expression for each axiomatic rule comprising a state-of-the-art specification  be $s_1$, $s_2$, ..., $s_{n_e}$, respectively. Thus, the total length of such expressions in a state-of-the-art specification
+%% is given as $\mathcal{E}^s$ =\[ \Set{\mathcal{E}^{i}_s}{1\le i\le n_e}{,}{,}\] where $\mathcal{E}^{i}_s$ is the $i^\mathit{th}$
+%% expression in the given specification. The process of verifying a given session trace against a specification involves comparing each expression in the given specification with each character in the session trace. The complexity (time complexity) of comparing the expression $\mathcal{E}^{i}_s$ against the session trace can be given as $s_t \times s_i$, where $s_i$ is the length of $\mathcal{E}^{i}_s$. The total complexity of verifying the given session trace against the above expressions comprising the given specification involves carrying out the above step for all expressions in the specification, which in turn, can be given as $s_t \times \left(s_1+s_2+...+s_{n_e}\right)$. Now, let us consider verifying the given session trace against the anomaly DSGs for the given specification. Let the number of anomaly DSGs for a given specification be $n_g$. Let the size of each anomaly DSG be $g_1$, $g_2$, ...., $g_{n_g}$. Verifying a given session trace against an anomaly DSG involves performing
+%% a pattern search in each of the DGSs with the session trace. The complexity $\mathcal{C}$ of the above search, using any algorithm based on Depth First Search,  can be given as $\mathcal{C}$ = $V+E$, where $V$ and $E$ are the number of vertices and edges in each DSG,
+%% respectively. Considering each DSG to be fully connected, the number of edges approximately equals the number of vertices
+%%  -1, i.e., $E \approx V - 1$. Hence, $\mathcal{C}$ can be further rewritten as $\mathcal{C}=V+E\approx 2V -1$. Thus, the complexity of a graph search algorithm can be given $\approx 2V -1$. The total complexity
+%%  of verifying he given session trace against anomaly DSGs involves performing the above pattern search for all anomaly DSGs comprising the given specification. Thus, the total complexity of verifying against anomaly DSGs can be given as
+%%  $s_t \times 2 \times \left( g_1 + g_2 ... + g_{n_g} \right) - n_g$.  Combining the complexity of verifying against the expressions and the complexity of verifying against the anomaly DSGs, the total complexity of verification
+%%   as per the state-of-the-art can be given as
+%%   $s_t \times \left( s_1+s_2+...+s_{n_e} + 2 \times g_1 + 2 \times g_2 ... + 2 \times g_{n_g} - n_g \right).$
+%   
+%\subsection{Violation Examples: Verified \\ Against ConSpec Specifications}\label{sec:examples}
+%  Using example session traces, we illustrate situations where a given consistency model is violated. Let us consider a
+%session trace $\mathit{st}_1$: $w^1(x,1), w^2(x,2), r^1(x){2}, r^2(x){1}$ to demonstrate how violation of RYW consistency can occur.
+% From the session trace $\mathit{st}_1$, the following LTL expression  \\ $W^1 F W^2 F R^1 F R^2$ follows
+% directly from the temporal order of execution as per the session trace. In $\mathit{st}_1$, the read operation $r^1(x){2}$
+% follows the write operation $w^1(x,1)$ can be expressed by the LTL expression $W^1 F R^1$; which satisfies the
+% condition given in LHS of the shorter specification $E^{s}$ in Equation \ref{eqn:MR} if $W^i$ = $W^1$, $R^j$ = $R^1$. The session trace
+% $\mathit{st}_1$ can be transformed into the following partial legal serializations (that also comprises all write operations from other
+% clients: $\mathit{Si}_p^1$ = $W^1 F R^2 F W^2 F R^1$, $\mathit{Si}_p^2$ = $W^2 F R^1 F W^1 F R^2$,
+%  and $\mathit{Si}_p^3$ = $R^1 F W^2 F W^1 F R^2$.
+% Only for $\mathit{Si}_p^1$, the condition $W^1 F R^2 \in \mathit{Si}_p^1$ holds, which does not hold for $\mathit{Si}_p^2$ and $\mathit{Si}_p^3$.
+% thus the condition corresponding to the RHS of the implies operator $\rightarrow$ in $E^{s}$ , given in Equation \ref{eqn:RYW}, holds.
+%  %$W^k$ preceding  $W^1$ such that the above LTL condition holds.
+%  Next, we consider the sequence in the session trace where the
+%   write operation $w^1(x,1)$ is followed by the read operation  $r^2(x){1}$, expressed by the LTL expression $W^1 F R^2$. As discussed before a partial
+%  serialization $\mathit{Si}_p^1$ exists for the session trace such that $W^1 F R^2 \in \mathit{Si}_p^1$, satisfying the first
+%  condition in the RHS of Equation \ref{eqn:RYW}.
+%  %Also, following the same argument as
+%%   above, there does not exist a $w^k$ such that the temporal order represented by the LTL condition $W^k F^x W^1 F^x R^2$ holds.
+%  Next, we consider the sequence write operation $W^2$ followed by $R^1$ in the session trace, given as $W^2 F R^1$.
+%  This implies that the condition $W^i F^x R^j$ in the LHS of the $E^{s}$ condition in Equation \ref{eqn:RYW} holds, where $W^i$ = $W^2$ and
+%  $R^j$ = $R^1$. Again a legal partial serialization $\mathit{Si}_p^1$ exists such that $W^2 F R^1 \in \mathit{Si}_p^1$.
+%%  Regarding the second condition in the RHS of  Equation \ref{eqn:RYW}, there does not exist
+%%  a write operation $W^k$ such that the LTL conditions $W^k F^x W^i F^x R^j$ and $v_j=v_k$ hold, where $W^i$ = $W^2$
+%%  and $R^j$ = $R^1$. Thus, the condition $\not\exists W^k \in \mathit{st} \left( W^k F^x W^i F^x R^j \in \mathit{st} \right) %\wedge \left( W^k F W^i \in \mathit{st} \right)
+%% \wedge \left( v^j = v^k \right)$ does not hold, where $\mathit{st}$ = $\mathit{st}_1$.
+%  %$R^1$ returns a value 2 was written by the write operation $W^1$ which precedes $W^2$.
+%%   Thus the condition
+%%  $\not\exists W^k \in \mathit{st} \left( W^k F^x W^i F^x R^j \in \mathit{st} \right) %\wedge \left( W^k F W^i \in \mathit{st} \right)
+%% \wedge \left( v^j = v^k \right)$ holds, where $\mathit{st}$ = $\mathit{st}_1$.
+%  Next, we consider the sequence write operation $W^2$ followed by $R^2$ in the session trace, given as $W^2 F R^2$.
+%  This implies that the condition $W^i F^x R^j$ in the LHS of $E^{s}$ in Equation \ref{eqn:RYW} holds, where $W^i$ = $W^2$ and
+%  $R^j$ = $R^2$. $\mathit{Si}_p^1$ is the only legal partial serialization that satisfies the condition $W^i F R^j \in \mathit{Si}_p$
+%   in the RHS of Equation \ref{eqn:RYW} for all the above write-read operation sequences. However, $\mathit{Si}_p$ does not satisfy
+%  $W^i F R^j \in \mathit{Si}_p$ for the write-read sequence $W^2 F R^2$.
+%  %Regarding the second condition in the RHS of  Equation \ref{eqn:RYW}, there does exist
+%%  a write operation $W^k$ = $W^1$ such that the LTL condition $W^k F^x W^i F^x R^j$ holds,  where $W^i$ = $W^2$ and
+%%  $R^j$ = $R^2$. Further, the read operation
+%%  $R^2$ returns a value 1 which was written by the write operation $W^1$ that precedes $W^2$. Thus the condition $v_j=v_k$
+%%  holds, and thus, in turn, the condition $\not\exists W^k \in \mathit{st} \left( W^k F^x W^i F^x R^j \in \mathit{st} \right) %\wedge \left( W^k F W^i \in \mathit{st} \right)
+%% \wedge \left( v^j = v^k \right)$ does not hold, where $\mathit{st}$ = $\mathit{st}_1$.
+%  For anomaly
+%  condition $C$  in Equation \ref{eqn:RYW} to hold, their cannot exist in the global session trace a read operation $r^k$ preceding the read operation
+%  $r^j$ (which is $r^2(x){1}$) and a write operation $w^l$ preceding $w^i$ (which is $w^2(x,2)$ in this case)
+%   such that the LTL condition $\left(  {v^k}^{'} = {v^i}^{'} \right) \wedge \big(\left( {v^j}^{'} = {v^l}^{'} \right) \vee
+%\big( \left( {W^l}^{'} F {R^j}^{'} \in \mathit{St} \right) \wedge \left( \not\exists {W^l}^{'} F {W^m}^{'} F {R^j}^{'} \in \mathit{St} \right) \big) \big)$ hold.
+%However, in the given session trace  $\mathit{st}_1$, there does exist a read $r^1(x){2}$ and a write $w^1(x,1)$, such that
+%conditions $\left(  {v^k}^{'} = {v^i}^{'} \right) $ and $\left( {v^j}^{'} = {v^l}^{'} \right)$ hold, thus, in turn,
+%violating the anomaly condition.
+%  Hence, the RYW condition is violated for the given session trace.
+% %In $\mathit{st}_1$, read operations $r^1(x){2}$ and $r^2(x){1}$ follow the $w^2(x,2)$, the latest write operation on $x$,
+%%   satisfying the RHS of Equation \ref{eqn:RYW}. However, the value returned by $r^2(x){1}$ is 1, which does not match the
+%%    value written by the latest write operation $w^2(x,2)$ preceding $r^2(x){1}$; hence, $S_1 $does not satisfy the
+%%    condition $v_m = v_l$ in Equation \ref{eqn:RYW}.  Further, the value written by $w^2(x,2)$ is not overwritten by any
+%%     subsequent write preceding $r^2(x){1}$; hence, $S_1$ does not satisfy the condition
+%%     $W^j(v_l) F^{o} W^p(v_q) F^{o} R^k{v_m}$ in  Equation \ref{eqn:RYW}. Thus $S_1$ does not satisfy Equation
+%%     \ref{eqn:RYW}.
+% \par Let us consider a session trace $\mathit{st}_2$:  $w^1(x,1)$, $\mathit{st}_2^{'}$: $w^2(x,2)$, and $\mathit{st}_2^{''}$: $r^1(x){1}, r^2(x){2}, r^3(x){1}$ to illustrate how
+% violation of MR consistency can occur. Since the above session traces comprise write operations followed by read on the same object, as well
+% as multiple read operations on same object x, they satisfy the conditions given in LHS of Equation \ref{eqn:MR}.
+% First, let us consider the sequence of read operations $r^1(x){1}$ and $r^2(x){2}$ in $\mathit{st}^2$, given by the LTL expression $R^1 F^x R^2$.
+% If and only if $R^i$ = $R^1$ and $R^j$ = $R^2$, the above sequence of reads can satisfy the LHS of the condition  $E^{s}$ in Equation \ref{eqn:MR}.
+%  The above traces can be transformed into legal partial serialization order $\mathit{Si}_p$ =
+% $W^1 F R^1 F R^3 F W^2 F R^2$, such that $R^1 F R^2 \in \mathit{Si}_p$ holds, thus satisfying
+% the first condition the RHS of the implies operator $\rightarrow$
+% in  $E^{s}$ in Equation \ref{eqn:MR}.
+%   Next, we consider the sequence $r^1(x){1}$ followed by $r^3(x){1}$ in the above traces, given as the LTL expression $R^1 F R^3$. The above condition satisfies the LHS of $E^s$ Equation
+%   \ref{eqn:MR}, given that
+%  $R^i$ = $R^1$ and $R^j$ = $R^3$, which, in turn, implies $v_i$ = $v_1$ = 1 and $v_j$ = $v_2$ =1. As discussed above, a
+%  legal partial serialization $\mathit{Si}_p$ exists for the above trace, such that $R^1 F R^3 \in \mathit{Si}_p$
+%  holds; the condition $E^s$  in the RHS of Equation \ref{eqn:MR} holds for the above sequence of reads.
+%  %Also, $W^m$ and $W^n$ are the only write operations
+%%  that can satisfy the condition $W^m F^x W^n F^x R^i F^x R^j \in \mathit{st}$. Hence,
+%%  the second condition in the RHS requires that $W^m$ = $W^1$ and $W^n$ = $W^2$, and thus $v_m$ = $v_1$ = 1 and $v_n$ = $v_2$ = 2.
+%%  Hence,  $v_n \not= v_i$, which, in turn, implies that the condition $\left( v^i = v^n \right) \wedge \left( v^j = v^m \right)$
+%%  $\left( v^i = v^n \right) \wedge \left( v^j = v^m \right)$ holds. This, in turn, second condition in the RHS of
+%%  Equation \ref{eqn:MR} holds.
+%   Next, we consider the sequence $r^2(x){2}$ followed by $r^3(x){1}$ in the above traces, given
+%  as $R^2 F R^3$. However, the above sequence of reads does not match the order among these reads in the serialization  $\mathit{Si}_p$, i.e.,
+%  $R^2 F R^3 \in \mathit{Si}_p$ holds;
+%    thus it does not satisfy the first condition in the RHS of Equation \ref{eqn:MR}.
+%    Further, for the LHS of Equation \ref{eqn:MR} to hold for the above sequence of reads,   $R^i$ = $R^2$ and $R^j$ = $R^3$,
+%   which, in turn, implies $v_i$ = $v_2$ = 2 and $v_j$ = $v_3$ =1.
+%   For the anomaly condition $C$ in Equation \ref{eqn:MR} to hold for the sequence of read operations $r^1(x){1}$ followed by $r^3(x){1}$, there cannot exist write
+%  operations $w^m$ and $w^n$ corresponding to the reads $r^i$ and $r^j$  such that the LTL condition
+%  $\left( {v^i}^{'} = {v^n}^{''} \right) \wedge \big( \left( {v^j}^{'} = {v^m}^{''} \right) \vee \big( \left( {W^m}^{'} F {R^j}^{'} \in \mathit{St} \right) \wedge \\ \left( \not\exists {W^m}^{'} F {W^p}^{'} F {R^j}^{'} \in \mathit{St} \right) \big)$ holds.
+%   Here, $W^m$ = $W^1$ and $W^n$ = $W^2$, since $W^m$ and $W^n$ are the only write operations in the given session history.
+%   Hence, $v_m$ = $v_1$ = 1 and $v_n$ = $v_2$ = 2. Also, it is given that
+%  $v_i$ = $v_1$ = 1 and $v_j$ = $v_2$ =2. Hence, the conditions $\left( v^i = v^n \right)$ and $ \left( v^j = v^m \right)$
+%  is satisfied; thus, in turn, the above LTL condition is also satisfied. Thus, the violation condition $C$
+%  in Equation \ref{eqn:MR} holds.
+%   %Also, $W^m$ = $W^1$ and $W^n$ = $W^2$. Hence,
+%%   $v_n$ = $v_i$ and $v_m$ = $v_j$. Thus, the second condition does not hold here.
+%    Hence, the above traces violate the MR condition.
+%   %\par
+% % In $S_2$, $r^1(x){1}$ returns a value 1, whereas it should have returned 2, which is the value written by the latest write operation $w^2(x,2)$ preceding $r^1(x){1}$. Thus, $S_2$ does not satisfy the condition $v_l = v_m$. Since there are not write operations overwriting the latest write operation $w^2(x,2)$ preceding each read, the condition $W^j(v_l) F^{o} W^x(v_y) F^{o} R^k(v_m)$ holds. Following the same line of argument, we can show that $S_2$ does not
+%% satisfy any of the  conditions in RHS of Equation \ref{eqn:MR}. Hence, $S_2$ does not satisfy Equation \ref{eqn:MR}.
+% \par Let us consider a session trace \\ $\mathit{st}_3$: $w^1(x,1), r^1(x){2}$, $\mathit{st}_3^{'}$: $r^2(x){1} w^2(x,2), r^3(x){1}$, and \\ $\mathit{st}_3^{''}$: $r^4(x){2}, r^5(x){1}$ to demonstrate
+% a violation of Causal consistency. Since, there are successive operations with direct precedence relation on the object x, $\mathit{st}_3$
+% satisfies LHS of the $E^s$ condition in Equation \ref{eqn:Causal}.  We can transform
+% the above session traces into a partial serialization $\mathit{Si}_p$ =
+% $W^1 F R^2 F R^3 F R^5 F W^2 F R^1 F R^4$. First, let us consider the sequence of operations
+% $w^1(x,1)$ and $r^1(x){2}$ in the above traces, given by the LTL expression $W^1 F R^1$. The above expression satisfies
+% the condition $\mathit{Op}^i F^x \mathit{Op}^j$, where $\mathit{Op}^i$ = $W^1$ and $\mathit{Op}^j$ = $R^1$;
+% thus satisfying the LHS of the implies operator $\rightarrow$ in $E^s$ in Equation \ref{eqn:Causal}. The above sequence of
+% writes and reads satisfies the condition $W^1 F R^1 \in \mathit{Si}_p$, thus satisfying the first condition the RHS of
+% the implies operator $\rightarrow$ in $E^s$ in Equation \ref{eqn:Causal}.
+% %For the second condition in the RHS of
+%% Equation \ref{eqn:Causal} to hold, there cannot exist write  operations $W^m$ such that the LTL conditions
+%%   $W^m F^x \mathit{Op}^i F^x \mathit{Op}^j \in \mathit{st}$ and $v^j = v^m$ hold.
+%% Since there is no such $W^m$ preceding $\mathit{Op}^i$, the second condition in the RHS of Equation \ref{eqn:Causal}
+%% holds for the above sequence of operations.
+% Following the same line of argument, the sequence of operations
+%  $w^1(x,1)$ and $r^2(x){1}$, $w^1(x,1)$ and $r^3(x){1}$, $w^1(x,1)$ and $r^4(x){2}$, $w^1(x,1)$ and $r^5(x){1}$
+%  and $w^1(x,1)$ and  $w^2(x,2)$ satisfy the LHS and RHS of $E^s$ in the Equation \ref{eqn:Causal}. Next, let us consider
+%  the sequence of operations $w^2(x,2)$ and $r^3(x){1}$, which is expressed using LTL condition $W^2 F^x R^3$.
+%  Thus, the above sequence satisfies LHS of $E^s$ in the Equation \ref{eqn:Causal}. The above sequence of
+% writes and reads do not satisfies the condition $W^2 F R^3 \in \mathit{Si}_p$, violating the RHS of $E^s$ in Equation \ref{eqn:RYW}.
+%  Let us consider the anomaly condition $C$ in Equation \ref{eqn:Causal} for the write and read operations $w^2(x,2)$ (which is
+%  $w^i$ in this case) and $r^3(x){1}$ (which is $r^j$ in this case). Since  $w^2(x,2)$ is followed by $r^3(x){1}$ in the session trace, they satisfy the LHS of the condition
+%  $C$. For the RHS of $C$ to hold, there cannot a exist write operations $w^m$ preceding the write $w^2(x,2)$ such that the
+%  LTL condition $\left( {v^j}^{'} = {v^m}^{''} \right) \vee
+% \big( \left( {W^m}^{'} F {\mathit{Op}^j}^{'} \in \mathit{st} \right) \wedge
+%\left( \not\exists {W^m}^{'} F {W^n}^{'} F {\mathit{Op}^j}^{'} \in \mathit{st} \right) \big)$
+% holds.
+% We can assign $W^m = W^1$ since $w^1(x,1)$ precedes $w^2(x,2)$. Subsequently the condition \\ $\left( {v^j}^{'} = {v^m}^{''} \right)$
+% holds (since $R^j$ = $R^3$ and $v_j$ = 1 in this case). Hence, the RHS of $C$ is satisfied for Equation \ref{eqn:Causal} for the above sequence of operations.
+% %Also, we can assign $W^m$ = $W^1$,
+%%   $\mathit{Op}^i$ = $W^2$, and $\mathit{Op}^j$ = $R^3$, such that the LTL conditions
+%%   $W^m F^x \mathit{Op}^i F^x \mathit{Op}^j \in \mathit{st}$ holds. Further, $v_j$ = $v_m$ = 1, violating
+%%   the condition $\not\exists  \mathit{st} \left( W^m F^x \mathit{Op}^i F^x \mathit{Op}^j \in \mathit{st}
+%%   \right) \wedge \left( v^j = v^m \right)$, violating the RHS of Equation \ref{eqn:Causal}.
+% It results in
+%   violation of Causal consistency condition.
+%% \forall i, j, k, o, \mathit{st} \big( \exists \mathit{Op}^k \in  \mathit{st}
+%%\big( \mathit{Op}^i F \mathit{Op}^j \vee \\ \left( \mathit{Op}^i F \mathit{Op}^k  \wedge
+%%\mathit{Op}^k F \mathit{Op}^j \right)
+%%\vee \big( \left( \mathit{Op}^i = W^i \right) \wedge \left( \mathit{Op}^j = R^j \right) \wedge \\
+%%\left( \left( v_i = v_j \right) \vee \left( \left( v_i = v_k \right)
+%% \wedge \left( v_k = v_j \right) \right) \big) \right) \big)
+%%\\ \rightarrow \exists \mathit{Si}_p \left( \forall \mathit{Op}^i F \mathit{Op}^j \in \mathit{Si}_p \right)
+%%\wedge \not\exists  \mathit{st} \left( W^m F \mathit{Op}^i F \mathit{Op}^j \in \mathit{st} \right) \\
+%%\wedge \left( v^j = v^m \right) \big)
+%
+% %The operation $r^1(x){2}$ returns 2, which does not match the write operation
+%% $w^1(x,1)$ that directly preceded $r^1(x){2}$. Similarly, $r^3(x){1}$  does not return the correct value written by
+%% the latest write $w^2(x,2)$ which directly precedes $r^3(x){1}$. Thus, $S_3$ does not satisfy the conditions in Equation
+%% \ref{eqn:Causal}.
+% All the above session traces violate the specification of Strict Serializability, given in Equation
+% \ref{eqn:Strict}. Consider the session traces $\mathit{st}_3$, $\mathit{st}_3^{'}$, and $\mathit{st}_3^{''}$, which can be transformed into the legal
+% serialization $\mathit{Si}$, which is, in this case, equivalent to  $\mathit{Si}_p$ in absence of writes from other
+% client applications in the given session history (see above). The sequence of operations $w^1(x,1)$ and
+% $r^1(x){2}$ in the above session trace satisfies the LHS of the condition $E^s$ (i.e., the condition
+% $\mathit{Op}^i X \mathit{Op}^j$). Since $v_i \not= v_j$, the above sequence of write and read operations
+% do not satisfy the condition  in the RHS of $E^s$, i.e., it violates the condition $W^1 X R^1 \in \mathit{Si}$.
+% For the anomaly condition $C$ to hold for the above sequence of operations, let us consider the
+% sequence of operations $w^2(x,2)$ and $r^3(x)1$. For the RHS of $C$ to hold, there cannot a exist write operations $r^k$ following the read $r^3(x)1$ such that the
+%  LTL condition $\big(  \left( {v^k}^{''} = {v^i}^{'} \right) \wedge   \left( {v^j}^{'} \not= {v^i}^{'} \right) \big) \wedge
+% \not\exists \big(  \left( {\mathit{Op}^i}^{'} = {W^i}^{'}  \oplus {R^i}^{'}  \right) \wedge  \left( {\mathit{Op}^i}^{'}  F {W^j}^{'} F  {R^k}^{'} \in \mathit{st} \right) \wedge \left( {\mathit{Op}^i}^{'} F {W^j}^{''}   F  {R^k}^{'}  F  {R^l}^{'} \in \mathit{St} \right) \big) \\
+% \big(  \left( {v^l}^{''} = {v^j}^{'} \right) \wedge   \left( {v^k}^{''} = {v^i}^{'} \right) \big)$
+% holds.
+% We can assign $r^k = r^4$ since $r^4(x)2$ follows $r^3(x)1$. Subsequently the conditions \\ $\left( {v^k}^{''} = {v^i}^{''} \right)$
+%and $\left( {v^j}^{'} \not= {v^i}^{'} \right)$ holds, since $r^j$ yields $v_j$ = 1, and
+% $r^k$ yields $v_k$ = 2.
+% Thus, it also violates the anomaly condition in Equation \ref{eqn:Strict}, violating strict serializability.
+% \par  We consider the session traces \\ $\mathit{st}_4$: $w^1(x,1)$, $\mathit{st}_4^{'}$: $r^1(x){1}, w^2(x,2)$, and
+% $\mathit{st}_4^{''}$: $r^2(x){2}, r^3(x){1}$ to show how
+% WFR consistency can be violated. The above session traces can be transformed into a legal serialization \\
+% $\mathit{Si}_p$  = $W^1 F R^1 F R^2 F W^2$. The write operation $w^1(x,1)$ follows
+%  the read operation $r^1(x){1}$, and can be expressed as $W^1 F^x R^1$. The above expression satisfies
+% the condition $W^i F R^j$, where $W^i$ = $W^1$ and $R^j$ = $R^1$. Hence, the above traces satisfy the
+% condition in the LHS of Equation \ref{eqn:WFR}. Further, by observation, the above sequence of write-read
+% operations satisfies the condition  $W^1 F R^1 \in \mathit{Si}_p$. Thus, the condition $E^s$ in the RHS of
+% Equation \ref{eqn:WFR} holds. According to the anomaly condition $C$ in Equation \ref{eqn:WFR}, there must not
+% exist a read operation $r^n(x)$ such that the conditions $\left( R^i F^x W^j F^x R^n \in \mathit{st} \right) \wedge
+%\left( W^j F^x R^n \in \mathit{st} \right)$ and $v^n = v^i$ are satisfied. Since $r^2(x){1}$ succeeds  $w^2(x,2)$, we can
+%assign $R^n$ = $R^2$. But, the read operation $r^2(x){1}$ returns a value 1 which was written by $w^1(x,1)$; thus
+%the condition $v^n = v^i$ holds. Thus, $\mathit{st}_4$ violates the second condition in
+% RHS of Equation \ref{eqn:WFR}; hence, it violates WFR consistency.
+% \par Let us consider the session traces \\ $\mathit{st}_5$: $w^1(x,1), r^1(x){2}, w^2(x,2)$, $\mathit{st}_5^{'}$: $r^2(x){2}$, and \\
+% $\mathit{st}_5^{''}$: $r^3(x){1}, r^4(x){2}$, and demonstrate violation of
+%  MW consistency with it. The above session traces can be transformed in a legal serialization
+%  $\mathit{Si}$ = $W^1 F W^2 F R^1 F R^2$.
+%   Since the above session traces comprise a sequence of successive writes $w^1(x,1), w^2(x,2)$ on same object x,
+%   it can be expressed as $W^i F W^j$, thus satisfying the LHS of $E^s$ in Equation \ref{eqn:MW}, where $W^i$ = $W^1$ and $W^j$ = $W^2$.
+%  Also, the above sequence of write operations satisfies the first condition of the RHS of Equation \ref{eqn:MW},
+%  i.e., $W^i F W^j \in \mathit{Si}$. The above traces can be transformed into a legal serialization order $\mathit{Si}$ =
+%   $w^1(x,1), r^2(x){1}, w^2(x,2), r^1(x){2}$, thus satisfying the first condition in the RHS of Equation \ref{eqn:WFR}.
+%   For the anomaly condition $C$ to hold, there cannot exist a sequence of write operations $w^1(x,1)$ and
+%    $w^2(x,2)$ followed by a sequence of read operations $r^k$ and $r^l$ such that the following condition holds:
+%  $\left( \not\exists  {R^k}^{'} F  {R^l}^{'} \in \mathit{St} \right)
+%   \wedge  \left( {v_k}^{'} = {v_j}^{'} \right) \wedge \\
+%   \left( {v_l}^{'} = {v_i}^{'} \right)$. For the above session trace,
+%  we assign the operations $r^2(x){2}$ and $r^3(x){1}$ to the read operation $r^k$ and $r^l$. However, the above
+%  read operations $r^k$ yields $v_k$ = 2, and $r^l$ yields $v_l$ = 1, such that the condition
+%  $\left( {v_k}^{'} = {v_j}^{'} \right) \wedge \\
+%   \left( {v_l}^{'} = {v_i}^{'} \right)$ holds.
+%   %According to the RHS of Equation \ref{eqn:MW},  there must not exist a read operation $r^n(x)$ that satisfies the
+%%   conditions $ W^i F^x W^j F^x R^n \in \mathit{st}$ and $v^n = v^i$. In other words, any operation that
+%%   follows the above write sequence must not return a value updated by a write operation that precedes the latest write.
+%%   Since the read operation $r^1(x){1}$ succeeds the sequence of writes $W^1 F^x W^2$, $R^n$ = $R^1$. But, $r^1(x){1}$
+%%   returns the value 1; thus, the condition $v^n = v^i$ holds. Thus, $\mathit{st}_5$ violates the RHS of Equation \ref{eqn:MW},
+%%    and, in turn, violates MW consistency.
+%  \par Consider a group of 2 clients (or processors), namely $\mathit{Cl}_1$ and $\mathit{Cl}^2$, respectively.  Let us
+%  consider  that operations are invoked from the above 2 clients, and a session trace  $\mathit{st}_6$ is
+%  collected as follows.
+%  $\mathit{st}_6$: $w^1(x,1), r^1(y){1}$, $\mathit{st}_6^{'}$: $w^2(y,1), r^2(x){2}$. % In
+%%   $\mathit{st}_6$, the order of write operations $w^1(x,1)$ and $w^2(y,1)$ are different in each of the
+%%  2 session traces. In $\mathit{st}^2$, $r^2(x){1}$ returned while $w^1(x,1)$ did not yet execute. In
+%%  $\mathit{st}_1$, $w^1(x,1)$ executed but $r^2(x){1}$ did not execute.
+%  For the above session trace to satisfy TSO consistency, the condition \\
+%  $\left( {W^i}^{'}(x) F {R^j}^{''}(x) \in \mathit{St}  \right) \wedge 
+%    \left( {v_j}^{''} \not= {v_i}^{'} \right)  \wedge \\
+%  %\big( \not\exists \big( \left({R^k}(x)^{'} \in \mathit{st}^{'} \right) \wedge  \\
+%  \left( {R^k}^{''}(x) F {R^j}^{''}(x) \in \mathit{St}  \right)
+%     \wedge \left( {v_k}^{''} \not= {v_i}^{'} \right)  \\
+%     \wedge
+% %\not\exists  \big( %\left( {W^i}^{'} F {R^j}^{'} \in \mathit{st} \right) \wedge
+%\left( {R^k}^{'} F {R^j}^{'} \in \mathit{st} \right)  \wedge
+%%\left(  \mathit{st}^{'} \in \mathit{St} \right) \wedge
+%\left( {W^l}^{'} F {W^i}^{'} \in \mathit{St} \right) %\big) \\
+%\wedge \left(  {v^k}^{'} = {v^i}^{'} \right) \wedge \\
+%\big( \left( {v^j}^{'} = {v^l}^{'} \right) \vee
+%\big( \left( {W^l}^{'} F {R^j}^{'} \in \mathit{St} \right)  \wedge \\
+% \not\exists  {W^m}^{'} \left( {W^l}^{'} F {W^m}^{'} F {R^j}^{'} \in \mathit{St} \right) \big) \big)$
+%  must hold. In the above session traces, let us assign the operation  $w^1(x,1)$ as $w^i$. $r^2(x){2}$ occurs in another session trace, and thus invoked was from a different client. Further,
+%  $r^2(x){2}$ follows $w^1(x,1)$ in the global session order. Hence we can assign the operation
+%  $r^2(x){2}$ as $r^j$. Since $r^2(x){2}$ returns 2 instead of 1, the condition ${v_j}^{''} \not= {v_i}^{'} $ does not hold.
+%  Also, there doesn't exist an operation $r^k$ preceding $r^2(x){2}$ that satisfies the condition ${v_k}^{''} \not= {v_i}^{'} $.
+%  Thus, the given session trace violates Equation \ref{eqn:TSO}.
+%    \par  Consider two client applications (or processors), namely $\mathit{Cl}_1$ and $\mathit{Cl}^2$,
+%  respectively. Consider a session trace collected by executing operations on the above client  applications as follows.
+%   $\mathit{st}_7$: $w^1(x,1), w^2(y,1)$,    $\mathit{st}_7^{'}$: $r^1(x){1}$,  $\mathit{st}_7^{''}$:
+%  $r^2(y){1}, r(x){1}$. To satisfy the PC consistency, any sequence of write operations $w^i$ and $w^j$ invoked by a client must satisfy
+%  the condition $\big(\not\exists \left( {W^i}^{'} F {W^j}^{'} \in \mathit{st} \right) \wedge
+%  \left( \mathit{st}^{'} \in \mathit{St} \right) \wedge
+%  \left( {R^k}^{'} F {R^l}^{'} \in \mathit{st}^{'} \right) \big)
+% \big( \left( v_k^{''} = v_j^{'} \right) \wedge \left( v_l^{'} = v_i^{'} \right)\big)$. Thus, there must not exists a sequence of
+% reads $r^k$ and $r^l$ such that the condition  $\left( v_k^{''} = v_j^{'} \right) \wedge \left( v_l^{'} = v_i^{'} \right)$
+% holds. In the above session traces, the write operations  are executed according to the precedence order
+%  $w^1(x,1)$ followed by $ w^2(y,1)$, hence we assign $w^1(x,1)$ and $ w^2(y,1)$ as $w^i$ and $w^j$. Also, let us assign
+%  the sequence of read operations $r(x){1}$  and $r^2(y){1}$ as $r^k$ and $r^l$, respectively. According to the
+%   above condition, reads against the above writes should view the results of the above write operations
+%  according to the invocation order of these writes. However, in the given session trace, the client application
+%  $\mathit{Cl}_2$ observes the above writes out of order. Since  $r^2(y){1}$ executes before ,$r(x){1}$ in the above session
+%  traces, $\mathit{Cl}_2$ observes the result of $w^2(y,1)$ before observing result of $w^1(x,1)$.  Thus,
+%   the above traces violate Equation \ref{eqn:PC}.
 % \par Consider a session trace $\mathit{st}_8$: $w^1_{tx}(x,2), w^2_{ty}(x,5),  w^1_{ty}(y,5), \\ c_{ty},
 % w^2_{tx}(y,8), r^1_{ty}(x){5}, r^2_{ty}(y){8}, c_{tx}$. According to the  specification of PL-1 isolation level
 % (refer to Equation \ref{eqn:PL1}), there cannot exist read operations $r^m_\mathit{ty}$ and $r^n_\mathit{ty}$ such that they satisfy the condition
