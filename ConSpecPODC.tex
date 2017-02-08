@@ -72,17 +72,17 @@ escapeinside={\%*}{*)},         % if you want to add a comment within your code
 \author{Ricardo Dias}
 \email{ricardo.dias@gmail.com}
 \affiliation{%
-  \institution{NOVA LINCS, Universidade NOVA Lisboa \& SUSE Linux GmbH}
+  \institution{SUSE Linux GmbH}
 %  \city{Prague}
 %  \country{Czech Republic}}
 %\author{Tian He}
 %\affiliation{%
 %  \institution{University of Minnesota}
   \country{Portugal}}
-\author{Rodrigo Miragaia Rodrigues}
-\email{rdias@gsd.inesc-id.pt}
+\author{Rodrigo Rodrigues}
+\email{rodrigo@gsd.inesc-id.pt}
 \affiliation{%
-  \institution{INESC-ID/IST}
+  \institution{INESC-ID/IST (U.\ Lisboa)}
 %  \city{Charlottesville}
 %  \state{VA}
 %  \postcode{22903}
@@ -1118,16 +1118,23 @@ E^s = \forall x, \mathit{st}, \mathit{st}^{'} \in \mathit{St}, w(x,v), r^{'}(x,v
 %  \end{align}
  
  
-\section{Rewriting CAP Theorem in terms of ConSpec}\label{sec:cap}
- CAP theorem \cite{brew:cap, Gilbert:2002:BCF:564585.564601} states that it is impossible to simultaneously achieve atomic consistency (linearizability), availability (i.e.,
- the property that there must be a response against every request), and partition tolerance (i.e., tolerance of network partitions)
- in a distributed system. However, the original statement of CAP is restricted to linearizability, and does not address
- the wide array of consistency models supported by modern storage systems. Indeed modern storage systems relax consistency
- guarantees to favour  availability and partition tolerance according to the use case and system requirements. The
- various degrees of relaxation gives rise to a lattice of consistency models, ranging from RYW to SC.
- In this section, we rewrite the CAP theorem to take into account this wide array of consistency models. Here, we analyze
- the specifications of consistency models, and derive the condition that makes a particular consistency model
- CAP-strong, i.e., strong enough to be bounded by the constraints of CAP theorem, as follows. First, we state and prove the condition for a consistency model to be CAP-strong, and then we state and prove the opposite case, i.e., we prove the condition for a consistency model to be CAP-weak.  %. We rewrite CAP as follows.
+\section{Rewriting the CAP Theorem in terms of ConSpec}\label{sec:cap}
+The CAP conjecture was initially stated informally as the impossibility of simultaneously achieving strong Consistency, Availability, and Partition tolerance in a replicated system~\cite{brew:cap}. When this theorem was subsequently proven by Gilbert and Lynch~\cite{Gilbert:2002:BCF:564585.564601}, these three properties were stated precisely, and, in this context, strong consistency was defined as atomicity (or linearizability).
+
+The fact that the original proof of CAP is restricted to linearizability raises the question of whether CAP holds using other definitions from
+ the wide array of consistency models supported by modern storage systems.
+ In this section, we rewrite the CAP theorem in terms of ConSpec to precisely define the class of consistency models that can and cannot be implemented in a highly-available, partition-tolerant way.
+
+
+--
+
+To begin with, we need a helper definition to enumerate all
+
+--
+
+%% to take into account this wide array of consistency models. Here, we analyze
+%%  the specifications of consistency models, and derive the condition that makes a particular consistency model
+%%  CAP-strong, i.e., strong enough to be bounded by the constraints of CAP theorem, as follows. First, we state and prove the condition for a consistency model to be CAP-strong, and then we state and prove the opposite case, i.e., we prove the condition for a consistency model to be CAP-weak.  %. We rewrite CAP as follows.
  First, we define a property called Global Write Order per Object (GWO) which can be imposed by a partial order $\preccurlyeq$ specified  by a ConSpec specification (refer to \ref{def:form0}).  GWO requires that all clients executing in a system observe write operations on each data object according to a global order, i.e., writes to each data object follow a common precedence order in all session traces. 
 \begin{definition}{Global Write Order per Object (GWO):}\label{def:gwo}
 Global Write Order per Object (GWO)  is a property which requires a global order among results of write operations to each object across all clients in a system. A partial order $\preccurlyeq$ satisfies GWO if $\preccurlyeq \; = \; \forall  x, \mathit{st}, \mathit{st}^{'} \in \mathit{St}, w(x,v), w^{'}(x,v^{'}) \in \mathcal{O}  \left( {W}^{'}  \preccurlyeq_{st} {W}^{''} \wedge {W}^{'}  \preccurlyeq_{st}^{'} {W}^{''} \right),$ where $\preccurlyeq_{st}$ and $\preccurlyeq_{st}^{'}$ are the restriction of the partial order  $\preccurlyeq$ to operations from a pair of clients, ovserved in the respective session traces $\mathit{st}$ and $\mathit{st}^{'}$.
