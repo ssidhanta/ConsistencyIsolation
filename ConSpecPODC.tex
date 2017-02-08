@@ -705,9 +705,10 @@ E^{s} = \forall \mathit{st} \in \mathit{St}, {\mathit{Op}}^{'}, {\mathit{Op}}^{'
   \begin{align}\label{eqn:SC}
 \begin{split}
   E^{s} =  \forall \mathit{st} \in \mathit{St}, {\mathit{Op}}^{'}, {\mathit{Op}}^{''} \in \mathit{st} \big( \mathit{Op}^{'} F  {\mathit{Op}}^{''} \in \mathit{st}
-\rightarrow \left( {\mathit{Op}}^{'} \preccurlyeq {\mathit{Op}}^{''} \right) \big), 
+\rightarrow \left( {\mathit{Op}}^{'} \prec {\mathit{Op}}^{''} \right) \big), 
 \end{split}
-  \end{align} where the partial order $\preccurlyeq$ is a partial order over operations in a global execution comprising operations executed by all clients executing on the system, and $\left( \mathcal{O}, \preccurlyeq \right)$ is the corresponding partial order set. 
+  \end{align} where $\prec$ denotes a total order over operations in a global execution comprising operations executed by all clients executing on the system. The total order relation $\left( {\mathit{Op}}^{'} \prec {\mathit{Op}}^{''} \right)$ implies 
+ $\left( {\mathit{Op}}^{'} \preccurlyeq {\mathit{Op}}^{''} \right) \vee \left( {\mathit{Op}}^{''}  \preccurlyeq {\mathit{Op}}^{'}\right)$, where  $\preccurlyeq$ denotes a partial order relation,and $\left( \mathcal{O}, \preccurlyeq \right)$ is the corresponding partial order set. 
 %  Strict Serializability \cite{Herlihy:1990:LCC:78969.78972} is a consistency model that adds the restriction of linearizability to serializability. In addition to the existential quantification over an equivalent legal serialization over the global session trace, it further specifies: any session trace must observe latest result of all operations in a client application. Using the notion of serialization of a client, given in Equation \ref{def:clientser},  Strict Serializability is expressed as follows. \\
  %\begin{align}\label{eqn:Strict}
 %\begin{split}
@@ -759,8 +760,8 @@ E^{s} = \forall \mathit{st} \in \mathit{St}, {\mathit{Op}}^{'}, {\mathit{Op}}^{'
 %  $E^s = \forall x, y, \mathit{st}, \mathit{st}^{'} \in \mathit{St} \not\exists {\mathit{op}}(x), {\mathit{op}^{'}}(y) \in \mathcal{O} 
 % \left( {\mathit{Op}}^{'}(x) F {\mathit{Op}}^{''} (y) \in \mathit{st} \right) \rightarrow \left( {\mathit{Op}}^{''}(y) F {\mathit{Op}}^{'} (x) \in \mathit{st}^{'} \right)$,   
 % which can be rewritten as follows.
- \begin{align}\label{eqn:PC}
-\begin{split}
+% \begin{align}\label{eqn:PC}
+%\begin{split}
 %E^{s} = C =   \forall \mathit{st} \in \mathit{St} \not\exists \big( \left(  {W^i}^{'}, {W^j}^{'} \in \mathit{st}  \right)
 %\wedge \left( {R^k}^{'}, {R^l}^{'} \in \mathit{St} \right) \big) \\
 %\big( \left( {W^i}^{'} F {W^j}^{'} \in \mathit{st} \right) \wedge
@@ -774,13 +775,18 @@ E^{s} = \forall \mathit{st} \in \mathit{St}, {\mathit{Op}}^{'}, {\mathit{Op}}^{'
 %\big( \left( {W^l}^{'} F {R^j}^{'} \in \mathit{St} \right) \wedge
 % \left( \not\exists {W^l}^{'} F {W^m}^{'} F {R^j}^{'} \in \mathit{St} \right) \big) \big) \big)
 %E^s = \left( \mathcal{O}, \preccurlyeq \right), 
-\forall x, y, \mathit{st}, \mathit{st}^{'} \in \mathit{St}  \big( \left( W^{'}(x) F W^{''} (y) \in \mathit{st} \right) \rightarrow  \left(  \left( W^{'}(x) \preccurlyeq_{st+w} W^{''} (y)   \right) \wedge  \left( W^{'}(x)  \preccurlyeq_{{st}^{'}+w}  W^{''} (y)  \right) \right) \big),
-\end{split}
-  \end{align}
+$\forall x, y, \mathit{st}, \mathit{st}^{'} \in \mathit{St}  \big( \left( W^{'}(x) F W^{''} (y) \in \mathit{st} \right) \rightarrow  \left(  \left( W^{'}(x) \preccurlyeq_{st+w} W^{''} (y)   \right) \wedge  \left( W^{'}(x)  \preccurlyeq_{{st}^{'}+w}  W^{''} (y)  \right) \right) \big)$,
+%\end{split}
+%  \end{align}
 %  \forall x, y, \mathit{st}, \mathit{st}^{'} \in \mathit{St}  \left( {\mathit{Op}}^{'}(x) F {\mathit{Op}}^{''} (y) \in \mathit{st} \right) \rightarrow  \left( {\mathit{Op}}^{'}(x) F {\mathit{Op}}^{''} (y)  \in \left( \mathcal{O}, \preccurlyeq_{st} \right) \wedge {\mathit{Op}}^{'}(x) F {\mathit{Op}}^{''} (y)  \in \left( \mathcal{O}, \preccurlyeq_{{st}^{'}} \right)  \right),
 %\end{split}
 %  \end{align} 
-   where $ \preccurlyeq_{st+w}$ and $ \preccurlyeq_{{st}^{'}+w}$ are partial orders restricted to operations performed by clients $\mathit{Cl}$ and $\mathit{Cl}^{'}$ and writes from all other clients, respectively, observed in the respective local session traces $\mathit{st}$ and $\mathit{st}^{'}$. % all data objects with respect to a given global execution.
+   where $ \preccurlyeq_{st+w}$ and $ \preccurlyeq_{{st}^{'}+w}$ are partial orders restricted to operations performed by clients $\mathit{Cl}$ and $\mathit{Cl}^{'}$ and writes from all other clients, respectively, observed in the respective local session traces $\mathit{st}$ and $\mathit{st}^{'}$.  The partial order relations $  \left( W^{'}(x) \preccurlyeq_{st+w} W^{''} (y)   \right)$ and $ \left( W^{'}(x)  \preccurlyeq_{{st}^{'}+w}  W^{''} (y)  \right)$ can be expressed in terms of the corresponding partial order sets $\left( \mathcal{O}, \preccurlyeq_{st+w} \right)$  and $\left( \mathcal{O}, \preccurlyeq_{{st}^{'}+w} \right)$. By that logic, the condition $ \left( W^{'}(x) \preccurlyeq_{st+w} W^{''} (y)   \right) \wedge  \left( W^{'}(x)  \preccurlyeq_{{st}^{'}+w}  W^{''} (y)  \right) $ can be expressed in terms of an intersection $\left( \mathcal{O}, \preccurlyeq^{'} \right)$ of the partial order sets  $\left( \mathcal{O}, \preccurlyeq_{st+w} \right)$  and $\left( \mathcal{O}, \preccurlyeq_{{st}^{'}+w} \right)$, where the partial order $ \preccurlyeq^{'} $ represents the relation among elements of the new partial order set formed out of the intersection of $\left( \mathcal{O}, \preccurlyeq_{st+w} \right)$  and $\left( \mathcal{O}, \preccurlyeq_{{st}^{'}+w} \right)$. Thus the  TSO equation can be expressed in terms of the new partial order $ \preccurlyeq^{'} $ as follows. 
+    \begin{align}\label{eqn:PC}
+\begin{split}
+\forall x, y, \mathit{st}, \mathit{st}^{'} \in \mathit{St}  \big( \left( W^{'}(x) F W^{''} (y) \in \mathit{st} \right) \rightarrow  \left( W^{'}(x) \preccurlyeq^{'} W^{''} (y)   \right)  \big),
+\end{split}
+  \end{align} % all data objects with respect to a given global execution.
  %\forall \big( %\left( \mathit{st} \in \mathit{St} \right) \wedge
 % \left( {W^i}(x)^{'} F {W^j}(z)^{'} F {R^k}(y)^{'} \in \mathit{st} \right) \wedge \\
 %  \left( {W^l}(y)^{'} F {W^m}(z)^{'} F {R^n}(x)^{'} \in \mathit{st} \right) \big) \\
@@ -850,11 +856,15 @@ E^{s} = \forall \mathit{st} \in \mathit{St}, {\mathit{Op}}^{'}, {\mathit{Op}}^{'
 %\end{split}
 %  \end{align} 
   %which can be rewritten as follows. 
-  \begin{align}\label{eqn:TSO}
+ $E^s = \forall x, \mathit{st}, \mathit{st}^{'} \in \mathit{St}, w(x,v), r^{'}(x,v^{'}), r^{''}(x), w^{'''}(x,v^{'''}) \in \mathcal{O}  \big( \left( W^{'}(x) F R^{''} (x) \in \mathit{st} \right)  \wedge  \left( \mathit{R}^{'''}(x) F W^{''''} (x) \in \mathit{st}^{'} \right)  \wedge \left( v^{''} = v \right) \wedge \left( v^{'''} = v^{'} \right)  \big) \rightarrow   \big( \left( W^{'}(x) \preccurlyeq(x)_{st} W^{'''} (x) \right) \wedge \left( W^{'}(x) \preccurlyeq(x)_{{st}^{'}} W^{'''} (x) \right)  \big) \big).$
+ Following the same approach as in PC, we can rewrite the TSO Equation in terms of intersection of the partial order sets  $\left( \mathcal{O}, \preccurlyeq(x)_{st} \right)$  and $\left( \mathcal{O}, \preccurlyeq(x)_{{st}^{'}} \right)$. 
+ Using a new partial order relation $\preccurlyeq(x)^{'}$ that denotes the partial order relation among elements
+  in the partial order set formed out of the intersection of the partial order sets $\left( \mathcal{O}, \preccurlyeq(x)_{st} \right)$  and $\left( \mathcal{O}, \preccurlyeq(x)_{{st}^{'}} \right)$, we express TSO as follows. 
+   \begin{align}\label{eqn:TSO}
 \begin{split}
-E^s = \forall x, \mathit{st}, \mathit{st}^{'} \in \mathit{St}, w(x,v), r^{'}(x,v^{'}), r^{''}(x), w^{'''}(x,v^{'''}) \in \mathcal{O}  \big( \left( W^{'}(x) F R^{''} (x) \in \mathit{st} \right)  \wedge  \left( \mathit{R}^{'''}(x) F W^{''''} (x) \in \mathit{st}^{'} \right) \\ \wedge \left( v^{''} = v \right) \wedge \left( v^{'''} = v^{'} \right)  \big) \rightarrow   \big( \left( W^{'}(x) \preccurlyeq(x)_{st} W^{'''} (x) \right) \wedge \left( W^{'}(x) \preccurlyeq(x)_{{st}^{'}} W^{'''} (x) \right)  \big) \big)
+E^s = \forall x, \mathit{st}, \mathit{st}^{'} \in \mathit{St}, w(x,v), r^{'}(x,v^{'}), r^{''}(x), w^{'''}(x,v^{'''}) \in \mathcal{O}  \big( \left( W^{'}(x) F R^{''} (x) \in \mathit{st} \right)  \wedge  \left( \mathit{R}^{'''}(x) F W^{''''} (x) \in \mathit{st}^{'} \right) \\ \wedge \left( v^{''} = v \right) \wedge \left( v^{'''} = v^{'} \right)  \big) \rightarrow    \left( W^{'}(x) \preccurlyeq(x)^{'} W^{'''} (x) \right) \big)
 \end{split}
-  \end{align}. % where $ \preccurlyeq(x)$ is a partial order  over  all operations on a given object $x$ comprised in a given global execution, i.e., comprising all clients executing on a system. %and $ \mathit{Si}$ is an equivalent legal serialization of a global execution defined in Equation \ref{def:ser}.
+  \end{align}.% where $ \preccurlyeq(x)$ is a partial order  over  all operations on a given object $x$ comprised in a given global execution, i.e., comprising all clients executing on a system. %and $ \mathit{Si}$ is an equivalent legal serialization of a global execution defined in Equation \ref{def:ser}.
   %$\preccurlyeq$ is given as a composition $\preccurlyeq =  \preccurlyeq^{'}(x) \circ  ... \circ^{'} \preccurlyeq^{''}(x)$,  and $\circ, ... \circ^{''}$ are composition operators, like $\cap$ or $\cup$, over partial order sets (posets) $\preccurlyeq^{'}(x), ... \preccurlyeq^{''}(x)$ comprising partial orders defined over a given object $x$.
  
 % \subsection{Specification of Isolation Levels}
@@ -1163,15 +1173,16 @@ Let us consider that the underlying storage system satisfies a consistency model
  
 
  \section{Implementation}\label{sec:impl}
- We provide an open source automated verification tool built using Spin, an open source software verification tool  \cite{Holzmann:2003:SMC:1405716}. Our tool can verify whether a given session trace satisfies a given consistency model or a given isolation level, specified in terms of a ConSpec expression. The source code and instructions for running the ConSpec tool is provided in an open source github repository \url{https://github.com/ssidhanta/ConSpecTool}. The tool accepts specifications of a given ConSpec definition in the form of an LTL expression. The behaviour of the clients acting on the underlying storage system is provided as an interaction of processes specified using the  PROMELA meta language. It runs the Spin model checker over the session trace, and the serialization list, and determines whether the session trace satisfies the specified consistency model or not. 
+ We provide an open source automated verification tool built using Spin, an open source software verification tool  \cite{Holzmann:2003:SMC:1405716}. Our tool can verify whether a given session trace satisfies a given consistency model or a given isolation level, specified in terms of a ConSpec expression. The source code and instructions for running the ConSpec tool is provided in an open source github repository \url{https://github.com/ssidhanta/ConSpecTool}. The tool accepts specifications of a given ConSpec definition in the form of an LTL expression. The behaviour of the clients acting on the underlying storage system is provided as an interaction of processes specified using the  PROMELA meta language. The tool runs the Spin model checker over the session trace, and the serialization list, and determines whether the session trace satisfies the specified consistency model or not. 
  From the  PROMELA specification, Spin captures the specified semantics of a given storage system. The PROMELA specifications are translated into C code. Spin acts as a driver that verifies the generated C code  against the  ConSpec definitions expressed in terms of LTL formulas. Spin parses the given session trace and the set of equivalent serializations generated for a given storage system.   The LTL model checker embedded within Spin verifies whether a given session trace satisfies a given ConSpec specifications. The github repository comprises a PROMELA specification for each of the consistency models and isolation levels, the Spin-based main source file, and the code for generating the list of  equivalent serializations.
  
 \section{Deriving ConSpec Specifications From the State-of-the-Art Definitions}\label{sec:derive}
  %Here we show how the ConSpec specifications can be directly derived from state-of-the-art specifications of
  %consistency \cite{Chockler2000, Terry:1994:SGW:645792.668302}. 
- As already discussed,
- state-of-the-art consistency specifications  \cite{Chockler2000, Terry:1994:SGW:645792.668302} define axiomatic rules for consistency models using first order
- logic expressions.  Consistency definitions are specified by Chockler et al. \cite{Chockler2000} as follows.
+ %As already discussed,
+ %state-of-the-art consistency specifications  \cite{Chockler2000, Terry:1994:SGW:645792.668302} define axiomatic rules for consistency models using first order
+ %ogic expressions.  
+ Consistency definitions are specified by Chockler et al. \cite{Chockler2000} as follows.
  They use the following formalization syntax in their definitions. Consider two operations $\mathit{op}^1$ and
  $\mathit{op}^2$ invoked from a client application, such that $\mathit{op}^1$ is a write operation that updates
  a storage system object $o$, and $\mathit{op}^2$ is a read operation that reads $o$. The symbol $\rightarrow$ denotes
@@ -1363,74 +1374,6 @@ Let us consider that the underlying storage system satisfies a consistency model
 %  \vee \big( \left( {W^m}^{''} F { R^l}^{''} \in \mathit{St} \right) \wedge
 %   \left(  \not\exists {W^m}^{''} F {W^n}^{''} F { R^l}^{''} \in \mathit{St}  \right)  \big)  \big)$
 %   (refer to Equation \ref{eqn:WFR}).
-  \par Chockler et al. states the MW consistency model as: if the condition represented by the expression
-  $\mathit{op}^1 \xrightarrow{\sigma} \mathit{op}^2$ holds for a given execution sequence $\sigma$ of write operations
-  (let us call this Condition 1), there must exist a serialization ${S_i}$,comprising the
-   operations $\mathit{op}^1$ and $\mathit{op}^2$, for which the condition given by the expression
-  $\mathit{op}^1 \xrightarrow{S} \mathit{op}^2$ must hold (let us call this Condition 2).
-  The above precedence relationships among operations $\mathit{op}^1$ and $\mathit{op}^2$ in Condition 1 can be directly
-  expressed in terms of an LTL expression
-    $\mathit{Op}^1 F \mathit{Op}^2 \in \mathit{st}$, where a session trace $\mathit{st}$ is equivalent to $\sigma$ for the
-    means and purposes of this paper.
- % Thus, the expressions $\left(\mathit{op}^1 \rightarrow \mathit{op}^2\right)^\sigma$ can be rewritten as LTL formula
-%  $\left(\mathit{Op}^1 X^{o} \mathit{Op}^2\right)_{o}^\mathit{po}$.
-   The expression $\mathit{op}^1 \xrightarrow{Si} \mathit{op}^2$ in Condition 2
-  can be expressed in terms of LTL as $\mathit{Op}^1 F \mathit{Op}^2 \in S_p$,  where
-  $S_p$ is equivalent to $S_i$.  Further,
-   since MW talks about a sequence of write operations, the propositional variable
-   $\mathit{Op}^1$ and   $\mathit{Op}^2$ in both Condition 1 and Condition 2 can safely be  replaced  by new
-   propositional variables  $W^{'}$ and $W^{''}$. Since $W^{'}  F W^{''}  \in S_p$ denotes a partial order among $W^{'}$ and $W^{''}$, we can rewrite the above expression as  $W^{'}  \preccurlyeq_{st+w} W^{''}$. Thus, Chockler's definition reduces into the specification given in Equation \ref{eqn:MW}. 
-%Further, the definition of MW can be also expressed as: a read operation $r^n$ must not observe
-%    a value that is written by  an earlier write $w^i$ instead of a later write operation $w^j$ in the
-%    execution sequence. The above condition can be expressed in terms of the LTL expression
-%    $\not\exists  \mathit{st} \left( W^i F W^j F R^n \in \mathit{st} \right) \wedge \left( v^n = v^i\right)$.
-% Let us consider that there exists two consecutive write operations $w^i$ and $w^j$ in a given session
-%    trace, i.e., the condition ${W^i}^{''} F {W^j}^{''}  \in \mathit{st}$ holds. A read operation $r^m$
-%    cannot read the result of the earlier write operation $w^i$.
-% Further, let us consider a sequence of consecutive read operations $r^k$ and $r^l$  in a given
-%   global session history $\mathit{St}$, i.e., the condition ${R^k}^{'} F {R^l}^{'} \in \mathit{St}$ holds. According to
-%   the definition of MR, if the first read operation $r^k$ returns the
-%    result of the later write $w^j$, then the later read $r^l$ that follows $r^k$ can not return the result
-%    written by the earlier write $w^i$, i.e., the condition $\left( {v_k}^{''} = {v_j}^{'} \right) \wedge \left( {v_l}^{''} = {v_i}^{'} \right) $
-%    must hold. Further, let us consider the read operation $r^k$  reads the result of a preceding write $w^m$, and the read $r^n$ reads the
-%    result of a write $w^i$, the write $w^i(x)$ precedes $w^j(y)$ in the given session trace. Then, one of the following
-%    conditions must hold: 1) $r^n$ read the result of the write $w^m$, i.e., ${v_m}^{''} = {v_n}^{''}$ or 2) $r^n$ directly follows $w^m$ in the given
-%    session trace, i.e., $\left( {W^m}^{'} F {R^n}^{'} \in \mathit{St} \right) \wedge \\
-%      \not\exists \left( {W^m}^{'} F {W^p}^{'} F {R^n}^{'} \in \mathit{St} \right)$. Combining the above
-%  conditions, we can derive the anomaly expression for MW $C = \not\exists {W^j}^{'} F  {R^m}^{'} \in \mathit{st} \left( {v_m}^{'} = {v_i}^{'} \right)  \wedge \left( \not\exists  {R^k}^{''} F  {R^l}^{''} \in \mathit{St} \right) \\
-%   \left( \left( {v_k}^{''} = {v_j}^{'} \right) \wedge \left( {v_l}^{''} = {v_i}^{'} \right) \right) \wedge \not\exists \big( \left( {W^m}(x)^{'} F {R^k}(x)^{'} \in \mathit{St}  \right) \wedge \\
-%     \left( {v_m}^{''} = {v_k}^{'} \right) \wedge \left(  {W^i}(x)^{'} F {R^n}(x)^{'} \in \mathit{St} \right) \wedge \left( {v_i}^{'} = {v_n}^{'} \right) \wedge \\
-%     \left( {W^i}(x)^{'} F  {W^j}(y)^{'} \in \mathit{st} \right) \wedge \left( {R^l}(y)^{'} F  {R^k}(x)^{'} \in \mathit{St} \right) \big) \\
-% \big(  \left( {v_m}^{''} = {v_n}^{''} \right) \vee
-% \big( \left( {W^m}^{'} F {R^n}^{'} \in \mathit{St} \right) \wedge \\
-%      \not\exists \left( {W^m}^{'} F {W^p}^{'} F {R^n}^{'} \in \mathit{St} \right)  \big)$
-%      (refer to Equation \ref{eqn:MW}).
- %The postcondition of Chockler et al. implies that in any serialization order, a read operation $\mathit{op}^j$
-% must return the values written by the latest write operations that directly precedes it, namely $\mathit{op}^i$.
-% This, in turn, implies $v_l = v_m$ and
-% $v_l = v_m$, respectively.
-% However, subsequent write operations $\mathit{op}^p$ may alternatively overwrite the
-%  values  observed/written by operation $\mathit{op}^k$ . The above conditions may be specified by the
-% expressions $\mathit{Op}^j F^{o} \mathit{Op}^p X^{o} \mathit{Op}^k$. Thus, the expression for causal
-% consistency can be rewritten as
-%  \begin{align}
-%  \begin{split}
-%\forall i, j, k, l, m, n, p, q \big( \big( \left( \mathit{Op}^j = \left( W^j(v_l) \oplus R^j{v_l} \right) \right) \\
-%\wedge \left(   \mathit{Op}^k = \left( W^k(v_m) \oplus R^k{v_m} \right) \right) \wedge \left( \mathit{Op}^p = W^p(v_q)  \right) \big)
-% \\ \wedge \big( \left( \left( \mathit{Op}^j F^{o} \mathit{Op}^k \right) \oplus \left( \mathit{Op}^j X^{o} \mathit{Op}^k \right) \right)  \\
-% \vee \big( \left( \left( \mathit{Op}^j F^{o} \mathit{Op}^n \right) \oplus \left( \mathit{Op}^j X^{o} \mathit{Op}^n \right) \right)  \\
-%\wedge \left( \left( \mathit{Op}^n F^{o} \mathit{Op}^k \right) \oplus \left( \mathit{Op}^n X^{o} \mathit{Op}^j \right) \right) \big) \big) \big)_{o}^\mathit{po} \\
-%\rightarrow \big(G\;  \left( v_l = v_m \right) \oplus \left( \mathit{Op}^j F^{o} \mathit{Op}^p X^{o} \mathit{Op}^k \right) \big)_{o}^\mathit{st}.
-%\end{split}
-% \end{align}
-%$\forall i, j, k, l, o, \mathit{st}_x, \mathit{st}_y \big( W^i F W^j \in \mathit{st}_x, \mathit{st}_y
-%\\ \rightarrow  \exists S \left( W^i F W^j \in S \right) \wedge
-%\\ \wedge \not\exists R^m  \left( W^i F W^j F R^m \in \mathit{st}_x, \mathit{st}_y \right) \\
-%\wedge \big( \left( \left( v^m = v^i \in \mathit{st}_x  \right) \wedge \left( v^m = v^j \in \mathit{st}_y
-%\right) \right) \\
-% \vee \left( \left( v^m = v^j \in \mathit{st}_x  \right) \wedge \left( v^m = v^i \in \mathit{st}_y \right)
-% \right) \big) \big)
-%$
 The derivations of rest of the consistency models are given in Section \ref{sec:restderive}.
 
 \section{Conclusions}
@@ -1918,7 +1861,75 @@ In this paper, we presented precise formal definitions for the existing body of 
 %\end{lstlisting}
 \section{Appendix}
 \subsection{Derivations of Rest of the ConSpec Specifications}\label{sec:restderive}
-  Causal consistency is specified by Chockler et al. as follows. Chockler et al. defines a
+ Chockler et al. states the MW consistency model as: if the condition represented by the expression
+  $\mathit{op}^1 \xrightarrow{\sigma} \mathit{op}^2$ holds for a given execution sequence $\sigma$ of write operations
+  (let us call this Condition 1), there must exist a serialization ${S_i}$,comprising the
+   operations $\mathit{op}^1$ and $\mathit{op}^2$, for which the condition given by the expression
+  $\mathit{op}^1 \xrightarrow{S} \mathit{op}^2$ must hold (let us call this Condition 2).
+  The above precedence relationships among operations $\mathit{op}^1$ and $\mathit{op}^2$ in Condition 1 can be directly
+  expressed in terms of an LTL expression
+    $\mathit{Op}^1 F \mathit{Op}^2 \in \mathit{st}$, where a session trace $\mathit{st}$ is equivalent to $\sigma$ for the
+    means and purposes of this paper.
+ % Thus, the expressions $\left(\mathit{op}^1 \rightarrow \mathit{op}^2\right)^\sigma$ can be rewritten as LTL formula
+%  $\left(\mathit{Op}^1 X^{o} \mathit{Op}^2\right)_{o}^\mathit{po}$.
+   The expression $\mathit{op}^1 \xrightarrow{Si} \mathit{op}^2$ in Condition 2
+  can be expressed in terms of LTL as $\mathit{Op}^1 F \mathit{Op}^2 \in S_p$,  where
+  $S_p$ is equivalent to $S_i$.  Further,
+   since MW talks about a sequence of write operations, the propositional variable
+   $\mathit{Op}^1$ and   $\mathit{Op}^2$ in both Condition 1 and Condition 2 can safely be  replaced  by new
+   propositional variables  $W^{'}$ and $W^{''}$. Since $W^{'}  F W^{''}  \in S_p$ denotes a partial order among $W^{'}$ and $W^{''}$, we can rewrite the above expression as  $W^{'}  \preccurlyeq_{st+w} W^{''}$. Thus, Chockler's definition reduces into the specification given in Equation \ref{eqn:MW}. 
+%Further, the definition of MW can be also expressed as: a read operation $r^n$ must not observe
+%    a value that is written by  an earlier write $w^i$ instead of a later write operation $w^j$ in the
+%    execution sequence. The above condition can be expressed in terms of the LTL expression
+%    $\not\exists  \mathit{st} \left( W^i F W^j F R^n \in \mathit{st} \right) \wedge \left( v^n = v^i\right)$.
+% Let us consider that there exists two consecutive write operations $w^i$ and $w^j$ in a given session
+%    trace, i.e., the condition ${W^i}^{''} F {W^j}^{''}  \in \mathit{st}$ holds. A read operation $r^m$
+%    cannot read the result of the earlier write operation $w^i$.
+% Further, let us consider a sequence of consecutive read operations $r^k$ and $r^l$  in a given
+%   global session history $\mathit{St}$, i.e., the condition ${R^k}^{'} F {R^l}^{'} \in \mathit{St}$ holds. According to
+%   the definition of MR, if the first read operation $r^k$ returns the
+%    result of the later write $w^j$, then the later read $r^l$ that follows $r^k$ can not return the result
+%    written by the earlier write $w^i$, i.e., the condition $\left( {v_k}^{''} = {v_j}^{'} \right) \wedge \left( {v_l}^{''} = {v_i}^{'} \right) $
+%    must hold. Further, let us consider the read operation $r^k$  reads the result of a preceding write $w^m$, and the read $r^n$ reads the
+%    result of a write $w^i$, the write $w^i(x)$ precedes $w^j(y)$ in the given session trace. Then, one of the following
+%    conditions must hold: 1) $r^n$ read the result of the write $w^m$, i.e., ${v_m}^{''} = {v_n}^{''}$ or 2) $r^n$ directly follows $w^m$ in the given
+%    session trace, i.e., $\left( {W^m}^{'} F {R^n}^{'} \in \mathit{St} \right) \wedge \\
+%      \not\exists \left( {W^m}^{'} F {W^p}^{'} F {R^n}^{'} \in \mathit{St} \right)$. Combining the above
+%  conditions, we can derive the anomaly expression for MW $C = \not\exists {W^j}^{'} F  {R^m}^{'} \in \mathit{st} \left( {v_m}^{'} = {v_i}^{'} \right)  \wedge \left( \not\exists  {R^k}^{''} F  {R^l}^{''} \in \mathit{St} \right) \\
+%   \left( \left( {v_k}^{''} = {v_j}^{'} \right) \wedge \left( {v_l}^{''} = {v_i}^{'} \right) \right) \wedge \not\exists \big( \left( {W^m}(x)^{'} F {R^k}(x)^{'} \in \mathit{St}  \right) \wedge \\
+%     \left( {v_m}^{''} = {v_k}^{'} \right) \wedge \left(  {W^i}(x)^{'} F {R^n}(x)^{'} \in \mathit{St} \right) \wedge \left( {v_i}^{'} = {v_n}^{'} \right) \wedge \\
+%     \left( {W^i}(x)^{'} F  {W^j}(y)^{'} \in \mathit{st} \right) \wedge \left( {R^l}(y)^{'} F  {R^k}(x)^{'} \in \mathit{St} \right) \big) \\
+% \big(  \left( {v_m}^{''} = {v_n}^{''} \right) \vee
+% \big( \left( {W^m}^{'} F {R^n}^{'} \in \mathit{St} \right) \wedge \\
+%      \not\exists \left( {W^m}^{'} F {W^p}^{'} F {R^n}^{'} \in \mathit{St} \right)  \big)$
+%      (refer to Equation \ref{eqn:MW}).
+ %The postcondition of Chockler et al. implies that in any serialization order, a read operation $\mathit{op}^j$
+% must return the values written by the latest write operations that directly precedes it, namely $\mathit{op}^i$.
+% This, in turn, implies $v_l = v_m$ and
+% $v_l = v_m$, respectively.
+% However, subsequent write operations $\mathit{op}^p$ may alternatively overwrite the
+%  values  observed/written by operation $\mathit{op}^k$ . The above conditions may be specified by the
+% expressions $\mathit{Op}^j F^{o} \mathit{Op}^p X^{o} \mathit{Op}^k$. Thus, the expression for causal
+% consistency can be rewritten as
+%  \begin{align}
+%  \begin{split}
+%\forall i, j, k, l, m, n, p, q \big( \big( \left( \mathit{Op}^j = \left( W^j(v_l) \oplus R^j{v_l} \right) \right) \\
+%\wedge \left(   \mathit{Op}^k = \left( W^k(v_m) \oplus R^k{v_m} \right) \right) \wedge \left( \mathit{Op}^p = W^p(v_q)  \right) \big)
+% \\ \wedge \big( \left( \left( \mathit{Op}^j F^{o} \mathit{Op}^k \right) \oplus \left( \mathit{Op}^j X^{o} \mathit{Op}^k \right) \right)  \\
+% \vee \big( \left( \left( \mathit{Op}^j F^{o} \mathit{Op}^n \right) \oplus \left( \mathit{Op}^j X^{o} \mathit{Op}^n \right) \right)  \\
+%\wedge \left( \left( \mathit{Op}^n F^{o} \mathit{Op}^k \right) \oplus \left( \mathit{Op}^n X^{o} \mathit{Op}^j \right) \right) \big) \big) \big)_{o}^\mathit{po} \\
+%\rightarrow \big(G\;  \left( v_l = v_m \right) \oplus \left( \mathit{Op}^j F^{o} \mathit{Op}^p X^{o} \mathit{Op}^k \right) \big)_{o}^\mathit{st}.
+%\end{split}
+% \end{align}
+%$\forall i, j, k, l, o, \mathit{st}_x, \mathit{st}_y \big( W^i F W^j \in \mathit{st}_x, \mathit{st}_y
+%\\ \rightarrow  \exists S \left( W^i F W^j \in S \right) \wedge
+%\\ \wedge \not\exists R^m  \left( W^i F W^j F R^m \in \mathit{st}_x, \mathit{st}_y \right) \\
+%\wedge \big( \left( \left( v^m = v^i \in \mathit{st}_x  \right) \wedge \left( v^m = v^j \in \mathit{st}_y
+%\right) \right) \\
+% \vee \left( \left( v^m = v^j \in \mathit{st}_x  \right) \wedge \left( v^m = v^i \in \mathit{st}_y \right)
+% \right) \big) \big)
+%$
+\par  Causal consistency is specified by Chockler et al. as follows. Chockler et al. defines a
 \emph{direct precedence relation} (which we denote as $\xRightarrow{\sigma}$) between operations $\mathit{op}$
  and$\mathit{op}^{'} $ in the execution order $\sigma$ as follows. $\mathit{op} \xRightarrow{\sigma} \mathit{op}^{'} $
   implies that either $\mathit{op}^{'} $ reads values written by operation $\mathit{op}$, or  a precedence relationship
@@ -1977,7 +1988,7 @@ S_p \right)$, for each client.  ${\mathit{Op}}^{'}  F {\mathit{Op}}^{''}   \in S
    serialization of the above execution sequence. In other words, any two operations must occur in a session trace in an
    order that matches the precedence relation of these operations in a legal serialization of those operations.  Hence, this condition can be expressed in terms of LTL as
    $\mathit{Op}^{'} F \mathit{Op}^{''} \in \mathit{st}
-\rightarrow \exists S_c \left( \mathit{Op}^{'} F \mathit{Op}^{''} \in S_c \right)$, where $S_c$ denotes an equivalent legal seriaization of a global execution restricted to operations from the given client (refer to Equation \ref{def:clientser}). Since ${\mathit{Op}}^{'}  F {\mathit{Op}}^{''}  \in S_c$ denotes a partial order among ${\mathit{Op}}^{'} $ and ${\mathit{Op}}^{''}$, we can rewrite the above expression as  ${\mathit{Op}}^{'}  \preccurlyeq {\mathit{Op}}^{''} $. Thus, Chockler's definition reduces into the specification given in Equation \ref{eqn:SC}. 
+\rightarrow \exists S_c \left( \mathit{Op}^{'} F \mathit{Op}^{''} \in S_c \right)$, where $S_c$ denotes an equivalent legal seriaization of a global execution restricted to operations from the given client (refer to Equation \ref{def:clientser}). Since ${\mathit{Op}}^{'}  F {\mathit{Op}}^{''}  \in S_c$ implies a total order among ${\mathit{Op}}^{'} $ and ${\mathit{Op}}^{''}$, we can rewrite the above expression as  ${\mathit{Op}}^{'}  \prec {\mathit{Op}}^{''} $, where ${\mathit{Op}}^{'}  \prec {\mathit{Op}}^{''}$  implies $\left( {\mathit{Op}}^{'} \preccurlyeq {\mathit{Op}}^{''} \right) \vee \left( {\mathit{Op}}^{''}  \preccurlyeq {\mathit{Op}}^{'}\right)$. Thus, Chockler's definition reduces into the specification given in Equation \ref{eqn:SC}. 
 % Additionally, consider that a read operations $r^j$ follows a write operation $w^i$ in a given session
 % trace. Conisider a read oepration $r_k$ follows $r^j$ in the global session history. Strict serializability
 % requires that the later read $r^k$ can not read the result of the write $w^i$ if the earlier read $r^j$ did not observe it,
@@ -2015,7 +2026,7 @@ S_p \right)$, for each client.  ${\mathit{Op}}^{'}  F {\mathit{Op}}^{''}   \in S
 % total number of processors. We can express the condition the propositional logic variable $A$ must hold for any store
 % $\mathit{store}_n$ with the expression  $\bigcap_{\mathit{processor}_n}^{\mathit{processors}} A$.
 Consider that a given client observes write operations $w(x,v), w^{'}(y,v^{'})$ according to a temporal order $W^{'}(x) F W^{''} (y)$ observed in a session trace $\mathit{st}$. Then, no other session trace $\mathit{st}^{'}$ observed by any other concurrent client may observe the operations in an order which violates the temporal order in $\mathit{st}$. This, in turn, implies that the precedence $W^{'}(x) F W^{''} (y)$  must be respected in partial order sets   $\left( \mathcal{O}, \preccurlyeq_{{st}^{'}+w} \right)$ and $\left( \mathcal{O}, \preccurlyeq_{st+w} \right)$ for session traces $\mathit{st}$ and $\mathit{st}^{'}$, respectively. Thus, Processor Consistency can be expressed as 
-   $\forall x, y, \mathit{st}, \mathit{st}^{'} \in \mathit{St}  \left( W^{'}(x) F W^{''} (y) \in \mathit{st} \right) \rightarrow  \left(  \left( W^{'}(x) \preccurlyeq_{st+w} W^{''} (y)   \right) \wedge  \left( W^{'}(x)  \preccurlyeq_{{st}^{'}+w}  W^{''} (y)  \right) \right)$. %\\
+   $\forall x, y, \mathit{st}, \mathit{st}^{'} \in \mathit{St}  \big( \left( W^{'}(x) F W^{''} (y) \in \mathit{st} \right) \rightarrow  \left(  \left( W^{'}(x) \preccurlyeq_{st+w} W^{''} (y)   \right) \wedge  \left( W^{'}(x)  \preccurlyeq_{{st}^{'}+w}  W^{''} (y)  \right) \right) \big)$. %\\
 %E^{s} = C =   \forall \mathit{st} \in \mathit{St} \not\exists \big( \left(  {W^i}^{'}, {W^j}^{'} \in \mathit{st}  \right)
 %\wedge \left( {R^k}^{'}, {R^l}^{'} \in \mathit{St} \right) \big) \\
 %\big( \left( {W^i}^{'} F {W^j}^{'} \in \mathit{st} \right) \wedge
