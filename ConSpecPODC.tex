@@ -333,13 +333,13 @@ The remainder of this paper is organized as follows. Section  \ref{sec:definitio
 
 We assume a set of clients that access the storage system by invoking operations. A very large class of consistency definitions (namely those describing the behaviour of loads and stores on computer hardware) assume that these operations are partitioned into two classes, namely read operations that do not affect the result of subsequent operations and write operations that do. Given that these consistency definitions are based on the existence of these two classes of operations, we will assume that the space of possible operations is partitioned in this way, but we develop our definitions such that they can be generalized in a straightforward way to other models. (For example, databases make a similar distinction between queries and updates, and the state machine replication model distinguishes between read-only and read-write requests.)
 
-Similarly, many consistency definitions reason about an interface that exposes the existence of multiple objects (e.g., different memory addresses seen by a CPU or different keys in a key-value store). As such, we assume that the interface allows the programmer to specify objects that are associated with each operation, where we define object $o_j$ to comprise: 1) a unique name, given by the string $o_j$, and 2) a value $v_j$, which can be of any datatype, such as float, double, string, etc. %(A special case of this is a system with a single object whose datatype can be as complex as an entire file system or database, thus encompassing other models such as the state machine replication model~\cite{schneider:smr:tutorial}.) {\bf [RR: Note that the existence of a value does not match the SMR/DB model, since the operations do not return/overwrite the entire state of the state machine/database. How to make this analogy hold?]}
+Similarly, many consistency definitions reason about an interface that exposes the existence of multiple objects (e.g., different memory addresses seen by a CPU or different keys in a key-value store). As such, we assume that the interface allows the programmer to specify objects that are associated with each operation, where we define object $x_j$ to comprise: 1) a unique name, given by the string $x_j$, and 2) a value $v_j$, which can be of any datatype, such as float, double, string, etc. %(A special case of this is a system with a single object whose datatype can be as complex as an entire file system or database, thus encompassing other models such as the state machine replication model~\cite{schneider:smr:tutorial}.) {\bf [RR: Note that the existence of a value does not match the SMR/DB model, since the operations do not return/overwrite the entire state of the state machine/database. How to make this analogy hold?]}
 
   A \emph{session trace} $\mathit{st}$ is a sequence of operations executed by the same client, ordered by the real-time instant when they were invoked. In this paper we assume that a client only invokes an operation after the preceding operation has returned its response value. We denote the set of all possible session traces as $\mathcal{S}_t$.
 % comprising the results of a local execution, i.e., results of operations invoked from  a client application, observed from  the client machine. A given client application is executed on a target storage system. In the course of execution of the client application, we collect session traces over a pre-defined sliding window over time from the client machine (i.e., the machine that hosts the client application). %We perform \emph{session trace analysis} on the above session traces to determine whether the target system satisfies a given consistency model or an isolation level.
 % Let $j$ be the index of the read operation in the execution sequence of  $\mathit{Cl}$ observed in a session trace.
 
-Under the above assumption that the set of possible operations is partitioned into two classes, we define that a write operation $\mathit{o}$, which writes a value $v$ to an object $o$, is denoted as $w(o,v)$. Similarly, a read operation $\mathit{o}^{'}$ on object $o$ that outputs a value $v^{'}$ is denoted $r(o){v^{'}}$. %{\bf [RR: I am inclined to remove the subscript $j$ and $k$.]}
+Under the above assumption that the set of possible operations is partitioned into two classes, we define that a write operation $\mathit{o}$, which writes a value $v$ to an object $x$, is denoted as $w(x,v)$. Similarly, a read operation $\mathit{o}^{'}$ on object $x$ that outputs a value $v^{'}$ is denoted $r(x){v^{'}}$. %{\bf [RR: I am inclined to remove the subscript $j$ and $k$.]}
  \def\tuple#1{\langle #1\rangle}
 This allows us to define a session trace $\mathit{st}$ as a sequence of tuples  $\tuple{w, {v}}$ or
  $\tuple{r, {v}^{'}}$. %, where the index $i$ corresponds to the position of the operation in the sequence, and therefore allows us to uniquely identify each operation within a sequence. {\bf [RR: This is not great because then we cannot identify this across sequences, and if it's not a sequence number then again I propose we remove this from these definitions]}
@@ -360,19 +360,19 @@ The \emph{global session trace} $\mathcal{S}_t$ denotes the set of all
 %  Further, we do not assume anything regarding the nature of the storage system --- whether it is a standalone database, a transactional store, or a distributed storage system. Also, we do not make any assumptions regarding the configuration of the storage system, e.g., we do not assume what partitioning scheme or what normalization form (in case of RDBMS) a storage system follows. Our specifications restrict how client applications view results of storage operations, and is independent of how the underlying storage system internally processes storage operations. By not assuming anything regarding the implementation details, we render our specifications implementation independent, i.e., not specific to any particular storage system implementation. We further assume that a read operation $r^k_{tx}(o){v_m}$ always returns a unique value $v_m$ for an object $o$, and a write operation $w^j_{tx}(o,v_l)$ updates the value of an object $o$ to a unique value $v_l$.  This allows us to identify the particular write operation responsible for a particular value observed from a client application.
 Our notation defines special purpose LTL operators as shorthands to longer expressions. These correspond to scope operators
    that specify the context within which the expression is 
-  restricted. For example, we define a special-purpose operator  $X^{o}$, which is derived
-  from the  LTL modal operator ``next", i.e., $X$. The superscript ${o}$ in the above operator is used to specify that the
-   operator defines the LTL relationship ``next" among only the operations performed on the object ${o}$. 
+  restricted. For example, we define a special-purpose operator  $X^{x}$, which is derived
+  from the  LTL modal operator ``next", i.e., $X$. The superscript ${x}$ in the above operator is used to specify that the
+   operator defines the LTL relationship ``next" among only the operations performed on the object $x$. 
 %% The
 %% superscript $o$ specifies the context of an object $o$ for the enclosed relation; $o$ is equivalent to an operand for a
  %%  storage operation.
   E.g., an expression ${w} X^{o} {r}$ denotes that among operations performed on the object
-     ${o}$, the execution of the operation $r(o){v}$ immediately follows the execution operation $w(o,v)$.
+     ${o}$, the execution of the operation $r(x){v}$ immediately follows the execution operation $w(x,v)$.
 %% ; the
 %%       superscript $'$ denotes an instance of execution of a given operation in a session trace. We also use the  LTL
 %%       operator ``eventually", i.e., $F$, do denote that an operation is preceded by the another operation in a given
 %%       execution sequence. The superscript ${o}$ in the above operator is used to specify that the operator defines the  LTL relationship ``eventually" among only the operations performed specifically on the object ${o}$.
-Finally, we assume the system has a sequential specification, which is a correctness condition, corresponding to the output of the operations in centralized system that executes operation in sequence, one at a time. In the case of the sequential specification of a system whose interface are read and write operations, the read operation to object $o$ must output the value associated with the most recent write operation to the same object $o$.
+Finally, we assume the system has a sequential specification, which is a correctness condition, corresponding to the output of the operations in centralized system that executes operation in sequence, one at a time. In the case of the sequential specification of a system whose interface are read and write operations, the read operation to object $x$ must output the value associated with the most recent write operation to the same object $x$.
 %\newtheorem{definition}{Definition}
   %% A \emph{serialization} is a linear sequence comprising all operations comprising a global  execution on a
   %% storage system.
@@ -488,7 +488,7 @@ In this section, we present the ConSpec specifications for several common consis
   %\subsection{Specifications for Consistency Models}
 We start by specifying a series of session guarantees, which were originally proposed by Terry et al.\ in the context of a mobile computing storage system called Bayou~\cite{Terry:1994:SGW:645792.668302}. These are four guarantees that apply to individual sessions, allowing applications to see a view of the storage system that is consistent with their previous operations. Their original definition is implementation-dependent, since it is stated, for instance, in terms of the order in which writes are applied at various server replicas. Subsequently there were authors who wrote implementation-independent definition for these session guarantees~\cite{Chockler2000, Burckhardt:2014:PEC:2693641.2693642}. 
 
-We start with the Read Your Writes (RYW) session guarantee, which informally precludes a read operation $r$ from reading a value for object $o$ that precedes a value the same client previously wrote to the same object in the same session.
+We start with the Read Your Writes (RYW) session guarantee, which informally precludes a read operation $r$ from reading a value for object $x$ that precedes a value the same client previously wrote to the same object in the same session.
 % stated as follows. Let us consider that a client application performs
 %    a write operation followed by a read operation on an object $o$, observed in any given session trace, obtained by executing the above client application.
 %    According to RYW, given a session trace,  a read operation within that trace must not observe the result of an earlier write
@@ -1241,7 +1241,7 @@ According to the above condition implied by the specification $E^s$ for $\mathca
  %state-of-the-art consistency specifications  \cite{Chockler2000, Terry:1994:SGW:645792.668302} define axiomatic rules for consistency models using first order
  %ogic expressions.   
  RYW, MR, WFR, MW, Causal and Sequential consistency have been defined precisely by Chockler et al. \cite{Chockler2000}, whereas TSO and PC have been defined in \cite{Ahamad:1993:PPC:165231.165264, Owens:2009:BXM:1616077.1616107}.  In this section and in Section \ref{sec:restderive}, we formally derive ConSpec specification for each of these consistency models from the equivalent definitions provided in \cite{Chockler2000, Ahamad:1993:PPC:165231.165264, Owens:2009:BXM:1616077.1616107}. We begin by stating the  syntax  and notations used by Chockler et al. before proceeding to present our derivations. They denote as $\mathit{o}^1$ and
- $\mathit{o}^2$ a pair of  operations invoked from a session $\mathit{st}$ of a process $ p_i$, which  read or write to an object $o$ in the system % , such that $\mathit{o}^1$ is a write operation that updates
+ $\mathit{o}^2$ a pair of  operations invoked from a session $\mathit{st}$ of a process $ p_i$, which  read or write to an object $x$ in the system % , such that $\mathit{o}^1$ is a write operation that updates
  %an object $o$ in the system, and $\mathit{o}^2$ is a read operation that reads $o$.  
 In this paper, we refer to a process as a client, and use the notation $\mathit{Cl}$ in place of $p$, without any loss of information. Chockler et al. uses the symbol a $\rightarrow$ to denote a  
   precedence relationship \cite{Bailis:2013:BCC:2463676.2465279} between two operations. The
@@ -1985,20 +1985,23 @@ In this paper, we presented precise formal definitions for the existing body of 
 % \vee \left( \left( v^m = v^j \in \mathit{st}_x  \right) \wedge \left( v^m = v^i \in \mathit{st}_y \right)
 % \right) \big) \big)
 %$
-\par  Causal consistency is specified by Chockler et al. as follows. Chockler et al. defines a
-\emph{direct precedence relation} (which we denote as $\xRightarrow{\sigma}$) between operations $\mathit{o}$
- and$\mathit{o}^{'} $ in the execution order $\sigma$ as follows. $\mathit{o} \xRightarrow{\sigma} \mathit{o}^{'} $
-  implies that either $\mathit{o}^{'} $ reads values written by operation $\mathit{o}$, or  a precedence relationship
-exists in the execution order $\sigma$ between $\mathit{o}$  and $\mathit{o}^{'} $, i.e.,
-$\mathit{o} \xrightarrow{\sigma}\mathit{o}^{'} $ exists. The former part of the precondition can be expressed in the
- form ${\mathit{Op}}^{'} F {\mathit{Op}}^{''}$, where the LTL-like operator $F$ is equivalent to the precedence operator.
- The latter part of the precondition implies read operation $\mathit{Op}^{'}$ reads the value
- written by $\mathit{Op}^{''}$, i.e., $ \left( {\mathit{Op}}^{'} = {W}^{'} \right) \wedge \left( {\mathit{Op}}^{''} = {R}^{''} \right) \wedge
-   \left( v = v^{'} \right)$. The precondition of causal consistency specifies that a transitive closure
-must exist for a direct precedence relation $\xRightarrow{\sigma}$, i.e., $\xRightarrow{\star}$ must exist, i.,e.,
+\par In their definition of Causal consistency, Chockler uses the notion of a 
+\emph{direct precedence relation} between operations $\mathit{o}$
+ and$\mathit{o}^{'} $ in an execution order $\sigma$, denoted as $\xRightarrow{\sigma}$. The expression $\mathit{o} \xRightarrow{\sigma} \mathit{o}^{'} $
+  implies that either of the following conditions must hold: Condition 1) $\mathit{o}^{'} $ is a read operation which returns the values written by a write operation $\mathit{o}$, or Condition 2)  a precedence relationship
+exists between $\mathit{o}$  and $\mathit{o}^{'} $  in the execution order $\sigma$ , i.e., the precedence condition 
+$\mathit{o} \xrightarrow{\sigma} \mathit{o}^{'} $ holds. Causal consistency specifies: if the precondition holds (i.e., if either Condition 1 or Condition 2 holds) for a given pair of operations $\mathit{o}$  and $\mathit{o}^{'} $ in every client in the system (i.e., for every process $p_i$), then the operations $\mathit{o}$  and $\mathit{o}^{'} $ must occur in the same precedence order in an equivalent legal serialzation $S_p$ of a partial execution $\sigma |i + w$ comprising $\mathit{o}$  and $\mathit{o}^{'} $, i.e., the condition $\mathit{o} \xrightarrow{S_p}\mathit{o}^{'} $ must hold for each client in the system. 
+ The above postcondition can be expressed in terms of LTL as  $\exists S_p \left( \forall \mathit{Op}^{'} F \mathit{Op}^{''} \in
+S_p \right)$, for each client.  The condition ${\mathit{Op}}^{'}  F {\mathit{Op}}^{''}   \in S_p$ denotes a partial order among ${\mathit{Op}}^{'} $ and ${\mathit{Op}}^{''} $ with respect to each client. Hence, following the same line of reasoning as that  used in our derivation for RYW, the above postcondition can be restated as: must exist a partial order $\preccurlyeq$ comprising which respects the order specified among the operations with respect to each client, i.e., in each observed session trace. Thus, the postcondition reduces to the form ${\mathit{Op}}^{'}  \preccurlyeq {\mathit{Op}}^{''}  $.  Resuming our analysis of the preconditions, Condition 1 in the preconditions can be expressed in the
+ form ${\mathit{Op}}^{'} F {\mathit{Op}}^{''}$, since the LTL eventually operator $F$  
+  is equivalent to the precedence operator $\xrightarrow{\sigma}$.
+ The latter part of the precondition implies read operation $\mathit{o}(x){v}^{'}$ corresponding to the propositional variable ${\mathit{Op}}^{'} $ reads the value
+ written by the write $\mathit{o}(x,v)^{''}$ corresponding to the propositional variable  ${\mathit{Op}}^{''}$. The above precondition, comprising a logical disjunction over Condition 1 and 2, can be expressed as $ \left( {\mathit{Op}}^{'} = {W}^{'} \right) \wedge \left( {\mathit{Op}}^{''} = {R}^{''} \right) \wedge
+   \left( v = v^{'} \right)$. According to Chockler er al., the precondition of causal consistency specifies that a transitive closure 
+must exist over the direct precedence relation $\xRightarrow{\sigma}$, i.e., $\xRightarrow{\star}$ must exist. Thus,
 the condition $ {\mathit{Op}}^{'} F {\mathit{Op}}^{''} \vee
  \left( \left( {\mathit{Op}}^{'} = {W}^{'} \right) \wedge \left( {\mathit{Op}}^{''} = {R}^{''} \right) \wedge
-   \left( v_i = v_j \right) \right)$ must hold. From the condition 1 in Definition \ref{def:form0}, every operation must reflect results of prior operations being performed in an equivalent sequence; hence, the above precondition can be rewritten as ${\mathit{Op}}^{'}  F {\mathit{Op}}^{''}  \in \mathit{st}$. % The precondition specifies that operations $\mathit{o}^j$  and $\mathit{o}^k$ are comprised in the execution
+   \left( v_i = v_j \right) \right)$ must hold.  However, it directly follows from the Condition 1 in Definition \ref{def:form0} that if the postcondition holds, i.e., if a valid $S_p$ exists comprising $\mathit{o}$  and $\mathit{o}^{'} $ exists,  every operation that satisfies the postcondition must reflect results of prior operations in an equivalent $S_p$. Hence, the postcondition implies the transitivity condition in the precondition. Hence, the above precondition can be rewritten as ${\mathit{Op}}^{'}  F {\mathit{Op}}^{''}  \in \mathit{st}$. % The precondition specifies that operations $\mathit{o}^j$  and $\mathit{o}^k$ are comprised in the execution
 %order $\sigma$.  The second precondition which claims
 % closure under transitivity of direct precedence relations, we can specify that if $\mathit{o}^i$ directly precedes
 % $\mathit{o}^k$, and $\mathit{o}^k$ directly precedes $\mathit{o}^j$, $\mathit{o}^i$ directly precedes
@@ -2011,12 +2014,7 @@ the condition $ {\mathit{Op}}^{'} F {\mathit{Op}}^{''} \vee
 %\left( \left( v_i = v_k \right)
 % \wedge \left( v_k = v_j \right) \right) \big) \right) \big)$.
 % The above expression matches the LHS of Equation \ref{eqn:Causal}.
- Chockler et al. specifies that for each client, if the above
-precondition holds, the condition $\mathit{o} \xrightarrow{S}\mathit{o}^{'} $ must hold,
-i.e., an occurrence of $\mathit{o}$ must be followed by an occurrence of $\mathit{o}^{'} $ in any
- legal serialization ${S_p}$. 
- The above postcondition can be expressed in terms of LTL as \\ $\exists S_p \left( \forall \mathit{Op}^{'} F \mathit{Op}^{''} \in
-S_p \right)$, for each client.  ${\mathit{Op}}^{'}  F {\mathit{Op}}^{''}   \in S_p$ denotes a partial order among ${\mathit{Op}}^{'} $ and ${\mathit{Op}}^{''} $ with respect to each client. Since the above condition must hold for each client, it directly follows that there must exist a partial order $\preccurlyeq$ comprising all operations in the global session trace which respects the order specified in each session trace for each client. Thus, we can rewrite the above expression as  ${\mathit{Op}}^{'}  \preccurlyeq {\mathit{Op}}^{''}  $. Thus, Chockler's definition reduces into the specification given in Equation \ref{eqn:Causal}. 
+ Thus, Chockler's definition reduces into the specification given in Equation \ref{eqn:Causal}. 
 % Additionally, the definition of  Causal consistency requires that the operation $\mathit{o}^j$ must not
 % read the result of an earlier write operations $w^m$  instead of $\mathit{o}^i$ such that either of the following
 %  conditions are satisfied. The first condition specifies that $r^j$ returns the result of $w^m$, i.e., the condition
