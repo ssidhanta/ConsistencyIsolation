@@ -2033,16 +2033,17 @@ the condition $ {\mathit{Op}}^{'} F {\mathit{Op}}^{''} \vee
 % \big( \left( {W^m}^{'} F {\mathit{Op}^j}^{'} \in \mathit{st} \right) \wedge
 %\left( \not\exists {W^m}^{'} F {W^n}^{'} F {\mathit{Op}^j}^{'} \in \mathit{st} \right) \big) \big) \big)$
  \par Chockler et al. states Sequential Consistency as: the order of execution among operations comprised in any execution
- sequence of a given client application must match the precedence order in a legal serialization for the given
- execution sequence. The order  of execution among operations in an execution sequence $\sigma$
- can be given  in terms of a series of LTL expression that express the precedence of successive operations in the sequence.
-  The precedence relation between any two successive operations $\mathit{o}$ and $\mathit{o}^{'}$ can be expressed as
-   $\mathit{Op}^{'} F \mathit{Op}^{''}$.  Thus, the above condition can be expressed as: any two operations in an execution
-   sequence must execute in an order that matches the precedence relation among these operations in a legal
-   serialization of the above execution sequence. In other words, any two operations must occur in a session trace in an
-   order that matches the precedence relation of these operations in a legal serialization of those operations.  Hence, this condition can be expressed in terms of LTL as
-   $\mathit{Op}^{'} F \mathit{Op}^{''} \in \mathit{st}
-\rightarrow \exists S_c \left( \mathit{Op}^{'} F \mathit{Op}^{''} \in S_c \right)$, where $S_c$ denotes an equivalent legal seriaization of a global execution restricted to operations from the given client (refer to Equation \ref{def:clientser}). Since ${\mathit{Op}}^{'}  F {\mathit{Op}}^{''}  \in S_c$ implies a total order among ${\mathit{Op}}^{'} $ and ${\mathit{Op}}^{''}$, we can rewrite the above expression as  ${\mathit{Op}}^{'}  \prec {\mathit{Op}}^{''} $, where ${\mathit{Op}}^{'}  \prec {\mathit{Op}}^{''}$  implies $\left( {\mathit{Op}}^{'} \preccurlyeq {\mathit{Op}}^{''} \right) \vee \left( {\mathit{Op}}^{''}  \preccurlyeq {\mathit{Op}}^{'}\right)$. Thus, Chockler's definition reduces into the specification given in Equation \ref{eqn:SC}. 
+ sequence of a given client application must match the precedence order in an equivalent legal serialization for the given
+ execution sequence. Following the same approach as in previous derivation, %the order  of execution among operations in an execution sequence $\sigma$, 
+ %can be given  in terms of a series of LTL expression that express the precedence of successive operations in the sequence.
+  the precedence relation between a pair successive operations $\mathit{o}$ and $\mathit{o}^{'}$ in an execution sequence $\sigma$ can be expressed as
+   $\mathit{Op}^{'} F \mathit{Op}^{''} \in \mathit{st}$.  %Thus, the above condition can be expressed as: any two operations in an execution
+  % sequence must execute in an order that matches the precedence relation among these operations in a legal
+  % serialization of the above execution sequence. In other words, any two operations must occur in a session trace in an
+   %order that matches the precedence relation of these operations in a legal serialization of those operations.  Hence, this condition can be expressed in terms of LTL as
+  % $\mathit{Op}^{'} F \mathit{Op}^{''} \in \mathit{st}
+  SC requires that an equivalent legal serialization must exist comprising operations performed by all clients in the system which matches the precedence among the operations $\mathit{o}$ and $\mathit{o}^{'}$.  We denote such a legal serialization as $S_c$, the subscript $c$ denotes that the serialization corresponds to a global execution restricted to operations from a given client (refer to the definition of $S_c$ in Equation \ref{def:clientser}). Hence, the postcondition can be expressed as $ \exists S_c \left( \mathit{Op}^{'} F \mathit{Op}^{''} \in S_c \right)$. %, where $S_c$ denotes an equivalent legal serialization of a global execution restricted to operations from the given client (refer to the definition of $S_c$ in Equation \ref{def:clientser}). 
+  As in our previous derivations, the above postcondition can be expressed as ${\mathit{Op}}^{'}  \preccurlyeq {\mathit{Op}}^{''}  \in S_c$.  Further, since the condition ${\mathit{Op}}^{'}  F {\mathit{Op}}^{''}  \in S_c$ implies a total order $\prec$ among ${\mathit{o}}(x,v)^{'} $ and ${\mathit{o}}(x,v^{'})^{''}$, we can replace the partial order symbol $\preccurlyeq$ with $\prec$. This does not cause any loss of information since a total order is a special case of a partial order, i.e., ${\mathit{Op}}^{'}  \prec {\mathit{Op}}^{''}$  implies $\left( {\mathit{Op}}^{'} \preccurlyeq {\mathit{Op}}^{''} \right) \vee \left( {\mathit{Op}}^{''}  \preccurlyeq {\mathit{Op}}^{'}\right)$. Hence, we can rewrite the above postcondition as  ${\mathit{Op}}^{'}  \prec {\mathit{Op}}^{''} $. Thus, Chockler's definition of SC reduces into the specification given in Equation \ref{eqn:SC}. 
 % Additionally, consider that a read operations $r^j$ follows a write operation $w^i$ in a given session
 % trace. Consider a read operation $r_k$ follows $r^j$ in the global session history. Strict serializability
 % requires that the later read $r^k$ can not read the result of the write $w^i$ if the earlier read $r^j$ did not observe it,
