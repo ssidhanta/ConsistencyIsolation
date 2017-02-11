@@ -1189,7 +1189,7 @@ then it has an available and partition-tolerant implementation.
 
 
 
-Given any global session trace $\mathcal{S}_t$, we prove this by induction on the length of the execution that produced $\mathcal{S}_t$. {\bf [RR: We need to define mathematically the execution model.]} The base case with an empty execution is vacuously true, since an empty trace meets any consistency condition (no safety properties are ever violated by an empty trace). For the induction step, we need to prove that, given an execution for which an available and partition-tolerant implementation produced a trace that conforms with $E^s$, it is possible for such implementation to receive a new operation and produce an output that is also consistent. Suppose, by contradiction, that it is not. ...
+Given any global session trace $\mathcal{S}_t$, we prove this by induction on the length of the execution that produced $\mathcal{S}_t$. {\bf [RR: We need to define mathematically the execution model.]} The base case with an empty execution is vacuously true, since an empty trace meets any consistency condition (no safety properties are ever violated by an empty trace). For the induction step, we need to prove that, given an execution for which an available and partition-tolerant implementation produced a trace that conforms to $E^s$, it is possible for such implementation to receive a new operation and produce an output that is also consistent. Suppose, by contradiction, that it is not. ...
 
 
 ---
