@@ -1145,9 +1145,18 @@ for a consistency model to have an available and partition tolerant
 implementation.
 
 \begin{theorem}[Extended CAP theorem] 
-It is possible for a storage system to satisfy a consistency model $E^s$ while simultaneously providing high availability and partition tolerance if and only if for any global session trace $\mathcal{S}_t$, there exists a corresponding partial order enumeration that does not constrain elements of different sessions according to the respective partial order, i.e.:
+It is possible for a storage system to satisfy a consistency model $E^s$ while simultaneously providing high availability and partition tolerance if and only if for any global session trace $\mathcal{S}_t$ and its valid partial orderings, wen you consider the set of maxima of that partial order, it is always possible to make them depend only on the previous operation in the same session and still obtain a valid partial order, i.e.:
 
-$\forall \mathit{st}, \mathit{st}^{'} \in \mathcal{S}_t ~ \exists \preccurlyeq \in \Pi(\mathcal{S}_t,E^s) ~ \forall o, o' \in \mathcal{S}_t (o \in \mathit{st} \wedge o' \in \mathit{st}^{'} \wedge \mathit{st} \not= \mathit{st}^{'} \rightarrow o \not\preccurlyeq o' \wedge o' \not\preccurlyeq o)$
+%there exists a corresponding partial order enumeration that does not constrain elements of different sessions according to the respective partial order, i.e.:
+
+\noindent $\forall \preccurlyeq \in \Pi(\mathcal{S}_t,E^s) ~ \forall o \in max(\mathcal{S}_t, \preccurlyeq) ~ (\textsc{removeallexceptsession}(\preccurlyeq,o) \in \Pi(\mathcal{S}_t,E^s) ~ ) $
+
+where we define {\sc removeallexceptsession} as a partial order where the maxima are only ordered with respect to the previous operation in the same session, i.e.:
+
+\noindent {\sc removeallexceptsession} $(\preccurlyeq,o) \equiv \preccurlyeq \setminus \langle o',o \rangle, \forall o': (... , o', o) \notin \mathcal{S}_t$
+
+
+%$\forall \mathit{st}, \mathit{st}^{'} \in \mathcal{S}_t ~ \exists \preccurlyeq \in \Pi(\mathcal{S}_t,E^s) ~ \forall o, o' \in \mathcal{S}_t (o \in \mathit{st} \wedge o' \in \mathit{st}^{'} \wedge \mathit{st} \not= \mathit{st}^{'} \rightarrow o \not\preccurlyeq o' \wedge o' \not\preccurlyeq o)$
 
  \end{theorem} \label{thrm:cap}
 
