@@ -1155,20 +1155,22 @@ under $E^s$, i.e.:
 $\Pi(\mathcal{S}_t,E^s) \equiv  \{\preccurlyeq:  E^s\; \vDash \; \left( {\mathcal{O}_{St}}_{St}, \preccurlyeq \right)\}$
 \end{definition}
 
+{\bf [Need to pin down execution model, and the previous definition needs to have the operation signature but not its result.]}
+
 This allows us to define the following necessary and sufficient condition
 for a consistency model to have an available and partition tolerant
 implementation.
 
 \begin{theorem}[Extended CAP theorem] 
-It is possible for a storage system to satisfy a consistency model $E^s$ while simultaneously providing high availability and partition tolerance if and only if for any global session trace $\mathcal{S}_t$ and all of its valid partial orderings, when you consider the set of maxima of each partial order, it is always possible to make them depend only on the previous operation in the same session and still obtain a valid partial order, i.e.:
+In an asynchronous system, it is possible to implement a consistency model $E^s$ while simultaneously providing availability and partition tolerance if and only if for any global session trace $\mathcal{S}_t$ and all of its partial orderings that are allowed by $E^s$, when you consider the set of maxima of each partial order, it is always possible to make them depend only on the previous operation in the same session and still obtain a valid partial order, i.e.:
 
 %there exists a corresponding partial order enumeration that does not constrain elements of different sessions according to the respective partial order, i.e.:
 
-\noindent $\forall \preccurlyeq \in \Pi(\mathcal{S}_t,E^s) ~ \forall o \in max(\mathcal{S}_t, \preccurlyeq) ~ (\textsc{removeallexceptsession}(\preccurlyeq,o) \in \Pi(\mathcal{S}_t,E^s) ~ ) $
+\noindent $\forall \mathcal{S}_t ~ \forall \preccurlyeq \in \Pi(\mathcal{S}_t,E^s) ~ \forall o \in max(\mathcal{S}_t, \preccurlyeq) ~ (\textsc{RemoveAllExceptSession}(\preccurlyeq,o) \in \Pi(\mathcal{S}_t,E^s) ~ ) $
 
-where we define {\sc removeallexceptsession} as a partial order where the maxima are only ordered with respect to the previous operation in the same session, i.e.:
+where we define {\sc RemoveAllExceptSession} as a partial order where the maxima are only ordered with respect to prior operations in the same session, i.e.:
 
-\noindent {\sc removeallexceptsession}$(\preccurlyeq,o) \equiv \preccurlyeq \setminus \{ \langle o',o \rangle: (... , o', o) \notin \mathcal{S}_t\}$
+\noindent {\sc RemoveAllExceptSession}$(\preccurlyeq,o) \equiv \preccurlyeq \setminus \{ \langle o',o \rangle: (... , o', ..., o) \notin \mathcal{S}_t\}$
 
 
 %$\forall \mathit{st}, \mathit{st}^{'} \in \mathcal{S}_t ~ \exists \preccurlyeq \in \Pi(\mathcal{S}_t,E^s) ~ \forall o, o' \in \mathcal{S}_t (o \in \mathit{st} \wedge o' \in \mathit{st}^{'} \wedge \mathit{st} \not= \mathit{st}^{'} \rightarrow o \not\preccurlyeq o' \wedge o' \not\preccurlyeq o)$
@@ -1198,31 +1200,22 @@ where we define {\sc removeallexceptsession} as a partial order where the maxima
 %On the other hand, a consistency model that imposes a partial order $\preccurlyeq$ only among results observed by operations performed by a single client  in a global execution is regarded as CAP-weak. It directly follows from Theorem \ref{th:cap} that the CAP-weak condition, in turn,
 % implies that the specified partial order $\preccurlyeq$ as per Definition \ref{def:form0} must be a partial order comprising only operations from a given client. In other words, a CAP-weak consistency model restricts a partial order $\preccurlyeq_{st}$, comprising results observed in  a given session trace $\mathit{st}$ (comprising operations performed by a single client), or a partial order $\preccurlyeq_{\mathit{st}+w}$ comprising operations performed by a single client as well as all writes from other clients (since writes alone from the other clients do not have any implication with respect to the observed results,  $\preccurlyeq_{\mathit{st}+w}$ can be considered as  partial order over operations from he given client only).  %Next, we state the reverse of CAP theorem. 
 
-{\bf [RR: Side note: below, the global session trace should only include the operations and not their return values, check this. Also check if you depend on operation from same session other than preceding one.]}
+%%{\bf [RR: Side note: below, the global session trace should only include the operations and not their return values, check this. Also check if you depend on operation from same session other than preceding one.]}
 
-\par \textbf{Proof:} We start by proving the implication in the direction $(\rightarrow)$. Following the proof style of Gilbert et al.~\cite{Gilbert:2002:BCF:564585.564601}, we prove this by contradiction as follows.  Let us assume, by contradiction, that consistency model $E^s$ is implemented by an algorithm that is highly available during partitions but does not meet the condition at the end of the Theorem. The fact that $E^s$  does not meet this condition means precisely that there must exist a global session trace $\mathcal{S}_t$ with a valid partial order $\prec$ that has a maximum element $o_{s1}$ such that $o_{s1}'\prec o_{s1} \wedge o_{s2}\prec o_{s1}$, where $o_{s1}'$ belongs to the same session as $o_{s1}$, and $o_{s1},o_{s2}$ belong to different sessions (from clients $c_1$ and $c_2$), and where it is not admissible to have a partial order where $o_{s2}\not\prec o_{s1}$. Without loss of generality, consider that $c_1$ and $c_2$ are the only two clients in the system. {\bf [CHECK IF IT REALLY DOES NOT LOSE GENERALITY!]}
+\par \textbf{Proof:} We start by proving the implication in the direction $(\rightarrow)$. Following the proof style of Gilbert et al.~\cite{Gilbert:2002:BCF:564585.564601}, we prove this by contradiction as follows.  Let us assume, by contradiction, that consistency model $E^s$ is implemented by an algorithm that is highly available during partitions but does not meet the condition at the end of the Theorem. The fact that $E^s$  does not meet this condition means precisely that there must exist a global session trace $\mathcal{S}_t$ with a valid partial order $\prec$ that has a maximum element $o_{s1}$ such that $o_{s2}\prec o_{s1}$, where $o_{s1},o_{s2}$ belong to different sessions (from clients $c_1$ and $c_2$, respectively), and where it is not admissible to have a partial order where $o_{s2}\not\prec o_{s1}$. Without loss of generality, consider that $c_1$ and $c_2$ are the only two clients in the system. {\bf [CHECK IF IT REALLY DOES NOT LOSE GENERALITY!]}
 %and a pair of operations in distinct sessions, $o_{s1}$ and $o_{s2}$ (from clients $c_1$ and $c_2$), where, for every admissible partial order $\prec$, one of the operation must see the effects of the other, i.e., $o_{s1}\prec o_{s2} \vee o_{s2}\prec o_{s1}$.
 
-Now let us construct an execution:
+Now let us construct the following execution. First, we run the system under the exact same conditions that produced $\mathcal{S}_t$ until client $c_1$ is about to execute $o_{s1}$ and client $c_2$ is about to execute $o_{s2}$. At this point, a partition occurs that separates $c_1$ and $c_2$, which persists until the end of the execution. By the availability and partition-tolerance properties, the operations $o_{s1}$ and $o_{s2}$ will eventually complete and, by our initial assumption in the previous paragraph, the former operation must see the effects of the latter, i.e., the partial order that supports that execution must be such that $o_{s2}\prec o_{s1}$. Now run the exact same execution, but where the client $c_2$ crashes right before invoking $o_{s2}$. This execution is indistinguishable from the previous one from the standpoint of $c_1$. Thus $c_1$ will follow the same sequence of states and produce the same outputs as in the previous execution. This would mean that the algorithm would not meet its ConSpec specification, since $o_{s1}$ would reflect the execution of an operation that was not part of the global session trace $\mathcal{S}_t$, namely $o_{s2}$. This contradicts the fact that the algorithm that was used meets that specification and the CAP properties.
 
-[run with whatever network conditions that lead to partial order up until s1 and s2 are invoked. Then partition forever. Now s1 and s2 must conclude and s1 must depend on s2 (check if latter is true.)]
+Next we focus on the implication in the direction $(\leftarrow)$. Here, we need to prove that if a consistency model $E^s$ meets the condition:
 
-Now we consider an execution of the system where the above mentioned algorithm runs in an environment where each client invokes the sequence of operations in the corresponding sessions of $\mathcal{S}_t$, the network is behaving such that clients $c_1$ and $c_2$ are partitioned from each other (and within each partition we have the asynchronous model), and that leads to $\prec$ being its valid partial order. 
-
-
-In the execution we are considering, by the availability and partition-tolerance properties, the operations $o_{s1}$ and $o_{s2}$ will eventually complete and, by our initial assumption in the previous paragraph, the former operation saw the effects of the latter, i.e., the partial order that supports that execution is such that $o_{s2}\prec o_{s1}$. Now run the exact same execution, but where the network behavior is modified so that all the processes in the same side of the partition as $c_2$ crash immediately at time zero. Because of the partition, this execution is indistinguishable from all the processes on the same side of the partition as $c_1$ (including $c_1$ itself). Thus $c_1$ will follow the same sequence of states and produce the same outputs as in the previous execution. This would mean that the algorithm would not meet its ConSpec specification, since $o_{s1}$ would reflect the execution of an operation that was not part of the global session trace $\mathcal{S}_t$, namely $o_{s2}$. This contradicts the fact that the algorithm that was used meets that specification and the CAP properties.
-
-Next we focus on the implication in the direction $(\leftarrow)$. Here, we need to prove that if a consistency model $E^s$ meets the condition that for any global session trace $\mathcal{S}_t$:
-
-\noindent $\forall \mathit{st}, \mathit{st}^{'} \in \mathcal{S}_t ~ \exists \preccurlyeq \in \Pi(\mathcal{S}_t,E^s) ~ \forall o, o' \in \mathcal{S}_t (o \in \mathit{st} \wedge o' \in \mathit{st}^{'} \wedge \mathit{st} \not= \mathit{st}^{'} \rightarrow o \not\preccurlyeq o' \wedge o' \not\preccurlyeq o)$
-
+\noindent $\forall \mathcal{S}_t ~ \forall \preccurlyeq \in \Pi(\mathcal{S}_t,E^s) ~ \forall o \in max(\mathcal{S}_t, \preccurlyeq) ~ (\textsc{RemoveAllExceptSession}(\preccurlyeq,o) \in \Pi(\mathcal{S}_t,E^s) ~ ) $
 
 then it has an available and partition-tolerant implementation. 
 
 
 
-Given any global session trace $\mathcal{S}_t$, we prove this by induction on the length of the execution that produced $\mathcal{S}_t$. {\bf [RR: We need to define mathematically the execution model.]} The base case with an empty execution is vacuously true, since an empty trace meets any consistency condition (no safety properties are ever violated by an empty trace). For the induction step, we need to prove that, given an execution for which an available and partition-tolerant implementation produced a trace that conforms to $E^s$, it is possible for such implementation to receive a new operation and produce an output that is also consistent. Suppose, by contradiction, that it is not. ...
-
+Given any global session trace $\mathcal{S}_t$, we prove this by induction on the length of the execution that produced $\mathcal{S}_t$. The base case with an empty execution is vacuously true, since an empty trace meets any consistency condition (no safety properties are ever violated by an empty trace). For the induction step, we need to prove that, given an execution for which an available and partition-tolerant implementation produced a trace that conforms to $E^s$, it is possible for such implementation to receive a new operation and produce an output that is also consistent. 
 
 ---
 
