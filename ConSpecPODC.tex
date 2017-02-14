@@ -73,10 +73,10 @@ escapeinside={\%*}{*)},         % if you want to add a comment within your code
 %  \postcode{22903}
   \country{Portugal}
 }
-\author{Ricardo Dias}
-\email{ricardo.dias@gmail.com}
+\author{Ricardo J. Dias}
+\email{rjd.di@gmail.com}
 \affiliation{%
-  \institution{NOVA LINCS/Universidade Nova de Lisboa/ SUSE Linux GmbH}
+  \institution{NOVA LINCS, Universidade NOVA de Lisboa \& SUSE Linux GmbH}
 %  \city{Prague}
 %  \country{Czech Republic}}
 %\author{Tian He}
@@ -111,7 +111,7 @@ Phone: +351 912413257\\
 \textbf{Ricardo Dias}, %\\
 %\textbf{ricardo.dias@gmail.com}
 %\affiliation{%
-  Affiliation:  NOVA LINCS/Universidade Nova de Lisboa/SUSE Linux GmbH\\ \\
+  Affiliation:  NOVA LINCS, Universidade NOVA de Lisboa \& SUSE Linux GmbH\\ \\
 %  \city{Prague}
 %  \country{Czech Republic}}
 %\author{Tian He}
@@ -776,7 +776,7 @@ E^{s} = \forall \mathit{st} \in \mathcal{S}_t, {\mathit{Op}}^{'}, {\mathit{Op}}^
  \end{split}
   \end{align} %where the partial order $\left( {\mathcal{O}_{St}}, \preccurlyeq \right)$ enforces order among conflicting operations in an equivalent $S_p$ to follow the causal order. 
   where $\mathit{st}$ is the session in context of session guarantees, and $ \preccurlyeq$ is a partial order over operations across all data objects with respect to a given global session trace $ \mathcal{S}_t$. 
-  \par Causal+ consistency, which is the strongest consistency that can  be implemented in  a highly available manner (i.e.,  the system is available in presence of partitions) is defined and implemented by Lloyd et al.  \cite{Lloyd:2011:DSE:2043556.2043593}. We formalise their definitions in terms of ConSpec  as follows. 
+  \par Causal+ consistency, which is the strongest consistency that can  be implemented in  a highly available manner (i.e.,  the system is available in presence of partitions) is defined and implemented by Lloyd et al.  \cite{Lloyd:2011:DSE:2043556.2043593}. It states: in addition to preserving the causality condition of causal consistency, writes from multiple clients on conflicting objects can not observe divergent results. We formalise their definitions in terms of ConSpec  as follows. 
    \begin{align}\label{eqn:CausalC}
 \begin{split}
 E^{s} = \forall \mathit{st}, \mathit{st}^{'}, \in \mathcal{S}_t, {\mathit{Op}}^{'}, {\mathit{Op}}^{''} \in \mathit{st} \big(  {\mathit{Op}}^{'} F _ \mathit{st} {\mathit{Op}}^{''} 
@@ -2192,7 +2192,8 @@ the condition $ {\mathit{Op}}^{'} F {\mathit{Op}}^{''} \vee
 %\big( \left( {v^j}^{'} = {v^m}^{''} \right) \vee \\
 % \big( \left( {W^m}^{'} F {\mathit{Op}^j}^{'} \in \mathit{st} \right) \wedge
 %\left( \not\exists {W^m}^{'} F {W^n}^{'} F {\mathit{Op}^j}^{'} \in \mathit{st} \right) \big) \big) \big)$
-\par Causal+ consistency is defined by Lloyd et al.  in prosaic form \cite{Lloyd:2011:DSE:2043556.2043593}. We formalise their definitions in terms of ConSpec  as follows. We express their prosaic definition in terms of LTL as follow. 
+\par Causal+ consistency is defined by Lloyd et al. in prosaic form \cite{Lloyd:2011:DSE:2043556.2043593}. We formalise their definitions in terms of ConSpec  as follows. Valid partial orders $\preccurlyeq_{\mathit{st}+w}$ and  $\preccurlyeq(x)_{\mathit{st}+w}$ comprising operations from 
+sessions $\mathit{st}$ and$ \mathit{st}^{'}$ must preserve the precedence order among pairs of  writes $w(x)$ and $ ws^{'} (x)$ on a common data object $x$.  We express the above definition in terms of LTL as follow. 
  $E^{s} = \forall \mathit{st}, \mathit{st}^{'}, \in \mathcal{S}_t, {\mathit{Op}}^{'}, {\mathit{Op}}^{''}, W^{'}(x),  W^{''} (x) \in \mathit{st} \big(  {\mathit{Op}}^{'} F _ \mathit{st} {\mathit{Op}}^{''} 
  \rightarrow {\mathit{Op}}^{'} \preccurlyeq_{\mathit{st}+w} {\mathit{Op}}^{''}  \wedge W^{'}(x) \preccurlyeq(x)_{\mathit{st}+w} W^{'} (x) \rightarrow W^{'}(x) \preccurlyeq(x)_{{st}^{'}+w} W^{''} (x)  \big),  
  $ where $ \preccurlyeq_{\mathit{st}+w}$ is a partial order  restricted to  the elements of sessions $\mathit{st}$ and $\mathit{st}^{'}$ plus writes from other clients.  $ \preccurlyeq(x)_{\mathit{st}+w}$ and $\preccurlyeq(x)_{{st}^{'}+w}$ denote  partial orders  over operations on a given object $x$ restricted to  the elements of sessions $\mathit{st}$ and $\mathit{st}^{'}$ plus writes from other clients, respectively.  
