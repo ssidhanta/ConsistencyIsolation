@@ -155,7 +155,6 @@ escapeinside={\%*}{*)},         % if you want to add a comment within your code
 % is the number that will appear on the first page PLUS the
 % number that will appear in the \additionalauthors section.
 
-\maketitle
 \begin{abstract}
  We propose a specification language named \emph{ConSpec}, which enables the formalization of
  different consistency semantics that a storage system may provide, using a simple and uniform syntax, which is independent
@@ -189,7 +188,7 @@ Finally, using our generic definitions and the insights from analyzing different
 %  the application scope.
  %For transactional storage systems, we consider only committed transactions; analyzing uncommitted transactions is beyond the scope of this paper.
 \end{abstract}
-
+\maketitle
 \section{Introduction}
 
    The development of modern Internet-based applications and services requires application developers to take into account the semantics of the 
@@ -264,8 +263,9 @@ Another contribution of this paper is that we built a tool, which is available o
 
 Our final contribution is that we were able to restate in much broader terms the CAP theorem \cite{brew:cap, Gilbert:2002:BCF:564585.564601}, whose original proof used linearizability as synonym for the strong consistency captured by the ``C'' property. In our new formulation of this theorem, we are able to define necessary and sufficient conditions for a given consistency model to be \emph{CAP-strong}, i.e., bound by the impossibility of being implemented in a highly available, partition-tolerant way.
 
-The remainder of this paper is organized as follows. Section \ref{sec:related} discusses relevant related work. Section  \ref{sec:definitions} presents the assumed system model, and basic definitions and terminology used in the paper.  Section \ref{sec:syntax} presents a general format of specifications based on ConSpec. Section \ref{sec:list} lists the specifications of various  consistency models, expressed using ConSpec.  Section \ref{sec:cap} presents a reformulation of the CAP theorem, and formally proves the same.  Section \ref{sec:impl} presents the design of a prototype automated verification tool that can validate a session trace with respect to a ConSpec specification. In Sections \ref{sec:derive} and \ref{sec:restderive}, we prove equivalence of each of the listed ConSpec specifications with their original definitions; because of lack of space, we include some of the proofs in the Appendix.  %Section \ref{sec:capanalyze} analyzes the lattice of consistency models in terms of the restated CAP theorem.  
-% Section \ref{sec:ser} in the appendix comprises ConSpec expressions for the various serialization definitions used in the original consistency definitions.  Section \ref{sec:equiv} illustrates the equivalence between the syntax of ConSpec expressions and the syntax of state-of-the-art  consistency definitions.  Section \ref{sec:hierarchy} presents a hierarchical organizaton of the lattice of consistency models. %Section \ref{sec:complex} in the appendix comprises a comparison of the complexity of verification using ConSpec with the state-of-the-art verification techniques. 
+The remainder of this paper is organized as follows. Section \ref{sec:related} discusses relevant related work. Section  \ref{sec:definitions} presents the assumed system model, and basic definitions and terminology used in the paper.  Section \ref{sec:syntax} presents a general format of specifications based on ConSpec. Section \ref{sec:list} lists the specifications of various  consistency models, expressed using ConSpec.  Section \ref{sec:cap} presents a reformulation of the CAP theorem, and formally proves the same.  Section \ref{sec:capanalyze} analyzes the lattice of consistency models in terms of the restated CAP theorem.  
+ Section \ref{sec:impl} presents the design of a prototype automated verification tool that can validate a session trace with respect to a ConSpec specification.  In Sections \ref{sec:derive}, we prove equivalence of each of the listed ConSpec specifications with their original definitions. %; because of lack of space, we include some of the proofs in the Appendix.  
+ % Section \ref{sec:ser} in the appendix comprises ConSpec expressions for the various serialization definitions used in the original consistency definitions.  Section \ref{sec:equiv} illustrates the equivalence between the syntax of ConSpec expressions and the syntax of state-of-the-art  consistency definitions.  Section \ref{sec:hierarchy} presents a hierarchical organizaton of the lattice of consistency models. %Section \ref{sec:complex} in the appendix comprises a comparison of the complexity of verification using ConSpec with the state-of-the-art verification techniques. 
 % Section  \ref{sec:examples}  comprises a detailed analysis of the process of verification of ConSpec specifications with respect to sample session traces that cause violations of the specifications. 
  
  %%  \par We argue that specifications expressed in terms of ConSpec are much easier to reason about than the state-of-the-art definitions, which require an understanding
@@ -326,9 +326,9 @@ The remainder of this paper is organized as follows. Section \ref{sec:related} d
 %\end{figure}
 
  \section{Related Work} \label{sec:related}
-  As indicated in the CAP theorem \cite{brew:cap}, which was later proved formally by Gilbert et al. \cite{Gilbert:2002:BCF:564585.564601}, it is not possible to provide strong consistency in a system while providing high availability in presence of partitions.  By strong consistency, Brewer referred to linerarizability  \cite{Herlihy:1990:LCC:78969.78972}, which requires that writes should be observed in a system instantaneously, i.e., a read operation should always return result of the latest write.  To remain available while partitions, systems must choose to implement a consistency model that is not too strict to render the system unavailable during partitions (because of high degree to synchronization), and not too weak to violate the application-level correctness. According to specific application behaviour and correctness requirements,  a plethora of  consistency models have been defined and implemented till date to support weaker semantics, each specifying different constraints and restriction with respect to the ordering among observed operations. In one end of the ever-expanding consistency spectrum, a  group of systems, e.g.,  shared memory implementations, assume that partitions are rare, and favour stronger consistency semantics. There has been considerable work attempting to develop formal semantics for precisely defining such consistency models  \cite{Ahamad94causalmemory:, Attiya:1994:SCV:176575.176576, Herlihy:1990:LCC:78969.78972, Lamport:1979:MMC:1311099.1311750, opac-b1024856, Mizuno1995, Raynal1995}.  
-  \par On the other hand, consistency models in the other side of the consistency spectrum lack standardized formal definitions. Such consistency models are implemented by applications that hail from a growing ecosystem of modern web-based applications. Such systems trade off stronger consistency models for weaker versions, favouring high availability and partition tolerance \cite{Lakshman:2010:CDS:1773912.1773922, Sumbaly_servinglarge-scale, Meiklejohn:2013:RPD:2505305.2505309, Plugge:2010:DGM:1869938, Schutt:2008:SRT:1411273.1411280, DeCandia:2007:DAH:1323293.1294281}. This is particularly true for production-level large-scale geo-replicated systems which replicate data across multiple servers located in geographically distributed datacenters to provide high availability and lower latency to clients from different regions.  Typically, each of these systems define and implement a consistency model in terms of their own system design and protocol-level  assumptions; resulting in ambiguity and confusion.  Terry et al. \cite{bayou}  defined a group weak session guarantees in  prosaic  form, using use cases and terminology that is  very specific to the target applications and the  prototype system discussed in the paper.  To the best of our knowledge,  Chockler et al. \cite{Chockler2000} arguably provides the most comprehensive (though incomplete) collection  of prosaic consistency definitions, which are somewhat implementation agnostic  and flexible. Apart from the fact that the paper is outdated, and does not cover many important consistency models, it also lack axiomatic formalization and a generalized syntax. Mahajan et al. \cite{mahajan11cacTR} defined Real Time Causal Consistency, a stronger variant of causal consistency, and proved that it is the strongest consistency model that can be provided into a highly available and eventually consistent implementation.  
-Burckhardt et al. \cite{Burckhardt:2014:PEC:2693641.2693642} presents a  formal approach for  expressing consistency semantics in the form of axiomatic specifications of system behaviour, using   properties like visibility and happens before order as building blocks. However, the resulting  formalization is still much complicated, and assumes replicated systems, thus lacking flexibility. Recently, Attiya et al.  \cite{Attiya:2015:LHE:2767386.2767419}  provided a formal specification of systems that implement causal consistency, and proved that Observable Causal Consistency, a stronger variant of causal consistency, is the strongest consistency model that can be provided in a highly available, partition tolerant manner. But their formulation is also tied to replicated systems  and addresses  Observable Causal Consistency, hence can not be generalized.  To conclude, the current literature lacks generalized formal definitions of different consistency models, which would be crucial to designing, implementing, analyzing, and verifying correctness of a system with respect to a particular consistency model.
+  As indicated in the CAP theorem \cite{brew:cap}, which was later proved formally by Gilbert et al. \cite{Gilbert:2002:BCF:564585.564601}, it is not possible to provide strong consistency in a system while providing high availability in presence of partitions.  By strong consistency, Brewer referred to linerarizability  \cite{Herlihy:1990:LCC:78969.78972}, which requires that writes should be observed in a system instantaneously, i.e., a read operation should always return result of the latest write.  To remain available during partitions, systems must choose to implement a consistency model that is not too strict to render the system unavailable during partitions (because of high degree to synchronization), and not too weak to violate the application-level correctness. According to specific application behaviour and correctness requirements,  a plethora of  consistency models have been defined and implemented till date to support weaker semantics (weaker than linearizability). Each consistency model specify a specific  set of constraints and restriction with respect to ordering among observed operations in a valid execution. In one end of the ever-expanding consistency spectrum, a  group of systems, e.g.,  shared memory implementations, assume that partitions are rare, and favour stronger consistency semantics. There has been considerable work attempting to develop formal semantics for precisely defining such consistency models  \cite{Ahamad94causalmemory:, Attiya:1994:SCV:176575.176576, Herlihy:1990:LCC:78969.78972, Lamport:1979:MMC:1311099.1311750, opac-b1024856, Mizuno1995, Raynal1995}.  But such definitions are specific to consistency models for shared memory systems, and can not be generalized for applying to other systems and applications, e.g., replicated storage systems.   
+  \par Consistency models in the other side of the consistency spectrum lack standardized formal definitions. Such consistency models are implemented by applications that hail from a growing ecosystem of modern web-based applications. These systems trade off stronger consistency models for weaker models, favouring high availability and partition tolerance \cite{Lakshman:2010:CDS:1773912.1773922, Sumbaly_servinglarge-scale, Meiklejohn:2013:RPD:2505305.2505309, Plugge:2010:DGM:1869938, Schutt:2008:SRT:1411273.1411280, DeCandia:2007:DAH:1323293.1294281}. This is particularly true for production-level large-scale geo-replicated systems which replicate data across multiple servers located in geographically distributed datacenters to provide high availability and lower latency to clients from different regions.  Typically, each of these systems define and implement a consistency model in terms of their own system design and protocol-level  assumptions; resulting in ambiguity and confusion.  Terry et al. \cite{bayou}  defined a group weak session guarantees in  prosaic  form, using use cases and terminology that is  very specific to the target applications and the  prototype system discussed in the paper.  To the best of our knowledge,  Chockler et al. \cite{Chockler2000} arguably provides the most comprehensive (though incomplete) collection  of prosaic consistency definitions, which are somewhat implementation agnostic  and flexible. Apart from the fact that the paper is outdated, and does not cover many important consistency models, it also lack axiomatic formalization and a generalized syntax. Mahajan et al. \cite{mahajan11cacTR} defined Real Time Causal Consistency, a stronger variant of causal consistency, and proved that it is the strongest consistency model that can be provided into a highly available and eventually consistent implementation.  
+Burckhardt et al. \cite{Burckhardt:2014:PEC:2693641.2693642} present a  formal approach for  expressing consistency semantics in the form of axiomatic specifications of system behaviour, using   properties like visibility and happens before order as building blocks. However, the resulting  formalization is still much complicated, and is targeted towards replicated systems, thus lacking flexibility. Recently, Attiya et al.  \cite{Attiya:2015:LHE:2767386.2767419}  provided a formal specification of systems that implement causal consistency, and proved that Observable Causal Consistency, a stronger variant of causal consistency, is the strongest consistency model that can be provided in a highly available, partition tolerant manner. But their formulation is also tied to replicated systems  and addresses  Observable Causal Consistency, hence can not be generalized.  To conclude, the current literature lacks generalized formal definitions of different consistency models, which would be crucial to designing, implementing, analyzing, and verifying correctness of a system with respect to a particular consistency model.
 
 
   \section{Basic Definitions} \label{sec:definitions}
@@ -1293,111 +1293,51 @@ Given any global session trace $\mathcal{S}_t$, we prove this by induction on th
 
  {\bf [RR: Add corolary saying: the consistency models Causal, SC, PC, and TSO are CAP-strong, since any valid $\mathcal{S}_t$ for  these consistency models require the existence of a valid partial order, hence a valid partial order enumeration, comprising operations performed from different sessions. Hence, according to Theorem \ref{thrm:cap}, these consistency models can not be implemented in a highly available and partition tolerant manner. ]}
  
-
-   \section{Implementation}\label{sec:impl}
- We provide an open source automated verification tool built using Spin \cite{Holzmann:2003:SMC:1405716}, an open source software verification tool. The source code of the ConSpec tool and instructions for running it is made publicly available in a github repository \url{https://github.com/ssidhanta/ConSpecTool}. A given session trace is supplied to the tool as an input. The expression  $E^s$ for a particular consistency model $\mathcal{C}$ is specified as a Spin LTL formula.  $E^s$ acts as a safety property, and the system behaviour is modelled from a given session trace using the PROMELA meta language. The PROMELA source file provides an abstract model of interaction of the system with clients. The tool systematically attempts to  verify whether a given session trace is valid under a given consistency model $\mathcal{C}$, specified in terms of  $E^s$.   
-  Internally, Spin translates the PROMELA source file into C code. The Spin driver then runs the built-in model checker to check for counter-examples for the above generated C code  against the  safety properties, extracted from $E^s$.  The Spin model checker validates the generated C code with the Spin formula as the invariant, with the set of equivalent legal serializations generated from the given session trace supplied as an input to the model checkers.  %The github repository comprises a PROMELA specification for each of the consistency models and isolation levels, the Spin-based main source file, and the code for generating the list of  equivalent serializations.
+\section{Analysis of Consistency Models With Respect To CAP}\label{sec:capanalyze}
+ For RYW, MR, Causal consistency, WFR, and MW, $E^s$ imposes restrictive conditions on operations comprised in an
+equivalent legal serialization of a partial order $\preccurlyeq_{\mathit{st}+w}$, composed of operations performed by the given client, along with only
+writes from other concurrent clients. Since $\preccurlyeq_{\mathit{st}+w}$ does not comprise read operations from all clients in   $\mathcal{S}_t$, the above consistency models impose only a strict partial order with respect to  operations in $\mathcal{S}_t$. Thus, writes from concurrent clients are allowed to overwrite results of writes from
+a given client as long as there exists an equivalent legal serialization comprising the combination of
+operations from the given client and the concurrent writes. It only restricts that the partial order, i.e., precedence, among the operations from
+each client is maintained. Similarly, Processor consistency (PC) restricts that the order among operations in a given client must be preserved in all executions, i.e., no client may observe the operations from a given client in a different order than the invocation order. Hence, PC does not enforce a partial order  across operations from different concurrent clients, it only imposes a strict partial order on all operations from a given client.  Thus, these comprise a weaker class of consistency models that can be satisfied without synchronization
+among clients, i.e., these consistency models are not dependent among reliable communication among concurrent clients (like broadcasting
+of results on common data objects, or blocking of conflicting operations). % Under these consistency models,
+% a pair of concurrent clients, namely $\mathit{Cl}_1$ and $\mathit{Cl}_2$, can continue providing high availability guarantees in a partitioned network, where there
+% all communication between $\mathit{Cl}_1$  and  $\mathit{Cl}_2$ are lost. Hence, the above consistency models are CAP-relaxed.
+ %For Strict Serialization, $E^s$ imposes a restrictive conditions that mutual order among operations performed by each client
+% in a global execution must be preserved in an equivalent legal serialization $S_c$, where $S_c$ is a restriction of the
+% legal serialization $\mathit{Ser}$ with respect to a given
+%client $\mathit{Cl}$.
+% Using the expression for $S_c$ from Definition \ref{def:clientser} in Equation \ref{eqn:Strict}, the specification for Strict
+% Serializability can be given in the same manner as Chockler et al., as follows.  
+% $E^{s} =  \forall \mathit{st} \big( \mathit{Op}^{'} X^o {\mathit{Op}}^{''} \in \mathit{st}
+%\\ \rightarrow
+%\exists \left( {\mathit{Op}^i}^{'}, {\mathit{Op}}^{''} \in \mathit{Ser} \wedge {\mathit{Op}}^{'}, {\mathit{Op}}^{''} \in \mathit{st} \right) \\ 
+%\left( {\mathit{Op}}^{'} X^o {\mathit{Op}}^{''} \in S_c \right) \big).$
+%Since, $ \mathit{S_c} \subset \mathit{Ser}$, ${\mathit{Op}}^{'} X^o {\mathit{Op}}^{''} \in \mathit{S_c}$ implies ${\mathit{Op}}^{'} X^o {\mathit{Op}}^{''} \in \mathit{Ser}$
+%Hence, moving the existential quantifier out of the enclosing scope of the universal quantifier, the above expression can be rewritten as
+%\\ $E^{s} =  \exists \left( {\mathit{Op}}^{'}, {\mathit{Op}}^{''} \in \mathit{Ser} \right) \forall \mathit{st} \big( \mathit{Op} X^o {\mathit{Op}}^{''} \in \mathit{st}
+%\\ \rightarrow \left( {\mathit{Op}}^{'} X^o {\mathit{Op}}^{''} \in \mathit{Ser} \right) \big).$
+% Thus, 
+ Strict Serializability restricts that the mutual execution order among operations
+performed by each client in a global execution must be preserved in a partial order $\preccurlyeq$ comprising all operations in  in a global execution (similar to an equivalent  legal serialization $\mathit{Ser}$ in the definitions of Chockler et al. defined in Equation \ref{def:ser}). Thus, Strict serializability imposes a partial order among  operations from all clients comprised in  $\mathcal{S}_t$.
+ %Legal serialization $\mathit{Ser}$ strictly orders results of all operations from all clients
+% such that each read operation performed by each client returns the result of the preceding write performed by the same client.
+ %Hence, Strict Serializability imposes strong restrictions on the execution order and observed results for each clients, such that
+% a concurrent client may not overwrite the results of an operation performed by a given client. %In Equation \ref{form-1},
+% the LTL operators $R$ and $R^{'}$ can imply constraints
+% either on the observed results (in the form of equality relation among values observed) or precedence relation (denoted by
+% eventually operator $F$ or special-purpose next operator $X^o$) among each pair of operations.
+ TSO 
+ imposes restrictions on the execution order and observed results among all operations performed by different concurrent clients observed in a global session trace $\mathcal{S}_t$. Hence, it directly follows from the definitions that TSO imposes a partial order on  $\mathcal{S}_t$, where each operation performed. by a given client in $\mathcal{S}_t$ is bounded by a partial order relation with an operation in $\mathcal{S}_t$ performed by another concurrent client.
+ Hence, these consistency models require strict synchronization among operations from different clients, such that
+ operations from each client must  be executed in isolation from other concurrent clients.   
  
-\section{Deriving ConSpec Specifications From Original Definitions}\label{sec:derive}
- %Here we show how the ConSpec specifications can be directly derived from state-of-the-art specifications of
- %consistency \cite{Chockler2000, Terry:1994:SGW:645792.668302}. 
- %As already discussed,
- %state-of-the-art consistency specifications  \cite{Chockler2000, Terry:1994:SGW:645792.668302} define axiomatic rules for consistency models using first order
- %ogic expressions.   
- RYW, MR, WFR, MW, Causal and Sequential consistency have been defined precisely by Chockler et al. \cite{Chockler2000}, whereas TSO and PC have been defined in \cite{Ahamad:1993:PPC:165231.165264, Owens:2009:BXM:1616077.1616107}.  In this section and in Section \ref{sec:restderive}, we formally derive ConSpec specification for each of these consistency models from the equivalent definitions provided in \cite{Chockler2000, Ahamad:1993:PPC:165231.165264, Owens:2009:BXM:1616077.1616107}. We begin by stating the  syntax  and notations used by Chockler et al. before proceeding to present our derivations. They denote as $\mathit{o}^1$ and
- $\mathit{o}^2$ a pair of  operations invoked from a session $\mathit{st}$ of the $i^{th}$  process $ p_i$ in the system, which  read or write to an object $x$. % , such that $\mathit{o}^1$ is a write operation that updates
- %an object $o$ in the system, and $\mathit{o}^2$ is a read operation that reads $o$.  
-In this paper, we refer to a process as a client, and use the notation $\mathit{Cl}_i$ in place of $p_i$ for the $i^{th}$ client in the system (similar to Chockler et al.), without any loss of information. Chockler et al. uses the symbol a $\rightarrow$ to denote a  
-  precedence relationship \cite{Bailis:2013:BCC:2463676.2465279} between two operations. The
-  notation $\sigma_i$ is used to denote an execution comprising a sequence of read and write operations performed by  a client $\mathit{Cl}_i$ (or a process as per Chockler et al.\textquotesingle s terminology). The notation $\sigma$ denotes a global execution comprising all executions performed by all clients in the system.They also introduce a specialised form of the precedence operator $\xrightarrow{\sigma_i}$, using the superscript $\sigma_i$ to restrict the precedence relationship $\rightarrow$ to operations comprised in a  particular execution  $\sigma_i$.  Thus, an expression $\mathit{o}^1 \xrightarrow{\sigma_i} \mathit{o}^2$
-  implies that an execution of the operation $\mathit{o}^1$ precedes, i.e., happens before, an
-  execution of the operation $\mathit{o}^2$ in an execution sequence $\sigma_i$. %The consistency definitions by
-%  Chockler et al. specify the allowed order of operations with respect to a \emph{serialization}, which is
-%   a linear sequence of operations formed with the operations  in a given execution sequence.
- They use the notation $\sigma |i + w$ to denote a partial
-    execution, where $i + w$ implies the restriction of a global execution $\sigma$ to all operations performed by a given client (or process $p_i$) and all writes from
-    from other clients. $S_p$ denotes an equivalent legal serialization for the above partial execution $\sigma |i + w$ .  For means and
-   purposes of this paper, an execution sequence $\sigma_i$ is
-   equivalent to a session trace $\mathit{st}$ in ConSpec. %An execution order $\sigma$ (invocation order) in
-%   \cite{Chockler2000}of Chockler et al.  is equivalent to the program order $\mathit{po}$ in ConSpec.
- Hence, without any loss of information,  we replace each reference to $\sigma_i$ in the  the definitions of Chockler et al.  with the notation  $\mathit{st}$.
-  We can rewrite a precedence relation $ \mathit{o}^1 \xrightarrow{\sigma_i} \mathit{o}^2 $ found in Chockler et al.\textquotesingle s defintions, in terms of Linear Temporal Logic 
- (LTL) as $\mathit{o}^1 F_\mathit{st} \mathit{o}^2$, replacing the precedence  operator $\rightarrow$ with the
- equivalent special-purpose LTL operator $F_\mathit{st}$ that denotes ``eventually" relations among with respect to the session $\mathit{st}$ (defined in Section \ref{sec:definitions}), i.e.,  it is equivalent to $\mathit{o}^1 F_\mathit{st} \mathit{o}^2 \in \mathit{st}$. 
- A special-purpose operator $\xrightarrow{S_p}$ denotes restriction of the precedence operator $\rightarrow$ to the legal serialization $S_p$.  As postconditions, the definitions of Chockler et al.  specify a precedence relation $\mathit{o}^1 \xrightarrow{S_p} \mathit{o}^2$ , which  restricts the precedence relation $\mathit{o}^1 \rightarrow \mathit{o}^2$ among $\mathit{o}^1$ and $\mathit{o}^2$ to the legal serialization ${S_p}$. We can rewrite the above precedence relation 
-  $ \mathit{o}^1 \xrightarrow{S_p} \mathit{o}^2 $, in terms of Linear Temporal Logic (i.e., LTL), as 
-  $\mathit{o}^1 F \mathit{o}^2 \in S_p$,
-  %where we assign the notation $S$ to a serialization ${S_p}$, and replace the precedence
-  %operator with the equivalent LTL operator $F$ that denotes ``eventually". 
-%  Also, Chockler et al.
-%  bases their definitions on a serialization of an execution sequence comprising all operations performed
-%  by a client application (or a process), along with writes by all other clients. In ConSpec,
-%  we denote such a serialization as $S_p$. 
- %We can express the precedence relation for such a
- % serialization in terms of LTL  as $ \mathit{o}^1 F \mathit{o}^2 \in S_p$.
- %\par 
- %Let $w^i$ and $r^j$ be signatures of read and write operations $\mathit{o}^1$ and
-% $\mathit{o}^2$, respectively.
-  \par Using the above notations, Chockler et al. states the RYW consistency model as follows.  For any pair of read and write operations $\mathit{o}^1$ and $\mathit{o}^2$, if the condition  (let us call this Condition 1) 
-     $\mathit{o}^1 \xrightarrow{\sigma_i} \mathit{o}^2$ holds for a given execution sequence $\sigma_i$, 
- comprising the above write and read operations, there must exist a serialization ${S_p}$ for a partial execution  $\sigma |i + w$ comprising the
-   operations $\mathit{o}^1$ and $\mathit{o}^2$ plus writes from other clients, for which the condition (let us call this Condition 2) 
-  $\mathit{o}^1 \xrightarrow{S_p} \mathit{o}^2$ must hold. %The
-   %precedence relationships among operations $\mathit{o}^1$ and $\mathit{o}^2$ in 
-   %Condition 1 can be directly
- % expressed in terms of LTL as follows. 
- Let $\mathit{Op}^1$ and $\mathit{Op}^2$  be propositional logic
-  variables that indicate whether operations $\mathit{o}^1$ and $\mathit{o}^2$  have
-  returned (if $\mathit{Op}^1$ and $\mathit{Op}^2$ is TRUE) or not. Since Condition 1  denotes precedence among  $\mathit{o}^1$ and $\mathit{o}^2$ with respect to
-   a given execution order $\sigma_i$, it can be expressed in terms of an LTL expression
-    $\mathit{Op}^1 F_\mathit{st} \mathit{Op}^2 $, replacing $\sigma_i$ with $\mathit{st}$ without loss of information (see above). The above LTL expression implies: if the propositional variable
-    $\mathit{Op}^1$ is true at one instant, $\mathit{Op}^2$ is eventually true in some later instant for the
-    same session trace $\mathit{st}$, i.e.,  the operation $\mathit{o}^2$ follows the operation $\mathit{o}^1$ in the
-     given session trace $\mathit{st}$.
- % Thus, the expressions $\left(\mathit{o}^1 \rightarrow \mathit{o}^2\right)^\sigma$ can be rewritten as LTL formula
-%  $\left(\mathit{Op}^1 X^{o} \mathit{Op}^2\right)_{o}^\mathit{po}$.
-   Following the same line of reasoning, the expression $\mathit{o}^1 \xrightarrow{S_p} \mathit{o}^2$ in Condition 2
-  can be expressed in terms of LTL as $\mathit{Op}^1 F_{S_p} \mathit{Op}^2$, which is equivalent to $\mathit{Op}^1 F_{S_p} \mathit{Op}^2 \in S_p$. %,  where
-%  $S_p$ is equivalent to $S_p$, i.e., both notations represent a legal serialization comprising all
-  % operations performed from a given client application along with writes from all other clients.  
-  Since RYW only considers only those execution sequences where a write operations is followed by a read, $\mathit{Op}^1$ and $\mathit{Op}^2$ can be  replaced  by new propositional variables
-   $W^{'}$ and $R^{''}$, without any loss of information. Thus, Condition 1 and Condition 2 can be expressed as  $W^{'} F_\mathit{st} R^{''}$ and $W^{'} F_{S_p}  R^{''} $, respectively. Further, we can replace $S_p$ with an equivalent partial order $\preccurlyeq_{\mathit{st}+w}$, defined stepwise in Definition \ref{def:form0} and Equation \ref{eqn:RYW}, because of the following reasons.  According to Chockler et al., a legal serialization $S_p$ is a sequence of operations that satisfies the following properties: Property 1) it comprises all operations from a given client plus writes from all other clients, and Property 2) each read in the sequence $S_p$ returns the result of the preceding write in $S_p$.  First, by definition (refer to definition of $\preccurlyeq in $Definition \ref{def:form0}), $\preccurlyeq_{\mathit{st}+w}$ is a partial order  comprising all operations in a session trace plus writes from other operations, thus $\preccurlyeq_{\mathit{st}+w}$ satisfies Property 1 for $S_p$. Second, following directly from Condition 1 in Definition \ref{def:form0}, output of each operation in $\preccurlyeq_{\mathit{st}+w}$ is equivalent to that obtained by executing a linear sequence of the operations preceding that operation, thus $\preccurlyeq_{\mathit{st}+w}$ satisfies Property 2 for $S_p$. Hence, we can rewrite the postcondition $W^1 F_{S_p} W^2 \in S_p$  for Condition 2 as  $W^{'} \preccurlyeq_{\mathit{st}+w} R^{''}$. Combining the precondition and postcondition, Chockler's definition of RYW reduces into the ConSpec specification in Equation \ref{eqn:RYW}. 
-%   Further, the anomaly condition $C$ for RYW can be derived as follows. Let us consider that there exists
-%   a write operation $w^l$ precedes $w^i$, i.e., ${W^l}^{'} F {W^i}^{'} \in \mathcal{S}_t$, and a read operation
-%    $r^k$ precedes $r^j$, i.e., ${R^k}^{'} F {R^j}^{'} \in \mathit{st}$. According to the
-%    definition of RYW in \cite{Terry:1994:SGW:645792.668302, Burckhardt:2014:PEC:2693641.2693642},
-%   either of the following conditions must be satisfied: 1) $r^j$ must not observe a value that was written by $w^l$ if the result of the later write
-%   $w^j$ was already read by read $r^k$, i.e., $\left(  {v^k}^{'} = {v^i}^{'} \right) \wedge \big( \left( {v^j}^{'} = {v^l}^{'} \right)$, or
-%   2) the read $r^j$ is directly followed by the write $w^l$, i.e.,  the condition
-%   $\left( {W^l}^{'} F {R^j}^{'} \in \mathcal{S}_t \right) \wedge \left( \not\exists {W^l}^{'} F {W^m}^{'} F {R^j}^{'} \in \mathcal{S}_t \right)$
-%   must hold.
-%  % Let $w^k(o,v_k)$ be signature of the write operation $\mathit{o}^k$, which overwrites the value written by
-%%   $\mathit{o}^1$; let $W^k$ be a propositional variable that indicates whether the operation
-%%   $\mathit{o}^k$ returns the result.
-%%  Replacing variables $\mathit{Op}^1$, $\mathit{Op}^2$, and $\mathit{Op}^k$  with variables $W^j(v_l)$, $R^k{v_m}$, and
-%%  $W^p(v_q)$, respectively, the above condition can be expressed as
-%%  $\not\exists W^k \in \mathit{st} \left( W^k F W^i F R^j \in \mathit{st} \right)$.
-%  From the above reasoning, we can directly derive the ConSpec expression $C$ = $\not\exists  \big( %\left( {W^i}^{'} F {R^j}^{'} \in \mathit{st} \right) \wedge
-%\left( {R^k}^{'} F {R^j}^{'} \in \mathit{st} \right) \wedge \\
-%%\left(  \mathit{st}^{'} \in \mathcal{S}_t \right) \wedge
-%\left( {W^l}^{'} F {W^i}^{'} \in \mathcal{S}_t \right) %\big) \\
-%\big( \left(  {v^k}^{'} = {v^i}^{'} \right) \wedge \big( \left( {v^j}^{'} = {v^l}^{'} \right) \vee \\
-%\big( \left( {W^l}^{'} F {R^j}^{'} \in \mathcal{S}_t \right) \wedge \left( \not\exists {W^l}^{'} F {W^m}^{'} F {R^j}^{'} \in \mathcal{S}_t \right) \big) \big) \big)$
-% (refer to Equation \ref{eqn:RYW}.
- %\begin{align}
-%  \begin{split}
-%\forall i, j, o, \mathit{st} \big( \left( W^i F R^j \in \mathit{st} \right) \;
-% \rightarrow \; \exists S_p \left(  W^i F R^j \in S_p \right)
-%\\ \wedge  \not\exists W^k \in \mathit{st} \left( W^k F W^i F R^j \in \mathit{st} \right) %\wedge \left( W^k F W^i \in \mathit{st} \right)
-% \wedge \left( v^j = v^k \right) \big).
-%  \end{split}
-%  \end{align}
-% In the above expression, the condition \\ $\left( W^j(v_l) F W^p(v_q) F R^k{v_m} \right) \oplus \left( W^j(v_l)X^{o}R^k{v_m} \right)$ in a session trace $\mathit{st}$ implies that either 1) the read operation $R^k{v_m}$ returns the value written by the write operation $w^j(o,v_l)$, or 2) a value that is written by a write operation $w^p(o,v_q)$, that follows $w^j(o,v_l)$ and overwrites $o$. The condition 1 in the above statement, in turn, implies that $v_m = v_l$. Plugging in the above expression in Equation \ref{eqn:RYWder}, the above expression can be reduced to the ConSpec expression for RYW, given as
-%  \begin{align}\label{eqn:RYWFin}
-%\begin{split}\forall i, j, k, l, m \left(\star W^j(v_l)X^{o}R^k{v_m} \star \right)_{o}^\mathit{po} \\ \rightarrow \left(G\;  \left( W^j(v_l) F W^p(v_q) F R^k{v_m} \right) \oplus \left( v_m = v_l \right) \right)_{o}^\mathit{st}
-%\end{split}
-%\end{align}.
-The derivations of rest of the consistency models, which follow the above approach, are given in Section \ref{sec:restderive}.
+   \section{Implementation}\label{sec:impl}
+ We provide an open source automated verification tool built using Spin \cite{Holzmann:2003:SMC:1405716}, an open source software verification framework. The source code of the ConSpec tool and instructions for running it is made publicly available in a github repository \url{https://github.com/ssidhanta/ConSpecTool}. A given session trace is supplied to the tool as an input. The expression  $E^s$ for a particular consistency model $\mathcal{C}$ is specified as a Spin LTL formula.  $E^s$ acts as a safety property, and the system behaviour is modelled from a given session trace using the PROMELA meta language. The PROMELA source file provides an abstract model of interaction of the system with clients. The tool systematically attempts to  verify whether a given session trace is valid under a given consistency model $\mathcal{C}$, specified in terms of  $E^s$.   
+  Internally, Spin translates the PROMELA source file into C code. The Spin driver then runs the built-in model checker to check for counter-examples for the above generated C code  against  the Spin formula extracted from $E^s$.  The Spin model checker validates the generated C code with the Spin formula as the invariant, with the set of equivalent legal serializations generated from the given session trace supplied as an input to the model checkers.  %The github repository comprises a PROMELA specification for each of the consistency models and isolation levels, the Spin-based main source file, and the code for generating the list of  equivalent serializations.
+ 
+%The derivations of rest of the consistency models, which follow the above approach, are given in Section \ref{sec:restderive}.
 
 \section{Conclusions}
 In this paper, we presented precise formal definitions for the existing body of consistency semantics using a generalized specification language, ConSpec. In contrast with the existing definitions many of which are either tied to the specific syntax, protocols, and implementation-level details of a particular class of storage systems, or are not  precise, our definitions are precise, implementation-agnostic, and flexible.  Hence, ConSpec definitions can be used as a standard baseline for evaluating and verifying the consistency semantics of existing storage systems, as well as for correctly specifying and implementing new prototype storage systems. %Based on the above generalized definitions,  consistency models can be hierarchically compared, based on their degree of strength.
@@ -1885,7 +1825,107 @@ In this paper, we presented precise formal definitions for the existing body of 
 %
 %\end{lstlisting}
 \section{Appendix}
-\subsection{Derivations of Rest of the ConSpec Specifications}\label{sec:restderive}
+\subsection{Deriving ConSpec Specifications From Original Definitions}\label{sec:derive}
+ %Here we show how the ConSpec specifications can be directly derived from state-of-the-art specifications of
+ %consistency \cite{Chockler2000, Terry:1994:SGW:645792.668302}. 
+ %As already discussed,
+ %state-of-the-art consistency specifications  \cite{Chockler2000, Terry:1994:SGW:645792.668302} define axiomatic rules for consistency models using first order
+ %ogic expressions.   
+ RYW, MR, WFR, MW, Causal and Sequential consistency have been defined precisely by Chockler et al. \cite{Chockler2000}, whereas TSO and PC have been defined in \cite{Ahamad:1993:PPC:165231.165264, Owens:2009:BXM:1616077.1616107}.  In this section and in Section \ref{sec:restderive}, we formally derive ConSpec specification for each of these consistency models from the equivalent definitions provided in \cite{Chockler2000, Ahamad:1993:PPC:165231.165264, Owens:2009:BXM:1616077.1616107}. We begin by stating the  syntax  and notations used by Chockler et al. before proceeding to present our derivations. They denote as $\mathit{o}^1$ and
+ $\mathit{o}^2$ a pair of  operations invoked from a session $\mathit{st}$ of the $i^{th}$  process $ p_i$ in the system, which  read or write to an object $x$. % , such that $\mathit{o}^1$ is a write operation that updates
+ %an object $o$ in the system, and $\mathit{o}^2$ is a read operation that reads $o$.  
+In this paper, we refer to a process as a client, and use the notation $\mathit{Cl}_i$ in place of $p_i$ for the $i^{th}$ client in the system (similar to Chockler et al.), without any loss of information. Chockler et al. uses the symbol a $\rightarrow$ to denote a  
+  precedence relationship \cite{Bailis:2013:BCC:2463676.2465279} between two operations. The
+  notation $\sigma_i$ is used to denote an execution comprising a sequence of read and write operations performed by  a client $\mathit{Cl}_i$ (or a process as per Chockler et al.\textquotesingle s terminology). The notation $\sigma$ denotes a global execution comprising all executions performed by all clients in the system.They also introduce a specialised form of the precedence operator $\xrightarrow{\sigma_i}$, using the superscript $\sigma_i$ to restrict the precedence relationship $\rightarrow$ to operations comprised in a  particular execution  $\sigma_i$.  Thus, an expression $\mathit{o}^1 \xrightarrow{\sigma_i} \mathit{o}^2$
+  implies that an execution of the operation $\mathit{o}^1$ precedes, i.e., happens before, an
+  execution of the operation $\mathit{o}^2$ in an execution sequence $\sigma_i$. %The consistency definitions by
+%  Chockler et al. specify the allowed order of operations with respect to a \emph{serialization}, which is
+%   a linear sequence of operations formed with the operations  in a given execution sequence.
+ They use the notation $\sigma |i + w$ to denote a partial
+    execution, where $i + w$ implies the restriction of a global execution $\sigma$ to all operations performed by a given client (or process $p_i$) and all writes from
+    from other clients. $S_p$ denotes an equivalent legal serialization for the above partial execution $\sigma |i + w$ .  For means and
+   purposes of this paper, an execution sequence $\sigma_i$ is
+   equivalent to a session trace $\mathit{st}$ in ConSpec. %An execution order $\sigma$ (invocation order) in
+%   \cite{Chockler2000}of Chockler et al.  is equivalent to the program order $\mathit{po}$ in ConSpec.
+ Hence, without any loss of information,  we replace each reference to $\sigma_i$ in the  the definitions of Chockler et al.  with the notation  $\mathit{st}$.
+  We can rewrite a precedence relation $ \mathit{o}^1 \xrightarrow{\sigma_i} \mathit{o}^2 $ found in Chockler et al.\textquotesingle s defintions, in terms of Linear Temporal Logic 
+ (LTL) as $\mathit{o}^1 F_\mathit{st} \mathit{o}^2$, replacing the precedence  operator $\rightarrow$ with the
+ equivalent special-purpose LTL operator $F_\mathit{st}$ that denotes ``eventually" relations among with respect to the session $\mathit{st}$ (defined in Section \ref{sec:definitions}), i.e.,  it is equivalent to $\mathit{o}^1 F_\mathit{st} \mathit{o}^2 \in \mathit{st}$. 
+ A special-purpose operator $\xrightarrow{S_p}$ denotes restriction of the precedence operator $\rightarrow$ to the legal serialization $S_p$.  As postconditions, the definitions of Chockler et al.  specify a precedence relation $\mathit{o}^1 \xrightarrow{S_p} \mathit{o}^2$ , which  restricts the precedence relation $\mathit{o}^1 \rightarrow \mathit{o}^2$ among $\mathit{o}^1$ and $\mathit{o}^2$ to the legal serialization ${S_p}$. We can rewrite the above precedence relation 
+  $ \mathit{o}^1 \xrightarrow{S_p} \mathit{o}^2 $, in terms of Linear Temporal Logic (i.e., LTL), as 
+  $\mathit{o}^1 F \mathit{o}^2 \in S_p$,
+  %where we assign the notation $S$ to a serialization ${S_p}$, and replace the precedence
+  %operator with the equivalent LTL operator $F$ that denotes ``eventually". 
+%  Also, Chockler et al.
+%  bases their definitions on a serialization of an execution sequence comprising all operations performed
+%  by a client application (or a process), along with writes by all other clients. In ConSpec,
+%  we denote such a serialization as $S_p$. 
+ %We can express the precedence relation for such a
+ % serialization in terms of LTL  as $ \mathit{o}^1 F \mathit{o}^2 \in S_p$.
+ %\par 
+ %Let $w^i$ and $r^j$ be signatures of read and write operations $\mathit{o}^1$ and
+% $\mathit{o}^2$, respectively.
+  \par Using the above notations, Chockler et al. states the RYW consistency model as follows.  For any pair of read and write operations $\mathit{o}^1$ and $\mathit{o}^2$, if the condition  (let us call this Condition 1) 
+     $\mathit{o}^1 \xrightarrow{\sigma_i} \mathit{o}^2$ holds for a given execution sequence $\sigma_i$, 
+ comprising the above write and read operations, there must exist a serialization ${S_p}$ for a partial execution  $\sigma |i + w$ comprising the
+   operations $\mathit{o}^1$ and $\mathit{o}^2$ plus writes from other clients, for which the condition (let us call this Condition 2) 
+  $\mathit{o}^1 \xrightarrow{S_p} \mathit{o}^2$ must hold. %The
+   %precedence relationships among operations $\mathit{o}^1$ and $\mathit{o}^2$ in 
+   %Condition 1 can be directly
+ % expressed in terms of LTL as follows. 
+ Let $\mathit{Op}^1$ and $\mathit{Op}^2$  be propositional logic
+  variables that indicate whether operations $\mathit{o}^1$ and $\mathit{o}^2$  have
+  returned (if $\mathit{Op}^1$ and $\mathit{Op}^2$ is TRUE) or not. Since Condition 1  denotes precedence among  $\mathit{o}^1$ and $\mathit{o}^2$ with respect to
+   a given execution order $\sigma_i$, it can be expressed in terms of an LTL expression
+    $\mathit{Op}^1 F_\mathit{st} \mathit{Op}^2 $, replacing $\sigma_i$ with $\mathit{st}$ without loss of information (see above). The above LTL expression implies: if the propositional variable
+    $\mathit{Op}^1$ is true at one instant, $\mathit{Op}^2$ is eventually true in some later instant for the
+    same session trace $\mathit{st}$, i.e.,  the operation $\mathit{o}^2$ follows the operation $\mathit{o}^1$ in the
+     given session trace $\mathit{st}$.
+ % Thus, the expressions $\left(\mathit{o}^1 \rightarrow \mathit{o}^2\right)^\sigma$ can be rewritten as LTL formula
+%  $\left(\mathit{Op}^1 X^{o} \mathit{Op}^2\right)_{o}^\mathit{po}$.
+   Following the same line of reasoning, the expression $\mathit{o}^1 \xrightarrow{S_p} \mathit{o}^2$ in Condition 2
+  can be expressed in terms of LTL as $\mathit{Op}^1 F_{S_p} \mathit{Op}^2$, which is equivalent to $\mathit{Op}^1 F_{S_p} \mathit{Op}^2 \in S_p$. %,  where
+%  $S_p$ is equivalent to $S_p$, i.e., both notations represent a legal serialization comprising all
+  % operations performed from a given client application along with writes from all other clients.  
+  Since RYW only considers only those execution sequences where a write operations is followed by a read, $\mathit{Op}^1$ and $\mathit{Op}^2$ can be  replaced  by new propositional variables
+   $W^{'}$ and $R^{''}$, without any loss of information. Thus, Condition 1 and Condition 2 can be expressed as  $W^{'} F_\mathit{st} R^{''}$ and $W^{'} F_{S_p}  R^{''} $, respectively. Further, we can replace $S_p$ with an equivalent partial order $\preccurlyeq_{\mathit{st}+w}$, defined stepwise in Definition \ref{def:form0} and Equation \ref{eqn:RYW}, because of the following reasons.  According to Chockler et al., a legal serialization $S_p$ is a sequence of operations that satisfies the following properties: Property 1) it comprises all operations from a given client plus writes from all other clients, and Property 2) each read in the sequence $S_p$ returns the result of the preceding write in $S_p$.  First, by definition (refer to definition of $\preccurlyeq in $Definition \ref{def:form0}), $\preccurlyeq_{\mathit{st}+w}$ is a partial order  comprising all operations in a session trace plus writes from other operations, thus $\preccurlyeq_{\mathit{st}+w}$ satisfies Property 1 for $S_p$. Second, following directly from Condition 1 in Definition \ref{def:form0}, output of each operation in $\preccurlyeq_{\mathit{st}+w}$ is equivalent to that obtained by executing a linear sequence of the operations preceding that operation, thus $\preccurlyeq_{\mathit{st}+w}$ satisfies Property 2 for $S_p$. Hence, we can rewrite the postcondition $W^1 F_{S_p} W^2 \in S_p$  for Condition 2 as  $W^{'} \preccurlyeq_{\mathit{st}+w} R^{''}$. Combining the precondition and postcondition, Chockler's definition of RYW reduces into the ConSpec specification in Equation \ref{eqn:RYW}. 
+%   Further, the anomaly condition $C$ for RYW can be derived as follows. Let us consider that there exists
+%   a write operation $w^l$ precedes $w^i$, i.e., ${W^l}^{'} F {W^i}^{'} \in \mathcal{S}_t$, and a read operation
+%    $r^k$ precedes $r^j$, i.e., ${R^k}^{'} F {R^j}^{'} \in \mathit{st}$. According to the
+%    definition of RYW in \cite{Terry:1994:SGW:645792.668302, Burckhardt:2014:PEC:2693641.2693642},
+%   either of the following conditions must be satisfied: 1) $r^j$ must not observe a value that was written by $w^l$ if the result of the later write
+%   $w^j$ was already read by read $r^k$, i.e., $\left(  {v^k}^{'} = {v^i}^{'} \right) \wedge \big( \left( {v^j}^{'} = {v^l}^{'} \right)$, or
+%   2) the read $r^j$ is directly followed by the write $w^l$, i.e.,  the condition
+%   $\left( {W^l}^{'} F {R^j}^{'} \in \mathcal{S}_t \right) \wedge \left( \not\exists {W^l}^{'} F {W^m}^{'} F {R^j}^{'} \in \mathcal{S}_t \right)$
+%   must hold.
+%  % Let $w^k(o,v_k)$ be signature of the write operation $\mathit{o}^k$, which overwrites the value written by
+%%   $\mathit{o}^1$; let $W^k$ be a propositional variable that indicates whether the operation
+%%   $\mathit{o}^k$ returns the result.
+%%  Replacing variables $\mathit{Op}^1$, $\mathit{Op}^2$, and $\mathit{Op}^k$  with variables $W^j(v_l)$, $R^k{v_m}$, and
+%%  $W^p(v_q)$, respectively, the above condition can be expressed as
+%%  $\not\exists W^k \in \mathit{st} \left( W^k F W^i F R^j \in \mathit{st} \right)$.
+%  From the above reasoning, we can directly derive the ConSpec expression $C$ = $\not\exists  \big( %\left( {W^i}^{'} F {R^j}^{'} \in \mathit{st} \right) \wedge
+%\left( {R^k}^{'} F {R^j}^{'} \in \mathit{st} \right) \wedge \\
+%%\left(  \mathit{st}^{'} \in \mathcal{S}_t \right) \wedge
+%\left( {W^l}^{'} F {W^i}^{'} \in \mathcal{S}_t \right) %\big) \\
+%\big( \left(  {v^k}^{'} = {v^i}^{'} \right) \wedge \big( \left( {v^j}^{'} = {v^l}^{'} \right) \vee \\
+%\big( \left( {W^l}^{'} F {R^j}^{'} \in \mathcal{S}_t \right) \wedge \left( \not\exists {W^l}^{'} F {W^m}^{'} F {R^j}^{'} \in \mathcal{S}_t \right) \big) \big) \big)$
+% (refer to Equation \ref{eqn:RYW}.
+ %\begin{align}
+%  \begin{split}
+%\forall i, j, o, \mathit{st} \big( \left( W^i F R^j \in \mathit{st} \right) \;
+% \rightarrow \; \exists S_p \left(  W^i F R^j \in S_p \right)
+%\\ \wedge  \not\exists W^k \in \mathit{st} \left( W^k F W^i F R^j \in \mathit{st} \right) %\wedge \left( W^k F W^i \in \mathit{st} \right)
+% \wedge \left( v^j = v^k \right) \big).
+%  \end{split}
+%  \end{align}
+% In the above expression, the condition \\ $\left( W^j(v_l) F W^p(v_q) F R^k{v_m} \right) \oplus \left( W^j(v_l)X^{o}R^k{v_m} \right)$ in a session trace $\mathit{st}$ implies that either 1) the read operation $R^k{v_m}$ returns the value written by the write operation $w^j(o,v_l)$, or 2) a value that is written by a write operation $w^p(o,v_q)$, that follows $w^j(o,v_l)$ and overwrites $o$. The condition 1 in the above statement, in turn, implies that $v_m = v_l$. Plugging in the above expression in Equation \ref{eqn:RYWder}, the above expression can be reduced to the ConSpec expression for RYW, given as
+%  \begin{align}\label{eqn:RYWFin}
+%\begin{split}\forall i, j, k, l, m \left(\star W^j(v_l)X^{o}R^k{v_m} \star \right)_{o}^\mathit{po} \\ \rightarrow \left(G\;  \left( W^j(v_l) F W^p(v_q) F R^k{v_m} \right) \oplus \left( v_m = v_l \right) \right)_{o}^\mathit{st}
+%\end{split}
+%\end{align}.
+
+%\subsection{Derivations of Rest of the ConSpec Specifications}\label{sec:restderive}
   %Session Monotonic or Monotonic Read (also referred to as Session Causality or MR) consistency model is
  %another popular consistency model \cite{Chockler2000, Terry:1994:SGW:645792.668302}.
   According to Chockler et al.,
@@ -2497,45 +2537,6 @@ A serialization is said to be \emph{legal} if every read operation returns the v
 \subsection{A Hierarchy of ConSpec Specifications }\label{sec:hierarchy}
 Definitions of consistency models are specified using ConSpec in the form of LTL properties. Hence, ConSpec specifications can be classified using the same basic principles by which LTL properties are categorised \cite{Manna:1990:HTP:93385.93442}. There are four broad categories of  LTL properties: safety, guarantee, recurrence, and persistence. Consider that $\phi$ is a given LTL property, which may be a conjunction or disjunction of multiple LTL properties. A safety property is expressed in a generic format $\forall \phi$, whereas a guarantee property is expressed as $\exists \phi$; recurrence and persistence properties are expressed as $R \phi$ and $P \phi,$ respectively.  The specification $\mathcal{E}^{s} $  for each of the consistency models RYW, MR, Causal, WFR, and MW can be expressed in the form $\forall p \rightarrow \exists q, $ which can be rewritten as $\forall F p \rightarrow F q.$ This form of LTL specification is called the conditional guarantee form of LTL property. The specifications for the TSO and PC consistency models can be expressed in the form  $\forall p_1 \circ  p_2 \circ^{'}  ... \circ^{''}  p_k, $  where $\circ, \circ^{'}, ... , \circ^{''}$ are conjunction or disjunction operators of first order logic over LTL constraints $p_1, p_2, .... , p_k$. The above expression can be transformed into the form $\forall p,$ which is called the safety form of LTL property.  Thus, the ConSpec specifications can be broadly classified as conditional guarantee and safety properties. 
  \par Now, let us further analyze the consistency models belonging to the conditional guarantee form. The specifications $\mathcal{E}^{s} $ of RYW, MR, Causal, WFR, and MW can be expressed in the form  $\mathcal{E}^{s} = A \rightarrow B$ (refer to Definition \ref{def:form0}), where the precondition $A$ is specified as $A$ =$ {\mathit{Op}}^{'} F {\mathit{Op}}^{''} \in \mathit{st} $ .  The precondition $A$  in the specification $\mathcal{E}^{s} $ for Causal consistency  (refer to Equation \ref{eqn:Causal}) imposes an LTL constraint  on any  pair of operations $ {\mathit{o}}$ and  ${\mathit{o}^{'}}$  comprised in a given session trace.  Since the above operations $ {\mathit{o}}$ and  ${\mathit{o}^{'}}$ can be both read and write operations, precondition $A$ for Causal consistency is more restrictive than others. Thus, in turn, the set of session traces that satisfies the precondition $A$ for Causal consistency is smaller in size than the set that satisfies RYW, MR, WFR, and MW.  However, the postcondition $B$ for RYW, MR, Causal WFR, MW uniformly defines an existential quantification on the serialization of a partial execution for a given client.  The strength (degree of the strength) of a consistency model can be quantified by the size of the set of session traces that consistency model; smaller size  implies more restrictive condition, which, in turn, implies stronger the consistency model. Hence, Causal consistency is stronger than the rest of the above consistency models, namely RYW, MR, Causal WFR, and MW.  The precondition $A$ for RYW (refer to Equation \ref{eqn:RYW}) comprises an LTL constraint ${W}^{'} F {R}^{''}$ on successive write and read operations ${w}$ and ${r}^{'}$.  On the other hand, WFR (refer to Equation \ref{eqn:WFR}) comprises an LTL constraint ${R}^{'} F {W}^{''}$ on successive read and write operations ${r}$ and ${w}^{'}$. However the writes ${w}^{'}$ have no meaning in the observed session traces, unless viewed in company of a succeeding read  ${r}^{''}$.  Thus, the precondition $A$ for WFR can be expressed as ${W}^{'} F {R}^{''} F {R}^{'''}$, making it more restrictive; thus the set of traces which satisfy WFR is smaller than that of RYW and MR. Hence, WFR is stronger than the precondition $A = {R}^{'} F {R}^{''}$ for MR, as well as the precondition $A = {W}^{'} F {R}^{''}$. Similarly, the precondition $A$ =  ${W}^{'} F {W}^{''}$  for MW can be expressed as   $A$ =  ${W}^{'} F {W}^{''} F {R}^{'''} $, making it also stronger than RYW and MR.  Strict serializability model, on the other hand, specifies the precondition $A$ as an LTL constraint on any pair of operations; particularly,  it specifies $A$ as  $A$ =  ${\mathit{Op}}^{'} X {\mathit{Op}}^{''}$. The LTL operator next $X$ implies that the set of session traces satisfies the above precondition is even smaller than the set that satisfies Causal consistency. Hence Strict Serializability is stronger than the rest of the consistency models of the conditional guarantee form. 
-\subsection{Analysis of Consistency Models With Respect To CAP}\label{sec:capanalyze}
- For RYW, MR, Causal consistency, WFR, and MW, $E^s$ imposes restrictive conditions on operations comprised in an
-equivalent legal serialization of a partial order $\preccurlyeq_{\mathit{st}+w}$, composed of operations performed by the given client, along with only
-writes from other concurrent clients. Since $\preccurlyeq_{\mathit{st}+w}$ does not comprise read operations from all clients in   $\mathcal{S}_t$, the above consistency models impose only a strict partial order with respect to  operations in $\mathcal{S}_t$. Thus, writes from concurrent clients are allowed to overwrite results of writes from
-a given client as long as there exists an equivalent legal serialization comprising the combination of
-operations from the given client and the concurrent writes. It only restricts that the partial order, i.e., precedence, among the operations from
-each client is maintained. Similarly, Processor consistency (PC) restricts that the order among operations in a given client must be preserved in all executions, i.e., no client may observe the operations from a given client in a different order than the invocation order. Hence, PC does not enforce a partial order  across operations from different concurrent clients, it only imposes a strict partial order on all operations from a given client.  Thus, these comprise a weaker class of consistency models that can be satisfied without synchronization
-among clients, i.e., these consistency models are not dependent among reliable communication among concurrent clients (like broadcasting
-of results on common data objects, or blocking of conflicting operations). % Under these consistency models,
-% a pair of concurrent clients, namely $\mathit{Cl}_1$ and $\mathit{Cl}_2$, can continue providing high availability guarantees in a partitioned network, where there
-% all communication between $\mathit{Cl}_1$  and  $\mathit{Cl}_2$ are lost. Hence, the above consistency models are CAP-relaxed.
- %For Strict Serialization, $E^s$ imposes a restrictive conditions that mutual order among operations performed by each client
-% in a global execution must be preserved in an equivalent legal serialization $S_c$, where $S_c$ is a restriction of the
-% legal serialization $\mathit{Ser}$ with respect to a given
-%client $\mathit{Cl}$.
-% Using the expression for $S_c$ from Definition \ref{def:clientser} in Equation \ref{eqn:Strict}, the specification for Strict
-% Serializability can be given in the same manner as Chockler et al., as follows.  
-% $E^{s} =  \forall \mathit{st} \big( \mathit{Op}^{'} X^o {\mathit{Op}}^{''} \in \mathit{st}
-%\\ \rightarrow
-%\exists \left( {\mathit{Op}^i}^{'}, {\mathit{Op}}^{''} \in \mathit{Ser} \wedge {\mathit{Op}}^{'}, {\mathit{Op}}^{''} \in \mathit{st} \right) \\ 
-%\left( {\mathit{Op}}^{'} X^o {\mathit{Op}}^{''} \in S_c \right) \big).$
-%Since, $ \mathit{S_c} \subset \mathit{Ser}$, ${\mathit{Op}}^{'} X^o {\mathit{Op}}^{''} \in \mathit{S_c}$ implies ${\mathit{Op}}^{'} X^o {\mathit{Op}}^{''} \in \mathit{Ser}$
-%Hence, moving the existential quantifier out of the enclosing scope of the universal quantifier, the above expression can be rewritten as
-%\\ $E^{s} =  \exists \left( {\mathit{Op}}^{'}, {\mathit{Op}}^{''} \in \mathit{Ser} \right) \forall \mathit{st} \big( \mathit{Op} X^o {\mathit{Op}}^{''} \in \mathit{st}
-%\\ \rightarrow \left( {\mathit{Op}}^{'} X^o {\mathit{Op}}^{''} \in \mathit{Ser} \right) \big).$
-% Thus, 
- Strict Serializability restricts that the mutual execution order among operations
-performed by each client in a global execution must be preserved in a partial order $\preccurlyeq$ comprising all operations in  in a global execution (similar to an equivalent  legal serialization $\mathit{Ser}$ in the definitions of Chockler et al. defined in Equation \ref{def:ser}). Thus, Strict serializability imposes a partial order among  operations from all clients comprised in  $\mathcal{S}_t$.
- %Legal serialization $\mathit{Ser}$ strictly orders results of all operations from all clients
-% such that each read operation performed by each client returns the result of the preceding write performed by the same client.
- %Hence, Strict Serializability imposes strong restrictions on the execution order and observed results for each clients, such that
-% a concurrent client may not overwrite the results of an operation performed by a given client. %In Equation \ref{form-1},
-% the LTL operators $R$ and $R^{'}$ can imply constraints
-% either on the observed results (in the form of equality relation among values observed) or precedence relation (denoted by
-% eventually operator $F$ or special-purpose next operator $X^o$) among each pair of operations.
- TSO 
- imposes restrictions on the execution order and observed results among all operations performed by different concurrent clients observed in a global session trace $\mathcal{S}_t$. Hence, it directly follows from the definitions that TSO imposes a partial order on  $\mathcal{S}_t$, where each operation performed. by a given client in $\mathcal{S}_t$ is bounded by a partial order relation with an operation in $\mathcal{S}_t$ performed by another concurrent client.
- Hence, these consistency models require strict synchronization among operations from different clients, such that
- operations from each client must  be executed in isolation from other concurrent clients.   
 
 % \subsection{Comparison of ConSpec Tool With the State-of-the-art}\label{sec:compare}
 % Here, we compare our approach of analyzing session traces against ConSpec specification with the traditional approach of analyzing server traces \cite{DBLP:conf/icde/AdyaLO00, Chockler2000, Terry:1994:SGW:645792.668302, Burckhardt:2014:PEC:2693641.2693642}. %Let us start by assuming that both approaches use a single expression to represent a given consistency model or isolation level. Let us also assume that session traces used in our approach, and server traces used in traditional approaches, are equivalent in the context of complexity analysis.  Under the above assumptions, complexity of trace analysis with our approach can be potentially worse than the server trace analysis approach if anomaly exists in a given trace. This can be attributed to the fact that, with the server trace analysis approach, the analysis terminates as soon as an anomaly is found in any portion of a given execution trace.  Contrastingly, with our approach, the analysis may continue till the very end of the trace, since it checks if all portions of the trace conforms to the ConSpec specifications. Thus a trace analysis may terminate earlier with the server trace analysis approach. However, we fix the problem by modifying our approach to indirectly detect anomalies (see later part of this Section), thus enabling it to terminate early, similar to the server trace analysis approach.
