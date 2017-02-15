@@ -108,7 +108,7 @@ Phone: +351 912413257\\ \\
 %  \postcode{22903}
   %\country{Portugal}
 %}
-\textbf{Ricardo Dias}, %\\
+\textbf{Ricardo J. Dias}, %\\
 %\textbf{ricardo.dias@gmail.com}
 %\affiliation{%
   Affiliation:  NOVA LINCS, Universidade NOVA de Lisboa \& SUSE Linux GmbH\\ \\
@@ -438,11 +438,11 @@ We define a session invocation trace $\mathit{sit}$ as the sequence of invocatio
 % comprising the results of a local execution, i.e., results of operations invoked from  a client application, observed from  the client machine. A given client application is executed on a target storage system. In the course of execution of the client application, we collect session traces over a pre-defined sliding window over time from the client machine (i.e., the machine that hosts the client application). %We perform \emph{session trace analysis} on the above session traces to determine whether the target system satisfies a given consistency model or an isolation level.
 % Let $j$ be the index of the read operation in the execution sequence of  $\mathit{Cl}$ observed in a session trace.
 
-In our notation, we denote an invocation of a write operation that writes a value $v$ to an object $x$, as $w(x,v)$ (with an empty response). Conversely, a read operation on object $x$ that outputs a value $v^{'}$ is denoted $r(x){v^{'}}$. %{\bf [RR: I am inclined to remove the subscript $j$ and $k$.]}
+In our notation, we denote an invocation of a write operation that writes a value $v$ to an object $x$, as $w(x,v)$ (with an empty response). Conversely, a read operation on object $x$ that outputs a value $v'$ is denoted $r(x){v'}$. %{\bf [RR: I am inclined to remove the subscript $j$ and $k$.]}
  \def\tuple#1{\langle #1\rangle}
 This allows us to define a shorthand notation for a session trace $\mathit{st} \in \mathcal{S}_t$ as a sequence of tuples  $\tuple{w, {v}}$ or
- $\tuple{r, {v}^{'}}$.
-In our formulas, when a quantifiers restricts an operation to a given type (read or write), we simply us the letters R and W, i.e., we write $\forall R \in \mathcal{O}$ as a shorthand for $\forall r(x){v} \in \mathcal{O}$.
+ $\tuple{r, {v}'}$.
+In our formulas, when a quantifiers restricts an operation to a given type (read or write), we simply use the letters R and W, i.e., we write $\forall R \in \mathcal{O}$ as a shorthand for $\forall r(x){v} \in \mathcal{O}$.
 
  %, where the index $i$ corresponds to the position of the operation in the sequence, and therefore allows us to uniquely identify each operation within a sequence. {\bf [RR: This is not great because then we cannot identify this across sequences, and if it's not a sequence number then again I propose we remove this from these definitions]}
 %. The fields comprising each tuple $\mathit{tup}_i$ are: 1) $w^i$  and $r^i$ are abbreviated signatures of write and read
@@ -468,7 +468,7 @@ The \emph{global session trace} $\mathcal{S}_t$ (resp.\ global session invocatio
 %% The
 %% superscript $o$ specifies the context of an object $o$ for the enclosed relation; $o$ is equivalent to an operand for a
  %%  storage operation.
-  E.g., an expression ${w} F_\mathit{st} {r}$ denotes that the operation $w(x,v)$ is followed by the operation  $r(x){v}$ in a session trace $\mathit{st}$.  
+  E.g., an expression ${w} \operatorname{\it F}_\mathit{st} {r}$ denotes that the operation $w(x,v)$ is followed by the operation  $r(x){v}$ in a session trace $\mathit{st}$.  
 %% ; the
 %%       superscript $'$ denotes an instance of execution of a given operation in a session trace. We also use the  LTL
 %%       operator ``eventually", i.e., $F$, do denote that an operation is preceded by the another operation in a given
