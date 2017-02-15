@@ -1009,11 +1009,19 @@ E^s = \forall x, \mathit{st}, \mathit{st}^{'} \in \mathcal{S}_t, w(x,v), r^{'}(x
  Sequential consistency (SC) is a consistency model which requires that a global execution comprising operations executed from one or more clients must be equivalent to the result of executing the operations in a sequential order, such that the mutual order among operations from each client in the sequence respects the invocation order of the operations defined in the client.  Using ConSpec, SC  is expressed as follows.
   \begin{align}\label{eqn:SC}
 \begin{split}
-  E^{s} =  \forall {\mathit{Op}}^{'}, {\mathit{Op}}^{''} \in \mathcal{O}_{St}~\left( {\mathit{Op}}^{'} \preccurlyeq {\mathit{Op}}^{''}  \vee  {\mathit{Op}}^{''}  \preccurlyeq {\mathit{Op}}^{'}\right) \wedge \left( (
-\exists \mathit{st}\in \mathcal{S}_t:\mathit{Op}^{'} F_ \mathit{st}  {\mathit{Op}}^{''})
-\Rightarrow  {\mathit{Op}}^{'} \preccurlyeq {\mathit{Op}}^{''}  \right) 
+  E^{s} =  \forall {\mathit{Op}}', {\mathit{Op}}'' \in \mathcal{O}_{St} : \; \left({\mathit{Op}}' \preccurlyeq {\mathit{Op}}''  \vee  {\mathit{Op}}''  \preccurlyeq {\mathit{Op}}'\right) \wedge \left( (
+\exists \mathit{st}\in \mathcal{S}_t:\mathit{Op}' \operatorname{\it F}_\mathit{st}  {\mathit{Op}}'')
+\Rightarrow  {\mathit{Op}}' \preccurlyeq {\mathit{Op}}''  \right) 
 \end{split}
   \end{align}
+  
+\begin{align}\label{eqn:SC2}
+\begin{split}
+    E^{s} =  & \; \forall \mathit{st} \in \mathcal{S}_t, \; {\mathit{Op}}, {\mathit{Op}}' \in \mathit{st}, \; {\mathit{Op}}'', {\mathit{Op}}''' \in \mathcal{O}_{St} : \\
+& \mathit{Op} \operatorname{\it F}_\mathit{st} {\mathit{Op}}' \Rightarrow  {\mathit{Op}} \preccurlyeq {\mathit{Op}}' \quad \wedge \quad 
+\left({\mathit{Op}}'' \preccurlyeq {\mathit{Op}}'''  \vee  {\mathit{Op}}'''  \preccurlyeq {\mathit{Op}}''\right) 
+\end{split}
+\end{align}
 % where $\prec$ denotes a total order over operations in a global execution comprising operations executed by all clients executing on the system. The total order relation $\left( {\mathit{Op}}^{'} \prec {\mathit{Op}}^{''} \right)$ implies 
 % $\left( {\mathit{Op}}^{'} \preccurlyeq {\mathit{Op}}^{''} \right) \vee \left( {\mathit{Op}}^{''}  \preccurlyeq {\mathit{Op}}^{'}\right)$, where  $\preccurlyeq$ denotes a partial order relation, and $\left( {\mathcal{O}_{St}}, \preccurlyeq \right)$ is the corresponding partial order set.  
  
