@@ -635,10 +635,10 @@ Following the format of Definition \ref{def:form0}, RYW can be defined by the fo
 %  \big( \left( {W^i}^{'} F {R^j}^{'} \in \mathit{st} \right)
 % \Rightarrow \\
 % \left(  {W^i}^{'} \preccurlyeq_{\mathit{st}+w} {R^j}^{'} \right)\big),
-  \mathcal{E}^{s} = \forall  {W}^{'}, {R}^{'} \in \mathit{st}
-  \big( \left( {W}^{'} F _ \mathit{st} {R}^{'} \right)
+  E^{s} = \forall \;  {W}', {R}' \in \mathit{st} : \;
+  {W}' \operatorname{\it F}_\mathit{st} {R}'
  \Rightarrow 
- \left(  {W}^{'} \preccurlyeq_{\mathit{st}+w} {R}^{'} \right)\big),
+ {W}' \preccurlyeq_{\mathit{st}+w} {R}',
  %C = \left( \not\exists {R^k}^{'}, {W^l}^{'} \in \mathcal{S}_t \right)   \big( %\left( {W^i}^{'} F {R^j}^{'} \in \mathit{st} \right) \wedge
 %\left( {R^k}^{'} F {R^j}^{'} \in \mathit{st} \right)   \\ \wedge
 %%\left(  \mathit{st}^{'} \in \mathcal{S}_t \right) \wedge
@@ -661,8 +661,8 @@ Following the format of Definition \ref{def:form0}, RYW can be defined by the fo
 %\mathcal{E}^{s} = \forall  \mathit{st} \in \mathcal{S}_t, {R^i}^{'}, {R^j}^{'} \in \mathit{st} \big( {R^i}^{'} F {R^j}^{'} \in \mathit{st}
 % \Rightarrow \;  \exists S_p \\ \left( {R^i}^{'} F {R^j}^{'} \in S_p \right) \big). 
 % \mathit{st} \in \mathcal{S}_t,
- \mathcal{E}^{s} = \forall   {R}^{'}, {R}^{''} \in \mathit{st} \big( {R}^{'} F _ \mathit{st} {R}^{''}
- \Rightarrow \left( {R}^{'} \preccurlyeq_{\mathit{st}+w} {R}^{''} \right) \big), 
+ E^{s} = \forall \;  {R}', {R}'' \in \mathit{st} : \; {R}' \operatorname{\it F}_\mathit{st} {R}''
+ \Rightarrow {R}' \preccurlyeq_{\mathit{st}+w} {R}'' , 
  %; \\
  %C = \left( \not\exists {W^m}^{''}, {W^n}^{''} \in \mathcal{S}_t \right) \big( \left( {R^i}^{'} F {R^j}^{'} \in \mathit{st} \right) \\ %\left( {\mathit{st}}^{'} \in \mathcal{S}_t \right) \wedge
 % \wedge \left( {W^m}^{''} F {W^n}^{''}  \in \mathcal{S}_t \right) %\left( {W^m}^{''} F {W^n}^{''} F {R^i}^{'} F {R^j}^{'} \in \mathcal{S}_t \right) \wedge \\
@@ -692,8 +692,8 @@ Following the format of Definition \ref{def:form0}, RYW can be defined by the fo
 \begin{split}
 %E^{s} =  \forall \mathit{st} \in \mathcal{S}_t, {R^i}^{'}, {W^j}^{'} \in \mathit{st} \big( \left( {R^i}^{'} F {W^j }^{'} \in \mathit{st} \right)
 % \Rightarrow \exists S_p \\ \left(  {R^i}^{'} F {W^j}^{'} \in S_p \right) \big). 
-E^{s} =  \forall  {R}^{'}, {W}^{'} \in \mathit{st} \big( \left( {R}^{'} F _ \mathit{st} {W}^{'}  \right)
- \Rightarrow \left(  {R}^{'} \preccurlyeq_{\mathit{st}+w} {W}^{'} \right) \big), %; \\
+E^{s} =  \forall \; {R}', {W}' \in \mathit{st} : \; {R}^{'} \operatorname{\it F}_\mathit{st} {W}'
+ \Rightarrow {R}' \preccurlyeq_{\mathit{st}+w} {W}' , %; \\
  %C = \not\exists \left( {R^k}^{'}, {W^l}^{'} \in \mathcal{S}_t \right)   \big(%\left( {W^i}^{'} F {R^j}^{'} \in \mathit{st} \right) \wedge
 %\left( {R^i}^{'} F {R^k}^{'} \in \mathit{st} \right)   \wedge
 %%\left(  \mathit{st}^{'} \in \mathcal{S}_t \right) \wedge
@@ -728,12 +728,12 @@ with the same meaning for $\mathit{st}$ and $\preccurlyeq_{\mathit{st}+w}$ as in
 %\Rightarrow \left(\star w(o,v)F^{o}w^{'}(o,v^{'}) \star \right)_{o}^\mathit{st}.
 %\end{split}
 %  \end{align}
- \par Finally, the last session guarantee is the Monotonic Writes (MW) model, which is specified as follows: successive write operations invoked from the same session must be applied in the order in which they appear in the session trace.  MW is expressed in ConSpec as follows. \label{def:parser}.
+ \par Finally, the last session guarantee is the Monotonic Writes (MW) model, which is specified as follows: successive write operations invoked from the same session must be applied in the order in which they appear in the session trace.  MW is expressed in ConSpec as follows.
   \begin{align}\label{eqn:MW}
 \begin{split}
 %E^{s} = \forall \mathit{st} \in \mathcal{S}_t, {W^i}^{'}, {W^j}^{'} \in \mathit{st} \big( {W^i}^{'} F {W^j}^{'} \in \mathit{st}  \Rightarrow
 %  \exists S_p \\ \left( {W^i}^{'} F {W^j}^{'} \in S_p \right) \big).
-E^{s} = \forall  {W}^{'}, {W}^{''} \in \mathit{st} \big( {W}^{'} F _ \mathit{st} {W}^{''}  \Rightarrow \left( {W}^{'} \preccurlyeq_{\mathit{st}+w} {W}^{''} \right) \big), %; \\
+E^{s} = \forall \; {W}', {W}'' \in \mathit{st} : \; {W}' \operatorname{\it F}_\mathit{st} {W}''  \Rightarrow {W}' \preccurlyeq_{\mathit{st}+w} {W}'' , %; \\
   %C = \left( \not\exists {R^k}^{''}, {R^l}^{''}, {R^m}^{'} \in \mathcal{S}_t \right)
 %   \big( \left( {W^j}^{'} F  {R^m}^{'} \in \mathit{st} \right) \wedge \\
 %   \left( {v_m}^{'} = {v_i}^{'} \right)
@@ -774,7 +774,7 @@ Our generic formulation allows for an interesting perspective on the definition 
 %  \end{align}
 \begin{align}\label{eqn:Causal}
 \begin{split}
-E^{s} = \forall \mathit{st} \in \mathcal{S}_t, {\mathit{Op}}^{'}, {\mathit{Op}}^{''} \in \mathit{st} \big( \left( {\mathit{Op}}^{'} F _ \mathit{st} {\mathit{Op}}^{''} \right)
+E^{s} = \forall \; \mathit{st} \in \mathcal{S}_t, {\mathit{Op}}', {\mathit{Op}}' \in \mathit{st} : \; {\mathit{Op}}' \operatorname{\it F}_\mathit{st} {\mathit{Op}}''
 % \vee \big( \left( {\mathit{Op}}^{'} = {W}^{'} \right) \wedge \\
 %\left( {\mathit{Op}}^{''} = {R}^{'} \right) \wedge
   % \left( v = v^{'} \right) \big) %\Rightarrow \exists S_p \left( {\mathit{Op}^i}^{'} F {\mathit{Op}^j}^{'} \in S_p \right) \big). 
@@ -782,7 +782,7 @@ E^{s} = \forall \mathit{st} \in \mathcal{S}_t, {\mathit{Op}}^{'}, {\mathit{Op}}^
 % \vee \big( \left( {\mathit{Op}^i}^{'} = {W^i}^{'} \right) \wedge \\
 %\left( {\mathit{Op}^j}^{'} = {R^j}^{'} \right) \wedge
 %   \left( v_i = v_j \right) \big)
- \Rightarrow {\mathit{Op}}^{'} \preccurlyeq {\mathit{Op}}^{''} \big) , 
+ \Rightarrow {\mathit{Op}}' \preccurlyeq {\mathit{Op}}'' , 
    %; \\
  %C = \not\exists \left( {W^m}^{'} \in \mathcal{S}_t \right) \big( %\left( \mathit{st}^{'} \in \mathcal{S}_t \right) \wedge
 %   \left( {\mathit{Op}^i}^{'} F {\mathit{Op}^j}^{'} \in \mathit{st} \right) %\left( {W^m}^{''} \in \mathcal{S}_t \right)  \\
