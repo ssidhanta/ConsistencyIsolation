@@ -920,7 +920,8 @@ E^{s} = & \; \forall \; \mathit{st}, \mathit{st}', \in \mathcal{S}_t, \; {\mathi
  %Following the approach as in Causal+, we rewrite PC specification as %n terms of a partial order $ \preccurlyeq^{'} $ as follows. 
     \begin{align}\label{eqn:PC}
 \begin{split}
-\forall x, y, \mathit{st},   \in \mathcal{S}_t \; W^{'}(x) F_ \mathit{st} W^{''} (y)  \Rightarrow  W^{'}(x) \preccurlyeq W^{''} (y)  \wedge R^{'}(x) F_ \mathit{st} R^{''} (y)  \Rightarrow  R^{'}(x) \preccurlyeq R^{''} (y).
+E^{s} = & \forall \mathit{st} \in \mathcal{S}_t, \; R'(x), R''(y), W'(x), W''(y) \in \mathit{st}: \\
+& W'(x) \operatorname{\it F}_\mathit{st} W''(y)  \Rightarrow  W'(x) \preccurlyeq W''(y)  \wedge R'(x) \operatorname{\it F}_\mathit{st} R''(y)  \Rightarrow  R'(x) \preccurlyeq R''(y).
 \end{split}
   \end{align}   %\forall \big( %\left( \mathit{st} \in \mathcal{S}_t \right) \wedge
 % \left( {W^i}(x)^{'} F {W^j}(z)^{'} F {R^k}(y)^{'} \in \mathit{st} \right) \wedge \\
