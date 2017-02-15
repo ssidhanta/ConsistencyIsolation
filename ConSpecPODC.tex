@@ -1007,14 +1007,14 @@ E^{s} = & \forall \mathit{st} \in \mathcal{S}_t, \; R'(x), R''(y), W'(x), W''(y)
 %   %$\preccurlyeq$ is given as a composition $\preccurlyeq =  \preccurlyeq^{'}(x) \circ  ... \circ^{'} \preccurlyeq^{''}(x)$,  and $\circ, ... \circ^{''}$ are composition operators, like $\cap$ or $\cup$, over partial order sets (posets) $\preccurlyeq^{'}(x), ... \preccurlyeq^{''}(x)$ comprising partial orders defined over a given object $x$.
  
  Sequential consistency (SC) is a consistency model which requires that a global execution comprising operations executed from one or more clients must be equivalent to the result of executing the operations in a sequential order, such that the mutual order among operations from each client in the sequence respects the invocation order of the operations defined in the client.  Using ConSpec, SC  is expressed as follows.
-  \begin{align}\label{eqn:SC}
-\begin{split}
-  E^{s} =  \forall {\mathit{Op}}', {\mathit{Op}}'' \in \mathcal{O}_{St} : \; \left({\mathit{Op}}' \preccurlyeq {\mathit{Op}}''  \vee  {\mathit{Op}}''  \preccurlyeq {\mathit{Op}}'\right) \wedge \left( (
-\exists \mathit{st}\in \mathcal{S}_t:\mathit{Op}' \operatorname{\it F}_\mathit{st}  {\mathit{Op}}'')
-\Rightarrow  {\mathit{Op}}' \preccurlyeq {\mathit{Op}}''  \right) 
-\end{split}
-  \end{align}
-  
+% \begin{align}\label{eqn:SC}
+% \begin{split}
+%   E^{s} =  \forall {\mathit{Op}}', {\mathit{Op}}'' \in \mathcal{O}_{St} : \; \left({\mathit{Op}}' \preccurlyeq {\mathit{Op}}''  \vee  {\mathit{Op}}''  \preccurlyeq {\mathit{Op}}'\right) \wedge \left( (
+% \exists \mathit{st}\in \mathcal{S}_t:\mathit{Op}' \operatorname{\it F}_\mathit{st}  {\mathit{Op}}'')
+% \Rightarrow  {\mathit{Op}}' \preccurlyeq {\mathit{Op}}''  \right)
+% \end{split}
+%   \end{align}
+%
 \begin{align}\label{eqn:SC2}
 \begin{split}
     E^{s} =  & \; \forall \mathit{st} \in \mathcal{S}_t, \; {\mathit{Op}}, {\mathit{Op}}' \in \mathit{st}, \; {\mathit{Op}}'', {\mathit{Op}}''' \in \mathcal{O}_{St} : \\
