@@ -1308,9 +1308,9 @@ In an asynchronous system, it is possible to implement a consistency model $E^s$
 
 \noindent $\forall \mathcal{S}_{it} ~ \forall \preccurlyeq \in \Pi(\mathcal{S}_{it},E^s) ~ \forall o \in max(\mathcal{S}_{it}, \preccurlyeq) ~ (\textsc{RemoveAllExceptSession}(\preccurlyeq,o) \in \Pi(\mathcal{S}_{it},E^s) ~ ) $
 
-where we define {\sc RemoveAllExceptSession} as a partial order where the maxima are only ordered with respect to prior operations in the same session, i.e.:
+where we define {\sc RemoveAllExceptSession} as a partial order where the maximum $o$ is only directly ordered after prior operations in the same session, i.e.:
 
-\noindent {\sc RemoveAllExceptSession}$(\preccurlyeq,o) \equiv \preccurlyeq \setminus \{ \langle o',o \rangle: (... , o', o) \notin \mathcal{S}_t\}$
+\noindent {\sc RemoveAllExceptSession}$(\preccurlyeq,o) \equiv \preccurlyeq \setminus \{ \langle o',o \rangle$, where $\langle o',o \rangle$ belongs to the transitive reduction of $\preccurlyeq$, and $o'$ does not belong to the same session as $o\}$.
 
 
 %$\forall \mathit{st}, \mathit{st}^{'} \in \mathcal{S}_t ~ \exists \preccurlyeq \in \Pi(\mathcal{S}_t,E^s) ~ \forall o, o' \in \mathcal{S}_t (o \in \mathit{st} \wedge o' \in \mathit{st}^{'} \wedge \mathit{st} \not= \mathit{st}^{'} \Rightarrow o \not\preccurlyeq o' \wedge o' \not\preccurlyeq o)$
@@ -1352,13 +1352,13 @@ The assumption about there being only two clients does not lose generality becau
 
 Next we focus on the implication in the direction $(\Leftarrow)$. Here, we need to prove that if a consistency model $E^s$ meets the condition:
 
-\noindent $\forall \mathcal{S}_t ~ \forall \preccurlyeq \in \Pi(\mathcal{S}_t,E^s) ~ \forall o \in max(\mathcal{S}_t, \preccurlyeq) ~ (\textsc{RemoveAllExceptSession}(\preccurlyeq,o) \in \Pi(\mathcal{S}_t,E^s) ~ ) $
+\noindent $\forall \mathcal{S}_{it} ~ \forall \preccurlyeq \in \Pi(\mathcal{S}_{it},E^s) ~ \forall o \in max(\mathcal{S}_{it}, \preccurlyeq) ~ (\textsc{RemoveAllExceptSession}(\preccurlyeq,o) \in \Pi(\mathcal{S}_{it},E^s) ~ ) $
 
 then it has an available and partition-tolerant implementation. 
 
 
 
-Given any global session trace $\mathcal{S}_t$, we prove this by induction on the length of the execution that produced $\mathcal{S}_t$. The base case with an empty execution is vacuously true, since an empty trace meets any consistency condition (no safety properties are ever violated by an empty trace). For the induction step, we need to prove that, given an execution for which an available and partition-tolerant implementation produced a trace that conforms to $E^s$, it is possible for a client to invoke a new operation and produce an output that is also consistent. This is true because, even in the case that the client that invokes the new operation is partitioned from the remaining of the clients, it is always legal to produce an operation that depends on a prior operation from the same session and all the operations that transitively precede it according to $\prec$. Furthermore, the valid output of this operation can be determined by using only information that is local to the session, by running the sequential specification of the system on the graph of preceding operations.
+Given any global session invocation trace $\mathcal{S}_{it}$, we prove this by induction on the length of the execution that produced $\mathcal{S}_{it}$. The base case with an empty execution is vacuously true, since an empty trace meets any consistency condition (no safety properties are ever violated by an empty trace). For the induction step, we need to prove that, given an execution for which an available and partition-tolerant implementation produced a trace that conforms to $E^s$, it is possible for a client to invoke a new operation and produce an output that is also consistent. This is true because, even in the case that the client that invokes the new operation is partitioned from the remaining of the clients, it is always legal to produce an operation that depends on a prior operation from the same session and all the operations that transitively precede it according to $\preccurlyeq$. Furthermore, the valid output of this operation can be determined by using only information that is local to the session, by running the sequential specification of the system on the graph of preceding operations.
 
 
 %% consider a pair of sessions from , namely $\mathit{Cl}_1$ and $\mathit{Cl}_2$ executing
