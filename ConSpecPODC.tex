@@ -1259,7 +1259,7 @@ E^s = \forall x, \mathit{st}, \mathit{st}^{'} \in \mathcal{S}_t, w(x,v), r^{'}(x
 
  
 \section{Rewriting the CAP Theorem in terms of ConSpec}\label{sec:cap}
-The CAP conjecture was initially stated informally as the impossibility of simultaneously achieving strong Consistency, Availability, and Partition tolerance in a replicated system~\cite{brew:cap}. When this theorem was subsequently proven by Gilbert and Lynch~\cite{Gilbert:2002:BCF:564585.564601}, these three properties were stated precisely, and, in this context, strong consistency was defined as atomicity (or linearizability).
+The CAP conjecture was initially stated informally as the impossibility of simultaneously achieving strong Consistency, Availability, and Partition tolerance in a replicated system~\cite{brew:cap}. When this theorem was subsequently proven by Gilbert and Lynch~\cite{Gilbert:2002:BCF:564585.564601}, these three properties were stated precisely, and, in this context, strong consistency was defined as atomicity (or linearizability~\cite{Herlihy:1990:LCC:78969.78972}).
 
 The fact that the original proof of CAP is restricted to linearizability raises the question of whether CAP holds using other definitions from
  the wide array of consistency models supported by modern storage systems.
@@ -1268,19 +1268,18 @@ The fact that the original proof of CAP is restricted to linearizability raises 
 
 
 
-To begin with, we need a helper definition to enumerate all admissible partial orders for a given restriction condition $E^s$ and set of operations in a global session trace $\mathcal{S}_t$.
+To begin with, we need a helper definition to enumerate all admissible partial orders for a given restriction condition $E^s$ and set of operations in a global session invocation trace $\mathcal{S}_{it}$.
 
 \begin{definition}[Partial order enumeration] \label{def:allpos}
-Given a global session trace $\mathcal{S}_t$ and a restrictive condition $E^s$
+Given a global session invocation trace $\mathcal{S}_{it}$ and a restrictive condition $E^s$
 for a ConSpec definition, we define the partial order enumeration
-of this session trace and condition, $\Pi(\mathcal{S}_t,E^s)$ as
-the set of partial orders over the elements of $\mathcal{S}_t$ that are valid
+of this session invocation trace and condition, $\Pi(\mathcal{S}_{it},E^s)$ as
+the set of partial orders over the elements of any compatible session trace $\mathcal{S}_{it}$ that are valid
 under $E^s$, i.e.:
 
-$\Pi(\mathcal{S}_t,E^s) \equiv  \{\preccurlyeq:  E^s\; \vDash \; \left( {\mathcal{O}_{St}}, \preccurlyeq \right)\}$
-\end{definition}
 
-{\bf [Need to pin down execution model, and the previous definition needs to have the operation signature but not its result.]}
+$\Pi(\mathcal{S}_{it},E^s) \equiv  \{\preccurlyeq: \exists \mathcal{S}_{t} \left(  E^s\; \vDash \; \left( {\mathcal{S}_{t}}, \preccurlyeq \right) \wedge \mathcal{S}_{t}\bowtie \mathcal{S}_{it} \right) \}$
+\end{definition}
 
 This allows us to define the following necessary and sufficient condition
 for a consistency model to have an available and partition tolerant
@@ -1291,7 +1290,7 @@ In an asynchronous system, it is possible to implement a consistency model $E^s$
 
 %there exists a corresponding partial order enumeration that does not constrain elements of different sessions according to the respective partial order, i.e.:
 
-\noindent $\forall \mathcal{S}_t ~ \forall \preccurlyeq \in \Pi(\mathcal{S}_t,E^s) ~ \forall o \in max(\mathcal{S}_t, \preccurlyeq) ~ (\textsc{RemoveAllExceptSession}(\preccurlyeq,o) \in \Pi(\mathcal{S}_t,E^s) ~ ) $
+\noindent $\forall \mathcal{S}_{it} ~ \forall \preccurlyeq \in \Pi(\mathcal{S}_{it},E^s) ~ \forall o \in max(\mathcal{S}_{it}, \preccurlyeq) ~ (\textsc{RemoveAllExceptSession}(\preccurlyeq,o) \in \Pi(\mathcal{S}_{it},E^s) ~ ) $
 
 where we define {\sc RemoveAllExceptSession} as a partial order where the maxima are only ordered with respect to prior operations in the same session, i.e.:
 
