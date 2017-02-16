@@ -317,7 +317,7 @@ semantics. ConSpec builds on the observations made by recent proposals
 that it is possible to define weak consistency semantics in terms of
 partial orders over the set of operations that were executed in the
 system, which comprise a visibility graph 
-\cite{Li:2012:MGS:2387880.2387906, Gotsman:2016:CIS:2837614.2837625, Li:2012:MGS:2387880.2387906}. This allows us to reduce
+\cite{Li:2012:MGS:2387880.2387906, Gotsman:2016:CIS:2837614.2837625, cheng-papoc}. This allows us to reduce
 the configurable part of the consistency definition to a set of restrictions,
 written in Linear Temporal Logic (LTL), to a generic partial order.
 %% . LTL is a natural choice for specifying relative
@@ -335,10 +335,10 @@ equivalence.
 
 Another contribution of this paper is that we built a tool, which is available online, to check whether a given trace violates a certain consistency model. This tool leverages our LTL based syntax, which allowed us to reuse existing automatic checkers and adapt them to our constructs in a direct way.
 
-Our final contribution is that we were able to restate in much broader terms the CAP theorem \cite{brew:cap, Gilbert:2002:BCF:564585.564601}, whose original proof used linearizability as synonym for the strong consistency captured by the ``C'' property. In our new formulation of this theorem, we are able to define necessary and sufficient conditions for a given consistency model to be \emph{CAP-strong}, i.e., bound by the impossibility of being implemented in a highly available, partition-tolerant way.
+Our final contribution is that we were able to restate in much broader terms the CAP theorem \cite{brew:cap, Gilbert:2002:BCF:564585.564601}, whose original proof used linearizability as synonym for the strong consistency captured by the ``C'' property. In our new formulation of this theorem, we are able to define necessary and sufficient conditions for a given consistency model to be bound by the impossibility of being implemented in a highly available, partition-tolerant way.
 
-The remainder of this paper is organized as follows. Section \ref{sec:related} discusses relevant related work. Section  \ref{sec:definitions} presents the assumed system model, and basic definitions and terminology used in the paper.  Section \ref{sec:syntax} presents a general format of specifications based on ConSpec. Section \ref{sec:list} lists the specifications of various  consistency models, expressed using ConSpec.  Section \ref{sec:cap} presents a reformulation of the CAP theorem, and formally proves the same.  Section \ref{sec:capanalyze} analyzes the lattice of consistency models in terms of the restated CAP theorem.  
- Section \ref{sec:impl} presents the design of a prototype automated verification tool that can validate a session trace with respect to a ConSpec specification.  %In Sections \ref{sec:derive}, we prove equivalence of each of the listed ConSpec specifications with their original definitions. %; because of lack of space, we include some of the proofs in the Appendix.  
+The remainder of this paper is organized as follows. Section \ref{sec:related} discusses relevant related work. Section  \ref{sec:definitions} presents the assumed system model, and basic definitions and terminology used in the paper.  Section \ref{sec:syntax} presents a general format of specifications based on ConSpec. Section \ref{sec:list} lists the specifications of various  consistency models, expressed using ConSpec.  Section \ref{sec:cap} presents a reformulation of the CAP theorem, and formally proves the same.  Section \ref{sec:capanalyze} analyzes the previously mentioned consistency models in terms of the restated CAP theorem.  
+ Finally, Section \ref{sec:impl} presents the design of a prototype automated verification tool that can validate a session trace with respect to a ConSpec specification, and we conclude in Section 9 with a series of future work directions.  %In Sections \ref{sec:derive}, we prove equivalence of each of the listed ConSpec specifications with their original definitions. %; because of lack of space, we include some of the proofs in the Appendix.  
  % Section \ref{sec:ser} in the appendix comprises ConSpec expressions for the various serialization definitions used in the original consistency definitions.  Section \ref{sec:equiv} illustrates the equivalence between the syntax of ConSpec expressions and the syntax of state-of-the-art  consistency definitions.  Section \ref{sec:hierarchy} presents a hierarchical organizaton of the lattice of consistency models. %Section \ref{sec:complex} in the appendix comprises a comparison of the complexity of verification using ConSpec with the state-of-the-art verification techniques. 
 % Section  \ref{sec:examples}  comprises a detailed analysis of the process of verification of ConSpec specifications with respect to sample session traces that cause violations of the specifications. 
  
@@ -409,15 +409,14 @@ Often, the definitions of these consistency models is vague and/or underspecifie
 Even when the specification is more precise, it may suffer from being tied to implementation details that may not be widely applicable. For instance, some definitions assume the existence of a centralized server that keeps monotonically increasing version number associated with the data~\cite{DBLP:conf/icde/AdyaLO00}; others explicitly define consistency in terms of the state maintained by different replicas of the data~\cite{Li:2012:MGS:2387880.2387906}; finally, Terry et al.\ defined a set of session guarantees that strengthen the consistency offered by eventually consistent systems, but these are defined operationally in terms of the replicas that are accessed and the operations that these replica process and the respective order in which they are processed~\cite{bayou}.
 
 With the goal of obtaining more precise and less operational definitions, 
-Chockler et al.~\cite{Chockler2000} defined these session guarantees [and
-a few other definitions, namely processor consistency, sequential consistency, and causal sonsistency] using first-order logic expressions.
-Even more broadly, Burckhardt et al. \cite{Burckhardt:2014:PEC:2693641.2693642} present the definitions of a wide variety of consistency models using properties like visibility and happens before order as building blocks.  Our definitions build on recent proposals for new consistency models that are weakly consistent by default but distinguish a subset of the operations, and enforce visibility restrictions among those operations~\cite{Li:2012:MGS:2387880.2387906, Gotsman:2016:CIS:2837614.2837625, Li:2012:MGS:2387880.2387906}. In contrast, our goal is not to propose a new consistency model, but to gain a deeper understanding of existing ones.
+Chockler et al.~\cite{Chockler2000} defined these session guarantees (and some other consistency levels) using first-order logic expressions.
+Even more broadly, Burckhardt et al. \cite{Burckhardt:2014:PEC:2693641.2693642} present the definitions of a wide variety of consistency models using properties like visibility and happens before order as building blocks.  Our definitions build on recent proposals for new consistency models that are weakly consistent by default but distinguish a subset of the operations, and enforce visibility restrictions among those operations~\cite{Li:2012:MGS:2387880.2387906, Gotsman:2016:CIS:2837614.2837625, cheng-papoc}. In contrast, our goal is not to propose a new consistency model, but to gain a deeper understanding of existing ones.
 
 Compared to these prior approaches, ConSpec provides a generic way to describe consistency specifications, where each consistency level corresponds to a different parameterization of our generic definition. Furthermore, we use our generic framework to generalize the CAP theorem as proved by Gilbert and Lynch~\cite{Gilbert:2002:BCF:564585.564601}. Finally, we provide a software artifact to check whether traces meet a certain consistency level.
 
 Other authors have explored the CAP theorem beyond its original formulation and first proof. 
 Mahajan et al. \cite{mahajan11cacTR} defined Real Time Causal Consistency, a stronger variant of causal consistency, and proved that it is the strongest consistency model that can be provided in a highly available and eventually consistent implementation.  
-Recently, Attiya et al.~\cite{Attiya:2015:LHE:2767386.2767419}  provided a formal specification of systems that implement causal consistency, and proved that Observable Causal Consistency, a stronger variant of causal consistency, is the strongest consistency model that can be provided in a highly available, partition tolerant manner. In addition, their definitions are tied to implementation-level concepts, namely a set of replicas connected by a network.
+Recently, Attiya et al.~\cite{Attiya:2015:LHE:2767386.2767419}  provided a formal specification of systems that implement causal consistency, and proved that Observable Causal Consistency, a stronger variant of causal consistency, is the strongest consistency model that can be provided in a highly available, partition tolerant manner. Their definitions are stated in terms of some implementation-level concepts, namely a set of replicas connected by a network.
 In contrast, we generalize CAP by defining necessary and sufficient conditions for consistency models to be implemented in an available and partition-tolerant way, which are applied to precisely characterize the CAP line in a hierarchy of consistency models.
 
   \section{Basic Definitions} \label{sec:definitions}
@@ -442,8 +441,7 @@ We define a session invocation trace $\mathit{sit}$ as the sequence of invocatio
 
 In our notation, we denote an invocation of a write operation that writes a value $v$ to an object $x$, as $w(x,v)$ (with an empty response). Conversely, a read operation on object $x$ that outputs a value $v'$ is denoted $r(x){v'}$. %{\bf [RR: I am inclined to remove the subscript $j$ and $k$.]}
  \def\tuple#1{\langle #1\rangle}
-This allows us to define a shorthand notation for a session trace $\mathit{st} \in \mathcal{S}_t$ as a sequence of tuples  $\tuple{w, {v}}$ or
- $\tuple{r, {v}'}$.
+%This allows us to define a shorthand notation for a session trace $\mathit{st} \in \mathcal{S}_t$ as a sequence of tuples  $\tuple{w, {v}}$ or $\tuple{r, {v}'}$.
 In our formulas, when a quantifiers restricts an operation to a given type (read or write), we simply use the letters R and W, i.e., we write $\forall R \in \mathcal{O}$ as a shorthand for $\forall r(x){v} \in \mathcal{O}$.
 
  %, where the index $i$ corresponds to the position of the operation in the sequence, and therefore allows us to uniquely identify each operation within a sequence. {\bf [RR: This is not great because then we cannot identify this across sequences, and if it's not a sequence number then again I propose we remove this from these definitions]}
@@ -465,7 +463,7 @@ The \emph{global session trace} $\mathcal{S}_t$ (resp.\ global session invocatio
 
  Our notation defines special purpose LTL operators as shorthands to longer expressions. These correspond to scope operators
    that specify the context within which the expression is 
-  restricted. For example, we define a special-purpose operator $F_\mathit{st}$ to restrict the LTL operator ``eventually" to operations comprised in the session trace $\mathit{st}$. % i.e., $F_\mathit{st}$.  %$X^{x}$, which is derived
+  restricted. For example, we define a special-purpose operator $F_\mathit{st}$ to restrict the LTL operator ``eventually'' to operations comprised in the session trace $\mathit{st}$. % i.e., $F_\mathit{st}$.  %$X^{x}$, which is derived
 %  from the  LTL modal operator ``next", i.e., $X$. The superscript ${x}$ in the above operator is used to specify that the
 %   operator defines the LTL relationship ``next" among only the operations performed on the object $x$. 
 %% The
@@ -516,7 +514,7 @@ Finally, we assume the system has a sequential specification, which is a correct
 In this section we present our generic ConSpec definition, which can be parameterized to obtain specifications for commonly used consistency models and 
   isolation levels. Note that ConSpec focuses only on safety conditions. Defining liveness conditions is left as future work.
 
-ConSpec builds on recent proposals for consistency definitions that treat a subset of the operations in a given trace differently (e.g., operations labeled as being ``strongly consistent''), since they only enforce visibility among those specific operations~\cite{Li:2012:MGS:2387880.2387906, Gotsman:2016:CIS:2837614.2837625, Li:2012:MGS:2387880.2387906}. We can similarly see different consistency definitions as enforcing different visibility relationships only among a subset of the system operations, often depending on their types (e.g., reads versus writes).
+ConSpec builds on recent proposals for consistency definitions that treat a subset of the operations in a given trace differently (e.g., operations labeled as being ``strongly consistent''), since they only enforce visibility among those specific operations~\cite{Li:2012:MGS:2387880.2387906, Gotsman:2016:CIS:2837614.2837625, cheng-papoc}. We can similarly see different consistency definitions as enforcing different visibility relationships only among a subset of the system operations, often depending on their types (e.g., reads versus writes).
 
 As such, the generic definition of ConSpec requires the existence of a partial order that intuitively forms a ``visibility graph'', i.e., the output of each operation must reflect the effects of the operations that precede it according to that partial order. This allows us to see different consistency models as imposing different restrictive conditions on this precedence.
  Such a
@@ -885,8 +883,8 @@ with the subtle difference that this is a global property, instead of being spec
 % % \end{split}
 % %  \end{align} where the partial order $\left( {\mathcal{O}_{St}}, \preccurlyeq \right)$ is a partial order over operations in a global execution comprising operations executed by all clients executing on the system. %It restricts an equivalent serialization of a client $S_c$, defined in Definition \ref{def:clientser}, to respect the order of successive operations in a given session trace. %where $\mathit{o}_i$ is any operation (read or write), and $\mathcal{S}$ is the set of all session traces for a given client application. % scope.
 
-For Processor Consistency \cite{Ahamad:1993:PPC:165231.165264}, we consider the more 
-  well known Goodman's definition of Processor Consistency (PC) over the alternate definition used implemented in the DASH system. Goodman's PC specifies: write operations performed from each client application must be observed by all clients (i.e., must occur in all  session traces) according to their invocation orders. % In other words, the order in which any pair of  writes, invoked from a particular client, are observed in session traces of all other clients must always respect the invocation order of the above operations. %Reads against  write operations should
+For Processor Consistency, we consider the more 
+  well known Goodman's definition of Processor Consistency (PC) over the alternate definition used implemented in the DASH system~\cite{Ahamad:1993:PPC:165231.165264}. Goodman's PC specifies that write operations performed from each client application must be observed by all clients (i.e., must occur in all  session traces) according to their invocation orders. % In other words, the order in which any pair of  writes, invoked from a particular client, are observed in session traces of all other clients must always respect the invocation order of the above operations. %Reads against  write operations should
  % view the results of the writes
  % according to the invocation order of these writes in a client application. % Let $\mathit{processors}$ be an  integer term that denotes the
 % total number of processors. We can express the condition the propositional logic variable $A$ must hold for any store
@@ -1036,7 +1034,7 @@ E^{s} = & \forall \mathit{st} \in \mathcal{S}_t, \; R'(x), R''(y), W'(x), W''(y)
         \label{fig:example}
 \end{figure}
 
-\par Figure~\ref{fig:example} shows an example execution where the global session trace contains two sessions, each with three operations (two writes followed by a read). This execution meets all the consistency levels we defined with the exception of sequential consistency. The right hand side of the figure shows a partial order that can be used to support the execution, and that meets the constraints specified by all the consistency levels except those specified by sequential consistency. For sequential consistency, the constraints would require the partial order to be a total order, which is impossible to achieve while also obeying the session order and explaining the results that are observed according to the sequential specification of a read/write interface. This is because one would have to serialize both reads before the respective writes of value 99, but that would be impossible to achieve in a total order that respects the session orders.
+\par Figure~\ref{fig:example} shows an example execution where the global session trace contains two sessions, each with three operations (two writes followed by a read). This execution meets all the consistency levels we defined with the exception of sequential consistency. The right hand side of the figure shows a partial order that is a superset of what can be used to support the execution in various definitions, and that meets the constraints specified by all the consistency levels except those specified by sequential consistency. For sequential consistency, the constraints would require the partial order to be a total order, which is impossible to achieve while also obeying the session order and explaining the results that are observed according to the sequential specification of a read/write interface. This is because one would have to serialize both reads before the respective writes of value 99, but that would be impossible to achieve in a total order that respects the session orders.
 
 
 % where $\prec$ denotes a total order over operations in a global execution comprising operations executed by all clients executing on the system. The total order relation $\left( {\mathit{Op}}^{'} \prec {\mathit{Op}}^{''} \right)$ implies 
@@ -1385,6 +1383,9 @@ then it has an available and partition-tolerant implementation.
 
 Given any global session invocation trace $\mathcal{S}_{it}$, we prove this by induction on the length of the execution that produced $\mathcal{S}_{it}$. The base case with an empty execution is vacuously true, since an empty trace meets any consistency condition (no safety properties are ever violated by an empty trace). For the induction step, we need to prove that, given an execution for which an available and partition-tolerant implementation produced a trace that conforms to $E^s$, it is possible for a client to invoke a new operation and produce an output that is also consistent. This is true because, even in the case that the client that invokes the new operation is partitioned from the remaining of the clients, it is always legal to produce an operation that depends on a prior operation from the same session and all the operations that transitively precede it according to $\preccurlyeq$. Furthermore, the valid output of this operation can be determined by using only information that is local to the session, by running the sequential specification of the system on the graph of preceding operations.
 
+\begin{flushright}
+$\square$
+\end{flushright}
 
 %% consider a pair of sessions from , namely $\mathit{Cl}_1$ and $\mathit{Cl}_2$ executing
 %% on two storage server nodes $N_1$ and $N_2$.
