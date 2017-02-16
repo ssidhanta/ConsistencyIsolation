@@ -147,7 +147,7 @@ Phone: +351 912413257\\ \\
 %   automated verification even more difficult. To the best of our knowledge, this is the first work that expresses both
 %   consistency and isolation levels in terms of ConSpec, a language that
 To enable a simple and uniform description of various existing proposals, ConSpec builds on recent proposals that view weak consistency
-definitions as partial orderings between operations forming a visibility graph, which reduces the consistency definition to a set of
+definitions as partial orderings between operations forming a visibility graph, which reduces the consistency definitions to a set of
 restrictions on those partial orders, described using Linear Temporal Logic (LTL). We use ConSpec to revisit several existing models in light 
 of a common way to define and compare them. Furthermore, the use 
 of LTL enabled us to leverage existing automatic checkers to build a tool for validating whether a given trace of the execution of a system meets
@@ -246,7 +246,7 @@ Finally, using our generic definitions and the insights from analyzing different
 %   automated verification even more difficult. To the best of our knowledge, this is the first work that expresses both
 %   consistency and isolation levels in terms of ConSpec, a language that
 To enable a simple and uniform description of various existing proposals, ConSpec builds on recent proposals that view weak consistency
-definitions as partial orderings between operations forming a visibility graph, which reduces the consistency definition to a set of
+definitions as partial orderings between operations forming a visibility graph, which reduces the consistency definitions to a set of
 restrictions on those partial orders, described using Linear Temporal Logic (LTL). We use ConSpec to revisit several existing models in light 
 of a common way to define and compare them. Furthermore, the use 
 of LTL enabled us to leverage existing automatic checkers to build a tool for validating whether a given trace of the execution of a system meets
@@ -587,7 +587,7 @@ Condition 1, when applied to a system whose interface consists only of reads and
  %%   does not comprise read operations performed by other concurrent clients, consistency models which impose constraints on $S_p$ can only be regarded as \emph{partial orders} over a global execution comprising operations performed by all concurrent clients on the underlying storage system. An LTL formula representing the specification of such a consistency model can not be regarded as a total order over operations performed by all clients (represented by the global session trace $\mathcal{S}_t$). By definition, an LTL formulas satisfies the following properties: 1) irreflexivity, since LTL defines a linear order over time, and this linearity implies that there can not be any cyclic relation in LTL formulas, 2)  transitivity, which follows trivially from the linear order imposed by LTL, and 3) asymmetric, which follows directly from conditions 1 and 2. Since the above group of consistency models are specified in terms of LTL constraints, they, in turn, are irreflexive, transitive, and asymmetric. Hence, by definition, such consistency models are regarded as \emph{strict partial orders} over all clients.    
   
  \section{Specifying existing models}\label{sec:list}
-In this section, we present the ConSpec specifications for several common consistency models  documented in the literature~\cite{Chockler2000, Terry:1994:SGW:645792.668302, Burckhardt:2014:PEC:2693641.2693642}. We make the derivations of  ConSpec definitions from their original counterparts in an extended version of the paper available at \url{https://github.com/ssidhanta/ConSpecTool}. %Subsequently, in the Appendix, we discuss how these definitions correspond to their original counterparts.
+In this section, we present the ConSpec specifications for several common consistency models  documented in the literature~\cite{Chockler2000, Terry:1994:SGW:645792.668302, Burckhardt:2014:PEC:2693641.2693642}. The derivations of  ConSpec definitions from their original counterparts in an extended version of the paper are available at \url{https://github.com/ssidhanta/ConSpecTool/blob/master/ConSpecPODCFull.pdf}. %Subsequently, in the Appendix, we discuss how these definitions correspond to their original counterparts.
   %\subsection{Specifications for Consistency Models}
 We start by specifying a series of session guarantees, which were originally proposed by Terry et al.\ in the context of a mobile computing storage system called Bayou~\cite{Terry:1994:SGW:645792.668302}. These are four guarantees that apply to individual sessions, allowing applications to see a view of the storage system that is consistent with their previous operations. Their original definition is tied to some implementation-level concepts, since it is stated, for instance, in terms of the order in which writes are applied at various server replicas. Subsequently there were authors who wrote formal definitions for these session guarantees~\cite{Chockler2000, Burckhardt:2014:PEC:2693641.2693642}. 
 
@@ -1865,7 +1865,7 @@ ConSpec opens several interesting avenues for future work. First, we intend to a
 % The following two commands are all you need in the
 % initial runs of your .tex file to
 % produce the bibliography for the citations in your paper.
-\bibliographystyle{abbrv}
+\bibliographystyle{acm}
 \bibliography{allrec}  % sigproc.bib is the name of the Bibliography in this case
 % You must have a proper ".bib" file
 %  and remember to run:
