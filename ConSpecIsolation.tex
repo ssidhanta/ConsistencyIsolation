@@ -1051,19 +1051,22 @@ E^{s} = & \forall \mathit{st} \in \mathcal{S}_t, \; R'(x), R''(y), W'(x), W''(y)
 % where $T$ is the set of all transactions executing in the system.  
  The generalized definition of isolation definitions is given as follows. 
   \begin{definition}{ConSpec form for Isolation definitions:}\label{def:form0}
-Given a set $T$ of all transactions executing on a system, % session trace $\mathcal{S}_t$,
+Given a global session trace $\mathcal{S}_t$ comprising a sequence of all operations performed from all transactions comprised in the set $T$ of all transactions executing on a system, % session trace $\mathcal{S}_t$,
 % representing a global execution of all concurrent clients on a given storage
 %system,
-we say  that $T$ satisfies a consistency model $\mathcal{C}$ 
-if there exists a partial order  $\left( T, \preccurlyeq \right)$ over the set $T$ of all transactions executing in the system 
+we say  that   $\mathcal{S}_t$ satisfies a isolation level $\mathcal{I}$
+if there exists a partial order  $\left( T, \preccurlyeq \right)$ over $T$ %of all transactions executing in the system 
 %$\left( {\mathcal{O}_{T}}, \preccurlyeq \right)$ over the set ${\mathcal{O}_{T}}$ comprising operations  present in all transactions in $T$, i.e.,  ${\mathcal{O}_{T}} = \bigcup_{{\mathit{tx}} \in T} \{ o \mid o \in {\mathit{tx}} \},$
- such that 1) ${\mathit{tx}} \preccurlyeq {\mathit{ty}}$ specifies that, in $\preccurlyeq$, invocation and response of all operations in ${\mathit{tx}}$ precede invocation and response of all operations in ${\mathit{ty}} $ on a common object    and  %1) for every operation $\mathit{o}$ in $\mathcal{O}_T$, its output is equal to the one obtain by executing the sequential specification of a linear extension of the operations preceding $\mathit{o}$ in $\preccurlyeq$,
+ such that 1) if  an operation $o_{\mathit{tx}}$ on an object $x$ from ${\mathit{tx}} $ precedes an operation $o_{\mathit{ty}}$ from ${\mathit{ty}}$ on  $x$ in $\preccurlyeq$, 
+ then  no operation from ${\mathit{tx}} $ can return the result of any operation from ${\mathit{ty}}$ on $x$, i.e., $\not\exists \; x, \; o(x)_{\mathit{tx}}(v)^{'},  \;  o(x, v^{'} )^{'}_{\mathit{ty}} \in \mathcal{S}_t: \;  v = v^{'}$,   %, in $\preccurlyeq$, invocation and response of all operations in ${\mathit{tx}}$ precede invocation and response of all operations in ${\mathit{ty}} $ on a common object   
+  and  %1) for every operation $\mathit{o}$ in $\mathcal{O}_T$, its output is equal to the one obtain by executing the sequential specification of a linear extension of the operations preceding $\mathit{o}$ in $\preccurlyeq$,
 % the same irrespective of the
  %%among operations preceding it in $\preccurlyeq$, %$\exists {\mathit{Op}^i}^{'}, {\mathit{Op}^j}^{'} \in \mathcal{S}_t:
  %{\mathit{Op}^i}^{'} \preccurlyeq {\mathit{Op}^j}^{'}\; \Rightarrow \;{\mathit{Op}^i}^{'} R {\mathit{Op}^j}^{'}$, %\; \vee \; v_i \sim v_j$,{\mathcal{O}_{St}}, \preccurlyeq
 % and 2) 
  2) $\left( T, \preccurlyeq \right)$ obeys $E^s$, which is an LTL expression restricting $\left( T, \preccurlyeq \right)$.
-\end{definition}
+\end{definition} 
+Condition 1 ensures  that result of no operation in  ${\mathit{ty}} $ can be observed before results of all operations in ${\mathit{tx}}$ are observed. 
  Isolation levels are defined in terms of a partial order $\left( T, \preccurlyeq \right)$ 
  %$\left( {\mathcal{O}_T}, \preccurlyeq \right)$ over a set ${\mathcal{O}_T}$ comprising operations performed from all transactions ${\mathit{tx}} \in T$ 
  where $T$ is the set of all transactions executing in the system.   Thus, %replacing $\left( {\mathcal{O}_{St}}, \preccurlyeq \right)$ with  $\left( T, \preccurlyeq \right)$ in Definition \ref{def:form0}, 
