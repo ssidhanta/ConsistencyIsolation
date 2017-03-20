@@ -1054,11 +1054,12 @@ E^{s} = & \forall \mathit{st} \in \mathcal{S}_t, \; R'(x), R''(y), W'(x), W''(y)
 Given a global session trace $\mathcal{S}_t$ comprising a sequence of all operations performed from all transactions comprised in the set $T$ of all transactions executing on a system, % session trace $\mathcal{S}_t$,
 % representing a global execution of all concurrent clients on a given storage
 %system,
-we say  that   $\mathcal{S}_t$ satisfies a isolation level $\mathcal{I}$
+we say  that   $\mathcal{S}_t$ satisfies an isolation level $\mathcal{I}$
 if there exists a partial order  $\left( T, \preccurlyeq \right)$ over $T$ %of all transactions executing in the system 
 %$\left( {\mathcal{O}_{T}}, \preccurlyeq \right)$ over the set ${\mathcal{O}_{T}}$ comprising operations  present in all transactions in $T$, i.e.,  ${\mathcal{O}_{T}} = \bigcup_{{\mathit{tx}} \in T} \{ o \mid o \in {\mathit{tx}} \},$
- such that 1) if  an operation $o_{\mathit{tx}}$ on an object $x$ from ${\mathit{tx}} $ precedes an operation $o_{\mathit{ty}}$ from ${\mathit{ty}}$ on  $x$ in $\preccurlyeq$, 
- then  no operation from ${\mathit{tx}} $ can return the result of any operation from ${\mathit{ty}}$ on $x$, i.e., $\not\exists \; x, \; o(x)_{\mathit{tx}}(v)^{'},  \;  o(x, v^{'} )^{'}_{\mathit{ty}} \in \mathcal{S}_t: \;  v = v^{'}$,   %, in $\preccurlyeq$, invocation and response of all operations in ${\mathit{tx}}$ precede invocation and response of all operations in ${\mathit{ty}} $ on a common object   
+ such that 1) %${\mathit{tx}} \preccurlyeq {\mathit{ty}}$  implies: 
+ if a transaction ${\mathit{tx}}$ precedes a transaction $ {\mathit{ty}}$ in $\preccurlyeq$ and  an operation $o_{\mathit{ty}}$  from ${\mathit{ty}} $ overwrites/returns the value of $x$ resulting from an operation $o_{\mathit{tx}}$ from ${\mathit{tx}}$, 
+ then  no operation from ${\mathit{tx}} $ can overwrite/return the result of  $x$ obtained from any operation from ${\mathit{ty}}$, i.e., $\not\exists \; x, \; o(x)_{\mathit{tx}}(v)^{'},  \;  o(x, v^{'} )^{'}_{\mathit{ty}} \in \mathcal{S}_t: \;  v = v^{'}$,   %, in $\preccurlyeq$, invocation and response of all operations in ${\mathit{tx}}$ precede invocation and response of all operations in ${\mathit{ty}} $ on a common object   
   and  %1) for every operation $\mathit{o}$ in $\mathcal{O}_T$, its output is equal to the one obtain by executing the sequential specification of a linear extension of the operations preceding $\mathit{o}$ in $\preccurlyeq$,
 % the same irrespective of the
  %%among operations preceding it in $\preccurlyeq$, %$\exists {\mathit{Op}^i}^{'}, {\mathit{Op}^j}^{'} \in \mathcal{S}_t:
