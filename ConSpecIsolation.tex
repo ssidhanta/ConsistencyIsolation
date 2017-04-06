@@ -1042,7 +1042,7 @@ E^{s} = & \forall \mathit{st} \in \mathcal{S}_t, \; R'(x), R''(y), W'(x), W''(y)
 
 
  \section{Generalized Definition of Isolation Levels}
-  For specifying isolation levels, we consider only the isolation levels defined by Adya et al. \cite{DBLP:conf/icde/AdyaLO00}. We show the equivalence between the graphical representation of the dependency relations used by Adya et al. and the LTL specifications of ConSpec in Section \ref{sec:equiv}.
+  %For specifying isolation levels, we consider only the isolation levels defined by Adya et al. \cite{DBLP:conf/icde/AdyaLO00}. We show the equivalence between the graphical representation of the dependency relations used by Adya et al. and the LTL specifications of ConSpec in Section \ref{sec:equiv}.
  %The isolation level PL-1 mandates that write operations in  a transaction must be executed such that write-write
  %dependency cycles among transactions are proscribed. %before any write from a different transaction executes.
  Here, we denote read and write operations on object $x$ invoked from a transaction $\mathit{tx}$ as $r^k_{\mathit{tx}}(x){v_m}$ and $w^j_{\mathit{tx}}(x)$, respectively. Similar to a session, a transaction ${\mathit{tx}}$ also comprises a sequence of invocations and responses, one invocation and one response for each operation comprising ${\mathit{tx}}$. The operations comprised in ${\mathit{tx}}$ are ordered according to the invocation order. We assume that an operation comprising a transaction ${\mathit{tx}}$ can not be invoked till the response from the preceding operation of ${\mathit{tx}}$ has been received. Additionally, a transaction ${\mathit{tx}}$ comprises a commit and optionally an abort operation, denotes as $c_\mathit{tx}$ and $a_\mathit{tx}$, respectively.  
@@ -1059,32 +1059,51 @@ we say  that   $\mathcal{S}_t$ satisfies an isolation level $\mathcal{I}$
  if there exists a partial order  $\left( T, \preccurlyeq \right)$ over $T$ %of all transactions executing in the system 
 %$\left( {\mathcal{O}_{T}}, \preccurlyeq \right)$ over the set ${\mathcal{O}_{T}}$ comprising operations  present in all transactions in $T$, i.e.,  ${\mathcal{O}_{T}} = \bigcup_{{\mathit{tx}} \in T} \{ o \mid o \in {\mathit{tx}} \},$
  such that:  %${\mathit{tx}} \preccurlyeq {\mathit{ty}}$  implies the following: 
- 1) for each operation in a transaction ${\mathit{tx}}$ comprised in $\mathcal{S}_t$,  the value of each object is equal to the value observed by the sequential  specification of a linear extension of all transactions preceding ${\mathit{tx}}$ in $\preccurlyeq$, i.e., it is the value written by a write operation invoked by a transaction $ {\mathit{ty}}$ which 
-  precedes the transaction $ {\mathit{tx}}$ in $\preccurlyeq$,  
-  i.e.,  $\exists \; x, \; W(x,v)_{\mathit{tx}}, R(x){v^{'}}_{\mathit{ty}} \in  \mathcal{S}_t: W(x,v)_{\mathit{tx}} \operatorname{\it F}_\mathit{st} R(x){v^{'}}_{\mathit{ty}} \wedge  v = v^{'}  \Leftrightarrow \mathit{tx} \preccurlyeq \mathit{ty}$, 
+ 1) $\left( T, \preccurlyeq \right)$ obeys $E^s$, which is an LTL expression restricting $\left( T, \preccurlyeq \right)$, and for all transactions $\mathit{tx}, \mathit{ty} \in T$, which read or write on some common objects. at least one of the following conditions are satisfied: 
+ 2) %for each operation in a transaction ${\mathit{tx}}$ comprised in $\mathcal{S}_t$,  the value of each object is equal to the value observed by the sequential  specification of a linear extension of all transactions preceding ${\mathit{tx}}$ in $\preccurlyeq$, i.e., it is the value written by
+if transaction $ {\mathit{ty}}$ reads the result of at least one write operation invoked by a transaction $ {\mathit{tx}}$, this  implies $\mathit{tx} \preccurlyeq \mathit{ty}$, %which we refer to as $\mathit{tx} \preccurlyeq_{\mathit{wr}} \mathit{ty}$,  where the suffix ${\mathit{wr}}$ restricts the partial order $\preccurlyeq$ among write operations in $\mathit{tx}$ and read operations in $\mathit{ty}$, %which 
+  %precedes the transaction $ {\mathit{tx}}$ in $\preccurlyeq$,  
+  %i.e.,  $\exists W(x,v)_{\mathit{tx}}, R(x){v^{'}}_{\mathit{ty}} \in  \mathcal{S}_t: %W(x,v)_{\mathit{tx}} \operatorname{\it F}_\mathit{st} R(x){v^{'}}_{\mathit{ty}} \wedge 
+  % v = v^{'}  \rightarrow \mathit{tx} \preccurlyeq_{\mathit{wr}} \mathit{ty}$,  
+   3)  if $\mathit{tx}$ and  $ {\mathit{ty}}$ both write to $x$, and any transaction  $\mathit{tz}$, which satisfies the condition $\mathit{ty} \preccurlyeq \mathit{tz}$ as per Condition 2 given above, reads the result of the write performed by $\mathit{ty}$ on $x$ instead of a write by  $\mathit{tx}$, this  implies $\mathit{tx} \preccurlyeq \mathit{ty}$, %which we refer to as $\mathit{tx} \preccurlyeq_{\mathit{ww}} \mathit{ty}$, where the suffix ${\mathit{ww}}$ restricts the partial order $\preccurlyeq$ among write operations in $\mathit{tx}$ and $\mathit{ty}$, i.e., $ \exists {\mathit{tz}} \in T, W(x,v)_{\mathit{tx}},W(x,v^{'})_{\mathit{ty}}, R(x){v^{''}}_{\mathit{tz}} \in  \mathcal{S}_t: %W(x,v)_{\mathit{tx}} \operatorname{\it F}_\mathit{st} R(x){v^{'}}_{\mathit{ty}} \wedge 
+    %\mathit{ty} \preccurlyeq_{\mathit{wr}} \mathit{tz} \wedge v^{'} = v^{''}   \rightarrow \mathit{tx} \preccurlyeq_{\mathit{ww}} \mathit{ty}$, 
+    and 4) if $\mathit{tx}$ reads from $x$ and  $ {\mathit{ty}}$ writes to $x$, and  any transaction  $\mathit{tz}$, which satisfies the condition $\mathit{ty} \preccurlyeq \mathit{tz}$ as per Condition 2, reads the result of the write performed by $\mathit{ty}$ on $x$ instead of the result  of $\mathit{tx}$, this implies $\mathit{tx} \preccurlyeq \mathit{ty}$.  %which we refer to as $\mathit{tx} \preccurlyeq_{\mathit{rw}} \mathit{ty}$, where the suffix ${\mathit{rw}}$ restricts the partial order $\preccurlyeq$ among read operations in $\mathit{tx}$ and write operations in $\mathit{ty}$, i.e., $\exists {\mathit{tz}} \in T, R(x,v)_{\mathit{tx}}, W(x,v^{'})_{\mathit{ty}}, R(x){v^{''}}_{\mathit{tz}} \in  \mathcal{S}_t: %W(x,v)_{\mathit{tx}} \operatorname{\it F}_\mathit{st} R(x){v^{'}}_{\mathit{ty}} \wedge 
+    %\mathit{ty} \preccurlyeq_{\mathit{wr}} \mathit{tz} \wedge v^{'} = v^{''}  \rightarrow \mathit{tx} \preccurlyeq_{\mathit{rw}} \mathit{ty}$. %for each operation in a transaction ${\mathit{tx}}$ comprised in $\mathcal{S}_t$,  the value of each object is equal to the val
  %an operation $o_{\mathit{ty}}$  from ${\mathit{ty}} $ modifies (writes) /returns (reads) the value of $x$ resulting from an operation $o_{\mathit{tx}}$ from ${\mathit{tx}}$, 
  %3)  %no operation from ${\mathit{tx}} $ can modify (write) /return (read) the result of  $x$ obtained from any operation from ${\mathit{ty}}$, i.e., 
  %$\not\exists \; x, \;  w(x,v^{''})_{\mathit{tx}} \vee r(x){v^{''}}_{\mathit{tx}} \in {\mathit{tx}},  \;  \left( w(x,v^{'''})_{\mathit{ty}} \vee r(x){v^{'''}}_{\mathit{ty}} \right) F r(x){v^{''''}}_{\mathit{ty}} \in {\mathit{ty}}: \;  v^{''''} = v^{'''}$,   %, in $\preccurlyeq$, invocation and response of all operations in ${\mathit{tx}}$ precede invocation and response of all operations in ${\mathit{ty}} $ on a common object   
-  and  %1) for every operation $\mathit{o}$ in $\mathcal{O}_T$, its output is equal to the one obtain by executing the sequential specification of a linear extension of the operations preceding $\mathit{o}$ in $\preccurlyeq$,
+  %and  %1) for every operation $\mathit{o}$ in $\mathcal{O}_T$, its output is equal to the one obtain by executing the sequential specification of a linear extension of the operations preceding $\mathit{o}$ in $\preccurlyeq$,
 % the same irrespective of the
  %%among operations preceding it in $\preccurlyeq$, %$\exists {\mathit{Op}^i}^{'}, {\mathit{Op}^j}^{'} \in \mathcal{S}_t:
  %{\mathit{Op}^i}^{'} \preccurlyeq {\mathit{Op}^j}^{'}\; \Rightarrow \;{\mathit{Op}^i}^{'} R {\mathit{Op}^j}^{'}$, %\; \vee \; v_i \sim v_j$,{\mathcal{O}_{St}}, \preccurlyeq
 % and 2) 
- 2) $\left( T, \preccurlyeq \right)$ obeys $E^s$, which is an LTL expression restricting $\left( T, \preccurlyeq \right)$.
+ %2) $\left( T, \preccurlyeq \right)$ obeys $E^s$, which is an LTL expression restricting $\left( T, \preccurlyeq \right)$.
 \end{definition} 
-Condition 1 ensures  that result of no operation in  ${\mathit{ty}} $ can be observed before results of all operations in ${\mathit{tx}}$ are observed. 
+%Condition 1 ensures  that result of no operation in  ${\mathit{ty}} $ can be observed before results of all operations in ${\mathit{tx}}$ are observed. 
  Isolation levels are defined in terms of a partial order $\left( T, \preccurlyeq \right)$ 
  %$\left( {\mathcal{O}_T}, \preccurlyeq \right)$ over a set ${\mathcal{O}_T}$ comprising operations performed from all transactions ${\mathit{tx}} \in T$ 
- where $T$ is the set of all transactions executing in the system.   $\mathit{tx} \preccurlyeq_{\mathit{wr}} \mathit{ty}$ restricts the partial order $\preccurlyeq$ among write operations in $\mathit{tx}$ and read operations in $\mathit{ty}$. By inspection of Definition \ref{def:form0} , $\mathit{tx} \preccurlyeq_{\mathit{wr}} \mathit{ty}  \;  \equiv \; \mathit{tx} \preccurlyeq \mathit{ty} $.  
+ where $T$ is the set of all transactions executing in the system.   %$\mathit{tx} \preccurlyeq_{\mathit{wr}} \mathit{ty}$ restricts the partial order $\preccurlyeq$ among write operations in $\mathit{tx}$ and read operations in $\mathit{ty}$. By inspection of Definition \ref{def:form0} , $\mathit{tx} \preccurlyeq_{\mathit{wr}} \mathit{ty}  \;  \equiv \; \mathit{tx} \preccurlyeq \mathit{ty} $.  
   %Thus, %replacing $\left( {\mathcal{O}_{St}}, \preccurlyeq \right)$ with  $\left( T, \preccurlyeq \right)$ in Definition \ref{def:form0}, 
-However, most isolation levels, except a few like read uncommitted or PL-1, impose a partial order. among committed transactions only, i.e., they disallow reading results of operations performed from uncommitted/aborted transactions. ConSpec expresses such isolation levels as partial orders on committed transactions denoted as $\mathit{tx}^{c}$ and $\mathit{ty}^{c}$.  All operations in $\mathit{tx}^{c}$ and $\mathit{ty}^{c}$ are followed by commit operations $c_\mathit{tx}$ and $c_\mathit{ty}$,respectively. It further implies that $\mathit{tx}$ and $\mathit{ty}$ has not been aborted, i.e., they do not comprise abort operations $a_\mathit{tx}$ and $a_\mathit{ty}$, respectively.
-  
+We refer to the partial order relation $\mathit{tx} \preccurlyeq \mathit{ty}$ in Condition 2 as $\mathit{tx} \preccurlyeq_{\mathit{wr}} \mathit{ty}$,  where the suffix ${\mathit{wr}}$ restricts the partial order $\preccurlyeq$ among write operations in $\mathit{tx}$ and read operations in $\mathit{ty}$, %which 
+  %precedes the transaction $ {\mathit{tx}}$ in $\preccurlyeq$,  
+  i.e.,  $\exists W(x,v)_{\mathit{tx}}, R(x){v^{'}}_{\mathit{ty}} \in  \mathcal{S}_t: %W(x,v)_{\mathit{tx}} \operatorname{\it F}_\mathit{st} R(x){v^{'}}_{\mathit{ty}} \wedge 
+   v = v^{'}  \rightarrow \mathit{tx} \preccurlyeq_{\mathit{wr}} \mathit{ty}$. 
+   We refer to the partial order relation $\mathit{tx} \preccurlyeq \mathit{ty}$ in Condition 3 as $\mathit{tx} \preccurlyeq_{\mathit{ww}} \mathit{ty}$, where the suffix ${\mathit{ww}}$ restricts the partial order $\preccurlyeq$ among write operations in $\mathit{tx}$ and $\mathit{ty}$, i.e., $ \exists {\mathit{tz}} \in T, W(x,v)_{\mathit{tx}},W(x,v^{'})_{\mathit{ty}}, R(x){v^{''}}_{\mathit{tz}} \in  \mathcal{S}_t: %W(x,v)_{\mathit{tx}} \operatorname{\it F}_\mathit{st} R(x){v^{'}}_{\mathit{ty}} \wedge 
+    \mathit{ty} \preccurlyeq_{\mathit{wr}} \mathit{tz} \wedge v^{'} = v^{''}   \rightarrow \mathit{tx} \preccurlyeq_{\mathit{ww}} \mathit{ty}$. We refer to the partial order relation $\mathit{tx} \preccurlyeq \mathit{ty}$ in Condition 4 as $\mathit{tx} \preccurlyeq_{\mathit{rw}} \mathit{ty}$, where the suffix ${\mathit{rw}}$ restricts the partial order $\preccurlyeq$ among read operations in $\mathit{tx}$ and write operations in $\mathit{ty}$, i.e., $\exists {\mathit{tz}} \in T, R(x,v)_{\mathit{tx}}, W(x,v^{'})_{\mathit{ty}}, R(x){v^{''}}_{\mathit{tz}} \in  \mathcal{S}_t: %W(x,v)_{\mathit{tx}} \operatorname{\it F}_\mathit{st} R(x){v^{'}}_{\mathit{ty}} \wedge 
+    \mathit{ty} \preccurlyeq_{\mathit{wr}} \mathit{tz} \wedge v^{'} = v^{''}  \rightarrow \mathit{tx} \preccurlyeq_{\mathit{rw}} \mathit{ty}$.  
+    \par However, most isolation levels, except a few like read uncommitted or PL-1, impose a partial order. among committed transactions only, i.e., they disallow reading results of operations performed from uncommitted/aborted transactions. ConSpec expresses such isolation levels as partial orders on committed transactions denoted as $\mathit{tx}^{c}$ and $\mathit{ty}^{c}$.  All operations in $\mathit{tx}^{c}$ and $\mathit{ty}^{c}$ are followed by commit operations $c_\mathit{tx}$ and $c_\mathit{ty}$, respectively. It further implies that $\mathit{tx}$ and $\mathit{ty}$ has not been aborted, i.e., they do not comprise abort operations $a_\mathit{tx}$ and $a_\mathit{ty}$, respectively.  If a partial order $\preccurlyeq$ is a total order, denoted as  $\prec$, for any pair of transactions $\mathit{tx}, \mathit{ty} \in T$ that belong to the partial order set $\left( T, \prec \right)$, either $\mathit{tx} \prec \mathit{ty}$ or $\mathit{ty} \prec \mathit{tx}$ holds but both can not hold simultaneously. For instance, if $\prec$ satisfies Condition 2 in Definition \ref{def:form0},  
+  %which 
+  %precedes the transaction $ {\mathit{tx}}$ in $\preccurlyeq$,  
+  	$\exists W(x,v)_{\mathit{tx}}, R(x){v^{'}}_{\mathit{ty}} \in  \mathcal{S}_t: %W(x,v)_{\mathit{tx}} \operatorname{\it F}_\mathit{st} R(x){v^{'}}_{\mathit{ty}} \wedge 
+   v = v^{'}  \rightarrow \mathit{tx} \prec_{\mathit{wr}} \mathit{ty}$ or $\exists W(x,v)_{\mathit{ty}}, R(x){v^{'}}_{\mathit{tx}} \in  \mathcal{S}_t: %W(x,v)_{\mathit{tx}} \operatorname{\it F}_\mathit{st} R(x){v^{'}}_{\mathit{ty}} \wedge 
+   v = v^{'}  \rightarrow \mathit{ty} \prec_{\mathit{wr}} \mathit{tx}$.  The above total order proscribes wr dependency cycles among transactions.  
+   
  \section{Specification of Existing Isolation Levels}
   Read committed isolation level is specified as follows. 
    \begin{align}\label{eqn:readcomm}
 \begin{split}
  E^{s} =  \; \forall R_{\mathit{ty}}(x){v} \in \mathcal{S}_t. \; \exists \mathit{tx}^{c} \in T: 
-\mathit{tx}^{c} \preccurlyeq \mathit{ty}. %\quad \vee \quad \forall x, \; \mathit{tx}, \mathit{ty} \in T:  
+\mathit{tx}^{c} \preccurlyeq_{\mathit{wr}} {ty}. %\quad \vee \quad \forall x, \; \mathit{tx}, \mathit{ty} \in T:  
 %\mathit{ty} \preccurlyeq_{\mathit{ww}} \mathit{tx}
 \end{split}
   \end{align}
@@ -1099,23 +1118,31 @@ However, most isolation levels, except a few like read uncommitted or PL-1, impo
   \par We use the definition of snapshot isolation level found in \cite{kemme-thesis}. Additionally, Adya et al. \cite{Adya:1999:WCG:930194} specifies the following anomalies that snapshot isolation level proscribes. 
   SI-a: Concurrent transactions do not observe the effects of one another, and do not modify the same objects. 
   SI-b: A transaction observes complete effects of transactions that committed before it started.  SI-a can be interpreted as follows.   If a pair of transactions can observe results of each other, they are not concurrent, i.e., $\preccurlyeq$ among a pair of transactions in Definition \ref{def:form0} is a total order $\prec$.  Thus, $\forall \mathit{tx}, \mathit{ty} \in T,  W_{\mathit{tx} }(x, v),  W_{\mathit{ty} }(x, v^{'}), R_{\mathit{tx}}(x){v^{''}}, R_{\mathit{ty}}(x){v^{'''}} \in  \mathcal{S}_t: 
- W_{\mathit{tx} }(x, v) \operatorname{\it F}_\mathit{st} R_{\mathit{tx}}(x){v^{''}} \quad \wedge \quad v = v^{''}  
- \wedge \quad W_{\mathit{ty} }(x, v^{'})  \operatorname{\it F}_\mathit{st} R_{\mathit{tx}}(x){v^{'''}} \quad \wedge \quad  \quad v^{'} = v^{'''} \quad  \Rightarrow  \quad \mathit{tx}^{c} \prec_{\mathit{ww}} \mathit{ty} \quad \wedge \quad \mathit{tx}^{c} \prec_{\mathit{wr}} \mathit{ty} $. SI-b can be interpreted as: if a transaction  ${\mathit{ty}} $ observes values from another transaction  ${\mathit{tx}} $ implies a partial order  $\preccurlyeq$ on  $\mathit{tx}^{c}$ and ${\mathit{ty}} $.  This can be expressed as $\forall \mathit{tx}, \mathit{ty} \in T,  W_{\mathit{tx} }(x, v),  R_{\mathit{ty}}(x){v^{'''}} \in  \mathcal{S}_t: 
- W_{\mathit{tx} }(x, v) \operatorname{\it F}_\mathit{st} R_{\mathit{ty}}(x){v^{'}}  \quad \wedge \quad v = v^{'''} \quad  \Rightarrow  \quad \mathit{tx}^{c} \preccurlyeq_{\mathit{wr}} \mathit{ty}$. Combining the above expressions, we have: 
+ %W_{\mathit{tx} }(x, v) \operatorname{\it F}_\mathit{st} R_{\mathit{tx}}(x){v^{''}} \quad \wedge \quad 
+ v = v^{''}  \quad \wedge \quad %W_{\mathit{ty} }(x, v^{'})  \operatorname{\it F}_\mathit{st} R_{\mathit{tx}}(x){v^{'''}} \quad 
+ \wedge \quad  \quad v^{'} = v^{'''} \quad  \Rightarrow  \quad \mathit{tx}^{c} \prec_{\mathit{ww}} \mathit{ty} \quad \wedge \quad \mathit{tx}^{c} \prec_{\mathit{wr}} \mathit{ty} $. SI-b can be interpreted as: if a transaction  ${\mathit{ty}} $ observes values from another transaction  ${\mathit{tx}} $ implies a partial order  $\preccurlyeq$ on  $\mathit{tx}^{c}$ and ${\mathit{ty}} $.  This can be expressed as $\forall \mathit{tx}, \mathit{ty} \in T,  W_{\mathit{tx} }(x, v),  R_{\mathit{ty}}(x){v^{'''}} \in  \mathcal{S}_t: 
+ %W_{\mathit{tx} }(x, v) \operatorname{\it F}_\mathit{st} R_{\mathit{ty}}(x){v^{'}}  \quad \wedge \quad 
+ v = v^{'''} \quad  \Rightarrow  \quad \mathit{tx}^{c} \preccurlyeq_{\mathit{wr}} \mathit{ty}$. Combining the above expressions, we have: 
    \begin{align}\label{eqn:snap}
 \begin{split}
- E^{s} =  \; \forall \mathit{tx}, \mathit{ty} \in T,  W_{\mathit{tx} }(x, v),  W_{\mathit{ty} }(x, v^{'}), R_{\mathit{tx}}(x){v^{''}}, R_{\mathit{ty}}(x){v^{'''}}, R_{\mathit{ty}}(x){v^{''''}} \in  \mathcal{S}_t:  
- W_{\mathit{tx} }(x, v) \operatorname{\it F}_\mathit{st} R_{\mathit{tx}}(x){v^{''}} \\ \quad \wedge \quad v = v^{''}  
- \wedge \quad W_{\mathit{ty} }(x, v^{'})  \operatorname{\it F}_\mathit{st} R_{\mathit{ty}}(x){v^{'''}} \quad \wedge   v^{'} = v^{'''}   \Rightarrow  \quad \mathit{tx}^{c} \prec_{\mathit{ww}} \mathit{ty}  \quad  
- \wedge \quad W_{\mathit{tx} }(x, v) \operatorname{\it F}_\mathit{st} R_{\mathit{ty}}(x){v^{'}}  \quad \wedge \\ \quad v = v^{'''}  \quad  \Rightarrow  \quad \mathit{tx}^{c} \prec_{\mathit{wr}} \mathit{ty} \quad \wedge \quad  \mathit{tx} \not \prec_{\mathit{wr}} \mathit{tx} \quad \wedge \quad \mathit{ty} \not \prec_{\mathit{wr}} \mathit{ty} \quad \wedge \quad  v = v^{''''}.
+ E^{s} =  \; \forall \mathit{tx}, \mathit{ty} \in T,  W_{\mathit{tx} }(x, v),  W_{\mathit{ty} }(x, v^{'}), R_{\mathit{tx}}(x){v^{''}}, R_{\mathit{ty}}(x){v^{'''}}, R_{\mathit{ty}}(x){v^{''''}} \in  \mathcal{S}_t:  \\
+ %W_{\mathit{tx} }(x, v) \operatorname{\it F}_\mathit{st} R_{\mathit{tx}}(x){v^{''}} \\ \quad \wedge \quad 
+\left( v = v^{''}  \quad
+ \wedge \quad %W_{\mathit{ty} }(x, v^{'})  \operatorname{\it F}_\mathit{st} R_{\mathit{ty}}(x){v^{'''}} \quad \wedge  
+  v^{'} = v^{'''}   \quad  \Rightarrow  \quad \mathit{tx}^{c} \prec_{\mathit{ww}} \mathit{ty} % \right)  \\ 
+  \quad  
+ \wedge %\quad W_{\mathit{tx} }(x, v) \operatorname{\it F}_\mathit{st} R_{\mathit{ty}}(x){v^{'}}  \quad \wedge 
+  \quad %\left( v = v^{'''}  \quad  \Rightarrow  \quad \mathit{tx}^{c} \prec_{\mathit{wr}} \mathit{ty} \right)
+  \mathit{tx}^{c} \prec_{\mathit{wr}} \mathit{ty} \right) \quad \\
+   \wedge \quad  \left( \mathit{tx} \not \prec_{\mathit{wr}} \mathit{tx} \quad \wedge \quad \mathit{ty} \not \prec_{\mathit{wr}} \mathit{ty} \quad \wedge \quad  v = v^{''''} \right).
 % E^{s} =  \; \forall x, \; \mathit{tx}, \mathit{ty} \in T, R_{\mathit{tx}}(x){v^{''}}, W_{\mathit{tx} }(x, v), R_{\mathit{tx}}(x){v^{'''}} \in  \mathit{tx}, R_{\mathit{ty}}(x){v^{'}} \in \mathit{ty}: 
 %\mathit{tx}  \operatorname{\it F}_\mathit{st} \mathit{ty}  \quad \vdash \\
 % W_{\mathit{tx} }(x, v) \;  \operatorname{\it F}_\mathit{st} \;  c_\mathit{tx} \;  \operatorname{\it F}_\mathit{st} \; R_{\mathit{ty}}(x){v^{'}} \quad \Rightarrow \quad v = v^{'} \quad \wedge \\ 
 %R_{\mathit{tx}}(x){v^{''}} \;  \operatorname{\it F}_\mathit{st} \; W_{\mathit{tx} }(x, v) \;  \operatorname{\it F}_\mathit{st} \;  R_{\mathit{tx}}(x){v^{'''}}   \quad \Rightarrow  \quad v^{'''} = v^{''}  
 \end{split}
   \end{align}
- \par In ConSpec, the notation $\mathit{tx} \preccurlyeq_{\mathit{ww}} \mathit{ty}$ restricts the partial order $\preccurlyeq$ among write operations in $\mathit{tx}$ and $\mathit{ty}$, i.e., $\exists \; W(x,v)_{\mathit{tx}}, W(x,v^{'})_{\mathit{ty}}, R(x){v^{''}}_{\mathit{ty}} \in  \mathcal{S}_t: W(x,v)_{\mathit{tx}} \operatorname{\it F}_\mathit{st} W(x,v^{'})_{\mathit{ty}} \wedge W(x,v^{'})_{\mathit{ty}} \operatorname{\it F}_\mathit{st} R(x,v^{''})_{\mathit{ty}} \wedge  v^{''} = v^{'}  \Leftrightarrow \mathit{tx} \preccurlyeq_{\mathit{ww}} \mathit{ty}$. 
-  $\prec_{\mathit{ww}}$ restricts the total order $\prec$ among write operations in $\mathit{tx}$ and $\mathit{ty}$, i.e., $\mathit{tx} \prec_{\mathit{ww}} \mathit{ty}  \;  \equiv \; \exists {\mathit{W}}_ \mathit{tx}, {\mathit{W}}_ \mathit{ty} \in \mathcal{S}_t: {\mathit{W}}_ \mathit{tx} \prec {\mathit{W}}_ \mathit{ty}$. $\mathit{tx} \preccurlyeq_{\mathit{rw}} \mathit{ty}$ restricts the partial order $\preccurlyeq$ among read operations in $\mathit{tx}$ and write operations in $\mathit{ty}$, i.e., $\exists \; R(x,v)_{\mathit{tx}}, W(x,v^{'})_{\mathit{ty}}, R(x){v^{''}}_{\mathit{ty}} \in  \mathcal{S}_t:  W(x,v^{'})_{\mathit{ty}} \operatorname{\it F}_\mathit{st} R(x,v^{''})_{\mathit{ty}} \wedge  v^{''} = v^{'}  \Leftrightarrow \mathit{tx} \preccurlyeq_{\mathit{rw}} \mathit{ty}$.  Similarly,  $\mathit{tx} \preccurlyeq_{\mathit{rw}} \mathit{ty}$ restricts the partial order $\preccurlyeq$ among read operations in $\mathit{tx}$ and write operations in $\mathit{ty}$, i.e., $\mathit{tx} \preccurlyeq_{\mathit{rw}} \mathit{ty}  \;  \equiv \; \forall {\mathit{R}}_ \mathit{tx} \in \mathit{tx}, {\mathit{W}}_ \mathit{ty} \in \mathit{ty}: {\mathit{R}}_ \mathit{tx} \preccurlyeq {\mathit{W}}_ \mathit{ty}$.  $\mathit{tx} \preccurlyeq(x)_{\mathit{rw}} \mathit{ty}$  (referred to in PL-3) further restricts the partial order $\preccurlyeq$ among read operations in $\mathit{tx}$ and write operations in $\mathit{ty}$ on a common object $x$, i.e., $\mathit{tx} \preccurlyeq(x)_{\mathit{rw}} \mathit{ty}  \;  \equiv \; \forall {\mathit{R}}(x){v}_ \mathit{tx} \in \mathit{tx}, {\mathit{W}}(x,v^{'})_ \mathit{ty} \in \mathit{ty}: {\mathit{R}}(x){v^{''}}_ \mathit{tx} \preccurlyeq {\mathit{W}}(x,v^{'''})_ \mathit{ty}$. 
+ \par %In ConSpec, the notation $\mathit{tx} \preccurlyeq_{\mathit{ww}} \mathit{ty}$ restricts the partial order $\preccurlyeq$ among write operations in $\mathit{tx}$ and $\mathit{ty}$, i.e., $\exists \; W(x,v)_{\mathit{tx}}, W(x,v^{'})_{\mathit{ty}}, R(x){v^{''}}_{\mathit{ty}} \in  \mathcal{S}_t: W(x,v)_{\mathit{tx}} \operatorname{\it F}_\mathit{st} W(x,v^{'})_{\mathit{ty}} \wedge W(x,v^{'})_{\mathit{ty}} \operatorname{\it F}_\mathit{st} R(x,v^{''})_{\mathit{ty}} \wedge  v^{''} = v^{'}  \Leftrightarrow \mathit{tx} \preccurlyeq_{\mathit{ww}} \mathit{ty}$. 
+  %$\prec_{\mathit{ww}}$ restricts the total order $\prec$ among write operations in $\mathit{tx}$ and $\mathit{ty}$, i.e., $\mathit{tx} \prec_{\mathit{ww}} \mathit{ty}  \;  \equiv \; \exists {\mathit{W}}_ \mathit{tx}, {\mathit{W}}_ \mathit{ty} \in \mathcal{S}_t: {\mathit{W}}_ \mathit{tx} \prec {\mathit{W}}_ \mathit{ty}$. $\mathit{tx} \preccurlyeq_{\mathit{rw}} \mathit{ty}$ restricts the partial order $\preccurlyeq$ among read operations in $\mathit{tx}$ and write operations in $\mathit{ty}$, i.e., $\exists \; R(x,v)_{\mathit{tx}}, W(x,v^{'})_{\mathit{ty}}, R(x){v^{''}}_{\mathit{ty}} \in  \mathcal{S}_t:  W(x,v^{'})_{\mathit{ty}} \operatorname{\it F}_\mathit{st} R(x,v^{''})_{\mathit{ty}} \wedge  v^{''} = v^{'}  \Leftrightarrow \mathit{tx} \preccurlyeq_{\mathit{rw}} \mathit{ty}$.  Similarly,  $\mathit{tx} \preccurlyeq_{\mathit{rw}} \mathit{ty}$ restricts the partial order $\preccurlyeq$ among read operations in $\mathit{tx}$ and write operations in $\mathit{ty}$, i.e., $\mathit{tx} \preccurlyeq_{\mathit{rw}} \mathit{ty}  \;  \equiv \; \forall {\mathit{R}}_ \mathit{tx} \in \mathit{tx}, {\mathit{W}}_ \mathit{ty} \in \mathit{ty}: {\mathit{R}}_ \mathit{tx} \preccurlyeq {\mathit{W}}_ \mathit{ty}$.  $\mathit{tx} \preccurlyeq(x)_{\mathit{rw}} \mathit{ty}$  (referred to in PL-3) further restricts the partial order $\preccurlyeq$ among read operations in $\mathit{tx}$ and write operations in $\mathit{ty}$ on a common object $x$, i.e., $\mathit{tx} \preccurlyeq(x)_{\mathit{rw}} \mathit{ty}  \;  \equiv \; \forall {\mathit{R}}(x){v}_ \mathit{tx} \in \mathit{tx}, {\mathit{W}}(x,v^{'})_ \mathit{ty} \in \mathit{ty}: {\mathit{R}}(x){v^{''}}_ \mathit{tx} \preccurlyeq {\mathit{W}}(x,v^{'''})_ \mathit{ty}$. 
   \par The isolation level PL-1 mandates that write operations in  a transaction must be executed such that write-write
  dependency cycles among transactions are proscribed. In ConSpec, we specify PL-1 in terms of a total order among write operations from different transactions. Let $\mathit{tx}$ and $\mathit{ty}$  be consecutive transactions executing in a system.  Thus, PL-1 is specified as follows. 
 %in the \textbf{form-2} format, given in Equation \ref{form-2},
@@ -1236,10 +1263,11 @@ that proscribes write-write and write-read dependency cycles \cite{DBLP:conf/icd
 %{\mathit{W}}'_\mathit{ty}(x) \preccurlyeq {\mathit{W}}_ \mathit{tx}(x) \wedge \\
 %{\mathit{W}}_\mathit{tx}(x) \preccurlyeq {\mathit{R}}_ \mathit{ty}(x) \quad \vee \quad
 %{\mathit{R}}_\mathit{ty}(x) \preccurlyeq {\mathit{W}}_ \mathit{tx}(x),
-E^{s} =    \; \forall x, \; \mathit{tx}^{c}, \mathit{ty}^{c} \in T: 
+E^{s} =    \; \forall x, \; \mathit{tx}, \mathit{ty} %\mathit{tx}^{c}, \mathit{ty}^{c} 
+ \in T: 
 \mathit{tx}^{c} \prec_{\mathit{wr}} \mathit{ty}^{c} %\quad \vee \quad \forall x, \; \mathit{tx}^{c}, \mathit{ty}^{c} \in T: \mathit{ty}^{c} \preccurlyeq_{\mathit{wr}} \mathit{tx}^{c} 
- \quad \wedge 
-\; \forall x, \; \mathit{tx}, \mathit{ty} \in T: 
+ \quad \wedge \quad 
+%\; \forall x, \; \mathit{tx}, \mathit{ty} \in T: 
 \mathit{tx} \prec_{\mathit{ww}} \mathit{ty}. % \quad \vee \quad \forall x, \; \mathit{tx}, \mathit{ty} \in T:  
 %\mathit{ty} \preccurlyeq_{\mathit{ww}} \mathit{tx}. % \quad \wedge \\
 %\forall x, \; \mathit{tx}, \mathit{ty} \in T: \mathit{tx} \preccurlyeq_{\mathit{wr}} \mathit{ty} \quad \vee \quad \forall x, \; \mathit{tx}, \mathit{ty} \in T: 
@@ -1363,14 +1391,16 @@ E^{s} =    \; \forall x, \; \mathit{tx}^{c}, \mathit{ty}^{c} \in T:
 %{\mathit{R}}_\mathit{ty}(x) \preccurlyeq {\mathit{W}}_ \mathit{tx}(x) \quad \wedge \\
 %{\mathit{R}}'_\mathit{tx}(x) \preccurlyeq {\mathit{W}}'_ \mathit{ty}(x) \quad \vee \quad
 %{\mathit{W}}'_\mathit{ty}(x) \preccurlyeq {\mathit{R}}'_ \mathit{tx}(x),
-E^{s} =  \; \forall x, \; \mathit{tx}^{c}, \mathit{ty}^{c} \in T: 
+E^{s} =  \; \forall x, \; \mathit{tx}, \mathit{ty} %\mathit{tx}^{c}, \mathit{ty}^{c}
+ \in T: 
 \mathit{tx}^{c} \prec_{\mathit{wr}} \mathit{ty}^{c} %\quad \vee \quad \forall x, \; \mathit{tx}^{c}, \mathit{ty}^{c} \in T: \mathit{ty}^{c} \preccurlyeq_{\mathit{wr}} \mathit{tx}^{c} 
- \quad \wedge 
-\; \forall x, \; \mathit{tx}, \mathit{ty} \in T: 
+ \quad \wedge \quad 
+%\; \forall x, \; \mathit{tx}, \mathit{ty} \in T: 
 \mathit{tx} \prec_{\mathit{ww}} \mathit{ty} %\quad \vee \quad \forall x, \; \mathit{tx}, \mathit{ty} \in T:  
 %\mathit{ty} \preccurlyeq_{\mathit{ww}} \mathit{tx} 
- \quad \wedge 
-\forall x, \; \mathit{tx}, \mathit{ty} \in T: \mathit{tx} \prec_{\mathit{rw}} \mathit{ty}. %\quad \vee \quad \forall x, \; \mathit{tx}, \mathit{ty} \in T: 
+ \quad \wedge \quad 
+%\forall x, \; \mathit{tx}, \mathit{ty} \in T: 
+ \mathit{tx} \prec_{\mathit{rw}} \mathit{ty}. %\quad \vee \quad \forall x, \; \mathit{tx}, \mathit{ty} \in T: 
 %\mathit{ty} \preccurlyeq_{\mathit{rw}} \mathit{tx},
 \end{split}
   \end{align}.
