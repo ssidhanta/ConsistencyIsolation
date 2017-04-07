@@ -1059,15 +1059,15 @@ we say  that   $\mathcal{S}_t$ satisfies an isolation level $\mathcal{I}$
  if there exists a partial order  $\left( T, \preccurlyeq \right)$ over $T$ %of all transactions executing in the system 
 %$\left( {\mathcal{O}_{T}}, \preccurlyeq \right)$ over the set ${\mathcal{O}_{T}}$ comprising operations  present in all transactions in $T$, i.e.,  ${\mathcal{O}_{T}} = \bigcup_{{\mathit{tx}} \in T} \{ o \mid o \in {\mathit{tx}} \},$
  such that:  %${\mathit{tx}} \preccurlyeq {\mathit{ty}}$  implies the following: 
- 1) $\left( T, \preccurlyeq \right)$ obeys $E^s$, which is an LTL expression restricting $\left( T, \preccurlyeq \right)$, and for all transactions $\mathit{tx}, \mathit{ty} \in T$, which read or write on some common objects. at least one of the following conditions are satisfied: 
- 2) %for each operation in a transaction ${\mathit{tx}}$ comprised in $\mathcal{S}_t$,  the value of each object is equal to the value observed by the sequential  specification of a linear extension of all transactions preceding ${\mathit{tx}}$ in $\preccurlyeq$, i.e., it is the value written by
-if transaction $ {\mathit{ty}}$ reads the result of at least one write operation invoked by a transaction $ {\mathit{tx}}$, this  implies $\mathit{tx} \preccurlyeq \mathit{ty}$, %which we refer to as $\mathit{tx} \preccurlyeq_{\mathit{wr}} \mathit{ty}$,  where the suffix ${\mathit{wr}}$ restricts the partial order $\preccurlyeq$ among write operations in $\mathit{tx}$ and read operations in $\mathit{ty}$, %which 
+ 1) $\left( T, \preccurlyeq \right)$ obeys $E^s$, which is an LTL expression restricting $\left( T, \preccurlyeq \right)$, and 2) for all transactions $\mathit{tx}, \mathit{ty} \in T$, which read or write on some common objects, %. at least one of the following conditions are satisfied: 
+ %2) %for each operation in a transaction ${\mathit{tx}}$ comprised in $\mathcal{S}_t$,  the value of each object is equal to the value observed by the sequential  specification of a linear extension of all transactions preceding ${\mathit{tx}}$ in $\preccurlyeq$, i.e., it is the value written by
+if $ {\mathit{ty}}$ reads the result of at least one write operation invoked by $ {\mathit{tx}}$, this  implies $\mathit{tx} \preccurlyeq \mathit{ty}$. %which we refer to as $\mathit{tx} \preccurlyeq_{\mathit{wr}} \mathit{ty}$,  where the suffix ${\mathit{wr}}$ restricts the partial order $\preccurlyeq$ among write operations in $\mathit{tx}$ and read operations in $\mathit{ty}$, %which 
   %precedes the transaction $ {\mathit{tx}}$ in $\preccurlyeq$,  
   %i.e.,  $\exists W(x,v)_{\mathit{tx}}, R(x){v^{'}}_{\mathit{ty}} \in  \mathcal{S}_t: %W(x,v)_{\mathit{tx}} \operatorname{\it F}_\mathit{st} R(x){v^{'}}_{\mathit{ty}} \wedge 
   % v = v^{'}  \rightarrow \mathit{tx} \preccurlyeq_{\mathit{wr}} \mathit{ty}$,  
-   3)  if $\mathit{tx}$ and  $ {\mathit{ty}}$ both write to $x$, and any transaction  $\mathit{tz}$, which satisfies the condition $\mathit{ty} \preccurlyeq \mathit{tz}$ as per Condition 2 given above, reads the result of the write performed by $\mathit{ty}$ on $x$ instead of a write by  $\mathit{tx}$, this  implies $\mathit{tx} \preccurlyeq \mathit{ty}$, %which we refer to as $\mathit{tx} \preccurlyeq_{\mathit{ww}} \mathit{ty}$, where the suffix ${\mathit{ww}}$ restricts the partial order $\preccurlyeq$ among write operations in $\mathit{tx}$ and $\mathit{ty}$, i.e., $ \exists {\mathit{tz}} \in T, W(x,v)_{\mathit{tx}},W(x,v^{'})_{\mathit{ty}}, R(x){v^{''}}_{\mathit{tz}} \in  \mathcal{S}_t: %W(x,v)_{\mathit{tx}} \operatorname{\it F}_\mathit{st} R(x){v^{'}}_{\mathit{ty}} \wedge 
-    %\mathit{ty} \preccurlyeq_{\mathit{wr}} \mathit{tz} \wedge v^{'} = v^{''}   \rightarrow \mathit{tx} \preccurlyeq_{\mathit{ww}} \mathit{ty}$, 
-    and 4) if $\mathit{tx}$ reads from $x$ and  $ {\mathit{ty}}$ writes to $x$, and  any transaction  $\mathit{tz}$, which satisfies the condition $\mathit{ty} \preccurlyeq \mathit{tz}$ as per Condition 2, reads the result of the write performed by $\mathit{ty}$ on $x$ instead of the result  of $\mathit{tx}$, this implies $\mathit{tx} \preccurlyeq \mathit{ty}$.  %which we refer to as $\mathit{tx} \preccurlyeq_{\mathit{rw}} \mathit{ty}$, where the suffix ${\mathit{rw}}$ restricts the partial order $\preccurlyeq$ among read operations in $\mathit{tx}$ and write operations in $\mathit{ty}$, i.e., $\exists {\mathit{tz}} \in T, R(x,v)_{\mathit{tx}}, W(x,v^{'})_{\mathit{ty}}, R(x){v^{''}}_{\mathit{tz}} \in  \mathcal{S}_t: %W(x,v)_{\mathit{tx}} \operatorname{\it F}_\mathit{st} R(x){v^{'}}_{\mathit{ty}} \wedge 
+%   3)  if $\mathit{tx}$ and  $ {\mathit{ty}}$ both write to $x$, and any transaction  $\mathit{tz}$, which satisfies the condition $\mathit{ty} \preccurlyeq \mathit{tz}$ as per Condition 2 given above, reads the result of the write performed by $\mathit{ty}$ on $x$ instead of a write by  $\mathit{tx}$, this  implies $\mathit{tx} \preccurlyeq \mathit{ty}$, %which we refer to as $\mathit{tx} \preccurlyeq_{\mathit{ww}} \mathit{ty}$, where the suffix ${\mathit{ww}}$ restricts the partial order $\preccurlyeq$ among write operations in $\mathit{tx}$ and $\mathit{ty}$, i.e., $ \exists {\mathit{tz}} \in T, W(x,v)_{\mathit{tx}},W(x,v^{'})_{\mathit{ty}}, R(x){v^{''}}_{\mathit{tz}} \in  \mathcal{S}_t: %W(x,v)_{\mathit{tx}} \operatorname{\it F}_\mathit{st} R(x){v^{'}}_{\mathit{ty}} \wedge 
+%    %\mathit{ty} \preccurlyeq_{\mathit{wr}} \mathit{tz} \wedge v^{'} = v^{''}   \rightarrow \mathit{tx} \preccurlyeq_{\mathit{ww}} \mathit{ty}$, 
+%    and 4) if $\mathit{tx}$ reads from $x$ and  $ {\mathit{ty}}$ writes to $x$, and  any transaction  $\mathit{tz}$, which satisfies the condition $\mathit{ty} \preccurlyeq \mathit{tz}$ as per Condition 2, reads the result of the write performed by $\mathit{ty}$ on $x$ instead of the result  of $\mathit{tx}$, this implies $\mathit{tx} \preccurlyeq \mathit{ty}$.  %which we refer to as $\mathit{tx} \preccurlyeq_{\mathit{rw}} \mathit{ty}$, where the suffix ${\mathit{rw}}$ restricts the partial order $\preccurlyeq$ among read operations in $\mathit{tx}$ and write operations in $\mathit{ty}$, i.e., $\exists {\mathit{tz}} \in T, R(x,v)_{\mathit{tx}}, W(x,v^{'})_{\mathit{ty}}, R(x){v^{''}}_{\mathit{tz}} \in  \mathcal{S}_t: %W(x,v)_{\mathit{tx}} \operatorname{\it F}_\mathit{st} R(x){v^{'}}_{\mathit{ty}} \wedge 
     %\mathit{ty} \preccurlyeq_{\mathit{wr}} \mathit{tz} \wedge v^{'} = v^{''}  \rightarrow \mathit{tx} \preccurlyeq_{\mathit{rw}} \mathit{ty}$. %for each operation in a transaction ${\mathit{tx}}$ comprised in $\mathcal{S}_t$,  the value of each object is equal to the val
  %an operation $o_{\mathit{ty}}$  from ${\mathit{ty}} $ modifies (writes) /returns (reads) the value of $x$ resulting from an operation $o_{\mathit{tx}}$ from ${\mathit{tx}}$, 
  %3)  %no operation from ${\mathit{tx}} $ can modify (write) /return (read) the result of  $x$ obtained from any operation from ${\mathit{ty}}$, i.e., 
@@ -1084,26 +1084,35 @@ if transaction $ {\mathit{ty}}$ reads the result of at least one write operation
  %$\left( {\mathcal{O}_T}, \preccurlyeq \right)$ over a set ${\mathcal{O}_T}$ comprising operations performed from all transactions ${\mathit{tx}} \in T$ 
  where $T$ is the set of all transactions executing in the system.   %$\mathit{tx} \preccurlyeq_{\mathit{wr}} \mathit{ty}$ restricts the partial order $\preccurlyeq$ among write operations in $\mathit{tx}$ and read operations in $\mathit{ty}$. By inspection of Definition \ref{def:form0} , $\mathit{tx} \preccurlyeq_{\mathit{wr}} \mathit{ty}  \;  \equiv \; \mathit{tx} \preccurlyeq \mathit{ty} $.  
   %Thus, %replacing $\left( {\mathcal{O}_{St}}, \preccurlyeq \right)$ with  $\left( T, \preccurlyeq \right)$ in Definition \ref{def:form0}, 
-We refer to the partial order relation $\mathit{tx} \preccurlyeq \mathit{ty}$ in Condition 2 as $\mathit{tx} \preccurlyeq_{\mathit{wr}} \mathit{ty}$,  where the suffix ${\mathit{wr}}$ restricts the partial order $\preccurlyeq$ among write operations in $\mathit{tx}$ and read operations in $\mathit{ty}$, %which 
+The partial order relation $\mathit{tx} \preccurlyeq \mathit{ty}$ in Condition 2 %as $\mathit{tx} \preccurlyeq_{\mathit{wr}} \mathit{ty}$,  where the suffix ${\mathit{wr}}$ restricts the partial order $\preccurlyeq$ among write operations in $\mathit{tx}$ and read operations in $\mathit{ty}$, %which 
   %precedes the transaction $ {\mathit{tx}}$ in $\preccurlyeq$,  
-  i.e.,  $\exists W(x,v)_{\mathit{tx}}, R(x){v^{'}}_{\mathit{ty}} \in  \mathcal{S}_t: %W(x,v)_{\mathit{tx}} \operatorname{\it F}_\mathit{st} R(x){v^{'}}_{\mathit{ty}} \wedge 
-   v = v^{'}  \rightarrow \mathit{tx} \preccurlyeq_{\mathit{wr}} \mathit{ty}$. 
-   We refer to the partial order relation $\mathit{tx} \preccurlyeq \mathit{ty}$ in Condition 3 as $\mathit{tx} \preccurlyeq_{\mathit{ww}} \mathit{ty}$, where the suffix ${\mathit{ww}}$ restricts the partial order $\preccurlyeq$ among write operations in $\mathit{tx}$ and $\mathit{ty}$, i.e., $ \exists {\mathit{tz}} \in T, W(x,v)_{\mathit{tx}},W(x,v^{'})_{\mathit{ty}}, R(x){v^{''}}_{\mathit{tz}} \in  \mathcal{S}_t: %W(x,v)_{\mathit{tx}} \operatorname{\it F}_\mathit{st} R(x){v^{'}}_{\mathit{ty}} \wedge 
-    \mathit{ty} \preccurlyeq_{\mathit{wr}} \mathit{tz} \wedge v^{'} = v^{''}   \rightarrow \mathit{tx} \preccurlyeq_{\mathit{ww}} \mathit{ty}$. We refer to the partial order relation $\mathit{tx} \preccurlyeq \mathit{ty}$ in Condition 4 as $\mathit{tx} \preccurlyeq_{\mathit{rw}} \mathit{ty}$, where the suffix ${\mathit{rw}}$ restricts the partial order $\preccurlyeq$ among read operations in $\mathit{tx}$ and write operations in $\mathit{ty}$, i.e., $\exists {\mathit{tz}} \in T, R(x,v)_{\mathit{tx}}, W(x,v^{'})_{\mathit{ty}}, R(x){v^{''}}_{\mathit{tz}} \in  \mathcal{S}_t: %W(x,v)_{\mathit{tx}} \operatorname{\it F}_\mathit{st} R(x){v^{'}}_{\mathit{ty}} \wedge 
-    \mathit{ty} \preccurlyeq_{\mathit{wr}} \mathit{tz} \wedge v^{'} = v^{''}  \rightarrow \mathit{tx} \preccurlyeq_{\mathit{rw}} \mathit{ty}$.  
-    \par However, most isolation levels, except a few like read uncommitted or PL-1, impose a partial order. among committed transactions only, i.e., they disallow reading results of operations performed from uncommitted/aborted transactions. ConSpec expresses such isolation levels as partial orders on committed transactions denoted as $\mathit{tx}^{c}$ and $\mathit{ty}^{c}$.  All operations in $\mathit{tx}^{c}$ and $\mathit{ty}^{c}$ are followed by commit operations $c_\mathit{tx}$ and $c_\mathit{ty}$, respectively. It further implies that $\mathit{tx}$ and $\mathit{ty}$ has not been aborted, i.e., they do not comprise abort operations $a_\mathit{tx}$ and $a_\mathit{ty}$, respectively.  If a partial order $\preccurlyeq$ is a total order, denoted as  $\prec$, for any pair of transactions $\mathit{tx}, \mathit{ty} \in T$ that belong to the partial order set $\left( T, \prec \right)$, either $\mathit{tx} \prec \mathit{ty}$ or $\mathit{ty} \prec \mathit{tx}$ holds but both can not hold simultaneously. For instance, if $\prec$ satisfies Condition 2 in Definition \ref{def:form0},  
+  implies  $\exists W(x,v)_{\mathit{tx}}, R(x){v^{'}}_{\mathit{ty}} \in  \mathcal{S}_t: %W(x,v)_{\mathit{tx}} \operatorname{\it F}_\mathit{st} R(x){v^{'}}_{\mathit{ty}} \wedge 
+   v = v^{'}  \rightarrow \mathit{tx} \preccurlyeq \mathit{ty}$. 
+   %We refer to the partial order relation $\mathit{tx} \preccurlyeq \mathit{ty}$ in Condition 3 as $\mathit{tx} \preccurlyeq_{\mathit{ww}} \mathit{ty}$, where the suffix ${\mathit{ww}}$ restricts the partial order $\preccurlyeq$ among write operations in $\mathit{tx}$ and $\mathit{ty}$, i.e., $ \exists {\mathit{tz}} \in T, W(x,v)_{\mathit{tx}},W(x,v^{'})_{\mathit{ty}}, R(x){v^{''}}_{\mathit{tz}} \in  \mathcal{S}_t: %W(x,v)_{\mathit{tx}} \operatorname{\it F}_\mathit{st} R(x){v^{'}}_{\mathit{ty}} \wedge 
+    %\mathit{ty} \preccurlyeq_{\mathit{wr}} \mathit{tz} \wedge v^{'} = v^{''}   \rightarrow \mathit{tx} \preccurlyeq_{\mathit{ww}} \mathit{ty}$. We refer to the partial order relation $\mathit{tx} \preccurlyeq \mathit{ty}$ in Condition 4 as $\mathit{tx} \preccurlyeq_{\mathit{rw}} \mathit{ty}$, where the suffix ${\mathit{rw}}$ restricts the partial order $\preccurlyeq$ among read operations in $\mathit{tx}$ and write operations in $\mathit{ty}$, i.e., $\exists {\mathit{tz}} \in T, R(x,v)_{\mathit{tx}}, W(x,v^{'})_{\mathit{ty}}, R(x){v^{''}}_{\mathit{tz}} \in  \mathcal{S}_t: %W(x,v)_{\mathit{tx}} \operatorname{\it F}_\mathit{st} R(x){v^{'}}_{\mathit{ty}} \wedge 
+ %   \mathit{ty} \preccurlyeq_{\mathit{wr}} \mathit{tz} \wedge v^{'} = v^{''}  \rightarrow \mathit{tx} \preccurlyeq_{\mathit{rw}} \mathit{ty}$.  
+    \par However, most isolation levels, except a few like read uncommitted, impose a partial order among committed transactions only, i.e., they disallow reading results of operations performed from uncommitted/aborted transactions. ConSpec expresses such isolation levels as partial orders on committed transactions denoted as $\mathit{tx}^{c}$ and $\mathit{ty}^{c}$.  All operations in $\mathit{tx}^{c}$ and $\mathit{ty}^{c}$ are followed by commit operations $c_\mathit{tx}$ and $c_\mathit{ty}$, respectively. It further implies that $\mathit{tx}$ and $\mathit{ty}$ has not been aborted, i.e., they do not comprise abort operations $a_\mathit{tx}$ and $a_\mathit{ty}$, respectively.  If a partial order $\preccurlyeq$ is a total order, denoted as  $\prec$, for any pair of transactions $\mathit{tx}, \mathit{ty} \in T$ that belong to the partial order set $\left( T, \prec \right)$, either $\mathit{tx} \prec \mathit{ty}$ or $\mathit{ty} \prec \mathit{tx}$ holds but both can not hold simultaneously. For instance, if $\prec$ satisfies Condition 2 in Definition \ref{def:form0},  
   %which 
   %precedes the transaction $ {\mathit{tx}}$ in $\preccurlyeq$,  
   	$\exists W(x,v)_{\mathit{tx}}, R(x){v^{'}}_{\mathit{ty}} \in  \mathcal{S}_t: %W(x,v)_{\mathit{tx}} \operatorname{\it F}_\mathit{st} R(x){v^{'}}_{\mathit{ty}} \wedge 
-   v = v^{'}  \rightarrow \mathit{tx} \prec_{\mathit{wr}} \mathit{ty}$ or $\exists W(x,v)_{\mathit{ty}}, R(x){v^{'}}_{\mathit{tx}} \in  \mathcal{S}_t: %W(x,v)_{\mathit{tx}} \operatorname{\it F}_\mathit{st} R(x){v^{'}}_{\mathit{ty}} \wedge 
-   v = v^{'}  \rightarrow \mathit{ty} \prec_{\mathit{wr}} \mathit{tx}$.  The above total order proscribes wr dependency cycles among transactions.  
+   v = v^{'}  \rightarrow \mathit{tx} \prec \mathit{ty}$ or $\exists W(x,v)_{\mathit{ty}}, R(x){v^{'}}_{\mathit{tx}} \in  \mathcal{S}_t: %W(x,v)_{\mathit{tx}} \operatorname{\it F}_\mathit{st} R(x){v^{'}}_{\mathit{ty}} \wedge 
+   v = v^{'}  \rightarrow \mathit{ty} \prec \mathit{tx}$.  The above total order proscribes wr dependency cycles among transactions.  
    
  \section{Specification of Existing Isolation Levels}
-  Read committed isolation level is specified as follows. 
+ Here, we specify the ANSI SQL isolation levels using ConSpec \cite{Berenson:1995:CAS:223784.223785}.  The Read uncommitted isolation level is the lowest (i.e., weakest/least restrictive) isolation level; it only disallows the P0 phenomenon, also known as dirty write anomaly.  Read uncommitted can be specified as follows. 
+   \begin{align}\label{eqn:readuncomm}
+\begin{split}
+ E^{s} =  \; \forall {\mathit{tx}}, {\mathit{ty}} \in T: \;
+\mathit{tx} \preccurlyeq {\mathit{ty}} \quad \Rightarrow  \quad \not \exists \mathit{tz} \in T: \; \mathit{tz} \preccurlyeq {\mathit{ty}}. %\quad \vee \quad \forall x, \; \mathit{tx}, \mathit{ty} \in T:  
+%\mathit{ty} \preccurlyeq_{\mathit{ww}} \mathit{tx}
+\end{split}
+  \end{align}
+
+ \par Read committed isolation level proscribes P1 phenomenon, also known as dirty reads, in addition to proscribing dirty write. It is specified as follows. 
    \begin{align}\label{eqn:readcomm}
 \begin{split}
  E^{s} =  \; \forall R_{\mathit{ty}}(x){v} \in \mathcal{S}_t. \; \exists \mathit{tx}^{c} \in T: 
-\mathit{tx}^{c} \preccurlyeq_{\mathit{wr}} {ty}. %\quad \vee \quad \forall x, \; \mathit{tx}, \mathit{ty} \in T:  
+\mathit{tx}^{c} \preccurlyeq {ty} \quad \wedge   \quad \not \exists \mathit{tz} \in T: \; \mathit{tz} \preccurlyeq {\mathit{ty}}. %\quad \vee \quad \forall x, \; \mathit{tx}, \mathit{ty} \in T:  
 %\mathit{ty} \preccurlyeq_{\mathit{ww}} \mathit{tx}
 \end{split}
   \end{align}
@@ -1111,300 +1120,321 @@ We refer to the partial order relation $\mathit{tx} \preccurlyeq \mathit{ty}$ in
    \begin{align}\label{eqn:repeatread}
 \begin{split}
  E^{s} =  \; \forall R_{\mathit{ty}}(x){v}, R_{\mathit{ty}}(x){v^{'}} \in \mathcal{S}_t. \; \exists \mathit{tx} \in T: 
-\mathit{tx}^{c} \preccurlyeq_{\mathit{wr}} \mathit{ty} \quad \wedge \quad \mathit{tx} \not \preccurlyeq_{\mathit{wr}} \mathit{tx} \quad \wedge \quad v = v^{''}. %\quad \vee \quad \forall x, \; \mathit{tx}, \mathit{ty} \in T:  
+\mathit{tx}^{c} \preccurlyeq \mathit{ty} \quad \wedge \quad \mathit{ty} \not \preccurlyeq \mathit{ty} \quad \wedge \quad v = v^{''} \quad \wedge   \quad \not \exists \mathit{tz} \in T: \\ \mathit{tz} \preccurlyeq {\mathit{ty}}. %\quad \vee \quad \forall x, \; \mathit{tx}, \mathit{ty} \in T:  
+%\mathit{ty} \preccurlyeq_{\mathit{ww}} \mathit{tx}
+\end{split}
+  \end{align}
+  \par Cursor stability isolation level is specified as follows. 
+   \begin{align}\label{eqn:cursor}
+\begin{split}
+ E^{s} =  \; \forall W_{\mathit{tx} }(x, v^{''}), R_{\mathit{ty}}(x){v}, R_{\mathit{ty}}(x){v^{'}} \in \mathcal{S}_t: \; % . \; \exists \mathit{tx} \in T: 
+\mathit{tx}^{c} \preccurlyeq \mathit{ty} \quad \wedge \quad \mathit{ty} \not \preccurlyeq \mathit{ty} \quad \wedge \quad v = v^{'} \\\quad \wedge   \quad \not \exists \mathit{tz} \in T: \; \mathit{tz} \preccurlyeq {\mathit{ty}}. %\quad \vee \quad \forall x, \; \mathit{tx}, \mathit{ty} \in T:  
 %\mathit{ty} \preccurlyeq_{\mathit{ww}} \mathit{tx}
 \end{split}
   \end{align}
   \par We use the definition of snapshot isolation level found in \cite{kemme-thesis}. Additionally, Adya et al. \cite{Adya:1999:WCG:930194} specifies the following anomalies that snapshot isolation level proscribes. 
   SI-a: Concurrent transactions do not observe the effects of one another, and do not modify the same objects. 
-  SI-b: A transaction observes complete effects of transactions that committed before it started.  SI-a can be interpreted as follows.   If a pair of transactions can observe results of each other, they are not concurrent, i.e., $\preccurlyeq$ among a pair of transactions in Definition \ref{def:form0} is a total order $\prec$.  Thus, $\forall \mathit{tx}, \mathit{ty} \in T,  W_{\mathit{tx} }(x, v),  W_{\mathit{ty} }(x, v^{'}), R_{\mathit{tx}}(x){v^{''}}, R_{\mathit{ty}}(x){v^{'''}} \in  \mathcal{S}_t: 
+  SI-b: A transaction observes complete effects of transactions that committed before it started.  SI-a can be interpreted as follows.   If a pair of transactions can observe results of each other, they are not concurrent, i.e., $\preccurlyeq$ among a pair of transactions in Definition \ref{def:form0} is a total order $\prec$.  According to SI-b the above total order must be among committed version of $\mathit{tx}$ and $\mathit{ty}$, i.e., $\mathit{tx}^{c} \prec \mathit{ty}$. The above condition reduces to: $ \forall \mathit{tx}, \mathit{ty} \in T,  W_{\mathit{tx} }(x, v),  %W_{\mathit{ty} }(x, v^{'}), %R_{\mathit{tx}}(x){v^{''}},    
+  R_{\mathit{ty}}(x){v^{'}}, R_{\mathit{ty}}(x){v^{''}} \in  \mathcal{S}_t:
  %W_{\mathit{tx} }(x, v) \operatorname{\it F}_\mathit{st} R_{\mathit{tx}}(x){v^{''}} \quad \wedge \quad 
- v = v^{''}  \quad \wedge \quad %W_{\mathit{ty} }(x, v^{'})  \operatorname{\it F}_\mathit{st} R_{\mathit{tx}}(x){v^{'''}} \quad 
- \wedge \quad  \quad v^{'} = v^{'''} \quad  \Rightarrow  \quad \mathit{tx}^{c} \prec_{\mathit{ww}} \mathit{ty} \quad \wedge \quad \mathit{tx}^{c} \prec_{\mathit{wr}} \mathit{ty} $. SI-b can be interpreted as: if a transaction  ${\mathit{ty}} $ observes values from another transaction  ${\mathit{tx}} $ implies a partial order  $\preccurlyeq$ on  $\mathit{tx}^{c}$ and ${\mathit{ty}} $.  This can be expressed as $\forall \mathit{tx}, \mathit{ty} \in T,  W_{\mathit{tx} }(x, v),  R_{\mathit{ty}}(x){v^{'''}} \in  \mathcal{S}_t: 
+\left( v = v^{'}%W_{\mathit{ty} }(x, v^{'})  \operatorname{\it F}_\mathit{st} R_{\mathit{tx}}(x){v^{'''}} \quad 
+ \mathit{tx}^{c} \prec \mathit{ty} \right)$. Snapshot isolation also includes the repeatable read read. condition, i.e., $\forall \mathit{tx}, \mathit{ty} \in T,  W_{\mathit{tx} }(x, v),  %W_{\mathit{ty} }(x, v^{'}), %R_{\mathit{tx}}(x){v^{''}},    
+  R_{\mathit{ty}}(x){v^{'}}, R_{\mathit{ty}}(x){v^{''}} \in  \mathcal{S}_t: \left( \mathit{tx} \not \preccurlyeq \mathit{tx} \quad \wedge \quad \mathit{ty} \not \preccurlyeq \mathit{ty} \quad \wedge \quad v^{'} = v^{''} \right)$.  %SI-b can be interpreted as: if a transaction  ${\mathit{ty}} $ observes values from another transaction  ${\mathit{tx}} $ implies a partial order  $\preccurlyeq$ on  $\mathit{tx}^{c}$ and ${\mathit{ty}} $.  This can be expressed as $\forall \mathit{tx}, \mathit{ty} \in T,  W_{\mathit{tx} }(x, v),  R_{\mathit{ty}}(x){v^{'''}} \in  \mathcal{S}_t: 
  %W_{\mathit{tx} }(x, v) \operatorname{\it F}_\mathit{st} R_{\mathit{ty}}(x){v^{'}}  \quad \wedge \quad 
- v = v^{'''} \quad  \Rightarrow  \quad \mathit{tx}^{c} \preccurlyeq_{\mathit{wr}} \mathit{ty}$. Combining the above expressions, we have: 
+% v = v^{'''} \quad  \Rightarrow  \quad \mathit{tx}^{c} \preccurlyeq \mathit{ty}$. 
+ Combining the above expressions, we have: 
    \begin{align}\label{eqn:snap}
 \begin{split}
- E^{s} =  \; \forall \mathit{tx}, \mathit{ty} \in T,  W_{\mathit{tx} }(x, v),  W_{\mathit{ty} }(x, v^{'}), R_{\mathit{tx}}(x){v^{''}}, R_{\mathit{ty}}(x){v^{'''}}, R_{\mathit{ty}}(x){v^{''''}} \in  \mathcal{S}_t:  \\
+ E^{s} =  \; \forall \mathit{tx}, \mathit{ty} \in T,  W_{\mathit{tx} }(x, v),  %W_{\mathit{ty} }(x, v^{'}), %R_{\mathit{tx}}(x){v^{''}},    
+  R_{\mathit{ty}}(x){v^{'}}, R_{\mathit{ty}}(x){v^{''}} \in  \mathcal{S}_t:  \;
  %W_{\mathit{tx} }(x, v) \operatorname{\it F}_\mathit{st} R_{\mathit{tx}}(x){v^{''}} \\ \quad \wedge \quad 
-\left( v = v^{''}  \quad
- \wedge \quad %W_{\mathit{ty} }(x, v^{'})  \operatorname{\it F}_\mathit{st} R_{\mathit{ty}}(x){v^{'''}} \quad \wedge  
-  v^{'} = v^{'''}   \quad  \Rightarrow  \quad \mathit{tx}^{c} \prec_{\mathit{ww}} \mathit{ty} % \right)  \\ 
-  \quad  
- \wedge %\quad W_{\mathit{tx} }(x, v) \operatorname{\it F}_\mathit{st} R_{\mathit{ty}}(x){v^{'}}  \quad \wedge 
-  \quad %\left( v = v^{'''}  \quad  \Rightarrow  \quad \mathit{tx}^{c} \prec_{\mathit{wr}} \mathit{ty} \right)
-  \mathit{tx}^{c} \prec_{\mathit{wr}} \mathit{ty} \right) \quad \\
-   \wedge \quad  \left( \mathit{tx} \not \prec_{\mathit{wr}} \mathit{tx} \quad \wedge \quad \mathit{ty} \not \prec_{\mathit{wr}} \mathit{ty} \quad \wedge \quad  v = v^{''''} \right).
+\left( v = v^{'}   %v = v^{''}  \quad
+ %\wedge \quad %W_{\mathit{ty} }(x, v^{'})  \operatorname{\it F}_\mathit{st} R_{\mathit{ty}}(x){v^{'''}} \quad \wedge  
+  %v^{'} = v^{'''}   
+  \quad  \Rightarrow  \quad %\mathit{tx}^{c} \prec_{\mathit{ww}} \mathit{ty} % \right)  \\ 
+  %\quad  
+ %\wedge %\quad W_{\mathit{tx} }(x, v) \operatorname{\it F}_\mathit{st} R_{\mathit{ty}}(x){v^{'}}  \quad \wedge 
+  %\quad %\left( v = v^{'''}  \quad  \Rightarrow  \quad \mathit{tx}^{c} \prec_{\mathit{wr}} \mathit{ty} \right)
+  \mathit{tx}^{c} \prec \mathit{ty} \right) \quad 
+   \wedge \\
+    \quad  \left( \mathit{tx} \not \preccurlyeq \mathit{tx} \quad \wedge \quad \mathit{ty} \not \preccurlyeq \mathit{ty} \quad \wedge \quad v^{'} = v^{''} \right) \quad \wedge   \left( \quad \not \exists \mathit{tz} \in T: \; \mathit{tz} \preccurlyeq {\mathit{ty}} \right).
 % E^{s} =  \; \forall x, \; \mathit{tx}, \mathit{ty} \in T, R_{\mathit{tx}}(x){v^{''}}, W_{\mathit{tx} }(x, v), R_{\mathit{tx}}(x){v^{'''}} \in  \mathit{tx}, R_{\mathit{ty}}(x){v^{'}} \in \mathit{ty}: 
 %\mathit{tx}  \operatorname{\it F}_\mathit{st} \mathit{ty}  \quad \vdash \\
 % W_{\mathit{tx} }(x, v) \;  \operatorname{\it F}_\mathit{st} \;  c_\mathit{tx} \;  \operatorname{\it F}_\mathit{st} \; R_{\mathit{ty}}(x){v^{'}} \quad \Rightarrow \quad v = v^{'} \quad \wedge \\ 
 %R_{\mathit{tx}}(x){v^{''}} \;  \operatorname{\it F}_\mathit{st} \; W_{\mathit{tx} }(x, v) \;  \operatorname{\it F}_\mathit{st} \;  R_{\mathit{tx}}(x){v^{'''}}   \quad \Rightarrow  \quad v^{'''} = v^{''}  
 \end{split}
   \end{align}
- \par %In ConSpec, the notation $\mathit{tx} \preccurlyeq_{\mathit{ww}} \mathit{ty}$ restricts the partial order $\preccurlyeq$ among write operations in $\mathit{tx}$ and $\mathit{ty}$, i.e., $\exists \; W(x,v)_{\mathit{tx}}, W(x,v^{'})_{\mathit{ty}}, R(x){v^{''}}_{\mathit{ty}} \in  \mathcal{S}_t: W(x,v)_{\mathit{tx}} \operatorname{\it F}_\mathit{st} W(x,v^{'})_{\mathit{ty}} \wedge W(x,v^{'})_{\mathit{ty}} \operatorname{\it F}_\mathit{st} R(x,v^{''})_{\mathit{ty}} \wedge  v^{''} = v^{'}  \Leftrightarrow \mathit{tx} \preccurlyeq_{\mathit{ww}} \mathit{ty}$. 
-  %$\prec_{\mathit{ww}}$ restricts the total order $\prec$ among write operations in $\mathit{tx}$ and $\mathit{ty}$, i.e., $\mathit{tx} \prec_{\mathit{ww}} \mathit{ty}  \;  \equiv \; \exists {\mathit{W}}_ \mathit{tx}, {\mathit{W}}_ \mathit{ty} \in \mathcal{S}_t: {\mathit{W}}_ \mathit{tx} \prec {\mathit{W}}_ \mathit{ty}$. $\mathit{tx} \preccurlyeq_{\mathit{rw}} \mathit{ty}$ restricts the partial order $\preccurlyeq$ among read operations in $\mathit{tx}$ and write operations in $\mathit{ty}$, i.e., $\exists \; R(x,v)_{\mathit{tx}}, W(x,v^{'})_{\mathit{ty}}, R(x){v^{''}}_{\mathit{ty}} \in  \mathcal{S}_t:  W(x,v^{'})_{\mathit{ty}} \operatorname{\it F}_\mathit{st} R(x,v^{''})_{\mathit{ty}} \wedge  v^{''} = v^{'}  \Leftrightarrow \mathit{tx} \preccurlyeq_{\mathit{rw}} \mathit{ty}$.  Similarly,  $\mathit{tx} \preccurlyeq_{\mathit{rw}} \mathit{ty}$ restricts the partial order $\preccurlyeq$ among read operations in $\mathit{tx}$ and write operations in $\mathit{ty}$, i.e., $\mathit{tx} \preccurlyeq_{\mathit{rw}} \mathit{ty}  \;  \equiv \; \forall {\mathit{R}}_ \mathit{tx} \in \mathit{tx}, {\mathit{W}}_ \mathit{ty} \in \mathit{ty}: {\mathit{R}}_ \mathit{tx} \preccurlyeq {\mathit{W}}_ \mathit{ty}$.  $\mathit{tx} \preccurlyeq(x)_{\mathit{rw}} \mathit{ty}$  (referred to in PL-3) further restricts the partial order $\preccurlyeq$ among read operations in $\mathit{tx}$ and write operations in $\mathit{ty}$ on a common object $x$, i.e., $\mathit{tx} \preccurlyeq(x)_{\mathit{rw}} \mathit{ty}  \;  \equiv \; \forall {\mathit{R}}(x){v}_ \mathit{tx} \in \mathit{tx}, {\mathit{W}}(x,v^{'})_ \mathit{ty} \in \mathit{ty}: {\mathit{R}}(x){v^{''}}_ \mathit{tx} \preccurlyeq {\mathit{W}}(x,v^{'''})_ \mathit{ty}$. 
-  \par The isolation level PL-1 mandates that write operations in  a transaction must be executed such that write-write
- dependency cycles among transactions are proscribed. In ConSpec, we specify PL-1 in terms of a total order among write operations from different transactions. Let $\mathit{tx}$ and $\mathit{ty}$  be consecutive transactions executing in a system.  Thus, PL-1 is specified as follows. 
-%in the \textbf{form-2} format, given in Equation \ref{form-2},
- as follow.
- % \begin{align}\label{eqn:PL1}
-%\begin{split}
-%\forall i,j,k,l,m, tx, ty \left( tx F ty \; \wedge \; \star w^i_{tx} F w^j_{tx} \star \; \wedge \; \star w^k_{ty} F w^l_{ty} \star \right)^\mathit{po}_{o_m} \\
-%\Rightarrow \left(\star w^i_{tx} F w^j_{tx} \star \; \wedge \; \star w^k_{ty} F w^l_{ty} \star  \right)^\mathit{st}_{o_m},
-%\end{split}
-%  \end{align}
- %\begin{align}\label{eqn:PL1}
-%\begin{split}
-%\forall i,j, m, tx \left( \star w^i_{tx} F^{o} w^j_{tx} \star \right)^\mathit{po}_{o_m}
-%\Rightarrow \left(\star w^i_{tx} F^{o} w^j_{tx} \star  \right)^\mathit{st}_{o_m},
-%\end{split}
-%  \end{align}
-  \begin{align}\label{eqn:PL1}
+ \par Serializability, or one-copy serializability, is the strongest (i.e., the most restrictive) among the ANSI SQL isolation levels. It is defined in terms of a partial order $\preccurlyeq_S$; every transaction $\mathit{t}$ in $\preccurlyeq_S$ returns result of the latest transaction preceding $\mathit{t}$ in $\preccurlyeq_S$.  It can be specified as follows.  
+  \begin{align}\label{eqn:serial}
 \begin{split}
-%\forall i, j, k, l, m, n, p, q, u, z, tx \\ \big( \star W^j_{tx}(v_l) F^{o} W^m_{tx}(v_q) X^{o} R^p_{tx}{v_n} \star \big)^\mathit{po}_{o} \\
-%\Rightarrow \big(G \star \left( v_n = v_q \right) \oplus \\ \left( W^j_{tx}(v_l) F^{o} W^m_{tx}(v_q) X^{o} W^u_{tx}(v_z)  X^{o} R^p_{tx}{v_n}  \right) \star  \big)^\mathit{st}_{o},
-%\forall i, j, tx \\ \big( \star W^i_{tx} F^{o} W^j_{tx}(v_q) X^{o} R^p_{tx}{v_n} \star \big)^\mathit{po}_{o} \\
-%\Rightarrow \big(G \star \left( v_n = v_q \right) \oplus \\ \left( W^j_{tx}(v_l) F^{o} W^m_{tx}(v_q) X^{o} W^u_{tx}(v_z)  X^{o} R^p_{tx}{v_n}  \right) \star  \big)^\mathit{st}_{o},
-%\forall i, j, o, \mathit{st}, \mathit{tx} \big( \left( W^i_\mathit{tx} F W^j_\mathit{tx} \in \mathit{st} \right) \; \Rightarrow \; \exists S_p \left(  W^i_\mathit{tx} F W^j_\mathit{tx} \in S_p \right)
-%\\ \wedge  \not\exists R^k_\mathit{tx} \in \mathit{st} \left( W^i_\mathit{tx} F W^j_\mathit{tx} F R^k_\mathit{tx} \in \mathit{st} \right) \wedge \left( W^j_\mathit{tx} F R^k_\mathit{tx} \in \mathit{st} \right) \\ \wedge \left( v^k = v^i \right) \big),
-% E^s = \forall  \mathit{st} \in \mathcal{S}_t, \mathit{tx}, \mathit{ty} \in \mathcal{S}_t, x, y,\\
-%  {W}(x)^{'}_\mathit{tx},  {W}(y)^{''}_\mathit{tx},
-%  {W}(x)^{'''}_\mathit{ty}, {W}(y)^{''''}_\mathit{ty} \in  \mathcal{S}_t \\
-% %\mathit{tx} F \mathit{ty} \Rightarrow
-%  \big( \left( \not\exists {R^{'''''}}(x)_\mathit{tx}, {R^{''''''}}(y)_\mathit{ty} \in \mathcal{S}_t \right) \\
-%  % \big( \left( {W^i}(x)^{'}_\mathit{tx} F c_\mathit{tx} F  {W^k}(x)^{'}_\mathit{ty} F {R^m}(x)^{'}_\mathit{ty} \in \mathit{st} \right) \\
-%%\wedge \left( {W^j}(y)^{'}_\mathit{tx} F c_\mathit{tx} F {W^l}(y)^{'}_\mathit{ty} F {R^n}(y)^{'}_\mathit{ty} \in \mathcal{S}_t \right) \wedge \\
-%\big( \left( \left( v^{'''''}= v^{'''} \right) \wedge \left( v^{''''} = v \right) \right) \vee \\ \left( \left( v^{'''''} = v^{'} \right) \wedge \left( v^{''''} = v^{''}  \right) \right)  \big) \big)
-%E^{s} =  & \; \forall x, y, \mathcal{S}_t, \; {\mathit{W}}_\mathit{tx}(x), {\mathit{W}}'_ \mathit{ty}(x), {\mathit{W}}_\mathit{tx}(x)'', {\mathit{W}}'''_ \mathit{ty}(y) \in \mathcal{S}_t : \\
-%& {\mathit{W}}_\mathit{tx}(x) \preccurlyeq {\mathit{W}}'_ \mathit{ty}(y) \quad \Rightarrow \quad
-%{\mathit{W}}_\mathit{tx}(x)'' \preccurlyeq {\mathit{W}}'''_ \mathit{ty}(y)
-%E^{s} =  & \; \forall x, \; \mathit{tx}, \mathit{ty} \in T \; {\mathit{W}}_\mathit{tx}(x), {\mathit{W}}'_ \mathit{ty}(x) \in \mathcal{S}_t : \\
-%& {\mathit{W}}_\mathit{tx}(x) \preccurlyeq {\mathit{W}}'_ \mathit{ty}(x) \quad \vee \quad
-%{\mathit{W}}'_\mathit{ty}(x) \preccurlyeq {\mathit{W}}_ \mathit{tx}(x)
-E^{s} =  \; \forall x, \; \mathit{tx}, \mathit{ty} \in T: 
-\mathit{tx} \prec_{\mathit{ww}} \mathit{ty}. %\quad \vee \quad \forall x, \; \mathit{tx}, \mathit{ty} \in T:  
+ E^{s} =  \; \forall {\mathit{tx}}^{c}, \mathit{y}^{c} \in T: \;
+\mathit{tx}^{c} \preccurlyeq_S \mathit{ty}^{c}. %\quad \vee \quad \forall x, \; \mathit{tx}, \mathit{ty} \in T:  
 %\mathit{ty} \preccurlyeq_{\mathit{ww}} \mathit{tx}
 \end{split}
-  \end{align}
-The isolation level PL-2 states that operations from a transaction can not read a value that was not the final value that was
-committed by a transaction. Further, a transaction cannot read values written by aborted transactions. Additionally,
-operations in a transaction must be executed in an order
-that proscribes write-write and write-read dependency cycles \cite{DBLP:conf/icde/AdyaLO00} among transactions. PL-2 is given as
- % \begin{align}\label{eqn:PL2}
+  \end{align}%In ConSpec, the notation $\mathit{tx} \preccurlyeq_{\mathit{ww}} \mathit{ty}$ restricts the partial order $\preccurlyeq$ among write operations in $\mathit{tx}$ and $\mathit{ty}$, i.e., $\exists \; W(x,v)_{\mathit{tx}}, W(x,v^{'})_{\mathit{ty}}, R(x){v^{''}}_{\mathit{ty}} \in  \mathcal{S}_t: W(x,v)_{\mathit{tx}} \operatorname{\it F}_\mathit{st} W(x,v^{'})_{\mathit{ty}} \wedge W(x,v^{'})_{\mathit{ty}} \operatorname{\it F}_\mathit{st} R(x,v^{''})_{\mathit{ty}} \wedge  v^{''} = v^{'}  \Leftrightarrow \mathit{tx} \preccurlyeq_{\mathit{ww}} \mathit{ty}$. 
+  %$\prec_{\mathit{ww}}$ restricts the total order $\prec$ among write operations in $\mathit{tx}$ and $\mathit{ty}$, i.e., $\mathit{tx} \prec_{\mathit{ww}} \mathit{ty}  \;  \equiv \; \exists {\mathit{W}}_ \mathit{tx}, {\mathit{W}}_ \mathit{ty} \in \mathcal{S}_t: {\mathit{W}}_ \mathit{tx} \prec {\mathit{W}}_ \mathit{ty}$. $\mathit{tx} \preccurlyeq_{\mathit{rw}} \mathit{ty}$ restricts the partial order $\preccurlyeq$ among read operations in $\mathit{tx}$ and write operations in $\mathit{ty}$, i.e., $\exists \; R(x,v)_{\mathit{tx}}, W(x,v^{'})_{\mathit{ty}}, R(x){v^{''}}_{\mathit{ty}} \in  \mathcal{S}_t:  W(x,v^{'})_{\mathit{ty}} \operatorname{\it F}_\mathit{st} R(x,v^{''})_{\mathit{ty}} \wedge  v^{''} = v^{'}  \Leftrightarrow \mathit{tx} \preccurlyeq_{\mathit{rw}} \mathit{ty}$.  Similarly,  $\mathit{tx} \preccurlyeq_{\mathit{rw}} \mathit{ty}$ restricts the partial order $\preccurlyeq$ among read operations in $\mathit{tx}$ and write operations in $\mathit{ty}$, i.e., $\mathit{tx} \preccurlyeq_{\mathit{rw}} \mathit{ty}  \;  \equiv \; \forall {\mathit{R}}_ \mathit{tx} \in \mathit{tx}, {\mathit{W}}_ \mathit{ty} \in \mathit{ty}: {\mathit{R}}_ \mathit{tx} \preccurlyeq {\mathit{W}}_ \mathit{ty}$.  $\mathit{tx} \preccurlyeq(x)_{\mathit{rw}} \mathit{ty}$  (referred to in PL-3) further restricts the partial order $\preccurlyeq$ among read operations in $\mathit{tx}$ and write operations in $\mathit{ty}$ on a common object $x$, i.e., $\mathit{tx} \preccurlyeq(x)_{\mathit{rw}} \mathit{ty}  \;  \equiv \; \forall {\mathit{R}}(x){v}_ \mathit{tx} \in \mathit{tx}, {\mathit{W}}(x,v^{'})_ \mathit{ty} \in \mathit{ty}: {\mathit{R}}(x){v^{''}}_ \mathit{tx} \preccurlyeq {\mathit{W}}(x,v^{'''})_ \mathit{ty}$. 
+%  \par The isolation level PL-1 mandates that write operations in  a transaction must be executed such that write-write
+% dependency cycles among transactions are proscribed. In ConSpec, we specify PL-1 in terms of a total order among write operations from different transactions. Let $\mathit{tx}$ and $\mathit{ty}$  be consecutive transactions executing in a system.  Thus, PL-1 is specified as follows. 
+%%in the \textbf{form-2} format, given in Equation \ref{form-2},
+% as follow.
+% % \begin{align}\label{eqn:PL1}
+%%\begin{split}
+%%\forall i,j,k,l,m, tx, ty \left( tx F ty \; \wedge \; \star w^i_{tx} F w^j_{tx} \star \; \wedge \; \star w^k_{ty} F w^l_{ty} \star \right)^\mathit{po}_{o_m} \\
+%%\Rightarrow \left(\star w^i_{tx} F w^j_{tx} \star \; \wedge \; \star w^k_{ty} F w^l_{ty} \star  \right)^\mathit{st}_{o_m},
+%%\end{split}
+%%  \end{align}
+% %\begin{align}\label{eqn:PL1}
+%%\begin{split}
+%%\forall i,j, m, tx \left( \star w^i_{tx} F^{o} w^j_{tx} \star \right)^\mathit{po}_{o_m}
+%%\Rightarrow \left(\star w^i_{tx} F^{o} w^j_{tx} \star  \right)^\mathit{st}_{o_m},
+%%\end{split}
+%%  \end{align}
+%  \begin{align}\label{eqn:PL1}
 %\begin{split}
-%\forall i, j, tx, ty \left( tx F ty \right)^\mathit{po}_{\mathit{o}_j} \Rightarrow \left(\star c_{tx} F \mathit{o}^i_{ty} F c_{ty} \star \right)^\mathit{st}_{\mathit{o}_j},
+%%\forall i, j, k, l, m, n, p, q, u, z, tx \\ \big( \star W^j_{tx}(v_l) F^{o} W^m_{tx}(v_q) X^{o} R^p_{tx}{v_n} \star \big)^\mathit{po}_{o} \\
+%%\Rightarrow \big(G \star \left( v_n = v_q \right) \oplus \\ \left( W^j_{tx}(v_l) F^{o} W^m_{tx}(v_q) X^{o} W^u_{tx}(v_z)  X^{o} R^p_{tx}{v_n}  \right) \star  \big)^\mathit{st}_{o},
+%%\forall i, j, tx \\ \big( \star W^i_{tx} F^{o} W^j_{tx}(v_q) X^{o} R^p_{tx}{v_n} \star \big)^\mathit{po}_{o} \\
+%%\Rightarrow \big(G \star \left( v_n = v_q \right) \oplus \\ \left( W^j_{tx}(v_l) F^{o} W^m_{tx}(v_q) X^{o} W^u_{tx}(v_z)  X^{o} R^p_{tx}{v_n}  \right) \star  \big)^\mathit{st}_{o},
+%%\forall i, j, o, \mathit{st}, \mathit{tx} \big( \left( W^i_\mathit{tx} F W^j_\mathit{tx} \in \mathit{st} \right) \; \Rightarrow \; \exists S_p \left(  W^i_\mathit{tx} F W^j_\mathit{tx} \in S_p \right)
+%%\\ \wedge  \not\exists R^k_\mathit{tx} \in \mathit{st} \left( W^i_\mathit{tx} F W^j_\mathit{tx} F R^k_\mathit{tx} \in \mathit{st} \right) \wedge \left( W^j_\mathit{tx} F R^k_\mathit{tx} \in \mathit{st} \right) \\ \wedge \left( v^k = v^i \right) \big),
+%% E^s = \forall  \mathit{st} \in \mathcal{S}_t, \mathit{tx}, \mathit{ty} \in \mathcal{S}_t, x, y,\\
+%%  {W}(x)^{'}_\mathit{tx},  {W}(y)^{''}_\mathit{tx},
+%%  {W}(x)^{'''}_\mathit{ty}, {W}(y)^{''''}_\mathit{ty} \in  \mathcal{S}_t \\
+%% %\mathit{tx} F \mathit{ty} \Rightarrow
+%%  \big( \left( \not\exists {R^{'''''}}(x)_\mathit{tx}, {R^{''''''}}(y)_\mathit{ty} \in \mathcal{S}_t \right) \\
+%%  % \big( \left( {W^i}(x)^{'}_\mathit{tx} F c_\mathit{tx} F  {W^k}(x)^{'}_\mathit{ty} F {R^m}(x)^{'}_\mathit{ty} \in \mathit{st} \right) \\
+%%%\wedge \left( {W^j}(y)^{'}_\mathit{tx} F c_\mathit{tx} F {W^l}(y)^{'}_\mathit{ty} F {R^n}(y)^{'}_\mathit{ty} \in \mathcal{S}_t \right) \wedge \\
+%%\big( \left( \left( v^{'''''}= v^{'''} \right) \wedge \left( v^{''''} = v \right) \right) \vee \\ \left( \left( v^{'''''} = v^{'} \right) \wedge \left( v^{''''} = v^{''}  \right) \right)  \big) \big)
+%%E^{s} =  & \; \forall x, y, \mathcal{S}_t, \; {\mathit{W}}_\mathit{tx}(x), {\mathit{W}}'_ \mathit{ty}(x), {\mathit{W}}_\mathit{tx}(x)'', {\mathit{W}}'''_ \mathit{ty}(y) \in \mathcal{S}_t : \\
+%%& {\mathit{W}}_\mathit{tx}(x) \preccurlyeq {\mathit{W}}'_ \mathit{ty}(y) \quad \Rightarrow \quad
+%%{\mathit{W}}_\mathit{tx}(x)'' \preccurlyeq {\mathit{W}}'''_ \mathit{ty}(y)
+%%E^{s} =  & \; \forall x, \; \mathit{tx}, \mathit{ty} \in T \; {\mathit{W}}_\mathit{tx}(x), {\mathit{W}}'_ \mathit{ty}(x) \in \mathcal{S}_t : \\
+%%& {\mathit{W}}_\mathit{tx}(x) \preccurlyeq {\mathit{W}}'_ \mathit{ty}(x) \quad \vee \quad
+%%{\mathit{W}}'_\mathit{ty}(x) \preccurlyeq {\mathit{W}}_ \mathit{tx}(x)
+%E^{s} =  \; \forall x, \; \mathit{tx}, \mathit{ty} \in T: 
+%\mathit{tx} \prec_{\mathit{ww}} \mathit{ty}. %\quad \vee \quad \forall x, \; \mathit{tx}, \mathit{ty} \in T:  
+%%\mathit{ty} \preccurlyeq_{\mathit{ww}} \mathit{tx}
 %\end{split}
 %  \end{align}
-%\begin{align}\label{eqn:PL2}
+%The isolation level PL-2 states that operations from a transaction can not read a value that was not the final value that was
+%committed by a transaction. Further, a transaction cannot read values written by aborted transactions. Additionally,
+%operations in a transaction must be executed in an order
+%that proscribes write-write and write-read dependency cycles \cite{DBLP:conf/icde/AdyaLO00} among transactions. PL-2 is given as
+% % \begin{align}\label{eqn:PL2}
+%%\begin{split}
+%%\forall i, j, tx, ty \left( tx F ty \right)^\mathit{po}_{\mathit{o}_j} \Rightarrow \left(\star c_{tx} F \mathit{o}^i_{ty} F c_{ty} \star \right)^\mathit{st}_{\mathit{o}_j},
+%%\end{split}
+%%  \end{align}
+%%\begin{align}\label{eqn:PL2}
+%%\begin{split}
+%%\forall i, j, m, tx, ty \left( tx F^{o} ty \; \wedge w^i_{ty} F^{o} r^j_{ty} \right)^\mathit{po}_{\mathit{o}_m} \Rightarrow \\ \left(\star c_{tx} F^{o} w^i_{ty} F^{o} r^j_{ty} F^{o} c_{ty} \star \right)^\mathit{st}_{\mathit{o}_m},
+%%\end{split}
+%%  \end{align}
+%  \begin{align}\label{eqn:PL2}
 %\begin{split}
-%\forall i, j, m, tx, ty \left( tx F^{o} ty \; \wedge w^i_{ty} F^{o} r^j_{ty} \right)^\mathit{po}_{\mathit{o}_m} \Rightarrow \\ \left(\star c_{tx} F^{o} w^i_{ty} F^{o} r^j_{ty} F^{o} c_{ty} \star \right)^\mathit{st}_{\mathit{o}_m},
-%\end{split}
-%  \end{align}
-  \begin{align}\label{eqn:PL2}
-\begin{split}
-%\forall i, j, k, l, m, n, p, q, u, a, b, c, tx, ty \big( \left( tx F ty \right) \\ \wedge \left( \star W^j_{tx}(v_l)X^{o} R^k_{tx}{v_m} \star \right) \wedge \left( \star W^n_{ty}(v_q)X^{o} R^s_{ty}{v_u} \star \right) \big)^\mathit{po}_{\mathit{o}_i} \\
-%\Rightarrow \big( G \; \left( \left( v_m = v_l \right) \oplus \left( W^j_{tx}(v_l) F^{o} W^p_{tx}(v_a) X^{o} R^k_{tx}{v_m} \right) \right) F \;  c_{tx} \\ F \; \left( \left( v_u = v_q \right) \oplus \left( W^n_{ty}(v_q) F^{o} W^b_{ty}(v_c) X^{o} R^s_{ty}{v_u} \right) \right) \; F \; c_{ty} \star \big)^\mathit{st}_{\mathit{o}_i},
-%\forall i, j, k, l, o, \mathit{st}, \mathit{tx}, \mathit{ty} \big( \left( \mathit{tx} F \mathit{ty} \right) \wedge \left( W^i_\mathit{tx} F R^j_\mathit{tx} \in \mathit{st} \right) \\
-%\wedge \left( W^k_\mathit{ty} F R^l_\mathit{ty} \in \mathit{st} \right)
-%\; \Rightarrow \; \exists S \left( W^i_\mathit{tx} F R^j_\mathit{tx} F c_\mathit{tx} \in S \right) \\
-%\wedge \left(  c_\mathit{tx} F W^k_\mathit{ty} F R^l_\mathit{ty} F c_\mathit{ty} \in S_p \right)
-%\\ \wedge  \not\exists W^m_\mathit{tx} \in \mathit{st} \left( W^m_\mathit{tx} F W^i_\mathit{tx} F R^j_\mathit{tx} \in \mathit{st} \right) \wedge \left( v^j = v^m \right) \\
-%\wedge \not\exists W^n_\mathit{ty} \in \mathit{st} \left( W^n_\mathit{ty} F W^k_\mathit{ty} F R^l_\mathit{ty} \in \mathit{st} \right)  \wedge \left( v^l = v^n \right) \big)
-%E^{r} = \forall  \mathit{st}, \mathit{st}^{'} \in  \mathcal{S}_t, \mathit{tx}, \mathit{ty} \in  \mathcal{S}_t \\ \big(
-% % \mathit{tx} F \mathit{ty} \Rightarrow
-% \big( \big( \not\exists a_\mathit{tx} \in \mathit{st}
-% \big(  {W}(x)^{'}_\mathit{tx} F {R}(x)^{''}_\mathit{ty} \in \mathit{st} \big) \\
-%  \wedge  \not\exists a_\mathit{ty} \in \mathit{st}
-% \big( {W}(y)^{'''}_\mathit{ty} F {R}(y)^{''''}_\mathit{tx} \in \mathit{st}  \big) \big) \wedge
-%%\not\exists \left( c_{ty} F c_{tx} \in \mathit{st} \right)  \wedge \\
-% \big( \not\exists  {W}(x)^{'}_\mathit{tx}, {W}(x)^{''}_\mathit{tx}, \\ {R}(x)^{'''}_\mathit{ty} \in  \mathit{st}  \big)
-% \big( \left( {W}(x)^{'}_\mathit{tx}  F {W}(x)^{''}_\mathit{tx} F  c_\mathit{tx} \in  \mathit{st} \right) \\
-%   \wedge \left( v^{''} = v \right)  \big)  \wedge
-%   \not\exists \left( {W}(x)^{'}_\mathit{ty}, {W}(x)^{''}_\mathit{ty}, {R}(x)^{'''}_\mathit{tx} \in  \mathit{st} \right) \\
-%    \big( \left(
-% {W}(x)^{'}_\mathit{ty}  F {W}(x)^{''}_\mathit{ty} F  c_\mathit{ty} \in  \mathit{st} \right)
-%   \wedge \left( v^{''} = v \right)  \big) \wedge
-% %\mathit{tx} F \mathit{ty} \Rightarrow
-%  \big( \\ \not\exists {W}(x)^{'}_\mathit{tx},  {W}(y)^{''}_\mathit{tx},
-%  {W}(x)^{'''}_\mathit{ty}, {W}(y)^{''''}_\mathit{ty}, {R}(x)^{'''''}_\mathit{tx}, {R}(y)^{''''''}_\mathit{ty} \in \mathcal{S}_t \\ \big)
-%% \big( \left( {W^i}(x)^{'}_\mathit{tx} F c_\mathit{tx} F  {W^k}(x)^{'}_\mathit{ty} F {R^m}(x)^{'}_\mathit{ty} \in \mathit{st} \right) \\
-%%\wedge \left( {W^j}(y)^{'}_\mathit{tx} F c_\mathit{tx} F {W^l}(y)^{'}_\mathit{ty} F {R^n}(y)^{'}_\mathit{ty} \in \mathcal{S}_t \right) \wedge \\
-%\big( \left( \left( v^{''''} = v^{'''} \right) \wedge \left( v^{'''''} = v \right) \right) \vee \\ \left( \left( v^{'''''} = v^{'} \right) \wedge \left( v^{''''} = v^{''} \right) \right)  \big) \big) %\wedge \\
-%\left( \not\exists {R^m}(x)^{'}_\mathit{tx}, {R^n}(y)^{'}_\mathit{ty} \in \mathcal{S}_t \right) \c\
-%   \big( \left( {W^i}(x)^{'}_\mathit{tx} F c_\mathit{tx} F  {W^k}(x)^{'}_\mathit{ty} F {R^m}(x)^{'}_\mathit{ty} \in \mathit{st} \right) \wedge \\
-%   \left( {W^j}(y)^{'}_\mathit{tx} F c_\mathit{tx} F {W^l}(y)^{'}_\mathit{ty} F {R^n}(y)^{'}_\mathit{ty} \in \mathcal{S}_t \right) \wedge \\
-% \left( v_n^{'} = v_k^{'} \right) \wedge \left( v_m^{'} = v_i^{'} \right)  \big) \wedge \\
-% \big( \not\exists  \left({R^i}(x)^{'}_\mathit{tx} F {W^j}(x)^{'}_\mathit{ty} F {R^k}(x)^{'}_\mathit{ty} \in \mathcal{S}_t \right) \wedge \\
-%  \left({R^l}(y)^{'}_\mathit{ty} F {W^m}(y)^{'}_\mathit{tx} F {R^n}(y)^{'}_\mathit{tx} \in \mathcal{S}_t \right)  \big) \big(  \left( v_k^{'} = v_j^{'} \right) \wedge \\
-% \left( v_n^{'} = v_m^{'} \right) \big)
-%\big)
-%\left( {W^k}(x)^{'}_\mathit{tx} \in \mathit{st}  \right) \right) \\
-%  \left( {R^j}(x)^{'}_\mathit{ty} F {W^k}(x)^{'}_\mathit{tx} F c_\mathit{tx} \in  \mathit{st} \right) \wedge \\
-%   \not\exists \big( \left( {W^i}(x)^{'}_\mathit{tx} F {R^k}(x)^{'}_\mathit{tx} \in  \mathit{st}  \right) \wedge
-%  \left( {W^j}(x)^{'}_\mathit{ty} F {R^l}(x)^{'}_\mathit{ty} \in  \mathit{st} \right) \wedge \\
-%  \left( {W^m}(y)^{'}_\mathit{tx} F {R^p}(y)^{'}_\mathit{tx} \in  \mathit{st}  \right) \wedge
-%  \left( {W^n}(y)^{'}_\mathit{ty} F {R^q}(y)^{'}_\mathit{ty} \in  \mathit{st} \right)\big) \\
-%  \left( \left( v_l^{'} = v_k^{'} \right) \wedge \left( v_q^{'} = v_m^{'} \right) \right)  \big) \big)
- %\left( c_{ty} F {\mathit{Op}^i}^{'}_\mathit{tx} \in \mathit{st} \right) \big) \wedge \\
-% \not\exists \big( \left( {W^i}(x)^{'}_\mathit{tx}, {W^j}(y)^{'}_\mathit{tx}, {W^k}(x)^{'}_\mathit{ty}, {W^l}(y)^{'}_\mathit{ty} \in  \mathcal{S}_t \right) \wedge  \\
-%  \left( {R^m}(x)^{'}_\mathit{tx}, {R^n}(y)^{'}_\mathit{ty} \in \mathit{st} \right) \big)
-%  \big( \left( v_m^{'} = v_j^{'} \right) \wedge \left( v_n^{'} = v_k^{'} \right) \big)  \wedge \\
-%  \forall \left( {W^i}(x)^{'}_\mathit{tx} F {R^j}(x)^{'}_\mathit{tx} \in \mathit{st} \right) \left( {v_i}^{'} = {v_j}^{'} \right) \big)
-%E^{s} =   \; \forall x, y, \mathit{st} \in \mathcal{S}_t, {\mathit{R}}_\mathit{ty}(x) \in \mathit{st}, \; {\mathit{W}}_\mathit{tx}(x), {\mathit{W}}_\mathit{ty}(y)', {\mathit{W}}_\mathit{tx}(x)'', {\mathit{W}}_ \mathit{ty}(y)''', {\mathit{R}}_\mathit{ty}(x)' \in \mathcal{S}_t : \\
-%{\mathit{W}}_\mathit{tx}(x) \operatorname{\it F}_\mathit{st} {\mathit{W}}_\mathit{ty}(x)'  \operatorname{\it F}_\mathit{st} a_\mathit{ty}\operatorname{\it F}_\mathit{st} {\mathit{R}}_\mathit{ty}(x)  \quad \Rightarrow \quad
-%\not\exists {\mathit{W}}_\mathit{ty}(x)'  \preccurlyeq {\mathit{R}}_\mathit{ty}(x) \wedge \\
-%{\mathit{W}}_\mathit{tx}(x) \operatorname{\it F}_\mathit{st} {\mathit{W}}_ \mathit{ty}(y)' \quad \Rightarrow \quad
-%{\mathit{W}}_\mathit{tx}(x)'' \preccurlyeq {\mathit{W}}'''_ \mathit{ty}(y) \wedge \\
-%{\mathit{W}}_\mathit{tx}(x) \operatorname{\it F}_\mathit{st} {\mathit{R}}_ \mathit{ty}(y)' \quad \Rightarrow \quad
-%{\mathit{W}}_\mathit{tx}(y)'' \preccurlyeq {\mathit{R}}_ \mathit{ty}(x)',
-%E^{s} =   \; \forall x, \; \mathit{tx}, \mathit{ty} \in T, \; {\mathit{W}}_\mathit{tx}(x), {\mathit{W}}'_ \mathit{ty}(x), {\mathit{R}}_\mathit{ty}(x) \in \mathcal{S}_t : \\
-% \not\exists {\mathit{W}}_\mathit{tx}(x) \preccurlyeq a_\mathit{tx} \preccurlyeq {\mathit{R}}_\mathit{ty}(x) \quad \wedge \quad  \not\exists c_\mathit{tx} \preccurlyeq  {\mathit{W}}_\mathit{tx}(x) \preccurlyeq {\mathit{R}}_\mathit{ty}(x)  \wedge \\
-%{\mathit{W}}_\mathit{tx}(x) \preccurlyeq {\mathit{W}}'_ \mathit{ty}(x) \quad \vee \quad
-%{\mathit{W}}'_\mathit{ty}(x) \preccurlyeq {\mathit{W}}_ \mathit{tx}(x) \wedge \\
-%{\mathit{W}}_\mathit{tx}(x) \preccurlyeq {\mathit{R}}_ \mathit{ty}(x) \quad \vee \quad
-%{\mathit{R}}_\mathit{ty}(x) \preccurlyeq {\mathit{W}}_ \mathit{tx}(x),
-E^{s} =    \; \forall x, \; \mathit{tx}, \mathit{ty} %\mathit{tx}^{c}, \mathit{ty}^{c} 
- \in T: 
-\mathit{tx}^{c} \prec_{\mathit{wr}} \mathit{ty}^{c} %\quad \vee \quad \forall x, \; \mathit{tx}^{c}, \mathit{ty}^{c} \in T: \mathit{ty}^{c} \preccurlyeq_{\mathit{wr}} \mathit{tx}^{c} 
- \quad \wedge \quad 
-%\; \forall x, \; \mathit{tx}, \mathit{ty} \in T: 
-\mathit{tx} \prec_{\mathit{ww}} \mathit{ty}. % \quad \vee \quad \forall x, \; \mathit{tx}, \mathit{ty} \in T:  
-%\mathit{ty} \preccurlyeq_{\mathit{ww}} \mathit{tx}. % \quad \wedge \\
-%\forall x, \; \mathit{tx}, \mathit{ty} \in T: \mathit{tx} \preccurlyeq_{\mathit{wr}} \mathit{ty} \quad \vee \quad \forall x, \; \mathit{tx}, \mathit{ty} \in T: 
-%\mathit{ty} \preccurlyeq_{\mathit{wr}} \mathit{tx}, %\quad \wedge \quad
-%\left( \mathit{tx} \preccurlyeq_{\mathit{wr}} \mathit{ty} \quad \vee \quad
-%\mathit{ty} \preccurlyeq_{\mathit{wr}} \mathit{tx} \right),
-\end{split}
-  \end{align} % $a_\mathit{tx}$ and $a_\mathit{ty}$ are the abort statements for the transactions $\mathit{tx}$ and $\mathit{ty}$, respectively. F is the traditional LTL next operator.
-
- The isolation level  PL-3 specifies that, on top of PL-2,  read-write dependency cycles \cite{DBLP:conf/icde/AdyaLO00}
-  must also be proscribed among transactions. PL-3 is given as
- %\begin{align}\label{eqn:PL3}
-%\begin{split}
-%\forall i,j,k,l,m, tx, ty \left( tx F^{o} ty \; \wedge \; \star \mathit{o}^i_{tx} F^{o} \mathit{o}^j_{tx} \star \; \wedge \; \star \mathit{o}^k_{ty} F^{o} \mathit{o}^l_{ty} \star \right)^\mathit{po}_{o_m} \\
-%\Rightarrow \left(\star \mathit{o}^i_{tx} F^{o} \mathit{o}^j_{tx} F^{o} c_{tx} F^{o} \mathit{o}^k_{ty} F^{o} \mathit{o}^l_{ty} F^{o} c_{ty}  \right)^\mathit{st}_{o_m}.
-%\end{split}
-%  \end{align}
- \begin{align}\label{eqn:PL3}
-\begin{split}
-%\forall i, j, k, l, m, n, q, s, t, u, w, x, z, a, b, c, d, e, f, g, h, tx, ty \\
-%\big( \left( tx F ty \right) \wedge \left( \mathit{Op}^j =  \left(W^j_{tx}(v_l) \oplus R^k_{tx}{v_m} \right) \right) \wedge \\
-%\left( \mathit{Op}^n = \left( W^n_{tx}(v_q) \oplus R^s_{tx}{v_t} \right) \right)  \wedge \left( \star  \mathit{Op}^j X^{o} \mathit{Op}^n \star \right) \wedge \\
-%\left( \mathit{Op}^u = \left(W^u_{ty}(v_w) \oplus R^x_{ty}{v_z} \right) \right) \wedge \left( \mathit{Op}^a = \left( W^a_{ty}(v_b) \oplus R^c_{ty}{v_d} \right) \right) \\
-%\left( \star \mathit{Op}^u X^{o} \mathit{Op}^a   \star \right) \big)^\mathit{po}_{o} \\
-%\Rightarrow \big(G \; \left( v_f = v_q \right)  \oplus \left( v_t = v_l \right) \oplus \left( v_t = v_m \right) \big)  \\
-%  F c_{tx} F \big( \left( v_h = v_b \right) \oplus \left( v_d = v_b \right) \oplus \left( v_d = v_z \right) \big) F c_{ty}  \big)^\mathit{st}_{o}.
-%E^{r} = C = \big( \not\exists \left( a_\mathit{tx} \oplus a_\mathit{ty} \in \mathit{st} \right)
-% \left( {W^i}(x)^{'}_\mathit{tx} F {R^j}(x)^{'}_\mathit{ty} \in \mathit{st} \right)  \wedge
-%%\not\exists \left( c_{ty} F c_{tx} \in \mathit{st} \right)  \wedge \\
-% \not\exists \big( \big( \\
-% {W^i}(x)^{'}_\mathit{tx}  F {W^j}(x)^{'}_\mathit{tx} F  c_\mathit{tx} F {R^k}(x)^{'}_\mathit{ty} \in  \mathit{st} \big)
-%   \wedge \left( v_k^{'} = v_i^{'} \right)  \big) \wedge \\
-% %\mathit{tx} F \mathit{ty} \Rightarrow
-%  \left( \not\exists {W^i}(x)^{'}_\mathit{tx},  {W^j}(y)^{'}_\mathit{tx},
-%  {W^k}(x)^{'}_\mathit{ty}, {W^l}(y)^{'}_\mathit{ty}, {R^m}(x)^{'}_\mathit{tx}, {R^n}(y)^{'}_\mathit{ty} \in \mathcal{S}_t \right) \\
-%% \big( \left( {W^i}(x)^{'}_\mathit{tx} F c_\mathit{tx} F  {W^k}(x)^{'}_\mathit{ty} F {R^m}(x)^{'}_\mathit{ty} \in \mathit{st} \right) \\
-%%\wedge \left( {W^j}(y)^{'}_\mathit{tx} F c_\mathit{tx} F {W^l}(y)^{'}_\mathit{ty} F {R^n}(y)^{'}_\mathit{ty} \in \mathcal{S}_t \right) \wedge \\
-%\big( \left( \left( v_n^{'} = v_l^{'} \right) \wedge \left( v_m^{'} = v_i^{'} \right) \right) \vee \left( \left( v_n^{'} = v_j^{'} \right) \wedge \left( v_m^{'} = v_k^{'} \right) \right)  \big) \wedge \\
+%%\forall i, j, k, l, m, n, p, q, u, a, b, c, tx, ty \big( \left( tx F ty \right) \\ \wedge \left( \star W^j_{tx}(v_l)X^{o} R^k_{tx}{v_m} \star \right) \wedge \left( \star W^n_{ty}(v_q)X^{o} R^s_{ty}{v_u} \star \right) \big)^\mathit{po}_{\mathit{o}_i} \\
+%%\Rightarrow \big( G \; \left( \left( v_m = v_l \right) \oplus \left( W^j_{tx}(v_l) F^{o} W^p_{tx}(v_a) X^{o} R^k_{tx}{v_m} \right) \right) F \;  c_{tx} \\ F \; \left( \left( v_u = v_q \right) \oplus \left( W^n_{ty}(v_q) F^{o} W^b_{ty}(v_c) X^{o} R^s_{ty}{v_u} \right) \right) \; F \; c_{ty} \star \big)^\mathit{st}_{\mathit{o}_i},
+%%\forall i, j, k, l, o, \mathit{st}, \mathit{tx}, \mathit{ty} \big( \left( \mathit{tx} F \mathit{ty} \right) \wedge \left( W^i_\mathit{tx} F R^j_\mathit{tx} \in \mathit{st} \right) \\
+%%\wedge \left( W^k_\mathit{ty} F R^l_\mathit{ty} \in \mathit{st} \right)
+%%\; \Rightarrow \; \exists S \left( W^i_\mathit{tx} F R^j_\mathit{tx} F c_\mathit{tx} \in S \right) \\
+%%\wedge \left(  c_\mathit{tx} F W^k_\mathit{ty} F R^l_\mathit{ty} F c_\mathit{ty} \in S_p \right)
+%%\\ \wedge  \not\exists W^m_\mathit{tx} \in \mathit{st} \left( W^m_\mathit{tx} F W^i_\mathit{tx} F R^j_\mathit{tx} \in \mathit{st} \right) \wedge \left( v^j = v^m \right) \\
+%%\wedge \not\exists W^n_\mathit{ty} \in \mathit{st} \left( W^n_\mathit{ty} F W^k_\mathit{ty} F R^l_\mathit{ty} \in \mathit{st} \right)  \wedge \left( v^l = v^n \right) \big)
+%%E^{r} = \forall  \mathit{st}, \mathit{st}^{'} \in  \mathcal{S}_t, \mathit{tx}, \mathit{ty} \in  \mathcal{S}_t \\ \big(
+%% % \mathit{tx} F \mathit{ty} \Rightarrow
+%% \big( \big( \not\exists a_\mathit{tx} \in \mathit{st}
+%% \big(  {W}(x)^{'}_\mathit{tx} F {R}(x)^{''}_\mathit{ty} \in \mathit{st} \big) \\
+%%  \wedge  \not\exists a_\mathit{ty} \in \mathit{st}
+%% \big( {W}(y)^{'''}_\mathit{ty} F {R}(y)^{''''}_\mathit{tx} \in \mathit{st}  \big) \big) \wedge
+%%%\not\exists \left( c_{ty} F c_{tx} \in \mathit{st} \right)  \wedge \\
+%% \big( \not\exists  {W}(x)^{'}_\mathit{tx}, {W}(x)^{''}_\mathit{tx}, \\ {R}(x)^{'''}_\mathit{ty} \in  \mathit{st}  \big)
+%% \big( \left( {W}(x)^{'}_\mathit{tx}  F {W}(x)^{''}_\mathit{tx} F  c_\mathit{tx} \in  \mathit{st} \right) \\
+%%   \wedge \left( v^{''} = v \right)  \big)  \wedge
+%%   \not\exists \left( {W}(x)^{'}_\mathit{ty}, {W}(x)^{''}_\mathit{ty}, {R}(x)^{'''}_\mathit{tx} \in  \mathit{st} \right) \\
+%%    \big( \left(
+%% {W}(x)^{'}_\mathit{ty}  F {W}(x)^{''}_\mathit{ty} F  c_\mathit{ty} \in  \mathit{st} \right)
+%%   \wedge \left( v^{''} = v \right)  \big) \wedge
+%% %\mathit{tx} F \mathit{ty} \Rightarrow
+%%  \big( \\ \not\exists {W}(x)^{'}_\mathit{tx},  {W}(y)^{''}_\mathit{tx},
+%%  {W}(x)^{'''}_\mathit{ty}, {W}(y)^{''''}_\mathit{ty}, {R}(x)^{'''''}_\mathit{tx}, {R}(y)^{''''''}_\mathit{ty} \in \mathcal{S}_t \\ \big)
+%%% \big( \left( {W^i}(x)^{'}_\mathit{tx} F c_\mathit{tx} F  {W^k}(x)^{'}_\mathit{ty} F {R^m}(x)^{'}_\mathit{ty} \in \mathit{st} \right) \\
+%%%\wedge \left( {W^j}(y)^{'}_\mathit{tx} F c_\mathit{tx} F {W^l}(y)^{'}_\mathit{ty} F {R^n}(y)^{'}_\mathit{ty} \in \mathcal{S}_t \right) \wedge \\
+%%\big( \left( \left( v^{''''} = v^{'''} \right) \wedge \left( v^{'''''} = v \right) \right) \vee \\ \left( \left( v^{'''''} = v^{'} \right) \wedge \left( v^{''''} = v^{''} \right) \right)  \big) \big) %\wedge \\
 %%\left( \not\exists {R^m}(x)^{'}_\mathit{tx}, {R^n}(y)^{'}_\mathit{ty} \in \mathcal{S}_t \right) \c\
 %%   \big( \left( {W^i}(x)^{'}_\mathit{tx} F c_\mathit{tx} F  {W^k}(x)^{'}_\mathit{ty} F {R^m}(x)^{'}_\mathit{ty} \in \mathit{st} \right) \wedge \\
 %%   \left( {W^j}(y)^{'}_\mathit{tx} F c_\mathit{tx} F {W^l}(y)^{'}_\mathit{ty} F {R^n}(y)^{'}_\mathit{ty} \in \mathcal{S}_t \right) \wedge \\
 %% \left( v_n^{'} = v_k^{'} \right) \wedge \left( v_m^{'} = v_i^{'} \right)  \big) \wedge \\
-% \left( \not\exists {W^i}(x)^{'}_\mathit{tx}, {W^j}(x)^{'}_\mathit{ty}, {R^p}(x)^{'}_\mathit{tx}, {R^q}(x)^{'}_\mathit{ty} \in \mathit{st} \right) \big(  \left( v_p^{'} = v_j^{'} \right) \wedge \\
-% \left( v_q^{'} = v_i^{'} \right) \big)
-%   \big) \big) \wedge
-%%\forall  \mathcal{S}_t, \mathit{st}, \mathit{st}^{'}, \mathit{tx}, \mathit{ty} \big(
-%%  \mathit{tx} F \mathit{ty} \Rightarrow \\
-%% \big( \not\exists \left( \left( a_\mathit{tx} \in \mathit{st} \right) \wedge \left( a_\mathit{ty} \in \mathit{st} \right) \right) \wedge \\
-%% %\not\exists \left( c_{ty} F c_{tx} \in \mathit{st} \right)  \wedge \\
-%% \not\exists \left( \left( {W^i}(x)^{'}_\mathit{tx} F {W^j}(x)^{'}_\mathit{tx} F {R^k}(x)^{'}_\mathit{ty} \in  \mathit{st} \right)  \wedge \left( v_k^{'} = v_i^{'} \right)  \right) \wedge \\
-%%  \left( \not\exists {R^m}(x)^{'}_\mathit{tx}, {R^n}(y)^{'}_\mathit{ty} \in \mathcal{S}_t \right) \\
-%%   \big( \left( {W^i}(x)^{'}_\mathit{tx} F c_\mathit{tx} F  {W^k}(x)^{'}_\mathit{ty} F {R^m}(x)^{'}_\mathit{ty} \in \mathit{st} \right) \\
-%%\wedge \left( {W^j}(y)^{'}_\mathit{tx} F c_\mathit{tx} F {W^l}(y)^{'}_\mathit{ty} F {R^n}(y)^{'}_\mathit{ty} \in \mathcal{S}_t \right) \wedge \\
-%% \left( v_n^{'} = v_k^{'} \right) \wedge \left( v_m^{'} = v_i^{'} \right)  \big) \wedge \\
-%% \left( \not\exists {W^i}(x)^{'}_\mathit{tx}, {W^j}(x)^{'}_\mathit{ty}, {R^p}(x)^{'}_\mathit{tx}, {R^q}(x)^{'}_\mathit{ty} \in \mathit{st} \right) \big(  \left( v_p^{'} = v_j^{'} \right) \wedge \\
-%% \left( v_q^{'} = v_j^{'} \right) \big) \wedge
-%%   \big) \big)
-%%E^s =  \forall  \mathcal{S}_t, \mathit{st} \in \mathcal{S}_t, \mathit{tx}, \mathit{ty} \big(
-%%  \mathit{tx} F \mathit{ty} \Rightarrow \\
-%% \big( \not\exists \left( a_\mathit{ty} F a_\mathit{tx} \in \mathit{st} \right) \wedge \not\exists \left( c_{ty} F c_{tx} \in \mathit{st} \right)  \wedge \\
-%% \not\exists \left( \left( {W^i}(x)^{'}_\mathit{tx} F {R^j}(x)^{'}_\mathit{ty} \in  \mathit{st} \right) \wedge \left( {W^k}(x)^{'}_\mathit{tx} \in \mathit{st}  \right) \right) \\
+%% \big( \not\exists  \left({R^i}(x)^{'}_\mathit{tx} F {W^j}(x)^{'}_\mathit{ty} F {R^k}(x)^{'}_\mathit{ty} \in \mathcal{S}_t \right) \wedge \\
+%%  \left({R^l}(y)^{'}_\mathit{ty} F {W^m}(y)^{'}_\mathit{tx} F {R^n}(y)^{'}_\mathit{tx} \in \mathcal{S}_t \right)  \big) \big(  \left( v_k^{'} = v_j^{'} \right) \wedge \\
+%% \left( v_n^{'} = v_m^{'} \right) \big)
+%%\big)
+%%\left( {W^k}(x)^{'}_\mathit{tx} \in \mathit{st}  \right) \right) \\
 %%  \left( {R^j}(x)^{'}_\mathit{ty} F {W^k}(x)^{'}_\mathit{tx} F c_\mathit{tx} \in  \mathit{st} \right) \wedge \\
 %%   \not\exists \big( \left( {W^i}(x)^{'}_\mathit{tx} F {R^k}(x)^{'}_\mathit{tx} \in  \mathit{st}  \right) \wedge
 %%  \left( {W^j}(x)^{'}_\mathit{ty} F {R^l}(x)^{'}_\mathit{ty} \in  \mathit{st} \right) \wedge \\
 %%  \left( {W^m}(y)^{'}_\mathit{tx} F {R^p}(y)^{'}_\mathit{tx} \in  \mathit{st}  \right) \wedge
 %%  \left( {W^n}(y)^{'}_\mathit{ty} F {R^q}(y)^{'}_\mathit{ty} \in  \mathit{st} \right)\big) \\
-%%  \left( \left( v_l^{'} = v_k^{'} \right) \wedge \left( v_q^{'} = v_m^{'} \right) \right) \wedge \\
-%   \not\exists \big( \left( {R^i}(x)^{'}_\mathit{tx} \in  \mathit{st}  \right) \wedge
-%  \left( {W^j}(x)^{'}_\mathit{ty} F {R^k}(x)^{'}_\mathit{ty} \in  \mathit{st} \right) \wedge \\
-%  \left( {W^m}(y)^{'}_\mathit{tx} F {R^p}(y)^{'}_\mathit{tx} \in  \mathit{st}  \right) \wedge
-%  \left( {W^n}(y)^{'}_\mathit{ty} F {R^q}(y)^{'}_\mathit{ty} \in  \mathit{st} \right) \big) \\
-%  \big( \left( \left( v_k^{'} = v_j^{'} \right)  \wedge \left( v_p^{'} = v_m^{'} \right) \right)  \big) \big) \big) \big)
-%E^{r} = C = \forall \mathit{st}, \mathit{st}^{'} \in \mathcal{S}_t, \mathit{tx}, \mathit{ty} \in \mathcal{S}_t \\ \big(
-% % \mathit{tx} F \mathit{ty} \Rightarrow
-% \big( \big( \not\exists a_\mathit{tx} \in \mathit{st}
-% \big(  {W}(x)^{'}_\mathit{tx} F {R}(x)^{''}_\mathit{ty} \in \mathit{st} \big) \\
-%  \wedge  \not\exists a_\mathit{ty} \in \mathit{st}
-% \big( {W}(y)^{'''}_\mathit{ty} F {R}(y)^{''''}_\mathit{tx} \in \mathit{st}  \big) \big) \wedge
-%%\not\exists \left( c_{ty} F c_{tx} \in \mathit{st} \right)  \wedge \\
-% \big( \not\exists  {W}(x)^{'}_\mathit{tx}, {W}(x)^{''}_\mathit{tx}, \\ {R}(x)^{'''}_\mathit{ty} \in  \mathit{st}  \big)
-% \big( \left( {W}(x)^{'}_\mathit{tx}  F {W}(x)^{''}_\mathit{tx} F  c_\mathit{tx} \in  \mathit{st} \right) \\
-%   \wedge \left( v^{''} = v \right)  \big)  \wedge
-%   \not\exists \left( {W}(x)^{'}_\mathit{ty}, {W}(x)^{''}_\mathit{ty}, {R}(x)^{'''}_\mathit{tx} \in  \mathit{st} \right) \\
-%    \big( \left(
-% {W}(x)^{'}_\mathit{ty}  F {W}(x)^{''}_\mathit{ty} F  c_\mathit{ty} \in  \mathit{st} \right)
-%   \wedge \left( v^{''} = v \right)  \big) \wedge
-% %\mathit{tx} F \mathit{ty} \Rightarrow
-%  \big( \\ \not\exists {W}(x)^{'}_\mathit{tx},  {W}(y)^{''}_\mathit{tx},
-%  {W}(x)^{'''}_\mathit{ty}, {W}(y)^{''''}_\mathit{ty}, {R}(x)^{'''''}_\mathit{tx}, {R}(y)^{''''''}_\mathit{ty} \in \mathcal{S}_t \\ \big)
-% \big( \left( {W^i}(x)^{'}_\mathit{tx} F c_\mathit{tx} F  {W^k}(x)^{'}_\mathit{ty} F {R^m}(x)^{'}_\mathit{ty} \in \mathit{st} \right) \\
-%\wedge \left( {W^j}(y)^{'}_\mathit{tx} F c_\mathit{tx} F {W^l}(y)^{'}_\mathit{ty} F {R^n}(y)^{'}_\mathit{ty} \in \mathcal{S}_t \right) \wedge \\
-%\big( \left( \left( v^{''''} = v^{'''} \right) \wedge \left( v^{''''} = v \right) \right) \vee \\ \left( \left( v^{''''} = v^{'} \right) \wedge \left( v^{''''} = v^{''} \right) \right)  \big) \wedge \\
-%%\left( \not\exists {R^m}(x)^{'}_\mathit{tx}, {R^n}(y)^{'}_\mathit{ty} \in \mathcal{S}_t \right) \c\
-%%   \big( \left( {W^i}(x)^{'}_\mathit{tx} F c_\mathit{tx} F  {W^k}(x)^{'}_\mathit{ty} F {R^m}(x)^{'}_\mathit{ty} \in \mathit{st} \right) \wedge \\
-%%   \left( {W^j}(y)^{'}_\mathit{tx} F c_\mathit{tx} F {W^l}(y)^{'}_\mathit{ty} F {R^n}(y)^{'}_\mathit{ty} \in \mathcal{S}_t \right) \wedge \\
-%% \left( v_n^{'} = v_k^{'} \right) \wedge \left( v_m^{'} = v_i^{'} \right)  \big) \wedge \\
-%    \big( \not\exists {R}(x)^{'}_\mathit{tx}, {W}(x)^{''}_\mathit{ty}, {R}(x)^{'''}_\mathit{ty}, {R}(y)^{''''}_\mathit{ty}, {W}(y)^{'''''}_\mathit{tx}, {R}(y)^{''''''}_\mathit{tx} \in \mathcal{S}_t \big)  \\
-%     \big( \big( {R}(x)^{'}_\mathit{tx} F {W}(x)^{''}_\mathit{ty} F {R}(x)^{'''}_\mathit{ty} \in \mathcal{S}_t \big) \wedge \\
-%  \big(  {R}(y)^{''''}_\mathit{ty} F {W}(y)^{'''''}_\mathit{tx} F {R}(y)^{''''''}_\mathit{tx} \in \mathcal{S}_t \big)  \big)  \\
-%  \big(  \left( v^{''} = v^{'} \right) \wedge
-% \left( v^{'''''} = v^{''''} \right) \big) \big) \big)
-%\left( \mathit{Op}^i_\mathit{tx} X^o \mathit{Op}^j_\mathit{tx} \in \mathit{st} \right) \wedge
-% \left( \mathit{Op}^k_\mathit{ty} X^o \mathit{Op}^l_\mathit{ty} \in \mathit{st} \right)
-%\\ \Rightarrow \exists S \left( \mathit{Op}^i_\mathit{tx} X^o \mathit{Op}^j_\mathit{tx} F c_\mathit{tx} F \mathit{Op}^k_\mathit{ty} X^o \mathit{Op}^l_\mathit{ty} F c_\mathit{ty}  \in S \right)  \wedge \\
-% \forall \mathit{st}  \left( \mathit{Op}^j_\mathit{tx} X^o R^m_\mathit{tx} \in \mathit{st} \right) \wedge \left( v^m = v^j  \right) \wedge \\
-% \forall \mathit{st}  \left( \mathit{Op}^k_\mathit{ty} X^o R^n_\mathit{ty} \in \mathit{st} \right) \wedge \left( v^n = v^k  \right) \big) \big)
-%E^{s} =   \; \forall x, y, \mathit{st} \in \mathcal{S}_t, {\mathit{R}}_\mathit{ty}(y) \in \mathit{st}, \; {\mathit{W}}_\mathit{tx}(x), {\mathit{W}}_\mathit{ty}(y)', {\mathit{W}}_\mathit{tx}(x)'', {\mathit{W}}_ \mathit{ty}(y)''', \\ {\mathit{R}}_\mathit{ty}(x)', {\mathit{R}}_\mathit{tx}(x)'', {\mathit{R}}'''_ \mathit{ty}(y) \in \mathcal{S}_t :
-%{\mathit{W}}_\mathit{tx}(x) \operatorname{\it F}_\mathit{st} {\mathit{W}}_\mathit{ty}(x)'  \operatorname{\it F}_\mathit{st} a_\mathit{ty}\operatorname{\it F}_\mathit{st} {\mathit{R}}_\mathit{ty}(x) \\  \quad \Rightarrow \quad
-%\not\exists {\mathit{W}}_\mathit{ty}(x)'  \preccurlyeq {\mathit{R}}_\mathit{ty}(x) \wedge
-%{\mathit{W}}_\mathit{tx}(x) \operatorname{\it F}_\mathit{st} {\mathit{W}}_ \mathit{ty}(y)' \quad \Rightarrow \quad
-%{\mathit{W}}_\mathit{tx}(x)'' \preccurlyeq {\mathit{W}}'''_ \mathit{ty}(y) \wedge \\
-%{\mathit{W}}_\mathit{tx}(x) \operatorname{\it F}_\mathit{st} {\mathit{R}}_ \mathit{ty}(y) \quad \Rightarrow \quad
-%{\mathit{W}}_\mathit{tx}(y)'' \preccurlyeq {\mathit{R}}_ \mathit{ty}(x)' \wedge
-%{\mathit{R}}_ \mathit{ty}(x)' \preccurlyeq  {\mathit{R}}_ \mathit{ty}(y)  \quad \Rightarrow \quad
-%{\mathit{R}}_\mathit{tx}(x)'' \preccurlyeq {\mathit{R}}'''_ \mathit{ty}(y),
-% \; \forall x, \; \mathit{tx}, \mathit{ty} \in T, \; {\mathit{W}}_\mathit{tx}(x), {\mathit{W}}'_ \mathit{ty}(x), {\mathit{R}}_\mathit{ty}(x), {\mathit{R}}'_\mathit{tx}(x) \in \mathcal{S}_t : \\
-% \not\exists {\mathit{W}}_\mathit{tx}(x) \preccurlyeq a_\mathit{tx} \preccurlyeq {\mathit{R}}_\mathit{ty}(x) \quad \wedge  \quad \not\exists c_\mathit{tx} \preccurlyeq  {\mathit{W}}_\mathit{tx}(x) \preccurlyeq {\mathit{R}}_\mathit{ty}(x) \quad \wedge \\
-%{\mathit{W}}_\mathit{tx}(x) \preccurlyeq {\mathit{W}}'_ \mathit{ty}(x) \quad \vee \quad
-%{\mathit{W}}'_\mathit{ty}(x) \preccurlyeq {\mathit{W}}_ \mathit{tx}(x) \quad \wedge \\
-%{\mathit{W}}_\mathit{tx}(x) \preccurlyeq {\mathit{R}}_ \mathit{ty}(x) \quad \vee \quad
-%{\mathit{R}}_\mathit{ty}(x) \preccurlyeq {\mathit{W}}_ \mathit{tx}(x) \quad \wedge \\
-%{\mathit{R}}'_\mathit{tx}(x) \preccurlyeq {\mathit{W}}'_ \mathit{ty}(x) \quad \vee \quad
-%{\mathit{W}}'_\mathit{ty}(x) \preccurlyeq {\mathit{R}}'_ \mathit{tx}(x),
-E^{s} =  \; \forall x, \; \mathit{tx}, \mathit{ty} %\mathit{tx}^{c}, \mathit{ty}^{c}
- \in T: 
-\mathit{tx}^{c} \prec_{\mathit{wr}} \mathit{ty}^{c} %\quad \vee \quad \forall x, \; \mathit{tx}^{c}, \mathit{ty}^{c} \in T: \mathit{ty}^{c} \preccurlyeq_{\mathit{wr}} \mathit{tx}^{c} 
- \quad \wedge \quad 
-%\; \forall x, \; \mathit{tx}, \mathit{ty} \in T: 
-\mathit{tx} \prec_{\mathit{ww}} \mathit{ty} %\quad \vee \quad \forall x, \; \mathit{tx}, \mathit{ty} \in T:  
-%\mathit{ty} \preccurlyeq_{\mathit{ww}} \mathit{tx} 
- \quad \wedge \quad 
-%\forall x, \; \mathit{tx}, \mathit{ty} \in T: 
- \mathit{tx} \prec_{\mathit{rw}} \mathit{ty}. %\quad \vee \quad \forall x, \; \mathit{tx}, \mathit{ty} \in T: 
-%\mathit{ty} \preccurlyeq_{\mathit{rw}} \mathit{tx},
-\end{split}
-  \end{align}.
-  The isolation level  PL-2.99 can be thought of.a special case of PL-2; instead of generic  read-write dependency, PL.2.99 proscribes read-write item-dependency cycles among transactions. To keep our definitions simple, we do not make any distinction between  read-write item-dependency and  read-write dependency. Hence, in this paper, we do not provide a separarate specification definition of  PL.2.99. %PL-2.99 is given as
+%%  \left( \left( v_l^{'} = v_k^{'} \right) \wedge \left( v_q^{'} = v_m^{'} \right) \right)  \big) \big)
+% %\left( c_{ty} F {\mathit{Op}^i}^{'}_\mathit{tx} \in \mathit{st} \right) \big) \wedge \\
+%% \not\exists \big( \left( {W^i}(x)^{'}_\mathit{tx}, {W^j}(y)^{'}_\mathit{tx}, {W^k}(x)^{'}_\mathit{ty}, {W^l}(y)^{'}_\mathit{ty} \in  \mathcal{S}_t \right) \wedge  \\
+%%  \left( {R^m}(x)^{'}_\mathit{tx}, {R^n}(y)^{'}_\mathit{ty} \in \mathit{st} \right) \big)
+%%  \big( \left( v_m^{'} = v_j^{'} \right) \wedge \left( v_n^{'} = v_k^{'} \right) \big)  \wedge \\
+%%  \forall \left( {W^i}(x)^{'}_\mathit{tx} F {R^j}(x)^{'}_\mathit{tx} \in \mathit{st} \right) \left( {v_i}^{'} = {v_j}^{'} \right) \big)
+%%E^{s} =   \; \forall x, y, \mathit{st} \in \mathcal{S}_t, {\mathit{R}}_\mathit{ty}(x) \in \mathit{st}, \; {\mathit{W}}_\mathit{tx}(x), {\mathit{W}}_\mathit{ty}(y)', {\mathit{W}}_\mathit{tx}(x)'', {\mathit{W}}_ \mathit{ty}(y)''', {\mathit{R}}_\mathit{ty}(x)' \in \mathcal{S}_t : \\
+%%{\mathit{W}}_\mathit{tx}(x) \operatorname{\it F}_\mathit{st} {\mathit{W}}_\mathit{ty}(x)'  \operatorname{\it F}_\mathit{st} a_\mathit{ty}\operatorname{\it F}_\mathit{st} {\mathit{R}}_\mathit{ty}(x)  \quad \Rightarrow \quad
+%%\not\exists {\mathit{W}}_\mathit{ty}(x)'  \preccurlyeq {\mathit{R}}_\mathit{ty}(x) \wedge \\
+%%{\mathit{W}}_\mathit{tx}(x) \operatorname{\it F}_\mathit{st} {\mathit{W}}_ \mathit{ty}(y)' \quad \Rightarrow \quad
+%%{\mathit{W}}_\mathit{tx}(x)'' \preccurlyeq {\mathit{W}}'''_ \mathit{ty}(y) \wedge \\
+%%{\mathit{W}}_\mathit{tx}(x) \operatorname{\it F}_\mathit{st} {\mathit{R}}_ \mathit{ty}(y)' \quad \Rightarrow \quad
+%%{\mathit{W}}_\mathit{tx}(y)'' \preccurlyeq {\mathit{R}}_ \mathit{ty}(x)',
+%%E^{s} =   \; \forall x, \; \mathit{tx}, \mathit{ty} \in T, \; {\mathit{W}}_\mathit{tx}(x), {\mathit{W}}'_ \mathit{ty}(x), {\mathit{R}}_\mathit{ty}(x) \in \mathcal{S}_t : \\
+%% \not\exists {\mathit{W}}_\mathit{tx}(x) \preccurlyeq a_\mathit{tx} \preccurlyeq {\mathit{R}}_\mathit{ty}(x) \quad \wedge \quad  \not\exists c_\mathit{tx} \preccurlyeq  {\mathit{W}}_\mathit{tx}(x) \preccurlyeq {\mathit{R}}_\mathit{ty}(x)  \wedge \\
+%%{\mathit{W}}_\mathit{tx}(x) \preccurlyeq {\mathit{W}}'_ \mathit{ty}(x) \quad \vee \quad
+%%{\mathit{W}}'_\mathit{ty}(x) \preccurlyeq {\mathit{W}}_ \mathit{tx}(x) \wedge \\
+%%{\mathit{W}}_\mathit{tx}(x) \preccurlyeq {\mathit{R}}_ \mathit{ty}(x) \quad \vee \quad
+%%{\mathit{R}}_\mathit{ty}(x) \preccurlyeq {\mathit{W}}_ \mathit{tx}(x),
+%E^{s} =    \; \forall x, \; \mathit{tx}, \mathit{ty} %\mathit{tx}^{c}, \mathit{ty}^{c} 
+% \in T: 
+%\mathit{tx}^{c} \prec_{\mathit{wr}} \mathit{ty}^{c} %\quad \vee \quad \forall x, \; \mathit{tx}^{c}, \mathit{ty}^{c} \in T: \mathit{ty}^{c} \preccurlyeq_{\mathit{wr}} \mathit{tx}^{c} 
+% \quad \wedge \quad 
+%%\; \forall x, \; \mathit{tx}, \mathit{ty} \in T: 
+%\mathit{tx} \prec_{\mathit{ww}} \mathit{ty}. % \quad \vee \quad \forall x, \; \mathit{tx}, \mathit{ty} \in T:  
+%%\mathit{ty} \preccurlyeq_{\mathit{ww}} \mathit{tx}. % \quad \wedge \\
+%%\forall x, \; \mathit{tx}, \mathit{ty} \in T: \mathit{tx} \preccurlyeq_{\mathit{wr}} \mathit{ty} \quad \vee \quad \forall x, \; \mathit{tx}, \mathit{ty} \in T: 
+%%\mathit{ty} \preccurlyeq_{\mathit{wr}} \mathit{tx}, %\quad \wedge \quad
+%%\left( \mathit{tx} \preccurlyeq_{\mathit{wr}} \mathit{ty} \quad \vee \quad
+%%\mathit{ty} \preccurlyeq_{\mathit{wr}} \mathit{tx} \right),
+%\end{split}
+%  \end{align} % $a_\mathit{tx}$ and $a_\mathit{ty}$ are the abort statements for the transactions $\mathit{tx}$ and $\mathit{ty}$, respectively. F is the traditional LTL next operator.
+%
+% The isolation level  PL-3 specifies that, on top of PL-2,  read-write dependency cycles \cite{DBLP:conf/icde/AdyaLO00}
+%  must also be proscribed among transactions. PL-3 is given as
+% %\begin{align}\label{eqn:PL3}
+%%\begin{split}
+%%\forall i,j,k,l,m, tx, ty \left( tx F^{o} ty \; \wedge \; \star \mathit{o}^i_{tx} F^{o} \mathit{o}^j_{tx} \star \; \wedge \; \star \mathit{o}^k_{ty} F^{o} \mathit{o}^l_{ty} \star \right)^\mathit{po}_{o_m} \\
+%%\Rightarrow \left(\star \mathit{o}^i_{tx} F^{o} \mathit{o}^j_{tx} F^{o} c_{tx} F^{o} \mathit{o}^k_{ty} F^{o} \mathit{o}^l_{ty} F^{o} c_{ty}  \right)^\mathit{st}_{o_m}.
+%%\end{split}
+%%  \end{align}
+% \begin{align}\label{eqn:PL3}
+%\begin{split}
+%%\forall i, j, k, l, m, n, q, s, t, u, w, x, z, a, b, c, d, e, f, g, h, tx, ty \\
+%%\big( \left( tx F ty \right) \wedge \left( \mathit{Op}^j =  \left(W^j_{tx}(v_l) \oplus R^k_{tx}{v_m} \right) \right) \wedge \\
+%%\left( \mathit{Op}^n = \left( W^n_{tx}(v_q) \oplus R^s_{tx}{v_t} \right) \right)  \wedge \left( \star  \mathit{Op}^j X^{o} \mathit{Op}^n \star \right) \wedge \\
+%%\left( \mathit{Op}^u = \left(W^u_{ty}(v_w) \oplus R^x_{ty}{v_z} \right) \right) \wedge \left( \mathit{Op}^a = \left( W^a_{ty}(v_b) \oplus R^c_{ty}{v_d} \right) \right) \\
+%%\left( \star \mathit{Op}^u X^{o} \mathit{Op}^a   \star \right) \big)^\mathit{po}_{o} \\
+%%\Rightarrow \big(G \; \left( v_f = v_q \right)  \oplus \left( v_t = v_l \right) \oplus \left( v_t = v_m \right) \big)  \\
+%%  F c_{tx} F \big( \left( v_h = v_b \right) \oplus \left( v_d = v_b \right) \oplus \left( v_d = v_z \right) \big) F c_{ty}  \big)^\mathit{st}_{o}.
+%%E^{r} = C = \big( \not\exists \left( a_\mathit{tx} \oplus a_\mathit{ty} \in \mathit{st} \right)
+%% \left( {W^i}(x)^{'}_\mathit{tx} F {R^j}(x)^{'}_\mathit{ty} \in \mathit{st} \right)  \wedge
+%%%\not\exists \left( c_{ty} F c_{tx} \in \mathit{st} \right)  \wedge \\
+%% \not\exists \big( \big( \\
+%% {W^i}(x)^{'}_\mathit{tx}  F {W^j}(x)^{'}_\mathit{tx} F  c_\mathit{tx} F {R^k}(x)^{'}_\mathit{ty} \in  \mathit{st} \big)
+%%   \wedge \left( v_k^{'} = v_i^{'} \right)  \big) \wedge \\
+%% %\mathit{tx} F \mathit{ty} \Rightarrow
+%%  \left( \not\exists {W^i}(x)^{'}_\mathit{tx},  {W^j}(y)^{'}_\mathit{tx},
+%%  {W^k}(x)^{'}_\mathit{ty}, {W^l}(y)^{'}_\mathit{ty}, {R^m}(x)^{'}_\mathit{tx}, {R^n}(y)^{'}_\mathit{ty} \in \mathcal{S}_t \right) \\
+%%% \big( \left( {W^i}(x)^{'}_\mathit{tx} F c_\mathit{tx} F  {W^k}(x)^{'}_\mathit{ty} F {R^m}(x)^{'}_\mathit{ty} \in \mathit{st} \right) \\
+%%%\wedge \left( {W^j}(y)^{'}_\mathit{tx} F c_\mathit{tx} F {W^l}(y)^{'}_\mathit{ty} F {R^n}(y)^{'}_\mathit{ty} \in \mathcal{S}_t \right) \wedge \\
+%%\big( \left( \left( v_n^{'} = v_l^{'} \right) \wedge \left( v_m^{'} = v_i^{'} \right) \right) \vee \left( \left( v_n^{'} = v_j^{'} \right) \wedge \left( v_m^{'} = v_k^{'} \right) \right)  \big) \wedge \\
+%%%\left( \not\exists {R^m}(x)^{'}_\mathit{tx}, {R^n}(y)^{'}_\mathit{ty} \in \mathcal{S}_t \right) \c\
+%%%   \big( \left( {W^i}(x)^{'}_\mathit{tx} F c_\mathit{tx} F  {W^k}(x)^{'}_\mathit{ty} F {R^m}(x)^{'}_\mathit{ty} \in \mathit{st} \right) \wedge \\
+%%%   \left( {W^j}(y)^{'}_\mathit{tx} F c_\mathit{tx} F {W^l}(y)^{'}_\mathit{ty} F {R^n}(y)^{'}_\mathit{ty} \in \mathcal{S}_t \right) \wedge \\
+%%% \left( v_n^{'} = v_k^{'} \right) \wedge \left( v_m^{'} = v_i^{'} \right)  \big) \wedge \\
+%% \left( \not\exists {W^i}(x)^{'}_\mathit{tx}, {W^j}(x)^{'}_\mathit{ty}, {R^p}(x)^{'}_\mathit{tx}, {R^q}(x)^{'}_\mathit{ty} \in \mathit{st} \right) \big(  \left( v_p^{'} = v_j^{'} \right) \wedge \\
+%% \left( v_q^{'} = v_i^{'} \right) \big)
+%%   \big) \big) \wedge
+%%%\forall  \mathcal{S}_t, \mathit{st}, \mathit{st}^{'}, \mathit{tx}, \mathit{ty} \big(
+%%%  \mathit{tx} F \mathit{ty} \Rightarrow \\
+%%% \big( \not\exists \left( \left( a_\mathit{tx} \in \mathit{st} \right) \wedge \left( a_\mathit{ty} \in \mathit{st} \right) \right) \wedge \\
+%%% %\not\exists \left( c_{ty} F c_{tx} \in \mathit{st} \right)  \wedge \\
+%%% \not\exists \left( \left( {W^i}(x)^{'}_\mathit{tx} F {W^j}(x)^{'}_\mathit{tx} F {R^k}(x)^{'}_\mathit{ty} \in  \mathit{st} \right)  \wedge \left( v_k^{'} = v_i^{'} \right)  \right) \wedge \\
+%%%  \left( \not\exists {R^m}(x)^{'}_\mathit{tx}, {R^n}(y)^{'}_\mathit{ty} \in \mathcal{S}_t \right) \\
+%%%   \big( \left( {W^i}(x)^{'}_\mathit{tx} F c_\mathit{tx} F  {W^k}(x)^{'}_\mathit{ty} F {R^m}(x)^{'}_\mathit{ty} \in \mathit{st} \right) \\
+%%%\wedge \left( {W^j}(y)^{'}_\mathit{tx} F c_\mathit{tx} F {W^l}(y)^{'}_\mathit{ty} F {R^n}(y)^{'}_\mathit{ty} \in \mathcal{S}_t \right) \wedge \\
+%%% \left( v_n^{'} = v_k^{'} \right) \wedge \left( v_m^{'} = v_i^{'} \right)  \big) \wedge \\
+%%% \left( \not\exists {W^i}(x)^{'}_\mathit{tx}, {W^j}(x)^{'}_\mathit{ty}, {R^p}(x)^{'}_\mathit{tx}, {R^q}(x)^{'}_\mathit{ty} \in \mathit{st} \right) \big(  \left( v_p^{'} = v_j^{'} \right) \wedge \\
+%%% \left( v_q^{'} = v_j^{'} \right) \big) \wedge
+%%%   \big) \big)
+%%%E^s =  \forall  \mathcal{S}_t, \mathit{st} \in \mathcal{S}_t, \mathit{tx}, \mathit{ty} \big(
+%%%  \mathit{tx} F \mathit{ty} \Rightarrow \\
+%%% \big( \not\exists \left( a_\mathit{ty} F a_\mathit{tx} \in \mathit{st} \right) \wedge \not\exists \left( c_{ty} F c_{tx} \in \mathit{st} \right)  \wedge \\
+%%% \not\exists \left( \left( {W^i}(x)^{'}_\mathit{tx} F {R^j}(x)^{'}_\mathit{ty} \in  \mathit{st} \right) \wedge \left( {W^k}(x)^{'}_\mathit{tx} \in \mathit{st}  \right) \right) \\
+%%%  \left( {R^j}(x)^{'}_\mathit{ty} F {W^k}(x)^{'}_\mathit{tx} F c_\mathit{tx} \in  \mathit{st} \right) \wedge \\
+%%%   \not\exists \big( \left( {W^i}(x)^{'}_\mathit{tx} F {R^k}(x)^{'}_\mathit{tx} \in  \mathit{st}  \right) \wedge
+%%%  \left( {W^j}(x)^{'}_\mathit{ty} F {R^l}(x)^{'}_\mathit{ty} \in  \mathit{st} \right) \wedge \\
+%%%  \left( {W^m}(y)^{'}_\mathit{tx} F {R^p}(y)^{'}_\mathit{tx} \in  \mathit{st}  \right) \wedge
+%%%  \left( {W^n}(y)^{'}_\mathit{ty} F {R^q}(y)^{'}_\mathit{ty} \in  \mathit{st} \right)\big) \\
+%%%  \left( \left( v_l^{'} = v_k^{'} \right) \wedge \left( v_q^{'} = v_m^{'} \right) \right) \wedge \\
+%%   \not\exists \big( \left( {R^i}(x)^{'}_\mathit{tx} \in  \mathit{st}  \right) \wedge
+%%  \left( {W^j}(x)^{'}_\mathit{ty} F {R^k}(x)^{'}_\mathit{ty} \in  \mathit{st} \right) \wedge \\
+%%  \left( {W^m}(y)^{'}_\mathit{tx} F {R^p}(y)^{'}_\mathit{tx} \in  \mathit{st}  \right) \wedge
+%%  \left( {W^n}(y)^{'}_\mathit{ty} F {R^q}(y)^{'}_\mathit{ty} \in  \mathit{st} \right) \big) \\
+%%  \big( \left( \left( v_k^{'} = v_j^{'} \right)  \wedge \left( v_p^{'} = v_m^{'} \right) \right)  \big) \big) \big) \big)
+%%E^{r} = C = \forall \mathit{st}, \mathit{st}^{'} \in \mathcal{S}_t, \mathit{tx}, \mathit{ty} \in \mathcal{S}_t \\ \big(
+%% % \mathit{tx} F \mathit{ty} \Rightarrow
+%% \big( \big( \not\exists a_\mathit{tx} \in \mathit{st}
+%% \big(  {W}(x)^{'}_\mathit{tx} F {R}(x)^{''}_\mathit{ty} \in \mathit{st} \big) \\
+%%  \wedge  \not\exists a_\mathit{ty} \in \mathit{st}
+%% \big( {W}(y)^{'''}_\mathit{ty} F {R}(y)^{''''}_\mathit{tx} \in \mathit{st}  \big) \big) \wedge
+%%%\not\exists \left( c_{ty} F c_{tx} \in \mathit{st} \right)  \wedge \\
+%% \big( \not\exists  {W}(x)^{'}_\mathit{tx}, {W}(x)^{''}_\mathit{tx}, \\ {R}(x)^{'''}_\mathit{ty} \in  \mathit{st}  \big)
+%% \big( \left( {W}(x)^{'}_\mathit{tx}  F {W}(x)^{''}_\mathit{tx} F  c_\mathit{tx} \in  \mathit{st} \right) \\
+%%   \wedge \left( v^{''} = v \right)  \big)  \wedge
+%%   \not\exists \left( {W}(x)^{'}_\mathit{ty}, {W}(x)^{''}_\mathit{ty}, {R}(x)^{'''}_\mathit{tx} \in  \mathit{st} \right) \\
+%%    \big( \left(
+%% {W}(x)^{'}_\mathit{ty}  F {W}(x)^{''}_\mathit{ty} F  c_\mathit{ty} \in  \mathit{st} \right)
+%%   \wedge \left( v^{''} = v \right)  \big) \wedge
+%% %\mathit{tx} F \mathit{ty} \Rightarrow
+%%  \big( \\ \not\exists {W}(x)^{'}_\mathit{tx},  {W}(y)^{''}_\mathit{tx},
+%%  {W}(x)^{'''}_\mathit{ty}, {W}(y)^{''''}_\mathit{ty}, {R}(x)^{'''''}_\mathit{tx}, {R}(y)^{''''''}_\mathit{ty} \in \mathcal{S}_t \\ \big)
+%% \big( \left( {W^i}(x)^{'}_\mathit{tx} F c_\mathit{tx} F  {W^k}(x)^{'}_\mathit{ty} F {R^m}(x)^{'}_\mathit{ty} \in \mathit{st} \right) \\
+%%\wedge \left( {W^j}(y)^{'}_\mathit{tx} F c_\mathit{tx} F {W^l}(y)^{'}_\mathit{ty} F {R^n}(y)^{'}_\mathit{ty} \in \mathcal{S}_t \right) \wedge \\
+%%\big( \left( \left( v^{''''} = v^{'''} \right) \wedge \left( v^{''''} = v \right) \right) \vee \\ \left( \left( v^{''''} = v^{'} \right) \wedge \left( v^{''''} = v^{''} \right) \right)  \big) \wedge \\
+%%%\left( \not\exists {R^m}(x)^{'}_\mathit{tx}, {R^n}(y)^{'}_\mathit{ty} \in \mathcal{S}_t \right) \c\
+%%%   \big( \left( {W^i}(x)^{'}_\mathit{tx} F c_\mathit{tx} F  {W^k}(x)^{'}_\mathit{ty} F {R^m}(x)^{'}_\mathit{ty} \in \mathit{st} \right) \wedge \\
+%%%   \left( {W^j}(y)^{'}_\mathit{tx} F c_\mathit{tx} F {W^l}(y)^{'}_\mathit{ty} F {R^n}(y)^{'}_\mathit{ty} \in \mathcal{S}_t \right) \wedge \\
+%%% \left( v_n^{'} = v_k^{'} \right) \wedge \left( v_m^{'} = v_i^{'} \right)  \big) \wedge \\
+%%    \big( \not\exists {R}(x)^{'}_\mathit{tx}, {W}(x)^{''}_\mathit{ty}, {R}(x)^{'''}_\mathit{ty}, {R}(y)^{''''}_\mathit{ty}, {W}(y)^{'''''}_\mathit{tx}, {R}(y)^{''''''}_\mathit{tx} \in \mathcal{S}_t \big)  \\
+%%     \big( \big( {R}(x)^{'}_\mathit{tx} F {W}(x)^{''}_\mathit{ty} F {R}(x)^{'''}_\mathit{ty} \in \mathcal{S}_t \big) \wedge \\
+%%  \big(  {R}(y)^{''''}_\mathit{ty} F {W}(y)^{'''''}_\mathit{tx} F {R}(y)^{''''''}_\mathit{tx} \in \mathcal{S}_t \big)  \big)  \\
+%%  \big(  \left( v^{''} = v^{'} \right) \wedge
+%% \left( v^{'''''} = v^{''''} \right) \big) \big) \big)
+%%\left( \mathit{Op}^i_\mathit{tx} X^o \mathit{Op}^j_\mathit{tx} \in \mathit{st} \right) \wedge
+%% \left( \mathit{Op}^k_\mathit{ty} X^o \mathit{Op}^l_\mathit{ty} \in \mathit{st} \right)
+%%\\ \Rightarrow \exists S \left( \mathit{Op}^i_\mathit{tx} X^o \mathit{Op}^j_\mathit{tx} F c_\mathit{tx} F \mathit{Op}^k_\mathit{ty} X^o \mathit{Op}^l_\mathit{ty} F c_\mathit{ty}  \in S \right)  \wedge \\
+%% \forall \mathit{st}  \left( \mathit{Op}^j_\mathit{tx} X^o R^m_\mathit{tx} \in \mathit{st} \right) \wedge \left( v^m = v^j  \right) \wedge \\
+%% \forall \mathit{st}  \left( \mathit{Op}^k_\mathit{ty} X^o R^n_\mathit{ty} \in \mathit{st} \right) \wedge \left( v^n = v^k  \right) \big) \big)
+%%E^{s} =   \; \forall x, y, \mathit{st} \in \mathcal{S}_t, {\mathit{R}}_\mathit{ty}(y) \in \mathit{st}, \; {\mathit{W}}_\mathit{tx}(x), {\mathit{W}}_\mathit{ty}(y)', {\mathit{W}}_\mathit{tx}(x)'', {\mathit{W}}_ \mathit{ty}(y)''', \\ {\mathit{R}}_\mathit{ty}(x)', {\mathit{R}}_\mathit{tx}(x)'', {\mathit{R}}'''_ \mathit{ty}(y) \in \mathcal{S}_t :
+%%{\mathit{W}}_\mathit{tx}(x) \operatorname{\it F}_\mathit{st} {\mathit{W}}_\mathit{ty}(x)'  \operatorname{\it F}_\mathit{st} a_\mathit{ty}\operatorname{\it F}_\mathit{st} {\mathit{R}}_\mathit{ty}(x) \\  \quad \Rightarrow \quad
+%%\not\exists {\mathit{W}}_\mathit{ty}(x)'  \preccurlyeq {\mathit{R}}_\mathit{ty}(x) \wedge
+%%{\mathit{W}}_\mathit{tx}(x) \operatorname{\it F}_\mathit{st} {\mathit{W}}_ \mathit{ty}(y)' \quad \Rightarrow \quad
+%%{\mathit{W}}_\mathit{tx}(x)'' \preccurlyeq {\mathit{W}}'''_ \mathit{ty}(y) \wedge \\
+%%{\mathit{W}}_\mathit{tx}(x) \operatorname{\it F}_\mathit{st} {\mathit{R}}_ \mathit{ty}(y) \quad \Rightarrow \quad
+%%{\mathit{W}}_\mathit{tx}(y)'' \preccurlyeq {\mathit{R}}_ \mathit{ty}(x)' \wedge
+%%{\mathit{R}}_ \mathit{ty}(x)' \preccurlyeq  {\mathit{R}}_ \mathit{ty}(y)  \quad \Rightarrow \quad
+%%{\mathit{R}}_\mathit{tx}(x)'' \preccurlyeq {\mathit{R}}'''_ \mathit{ty}(y),
+%% \; \forall x, \; \mathit{tx}, \mathit{ty} \in T, \; {\mathit{W}}_\mathit{tx}(x), {\mathit{W}}'_ \mathit{ty}(x), {\mathit{R}}_\mathit{ty}(x), {\mathit{R}}'_\mathit{tx}(x) \in \mathcal{S}_t : \\
+%% \not\exists {\mathit{W}}_\mathit{tx}(x) \preccurlyeq a_\mathit{tx} \preccurlyeq {\mathit{R}}_\mathit{ty}(x) \quad \wedge  \quad \not\exists c_\mathit{tx} \preccurlyeq  {\mathit{W}}_\mathit{tx}(x) \preccurlyeq {\mathit{R}}_\mathit{ty}(x) \quad \wedge \\
+%%{\mathit{W}}_\mathit{tx}(x) \preccurlyeq {\mathit{W}}'_ \mathit{ty}(x) \quad \vee \quad
+%%{\mathit{W}}'_\mathit{ty}(x) \preccurlyeq {\mathit{W}}_ \mathit{tx}(x) \quad \wedge \\
+%%{\mathit{W}}_\mathit{tx}(x) \preccurlyeq {\mathit{R}}_ \mathit{ty}(x) \quad \vee \quad
+%%{\mathit{R}}_\mathit{ty}(x) \preccurlyeq {\mathit{W}}_ \mathit{tx}(x) \quad \wedge \\
+%%{\mathit{R}}'_\mathit{tx}(x) \preccurlyeq {\mathit{W}}'_ \mathit{ty}(x) \quad \vee \quad
+%%{\mathit{W}}'_\mathit{ty}(x) \preccurlyeq {\mathit{R}}'_ \mathit{tx}(x),
+%E^{s} =  \; \forall x, \; \mathit{tx}, \mathit{ty} %\mathit{tx}^{c}, \mathit{ty}^{c}
+% \in T: 
+%\mathit{tx}^{c} \prec_{\mathit{wr}} \mathit{ty}^{c} %\quad \vee \quad \forall x, \; \mathit{tx}^{c}, \mathit{ty}^{c} \in T: \mathit{ty}^{c} \preccurlyeq_{\mathit{wr}} \mathit{tx}^{c} 
+% \quad \wedge \quad 
+%%\; \forall x, \; \mathit{tx}, \mathit{ty} \in T: 
+%\mathit{tx} \prec_{\mathit{ww}} \mathit{ty} %\quad \vee \quad \forall x, \; \mathit{tx}, \mathit{ty} \in T:  
+%%\mathit{ty} \preccurlyeq_{\mathit{ww}} \mathit{tx} 
+% \quad \wedge \quad 
+%%\forall x, \; \mathit{tx}, \mathit{ty} \in T: 
+% \mathit{tx} \prec_{\mathit{rw}} \mathit{ty}. %\quad \vee \quad \forall x, \; \mathit{tx}, \mathit{ty} \in T: 
+%%\mathit{ty} \preccurlyeq_{\mathit{rw}} \mathit{tx},
+%\end{split}
+%  \end{align}.
+%  The isolation level  PL-2.99 can be thought of.a special case of PL-2; instead of generic  read-write dependency, PL.2.99 proscribes read-write item-dependency cycles among transactions. To keep our definitions simple, we do not make any distinction between  read-write item-dependency and  read-write dependency. Hence, in this paper, we do not provide a separarate specification definition of  PL.2.99. %PL-2.99 is given as
 %  \begin{align}\label{eqn:PL299}
 %\begin{split}
 %%\forall i, j, k, l, m, n, p, q, s, t, u, a, b, c, d, e, f, tx, ty \\ \big( \left( tx F ty \right) \wedge \left( \left( \star R^j_{tx}{v_l} F^{o} W^k_{tx}(v_m) X^{o} R^p_{tx}{v_t} \star \right) \right) \\ \wedge \left( \left( \star R^n_{ty}{v_s} F^{o} W^q_{ty}(v_u) X^{o} R^a_{ty}{v_b} \star \right) \right) \big)^\mathit{po}_{o_m} \\
