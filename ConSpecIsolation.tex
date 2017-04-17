@@ -1091,19 +1091,22 @@ The partial order relation $\mathit{tx} \preccurlyeq \mathit{ty}$ in Condition 2
    %We refer to the partial order relation $\mathit{tx} \preccurlyeq \mathit{ty}$ in Condition 3 as $\mathit{tx} \preccurlyeq_{\mathit{ww}} \mathit{ty}$, where the suffix ${\mathit{ww}}$ restricts the partial order $\preccurlyeq$ among write operations in $\mathit{tx}$ and $\mathit{ty}$, i.e., $ \exists {\mathit{tz}} \in T, W(x,v)_{\mathit{tx}},W(x,v^{'})_{\mathit{ty}}, R(x){v^{''}}_{\mathit{tz}} \in  \mathcal{S}_t: %W(x,v)_{\mathit{tx}} \operatorname{\it F}_\mathit{st} R(x){v^{'}}_{\mathit{ty}} \wedge 
     %\mathit{ty} \preccurlyeq_{\mathit{wr}} \mathit{tz} \wedge v^{'} = v^{''}   \rightarrow \mathit{tx} \preccurlyeq_{\mathit{ww}} \mathit{ty}$. We refer to the partial order relation $\mathit{tx} \preccurlyeq \mathit{ty}$ in Condition 4 as $\mathit{tx} \preccurlyeq_{\mathit{rw}} \mathit{ty}$, where the suffix ${\mathit{rw}}$ restricts the partial order $\preccurlyeq$ among read operations in $\mathit{tx}$ and write operations in $\mathit{ty}$, i.e., $\exists {\mathit{tz}} \in T, R(x,v)_{\mathit{tx}}, W(x,v^{'})_{\mathit{ty}}, R(x){v^{''}}_{\mathit{tz}} \in  \mathcal{S}_t: %W(x,v)_{\mathit{tx}} \operatorname{\it F}_\mathit{st} R(x){v^{'}}_{\mathit{ty}} \wedge 
  %   \mathit{ty} \preccurlyeq_{\mathit{wr}} \mathit{tz} \wedge v^{'} = v^{''}  \rightarrow \mathit{tx} \preccurlyeq_{\mathit{rw}} \mathit{ty}$.  
-    \par However, most isolation levels, except a few like read uncommitted, impose a partial order among committed transactions only, i.e., they disallow reading results of operations performed from uncommitted/aborted transactions. ConSpec expresses such isolation levels as partial orders on committed transactions denoted as $\mathit{tx}^{c}$ and $\mathit{ty}^{c}$.  All operations in $\mathit{tx}^{c}$ and $\mathit{ty}^{c}$ are followed by commit operations $c_\mathit{tx}$ and $c_\mathit{ty}$, respectively. It further implies that $\mathit{tx}$ and $\mathit{ty}$ has not been aborted, i.e., they do not comprise abort operations $a_\mathit{tx}$ and $a_\mathit{ty}$, respectively.  If a partial order $\preccurlyeq$ is a total order, denoted as  $\prec$, for any pair of transactions $\mathit{tx}, \mathit{ty} \in T$ that belong to the partial order set $\left( T, \prec \right)$, either $\mathit{tx} \prec \mathit{ty}$ or $\mathit{ty} \prec \mathit{tx}$ holds but both can not hold simultaneously. For instance, if $\prec$ satisfies Condition 2 in Definition \ref{def:form0},  
+    \par However, most isolation levels, except a few like read uncommitted, impose a partial order among committed transactions only, i.e., they disallow reading results of operations performed from uncommitted/aborted transactions. ConSpec expresses such isolation levels as partial orders on committed transactions denoted as $\mathit{tx}^{c}$ and $\mathit{ty}^{c}$.  All operations in $\mathit{tx}^{c}$ and $\mathit{ty}^{c}$ are followed by commit operations $c_\mathit{tx}$ and $c_\mathit{ty}$, respectively. It further implies that $\mathit{tx}$ and $\mathit{ty}$ has not been aborted, i.e., they do not comprise abort operations $a_\mathit{tx}$ and $a_\mathit{ty}$, respectively.  $\preccurlyeq_x$ restricts the partial order $\preccurlyeq$ to operations on an object $x$ comprised in the transactions in $\left( T, \preccurlyeq \right)$. If a partial order $\preccurlyeq$ is a total order, denoted as  $\prec$, for any pair of transactions $\mathit{tx}, \mathit{ty} \in T$ that belong to the partial order set $\left( T, \prec \right)$, either $\mathit{tx} \preccurlyeq \mathit{ty}$ or $\mathit{ty} \preccurlyeq \mathit{tx}$ holds but both can not hold simultaneously. For instance, if $\prec$ satisfies Condition 2 in Definition \ref{def:form0},  
   %which 
   %precedes the transaction $ {\mathit{tx}}$ in $\preccurlyeq$,  
   	$\exists W(x,v)_{\mathit{tx}}, R(x){v^{'}}_{\mathit{ty}} \in  \mathcal{S}_t: %W(x,v)_{\mathit{tx}} \operatorname{\it F}_\mathit{st} R(x){v^{'}}_{\mathit{ty}} \wedge 
    v = v^{'}  \rightarrow \mathit{tx} \prec \mathit{ty}$ or $\exists W(x,v)_{\mathit{ty}}, R(x){v^{'}}_{\mathit{tx}} \in  \mathcal{S}_t: %W(x,v)_{\mathit{tx}} \operatorname{\it F}_\mathit{st} R(x){v^{'}}_{\mathit{ty}} \wedge 
-   v = v^{'}  \rightarrow \mathit{ty} \prec \mathit{tx}$.  The above total order proscribes wr dependency cycles among transactions.  
+   v = v^{'}  \rightarrow \mathit{ty} \prec \mathit{tx}$.  %The above total order proscribes wr dependency cycles among transactions.  
    
  \section{Specification of Existing Isolation Levels}
  Here, we specify the ANSI SQL isolation levels using ConSpec \cite{Berenson:1995:CAS:223784.223785}.  The Read uncommitted isolation level is the lowest (i.e., weakest/least restrictive) isolation level; it only disallows the P0 phenomenon, also known as dirty write anomaly.  Read uncommitted can be specified as follows. 
    \begin{align}\label{eqn:readuncomm}
 \begin{split}
- E^{s} =  \; \forall {\mathit{tx}}, {\mathit{ty}} \in T: \;
-\mathit{tx} \preccurlyeq {\mathit{ty}} \quad \Rightarrow  \quad \not \exists \mathit{tz} \in T: \; \mathit{tz} \preccurlyeq {\mathit{ty}}. %\quad \vee \quad \forall x, \; \mathit{tx}, \mathit{ty} \in T:  
+ E^{s} =  \exists x, y, \mathit{tx}, \mathit{ty} \in T, W(x,v)_{\mathit{tx}}, R(x){v^{'}}_{\mathit{ty}} \in  \mathcal{S}_t: 
+  \mathit{tx} \preccurlyeq_y {\mathit{ty}} \quad \Rightarrow  \quad \not \exists \mathit{tz} \in T, W(x,v^{''})_{\mathit{tz}} \in  \mathcal{S}_t: \\
+   \mathit{tz} \preccurlyeq_x {\mathit{ty}} \quad \wedge \quad \mathit{tx} \preccurlyeq {\mathit{tz}}.
+% \; \forall x, {\mathit{tx}}, {\mathit{ty}} \in T: \;
+%\mathit{tx} \preccurlyeq_x {\mathit{ty}} \quad \Rightarrow  \quad \not \exists \mathit{tz} \in T: \; \mathit{tz} \preccurlyeq {\mathit{ty}}. %\quad \vee \quad \forall x, \; \mathit{tx}, \mathit{ty} \in T:  
 %\mathit{ty} \preccurlyeq_{\mathit{ww}} \mathit{tx}
 \end{split}
   \end{align}
@@ -1111,53 +1114,72 @@ The partial order relation $\mathit{tx} \preccurlyeq \mathit{ty}$ in Condition 2
  \par Read committed isolation level proscribes P1 phenomenon, also known as dirty reads, in addition to proscribing dirty write. It is specified as follows. 
    \begin{align}\label{eqn:readcomm}
 \begin{split}
- E^{s} =  \; \forall R_{\mathit{ty}}(x){v} \in \mathcal{S}_t. \; \exists \mathit{tx}^{c} \in T: 
-\mathit{tx}^{c} \preccurlyeq {ty} \quad \wedge   \quad \not \exists \mathit{tz} \in T: \; \mathit{tz} \preccurlyeq {\mathit{ty}}. %\quad \vee \quad \forall x, \; \mathit{tx}, \mathit{ty} \in T:  
+ E^{s} =  \exists x, y, \mathit{tx}^{c}, \mathit{ty} \in T, W(x,v)_{\mathit{tx}}^{c}, R(x){v^{'}}_{\mathit{ty}} \in  \mathcal{S}_t: 
+  \mathit{tx}^{c} \preccurlyeq {\mathit{ty}} \quad \wedge  \quad \not \exists \mathit{tz} \in T, W(x,v^{''})_{\mathit{tz}} \in  \mathcal{S}_t: \\
+   \mathit{tz} \preccurlyeq_x {\mathit{ty}} \quad \wedge \quad \mathit{tx} \preccurlyeq {\mathit{tz}}. 
+ %E^{s} =  \; \forall R_{\mathit{ty}}(x){v} \in \mathcal{S}_t. \; \exists \mathit{tx}^{c} \in T: 
+%\mathit{tx}^{c} \preccurlyeq {ty} \quad \wedge   \quad \not \exists \mathit{tz} \in T: \; \mathit{tz} \preccurlyeq {\mathit{ty}}. %\quad \vee \quad \forall x, \; \mathit{tx}, \mathit{ty} \in T:  
 %\mathit{ty} \preccurlyeq_{\mathit{ww}} \mathit{tx}
 \end{split}
   \end{align}
   \par Repeatable read isolation level is specified as follows. 
    \begin{align}\label{eqn:repeatread}
 \begin{split}
- E^{s} =  \; \forall R_{\mathit{ty}}(x){v}, R_{\mathit{ty}}(x){v^{'}} \in \mathcal{S}_t. \; \exists \mathit{tx} \in T: 
-\mathit{tx}^{c} \preccurlyeq \mathit{ty} \quad \wedge \quad \mathit{ty} \not \preccurlyeq \mathit{ty} \quad \wedge \quad v = v^{''} \quad \wedge   \quad \not \exists \mathit{tz} \in T: \\ \mathit{tz} \preccurlyeq {\mathit{ty}}. %\quad \vee \quad \forall x, \; \mathit{tx}, \mathit{ty} \in T:  
+ E^{s} =  \; \exists x, y, \mathit{tx}^{c}, \mathit{ty} \in T, W(x,v)_{\mathit{tx}}^{c}, R(x){v^{'}}_{\mathit{ty}}, R_{\mathit{ty}}(x){v^{''}} \in \mathcal{S}_t: \; \exists \mathit{tx} \in T:  \\
+\mathit{tx}^{c} \preccurlyeq \mathit{ty} \quad \wedge \quad %\mathit{ty} \not \preccurlyeq \mathit{ty} \quad \wedge \quad 
+ v^{'} = v^{''} \quad \wedge \quad \mathit{tx} \not \preccurlyeq \mathit{tx} \quad \wedge \quad \mathit{ty} \not \preccurlyeq \mathit{ty} \quad \wedge \\
+  \not \exists \mathit{tz} \in T, W(x,v^{'''})_{\mathit{tz}} \in  \mathcal{S}_t: 
+   \mathit{tz} \preccurlyeq_x {\mathit{ty}} \quad \wedge \quad \mathit{tx} \preccurlyeq {\mathit{tz}}. %\quad \vee \quad \forall x, \; \mathit{tx}, \mathit{ty} \in T:  
 %\mathit{ty} \preccurlyeq_{\mathit{ww}} \mathit{tx}
 \end{split}
   \end{align}
-  \par Cursor stability isolation level is specified as follows. 
-   \begin{align}\label{eqn:cursor}
-\begin{split}
- E^{s} =  \; \forall W_{\mathit{tx} }(x, v^{''}), R_{\mathit{ty}}(x){v}, R_{\mathit{ty}}(x){v^{'}} \in \mathcal{S}_t: \; % . \; \exists \mathit{tx} \in T: 
-\mathit{tx}^{c} \preccurlyeq \mathit{ty} \quad \wedge \quad \mathit{ty} \not \preccurlyeq \mathit{ty} \quad \wedge \quad v = v^{'} \\\quad \wedge   \quad \not \exists \mathit{tz} \in T: \; \mathit{tz} \preccurlyeq {\mathit{ty}}. %\quad \vee \quad \forall x, \; \mathit{tx}, \mathit{ty} \in T:  
-%\mathit{ty} \preccurlyeq_{\mathit{ww}} \mathit{tx}
-\end{split}
-  \end{align}
+%  \par Cursor stability isolation level is specified as follows. 
+%   \begin{align}\label{eqn:cursor}
+%\begin{split}
+% E^{s} =  \; \forall W_{\mathit{tx} }(x, v^{''}), R_{\mathit{ty}}(x){v}, R_{\mathit{ty}}(x){v^{'}} \in \mathcal{S}_t: \; % . \; \exists \mathit{tx} \in T: 
+%\mathit{tx}^{c} \prec \mathit{ty} %\quad \wedge \quad \mathit{ty} \not \preccurlyeq \mathit{ty} \quad \wedge \quad v = v^{'} \\ 
+%  \quad \wedge   \quad \not \exists \mathit{tz} \in T: \; \mathit{tz} \preccurlyeq {\mathit{ty}}. %\quad \vee \quad \forall x, \; \mathit{tx}, \mathit{ty} \in T:  
+%%\mathit{ty} \preccurlyeq_{\mathit{ww}} \mathit{tx}
+%\end{split}
+%  \end{align}
   \par We use the definition of snapshot isolation level found in \cite{kemme-thesis}. Additionally, Adya et al. \cite{Adya:1999:WCG:930194} specifies the following anomalies that snapshot isolation level proscribes. 
   SI-a: Concurrent transactions do not observe the effects of one another, and do not modify the same objects. 
-  SI-b: A transaction observes complete effects of transactions that committed before it started.  SI-a can be interpreted as follows.   If a pair of transactions can observe results of each other, they are not concurrent, i.e., $\preccurlyeq$ among a pair of transactions in Definition \ref{def:form0} is a total order $\prec$.  According to SI-b the above total order must be among committed version of $\mathit{tx}$ and $\mathit{ty}$, i.e., $\mathit{tx}^{c} \prec \mathit{ty}$. The above condition reduces to: $ \forall \mathit{tx}, \mathit{ty} \in T,  W_{\mathit{tx} }(x, v),  %W_{\mathit{ty} }(x, v^{'}), %R_{\mathit{tx}}(x){v^{''}},    
-  R_{\mathit{ty}}(x){v^{'}}, R_{\mathit{ty}}(x){v^{''}} \in  \mathcal{S}_t:
+  SI-b: A transaction observes complete effects of transactions that committed before it started.  SI-a can be interpreted as follows.   If a pair of transactions can observe results of each other, they are not concurrent, i.e., $\preccurlyeq$ among a pair of transactions in Definition \ref{def:form0} is a total order $\prec$.  According to SI-b the above total order must be among committed version of $\mathit{tx}$ and $\mathit{ty}$, i.e., $\mathit{tx}^{c} \prec \mathit{ty}$. The above condition reduces to: $ \exists x, y, \mathit{tx}^{c}, \mathit{ty} \in T, W(x,v)_{\mathit{tx}}^{c}, R(x){v^{'}}_{\mathit{ty}}, R_{\mathit{ty}}(x){v^{''}} \in \mathcal{S}_t:  \; \exists \mathit{tx} \in T:  
+v^{'} = v^{''}  \quad \Rightarrow \quad %\mathit{ty} \not \preccurlyeq \mathit{ty} \quad \wedge \quad 
+ \mathit{tx}^{c} \prec \mathit{ty}
+  %\forall \mathit{tx}, \mathit{ty} \in T,  W_{\mathit{tx} }(x, v),  %W_{\mathit{ty} }(x, v^{'}), %R_{\mathit{tx}}(x){v^{''}},    
+  %R_{\mathit{ty}}(x){v^{'}}, R_{\mathit{ty}}(x){v^{''}} \in  \mathcal{S}_t:
  %W_{\mathit{tx} }(x, v) \operatorname{\it F}_\mathit{st} R_{\mathit{tx}}(x){v^{''}} \quad \wedge \quad 
-\left( v = v^{'}%W_{\mathit{ty} }(x, v^{'})  \operatorname{\it F}_\mathit{st} R_{\mathit{tx}}(x){v^{'''}} \quad 
- \mathit{tx}^{c} \prec \mathit{ty} \right)$. Snapshot isolation also includes the repeatable read read. condition, i.e., $\forall \mathit{tx}, \mathit{ty} \in T,  W_{\mathit{tx} }(x, v),  %W_{\mathit{ty} }(x, v^{'}), %R_{\mathit{tx}}(x){v^{''}},    
+%\left( v = v^{'}%W_{\mathit{ty} }(x, v^{'})  \operatorname{\it F}_\mathit{st} R_{\mathit{tx}}(x){v^{'''}} \quad 
+  %\quad  \Rightarrow  \quad \mathit{tx}^{c} \prec \mathit{ty} \right)
+  $. Snapshot isolation also includes the repeatable read read. condition, i.e., $\forall \mathit{tx}, \mathit{ty} \in T,  W_{\mathit{tx} }(x, v),  %W_{\mathit{ty} }(x, v^{'}), %R_{\mathit{tx}}(x){v^{''}},    
   R_{\mathit{ty}}(x){v^{'}}, R_{\mathit{ty}}(x){v^{''}} \in  \mathcal{S}_t: \left( \mathit{tx} \not \preccurlyeq \mathit{tx} \quad \wedge \quad \mathit{ty} \not \preccurlyeq \mathit{ty} \quad \wedge \quad v^{'} = v^{''} \right)$.  %SI-b can be interpreted as: if a transaction  ${\mathit{ty}} $ observes values from another transaction  ${\mathit{tx}} $ implies a partial order  $\preccurlyeq$ on  $\mathit{tx}^{c}$ and ${\mathit{ty}} $.  This can be expressed as $\forall \mathit{tx}, \mathit{ty} \in T,  W_{\mathit{tx} }(x, v),  R_{\mathit{ty}}(x){v^{'''}} \in  \mathcal{S}_t: 
  %W_{\mathit{tx} }(x, v) \operatorname{\it F}_\mathit{st} R_{\mathit{ty}}(x){v^{'}}  \quad \wedge \quad 
 % v = v^{'''} \quad  \Rightarrow  \quad \mathit{tx}^{c} \preccurlyeq \mathit{ty}$. 
  Combining the above expressions, we have: 
    \begin{align}\label{eqn:snap}
 \begin{split}
- E^{s} =  \; \forall \mathit{tx}, \mathit{ty} \in T,  W_{\mathit{tx} }(x, v),  %W_{\mathit{ty} }(x, v^{'}), %R_{\mathit{tx}}(x){v^{''}},    
-  R_{\mathit{ty}}(x){v^{'}}, R_{\mathit{ty}}(x){v^{''}} \in  \mathcal{S}_t:  \;
+ E^{s} =  \; \exists x, y, \mathit{tx}^{c}, \mathit{ty} \in T, W(x,v)_{\mathit{tx}}^{c}, R(x){v^{'}}_{\mathit{ty}}, R_{\mathit{ty}}(x){v^{''}} \in \mathcal{S}_t: \\ %\; \exists \mathit{tx} \in T:  \\
+ v^{'} = v^{''}  \quad \Rightarrow \quad %\mathit{ty} \not \preccurlyeq \mathit{ty} \quad \wedge \quad 
+ \mathit{tx}^{c} \prec \mathit{ty} \quad
+ %E^{s} =  \; \forall \mathit{tx}, \mathit{ty} \in T,  W_{\mathit{tx} }(x, v),  %W_{\mathit{ty} }(x, v^{'}), %R_{\mathit{tx}}(x){v^{''}},    
+  %R_{\mathit{ty}}(x){v^{'}}, R_{\mathit{ty}}(x){v^{''}} \in  \mathcal{S}_t:  \;
  %W_{\mathit{tx} }(x, v) \operatorname{\it F}_\mathit{st} R_{\mathit{tx}}(x){v^{''}} \\ \quad \wedge \quad 
-\left( v = v^{'}   %v = v^{''}  \quad
+%\left( v = v^{'}   %v = v^{''}  \quad
  %\wedge \quad %W_{\mathit{ty} }(x, v^{'})  \operatorname{\it F}_\mathit{st} R_{\mathit{ty}}(x){v^{'''}} \quad \wedge  
   %v^{'} = v^{'''}   
-  \quad  \Rightarrow  \quad %\mathit{tx}^{c} \prec_{\mathit{ww}} \mathit{ty} % \right)  \\ 
+  %\quad  \Rightarrow  \quad %\mathit{tx}^{c} \prec_{\mathit{ww}} \mathit{ty} % \right)  \\ 
   %\quad  
  %\wedge %\quad W_{\mathit{tx} }(x, v) \operatorname{\it F}_\mathit{st} R_{\mathit{ty}}(x){v^{'}}  \quad \wedge 
   %\quad %\left( v = v^{'''}  \quad  \Rightarrow  \quad \mathit{tx}^{c} \prec_{\mathit{wr}} \mathit{ty} \right)
-  \mathit{tx}^{c} \prec \mathit{ty} \right) \quad 
-   \wedge \\
-    \quad  \left( \mathit{tx} \not \preccurlyeq \mathit{tx} \quad \wedge \quad \mathit{ty} \not \preccurlyeq \mathit{ty} \quad \wedge \quad v^{'} = v^{''} \right) \quad \wedge   \left( \quad \not \exists \mathit{tz} \in T: \; \mathit{tz} \preccurlyeq {\mathit{ty}} \right).
+  %\mathit{tx}^{c} \prec \mathit{ty} \right) \quad 
+   \wedge \quad 
+   \left( \mathit{tx} \not \preccurlyeq \mathit{tx} \quad \wedge \quad \mathit{ty} \not \preccurlyeq \mathit{ty} \quad \wedge \quad v^{'} = v^{''} \right) \quad \wedge \\
+   % \quad  \left( \mathit{tx} \not \preccurlyeq \mathit{tx} \quad \wedge \quad \mathit{ty} \not \preccurlyeq \mathit{ty} \quad 
+   % \wedge \quad v^{'} = v^{''} \right) 
+   \not \exists \mathit{tz} \in T, W(x,v^{'''})_{\mathit{tz}} \in  \mathcal{S}_t: 
+   \mathit{tz} \preccurlyeq_x {\mathit{ty}} \quad \wedge \quad \mathit{tx} \preccurlyeq {\mathit{tz}}.
+   %\quad \wedge   \left( \quad \not \exists \mathit{tz} \in T: \; \mathit{tz} \preccurlyeq {\mathit{ty}} \right).
 % E^{s} =  \; \forall x, \; \mathit{tx}, \mathit{ty} \in T, R_{\mathit{tx}}(x){v^{''}}, W_{\mathit{tx} }(x, v), R_{\mathit{tx}}(x){v^{'''}} \in  \mathit{tx}, R_{\mathit{ty}}(x){v^{'}} \in \mathit{ty}: 
 %\mathit{tx}  \operatorname{\it F}_\mathit{st} \mathit{ty}  \quad \vdash \\
 % W_{\mathit{tx} }(x, v) \;  \operatorname{\it F}_\mathit{st} \;  c_\mathit{tx} \;  \operatorname{\it F}_\mathit{st} \; R_{\mathit{ty}}(x){v^{'}} \quad \Rightarrow \quad v = v^{'} \quad \wedge \\ 
