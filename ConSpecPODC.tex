@@ -2033,10 +2033,8 @@ Additionally, Chockler et al. uses the notation $\sigma |i + w$ to denote a part
  %\par 
  %Let $w^i$ and $r^j$ be signatures of read and write operations $\mathit{o}^1$ and
 % $\mathit{o}^2$, respectively.
-  \par Using the above notations, Chockler et al. states the RYW consistency model as follows.  For any pair of read and write operations $\mathit{o}^1$ and $\mathit{o}^2$ comprised in a given execution $\sigma_i$ for a process $p_i$, if the condition  (let us call this Condition 1) 
-     $\mathit{o}^1 \xrightarrow{\sigma_i} \mathit{o}^2$ holds for $\sigma_i$, there must exist an equivalent legal serialization ${S_p}$ for a partial execution  $\sigma |i + w$ comprising 
-   operations invoked by $p_i$ plus writes invoked by other clients, for which the condition (let us call this Condition 2) 
-  $\mathit{o}^1 \xrightarrow{S_p} \mathit{o}^2$ must hold. %The
+  \par Using the above notations, Chockler et al. states the RYW consistency model as follows. RYW is given in the form Condition 1 $\Rightarrow$ Condition 2, where  Condition 1  and Condition 2 are given as follows, and $\Rightarrow$ is the implies operator.   Condition 1 is given in the form $\mathit{o}^1 \xrightarrow{\sigma_i} \mathit{o}^2$, where $\mathit{o}^1$ and $\mathit{o}^2$ are  read and write operations  comprised in a given execution $\sigma_i$ of a process $p_i$.  Condition 2 is given as $\mathit{o}^1 \xrightarrow{S_p} \mathit{o}^2$, where ${S_p}$ is an equivalent legal serialization  for a partial execution  $\sigma |i + w$ comprising 
+   operations invoked by $p_i$ plus writes invoked by other clients. %The
    %precedence relationships among operations $\mathit{o}^1$ and $\mathit{o}^2$ in 
    %Condition 1 can be directly
  % expressed in terms of LTL as follows. 
