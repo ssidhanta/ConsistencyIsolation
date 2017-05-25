@@ -2140,27 +2140,28 @@ We generate a session trace by executing the YCSB benchmark suite (YCSB v 0.1.4)
 \end{figure}
 
 \section{Violation Examples: Verified \\ Against ConSpec Specifications}\label{sec:examples}
-  Using example session traces, we illustrate situations where a given consistency model is violated. Let us consider a
-session trace $\mathit{st}_1$: $w^1(x,1), w^2(x,2), r^1(x){2}, r^2(x){1}$ to demonstrate how violation of RYW consistency can occur.
- From the session trace $\mathit{st}_1$, the following LTL expression  \\ $W^1 F W^2 F R^1 F R^2$ follows
- directly from the temporal order of execution as per the session trace. In $\mathit{st}_1$, the read operation $r^1(x){2}$
- follows the write operation $w^1(x,1)$ can be expressed by the LTL expression $W^1 F R^1$; which satisfies the
- condition given in LHS of the shorter specification $E^{s}$ in Equation \ref{eqn:MR} if $W^i$ = $W^1$, $R^j$ = $R^1$. The session trace
- $\mathit{st}_1$ can be transformed into the following partial legal serializations (that also comprises all write operations from other
- clients: $\mathit{Si}_p^1$ = $W^1 F R^2 F W^2 F R^1$, $\mathit{Si}_p^2$ = $W^2 F R^1 F W^1 F R^2$,
-  and $\mathit{Si}_p^3$ = $R^1 F W^2 F W^1 F R^2$.
- Only for $\mathit{Si}_p^1$, the condition $W^1 F R^2 \in \mathit{Si}_p^1$ holds, which does not hold for $\mathit{Si}_p^2$ and $\mathit{Si}_p^3$.
+  Using example session traces, we illustrate situations where given consistency models are violated. Let us consider a
+session trace $\mathit{st}_1$: $w^1(x,1), w^2(x,2), r^1(x){2}, r^2(x){1}$ to demonstrate how violation of RYW consistency can occur. 
+% From the session trace $\mathit{st}_1$, the following LTL expression  \\ $W^1 F W^2 F R^1 F R^2$ follows
+% directly from the temporal order of execution as per the session trace.  
+ In $\mathit{st}_1$, the read operation $r^1(x){2}$
+ follows the write operation $w^1(x,1)$, and this temporal order can be expressed by the LTL expression $W^1 F R^1$; which satisfies the
+ condition given in LHS of the specification $E^{s}$ given in Equation \ref{eqn:RYW}, where $W^i$ = $W^1$, $R^j$ = $R^1$. The session trace
+ $\mathit{st}_1$ can be transformed into the following valid partial orders (that also comprises all write operations from other
+ clients: $\preccurlyeq_{\mathit{st}+w}^1$ = $W^1 \preccurlyeq_{\mathit{st}+w} R^2 \preccurlyeq_{\mathit{st}+w} W^2 \preccurlyeq_{\mathit{st}+w} R^1$, $\preccurlyeq_{\mathit{st}+w}^2$ = $W^2 \preccurlyeq_{\mathit{st}+w} R^1 \preccurlyeq_{\mathit{st}+w} W^1 \preccurlyeq_{\mathit{st}+w} R^2$,
+  and $\preccurlyeq_{\mathit{st}+w}^3$ = $R^1 \preccurlyeq_{\mathit{st}+w} W^2 \preccurlyeq_{\mathit{st}+w} W^1 \preccurlyeq_{\mathit{st}+w} R^2$.
+ Only for $\preccurlyeq_{\mathit{st}+w}^1$, the condition $W^1 \preccurlyeq_{\mathit{st}+w} R^2$ holds, which does not hold for $\preccurlyeq_{\mathit{st}+w}^2$ and $\preccurlyeq_{\mathit{st}+w}^3$.
  thus the condition corresponding to the RHS of the implies operator $\Rightarrow$ in $E^{s}$ , given in Equation \ref{eqn:RYW}, holds.
   %$W^k$ preceding  $W^1$ such that the above LTL condition holds.
   Next, we consider the sequence in the session trace where the
    write operation $w^1(x,1)$ is followed by the read operation  $r^2(x){1}$, expressed by the LTL expression $W^1 F R^2$. As discussed before a partial
-  serialization $\mathit{Si}_p^1$ exists for the session trace such that $W^1 F R^2 \in \mathit{Si}_p^1$, satisfying the first
+  serialization $\preccurlyeq_{\mathit{st}+w}^1$ exists for the session trace such that $W^1 \preccurlyeq_{\mathit{st}+w} R^2$, satisfying the first
   condition in the RHS of Equation \ref{eqn:RYW}.
   %Also, following the same argument as
 %   above, there does not exist a $w^k$ such that the temporal order represented by the LTL condition $W^k F^x W^1 F^x R^2$ holds.
   Next, we consider the sequence write operation $W^2$ followed by $R^1$ in the session trace, given as $W^2 F R^1$.
   This implies that the condition $W^i F^x R^j$ in the LHS of the $E^{s}$ condition in Equation \ref{eqn:RYW} holds, where $W^i$ = $W^2$ and
-  $R^j$ = $R^1$. Again a legal partial serialization $\mathit{Si}_p^1$ exists such that $W^2 F R^1 \in \mathit{Si}_p^1$.
+  $R^j$ = $R^1$. Again a legal partial serialization $\preccurlyeq_{\mathit{st}+w}^1$ exists such that $W^2 \preccurlyeq_{\mathit{st}+w} R^1$.
 %  Regarding the second condition in the RHS of  Equation \ref{eqn:RYW}, there does not exist
 %  a write operation $W^k$ such that the LTL conditions $W^k F^x W^i F^x R^j$ and $v_j=v_k$ hold, where $W^i$ = $W^2$
 %  and $R^j$ = $R^1$. Thus, the condition $\not\exists W^k \in \mathit{st} \left( W^k F^x W^i F^x R^j \in \mathit{st} \right) %\wedge \left( W^k F W^i \in \mathit{st} \right)
@@ -2170,24 +2171,24 @@ session trace $\mathit{st}_1$: $w^1(x,1), w^2(x,2), r^1(x){2}, r^2(x){1}$ to dem
 %  $\not\exists W^k \in \mathit{st} \left( W^k F^x W^i F^x R^j \in \mathit{st} \right) %\wedge \left( W^k F W^i \in \mathit{st} \right)
 % \wedge \left( v^j = v^k \right)$ holds, where $\mathit{st}$ = $\mathit{st}_1$.
   Next, we consider the sequence write operation $W^2$ followed by $R^2$ in the session trace, given as $W^2 F R^2$.
-  This implies that the condition $W^i F^x R^j$ in the LHS of $E^{s}$ in Equation \ref{eqn:RYW} holds, where $W^i$ = $W^2$ and
-  $R^j$ = $R^2$. $\mathit{Si}_p^1$ is the only legal partial serialization that satisfies the condition $W^i F R^j \in \mathit{Si}_p$
-   in the RHS of Equation \ref{eqn:RYW} for all the above write-read operation sequences. However, $\mathit{Si}_p$ does not satisfy
-  $W^i F R^j \in \mathit{Si}_p$ for the write-read sequence $W^2 F R^2$.
+  This implies that the condition $W^i F R^j$ in the LHS of $E^{s}$ in Equation \ref{eqn:RYW} holds, where $W^i$ = $W^2$ and
+  $R^j$ = $R^2$. $\preccurlyeq_{\mathit{st}+w}^1$ is the only legal partial serialization that satisfies the condition $W^i \preccurlyeq_{\mathit{st}+w} R^j$
+   in the RHS of Equation \ref{eqn:RYW} for all the above write-read operation sequences. However, $\preccurlyeq_{\mathit{st}+w}$ does not satisfy
+  $W^i \preccurlyeq_{\mathit{st}+w} R^j $ for the write-read sequence $W^2 F R^2$.
   %Regarding the second condition in the RHS of  Equation \ref{eqn:RYW}, there does exist
 %  a write operation $W^k$ = $W^1$ such that the LTL condition $W^k F^x W^i F^x R^j$ holds,  where $W^i$ = $W^2$ and
 %  $R^j$ = $R^2$. Further, the read operation
 %  $R^2$ returns a value 1 which was written by the write operation $W^1$ that precedes $W^2$. Thus the condition $v_j=v_k$
 %  holds, and thus, in turn, the condition $\not\exists W^k \in \mathit{st} \left( W^k F^x W^i F^x R^j \in \mathit{st} \right) %\wedge \left( W^k F W^i \in \mathit{st} \right)
 % \wedge \left( v^j = v^k \right)$ does not hold, where $\mathit{st}$ = $\mathit{st}_1$.
-  For anomaly
-  condition $C$  in Equation \ref{eqn:RYW} to hold, their cannot exist in the global session trace a read operation $r^k$ preceding the read operation
-  $r^j$ (which is $r^2(x){1}$) and a write operation $w^l$ preceding $w^i$ (which is $w^2(x,2)$ in this case)
-   such that the LTL condition $\left(  {v^k}^{'} = {v^i}^{'} \right) \wedge \big(\left( {v^j}^{'} = {v^l}^{'} \right) \vee
-\big( \left( {W^l}^{'} F {R^j}^{'} \in \mathcal{S}_t \right) \wedge \left( \not\exists {W^l}^{'} F {W^m}^{'} F {R^j}^{'} \in \mathcal{S}_t \right) \big) \big)$ hold.
-However, in the given session trace  $\mathit{st}_1$, there does exist a read $r^1(x){2}$ and a write $w^1(x,1)$, such that
-conditions $\left(  {v^k}^{'} = {v^i}^{'} \right) $ and $\left( {v^j}^{'} = {v^l}^{'} \right)$ hold, thus, in turn,
-violating the anomaly condition.
+%  For anomaly
+%  condition $C$  in Equation \ref{eqn:RYW} to hold, their cannot exist in the global session trace a read operation $r^k$ preceding the read operation
+%  $r^j$ (which is $r^2(x){1}$) and a write operation $w^l$ preceding $w^i$ (which is $w^2(x,2)$ in this case)
+%   such that the LTL condition $\left(  {v^k}^{'} = {v^i}^{'} \right) \wedge \big(\left( {v^j}^{'} = {v^l}^{'} \right) \vee
+%\big( \left( {W^l}^{'} F {R^j}^{'} \in \mathcal{S}_t \right) \wedge \left( \not\exists {W^l}^{'} F {W^m}^{'} F {R^j}^{'} \in \mathcal{S}_t \right) \big) \big)$ hold.
+%However, in the given session trace  $\mathit{st}_1$, there does exist a read $r^1(x){2}$ and a write $w^1(x,1)$, such that
+%conditions $\left(  {v^k}^{'} = {v^i}^{'} \right) $ and $\left( {v^j}^{'} = {v^l}^{'} \right)$ hold, thus, in turn,
+%violating the anomaly condition.
   Hence, the RYW condition is violated for the given session trace.
  %In $\mathit{st}_1$, read operations $r^1(x){2}$ and $r^2(x){1}$ follow the $w^2(x,2)$, the latest write operation on $x$,
 %   satisfying the RHS of Equation \ref{eqn:RYW}. However, the value returned by $r^2(x){1}$ is 1, which does not match the
@@ -2199,16 +2200,18 @@ violating the anomaly condition.
  \par Let us consider a session trace $\mathit{st}_2$:  $w^1(x,1)$, $\mathit{st}_2^{'}$: $w^2(x,2)$, and $\mathit{st}_2^{''}$: $r^1(x){1}, r^2(x){2}, r^3(x){1}$ to illustrate how
  violation of MR consistency can occur. Since the above session traces comprise write operations followed by read on the same object, as well
  as multiple read operations on same object x, they satisfy the conditions given in LHS of Equation \ref{eqn:MR}.
- First, let us consider the sequence of read operations $r^1(x){1}$ and $r^2(x){2}$ in $\mathit{st}^2$, given by the LTL expression $R^1 F^x R^2$.
+ First, let us consider the sequence of read operations $r^1(x){1}$ and $r^2(x){2}$ in $\mathit{st}^2$, given by the LTL expression $R^1 F R^2$.
  If and only if $R^i$ = $R^1$ and $R^j$ = $R^2$, the above sequence of reads can satisfy the LHS of the condition  $E^{s}$ in Equation \ref{eqn:MR}.
-  The above traces can be transformed into legal partial serialization order $\mathit{Si}_p$ =
- $W^1 F R^1 F R^3 F W^2 F R^2$, such that $R^1 F R^2 \in \mathit{Si}_p$ holds, thus satisfying
+  The above traces can be transformed into legal partial order $\preccurlyeq_{\mathit{st}+w}$ =
+ $W^1 \preccurlyeq_{\mathit{st}+w} R^1 \preccurlyeq_{\mathit{st}+w} R^3 \preccurlyeq_{\mathit{st}+w} W^2 \preccurlyeq_{\mathit{st}+w} R^2$, such that $R^1 \preccurlyeq_{\mathit{st}+w} R^2$ holds, thus satisfying
  the first condition the RHS of the implies operator $\Rightarrow$
  in  $E^{s}$ in Equation \ref{eqn:MR}.
-   Next, we consider the sequence $r^1(x){1}$ followed by $r^3(x){1}$ in the above traces, given as the LTL expression $R^1 F R^3$. The above condition satisfies the LHS of $E^s$ Equation
+   Next, we consider the sequence $r^1(x){1}$ followed by $r^3(x){1}$ in the above traces, given as the LTL expression $R^1 F R^3$. 
+   The above condition satisfies the LHS of $E^s$ Equation
    \ref{eqn:MR}, given that
-  $R^i$ = $R^1$ and $R^j$ = $R^3$, which, in turn, implies $v_i$ = $v_1$ = 1 and $v_j$ = $v_2$ =1. As discussed above, a
-  legal partial serialization $\mathit{Si}_p$ exists for the above trace, such that $R^1 F R^3 \in \mathit{Si}_p$
+  $R^i$ = $R^1$ and $R^j$ = $R^3$, which, in turn, implies  $R^1 F R^3 $. % $v_i$ = $v_1$ = 1 and $v_j$ = $v_2$ =1.
+   As discussed above, a
+  legal partial order $\preccurlyeq_{\mathit{st}+w}$ exists for the above trace, such that $R^1 \preccurlyeq_{\mathit{st}+w} R^3$
   holds; the condition $E^s$  in the RHS of Equation \ref{eqn:MR} holds for the above sequence of reads.
   %Also, $W^m$ and $W^n$ are the only write operations
 %  that can satisfy the condition $W^m F^x W^n F^x R^i F^x R^j \in \mathit{st}$. Hence,
@@ -2217,19 +2220,20 @@ violating the anomaly condition.
 %  $\left( v^i = v^n \right) \wedge \left( v^j = v^m \right)$ holds. This, in turn, second condition in the RHS of
 %  Equation \ref{eqn:MR} holds.
    Next, we consider the sequence $r^2(x){2}$ followed by $r^3(x){1}$ in the above traces, given
-  as $R^2 F R^3$. However, the above sequence of reads does not match the order among these reads in the serialization  $\mathit{Si}_p$, i.e.,
-  $R^2 F R^3 \in \mathit{Si}_p$ holds;
+  as $R^2 F R^3$. However, the above sequence of reads does not match the order among these reads in a valid legal partial order  $\preccurlyeq_{\mathit{st}+w}$, i.e.,
+  $R^2 \preccurlyeq_{\mathit{st}+w} R^3$ holds;
     thus it does not satisfy the first condition in the RHS of Equation \ref{eqn:MR}.
     Further, for the LHS of Equation \ref{eqn:MR} to hold for the above sequence of reads,   $R^i$ = $R^2$ and $R^j$ = $R^3$,
-   which, in turn, implies $v_i$ = $v_2$ = 2 and $v_j$ = $v_3$ =1.
-   For the anomaly condition $C$ in Equation \ref{eqn:MR} to hold for the sequence of read operations $r^1(x){1}$ followed by $r^3(x){1}$, there cannot exist write
-  operations $w^m$ and $w^n$ corresponding to the reads $r^i$ and $r^j$  such that the LTL condition
-  $\left( {v^i}^{'} = {v^n}^{''} \right) \wedge \big( \left( {v^j}^{'} = {v^m}^{''} \right) \vee \big( \left( {W^m}^{'} F {R^j}^{'} \in \mathcal{S}_t \right) \wedge \\ \left( \not\exists {W^m}^{'} F {W^p}^{'} F {R^j}^{'} \in \mathcal{S}_t \right) \big)$ holds.
-   Here, $W^m$ = $W^1$ and $W^n$ = $W^2$, since $W^m$ and $W^n$ are the only write operations in the given session history.
-   Hence, $v_m$ = $v_1$ = 1 and $v_n$ = $v_2$ = 2. Also, it is given that
-  $v_i$ = $v_1$ = 1 and $v_j$ = $v_2$ =2. Hence, the conditions $\left( v^i = v^n \right)$ and $ \left( v^j = v^m \right)$
-  is satisfied; thus, in turn, the above LTL condition is also satisfied. Thus, the violation condition $C$
-  in Equation \ref{eqn:MR} holds.
+   which, in turn, implies $R^2 F R^3$. % $v_i$ = $v_2$ = 2 and $v_j$ = $v_3$ =1.
+%   For the anomaly condition $C$ in Equation \ref{eqn:MR} to hold for the sequence of read operations $r^1(x){1}$ followed by $r^3(x){1}$, there cannot exist write
+%  operations $w^m$ and $w^n$ corresponding to the reads $r^i$ and $r^j$  such that the LTL condition
+%  $\left( {v^i}^{'} = {v^n}^{''} \right) \wedge \big( \left( {v^j}^{'} = {v^m}^{''} \right) \vee \big( \left( {W^m}^{'} F {R^j}^{'} \in \mathcal{S}_t \right) \wedge \\ \left( \not\exists {W^m}^{'} F {W^p}^{'} F {R^j}^{'} \in \mathcal{S}_t \right) \big)$ holds.
+%   Here, $W^m$ = $W^1$ and $W^n$ = $W^2$, since $W^m$ and $W^n$ are the only write operations in the given session history.
+%   Hence, $v_m$ = $v_1$ = 1 and $v_n$ = $v_2$ = 2. Also, it is given that
+%  $v_i$ = $v_1$ = 1 and $v_j$ = $v_2$ =2. Hence, the conditions $\left( v^i = v^n \right)$ and $ \left( v^j = v^m \right)$
+%  is satisfied; thus, in turn, the above LTL condition is also satisfied.  
+% Thus, the violation condition $C$
+%  in Equation \ref{eqn:MR} holds.
    %Also, $W^m$ = $W^1$ and $W^n$ = $W^2$. Hence,
 %   $v_n$ = $v_i$ and $v_m$ = $v_j$. Thus, the second condition does not hold here.
     Hence, the above traces violate the MR condition.
@@ -2239,12 +2243,12 @@ violating the anomaly condition.
  \par Let us consider a session trace \\ $\mathit{st}_3$: $w^1(x,1), r^1(x){2}$, $\mathit{st}_3^{'}$: $r^2(x){1} w^2(x,2), r^3(x){1}$, and \\ $\mathit{st}_3^{''}$: $r^4(x){2}, r^5(x){1}$ to demonstrate
  a violation of Causal consistency. Since, there are successive operations with direct precedence relation on the object x, $\mathit{st}_3$
  satisfies LHS of the $E^s$ condition in Equation \ref{eqn:Causal}.  We can transform
- the above session traces into a partial serialization $\mathit{Si}_p$ =
- $W^1 F R^2 F R^3 F R^5 F W^2 F R^1 F R^4$. First, let us consider the sequence of operations
+ the above session traces into a valid partial order $\preccurlyeq_{\mathit{st}+w}$ =
+ $W^1 \preccurlyeq_{\mathit{st}+w} R^2 \preccurlyeq_{\mathit{st}+w} R^3 \preccurlyeq_{\mathit{st}+w} R^5 \preccurlyeq_{\mathit{st}+w} W^2 \preccurlyeq_{\mathit{st}+w} R^1 \preccurlyeq_{\mathit{st}+w} R^4$. First, let us consider the sequence of operations
  $w^1(x,1)$ and $r^1(x){2}$ in the above traces, given by the LTL expression $W^1 F R^1$. The above expression satisfies
- the condition $\mathit{Op}^i F^x \mathit{Op}^j$, where $\mathit{Op}^i$ = $W^1$ and $\mathit{Op}^j$ = $R^1$;
+ the condition $\mathit{Op}^i F \mathit{Op}^j$, where $\mathit{Op}^i$ = $W^1$ and $\mathit{Op}^j$ = $R^1$;
  thus satisfying the LHS of the implies operator $\Rightarrow$ in $E^s$ in Equation \ref{eqn:Causal}. The above sequence of
- writes and reads satisfies the condition $W^1 F R^1 \in \mathit{Si}_p$, thus satisfying the first condition the RHS of
+ writes and reads satisfies the condition $W^1 \preccurlyeq_{\mathit{st}+w} R^1$, thus satisfying the first condition the RHS of
  the implies operator $\Rightarrow$ in $E^s$ in Equation \ref{eqn:Causal}.
  %For the second condition in the RHS of
 % Equation \ref{eqn:Causal} to hold, there cannot exist write  operations $W^m$ such that the LTL conditions
@@ -2254,18 +2258,18 @@ violating the anomaly condition.
  Following the same line of argument, the sequence of operations
   $w^1(x,1)$ and $r^2(x){1}$, $w^1(x,1)$ and $r^3(x){1}$, $w^1(x,1)$ and $r^4(x){2}$, $w^1(x,1)$ and $r^5(x){1}$
   and $w^1(x,1)$ and  $w^2(x,2)$ satisfy the LHS and RHS of $E^s$ in the Equation \ref{eqn:Causal}. Next, let us consider
-  the sequence of operations $w^2(x,2)$ and $r^3(x){1}$, which is expressed using LTL condition $W^2 F^x R^3$.
+  the sequence of operations $w^2(x,2)$ and $r^3(x){1}$, which is expressed using LTL condition $W^2 F R^3$.
   Thus, the above sequence satisfies LHS of $E^s$ in the Equation \ref{eqn:Causal}. The above sequence of
- writes and reads do not satisfies the condition $W^2 F R^3 \in \mathit{Si}_p$, violating the RHS of $E^s$ in Equation \ref{eqn:RYW}.
-  Let us consider the anomaly condition $C$ in Equation \ref{eqn:Causal} for the write and read operations $w^2(x,2)$ (which is
-  $w^i$ in this case) and $r^3(x){1}$ (which is $r^j$ in this case). Since  $w^2(x,2)$ is followed by $r^3(x){1}$ in the session trace, they satisfy the LHS of the condition
-  $C$. For the RHS of $C$ to hold, there cannot a exist write operations $w^m$ preceding the write $w^2(x,2)$ such that the
-  LTL condition $\left( {v^j}^{'} = {v^m}^{''} \right) \vee
- \big( \left( {W^m}^{'} F {\mathit{Op}^j}^{'} \in \mathit{st} \right) \wedge
-\left( \not\exists {W^m}^{'} F {W^n}^{'} F {\mathit{Op}^j}^{'} \in \mathit{st} \right) \big)$
- holds.
- We can assign $W^m = W^1$ since $w^1(x,1)$ precedes $w^2(x,2)$. Subsequently the condition \\ $\left( {v^j}^{'} = {v^m}^{''} \right)$
- holds (since $R^j$ = $R^3$ and $v_j$ = 1 in this case). Hence, the RHS of $C$ is satisfied for Equation \ref{eqn:Causal} for the above sequence of operations.
+ writes and reads do not satisfies the condition $W^2 \preccurlyeq_{\mathit{st}+w} R^3$, violating the RHS of $E^s$ in Equation \ref{eqn:RYW}.
+%  Let us consider the anomaly condition $C$ in Equation \ref{eqn:Causal} for the write and read operations $w^2(x,2)$ (which is
+%  $w^i$ in this case) and $r^3(x){1}$ (which is $r^j$ in this case). Since  $w^2(x,2)$ is followed by $r^3(x){1}$ in the session trace, they satisfy the LHS of the condition
+%  $C$. For the RHS of $C$ to hold, there cannot a exist write operations $w^m$ preceding the write $w^2(x,2)$ such that the
+%  LTL condition $\left( {v^j}^{'} = {v^m}^{''} \right) \vee
+% \big( \left( {W^m}^{'} F {\mathit{Op}^j}^{'} \in \mathit{st} \right) \wedge
+%\left( \not\exists {W^m}^{'} F {W^n}^{'} F {\mathit{Op}^j}^{'} \in \mathit{st} \right) \big)$
+% holds.
+% We can assign $W^m = W^1$ since $w^1(x,1)$ precedes $w^2(x,2)$. Subsequently the condition \\ $\left( {v^j}^{'} = {v^m}^{''} \right)$
+% holds (since $R^j$ = $R^3$ and $v_j$ = 1 in this case). Hence, the RHS of $C$ is satisfied for Equation \ref{eqn:Causal} for the above sequence of operations.
  %Also, we can assign $W^m$ = $W^1$,
 %   $\mathit{Op}^i$ = $W^2$, and $\mathit{Op}^j$ = $R^3$, such that the LTL conditions
 %   $W^m F^x \mathit{Op}^i F^x \mathit{Op}^j \in \mathit{st}$ holds. Further, $v_j$ = $v_m$ = 1, violating
@@ -2288,54 +2292,54 @@ violating the anomaly condition.
 % the latest write $w^2(x,2)$ which directly precedes $r^3(x){1}$. Thus, $S_3$ does not satisfy the conditions in Equation
 % \ref{eqn:Causal}.
  All the above session traces violate the specification of Sequential Consistency (SC), given in Equation
- \ref{eqn:SC}. Consider the session traces $\mathit{st}_3$, $\mathit{st}_3^{'}$, and $\mathit{st}_3^{''}$, which can be transformed into the legal
- serialization $\mathit{Si}$, which is, in this case, equivalent to  $\mathit{Si}_p$ in absence of writes from other
+ \ref{eqn:SC}. Consider the session traces $\mathit{st}_3$, $\mathit{st}_3^{'}$, and $\mathit{st}_3^{''}$, which can be transformed into the valid partial order $\preccurlyeq$, which is, in this case, equivalent to  $\preccurlyeq_{\mathit{st}+w}$ in absence of writes from other
  client applications in the given session history (see above). The sequence of operations $w^1(x,1)$ and
  $r^1(x){2}$ in the above session trace satisfies the LHS of the condition $E^s$ (i.e., the condition
  $\mathit{Op}^i X \mathit{Op}^j$). Since $v_i \not= v_j$, the above sequence of write and read operations
- do not satisfy the condition  in the RHS of $E^s$, i.e., it violates the condition $W^1 X R^1 \in \mathit{Si}$.
- For the anomaly condition $C$ to hold for the above sequence of operations, let us consider the
- sequence of operations $w^2(x,2)$ and $r^3(x)1$. For the RHS of $C$ to hold, there cannot a exist write operations $r^k$ following the read $r^3(x)1$ such that the
-  LTL condition $\big(  \left( {v^k}^{''} = {v^i}^{'} \right) \wedge   \left( {v^j}^{'} \not= {v^i}^{'} \right) \big) \wedge
- \not\exists \big(  \left( {\mathit{Op}^i}^{'} = {W^i}^{'}  \oplus {R^i}^{'}  \right) \wedge  \left( {\mathit{Op}^i}^{'}  F {W^j}^{'} F  {R^k}^{'} \in \mathit{st} \right) \wedge \left( {\mathit{Op}^i}^{'} F {W^j}^{''}   F  {R^k}^{'}  F  {R^l}^{'} \in \mathcal{S}_t \right) \big) \\
- \big(  \left( {v^l}^{''} = {v^j}^{'} \right) \wedge   \left( {v^k}^{''} = {v^i}^{'} \right) \big)$
- holds.
- We can assign $r^k = r^4$ since $r^4(x)2$ follows $r^3(x)1$. Subsequently the conditions \\ $\left( {v^k}^{''} = {v^i}^{''} \right)$
-and $\left( {v^j}^{'} \not= {v^i}^{'} \right)$ holds, since $r^j$ yields $v_j$ = 1, and
- $r^k$ yields $v_k$ = 2.
+ do not satisfy the condition  in the RHS of $E^s$, i.e., it violates the condition $W^1 \preccurlyeq R^1$.
+ % For the anomaly condition $C$ to hold for the above sequence of operations, let us consider the
+% sequence of operations $w^2(x,2)$ and $r^3(x)1$. For the RHS of $C$ to hold, there cannot a exist write operations $r^k$ following the read $r^3(x)1$ such that the
+%  LTL condition $\big(  \left( {v^k}^{''} = {v^i}^{'} \right) \wedge   \left( {v^j}^{'} \not= {v^i}^{'} \right) \big) \wedge
+% \not\exists \big(  \left( {\mathit{Op}^i}^{'} = {W^i}^{'}  \oplus {R^i}^{'}  \right) \wedge  \left( {\mathit{Op}^i}^{'}  F {W^j}^{'} F  {R^k}^{'} \in \mathit{st} \right) \wedge \left( {\mathit{Op}^i}^{'} F {W^j}^{''}   F  {R^k}^{'}  F  {R^l}^{'} \in \mathcal{S}_t \right) \big) \\
+% \big(  \left( {v^l}^{''} = {v^j}^{'} \right) \wedge   \left( {v^k}^{''} = {v^i}^{'} \right) \big)$
+% holds.
+% We can assign $r^k = r^4$ since $r^4(x)2$ follows $r^3(x)1$. Subsequently the conditions \\ $\left( {v^k}^{''} = {v^i}^{''} \right)$
+%and $\left( {v^j}^{'} \not= {v^i}^{'} \right)$ holds, since $r^j$ yields $v_j$ = 1, and
+% $r^k$ yields $v_k$ = 2. 
  Thus, it also violates the anomaly condition in Equation \ref{eqn:SC}, violating SC.
  \par  We consider the session traces \\ $\mathit{st}_4$: $w^1(x,1)$, $\mathit{st}_4^{'}$: $r^1(x){1}, w^2(x,2)$, and
  $\mathit{st}_4^{''}$: $r^2(x){2}, r^3(x){1}$ to show how
- WFR consistency can be violated. The above session traces can be transformed into a legal serialization \\
- $\mathit{Si}_p$  = $W^1 F R^1 F R^2 F W^2$. The write operation $w^1(x,1)$ follows
-  the read operation $r^1(x){1}$, and can be expressed as $W^1 F^x R^1$. The above expression satisfies
+ WFR consistency can be violated. The above session traces can be transformed into a valid partial order \\
+ $\preccurlyeq_{\mathit{st}+w}$  = $W^1 \preccurlyeq_{\mathit{st}+w} R^1 \preccurlyeq_{\mathit{st}+w} R^2 \preccurlyeq_{\mathit{st}+w} W^2$. The write operation $w^1(x,1)$ follows
+  the read operation $r^1(x){1}$, and can be expressed as $W^1 F R^1$. The above expression satisfies
  the condition $W^i F R^j$, where $W^i$ = $W^1$ and $R^j$ = $R^1$. Hence, the above traces satisfy the
  condition in the LHS of Equation \ref{eqn:WFR}. Further, by observation, the above sequence of write-read
- operations satisfies the condition  $W^1 F R^1 \in \mathit{Si}_p$. Thus, the condition $E^s$ in the RHS of
- Equation \ref{eqn:WFR} holds. According to the anomaly condition $C$ in Equation \ref{eqn:WFR}, there must not
- exist a read operation $r^n(x)$ such that the conditions $\left( R^i F^x W^j F^x R^n \in \mathit{st} \right) \wedge
-\left( W^j F^x R^n \in \mathit{st} \right)$ and $v^n = v^i$ are satisfied. Since $r^2(x){1}$ succeeds  $w^2(x,2)$, we can
-assign $R^n$ = $R^2$. But, the read operation $r^2(x){1}$ returns a value 1 which was written by $w^1(x,1)$; thus
-the condition $v^n = v^i$ holds. Thus, $\mathit{st}_4$ violates the second condition in
+ operations satisfies the condition  $W^1 \preccurlyeq_{\mathit{st}+w} R^1$. Thus, the condition $E^s$ in the RHS of
+ Equation \ref{eqn:WFR} holds. %According to the anomaly condition $C$ in Equation \ref{eqn:WFR}, there must not
+% exist a read operation $r^n(x)$ such that the conditions $\left( R^i F^x W^j F^x R^n \in \mathit{st} \right) \wedge
+%\left( W^j F^x R^n \in \mathit{st} \right)$ and $v^n = v^i$ are satisfied. Since $r^2(x){1}$ succeeds  $w^2(x,2)$, we can
+%assign $R^n$ = $R^2$. But, the read operation $r^2(x){1}$ returns a value 1 which was written by $w^1(x,1)$; thus
+%the condition $v^n = v^i$ holds. 
+Thus, $\mathit{st}_4$ violates the second condition in
  RHS of Equation \ref{eqn:WFR}; hence, it violates WFR consistency.
  \par Let us consider the session traces \\ $\mathit{st}_5$: $w^1(x,1), r^1(x){2}, w^2(x,2)$, $\mathit{st}_5^{'}$: $r^2(x){2}$, and \\
  $\mathit{st}_5^{''}$: $r^3(x){1}, r^4(x){2}$, and demonstrate violation of
-  MW consistency with it. The above session traces can be transformed in a legal serialization
-  $\mathit{Si}$ = $W^1 F W^2 F R^1 F R^2$.
+  MW consistency with it. The above session traces can be transformed in a valid partial order 
+  $\preccurlyeq_{\mathit{st}+w}$ = $W^1 \preccurlyeq_{\mathit{st}+w} W^2 \preccurlyeq_{\mathit{st}+w} R^1 \preccurlyeq_{\mathit{st}+w} R^2$.
    Since the above session traces comprise a sequence of successive writes $w^1(x,1), w^2(x,2)$ on same object x,
    it can be expressed as $W^i F W^j$, thus satisfying the LHS of $E^s$ in Equation \ref{eqn:MW}, where $W^i$ = $W^1$ and $W^j$ = $W^2$.
   Also, the above sequence of write operations satisfies the first condition of the RHS of Equation \ref{eqn:MW},
-  i.e., $W^i F W^j \in \mathit{Si}$. The above traces can be transformed into a legal serialization order $\mathit{Si}$ =
-   $w^1(x,1), r^2(x){1}, w^2(x,2), r^1(x){2}$, thus satisfying the first condition in the RHS of Equation \ref{eqn:WFR}.
-   For the anomaly condition $C$ to hold, there cannot exist a sequence of write operations $w^1(x,1)$ and
-    $w^2(x,2)$ followed by a sequence of read operations $r^k$ and $r^l$ such that the following condition holds:
-  $\left( \not\exists  {R^k}^{'} F  {R^l}^{'} \in \mathcal{S}_t \right)
-   \wedge  \left( {v_k}^{'} = {v_j}^{'} \right) \wedge \\
-   \left( {v_l}^{'} = {v_i}^{'} \right)$. For the above session trace,
-  we assign the operations $r^2(x){2}$ and $r^3(x){1}$ to the read operation $r^k$ and $r^l$. However, the above
-  read operations $r^k$ yields $v_k$ = 2, and $r^l$ yields $v_l$ = 1, such that the condition
-  $\left( {v_k}^{'} = {v_j}^{'} \right) \wedge \\
-   \left( {v_l}^{'} = {v_i}^{'} \right)$ holds.
+  i.e., $W^i \preccurlyeq_{\mathit{st}+w} W^j$. The above traces can be transformed into a valid partial order $\preccurlyeq_{\mathit{st}+w}$ =
+   $w^1(x,1), r^2(x){1}, w^2(x,2), r^1(x){2}$, thus satisfying the first condition in the RHS of Equation \ref{eqn:MW}. 
+%   For the anomaly condition $C$ to hold, there cannot exist a sequence of write operations $w^1(x,1)$ and
+%    $w^2(x,2)$ followed by a sequence of read operations $r^k$ and $r^l$ such that the following condition holds:
+%  $\left( \not\exists  {R^k}^{'} F  {R^l}^{'} \in \mathcal{S}_t \right)
+%   \wedge  \left( {v_k}^{'} = {v_j}^{'} \right) \wedge \\
+%   \left( {v_l}^{'} = {v_i}^{'} \right)$. For the above session trace,
+%  we assign the operations $r^2(x){2}$ and $r^3(x){1}$ to the read operation $r^k$ and $r^l$. However, the above
+%  read operations $r^k$ yields $v_k$ = 2, and $r^l$ yields $v_l$ = 1, such that the condition
+%  $\left( {v_k}^{'} = {v_j}^{'} \right) \wedge \\
+%   \left( {v_l}^{'} = {v_i}^{'} \right)$ holds.
    %According to the RHS of Equation \ref{eqn:MW},  there must not exist a read operation $r^n(x)$ that satisfies the
 %   conditions $ W^i F^x W^j F^x R^n \in \mathit{st}$ and $v^n = v^i$. In other words, any operation that
 %   follows the above write sequence must not return a value updated by a write operation that precedes the latest write.
@@ -2372,19 +2376,22 @@ the condition $v^n = v^i$ holds. Thus, $\mathit{st}_4$ violates the second condi
     \par  Consider two client applications (or processors), namely $\mathit{Cl}_1$ and $\mathit{Cl}^2$,
   respectively. Consider a session trace collected by executing operations on the above client  applications as follows.
    $\mathit{st}_7$: $w^1(x,1), w^2(y,1)$,    $\mathit{st}_7^{'}$: $r^1(x){1}$,  $\mathit{st}_7^{''}$:
-  $r^2(y){1}, r(x){1}$. To satisfy the PC consistency, any sequence of write operations $w^i$ and $w^j$ invoked by a client must satisfy
-  the condition $\big(\not\exists \left( {W^i}^{'} F {W^j}^{'} \in \mathit{st} \right) \wedge
-  \left( \mathit{st}^{'} \in \mathcal{S}_t \right) \wedge
-  \left( {R^k}^{'} F {R^l}^{'} \in \mathit{st}^{'} \right) \big)
- \big( \left( v_k^{''} = v_j^{'} \right) \wedge \left( v_l^{'} = v_i^{'} \right)\big)$. Thus, there must not exists a sequence of
- reads $r^k$ and $r^l$ such that the condition  $\left( v_k^{''} = v_j^{'} \right) \wedge \left( v_l^{'} = v_i^{'} \right)$
- holds. In the above session traces, the write operations  are executed according to the precedence order
+  $r^2(y){1}, r(x){1}$. 
+%  To satisfy the PC consistency, any sequence of write operations $w^i$ and $w^j$ invoked by a client must satisfy
+%  the condition $\big(\not\exists \left( {W^i}^{'} F {W^j}^{'} \right) \wedge
+%  \left( \mathit{st}^{'} \in \mathcal{S}_t \right) \wedge
+%  \left( {R^k}^{'} F {R^l}^{'} \in \mathit{st}^{'} \right) \big)
+% \big( \left( v_k^{''} = v_j^{'} \right) \wedge \left( v_l^{'} = v_i^{'} \right)\big)$. Thus, there must not exists a sequence of
+% reads $r^k$ and $r^l$ such that the condition  $\left( v_k^{''} = v_j^{'} \right) \wedge \left( v_l^{'} = v_i^{'} \right)$
+% holds. 
+  In the above session traces, the write operations  are executed according to the precedence order
   $w^1(x,1)$ followed by $ w^2(y,1)$, hence we assign $w^1(x,1)$ and $ w^2(y,1)$ as $w^i$ and $w^j$. Also, let us assign
   the sequence of read operations $r(x){1}$  and $r^2(y){1}$ as $r^k$ and $r^l$, respectively. According to the
    above condition, reads against the above writes should view the results of the above write operations
   according to the invocation order of these writes. However, in the given session trace, the client application
   $\mathit{Cl}_2$ observes the above writes out of order. Since  $r^2(y){1}$ executes before ,$r(x){1}$ in the above session
-  traces, $\mathit{Cl}_2$ observes the result of $w^2(y,1)$ before observing result of $w^1(x,1)$.  Thus,
+  traces, $\mathit{Cl}_2$ observes the result of $w^2(y,1)$ before observing result of $w^1(x,1)$. 
+   Thus,
    the above traces violate Equation \ref{eqn:PC}.
 % \par Consider a session trace $\mathit{st}_8$: $w^1_{tx}(x,2), w^2_{ty}(x,5),  w^1_{ty}(y,5), \\ c_{ty},
 % w^2_{tx}(y,8), r^1_{ty}(x){5}, r^2_{ty}(y){8}, c_{tx}$. According to the  specification of PL-1 isolation level
