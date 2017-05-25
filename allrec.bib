@@ -11475,3 +11475,65 @@ author = {P. Mahajan and L. Alvisi and M. Dahlin},
  publisher = {ACM},
  address = {New York, NY, USA},
 } 
+@inproceedings{DBLP:conf/popl/BurckhardtGYZ14,
+  author    = {Sebastian Burckhardt and
+               Alexey Gotsman and
+               Hongseok Yang and
+               Marek Zawirski},
+  title     = {Replicated data types: specification, verification, optimality},
+  booktitle = {The 41st Annual {ACM} {SIGPLAN-SIGACT} Symposium on Principles of
+               Programming Languages, {POPL} '14, San Diego, CA, USA, January 20-21,
+               2014},
+  pages     = {271--284},
+  year      = {2014},
+  crossref  = {DBLP:conf/popl/2014},
+  url       = {http://doi.acm.org/10.1145/2535838.2535848},
+  doi       = {10.1145/2535838.2535848},
+  timestamp = {Thu, 09 Jan 2014 08:32:32 +0100},
+  biburl    = {http://dblp.uni-trier.de/rec/bib/conf/popl/BurckhardtGYZ14},
+  bibsource = {dblp computer science bibliography, http://dblp.org}
+}
+@techreport{understanding-eventual-consistency,
+author = {Burckhardt, Sebastian and Gotsman, Alexey and Yang, Hongseok},
+title = {Understanding Eventual Consistency},
+booktitle = {},
+year = {2013},
+month = {March},
+abstract = {Modern geo-replicated databases underlying large-scale Internet services guarantee immediate availability and tolerate network partitions at the expense of providing only weak forms of consistency, commonly dubbed eventual consistency. At the moment there is a lot of confusion about the semantics of eventual consistency, as different systems implement it with different sets of features and in subtly different forms, stated either informally or using disparate and low-level formalisms.
+We address this problem by proposing a framework for formal and declarative specification of the semantics of eventually consistent systems using axioms. Our framework is fully customizable: by varying the set of axioms, we can rigorously define the semantics of systems that combine any subset of typical guarantees or features, including conflict resolution policies, session guarantees, causality guarantees, multiple consistency levels and transactions. We prove that our specifications are validated by an example abstract implementation, based on algorithms used in real-world systems. These  results demonstrate that our framework provides system architects with a tool for exploring the design space, and lays the foundation for formal reasoning about eventually consistent systems.
+},
+publisher = {},
+url = {https://www.microsoft.com/en-us/research/publication/understanding-eventual-consistency/},
+address = {},
+pages = {},
+journal = {},
+volume = {},
+chapter = {},
+isbn = {},
+}
+
+@book{principles-of-eventual-consistency,
+author = {Burckhardt, Sebastian},
+title = {Principles of Eventual Consistency},
+booktitle = {Principles of Eventual Consistency},
+year = {2014},
+month = {October},
+abstract = {
+
+In globally distributed systems, shared state is never perfect. When communication is neither fast nor reliable, it is not possible to achieve strong consistency, low latency, and availability at the same time. Unfortunately, abandoning strong consistency has wide ramifications. Eventual consistency, though attractive from a performance viewpoint, is challenging to understand and reason about for both system architects and programmers. To provide robust abstractions, we need not just systems but also principles; we need the ability to articulate what a consistency protocol is supposed to guarantee, and the ability to prove or refute such claims.
+
+Principles of Eventual Consistency carefully examines both the what and the how of consistency in distributed systems. It provides the reader with tools for reasoning about consistency of protocols. The emphasis is on using basic mathematical techniques, such as sets, relations, and first order logic, to describe a wide variety of consistency guarantees, and to define protocols with a level of precision that enables us to prove both positive results – correctness of protocols – and negative results – refute implementability.
+
+&nbsp;
+
+
+},
+publisher = {now publishers},
+url = {https://www.microsoft.com/en-us/research/publication/principles-of-eventual-consistency/},
+address = {},
+pages = {1-150},
+journal = {},
+volume = {1},
+chapter = {},
+isbn = {},
+}
