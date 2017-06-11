@@ -1,5 +1,5 @@
 %\documentclass{sig-alternate-05-2015}
-\documentclass[journal,compsoc,fleqn]{IEEEtran}
+\documentclass[journal,compsoc]{IEEEtran}
 %\documentclass[acmlarge, ,11pt]{acmart}
 \usepackage{pdfpages}
 %\citestyle{acmauthoryear}
@@ -1070,7 +1070,12 @@ We use the notation $\mathit{Cl}_i$ for the $i^{th}$ client in the system. The p
  %\par 
  %Let $w^i$ and $r^j$ be signatures of read and write operations $\mathit{o}^1$ and
 % $\mathit{o}^2$, respectively.
-  \par Using the above notations, Chockler et al. state the RYW consistency model as  $\mathit{o}^1 \xrightarrow{\sigma_i} \mathit{o}^2 \Rightarrow \mathit{o}^1 \xrightarrow{S_p} \mathit{o}^2$, %RYW is given in the form 
+  \par Using the above notations, Chockler et al. state the RYW consistency model as  
+  \begin{align}
+  \begin{split}\label{chockler}
+  \mathit{o}^1 \xrightarrow{\sigma_i} \mathit{o}^2 \Rightarrow \mathit{o}^1 \xrightarrow{S_p} \mathit{o}^2
+  \end{split}
+  \end{align}, %RYW is given in the form 
 %    \begin{align}\label{eqn:formdef}
 %\begin{split}
 % Condition 1 \Rightarrow Condition 2,
@@ -1083,9 +1088,8 @@ We use the notation $\mathit{Cl}_i$ for the $i^{th}$ client in the system. The p
    %precedence relationships among operations $\mathit{o}^1$ and $\mathit{o}^2$ in 
    %Condition 1 can be directly
  % expressed in terms of LTL as follows. 
- Let $\mathit{inv}_1$ and  $\mathit{inv}_2$ denote the invocations, and $\mathit{resp}_1$ and  $\mathit{resp}_2$ denote the responses  of  $\mathit{o}^1$ and
- $\mathit{o}^2$, respectively.  Since the clients are well-formed (refer to Section  \ref{sec:definitions}), the precedence relation  $\mathit{o}^1 \xrightarrow{\sigma_i} \mathit{o}^2$ %among $\mathit{o}^1$ and $\mathit{o}^2$ with respect to  $\sigma_i$ given
-   in  Condition 1  implies that  both the  invocation $\mathit{inv}_1$ and response $\mathit{resp}_1$   for $\mathit{o}^1$ occurs before the invocation $\mathit{inv}_2$ and response $\mathit{resp}_2$ for $\mathit{o}^2$ can occur.  Hence, the precedence relation $ \mathit{o}^1 \xrightarrow{\sigma_i} \mathit{o}^2 $ among $\mathit{o}^1$ and
+ Let $\mathit{inv}_1$ and  $\mathit{inv}_2$ denote the invocations, and $\mathit{resp}_1$ and  $\mathit{resp}_2$ denote the responses  of  $\mathit{o}^1$ a $\mathit{o}^2$, respectively.  Since the clients are well-formed (refer to Section  \ref{sec:definitions}), the precedence relation  $\mathit{o}^1 \xrightarrow{\sigma_i} \mathit{o}^2$ %among $\mathit{o}^1$ and $\mathit{o}^2$ with respect to  $\sigma_i$ given
+   in   Equation \ref{chockler}  implies that  both the  invocation $\mathit{inv}_1$ and response $\mathit{resp}_1$   for $\mathit{o}^1$ occurs before the invocation $\mathit{inv}_2$ and response $\mathit{resp}_2$ for $\mathit{o}^2$ can occur.  Hence, the precedence relation $ \mathit{o}^1 \xrightarrow{\sigma_i} \mathit{o}^2 $ among $\mathit{o}^1$ and
  $\mathit{o}^2$  can be rewritten in terms of the invocation and responses comprising  $\mathit{o}^1$ and
  $\mathit{o}^2$, i.e.,  $ \mathit{inv}_1 \xrightarrow{\sigma_i} \mathit{inv}_2 $ and $ \mathit{resp}_1 \xrightarrow{\sigma_i} \mathit{resp}_2 $, respectively. 
  %Thus, $\mathit{o}^1 \xrightarrow{\sigma_i} \mathit{o}^2$ implies $\mathit{inv}^1 \xrightarrow{\sigma_i} \mathit{inv}^2$. 
@@ -1734,7 +1738,7 @@ In contrast,  SC requires that the visibility order $\preccurlyeq$ among operati
   Internally, Spin translates the PROMELA source file into C code. The Spin driver then runs the built-in model checker to check for counter-examples for the above generated C code  against  the Spin formula given as $E^s$.  The Spin model checker validates the generated C code with the Spin formula acting as an invariant on the system behaviour modelled by the C code. %, with the set of equivalent legal serializations generated from the given session trace supplied as an input to the model checkers.  %The github repository comprises a PROMELA specification for each of the consistency models and isolation levels, the Spin-based main source file, and the code for generating the list of  equivalent serializations.
   \par The tool accepts specifications of consistency models in the form of Spin LTL  formulas provided in the corresponding PROMELA source files.  Figure \ref{format:spec} illustrates a snippet taken from the  PROMELA  source file that models system behaviour for the RYW consistency model. In the above snippet, $\mathit{cc}$ is a Spin-style declaration of an LTL formula which specifies the RYW consistency model as a correctness condition imposed on the system behaviour; $\mathit{cc}$ is expressed in terms of the following PROMELA variable declarations provided in the pml file. The event of execution of an operation is declared using the typedef declaration  $\mathit{typedef}\; \mathit{Op}\; ...$, where $\mathit{typedef}$ is the PROMELA syntax for declaring a user-defined data type. In the declaration of an operation, operation type and variable (object) for each operation are declared as  mtype variables $\mathit{optype}$ and $\mathit{var}$, where $\mathit{mtype} $ is a PROMELA-style declaration of a constant ($\mathit{optype}$ can take constant values read or write).  Using the statement $\mathit{Op} \; \mathit{st}[\mathit{size}]$, a session trace of length $\mathit{size}$ is declared as an array $\mathit{st} $ of elements belonging to the user-defined datatype $\mathit{Op}$.  A valid serialization for a given session trace is declared using the typedef declaration $\mathit{typedef}\; \mathit{Ser}\; ...$.  The list of all possible valid serializations for a session trace $\mathit{st}$ is declared as an array $\mathit{ser}$ which is created by the statement $\mathit{Ser}\; \mathit{ser}[2];$, which creates an array of elements belonging to the type $\mathit{Ser}$. Each element in the array $\mathit{ser}$ is a permutation of the session trace $\mathit{st}$. The i'th element in the list of all possible serializations $\mathit{ser}$ is accessed as $\mathit{ser}[i]$, and the j'th operation in $\mathit{ser}[i]$ is accessed as $\mathit{ser}[i].\mathit{st}[j]$. In the LTL declaration 
 %  {\setlength{\abovedisplayskip}{0pt}%
-\setlength{\mathindent}{0pt}
+%\setlength{\mathindent}{0pt}
   \begin{align*}%\label{eqn:ltldec}	
 %\begin{split}
  ltl \; \mathit{cc}  \; \{  [] ( ! (\mathit{ser}[i].\mathit{st}[j].\mathit{optype} = w 
@@ -2623,9 +2627,9 @@ LSU, affiliated with the School of Electrical Engineering and Computer Science a
   %Session Monotonic or Monotonic Read (also referred to as Session Causality or MR) consistency model is
  %another popular consistency model \cite{Chockler2000, Terry:1994:SGW:645792.668302}.
   According to Chockler et al.,
- MR is expressed as Equation \ref{eqn:formdef}, %as: if the condition  (Condition 1) $\mathit{o}^1 \xrightarrow{\sigma_i} \mathit{o}^2$ holds for a given execution sequence $\sigma_i$, 
+ MR is expressed in terns of the correctness condition given in Equation \ref{eqn:formdef}, %as: if the condition  (Condition 1) $\mathit{o}^1 \xrightarrow{\sigma_i} \mathit{o}^2$ holds for a given execution sequence $\sigma_i$, 
  where both $\mathit{o}^1$ and $\mathit{o}^2$ are read operations. 
-   \begin{align}\label{eqn:formdef}
+   Equation \ref{eqn:formdef} is given as \begin{align}\label{eqn:formdef}
 \begin{split}
  Condition 1 \Rightarrow Condition 2,
   \end{split}
@@ -2634,7 +2638,7 @@ LSU, affiliated with the School of Electrical Engineering and Computer Science a
   %there must exist a serialization ${S_p}$, comprising the
    %operations $\mathit{o}^1$ and $\mathit{o}^2$, for which the condition (Condition 2)
   %$\mathit{o}^1 \xrightarrow{S_p} \mathit{o}^2$ holds.
-   Again, following the same logic as in RYW, the above precedence relationships among operations $\mathit{o}^1$ and $\mathit{o}^2$ in Condition 1 can be directly
+   Following the same logic as that used in the derivation of RYW (refer to Section \ref{eqn:formdef}), the precedence relationships among operations $\mathit{o}^1$ and $\mathit{o}^2$ in Condition 1 can be directly
   expressed in terms of an LTL expression
     $R^{'} F_\mathit{st} R^{''} $.   Similarly, the expression $\mathit{o}^1 \xrightarrow{S_p} \mathit{o}^2$ in Condition 2
   can be expressed in terms of LTL as $R^{'} F_{S_p} R^{''}$. 
