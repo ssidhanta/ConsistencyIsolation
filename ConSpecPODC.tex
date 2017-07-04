@@ -189,7 +189,7 @@ of a common way to define and compare them. Furthermore, the use
 of LTL enabled us to leverage existing automatic checkers to build a tool for validating whether a given trace of the execution of a system meets
 a certain consistency semantics. 
 Finally, using our generic definitions and the insights from analyzing different models, we fix the impossibility claims stated in the CAP and CAC theorems regarding feasibility of implementing a strongly consistent storage system. % restate the CAP theorem
- We precisely define the class of consistency definitions that can and cannot be implemented in a highly-available, partition-tolerant way, in contrast with the original definition which only considered linearizability. %We present SpecCheck, an  automated verification tool that is used %leverages of static analysis techniques
+ In contrast with the original definitions of he above theorems which only considered linearizability, we precisely define the class of consistency definitions that can and cannot be implemented in a highly-available, partition-tolerant way. %We present SpecCheck, an  automated verification tool that is used %leverages of static analysis techniques
   %to  verify whether a storage system satisfies a consistency model or isolation level, specified using ConSpec.
   %Using the following approach, specifications derived using ConSpec can be used to subsequently  verify whether a given storage system satisfies a given consistency model or isolation level.
  %SpecCheck accepts as input: 1) a ConSpec expression corresponding to a consistency model or isolation level that a
@@ -751,7 +751,7 @@ E^{s} = \quad \forall \mathit{st} \in \mathcal{S}_t, \; {W}', {W}'' \in \mathit{
 %\end{split}
 %  \end{align}
 
-Our generic formulation allows for an interesting perspective on the definition of causal consistency \cite{Ahamad:1993:PPC:165231.165264}, which can be expressed as the union of the previous session guarantees for all sessions. As such, any pair of operations in the same session need to be constrained by the partial order of the ConSpec definition:
+Next, we define Causal consistency, which is arguably one of the most popular and widely used consistency model in modern generation of large scale distributed storage systems. Our generic formulation allows for an interesting perspective on the definition of causal consistency \cite{Ahamad:1993:PPC:165231.165264}, which can be expressed as the union of the previous session guarantees for all sessions. As such, any pair of operations in the same session need to be constrained by the partial order of the ConSpec definition:
 
 %  \par Causal Consistency specifies: results of operations (in a given client application) that are bound by a causal relationship \cite{Bailis:2013:BCC:2463676.2465279} must be  visible in the session trace according to their mutual execution order with respect to an observed session trace. The ConSpec expression for Causal Consistency is given below.
  %\begin{align}\label{eqn:Causal}
@@ -871,9 +871,13 @@ with the subtle difference that this is a global property, instead of being spec
 % % \end{split}
 % %  \end{align} where the partial order $\left( {\mathcal{O}_{St}}, \preccurlyeq \right)$ is a partial order over operations in a global execution comprising operations executed by all clients executing on the system. %It restricts an equivalent serialization of a client $S_c$, defined in Definition \ref{def:clientser}, to respect the order of successive operations in a given session trace. %where $\mathit{o}_i$ is any operation (read or write), and $\mathcal{S}$ is the set of all session traces for a given client application. % scope.
 
- Next, we define Processor Consistency (PC) as expressed in %the more  well known 
-  Goodman's definition~\cite{Ahamad:1993:PPC:165231.165264}. We favour Goodman's definition %of Processor Consistency (PC) 
-   over the alternative lesser known definition implemented in the DASH system. Goodman's PC definition specifies that write operations performed by each client application must be observed by all clients (i.e., must occur in all  session traces) according to their invocation order. % In other words, the order in which any pair of  writes, invoked from a particular client, are observed in session traces of all other clients must always respect the invocation order of the above operations. %Reads against  write operations should
+ Next, we define Processor Consistency (PC), which is a widely implemented but largely misinterpreted shared memory consistency model; we use the definition of PC as expressed in %the more  well known 
+  Goodman's definition ~\cite{Ahamad:1993:PPC:165231.165264}. We favour Goodman's definition %of Processor Consistency (PC) 
+   over the alternative lesser known definition implemented in the DASH system. Goodman's PC definition specifies that  there must exist a valid legal serialization for  any partial execution of 
+ %comprising operations performed by 
+ all processors $p_i$ that orders operations according to the program order of $p_i$.  This condition can be expressed in terms of ConSpec as $\forall \mathit{st} \in \mathcal{S}_t, \; {\mathit{Op}}, {\mathit{Op}}' \in \mathcal{O}_{St} : \mathit{Op} \operatorname{\it F}_\mathit{st} {\mathit{Op}}' \Rightarrow  {\mathit{Op}} \preccurlyeq_{\mathit{st}+w}$ %, where $\preccurlyeq_{\mathit{st}+w}$ denotes a partial order formed out of a session trace $\mathit{st}$ for a given client plus all writes, 
+  because of the following reason. A valid legal serialization $S_p$ is a sequence of operations that satisfies the following properties: Property 1) it is a linear sequence that comprises all operations from a given client $\mathit{Cl}_i$ plus writes from all other clients, and Property 2) each read in the sequence $S_p$ returns the result of the preceding write in $S_p$. By definition (refer to definition of $\preccurlyeq_{\mathit{st}+w}$ in the ConSpec expression for  RYW), $\preccurlyeq_{\mathit{st}+w}$ is a partial order  comprising all operations in a session trace $\mathit{st}$ plus writes from other operations; thus $\preccurlyeq_{\mathit{st}+w}$ satisfies Property 1 of a valid $S_p$.   Also, following directly from the definition of $\preccurlyeq_{\mathit{st}+w}$, the output of each operation in $\preccurlyeq_{\mathit{st}+w}$ is equivalent to that obtained by executing a linear sequence of the operations preceding that operation; thus $\preccurlyeq_{\mathit{st}+w}$ satisfies Property 2 of a valid $S_p$. 
+  \par Additionally, PC specifies that  valid legal serializations of any given execution must order all write operations on a common object according to an identical precedence order.  Following the same line of reasoning as above, this condition can be given as $\forall \mathit{st} \in \mathcal{S}_t, \; W(x), W'(x) \in \mathcal{O}_{St} :  W(x) \operatorname{\it F}_\mathit{st} W'(x)  \Rightarrow  W(x) \prec W'(x)$, where  $W(x)$ and $W'(x)$ is used to denote write operations on a common object $x$, and $\prec$ denotes a total order over the global session trace $\mathcal{S}_t$.  Combining these, the ConSpec expression for PC is given as follows.  % In other words, the order in which any pair of  writes, invoked from a particular client, are observed in session traces of all other clients must always respect the invocation order of the above operations. %Reads against  write operations should
  % view the results of the writes
  % according to the invocation order of these writes in a client application. % Let $\mathit{processors}$ be an  integer term that denotes the
 % total number of processors. We can express the condition the propositional logic variable $A$ must hold for any store
@@ -911,10 +915,16 @@ with the subtle difference that this is a global property, instead of being spec
  %Following the approach as in Causal+, we rewrite PC specification as %n terms of a partial order $ \preccurlyeq^{'} $ as follows. 
     \begin{align}\label{eqn:PC}
 \begin{split}
-E^{s} = \; \forall \mathit{st} \in \mathcal{S}_t, \; R'(x), R''(y), W'(x), W''(y) \in \mathit{st}: \\
- W'(x) \operatorname{\it F}_\mathit{st} W''(y)  \Rightarrow  W'(x) \preccurlyeq W''(y)  \wedge \\ R'(x) \operatorname{\it F}_\mathit{st} R''(y)  \Rightarrow  R'(x) \preccurlyeq R''(y).
+E^{s} = \; \forall \mathit{st} \in \mathcal{S}_t, \; {\mathit{Op}}, {\mathit{Op}}', W(x), W'(x) \in \mathcal{O}_{St} : \\
+  \mathit{Op} \operatorname{\it F}_\mathit{st} {\mathit{Op}}' \Rightarrow  {\mathit{Op}} \preccurlyeq_{\mathit{st}+w} {\mathit{Op}}'  \wedge \\ W(x) \operatorname{\it F}_\mathit{st} W'(x)  \Rightarrow  W(x) \prec W'(x).
 \end{split}
-  \end{align}   %\forall \big( %\left( \mathit{st} \in \mathcal{S}_t \right) \wedge
+  \end{align}
+%    \begin{align}\label{eqn:PC}
+%\begin{split}
+%E^{s} = \; \forall \mathit{st} \in \mathcal{S}_t, \; R'(x), R''(y), W'(x), W''(y) \in \mathit{st}: \\
+% W'(x) \operatorname{\it F}_\mathit{st} W''(y)  \Rightarrow  W'(x) \preccurlyeq W''(y)  \wedge \\ R'(x) \operatorname{\it F}_\mathit{st} R''(y)  \Rightarrow  R'(x) \preccurlyeq R''(y).
+%\end{split}
+%  \end{align}   %\forall \big( %\left( \mathit{st} \in \mathcal{S}_t \right) \wedge
 % \left( {W^i}(x)^{'} F {W^j}(z)^{'} F {R^k}(y)^{'} \in \mathit{st} \right) \wedge \\
 %  \left( {W^l}(y)^{'} F {W^m}(z)^{'} F {R^n}(x)^{'} \in \mathit{st} \right) \big) \\
 %   \big( \not\exists \big( %\left( \mathit{st}^{'}, \mathit{st}^{''} \in \mathcal{S}_t  \right) \wedge \\
@@ -930,7 +940,7 @@ E^{s} = \; \forall \mathit{st} \in \mathcal{S}_t, \; R'(x), R''(y), W'(x), W''(y
 %\wedge \forall \mathit{st} \not\exists R^k, R^l \left( \mathit{Op}^i X^o R^k F \mathit{Op}^j X^o R^l \in \mathit{st} \right) \\ \wedge \left( v^k \not= v^i  \right) \wedge \left( v^l = v^j \right) \big)
 %\end{split}
 %  \end{align}, 
- where $\preccurlyeq$ is a partial order over the global session trace $\mathcal{S}_t$. % composition   $\preccurlyeq =  \preccurlyeq^{'} \circ  ... \circ^{'} \preccurlyeq^{''}$and $\circ, ... \circ^{''}$ are again composition operators, like $\cap$ or $\cup$, over partial order sets (posets) $\preccurlyeq^{'}, ...  \preccurlyeq^{''}$ comprising partial orders defined over all data objects.
+ %where $\preccurlyeq$ is a partial order over the global session trace $\mathcal{S}_t$. % composition   $\preccurlyeq =  \preccurlyeq^{'} \circ  ... \circ^{'} \preccurlyeq^{''}$and $\circ, ... \circ^{''}$ are again composition operators, like $\cap$ or $\cup$, over partial order sets (posets) $\preccurlyeq^{'}, ...  \preccurlyeq^{''}$ comprising partial orders defined over all data objects.
 %  \par Owens et al. \cite{Owens:2009:BXM:1616077.1616107} specifies Total Store Order (TSO) as: a read operation performed by a given client on a given data object can not return the result of a write on the same object by a different client unless the former write has been observed by all clients in the system. For instance, consider write-read sequences  $w(x,v)$, $r^{'}(x)$ and  $r^{''}(x)$, $w^{'''}(x,v^{'''})$ in session traces $\mathit{st}$  and $\mathit{st}^{'}$, respectively. The read $r^{'}(x)$ in $\mathit{st}$  can not return result of the later write $w^{'''}(x,v^{'''})$ from $\mathit{st}^{'}$ unless the preceding write $w(x,v)$ in  $\mathit{st}$ have been observed by  $r^{''}(x)$ from $\mathit{st}^{'}$.  %Consider an execution sequence  comprising a write operation $w(x,v)$ performed by a given client application (observed in a local session trace $\mathit{st}$ corresponding to that client) on an object $x$, followed by a read $r^{'}(x)$ on $x$. Another client invokes a read operation $r^{''}(x)$ on the same object $x$  followed by a write $w^{'''}(x,v^{'''})$ on $x$, observed in the session trace $\mathit{st}^{'}$.
 %   Variables  $v$, $v^{'}$,  $v^{''}$, and $v^{'''}$ denote the values returned by the operations $w(x,v)$, $r^{'}(x)$, $r^{''}(x)$, $w^{'''}(x,v^{'''})$, which are denoted by shorthand notations $W^{'}(x)$,  $R^{''} (x)$, $ {R}^{'''}(x)$, and $W^{''''}(x)$,  respectively. Thus, TSO can be expressed as follows. %According to TSO, the read $r^{'}(x,v^{'})$ can not observe the result of $w^{'''}(x,v^{'''})$ before the read $r^{''}(x)$ observes the result of $w(x,v)$. In other words, a valid legal serialization corresponding to partial executions of each client in the system must order  the writes to a given object in an identical precedence order. In terms of the generalised syntax in Definition \ref{def:form0}, the above condition can be restated as:  there must exist valid partial orders $\preccurlyeq_{{st}^{'}}$ and $\preccurlyeq_{{st}}$ over the operations in the session traces $\mathit{st}$ and $\mathit{st}^{'}$, respectively, which preserves the above order among writes to each data object $x$.  %This operation can not succeeded by another operation on the same  object   can not be observed  by any given client (i.e., can not occur in a  given session trace) return a subsequent (or newer) value unless the result of a given write is observed by all client applications, i.e., observed in all  session traces.
 % % A session trace for a client application can not view results of a sequence of write operations in an
@@ -997,7 +1007,8 @@ E^{s} = \; \forall \mathit{st} \in \mathcal{S}_t, \; R'(x), R''(y), W'(x), W''(y
 %   \end{align}, where $ \preccurlyeq$ is a partial order  over  all operations on a given object $x$ comprised in $\mathcal{S}_t$. %and $ \mathit{Si}$ is an equivalent legal serialization of a global execution defined in Equation \ref{def:ser}.
 %   %$\preccurlyeq$ is given as a composition $\preccurlyeq =  \preccurlyeq^{'}(x) \circ  ... \circ^{'} \preccurlyeq^{''}(x)$,  and $\circ, ... \circ^{''}$ are composition operators, like $\cap$ or $\cup$, over partial order sets (posets) $\preccurlyeq^{'}(x), ... \preccurlyeq^{''}(x)$ comprising partial orders defined over a given object $x$.
  
- Sequential consistency (SC) is a consistency model which requires that a global execution comprising operations executed from one or more clients must be equivalent to the result of executing the operations in a sequential order, such that the order among operations from each client in that sequence matches the invocation order of the operations.  Using ConSpec, SC  is expressed as follows.
+ In contrast with the session guarantees that enforces partial ordering among operations, Sequential consistency (SC) is a strong consistency model that enforces global ordering among operations executed from concurrent client processes. SC requires that a global execution comprising operations executed from one or more clients must be equivalent to the result of executing the operations in a sequential order, such that the order among operations from each client in that sequence matches the invocation order of the operations. According to Chockler et al., the above guarantee is achieved if the precedence order among operations  in a valid legal serialization for a given global execution  matches the precedence order of the operations in the local execution of each client process executing on the system.  Hence, there must exist a valid partial order set $\left( {\mathcal{O}_{St}}, \preccurlyeq \right)$ comprising all operations in a given global session trace $\mathcal{S}_t$ which satisfies the following condition. The precedence order among every pair of operations ${\mathit{Op}}$ and ${\mathit{Op}}'$ in  $ \preccurlyeq$ must follow the  precedence order among ${\mathit{Op}}$ and ${\mathit{Op}}'$ in each session trace $\mathit{st}$ comprised in  $\mathcal{S}_t$.  This condition can be given as $\exists \left( {\mathcal{O}_{St}}, \preccurlyeq \right) : \; \forall \mathit{st} \in \mathcal{S}_t, \; {\mathit{Op}}, {\mathit{Op}}' \in \mathit{st}, {\mathit{Op}}'', {\mathit{Op}}''' \in \mathcal{O}_{St} : 
+ \mathit{Op} \operatorname{\it F}_\mathit{st} {\mathit{Op}}' \Rightarrow  {\mathit{Op}} \preccurlyeq {\mathit{Op}}'$. Additionally, the result of every pair of operation must be equivalent to that of performing a sequential execution of the operations, i.e., there must exist an equivalent total order among the operations. This condition can be expressed as ${\mathit{Op}}'' \prec {\mathit{Op}}'''$, whsere  $\prec$ denotes a total order over the global session trace $\mathcal{S}_t$. Combining the above conditions, SC  is expressed as follows. 
 % \begin{align}\label{eqn:SC}
 % \begin{split}
 %   E^{s} =  \forall {\mathit{Op}}', {\mathit{Op}}'' \in \mathcal{O}_{St} : \; \left({\mathit{Op}}' \preccurlyeq {\mathit{Op}}''  \vee  {\mathit{Op}}''  \preccurlyeq {\mathit{Op}}'\right) \wedge \left( (
@@ -1008,11 +1019,18 @@ E^{s} = \; \forall \mathit{st} \in \mathcal{S}_t, \; R'(x), R''(y), W'(x), W''(y
 %
 \begin{align}\label{eqn:SC}
 \begin{split}
-    E^{s} =  \; \forall \mathit{st} \in \mathcal{S}_t, \; {\mathit{Op}}, {\mathit{Op}}' \in \mathit{st}, \; {\mathit{Op}}'', {\mathit{Op}}''' \in \mathcal{O}_{St} : \\
- \mathit{Op} \operatorname{\it F}_\mathit{st} {\mathit{Op}}' \Rightarrow  {\mathit{Op}} \preccurlyeq {\mathit{Op}}' \quad \wedge \\ 
-\left({\mathit{Op}}'' \preccurlyeq {\mathit{Op}}'''  \vee  {\mathit{Op}}'''  \preccurlyeq {\mathit{Op}}''\right) 
+    E^{s} =  \; \exists \left( {\mathcal{O}_{St}}, \preccurlyeq \right) : \; \forall \mathit{st} \in \mathcal{S}_t, \; {\mathit{Op}}, {\mathit{Op}}' \in \mathit{st}, \\ {\mathit{Op}}'', {\mathit{Op}}''' \in \mathcal{O}_{St} : 
+ \mathit{Op} \operatorname{\it F}_\mathit{st} {\mathit{Op}}' \Rightarrow  {\mathit{Op}} \preccurlyeq {\mathit{Op}}' \quad \\ \wedge {\mathit{Op}}'' \prec {\mathit{Op}}''' %\\ 
+%\left({\mathit{Op}}'' \prec {\mathit{Op}}'''  \vee  {\mathit{Op}}'''  \preccurlyeq {\mathit{Op}}''\right) 
 \end{split}
 \end{align}
+%\begin{align}\label{eqn:SC}
+%\begin{split}
+%    E^{s} =  \; \forall \mathit{st} \in \mathcal{S}_t, \; {\mathit{Op}}, {\mathit{Op}}' \in \mathit{st}, \; {\mathit{Op}}'', {\mathit{Op}}''' \in \mathcal{O}_{St} : \\
+% \mathit{Op} \operatorname{\it F}_\mathit{st} {\mathit{Op}}' \Rightarrow  {\mathit{Op}} \preccurlyeq {\mathit{Op}}' \quad \wedge {\mathit{Op}}'' \prec {\mathit{Op}}''' %\\ 
+%%\left({\mathit{Op}}'' \prec {\mathit{Op}}'''  \vee  {\mathit{Op}}'''  \preccurlyeq {\mathit{Op}}''\right) 
+%\end{split}
+%\end{align}
 
 \begin{figure}%[t]
         %\begin{center}
@@ -2000,7 +2018,7 @@ ConSpec opens several interesting avenues for future work. First, we intend to a
 \bibliography{allrec}
 \begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{ANU_3384.eps}}]{Subhajit Sidhanta}
 Subhajit Sidhanta received his PhD from the Department of Computer Science and Engineering
-LSU, affiliated with the School of Electrical Engineering and Computer Science at Louisiana State University, USA, in 2016. He is currently a Postdoctoral Researcher working with the Distributed Systems Research Group at INESC-ID research lab, affiliated with Instituto Superior Técnico at University of Lisbon, Portugal. His major research interest encompasses the areas of consistency in distributed systems, performance modelling of distributed storage and parallel computing systems.
+LSU, affiliated with the School of Electrical Engineering and Computer Science at Louisiana State University, USA, in 2016. He is currently a Postdoctoral Researcher working with the Distributed Systems Research Group at INESC-ID research lab, affiliated with Instituto Superior Tecnico at University of Lisbon, Portugal. His major research interest encompasses the areas of consistency in distributed systems, performance modelling of distributed storage and parallel computing systems.
 \end{IEEEbiography}
 %\begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{supratik.eps}}]{Supratik Mukhopadhyay}
 %Supratik Mukhopadhyay is a Professor in the Computer Science Department at Louisiana State University, USA. He received his PhD from the Max Planck Institut fuer Informatik and the University of Saarland in 2001, MS from the Indian Statistical Institute, India and his BS from Jadavpur University, India. His areas of specialization include formal verification of software, inference engines, bigdata analytics distributed systems, parallel computing framework and program synthesis.
