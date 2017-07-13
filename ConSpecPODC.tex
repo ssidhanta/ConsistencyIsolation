@@ -539,7 +539,7 @@ if there exists a partial order $\left( {\mathcal{O}_{St}}, \preccurlyeq \right)
 
 
 
-Condition 1, when applied to a system whose interface consists only of reads and writes, translates to a requirement that every read operation in $\mathcal{S}_t$ must return the value of the most recent write according to $\preccurlyeq$. (In the case of two or more concurrent preceding writes, the system must arbitrate an order for them, e.g., use the ``last writer wins'' policy~\cite{lww}.)
+Condition 1, when applied to a system whose interface consists only of reads and writes, translates to a requirement that every read operation in $\mathcal{S}_t$ must return the value of the most recent write according to $\preccurlyeq$. (In the case of two or more concurrent preceding writes, since any linear extension is valid, the system may arbitrate an order for them, e.g., use the ``last writer wins'' policy~\cite{lww}.)
   Condition 2 can be expressed as $ E^s\; \vDash \; \left( {\mathcal{O}_{St}}, \preccurlyeq \right),$ where %$R$ is a temporal operator, 
   $E^s$ is the ConSpec parameterization for each
  consistency model $\mathcal{C}$,
@@ -547,6 +547,7 @@ Condition 1, when applied to a system whose interface consists only of reads and
    %operations $\mathit{o}^i$ and $\mathit{o}^j$, and
  and  $\vDash$ is the satisfies operator.
 
+{\bf [RR: We could discuss two points that were raised by PODC reviewers here: the fact that using a PO is more restrictive than a relation but leads to more concise notation, and the fact that allowing any linear extension precludes fancy merging but again is more concise.]}
 
  %%  This implies that the consistency specification for a particular
  %%  consistency model  $\mathcal{C}$ must satisfy the conditions of the generalized partial order relation, i.e., Condition 1 of Definition \ref{def:form0}.
