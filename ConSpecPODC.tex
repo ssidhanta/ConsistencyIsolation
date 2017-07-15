@@ -1338,9 +1338,9 @@ Thus, $\mathit{st}_3$ violates %the second condition in
 %  Thus, the given session trace violates Equation \ref{eqn:TSO}.
     \par  For PC, consider two client applications (or processors), namely $\mathit{Cl}_1$ and $\mathit{Cl}^2$,
   respectively. Consider a session trace collected by executing operations on the above client  applications as follows.
-   $\mathit{st}_6$: $w^1(x,1), w^2(y,1)$,    %$\mathit{st}_7^{'}$: $r^1(x){1}$,  
+   $\mathit{st}_6$: $w^1(x,1), w^2(y,1), r^1(x){1}, r^2(y){1}$,    %$\mathit{st}_7^{'}$: $r^1(x){1}$,  
     $\mathit{st}_6^{'}$:
-  $r^2(y){1}, r(x){1}$. 
+  $r^3(y){1}, r^4(x){1}$. 
 %  To satisfy the PC consistency, any sequence of write operations $w^i$ and $w^j$ invoked by a client must satisfy
 %  the condition $\big(\not\exists \left( {W^i}^{'} F {W^j}^{'} \right) \wedge
 %  \left( \mathit{st}^{'} \in \mathcal{S}_t \right) \wedge
@@ -1349,12 +1349,12 @@ Thus, $\mathit{st}_3$ violates %the second condition in
 % reads $r^k$ and $r^l$ such that the condition  $\left( v_k^{''} = v_j^{'} \right) \wedge \left( v_l^{'} = v_i^{'} \right)$
 % holds. 
   In the above session traces, the write operations  are executed according to the precedence order
-  $w^1(x,1)$ followed by $ w^2(y,1)$, hence we assign $w^1(x,1)$ and $ w^2(y,1)$ as $w^i(x)$ and $w^j(x)$. Also, let us assign
-  the sequence of read operations $r(x){1}$  and $r^2(y){1}$ as $r^k(x)$ and $r^l(x)$, respectively. According to the
-   above condition, reads against the above writes should view the results of the above write operations
-  according to the invocation order of these writes. However, in the given session trace, the client application
-  $\mathit{Cl}_2$ observes the above writes out of order. Since  $r^2(y){1}$ executes before ,$r(x){1}$ in the above session
-  traces, $\mathit{Cl}_2$ observes the result of $w^2(y,1)$ before observing result of $w^1(x,1)$. 
+  $w^1(x,1)$ followed by $ w^2(y,1)$. %, hence we assign $w^1(x,1)$ and $ w^2(y,1)$ as $w^{'}(x)$ and $w^{'}(y)$. Also, let us assign
+  %the sequence of read operations $r(x){1}$  and $r^2(y){1}$ as $r^k(x)$ and $r^l(x)$, respectively. 
+  According to the
+   above condition, reads against the above writes should view the results of the above write operations should be observed by read operations on the respective objects in an identical order in all processors. However, in the given session trace, the client application
+  $\mathit{Cl}_2$ observes the above writes out of order with $\mathit{Cl}_1$. Since  $r^1(y){1}$ executes before $rr^2(x){1}$ in the above session
+  trace $\mathit{st}_6^{'}$, $\mathit{Cl}_2$ observes the result of $w^2(y,1)$ before observing result of $w^1(x,1)$ which contradicts the order $r^13(y){1}, r^2(x){1}$ in $\mathit{Cl}_1$. 
    Thus,
    the above traces violate Equation \ref{eqn:PC}.
     \begin{figure}%[t]
