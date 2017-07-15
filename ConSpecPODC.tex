@@ -703,7 +703,7 @@ Following the format of Definition \ref{def:form0}, RYW can be defined by the fo
 %  \end{align}
 %. the operator $F$ is the LTL operator eventually.
  %In other words, Equation \ref{eqn:MR} mandates that $r^s(o){v_t}$ returns the value $v_q$ written by the latest write operation $w^n(o,v_q)$, or that written by another write $w^u(o,v_x)$ that overwrites $w^n(o,v_q)$). It does not allow $r^s(o){v_t}$ to return a value $v_l$ written by an earlier write operation  $w^j(o,v_l)$ which was invoked earlier than $w^n(o,v_q)$. The above constraint ensures that a read operation always views the latest version of the object $o$.
-\par Write Follows Read (WFR)  specifies the following: a write operation that follows a read operation in the same session must be ordered after the write operation seen by that read. However, a write does not have any significance unless it is followed by a read on the same object; hence, we modify the original definition by Chockler et al. %as follows. WFR is expressed 
+\par Write Follows Read (WFR)  specifies the following: a write operation that follows a read operation in the same session must be ordered after the write operation seen by that read. However, a condition on a write operation does not have any significance unless it restricts the result of the write observed by a succeeding read on the same object; hence, we modify the original definition by Chockler et al. %as follows. WFR is expressed 
  in terms of ConSpec as follows. \\
  \begin{align}\label{eqn:WFR}
 \begin{split}
@@ -746,7 +746,7 @@ with the same meaning for $\mathit{st}$ and $\preccurlyeq_{\mathit{st}+w}$ as in
 %\Rightarrow \left(\star w(o,v)F^{o}w^{'}(o,v^{'}) \star \right)_{o}^\mathit{st}.
 %\end{split}
 %  \end{align}
- \par Finally, the last session guarantee is the Monotonic Writes (MW) model, which is specified as follows: successive write operations invoked from the same session must be applied in the order in which they appear in the session trace. However, a write does not have any significance unless it is followed by a read on the same object; hence, we modify the original definition by Chockler et al. %as follows.  MW is expressed 
+ \par Finally, the last session guarantee is the Monotonic Writes (MW) model, which is specified as follows: successive write operations invoked from the same session must be applied in the order in which they appear in the session trace. Similar to WFR, a condition on a sequence of writes does not have any significance unless it restricts the value observed by a read following them; hence, we modify the original definition by Chockler et al. %as follows.  MW is expressed 
   in terms of ConSpec as follows.
   \begin{align}\label{eqn:MW}
 \begin{split}
