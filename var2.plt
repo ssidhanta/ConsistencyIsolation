@@ -2,7 +2,7 @@
 set xlabel "size of session trace" font "Times-Roman,24 left"
 #set ylabel "Staleness (milliseconds)" font "Times-Roman,24”
 set key font "Times-Roman,24” 
-set ylabel "Latency in seconds" font "Times-Roman,24”
+set ylabel "Latency in milliseconds" font "Times-Roman,24”
 #set y2label “size of session trace" font "Times-Roman,20"
 
 set auto x 
