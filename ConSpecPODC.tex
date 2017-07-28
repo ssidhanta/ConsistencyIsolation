@@ -476,7 +476,7 @@ Finally, we assume the system has a sequential specification, %which is a correc
  is specific to the service interface. % (e.g., the state machine being replicated).
 
  
-While our consistency definitions treat the underlying storage system as a black box, for our proofs regarding the characteristics of the implementation of a certain consistency level (namely in our restatement of the CAP theorem), we need to consider the protocols that implement the consistency level. To this end, we model each process as a deterministic state machine, whose transitions can be triggered either by an external input (i.e., an operation invocation) or by receiving a message from the network, and where the transition can trigger sending messages and/or issuing outputs (i.e., an operation response). Processes are connected by unreliable asynchronous communication channels.
+While our consistency definitions are completely agnostic of implementation-level concepts, for our proofs regarding the characteristics of the implementation of a certain consistency level (namely in our restatement of the CAP theorem), we need to consider the protocols that implement the consistency level. To this end, we model each process as a deterministic state machine, whose transitions can be triggered either by an external input (i.e., an operation invocation) or by receiving a message from the network, and where the transition can trigger sending messages and/or issuing outputs (i.e., an operation response). Processes are connected by unreliable asynchronous communication channels.
 
  
 %\newtheorem{definition}{Definition}
@@ -558,7 +558,7 @@ Condition 1, when applied to a system whose interface consists only of reads and
  %$\sim$ is an equivalence relation between the results $v_i$ and $v_j$ observed by a pair of
    %operations $\mathit{o}^i$ and $\mathit{o}^j$, and
  and  $\vDash$ is the satisfies operator.
- \par A noteworthy choice that was made when producing the above definition is that consistency models are expressed in terms of  partial order among operations performed, instead of using more general relations~\cite{Burckhardt:2014:PEC:2693641.2693642}. This choice entails a tradeoff between generality (by allowing for arbitrary relations) and simplicity (by producing more concise and elegant definitions). We chose to have simpler definitions using partial orders for two main reasons. First, this is aligned with our goals of enabling a better understanding of consistency through simpler definitions, and second, the protocols that guarantee the extra properties required by partial orders (namely transitivity) are well studied and inexpensive in terms of the their runtime overhead, namely since they do not require cross-replica synchronization~\cite{Bailis:2013:BCC:2463676.2465279,Lloyd:2011:DSE:2043556.2043593}.
+ \par A noteworthy choice that was made when producing the above definition is that consistency models are expressed in terms of  partial order among operations performed, instead of using more general relations~\cite{Burckhardt:2014:PEC:2693641.2693642}. This choice entails a tradeoff between generality (by allowing for arbitrary relations) and simplicity (by producing more concise and elegant definitions using partial orders). We chose to have simpler definitions using partial orders for two main reasons. First, this is aligned with our goals of enabling a better understanding of consistency through simpler definitions, and second, the protocols that guarantee the extra properties required by partial orders (namely transitivity) are well studied and inexpensive in terms of the their runtime overhead, namely since they do not require cross-replica synchronization~\cite{Bailis:2013:BCC:2463676.2465279,Lloyd:2011:DSE:2043556.2043593}.
 
 Another discussion point worth highlighting is the fact that, when concurrent branches of an execution merge, our definitions state that the output that is produced by any linear extension of the partial order of prior requests is admissible. In practice, this corresponds to saying that our merge policy is to serialize concurrent requests in an arbitrary order and re-execute them. Again, it would have been straightforward to add complexity to our definitions in order to allow for other merge strategies, but we chose not to in order to keep our model simple and elegant.
 
@@ -1092,7 +1092,7 @@ Our final example definition is  Sequential consistency (SC), which is a strong 
 % $\left( {\mathit{Op}}^{'} \preccurlyeq {\mathit{Op}}^{''} \right) \vee \left( {\mathit{Op}}^{''}  \preccurlyeq {\mathit{Op}}^{'}\right)$, where  $\preccurlyeq$ denotes a partial order relation, and $\left( {\mathcal{O}_{St}}, \preccurlyeq \right)$ is the corresponding partial order set.  
  
 
-\section{Violation Examples: Verified \\ Against ConSpec Specifications}\label{sec:examples}
+\section{Verifying Traces Against ConSpec Specifications}\label{sec:examples}
   Using examples of global session traces, we illustrate both cases where a consistency model is met by the trace, and cases where a model is violated, as per the corresponding ConSpec definition.
     \begin{figure}%[t]
         %\begin{center}
@@ -1255,7 +1255,7 @@ Our final example definition is  Sequential consistency (SC), which is a strong 
 %%   returns the value 1; thus, the condition $v^n = v^i$ holds. 
 %Thus, $\mathit{st}_4$ violates the RHS of Equation \ref{eqn:MW},
 %    and, in turn, violates MW consistency. 
- \par Next we analyze a violation of Causal consistency in detail. Let us consider a global session trace $\mathcal{S}_t$ comprising the following session traces: $\mathit{st}_1$: $w^1(x,1)$, %r^1(x){2}$, 
+ \par Next, we analyze a violation of Causal consistency in detail. Let us consider a global session trace $\mathcal{S}_t$ comprising the following session traces: $\mathit{st}_1$: $w^1(x,1)$, %r^1(x){2}$, 
  $\mathit{st}_2$: $r^1(x){1}, w^2(x,2)$, %, r^3(x){1}$, 
  and  $\mathit{st}_3$: $r^2(x){2}, r^3(x){1}$. The list of valid partial orders, comprising all operations in $\mathcal{S}_t$, which satisfy Condition 1 in Definition \ref{def:form0} are given as follows.   
  \begin{itemize}
@@ -1449,7 +1449,7 @@ Putting together the previous requirements, we can see that only the partial ord
 The CAP conjecture was initially stated informally as the impossibility of simultaneously achieving strong Consistency, Availability, and Partition tolerance in a replicated system~\cite{brew:cap}. When this theorem was subsequently proven by Gilbert and Lynch~\cite{Gilbert:2002:BCF:564585.564601}, these three properties were stated precisely, and, in this context, strong consistency was defined as atomicity (or linearizability~\cite{Herlihy:1990:LCC:78969.78972}).
 
 The fact that the original proof of CAP is restricted to linearizability raises the question of whether CAP holds using other definitions from
- the wide array of consistency models supported by modern storage systems.
+ the wide array of consistency models supported by an increasingly large set of storage systems that propose new consistency definitions.
  In this section, we rewrite the CAP theorem in terms of ConSpec to precisely define the class of consistency models that can and cannot be implemented in a highly-available, partition-tolerant way.
 
 
@@ -2129,7 +2129,7 @@ ConSpec opens several interesting avenues for future work. First, we intend to a
 % The following two commands are all you need in the
 % initial runs of your .tex file to
 % produce the bibliography for the citations in your paper.
-\section{Acknowledgement}
+%\section{Acknowledgement}
 %The project is partially supported by Army Research Office (ARO) under Grant W911\-NF1010495.  Any opinions, findings, and conclusions or recommendations expressed in this material are those of the authors and do not necessarily reflect the views of the ARO or the United States Government. Wojciech Golab is supported in part by the Natural Sciences and Engineering Research Council (NSERC) of Canada. Subhajit Sidhanta is supported in part by the Amazon AWS (Amazon Web Services) Research Grant.
 \Urlmuskip=0mu plus 1mu\relax
 \renewcommand{\bibfont}{\footnotesize}
