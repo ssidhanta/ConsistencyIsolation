@@ -18,12 +18,13 @@
 \usepackage{amsmath,bm,times,amssymb}
 \usepackage{textcomp}
 \usepackage[breaklinks=true,bookmarks=false]{hyperref}
-\usepackage[hyphenbreaks]{breakurl}
+%\usepackage[hyphenbreaks]{breakurl}
 \usepackage[numbers]{natbib}
 \newtheorem{theorem}{Theorem}[section]
 \newtheorem{lemma}[theorem]{Lemma}
  %\newtheorem {theorem} {Theorem}
  %\newtheorem{corollary} {corollary} [theorem] 
+ \newcommand\myeq{\stackrel{\mathclap{\normalfont\mbox{def}}}{=}}
 \DeclarePairedDelimiterX\Set[2]{\lbrace}{\rbrace}%
 { #1 \,\delimsize|\,\mathopen{} #2 }
 \newsavebox{\ieeealgbox}
@@ -1096,7 +1097,7 @@ Our final example definition is  Sequential consistency (SC), which is a strong 
   Using examples of global session traces, we illustrate both cases where a consistency model is met by the trace, and cases where a model is violated, as per the corresponding ConSpec definition.
     \begin{figure}%[t]
         %\begin{center}
-        \includegraphics[width=3in,height=1.8in]
+        \includegraphics[width=3in,height=5in]
                     {examplepo} %\vspace{-5em}
           %\end{center} 
         \caption{Example of a global session trace and an example partial order that %is a superset of a partial order that 
@@ -1679,7 +1680,7 @@ In contrast,  SC requires that the visibility order $\preccurlyeq$ among operati
  
  
    \section{Implementation}\label{sec:impl}
- We provide an open source automated  tool for verifying whether a session trace meets a given consistency model. This tool was built using Spin \cite{Holzmann:2003:SMC:1405716}, a widely used \cite{spinroot-success} open source software verification framework. The source code of the ConSpec tool along with instructions for running it are made publicly available in a github repository \url{https://github.com/ssidhanta/ConSpecTool}. A given session trace is supplied to the tool as input, in the form of a text file containing an execution log collated by writing results of a sequence of storage operations as a series of rows of comma separated strings. The tool systematically attempts to  verify whether a given session trace is valid under a given consistency model $\mathcal{C}$, specified in terms of  $E^s$.  The expression  $E^s$ for a particular consistency model $\mathcal{C}$ is specified as a Spin LTL formula. The safety property  $E^s$, and the system behaviour, i.e., the specification of the operations supported by the target system, are modelled using the PROMELA meta language. The PROMELA source file provides an abstract description of the specificaiton of the storage system.
+ We provide an open source automated  tool for verifying whether a session trace meets a given consistency model. This tool was built using Spin \cite{Holzmann:2003:SMC:1405716}, a widely used \cite{spinroot-success} open source software verification framework. The source code of the ConSpec tool along with instructions for running it are made publicly available in a github repository \url{https://github.com/ssidhanta/ConSpecTool}. A given session trace is supplied to the tool as input, in the form of a text file containing an execution log collated by writing results of a sequence of storage operations as a series of rows of comma separated strings. The tool systematically attempts to  verify whether a given session trace is valid under a given consistency model $\mathcal{C}$, specified in terms of  $E^s$.  The expression  $E^s$ for a particular consistency model $\mathcal{C}$ is specified as a Spin LTL formula. The safety property  $E^s$, and the system behaviour, i.e., the specification of the operations supported by the target system, are modelled using the PROMELA meta language. The PROMELA source file provides an abstract description of the specificaiton of the storage system. 
   Internally, Spin translates the PROMELA source file into C code. The Spin driver then runs the built-in model checker to check for counter-examples for the above generated C code  against  the Spin formula given as $E^s$. % The Spin model checker validates the generated C code with the Spin formula acting as an invariant on the system behaviour modelled by the C code. %, with the set of equivalent legal serializations generated from the given session trace supplied as an input to the model checkers.  %The github repository comprises a PROMELA specification for each of the consistency models and isolation levels, the Spin-based main source file, and the code for generating the list of  equivalent serializations.
    \begin{figure}\caption{ConSpec Specification}\label{format:spec}
 \begin{lstlisting}[escapeinside={(*}{*)}]
@@ -1715,15 +1716,13 @@ In contrast,  SC requires that the visibility order $\preccurlyeq$ among operati
 
 %The derivations of rest of the consistency models, which follow the above approach, are given in Section \ref{sec:restderive}.
  \section{Evaluation}\label{sec:eval}
-
-In this section, we evaluate how long ConSpec takes to verify the consistency of a  session trace, and how that varies depending on the length of the trace.   We generate a global session trace by executing the Yahoo Cloud Serving Benchmark (YCSB) benchmark suite (YCSB v 0.1.4)  \cite{Cooper:2010:BCS:1807128.1807152}  on top of a Cassandra cluster (Apache Cassandra v 2.1.2)  \cite{Lakshman:2010:CDS:1773912.1773922}.  % running on an m3.medium Amazon Ec2 instance located in us-west-2a region.
- The YCSB client was used to simulate a number of concurrent client threads executing the given workload, where the number of clients correspond to the value passed to the thread parameter. Thus, YCSB generates a global session trace consisting of multiple session traces, where each session trace comprises the entire sequence of operations performed from a specific client thread.    We modify the source code of the YCSB Java client to write, for each operation, the execution time, operation type (read or write), keys accessed and corresponding values returned into log files. The ConSpec Tool ran on an Apple McBook Pro, with 8 GB 1600 MHz DDR3 RAM,  2.9 GHz Intel Core i7 processor, %Intel HD Graphics 4000 1536 MB, 
- running McOS Sierra v10.12.4. The serialization generator component of the tool runs on Java 1.8.0\_121, and the PROMELA component is compiled and run on Spin v 6.4.6.  
-  \par To understand how the verification time varies as the length of the global session trace increases, Figure \ref{fig:examplefull} plots the total latency that the tool incurs for performing a verification against global session traces of an increasing size.  In this experiment, we verify the YCSB session trace against the PROMELA source file corresponding to the RYW consistency model. 
- We execute the YCSB client with 50 concurrent client threads; thus at each instant the global session trace comprises 50 concurrent sessions.
-  At each run of the YCSB client, we increase the length of the global session trace by increasing the length of the execution of the client. The concurrency parameter is kept unchanged at 50 concurrent threads for all runs; thus, for each run, the size of the global session trace (defined as the total number of operations in that trace) is given by $50X$ the number of operations executed by one client thread during the its execution. 
-   The YCSB database is pre-loaded with $1,000,000$ records.  A request distribution parameter is employed to indicate to the YCSB client which random distribution to use as the basis for choosing the records on which a given operation is to be performed. We ran the client with the ``latest'' request distribution of keys, where the latest inserted records comprise the head of the distribution. The  ``target'' parameter is used to throttle  the target  operations per second; we set the target at 100  operations per second. 
-    \begin{figure}%[t]
+In this section, we evaluate how long ConSpec takes to verify the consistency of a  session trace, and how that varies depending on the length of the trace.   We run the ConSpec tool on global session traces generated by executing the Yahoo Cloud Serving Benchmark (YCSB) benchmark suite (YCSB v 0.1.4)  \cite{Cooper:2010:BCS:1807128.1807152}   on top of a Cassandra cluster (Apache Cassandra v 2.1.2)  \cite{Lakshman:2010:CDS:1773912.1773922}.  By varying the configuration parameters of YCSB, namely ``thread" and the execution time, we generate a series of global session traces of different length.  % running on an m3.medium Amazon Ec2 instance located in us-west-2a region.
+ Using the parameter ``thread", we simulated a number of concurrent YCSB client threads executing the given workload, where the number of clients correspond to the value passed to the thread parameter. Thus each execution of the YCSB client with a given value of the thread parameter generates a global session trace consisting of multiple session traces, where each session trace comprises the entire sequence of operations performed from a specific client thread. We modify the source code of the YCSB Java client to write, for each operation, the execution time, operation type (read or write), keys accessed and corresponding values returned into log files. The ConSpec Tool ran on an Apple McBook Pro, with 8 GB 1600 MHz DDR3 RAM,  2.9 GHz Intel Core i7 processor, %Intel HD Graphics 4000 1536 MB, 
+ running McOS Sierra v10.12.4. The serialization generator component of the tool runs on Java 1.8.0\_121, and the PROMELA component is compiled and run on Spin v6.4.6.  
+  \par In the evaluation section, we record the execution time of ConSpec tool; by execution time we refer to the time duration that begins with the preprocessing of the input global session trace and ends with printing of the result of the verification against the given specification. To understand how the execution time of the ConSpec tool varies with an increase in the length of  the global session trace, we plot the total latency that the tool incurs while executing on global session traces of increasing size. 
+  
+  \subsection{Evaluation with YCSB}\label{sec:evalycsb}
+      \begin{figure}%[t]
       %\begin{center}
         \includegraphics[width=3.4in,height=2.8in]
                     {conspecExecutionTimesFull.eps} %\vspace{-5em}
@@ -1731,8 +1730,22 @@ In this section, we evaluate how long ConSpec takes to verify the consistency of
         \caption{Execution Time of ConSpec Tool Against YCSB Trace.}
         \label{fig:examplefull}
 \end{figure}
-    \par Figure \ref{fig:examplefull} shows the time required to verify a global session  trace, as we vary the size of that trace, which is plotted on the x axis.  The results show that the execution time remains within 400 seconds (6 minutes 40 seconds) for a session trace with up to $25,000$  operations. Furthermore, the results show that the performance of tool scales approximately linearly.
-    This linear scalability was somewhat surprising, since our preprocessing step for generating all possible legal serializations for a given session trace has a complexity that is $\mathcal{O}(\mathit{SIZE}!),$ where $\mathit{SIZE}$ is the length of the session trace. We argue that a possible explanation for this fact are the optimizations employed by Spin, which make the verification step very efficient.
+ \begin{figure}%[t]
+      %\begin{center}
+        \includegraphics[width=3.4in,height=2.8in]
+                    {conspecExecutionTimesFullVariance.eps} %\vspace{-5em}
+          %\end{center} 
+        \caption{Variance of Execution Time of ConSpec Tool Against YCSB Trace.}
+        \label{fig:examplefullvar}
+\end{figure}
+  In this experiment, we verify the YCSB session  trace against  the RYW consistency model specified as a Spin LTL formula in the corresponding  PROMELA source file.  
+ We execute the YCSB client with 50 concurrent client threads; thus at each instant the global session  trace comprises 50 concurrent sessions. 
+  At each instance of execution of the YCSB client, we increase the length of the global session trace by increasing the  duration of execution of the client. The concurrency parameter is kept unchanged at 50 concurrent threads for all runs; thus, for each run, the size of the global session trace (defined as the total number of  operations in that trace) is given by $50 \times op$,  where $op$ is the number of operations executed by one client thread during one run of the client. 
+   We  pre-loaded the YCSB backend with $1,000,000$ records.  The parameter ``request distribution"   is used to indicate to the YCSB client which specific random distribution to use for the keys, which in turn, forms as the basis for choosing the records on which a given operation is to be performed. We ran the client with the ``latest'' request distribution of keys, where the latest inserted records comprise the head of the distribution. The  ``target'' parameter is used to throttle  the target  operations per second; we set the value of target at 100  operations per second. 
+
+    \par Figure \ref{fig:examplefull} shows the variation in execution time of ConSpec tool on global session  traces collected from YCSB, as we vary the size of the traces; trace size/length is plotted along the x axis.  The results show that the execution time remains within 400 seconds (6 minutes 40 seconds) for a global session trace comprising up to $25,000$  operations. Furthermore, the results show that the performance of tool scales approximately linearly. We repeated the verification of each global session trace 5 times,  and computed averages of the execution times observed in each of the 5 verifications  for each of the global session traces in Figure \ref{fig:examplefull}.  In  Figure \ref{fig:examplefullvar}, we plot the variances of the execution times observed in each of the 5 verifications performed against each of the global session traces. The size of each of the global session traces is plotted along the x axis, and the variance of the execution times for each global session trace is plotted along the y axis.   
+    \par The linear scalability observed in Figure \ref{fig:examplefull} was somewhat surprising, since our preprocessing step for generating all possible legal serializations for a given session trace has a complexity that is $\mathcal{O}(\mathit{SIZE}!),$ where $\mathit{SIZE}$ is the length of the session trace. This is because of the nested depth first search algorithm \cite{DBLP:conf/dimacs/HolzmannPY96} employed by the Spin model checker which is linear on the number of reachable states \cite{DBLP:conf/tacas/SchwoonE05}, which in turn is directly proportion to the size of the session trace in our case. In the first step, the nested depth first search algorithm reduces the model checking problem into a reachability problem where it searches for accepting states comprised in some strongly connected components in the graph of the given state space. Second, it leverages partial order reduction techniques to look for cycles around the accepting states on-the-fly.  The above two steps are interleaved with each other which enables nested depth first search achieve linear complexity and high memory efficiency.   
+    %We argue that a possible explanation for this fact are the optimizations employed by Spin, which make the verification step very efficient.
 
 %    Hence we can express the execution time for the preprocessing step as $(A \times \mathit{SIZE})!$, where $A$ is a constant term. The length of the session trace $\mathit{SIZE}$ can be given as $\mathit{SIZE}=B \times n$, where $B$ is a constant term, and $n$ is an integer term. By varying $n$, we can vary the size of the session trace as multiples of $B$; for our experiments we use $B$ = 50. In our experiments, we sequentially increase the size of session trace by incrementally varying $n$ from 1 to $500$. Hence the execution time of preprocessing step can be rewritten as  $A \times (n \times B)!$,  which results in a curved plot. %With an increase in length of session trace by $B$, i.e., with a new session trace of length $n \times B + B$, the execution time of Step 1 becomes $(A \times ((n+1)B)!$.   %The new execution time of Step 1 with a new session trace of length $n \times B + B$ is given as $A \times (n+1) \times B!$. 
   %It can be trivially deduced that the complexity of Step 2 is $\mathcal{O}(1)$. Let execution time of Step 2 be given as a constant term $D$. Since Step 3 is a special case of exhaustive search algorithm, the complexity of Step 3 is the same as that of exhaustive search, i.e., the complexity can be given as $\mathcal{O}((n \times B)^3)$. Let the execution time of Step 3 be given as $E \times (n \times B)^3$. %The  increase in execution time of Step 3 with a new session trace of length $n \times B + B$  is given as $E\times (((n +1) \times B)^3 - (n \times B)^3)$. Combining the above, the gradient of the plot of execution time against length of session trace is given as $(A \times ((n+1)B! - n \times B!) + (D -D) + E\times (((n +1) \times B)^3 - (n \times B)^3)) / ((n+1) \times B -n \times B)$, which can be simplified as $A/B \times (n \times B)! \times n + E \times B^2 \times (3 \times n^2 + 3 \times n + 1)$.    
@@ -1741,11 +1754,6 @@ In this section, we evaluate how long ConSpec takes to verify the consistency of
 %However, the curvature of the graph due to the preprocessing step is smoothed out by optimizations performed internally by the Spin tool, such as minimization of the  frequency of context switching by employing on-the-fly partial order reduction methods. This explains the nature of the above plot in Figure \ref{fig:examplefull}.  
 % \par This scalability can further be attributed to the design of the exhaustive verifier in the underlying Spin module, which leverages partial order reduction methods to optimize the search space of the verification process.  It performs these partial order reductions on-the-fly, thus restricting the frequency of context switching during the verification to a bare minimum without compromising the soundness of the verification process.  Further, instead of pre-building the state transition graph  for the verified system, it does incremental search, working on a portion of the search space iteratively on-the-fly.  
 % Due to such optimizations, Spin is able to scale with increasing size of input dataset, and is able to rigorously validate very large systems with very low overhead. 
-
- \par The approximately linear scalability shown in the previous experiment can be a source of concern for very long traces, e.g., collected from long-running systems. In those cases, an alternative solution is to work with only a portion of the global session trace at a particular instant. In particular, we can divide the session trace into smaller \emph{trace segments} enclosed within a sliding window, and execute  the tool on  each successive segment sequentially.   Figure \ref{fig:exampleIter} depicts the results from running the system in this mode of execution, where the time into the trace is plotted in the x axis, and the time taken to verify a sliding window of 5 operations is plotted in the y axis. The results show that the execution time remains below %190 milliseconds and
-   1 milliseconds, and can vary by a factor of approximately 3X between the fastest and the slowest window to be verified.   Thus, we can conclude that this mode of execution can be a practical way to handle long-lived systems.
-%  \par With the sliding window approach, the tool loops over the input session trace, processing a fixed segment of the trace at a time; the length of the above segment is the same throughout the entire span of the given session trace. During each iteration, the tool processes only a particular segment of the trace and verifies the specification against that segment. Thus, in each iteration of the the above loop, the tool executes  independent of the previous iterations. With increase in the length of the session trace, the verifier takes uniform time to execute each segment comprised in the additional portion of the new session trace. Hence, with increasing size of session trace, the execution time increases in a linear fashion. The demonstrated scalability of the tool makes it a  viable candidate for verifying live enterprise scale application processing petabyte scale datasets.  
-
 \begin{figure}%[t]
         %\begin{center}
         \includegraphics[width=3.5in,height=2.8in]
@@ -1753,6 +1761,22 @@ In this section, we evaluate how long ConSpec takes to verify the consistency of
           %\end{center} 
         \caption{Execution Time of ConSpec Tool Against YCSB Trace With Sliding Window size 5.}
         \label{fig:exampleIter}
+\end{figure}
+     \begin{figure}%[t]
+      %\begin{center}
+        \includegraphics[width=3.4in,height=2.8in]
+                    {conspecTPCC.eps} %\vspace{-5em}
+          %\end{center} 
+        \caption{Execution Time of ConSpec Tool Against TPCC Trace.}
+        \label{fig:examplefulltpcc}
+\end{figure}
+ \begin{figure}%[t]
+      %\begin{center}
+        \includegraphics[width=3.4in,height=2.8in]
+                    {conspecTPCCvar.eps} %\vspace{-5em}
+          %\end{center} 
+        \caption{Variance of Execution Time of ConSpec Tool Against TPCC Trace.}
+        \label{fig:examplefullvartpcc}
 \end{figure}
 %\begin{figure}%[t]
 %        %\begin{center}
@@ -1762,6 +1786,47 @@ In this section, we evaluate how long ConSpec takes to verify the consistency of
 %        \caption{Execution Time of ConSpec Tool Against YCSB Trace with sliding Window size of  50.}
 %        \label{fig:exampleIter50}
 %\end{figure}
+ \par The approximately linear scalability shown in the previous experiment can be a source of concern for very long traces, e.g., collected from long-running systems. In those cases, an alternative solution is to work with only a portion of the global session trace at a particular instant. In particular, we can divide the session trace into smaller \emph{trace segments} enclosed within a sliding window, and execute  the tool on  each successive segment sequentially.   Figure \ref{fig:exampleIter} depicts the results from running the system in this mode of execution, where the time taken to  verify the trace is plotted in the x axis, and the time taken to verify a session trace within a sliding window of 5 operations is plotted in the y axis. The results show that the execution time remains below %190 milliseconds and
+   1 milliseconds, and can vary by up to a factor of approximately 3 times between the fastest and the slowest window to be verified.   Thus, we can conclude that this mode of execution can be a practical way to handle long-lived systems.
+%  \par With the sliding window approach, the tool loops over the input session trace, processing a fixed segment of the trace at a time; the length of the above segment is the same throughout the entire span of the given session trace. During each iteration, the tool processes only a particular segment of the trace and verifies the specification against that segment. Thus, in each iteration of the the above loop, the tool executes  independent of the previous iterations. With increase in the length of the session trace, the verifier takes uniform time to execute each segment comprised in the additional portion of the new session trace. Hence, with increasing size of session trace, the execution time increases in a linear fashion. The demonstrated scalability of the tool makes it a  viable candidate for verifying live enterprise scale application processing petabyte scale datasets.  
+ \subsection{Evaluation with TPC-C}\label{sec:evaltpcc}
+      We also ran the TPC-C benchmark and collected global session traces from such runs. We used an open source java implementation of the TPC-C benchmark developed by CodeFutures Corporation \cite{Tpcc2015}, and modified it to collect the latency and throughput of the experiments in log files.  We ran the TPC-C client on a single client machine with a single node MYSQL server in the backend. We configured TPC-C with a connection pool of size 30, ramp up time of 30 seconds, and a single warehouse. Before running the TPC-C run commands, we loaded the TPC-C database tables for 60 by running the load command for 60 seconds. Subsequently during each experiment, the TPC-C run command was executed for durations of 60 seconds each, and the latency was recorded in log files. The size of the log file was gradually increased by increasing the execution time. TPC-C  disallows serialization anomalies under snapshot isolation. We ran the ConSpec tool against the session traces, compiled from the TPC-C log files, against the strict serializability consistency guarantee of ConSpec. Figures \ref{fig:examplefulltpcc} and   \ref{fig:examplefullvartpcc} illustrate the execution times and variance of the execution times with TPC-C logs of increasing size. 
+      
+
+\subsection{Comparison with Burkhardt's Definitions}\label{sec:evaltpcc}
+  \begin{figure}%[t]
+      %\begin{center}
+        \includegraphics[width=3.4in,height=2.8in]
+                    {conspecTPCCburk.eps} %\vspace{-5em}
+          %\end{center} 
+        \caption{Execution Time of ConSpec Tool Against TPCC Trace With respect to Burkhardt's Definition.}
+        \label{fig:examplefulltpccburk}
+\end{figure}
+We translated the consistency definitions of Burckhardt et al. \cite{Burckhardt:2014:PEC:2693641.2693642} into LTL form, and verified them against the Co\ref{sec:evaltpcc}) with Burkhardt's definition of RYW (referred to as read my writes in  \cite{Burckhardt:2014:PEC:2693641.2693642}) instead of the ConSpec definitions.  Figure \ref{fig:examplefulltpccburk} illustrates the execution time of the Conspec tool against consistency definitions of Burckhardt et al. \cite{Burckhardt:2014:PEC:2693641.2693642} with TPC-C logs of increasing size.  Before we can verify Burckhardt's definitions using ConSpec tool, we had to translate the definitions into the ConSpec syntax as follows. 
+  Burkhardt's definition of RYW is given as
+\newcommand\myleq{\stackrel{\mathclap{\normalfont\mbox{rb}}}{\leq}}
+\newcommand\myvis{\stackrel{\mathclap{\normalfont\mbox{vis}}}{\leq}}
+\newcommand\myss{\stackrel{\mathclap{\normalfont\mbox{ss}}}{\leq}}
+ \begin{align*}%\label{eqn:ltldec}	
+\mathit{RYW} \myeq \mathit{so} \subseteq \mathit{vis}, 
+    \end{align*} where  $\mathit{so}$ and  $\mathit{vis}$ are the relations ``session order" and ``visibility", respectively, defined in \cite{Burckhardt:2014:PEC:2693641.2693642}.
+     %\label{eqn:ltldec}	
+   Since $\mathit{so} \myeq \mathit{ss} \wedge \mathit{rb}$, where $\mathit{ss}$ and $\mathit{rb}$ are relations ``same session" and ``return-before", the RYW definition can be rewritten as follows.
+\begin{align*}
+\mathit{RYW} \myeq \mathit{ss} \wedge \mathit{rb} \subseteq \mathit{vis}
+    \end{align*}
+    Again, $\mathit{rb}$ is given as $\mathit{rb} \myeq \forall a, b \in E. a \myleq b$, where $E$ is the set of all ``operation events" \cite{Burckhardt:2014:PEC:2693641.2693642}.  $\mathit{vis}$ is defined as an acyclic relation such that $ \forall a, b \in E. a \myvis b \Rightarrow \mathit{obj}(a) = \mathit{obj}(b)$, where $\mathit{obj}(a)$ represents the object on which the operation corresponding to the event $a$ occurs. 
+     Thus, the expression for RYW reduced to 
+    \begin{align*}
+\mathit{RYW} \myeq  \forall a, b \in E. a \myleq b \wedge a \myss b \Rightarrow \mathit{obj}(a) = \mathit{obj}(b)
+    \end{align*}
+    To verify the above definition of RYW using the ConSpec tool, we rewrite the special-purpose relations  $\myleq$ and $\myss$ in terms of the syntax of ConSpec. Finally, the RYW definition in \cite{Burckhardt:2014:PEC:2693641.2693642} is reduced to the following form.    
+     \begin{align*}
+\mathit{RYW} \myeq  \quad \forall \mathit{st} \in \mathcal{S}_t,\;  a, b \in \mathit{st} : \\
+  a \operatorname{\it F}_\mathit{st} b 
+ \Rightarrow  \mathit{obj}(a) = \mathit{obj}(b), 
+    \end{align*} where we introduce $\mathit{obj}(a)$ as a new function in the ConSpec tool.
+
 
 \section{Conclusions} \label{sec:conc}
 In this paper, we presented a generic framework called ConSpec for defining consistency. ConSpec enables definitions that are precise, follow a generic structure, and are independent of implementation details. We used ConSpec to derive several concrete definitions of existing consistency levels. Furthermore, ConSpec also enabled a generic version of the CAP theorem, where the ``C'' property is no longer tied to a specific strong consistency definition. Instead, we define necessary and sufficient conditions for a consistency level to be within the scope of CAP, i.e., for the existence or not of a partition tolerant and available implementation.
@@ -3364,7 +3429,7 @@ LSU, affiliated with the School of Electrical Engineering and Computer Science a
 Ricardo Dias is a senior software enginner, at SUSE Linux, in the Entreprise Storage Team, where his main task is to contribute to the upstream Ceph storage system project. He is also an Associate Researcher at the NOVA LINCS laboratory. He received his doctoral degree from the Universidade Nova de Lisboa, Portugal, in 2013, under the supervision of Prof. João Lourenço, on the topic of transactional memory. He spent a couple of years as a postdoc researcher, working with Prof. Rodrigo Rodrigues on the topic of geo-replicated storage systems, first at the NOVAsys group of the NOVA LINCS laboratory, and then at the GSD group of the INESC-ID laboratory.
 He has received a Distinguished Paper Award at the Euro-Par 2012 and the Best paper Award at the HVC 2012.
 \end{IEEEbiography}
-\begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{ist14022}}]{Rodrigo Rodrigues}
+\begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{ist14022.png}}]{Rodrigo Rodrigues}
 Rodrigo Rodrigues is a full professor at the Instituto Superior Tecnico of the ULisboa and a researcher at INESC-ID since 2015. Previously, he was a faculty at the Nova University of Lisbon and the Max Planck Institute for Software Systems (MPI-SWS), where he led the Dependable Systems Group. He received his PhD degree from the Massachusetts Institute of Technology (MIT) in 2005, under the supervision of Prof. Barbara Liskov. He has won several fellowships and awards, including a best paper award at the Symposium on Operating Systems Principles, the flagship conference in computer systems, a special recognition award from MIT's Department of Electrical Engineering and Computer Science, and an ERC starting grant. In the last few years, he and his doctoral students have published their work in the top conferences of a broad range of areas, including OSDI, VLDB, NSDI, EuroSys, WWW, FAST, PODC, USENIX Security, and ASPLOS.
 \end{IEEEbiography}
 \end{document}
