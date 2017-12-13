@@ -1,0 +1,281 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1561\cocoasubrtf100
+{\fonttbl\f0\fswiss\fcharset0 ArialMT;\f1\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;\red26\green26\blue26;\red255\green255\blue255;\red26\green26\blue26;
+\red16\green60\blue192;}
+{\*\expandedcolortbl;;\cssrgb\c13333\c13333\c13333;\cssrgb\c100000\c100000\c100000;\cssrgb\c13333\c13333\c13333;
+\cssrgb\c6667\c33333\c80000;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww25100\viewh12760\viewkind0
+\deftab720
+\pard\pardeftab720\sl300\partightenfactor0
+
+\f0\fs25\fsmilli12800 \cf2 \cb3 \expnd0\expndtw0\kerning0
+\ul \ulc2 Please find below the comments by the reviewers, and our responses against each comment. The review comments are marked in bold, and our responses are given in normal text immediately after each comment.
+\b \
+\
+Reviewer: 1:
+\b0 \
+\
+\pard\pardeftab720\sl300\partightenfactor0
+
+\b \cf4 \cb3 \ulnone \outl0\strokewidth0 \strokec4 1) Many assumptions are left implicit which makes it difficult to grasp the actual power and generality of the approach.\
+For example, the F_st operator is introduced in page 3 by giving an example how to link writes and reads in a session.\
+Consider the following trace: w(x,1) w(x, 2) r(x),1 .\
+In this trace, does it hold that w(x) F_st r(x) ?\
+Yet, the expression w(x) F_st r(x) is seemingly assumed to hold true for the remainder of the paper (cf. also the evaluation).\
+This assumption precludes formalizations of systems which apply versioning.\
+Similarly, systems must have a sequential specification, which indirectly excludes systems whose semantics cover actual concurrent operations.
+\b0 \
+\pard\pardeftab720\sl300\partightenfactor0
+\cf2 \cb3 \outl0\strokewidth0 \
+The operator w(x) F_st r(x) simply implies that operation r(x) eventually executes after the operation w(x) executes in a session st. \cf2 \cb3 F_st\cf2 \cb3   does not assume anything regarding the values returned by the operations. The operator has been clearly defined in Section 3.  Hence, \cf2 \cb3 F_st is independent of the underlying system, i.e., w(x) F_st r(x) olds for any pair of operations in st irrespective of whether it is a versioning system or has a sequential specification. \
+\
+\pard\pardeftab720\sl300\partightenfactor0
+\cf4 \cb3 \outl0\strokewidth0 \strokec4 \
+
+\b Though the paper makes the claim in the introduction that the formalism can abstract from implementation details, assumptions are stated regarding the protocols implementing a specific consistency semantics for the proof of a theorem.\
+Now, it remains unclear where the assumptions actually come into play.\
+\
+
+\b0 The proof of the CAP theorem follows the same approach as that taken in the original paper by Brewer.  We only assume network partition and a specific client execution flow in order to prove the theorem. We do not make any additional assumptions regarding our original consistency definitions or the equivalent valid partial order for a given consistency model. Thus the assumptions in Section 7 do not have any implications on any statement we made in the rest of the paper. \
+\
+
+\b The definition of causal consistency (p.4/5) supposedly only covers single-object causal consistency.\
+Also, it is unclear how the definition tackles the transitivity of causal dependencies across sessions.\
+
+\b0 \cf2 \cb3 \outl0\strokewidth0 \
+The transitivity of causal dependencies follow directly from the definition of the a valid partial order in Section 4. Also, we have shown this transitivity while proving the equivalence of our specification of Causal consistency with Chockler\'92s definition in the Appendix.\
+\pard\pardeftab720\sl300\partightenfactor0
+\cf2 \
+\pard\pardeftab720\sl300\partightenfactor0
+\cf4 \cb3 \outl0\strokewidth0 \strokec4 I
+\b n all examples, operation sequences always start with writes. Do these first writes represent initializations? Can these be concurrent?\
+What is the semantics of traces that start with a read?\cf2 \cb3 \outl0\strokewidth0  \
+\pard\pardeftab720\partightenfactor0
+
+\f1\b0\fs24 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+To clarify, we have only included traces beginning with writes because a read at the beginning is not interesting for our analysis because it does not affect the result of any subsequent operation. However, all of our analysis applied to traces with read in the beginning; in fact you can add a read at the beginning of all of our examples and the result of the analysis will still be unchanged.  We simply omitted any precluding reads from our examples because they were not relevant to our discussion about consistency violations for given consistency models.  \
+\pard\pardeftab720\partightenfactor0
+\cf0 These starting writes can be considered initialisations, but we did not intend them to be that. Yes, they can be concurrent. But we did not consider concurrent writes in our examples because they did not help make our argument about  violations of the consistency models we were discussing in our examples. \
+\
+\pard\pardeftab720\sl300\partightenfactor0
+
+\f0\b\fs25\fsmilli12800 \cf4 \cb3 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec4 Page 7: "it is always legal to remove orderings between operations across sessions" - But this ordering might be necessary to explain an outcome of a trace.\cf2 \cb3 \outl0\strokewidth0 \
+\pard\pardeftab720\sl300\partightenfactor0
+
+\b0 \cf2 \
+We mentioned that statement while making the argument that weak consistency models do not impose restrictions on the order of operations from different sessions. \
+\
+
+\b 2) \cf4 \cb3 \outl0\strokewidth0 \strokec4 \'a0The formalisms are not applied with the mathematical rigor that I would expect from a paper with this kind of theoretical contributions.\
+\pard\pardeftab720\sl300\partightenfactor0
+\cf4 On page 3, the variables A and B denote both propositional variables and events.\
+How are events and operations related?\
+\
+
+\b0 We stated in Page 3 that A and B are  propositional variables that denote the events of occurrence of operations a and b. We rewrote that portion in the paper to make that point clearer. \
+\
+
+\b Page 4ff: How is the variable x in the different variants of E quantified?\
+\
+
+\b0 In E, the variable x is quantified as a string; propositional variable op(x) denotes the event of occurrence of operation op on an object denoted by the string x. 
+\f1\fs24 \cf0 \cb1 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 \
+\pard\pardeftab720\sl300\partightenfactor0
+\cf0 \
+\pard\pardeftab720\sl300\partightenfactor0
+
+\f0\b\fs25\fsmilli12800 \cf4 \cb3 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec4 Page 6, Definition 2: The symbol between S_t and S_it at the end is never introduced.\
+\
+\pard\pardeftab720\sl300\partightenfactor0
+
+\b0 \cf2 \cb3 \outl0\strokewidth0 S_t and S_it have been clearly defined in Section 3.\
+\
+\pard\pardeftab720\sl300\partightenfactor0
+
+\b \cf4 \cb3 \outl0\strokewidth0 \strokec4 Page 7, Proof of Theorem 7.1: The partial order enumeration is dependent on E^s, but this dependence does not seem to play a role in the proof. Why?\
+\
+
+\b0  Specification E^s of any consistency model is based on existence of a valid partial order comprising a given group of operations in a given global session trace S_t. E^s imposes restrictions on a valid partial order for S_ts. In Theorem 7.1, we analyse if the occurrence of a partition has any implications on the existence of a  valid partial partial order for a given global session trace.  Thus, E^s does come to play a role in Theorem 7.1 through the valid partial order it restricts.  \
+\
+
+\b 3) The evaluation is only preliminary.\
+Figure 3 shows the time to verify *a* global session trace. - Did you apply the tool only to one example??\
+\
+
+\f1\b0\fs24 \cf0 \cb1 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 We applied the tool to a sequence of different global session traces of increasing size using from the YCSB benchmark suite.  Now, we have  also added new subsection 10.2 comprising experiments with TPC-C benchmark also.\
+\
+
+\f0\b\fs25\fsmilli12800 \cf4 \cb3 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec4 How many runs were evaluated? What is the variance of latency?
+\f1\b0\fs24 \cf0 \cb1 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 \
+\
+In each of the experiments, we executed the ConSpec tool 5 times on each global session trace. We have shown the variance for 5 repetitions of the verification against every 30th global session trace. The variance is highlighted as text in the stacked bar charts. \
+\
+
+\f0\b\fs25\fsmilli12800 \cf4 \cb3 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec4 How does this tool compare to other similar tools? Is the preprocessing part of the measurement?
+\b0 \
+\
+We have added new subsection 10.3 to compare the tool against Burkhardt\'92s definitions. We translated Burkhardt\'92s definitions into ConSpec format and ran the ConSpec tool on these specifications. We ran the tool against session traces collected from experiments with the TPC-C benchmark.  We also analyzed how Burkhardt\'92s definitions compare against ConSpec definitions, Yes, preprocessing is part of the measurement, We have updated the content to clarify these details. \
+\
+
+\b It is very unsatisfactory as an explanation for the obviously unexpected scalability behavior that optimizations of Spin are a *possible* explanation.\
+Which optimizations come into play here? Which property of the traces allow such optimizations?\
+\
+
+\b0 We have updated the subsection 10.1 stating categorically which optimizations allow for semi-linear scalability of the tool. \
+\
+\
+
+\b Further comments:\
+- p. 4: The explanation is difficult to follow: ... such that W'(x) <<_st+w R'(x) is holds (broken sentence?)
+\f1\b0\fs24 \cf0 \cb1 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 \
+\pard\pardeftab720\sl300\partightenfactor0
+\cf0 \
+Fixed the typo.\
+\
+\pard\pardeftab720\sl300\partightenfactor0
+
+\f0\b\fs25\fsmilli12800 \cf4 \cb3 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec4 - On a side note, in my opinion it should be left to the reader to judge whether a solution is "elegant".\
+\
+
+\b0 Removed that claim.\
+\
+
+\b - Fig. 2: The type setting of the formula is broken.
+\f1\b0\fs24 \cf0 \cb1 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 \
+\pard\pardeftab720\sl300\partightenfactor0
+\cf0 \
+Fixed the figure. \
+
+\b \
+\pard\pardeftab720\sl300\partightenfactor0
+
+\f0\fs25\fsmilli12800 \cf4 \cb3 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec4 - p. 7: "specificaiton"
+\b0 \
+\
+Corrected typo.\
+\
+
+\b - p. 8: "created by the statement Ser ser[2]" ? Does this array only have two entries? Or is it a literature reference?\
+
+\b0 \
+Corrected. It was supposed to be a variable.\
+\
+
+\b - p. 8: What is the formula E^s used in the example?
+\b0 \
+\
+ Added reference to the RYW formula. \
+
+\b \
+- You should refer to the appendix in the text. This text would benefit from some structure. p. 11, lines 11-13: Shouldn't the condition be inv^i -> resp^i (for i = 1,2) and resp^1 -> inv^2?\
+
+\b0 \
+Updated that portion of the text. 
+\f1\fs24 \cf0 \cb1 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 \
+\pard\pardeftab720\sl300\partightenfactor0
+\cf0 \
+\pard\pardeftab720\sl300\partightenfactor0
+
+\f0\b\fs25\fsmilli12800 \cf2 \cb3 \expnd0\expndtw0\kerning0
+\ul \
+Reviewer: 2:\ulnone \
+\
+\pard\pardeftab720\sl300\partightenfactor0
+\cf4 \cb3 \outl0\strokewidth0 \strokec4 \
+- It could be nice to add some names (of authors or of the systems) when citing references\
+\
+
+\b0 Updated the related work section.\
+\
+
+\b - The evaluation part is the less interesting, the results are quite predictable and the performance of the software tool does not seems to be an important problem.\
+\
+
+\b0 Added new subsections 10.2 and 10.3 with TPC-C bechmark and experiments with Burkhardt\'92s definitions.\cf2 \cb3 \outl0\strokewidth0 \
+\pard\pardeftab720\sl300\partightenfactor0
+\cf2 \
+\pard\pardeftab720\sl300\partightenfactor0
+
+\b \cf2 \ul \
+Reviewer: 3:\ulnone \
+\pard\pardeftab720\sl300\partightenfactor0
+
+\b0 \cf2 \
+\pard\pardeftab720\sl300\partightenfactor0
+
+\b \cf4 \cb3 \outl0\strokewidth0 \strokec4 Another problem of the paper is the lack of comparison with recent work that has been carried out in the topic: for example,\
+\
+*the problem of specifying consistency models using temporal logic has also been assessed by Weber et al.,\
+see\'a0{\field{\*\fldinst{HYPERLINK "https://link.springer.com/chapter/10.1007%2F978-3-319-60225-7_17"}}{\fldrslt \cf5 \ul \ulc5 \strokec5 https://link.springer.com/chapter/10.1007%2F978-3-319-60225-7_17}}.
+\b0 \
+\
+\pard\pardeftab720\sl300\partightenfactor0
+\cf2 \cb3 \outl0\strokewidth0 Added comparison with the paper by \cf2 \cb3 Weber et al. in related work section.\
+\
+\pard\pardeftab720\sl300\partightenfactor0
+\cf4 \cb3 \outl0\strokewidth0 \strokec4 *
+\b *the authors reference the works of Burckhardt\'a0 et al. to model weak consistency [25,26,27]. Recently, Cerone et al. proposed a systematic way to define axioms in this\
+framework to specify consistency guarantees ({\field{\*\fldinst{HYPERLINK "https://arxiv.org/abs/1702.06028"}}{\fldrslt \cf5 \ul \ulc5 \strokec5 https://arxiv.org/abs/1702.06028}}). Although the work focuses on transactional consistency models of distributed databases, their approach can be adapted to model session guarantees and other weak consistency properties.\
+\
+
+\b0 Added comparison to the paper by \cf2 \cb3 \outl0\strokewidth0 Cerone et al. in related work section. Their paper have the same inherent problem as Burckhardt\'92s paper.\
+\
+
+\b \cf4 \cb3 \outl0\strokewidth0 \strokec4 * Weak consistency appears in the context of shared memory systems as well. In this field, there has been a lot of work regarding the implementation of tools that could determine whether a trace is allowed by a weak memory model. For example, Wickerson et al. recent work on the automatic comparison of weak memory models using the Alloy Analyzer: see\'a0{\field{\*\fldinst{HYPERLINK "https://johnwickerson.github.io/papers/memalloy.pdf"}}{\fldrslt \cf5 \ul \ulc5 \strokec5 https://johnwickerson.github.io/papers/memalloy.pdf}}.
+\b0 \cf2 \cb3 \outl0\strokewidth0 \
+\
+\cf2 \cb3 \
+Added comparison to Alloy in related work. \
+\
+
+\b \cf4 \cb3 \outl0\strokewidth0 \strokec4 Technical comments:\
+\
+* the authors state that they use linear temporal logic (LTL) as a basis for their framework (page 3, line 47); afterwards, they make use of universal and existential quantifications in formal specifications: however, these operators, are not part of the standard LTL syntax (see Section 9.1. here:\'a0{\field{\*\fldinst{HYPERLINK "http://www.win.tue.nl/~jschmalt/teaching/2IX20/reader_software_specification_ch_9.pdf"}}{\fldrslt \cf5 \ul \ulc5 \strokec5 http://www.win.tue.nl/~jschmalt/teaching/2IX20/reader_software_specification_ch_9.pdf}})
+\b0 \cf2 \cb3 \outl0\strokewidth0 \
+\pard\pardeftab720\sl300\partightenfactor0
+\cf2 \
+Updated that portion in Section 3. We have extended LTL by adding support for existential and universal quantifiers.\
+\
+\
+\pard\pardeftab720\sl300\partightenfactor0
+\cf4 \cb3 \outl0\strokewidth0 \strokec4 \
+
+\b * In LTL, the finally/eventually operator corresponds to the diamond operator <> (see again the link above, section 9.3). The authors\'a0 define "finally" as the operator\'a0 (=> <>)\
+(page 3, column 1, line 54). This may create some confusion to reader with a background in temporal logic.\
+\
+\
+\pard\pardeftab720\sl300\partightenfactor0
+
+\b0 \cf4 \
+
+\b * At page 3, column 1, line 56, the authors state that (A => <> B) has the meaning that if A is true at some point in time, then B will eventually be true. This is false: the formula (A => <> B) states that if A is true at the beginning of a trace (i.e. A holds for the first operation of a trace), then B will eventually become true. I believe that the right formula that captures what the authors are trying to model is [](A =>\'a0 <> B), which is also known as "A leadsto B".
+\b0 \
+\pard\pardeftab720\sl300\partightenfactor0
+\cf4 \
+\
+\pard\pardeftab720\sl300\partightenfactor0
+\cf4 *
+\b  the syntactic operator F_\{st\}, introduced at Page 3,\'a0 \'a0is parametric in a denotational component, namely a session trace st. This is quite odd.\
+\
+\
+\
+\
+* Furthermore, the operator F_\{st\} is ill-defined: at page 3, column 2, line 3, it is stated that\
+"A F_\{st\} B = \\exists A, B \\in st. A F B".\
+One problem with this definition is that the predicates A, B are bound to an existential quantifier in the RHS, but are free in the LHS. Thus the definition of A F_\{st\} B does\
+not depend from A, B at all. Another problem is that the existential quantification in the RHS requires that A,B are elements of the session trace st. But A, B are predicates, not elements of a trace. The obvious way to fix this problem (assuming LTL has been extended with existential quantification) would be "A F_\{st\} B = \\exists s_1,s_2 \\in st. A(s_1) /\\ B(s_2) \\wedge A F B", but this does not seem to express what the authors had in mind. Some clarification is necessary here.
+\b0 \
+\
+\
+\pard\pardeftab720\sl300\partightenfactor0
+
+\b \cf4 * The operator F_\{st\} introduced by the authors is not associative: for this reason, the meaning of the second line of equation (3), Page 4, second column, is not clear. I believe that the operator F_\{st\} is right associative, but this should be stated somewhere (or explicit parentheses should be inserted).\
+\
+
+\b0 Yes, F_st is associative. We updated Section 3 as such.}
