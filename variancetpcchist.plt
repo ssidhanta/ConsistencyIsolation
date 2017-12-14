@@ -46,4 +46,4 @@ set xlabel  offset character 0, -2, 0 font "" textcolor lt -1 norotate
 set ytics border in scale 0,0 mirror norotate  autojustify
 set ytics  norangelimit autofreq  font ",20"
 set ztics border in scale 0,0 nomirror norotate  autojustify
-plot newhistogram "With ConSpec Definition" lt 1, "varLog.txt" every 30 using 8 t "Average Execution Time (ms)",  '' every 30  using 7:xticlabels(1) t "Variance with ConSpec Definition", newhistogram "With Burkhardt's Definition" lt 1, '' every 30 using 10:xticlabels(1) t "Average Execution Time (ms)" linecolor rgb "#cc0000",  '' every 30  using 9:xticlabels(1) t "Variance with Burkhardt's Definition" linecolor rgb "#ff0000"; 
+plot newhistogram "With ConSpec Definition" lt 1, "varLog.txt" every 30 using 8 t "Average Execution Time (ms)",  '' every 30  using 7:xticlabels(1) t "Standard Deviation with ConSpec Definition", newhistogram "With Burkhardt's Definition" lt 1, '' every 30 using 10:xticlabels(1) t "Average Execution Time (ms)" linecolor rgb "#cc0000",  '' every 30  using 9:xticlabels(1) t "Standard Deviation with Burkhardt's Definition" linecolor rgb "#ff0000"; 
