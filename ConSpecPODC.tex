@@ -1265,9 +1265,6 @@ In Section \ref{sec:derive}, we show that the ConSpec specifications of  consist
 session trace $\mathit{st}_1$: $w(x,1), w'(x,2), r(x){2}, r'(x){1}$ to demonstrate how violation of RYW consistency can occur. 
 % From the session trace $\mathit{st}_1$, the following LTL expression  \\ $W^1 F W^2 F R^1 F R^2$ follows
 % directly from the temporal order of execution as per the session trace.  
- In $\mathit{st}_1$, the read operation $r(x){2}$
- follows the write operation $w(x,1)$, and this temporal order can be expressed by the LTL expression $\square W^x_{\mathit{st}} \rightarrow \lozenge R^x_{\mathit{st}}$; which satisfies the
- condition given in LHS (i.e., left hand side) of the specification $E^{s}$ given in Equation \ref{eqn:RYW}. %, where $W^i$ = $W^1$, $R^j$ = $R^1$. 
   The session trace
  $\mathit{st}_1$ can be transformed into the following  partial orders that satisfy Condition 1 in Definition \ref{def:form0}, which also comprise write operations from other
  clients: \begin{itemize}
@@ -1276,20 +1273,25 @@ session trace $\mathit{st}_1$: $w(x,1), w'(x,2), r(x){2}, r'(x){1}$ to demonstra
   \item $\preccurlyeq_{\mathit{st}+w}^2$ = $W'^x_{\mathit{st}} \preccurlyeq_{\mathit{st}+w}^2 R^x_{\mathit{st}} \preccurlyeq_{\mathit{st}+w}^2 W^x_{\mathit{st}} \preccurlyeq_{\mathit{st}+w}^2 R'^x_{\mathit{st}}$
   \item $\preccurlyeq_{\mathit{st}+w}^3$ = $R^x_{\mathit{st}} \preccurlyeq_{\mathit{st}+w}^3 W'^x_{\mathit{st}} \preccurlyeq_{\mathit{st}+w}^3 W^x_{\mathit{st}} \preccurlyeq_{\mathit{st}+w}^3 R'^x_{\mathit{st}}$
   \end{itemize}
- Only for $\preccurlyeq_{\mathit{st}+w}^1$, the condition $W^x_{\mathit{st}} \preccurlyeq_{\mathit{st}+w} R^x_{\mathit{st}}$ holds, which does not hold for $\preccurlyeq_{\mathit{st}+w}^2$ and $\preccurlyeq_{\mathit{st}+w}^3$.
- Thus the condition corresponding to the RHS of the implies operator $\rightarrow$ in $E^{s}$ , given in Equation \ref{eqn:RYW}, holds.
+ For $\mathit{st}_1$ to satisfy RYW, there must exist a valid partial order for $\mathit{st}_1$ which satisfies the RHS (i.e., right hand side) of Equation \ref{eqn:RYW} for all write-read pairs in $\mathit{st}_1$ (i.e., for all write follows read sequences in $\mathit{st}_1$) which satisfy the LHS of the specification $E^{s}$ given in Equation  \ref{eqn:RYW}.  In $\mathit{st}_1$, the read operation $r(x){2}$
+ follows the write operation $w(x,1)$, and this temporal order can be expressed by the LTL expression $\square W^x_{\mathit{st}} \rightarrow \lozenge R^x_{\mathit{st}}$; which satisfies the
+ condition given in LHS (i.e., left hand side) of the specification $E^{s}$ given in Equation \ref{eqn:RYW}. %, where $W^i$ = $W^1$, $R^j$ = $R^1$. 
+ Only for $\preccurlyeq_{\mathit{st}+w}^1$, the condition $W^x_{\mathit{st}} \preccurlyeq_{\mathit{st}+w}^1 R^x_{\mathit{st}}$ holds for the above write-read pair. %, which does not hold for .
+ Thus, only $\preccurlyeq_{\mathit{st}+w}^1$ satisfies the RHS of %implies operator $\rightarrow$ in $E^{s}$ , given in 
+  Equation \ref{eqn:RYW} for the above write-read pair. %, holds.
   %$W^k$ preceding  $W^1$ such that the above LTL condition holds.
-  Next, we consider the sequence in the session trace where the
-   write operation $w(x,1)$ is followed by the read operation  $r'(x){1}$, expressed by the LTL expression $\square W^x_{\mathit{st}} \rightarrow \lozenge R'^x_{\mathit{st}}$. As discussed before, a partial
-  order $\preccurlyeq_{\mathit{st}+w}^1$ exists for the session trace such that $W^x_{\mathit{st}} \preccurlyeq_{\mathit{st}+w}^1 R'^x_{\mathit{st}}$, satisfying the first
-  condition in the RHS of Equation \ref{eqn:RYW}.
+  Next, we consider the % sequence in the session trace where the
+   write operation $w(x,1)$ followed by the read operation  $r'(x){1}$ which satisfies the LHS of Equation  \ref{eqn:RYW}. %, expressed by the LTL expression $\square W^x_{\mathit{st}} \rightarrow \lozenge R'^x_{\mathit{st}}$. %As discussed before, a partial
+  For the partial order $\preccurlyeq_{\mathit{st}+w}^1$, %exists for the session trace such that  
+  the condition $W^x_{\mathit{st}} \preccurlyeq_{\mathit{st}+w}^1 R'^x_{\mathit{st}}$ holds, satisfying the 
+  the RHS of Equation \ref{eqn:RYW}.
   %Also, following the same argument as
 %   above, there does not exist a $w^k$ such that the temporal order represented by the LTL condition $W^k F^x W^1 F^x R^2$ holds.
-  Next, we consider the sequence where the write operation $W'^x_{\mathit{st}}$ is followed by the read $R^x_{\mathit{st}})$ in the session trace, given as $\square W'^x_{\mathit{st}} \rightarrow \lozenge R^x_{\mathit{st}}$.
-  This implies that the condition $\square W'^x_{\mathit{st}} 
-  \rightarrow \lozenge R^x_{\mathit{st}}$ holds, which in turn, implies that the LHS of the $E^{s}$ condition in Equation \ref{eqn:RYW} holds. %, where $W^x_{\mathit{st}}$ denotes the $W'^x_{\mathit{st}}$ and
+  Next, we consider the write operation $w'(x,2)$ followed by the read $r(x){2}$ in the session trace which satisfies the LHS of Equation  \ref{eqn:RYW}.
+  %This implies that the condition $\square W'^x_{\mathit{st}} 
+%  \rightarrow \lozenge R^x_{\mathit{st}}$ holds, which in turn, implies that the LHS of the $E^{s}$ condition in Equation \ref{eqn:RYW} holds. %, where $W^x_{\mathit{st}}$ denotes the $W'^x_{\mathit{st}}$ and
   %$R^x_{\mathit{st}}$ = $R^x_{\mathit{st}}$. 
-  Again a valid partial order $\preccurlyeq_{\mathit{st}+w}^1$ exists such that $W'^x_{\mathit{st}} \preccurlyeq_{\mathit{st}+w} R^x_{\mathit{st}}$.
+  Again the partial order $\preccurlyeq_{\mathit{st}+w}^1$ satisfies the condition $W'^x_{\mathit{st}} \preccurlyeq_{\mathit{st}+w} R^x_{\mathit{st}}$, which in turn, implies that the RHS of the RYW condition is true.
 %  Regarding the second condition in the RHS of  Equation \ref{eqn:RYW}, there does not exist
 %  a write operation $W^k$ such that the LTL conditions $W^k F^x W^i F^x R^j$ and $v_j=v_k$ hold, where $W^i$ = $W^2$
 %  and $R^j$ = $R^1$. Thus, the condition $\not\exists W^k \in \mathit{st} \left( W^k F^x W^i F^x R^j \in \mathit{st} \right) %\wedge \left( W^k F W^i \in \mathit{st} \right)
@@ -1298,13 +1300,15 @@ session trace $\mathit{st}_1$: $w(x,1), w'(x,2), r(x){2}, r'(x){1}$ to demonstra
 %   Thus the condition
 %  $\not\exists W^k \in \mathit{st} \left( W^k F^x W^i F^x R^j \in \mathit{st} \right) %\wedge \left( W^k F W^i \in \mathit{st} \right)
 % \wedge \left( v^j = v^k \right)$ holds, where $\mathit{st}$ = $\mathit{st}_1$.
-  Next, we consider the sequence where the write operation $W'^x_{\mathit{st}}$  is followed by the read $R'^x_{\mathit{st}}$ in the session trace, given as $\square W'^x_{\mathit{st}} \rightarrow \lozenge R'^x_{\mathit{st}}$.
-  This implies that the condition %$\square W'^x_{\mathit{st}} \rightarrow \lozenge R'^x_{\mathit{st}}$
-   in the LHS of $E^{s}$ specified in Equation \ref{eqn:RYW} holds. %, where $W'^x_{\mathit{st}}$ denotes the operation $w'(x,2)$ and
+  Next, we consider the write operation $w'(x,2)$  followed by the read $r'(x){2}$ in the session trace, which satisfies the LHS of Equation  \ref{eqn:RYW}. %given as $\square W'^x_{\mathit{st}} \rightarrow \lozenge R'^x_{\mathit{st}}$.
+  %This implies that the condition %$\square W'^x_{\mathit{st}} \rightarrow \lozenge R'^x_{\mathit{st}}$
+   %in the LHS of $E^{s}$ specified in Equation \ref{eqn:RYW} holds. %, where $W'^x_{\mathit{st}}$ denotes the operation $w'(x,2)$ and
   %$R'^x_{\mathit{st}}$ denotes the operation $r'(x){1}$.
-   $\preccurlyeq_{\mathit{st}+w}^1$ is the only valid partial order that satisfies the condition $W^x_{\mathit{st}} \preccurlyeq_{\mathit{st}+w}^1 R^x_{\mathit{st}}$
-   in the RHS of Equation \ref{eqn:RYW} for all the above write-read operation sequences. However, $\preccurlyeq_{\mathit{st}+w}^1$ does not satisfy the condition 
-  $W'^x_{\mathit{st}} \preccurlyeq_{\mathit{st}+w}^1 R'^x_{\mathit{st}} $ for the write-read sequence $\square W'^x_{\mathit{st}} \rightarrow \lozenge R'^x_{\mathit{st}}$. %, where $W'^x_{\mathit{st}}$ denotes the operation $w'(x,2)$ and
+ %Following the above line of reasoning, the partial order $\preccurlyeq_{\mathit{st}+w}^1$ %is the only valid partial order that 
+ %satisfies the condition $W^x_{\mathit{st}} \preccurlyeq_{\mathit{st}+w}^1 R^x_{\mathit{st}}$; thus 
+    %the RHS of Equation \ref{eqn:RYW} for this above write-read pair. 
+    However, $\preccurlyeq_{\mathit{st}+w}^1$ does not satisfy the condition 
+ RHS of Equation  \ref{eqn:RYW} for the above write-read sequence.  %$\square W'^x_{\mathit{st}} \rightarrow \lozenge R'^x_{\mathit{st}}$. %, where $W'^x_{\mathit{st}}$ denotes the operation $w'(x,2)$ and
   %$R'^x_{\mathit{st}}$ denotes the operation $r'(x){1}$.
   %Regarding the second condition in the RHS of  Equation \ref{eqn:RYW}, there does exist
 %  a write operation $W^k$ = $W^1$ such that the LTL condition $W^k F^x W^i F^x R^j$ holds,  where $W^i$ = $W^2$ and
@@ -1320,7 +1324,8 @@ session trace $\mathit{st}_1$: $w(x,1), w'(x,2), r(x){2}, r'(x){1}$ to demonstra
 %However, in the given session trace  $\mathit{st}_1$, there does exist a read $r^1(x){2}$ and a write $w^1(x,1)$, such that
 %conditions $\left(  {v^k}^{'} = {v^i}^{'} \right) $ and $\left( {v^j}^{'} = {v^l}^{'} \right)$ hold, thus, in turn,
 %violating the anomaly condition.
-  This causes violation of the RHS of Equation  \ref{eqn:RYW}, which in turn, results in violation of the RYW condition for the given session trace. 
+  %This causes violation of the RHS of Equation  \ref{eqn:RYW}, 
+  Thus there does not exist a valid partial order that satisfies the RHS of  Equation  \ref{eqn:RYW} for all write-read pairs in $\mathit{st}_1$ which meet the LHS of Equation  \ref{eqn:RYW}. This, in turn, results in violation of the RYW condition for $\mathit{st}_1$. 
   On the other hand,  a session trace $\mathit{st}^{'}_1$: $w(x,1), w'(x,2), r(x){2}, r'(x){2}$ preserves the RYW consistency model. There exists a valid partial order $\preccurlyeq_{\mathit{st}+w}^1$ = $W^x_{\mathit{st}} \preccurlyeq_{\mathit{st}+w}^1 W'^x_{\mathit{st}} \preccurlyeq_{\mathit{st}+w}^1 R^x_{\mathit{st}}
   \preccurlyeq_{\mathit{st}+w}^1 R'^x_{\mathit{st}}$ which satisfies the RHS for all write-read pairs in $\mathit{st}^{'}_1$ of Equation  \ref{eqn:RYW}. %The reads $ r(x){2}$ and $r'(x){2}$ return the value 2 written by the latest write $w'(x,2)$. 
  %In $\mathit{st}_1$, read operations $r^1(x){2}$ and $r^2(x){1}$ follow the $w^2(x,2)$, the latest write operation on $x$,
@@ -1339,14 +1344,14 @@ session trace $\mathit{st}_1$: $w(x,1), w'(x,2), r(x){2}, r'(x){1}$ to demonstra
          can be used by each of the ConSpec definitions we studied (except for Sequential Consistency, whose constraints are not met). Some of the ordering constraints are not required by the each of the session guarantees, depending on the type of the pair of operations ordered. Furthermore, the set of operations being considered must be adapted to exclude the reads from the sessions other than the one from the standpoint of which the session guarantees are being upheld. Note that in the case of a read operation that is partially ordered after two concurrent writes, the definition allows us to pick any of the linear extensions of the partial order.}
         \label{fig:example}
 \end{figure}
- \par Let us consider a session trace $\mathit{st}_2$:  $w(x,1)$, $\mathit{st}_2^{'}$: $w'(x,2)$, and $\mathit{st}_2^{''}$: $r(x){1}, r'(x){2}, r''(x){1}$ to illustrate how
- violation of MR consistency can occur. Since the above session traces comprise write operations followed by multiple reads on common objects, there are read-read sequences that satisfy the conditions stated in LHS of Equation \ref{eqn:MR}.
- First, let us consider the sequence of read operations $r(x){1}$ and $r'(x){2}$ in $\mathit{st}^2$.
+ \par Let us consider a global session trace $\mathit{st}_2$:  $w(x,1)$, $\mathit{st}_2^{'}$: $w'(x,2)$, and $\mathit{st}_2^{''}$: $r(x){1}, r'(x){2}, r''(x){1}$ to illustrate how
+ violation of MR consistency can occur. Since the above session traces comprise write operations followed by multiple reads on common objects, there are read-read sequences that satisfy the condition  in the LHS of Equation \ref{eqn:MR}.
+ The above traces can be transformed into a valid partial order $\preccurlyeq_{\mathit{st}+w}$ =
+ $W^x_{\mathit{st}} \preccurlyeq_{\mathit{st}+w} R^x_{\mathit{st}} \preccurlyeq_{\mathit{st}+w} R''^x_{\mathit{st}} \preccurlyeq_{\mathit{st}+w} W'^x_{\mathit{st}} \preccurlyeq_{\mathit{st}+w} R'^x_{\mathit{st}}$.  First, let us consider the sequence of read operations $r(x){1}$ and $r'(x){2}$ in $\mathit{st}^2$.
 Using $R^x_{\mathit{st}}$ to denote the operation  $r(x){1}$, and $R'^x_{\mathit{st}}$  to denote $r'(x){2}$, the above sequence of reads directly reduces  to the LHS of the expression of  $E^{s}$ in Equation \ref{eqn:MR}, given by the LTL expression $\square R^x_{\mathit{st}} \rightarrow \lozenge R'^x_{\mathit{st}}$.  
-  The above traces can be transformed into a valid partial order $\preccurlyeq_{\mathit{st}+w}$ =
- $W^x_{\mathit{st}} \preccurlyeq_{\mathit{st}+w} R^x_{\mathit{st}} \preccurlyeq_{\mathit{st}+w} R''^x_{\mathit{st}} \preccurlyeq_{\mathit{st}+w} W'^x_{\mathit{st}} \preccurlyeq_{\mathit{st}+w} R'^x_{\mathit{st}}$, such that $R^x_{\mathit{st}} \preccurlyeq_{\mathit{st}+w} R'^x_{\mathit{st}}$ holds, thus satisfying
- the RHS of the implies operator $\Rightarrow$
- in  $E^{s}$ in Equation \ref{eqn:MR}.  
+  The above sequence of reads satisfy the RHS of Equation \ref{eqn:MR}  since $R^x_{\mathit{st}} \preccurlyeq_{\mathit{st}+w} R'^x_{\mathit{st}}$ holds. % thus satisfying
+ %the RHS of the implies operator $\Rightarrow$
+ %in  $E^{s}$ in Equation \ref{eqn:MR}.  
    Next, we consider a sequence of reads $r(x){1}$ followed by $r''(x){1}$ in the above traces. The precedence among the reads in this sequence can be expressed by the LTL expression $\square R^x_{\mathit{st}} \rightarrow \lozenge R''^x_{\mathit{st}}$. 
    Thus, the above sequence satisfies the LHS of expression $E^s$ in Equation
    \ref{eqn:MR}. %, using 
@@ -1360,10 +1365,11 @@ Using $R^x_{\mathit{st}}$ to denote the operation  $r(x){1}$, and $R'^x_{\mathit
 %  Hence,  $v_n \not= v_i$, which, in turn, implies that the condition $\left( v^i = v^n \right) \wedge \left( v^j = v^m \right)$
 %  $\left( v^i = v^n \right) \wedge \left( v^j = v^m \right)$ holds. This, in turn, second condition in the RHS of
 %  Equation \ref{eqn:MR} holds.
-   Next, we consider the sequence of reads $r'(x){2}$ followed by $r''(x){1}$ in the above traces, given
-  as $\square R'^x_{\mathit{st}} \rightarrow \lozenge R''^x_{\mathit{st}}$. However, the above sequence of reads does not match the precedence among these reads according to the valid partial order  $\preccurlyeq_{\mathit{st}+w}$,  i.e.,
+   Next, we consider the sequence of reads $r'(x){2}$ followed by $r''(x){1}$ in the above traces which satisfies the LHS of Equation \ref{eqn:MR}. %, given
+  %as $\square R'^x_{\mathit{st}} \rightarrow \lozenge R''^x_{\mathit{st}}$. 
+   However, the above sequence of reads does not satisfy the RHS of Equation \ref{eqn:MR} since 
   $R'^x_{\mathit{st}} \preccurlyeq_{\mathit{st}+w} R''^x_{\mathit{st}}$ does not hold.
-    Thus this pair of reads also does not satisfy the condition in the RHS of Equation \ref{eqn:MR}. 
+    Thus,  the given global session trace does not satisfy the MR consistency model defined in Equation \ref{eqn:MR}. 
 %    Further, for the LHS of Equation \ref{eqn:MR} to hold for the above sequence of reads,   $R^i$ = $R^2$ and $R^j$ = $R^3$,
 %   which, in turn, implies $R^2 F R^3$. % $v_i$ = $v_2$ = 2 and $v_j$ = $v_3$ =1.
 %   For the anomaly condition $C$ in Equation \ref{eqn:MR} to hold for the sequence of read operations $r^1(x){1}$ followed by $r^3(x){1}$, there cannot exist write
@@ -1377,13 +1383,13 @@ Using $R^x_{\mathit{st}}$ to denote the operation  $r(x){1}$, and $R'^x_{\mathit
 %  in Equation \ref{eqn:MR} holds.
    %Also, $W^m$ = $W^1$ and $W^n$ = $W^2$. Hence,
 %   $v_n$ = $v_i$ and $v_m$ = $v_j$. Thus, the second condition does not hold here.
-    Hence, the above global session trace violate the MR condition. 
-     However, the session trace $\mathit{st}^{'}_2$:  $w(x,1)$, $\mathit{st}_2^{'}$: $w'(x,2)$, and $\mathit{st}_2^{''}$: $r(x){1}, r'(x){2}, r''(x){2}$ satisfies the MR definition since there exists a valid partial order  $\preccurlyeq_{\mathit{st}+w}'$ =
- $W^x_{\mathit{st}} \preccurlyeq_{\mathit{st}+w} R^x_{\mathit{st}} \preccurlyeq_{\mathit{st}+w}  W'^x_{\mathit{st}} \preccurlyeq_{\mathit{st}+w} R'^x_{\mathit{st}} \preccurlyeq_{\mathit{st}+w} R''^x_{\mathit{st}}$, such that $R^x_{\mathit{st}} \preccurlyeq_{\mathit{st}+w} R'^x_{\mathit{st}}$, $R^x_{\mathit{st}} \preccurlyeq_{\mathit{st}+w} R''^x_{\mathit{st}}$, and $R'^x_{\mathit{st}} \preccurlyeq_{\mathit{st}+w} R''^x_{\mathit{st}}$ hold. 
+    %Hence, the above global session trace violate the MR condition. 
+     However, the session trace $\mathit{st}^{'}_2$:  $w(x,1)$, $\mathit{st}_2^{'}$: $w'(x,2)$, and $\mathit{st}_2^{''}$: $r(x){1}, r'(x){2}, r''(x){2}$ satisfies the MR definition. There exists a valid partial order  $\preccurlyeq_{\mathit{st}+w}'$ =
+ $W^x_{\mathit{st}} \preccurlyeq_{\mathit{st}+w}' R^x_{\mathit{st}} \preccurlyeq_{\mathit{st}+w}'  W'^x_{\mathit{st}} \preccurlyeq_{\mathit{st}+w}' R'^x_{\mathit{st}} \preccurlyeq_{\mathit{st}+w}' R''^x_{\mathit{st}}$, such that $R^x_{\mathit{st}} \preccurlyeq_{\mathit{st}+w}' R'^x_{\mathit{st}}$, $R^x_{\mathit{st}} \preccurlyeq_{\mathit{st}+w}' R''^x_{\mathit{st}}$, and $R'^x_{\mathit{st}} \preccurlyeq_{\mathit{st}+w}' R''^x_{\mathit{st}}$ hold. This, in turn, implies that all read-read sequences which satisfy LHS of  Equation \ref{eqn:MR}, also satisfies the RHS of Equation \ref{eqn:MR}. 
    %\par
  % In $S_2$, $r^1(x){1}$ returns a value 1, whereas it should have returned 2, which is the value written by the latest write operation $w^2(x,2)$ preceding $r^1(x){1}$. Thus, $S_2$ does not satisfy the condition $v_l = v_m$. Since there are not write operations overwriting the latest write operation $w^2(x,2)$ preceding each read, the condition $W^j(v_l) F^{o} W^x(v_y) F^{o} R^k(v_m)$ holds. Following the same line of argument, we can show that $S_2$ does not
 % satisfy any of the  conditions in RHS of Equation \ref{eqn:MR}. Hence, $S_2$ does not satisfy Equation \ref{eqn:MR}.
-\par  We consider the session traces \\ $\mathit{st}_3$: $w(x,1)$, $\mathit{st}_3^{'}$: $r(x){1}, w'(x,2)$, and
+\par  We consider the global session trace comprising the following session traces: \\ $\mathit{st}_3$: $w(x,1)$, $\mathit{st}_3^{'}$: $r(x){1}, w'(x,2)$, and
  $\mathit{st}_3^{''}$: $w''(x){3}, r'(x){3}, w'''(x,2), r''(x){2}, r'''(x){3}$ to show how
  WFR consistency can be violated. The above session traces can be transformed into the following two valid partial orders:  
  $\preccurlyeq_{\mathit{st}+w}$  = $W^x_{\mathit{st}} \preccurlyeq_{\mathit{st}+w} R^x_{\mathit{st}} \preccurlyeq_{\mathit{st}+w} W'^x_{\mathit{st}}$ %\preccurlyeq_{\mathit{st}+w} W^2(x) \preccurlyeq_{\mathit{st}+w} R^2(x)$ 
@@ -1395,7 +1401,7 @@ Using $R^x_{\mathit{st}}$ to denote the operation  $r(x){1}$, and $R'^x_{\mathit
 % the above traces satisfy the
 % condition $R^i F W^j$ in the LHS of Equation \ref{eqn:WFR}. 
  Further, by observation,
-  there is no legal serialization comprising the above sequence of read-write 
+  there is no valid partial order comprising the above sequence of read-write 
  operations which satisfies the condition  $R'^x_{\mathit{st}} \preccurlyeq_{\mathit{st}+w} W'''^x_{\mathit{st}} \preccurlyeq_{\mathit{st}+w} R'''^x_{\mathit{st}}$. Thus, the condition in the RHS of  expression $E^s$ given in 
  Equation \ref{eqn:WFR} does not hold. %According to the anomaly condition $C$ in Equation \ref{eqn:WFR}, there must not
 % exist a read operation $r^n(x)$ such that the conditions $\left( R^i F^x W^j F^x R^n \in \mathit{st} \right) \wedge
@@ -1406,13 +1412,13 @@ Thus, $\mathit{st}_3$ violates %the second condition in
  %RHS of Equation \ref{eqn:WFR}; hence, it violates 
  WFR consistency.
   On the other hand, session traces $\mathit{st}^{''}_3$: $w(x,1)$, $\mathit{st}_3^{'''}$: $r(x){1}, w'(x,2)$, and
- $\mathit{st}_3^{'''}$: $w''(x){3}, r'(x){3}, w'''(x,2), r''(x){2}, r'''(x){2}$ satisfy WFR consistency since a valid partial order $\preccurlyeq_{\mathit{st}+w}^{''}$  exists, such that $\preccurlyeq_{\mathit{st}+w}^{''}$  = $W^x_{\mathit{st}} \preccurlyeq_{\mathit{st}+w} R^x_{\mathit{st}} \preccurlyeq_{\mathit{st}+w}  W'^x_{\mathit{st}} \preccurlyeq_{\mathit{st}+w}  W'''^x_{\mathit{st}} \preccurlyeq_{\mathit{st}+w}  R''^x_{\mathit{st}} \preccurlyeq_{\mathit{st}+w} R'''^x_{\mathit{st}}  \preccurlyeq_{\mathit{st}+w}  W''^x_{\mathit{st}}  \preccurlyeq_{\mathit{st}+w}  R'^x_{\mathit{st}} $  holds for all read-write-read sequences in $\mathit{st}_3^{'''}$. 
+ $\mathit{st}_3^{'''}$: $w''(x){3}, r'(x){3}, w'''(x,2), r''(x){2}, r'''(x){2}$ satisfy WFR consistency since a valid partial order $\preccurlyeq_{\mathit{st}+w}^{''}$  exists, such that $\preccurlyeq_{\mathit{st}+w}^{''}$  = $W^x_{\mathit{st}} \preccurlyeq_{\mathit{st}+w} R^x_{\mathit{st}} \preccurlyeq_{\mathit{st}+w}  W'^x_{\mathit{st}} \preccurlyeq_{\mathit{st}+w}  W'''^x_{\mathit{st}} \preccurlyeq_{\mathit{st}+w}  R''^x_{\mathit{st}} \preccurlyeq_{\mathit{st}+w} R'''^x_{\mathit{st}}  \preccurlyeq_{\mathit{st}+w}  W''^x_{\mathit{st}}  \preccurlyeq_{\mathit{st}+w}  R'^x_{\mathit{st}} $  holds for all read-write-read sequences in $\mathit{st}_3^{'''}$ that meets the LHS of Equation \ref{eqn:WFR}. 
  \par Let us consider the session traces \\ $\mathit{st}_4$: $w(x,1), r(x){1}, w'(x,2), r'(x){2}, r''(x){1}$ %$\mathit{st}_4^{'}$: $r^3(x){2}$, and \\
  and $\mathit{st}_4^{'}$: $r'''(x){1}, r''''(x){2}$, and demonstrate violation of
   MW consistency with them. The session trace $\mathit{st}_4$  can be transformed in a valid partial order 
-  $\preccurlyeq_{\mathit{st}+w}^1(''')$ = $W^x_{\mathit{st}} \preccurlyeq_{\mathit{st}+w} R^x_{\mathit{st}} \preccurlyeq_{\mathit{st}+w} R''^x_{\mathit{st}} \preccurlyeq_{\mathit{st}+w} W'^x_{\mathit{st}} \preccurlyeq_{\mathit{st}+w} R'^x_{\mathit{st}}$.  The above session traces comprise a sequence of successive writes $w(x,1), w'(x,2)$ on a common object $x$ followed by a subsequent read $r''(x){1}$. This sequence of writes and reads can be expressed as $\square W^x_{\mathit{st}} \rightarrow \lozenge W'^x_{\mathit{st}} \rightarrow \lozenge R''^x_{\mathit{st}} $, thus satisfying the LHS of  expression $E^s$ in Equation \ref{eqn:MW}. %, where $W^x_{\mathit{st}}$ = $W^1(x)$, $W^{''}(x)$ = $W^2(x)$, and $R^{'}(x)$ = $R^3(x)$. 
-   There is no legal serialization comprising the above sequence of write operations which satisfies the condition in the RHS of Equation \ref{eqn:MW},
-  i.e., $W^x_{\mathit{st}} \preccurlyeq_{\mathit{st}+w} W'^x_{\mathit{st}}  \preccurlyeq_{\mathit{st}+w} R''^x_{\mathit{st}}$.  %thus satisfying the first condition in the RHS of Equation \ref{eqn:MW}. 
+  $\preccurlyeq_{\mathit{st}+w}^1(''')$ = $W^x_{\mathit{st}} \preccurlyeq_{\mathit{st}+w} R^x_{\mathit{st}} \preccurlyeq_{\mathit{st}+w} R''^x_{\mathit{st}} \preccurlyeq_{\mathit{st}+w} W'^x_{\mathit{st}} \preccurlyeq_{\mathit{st}+w} R'^x_{\mathit{st}}$.  The above session traces comprise a sequence of successive writes $w(x,1), w'(x,2)$ on a common object $x$ followed by a subsequent read $r''(x){1}$. This sequence of writes and reads can be expressed as $\square W^x_{\mathit{st}} \rightarrow \lozenge W'^x_{\mathit{st}} \rightarrow \lozenge R''^x_{\mathit{st}} $, which satisfy the LHS of Equation \ref{eqn:MW}. %, where $W^x_{\mathit{st}}$ = $W^1(x)$, $W^{''}(x)$ = $W^2(x)$, and $R^{'}(x)$ = $R^3(x)$. 
+   However, there is no valid partial order comprising the above sequence of write operations which satisfies the RHS of Equation \ref{eqn:MW},
+  i.e., there is no  valid $ \preccurlyeq_{\mathit{st}+w} $ such that $W^x_{\mathit{st}} \preccurlyeq_{\mathit{st}+w} W'^x_{\mathit{st}}  \preccurlyeq_{\mathit{st}+w} R''^x_{\mathit{st}}$.  %thus satisfying the first condition in the RHS of Equation \ref{eqn:MW}. 
 %   For the anomaly condition $C$ to hold, there cannot exist a sequence of write operations $w^1(x,1)$ and
 %    $w^2(x,2)$ followed by a sequence of read operations $r^k$ and $r^l$ such that the following condition holds:
 %  $\left( \not\exists  {R^k}^{'} F  {R^l}^{'} \in \mathcal{S}_t \right)
@@ -1430,8 +1436,8 @@ Thus, $\mathit{st}_3$ violates %the second condition in
 Thus, $\mathit{st}_4$ violates the RHS of Equation \ref{eqn:MW},
     and, in turn, violates MW consistency. 
     In contrast, the session traces $\mathit{st}^{''}_4$: $w(x,1), r(x){1}, w'(x,2), r'(x){2}, r''(x){2}$ %$\mathit{st}_4^{'}$: $r^3(x){2}$, and \\
- and $\mathit{st}_4^{''}$: $r'''(x){1}, r''''(x){2}$ satisfy MW consistency since there exists a valid partial order $\preccurlyeq_{\mathit{st}+w}^{'''}$ = $W^x_{\mathit{st}} \preccurlyeq_{\mathit{st}+w} R^x_{\mathit{st}} \preccurlyeq_{\mathit{st}+w} R'''^x_{\mathit{st}} \preccurlyeq_{\mathit{st}+w} W'^x_{\mathit{st}} \preccurlyeq_{\mathit{st}+w} R'^x_{\mathit{st}} \preccurlyeq_{\mathit{st}+w} R''^x_{\mathit{st}} \preccurlyeq_{\mathit{st}+w} R''''^x_{\mathit{st}}$. which satisfies the RHS for all pairs of write sequences; thus  MW holds for $\mathit{st}^{''}_4$ .  
- \par Next, let us revisit the global session trace $\mathcal{S}_t$ comprising the following session traces: $\mathit{st}_1$: $w(x,1)$, %r^1(x){2}$, 
+ and $\mathit{st}_4^{''}$: $r'''(x){1}, r''''(x){2}$ satisfy MW consistency since there exists a valid partial order $\preccurlyeq_{\mathit{st}+w}^{'''}$ = $W^x_{\mathit{st}} \preccurlyeq_{\mathit{st}+w} R^x_{\mathit{st}} \preccurlyeq_{\mathit{st}+w} R'''^x_{\mathit{st}} \preccurlyeq_{\mathit{st}+w} W'^x_{\mathit{st}} \preccurlyeq_{\mathit{st}+w} R'^x_{\mathit{st}} \preccurlyeq_{\mathit{st}+w} R''^x_{\mathit{st}} \preccurlyeq_{\mathit{st}+w} R''''^x_{\mathit{st}}$. which satisfies the RHS for all pairs of write sequences that satisfy the LHS of Equation \ref{eqn:MW}. Thus,  MW holds for $\mathit{st}^{''}_4$ .  
+ \par Next, let us analyse a global session trace comprising the following session traces: $\mathit{st}_1$: $w(x,1)$, %r^1(x){2}$, 
  $\mathit{st}_2$: $r(x){1}, w'(x,2)$, %, r^3(x){1}$, 
  and  $\mathit{st}_3$: $r'(x){2}, r''(x){1}$. The list of valid partial orders, comprising all operations in $\mathcal{S}_t$, which satisfy Condition 1 in Definition \ref{def:form0} are given as follows.   
  \begin{itemize}
@@ -1442,7 +1448,7 @@ Thus, $\mathit{st}_4$ violates the RHS of Equation \ref{eqn:MW},
  \end{itemize} %There are successive operations with direct precedence relation on the object $x$, namely operations $w^2(x,2)$ and $r^3(x){1}$ in $\mathit{st}_5$; hence $\mathit{st}_5$,
  %satisfies LHS of the expression $E^s$ specified in Equation \ref{eqn:Causal}.  
  Since the session trace  $\mathit{st}_1$ comprises a single write it vacuously satisfies the Causal consistency condition  in Equation \ref{eqn:Causal}, given that this condition constrains pairs of operations in the trace. 
-   Next, we consider the  session trace $\mathit{st}_2$ in $\mathcal{S}_t$, comprising operations $r(x){1}$ and $w'(x,2)$. $\mathit{st}_2$ only matches the LTL condition $ \square\;  {\mathit{O}}^x_{\mathit{st}} \rightarrow \lozenge {\mathit{O}}'^x_{\mathit{st}}$ for ${\mathit{O}}^x_{\mathit{st}}$ = $r(x){1}$ and  ${\mathit{O}}'^x_{\mathit{st}}$ = $w'(x,2)$.  From the above list of valid partial orders, only $\preccurlyeq^1$ and $\preccurlyeq^2$ satisfy the  condition ${\mathit{O}}^x_{\mathit{st}} \preccurlyeq {\mathit{O}}'^x_{\mathit{st}}$ where ${\mathit{O}}^x_{\mathit{st}}$ = $r(x){1}$ and  ${\mathit{O}}'^x_{\mathit{st}}$ = $w'(x,2)$. Thus, $\mathit{st}_2$ reduces the set of eligible partial orders to the set $\preccurlyeq^1, \preccurlyeq^2$.
+   Next, we consider the  session trace $\mathit{st}_2$ in $\mathcal{S}_t$, comprising operations $r(x){1}$ and $w'(x,2)$. $\mathit{st}_2$ only matches the LTL condition $ \square\;  {\mathit{O}}^x_{\mathit{st}} \rightarrow \lozenge {\mathit{O}}'^x_{\mathit{st}}$ for ${\mathit{O}}^x_{\mathit{st}}$ = $r(x){1}$ and  ${\mathit{O}}'^x_{\mathit{st}}$ = $w'(x,2)$.  From the above list of valid partial orders, only $\preccurlyeq^1$ and $\preccurlyeq^2$ satisfy the  condition ${\mathit{O}}^x_{\mathit{st}} \preccurlyeq {\mathit{O}}'^x_{\mathit{st}}$ where ${\mathit{O}}^x_{\mathit{st}}$ = $r(x){1}$ and  ${\mathit{O}}'^x_{\mathit{st}}$ = $w'(x,2)$. Thus, $\mathit{st}_2$ reduces the set of valid partial orders to the set $\preccurlyeq^1, \preccurlyeq^2$.
 % also satisfies the Causal consistency condition in Equation \ref{eqn:Causal}.  % \preccurlyeq W^2(x) \preccurlyeq R^1(x) \preccurlyeq R^4(x)$.
   %First, let us consider the sequence of operations
  %$w^1(x,1)$ and $r^1(x){2}$ in the above traces, given by the LTL expression $W^1(x) F R^1(x)$. The above expression satisfies
@@ -1460,7 +1466,7 @@ Thus, $\mathit{st}_4$ violates the RHS of Equation \ref{eqn:MW},
   %and $w^1(x,1)$ and  $w^2(x,2)$ satisfy the LHS and RHS of $E^s$ in the Equation \ref{eqn:Causal}. Next, 
   %Let us consider
   Finally, let us consider the session trace $\mathit{st}_3$  in $\mathcal{S}_t$, comprising operations $w'(x,2)$ and $r''(x){1}$. Again, $\mathit{st}_3$ matches the LTL condition $ \square\;  {\mathit{O}}'^x_{\mathit{st}} \rightarrow \lozenge {\mathit{O}}''^x_{\mathit{st}}$ for ${\mathit{O}}'^x_{\mathit{st}}$ = $w'(x,2)$ and  ${\mathit{O}}''^x_{\mathit{st}}$ = $r''(x){1}$.  From the list of valid partial order given above, the only valid partial orders which satisfy the condition ${\mathit{O}}'^x_{\mathit{st}} \preccurlyeq {\mathit{O}}''^x_{\mathit{st}}$ are  $\preccurlyeq^3$ and $\preccurlyeq^4$.  
-Putting together the previous requirements, we can see that only the partial orders $\preccurlyeq^1$ and $\preccurlyeq^2$ meet the condition in Equation \ref{eqn:Causal}) for $\mathit{st}_1$ and $\mathit{st}_2$, whereas only $\preccurlyeq^3$ and $\preccurlyeq^4$ meet the same condition for $\mathit{st}_3$. Thus, there does not exist a single valid partial order that satisfies the causal consistency  condition for all the session traces in $\mathcal{S}_t$.  
+Putting together the previous requirements, we can see that only the partial orders $\preccurlyeq^1$ and $\preccurlyeq^2$ meet the condition in Equation \ref{eqn:Causal}) for $\mathit{st}_1$ and $\mathit{st}_2$, whereas only $\preccurlyeq^3$ and $\preccurlyeq^4$ meet the same condition for $\mathit{st}_3$. Thus, there does not exist a single valid partial order that satisfies the causal consistency  condition for all the session traces in $\mathcal{S}_t$. %; causing a violation of Causal consistency.  
  %The precedence between $w^2(x,2)$ and $r^3(x){1}$ in $\mathit{st}_5$ can be expressed as $W^2(x) F R^3(x)$.
 %Thus, the above sequence satisfies LHS of $E^s$ in the Equation \ref{eqn:Causal}. There does not exist a legal serialization %that  satisfies the condition $W^2(x) \preccurlyeq R^3(x)$, violating the RHS of $E^s$ in Equation \ref{eqn:Causal}.
 %  Let us consider the anomaly condition $C$ in Equation \ref{eqn:Causal} for the write and read operations $w^2(x,2)$ (which is
@@ -1477,7 +1483,7 @@ Putting together the previous requirements, we can see that only the partial ord
 %   $W^m F^x \mathit{Op}^i F^x \mathit{Op}^j \in \mathit{st}$ holds. Further, $v_j$ = $v_m$ = 1, violating
 %   the condition $\not\exists  \mathit{st} \left( W^m F^x \mathit{Op}^i F^x \mathit{Op}^j \in \mathit{st}
 %   \right) \wedge \left( v^j = v^m \right)$, violating the RHS of Equation \ref{eqn:Causal}.
- Hence, $\mathcal{S}_t$ is in violation of Causal consistency.
+% Hence, the above global session trace is in violation of Causal consistency.
 % \forall i, j, k, o, \mathit{st} \big( \exists \mathit{Op}^k \in  \mathit{st}
 %\big( \mathit{Op}^i F \mathit{Op}^j \vee \\ \left( \mathit{Op}^i F \mathit{Op}^k  \wedge
 %\mathit{Op}^k F \mathit{Op}^j \right)
@@ -1487,7 +1493,6 @@ Putting together the previous requirements, we can see that only the partial ord
 %\\ \Rightarrow \exists \mathit{Si}_p \left( \forall \mathit{Op}^i F \mathit{Op}^j \in \mathit{Si}_p \right)
 %\wedge \not\exists  \mathit{st} \left( W^m F \mathit{Op}^i F \mathit{Op}^j \in \mathit{st} \right) \\
 %\wedge \left( v^j = v^m \right) \big)
-
  %The operation $r^1(x){2}$ returns 2, which does not match the write operation
 % $w^1(x,1)$ that directly preceded $r^1(x){2}$. Similarly, $r^3(x){1}$  does not return the correct value written by
 % the latest write $w^2(x,2)$ which directly precedes $r^3(x){1}$. Thus, $S_3$ does not satisfy the conditions in Equation
@@ -1538,6 +1543,9 @@ Putting together the previous requirements, we can see that only the partial ord
 %  $r^2(x){2}$ as $r^j$. Since $r^2(x){2}$ returns 2 instead of 1, the condition ${v_j}^{''} \not= {v_i}^{'} $ does not hold.
 %  Also, there doesn't exist an operation $r^k$ preceding $r^2(x){2}$ that satisfies the condition ${v_k}^{''} \not= {v_i}^{'} $.
 %  Thus, the given session trace violates Equation \ref{eqn:TSO}.
+On the other hand, a global session trace comprising the following session traces $\mathit{st}'_1$: $w(x,1)$, %r^1(x){2}$, 
+ $\mathit{st}'_2$: $r(x){1}, w'(x,2)$, %, r^3(x){1}$, 
+ and  $\mathit{st}'_3$: $r'(x){1}, r''(x){2}$ satisfies Causal consistency. There exists a valid partial order  $\preccurlyeq$ such that $W^x_{\mathit{st}}   \preccurlyeq R^x_{\mathit{st}}  \preccurlyeq R'^x_{\mathit{st}}  \preccurlyeq W'^x_{\mathit{st}}   \preccurlyeq R''^x_{\mathit{st}} $ holds, i.e.,  $\preccurlyeq$ satisfies the RHS of Equation \ref{eqn:Causal} for all pairs of operations which satisfy the LHS.
     \par For PC, consider
     % two client applications (or processors), namely $\mathit{Cl}_1$ and $\mathit{Cl}^2$,
   %respectively.  First, consider 
