@@ -764,11 +764,11 @@ $\mathit{st}_2$: $w(x,1)$,
 
 $\mathit{st}_2^{'}$: $w'(x,2)$, and
 
-$\mathit{st}_2^{''}$: $r(x){1}, r'(x){2}, r''(x){1}$,
+$\mathit{st}_2^{''}$: $r(x){1}, r'(x){2}, r''(x){1}$. 
 
 This global session trace illustrates a
  violation of the Monotonic Reads session guarantee. In this case, since $\mathit{st}_2^{''}$ comprises  multiple reads on common objects, there are several read-read sequences that satisfy the condition  in the left hand side of the implication in Equation \ref{eqn:MR}.
- The above global session trace can only be explained under the generic ConSpec definition by one of the following partial orders:
+ The above global session trace can only be explained under the generic ConSpec definition by one of the following partial orders. 
  
 \noindent $\preccurlyeq_{\mathit{st}+w}^1$ =
  $W^x_{\mathit{st}} \preccurlyeq_{\mathit{st}+w}^1 R^x_{\mathit{st}} \preccurlyeq_{\mathit{st}+w}^1 R''^x_{\mathit{st}} \preccurlyeq_{\mathit{st}+w}^1 W'^x_{\mathit{st}} \preccurlyeq_{\mathit{st}+w}^1 R'^x_{\mathit{st}}$, or
@@ -814,7 +814,7 @@ This global session trace illustrates a
   For only the partial orders $\preccurlyeq_{\mathit{st}+w}^1$, $\preccurlyeq_{\mathit{st}+w}^2$, $\preccurlyeq_{\mathit{st}+w}^3$, $\preccurlyeq_{\mathit{st}+w}^4$, $\preccurlyeq_{\mathit{st}+w}^5$, $\preccurlyeq_{\mathit{st}+w}^6$, and $\preccurlyeq_{\mathit{st}+w}^7$, the above sequence of reads satisfies the right hand side of Equation \ref{eqn:MR}. %  since $R^x_{\mathit{st}} \preccurlyeq_{\mathit{st}+w} R'^x_{\mathit{st}}$ holds. % thus satisfying
  %the RHS of the implies operator $\Rightarrow$
  %in  $E^{s}$ in Equation \ref{eqn:MR}.  
-   Next, we consider the sequence of reads $r(x){1}$ followed by $r''(x){1}$ in $\mathit{st}^2$ %in the above traces. The precedence among the reads in this sequence implies that it meets the LTL expression $\square R^x_{\mathit{st}} \rightarrow \lozenge R''^x_{\mathit{st}}$. 
+   Next, we consider the sequence of reads $r(x){1}$ followed by $r''(x){1}$ in $\mathit{st}_2^{''}$  %in the above traces. The precedence among the reads in this sequence implies that it meets the LTL expression $\square R^x_{\mathit{st}} \rightarrow \lozenge R''^x_{\mathit{st}}$. 
    %Thus, the above sequence 
    which satisfies the left hand side of the implication in $E^s$ in Equation
    \ref{eqn:MR}.  From the above list of partial orders that satisfy the condition for the previous sequence of reads, only $\preccurlyeq_{\mathit{st}+w}^1$, $\preccurlyeq_{\mathit{st}+w}^4$, and $\preccurlyeq_{\mathit{st}+w}^5$ satisfy the right hand side for the given sequence of reads, i.e., $r(x){1}$ followed by $r''(x){1}$.  %, using 
@@ -938,7 +938,7 @@ with the same meaning for $\mathit{st}$ and $\preccurlyeq_{\mathit{st}+w}$ as in
   $\preccurlyeq_{\mathit{st}+w}^{14}$  = $W'^x_{\mathit{st}} \preccurlyeq_{\mathit{st}+w}^{14}   W'''^x_{\mathit{st}} \preccurlyeq_{\mathit{st}+w} R''^x_{\mathit{st}}  \preccurlyeq_{\mathit{st}+w}^{14}  W^x_{\mathit{st}}  \preccurlyeq_{\mathit{st}+w}^{14}   W''^x_{\mathit{st}} \preccurlyeq_{\mathit{st}+w}^{14} R'''^x_{\mathit{st}} \preccurlyeq_{\mathit{st}+w}^{14}  R'^x_{\mathit{st}}$
   
   First, consider the sequence with the read operation $r'(x){3}$ followed by 
-  the write operation  $w'''(x,2)$ , which in turn, is followed by read operation $r'''(x){3}$. %, and can be expressed as $R^1(x) F W^2(x) F R^4(x)$. 
+  the write operation  $w'''(x,2)$, which in turn, is followed by read operation $r'''(x){3}$. %, and can be expressed as $R^1(x) F W^2(x) F R^4(x)$. 
   The above sequence of operations can be expressed as an LTL expression condition $\square R'^x_{\mathit{st}} \rightarrow \lozenge W'''^x_{\mathit{st}} \rightarrow \lozenge R'''^x_{\mathit{st}}$, i.e., it satisfies the left hand side of Equation \ref{eqn:WFR}. %, where $R^{'}(x)$ = $R^2(x)$, $W^{'}(x)$ = $W^4(x)$, $R^{''}(x)$ = $R^4(x)$. Hence,  
 % the above traces satisfy the
 % condition $R^i F W^j$ in the LHS of Equation \ref{eqn:WFR}. 
@@ -999,9 +999,10 @@ Finally, the last session guarantee is the Monotonic Writes (MW) model, which is
 
 \noindent \emph{\textbf{Examples.}}
 Let us consider the following global session trace \\ 
+ 
  $\mathit{st}_4$: $w(x,1), r(x){1}, w'(x,2), r'(x){2}, r''(x){1}$ %$\mathit{st}_4^{'}$: $r^3(x){2}$, and \\
 
-$\mathit{st}_4^{'}$: $r'''(x){1}, r''''(x){2}$. %, and demonstrate violation of
+ $\mathit{st}_4^{'}$: $r'''(x){1}, r''''(x){2}$. %, and demonstrate violation of
  % MW consistency with them. 
  For this purpose we consider only $\mathit{st}_4$ since $\mathit{st}_4^{'}$ does not comprise any write sequences, and MW restricts ordering between writes in same session trace. The session trace $\mathit{st}_4$  can be transformed in the following valid valid partial orders. 
   
@@ -1447,10 +1448,18 @@ E^{s} =  \forall x,y \in \mathcal{X}, \mathit{st} \in \mathit{S_t}: \square \lef
  %For PC, consider
     % two client applications (or processors), namely $\mathit{Cl}_1$ and $\mathit{Cl}^2$,
   %respectively.  First, consider 
-   We consider the  following global session trace originally discussed by Ahamad et al. in his paper \cite{Ahamad:1993:PPC:165231.165264} where he formalized Goodman's definition of PC. $\mathit{st}_6$: $w(x,0), w(y,0)$, $\mathit{st}_6^{'}$:  $ r(y){0}, r(x){1}$, and $\mathit{st}_6^{'}$:  $ r'(x){1}, r''(x){0}$. There exists following two valid partial orders for the above global session trace.   $\noindent \preccurlyeq_{\mathit{st}+w}^1$  = $R'^x_{\mathit{st}} \preccurlyeq_{\mathit{st}+w}^1 W^x_{\mathit{st}} \preccurlyeq_{\mathit{st}+w}^1  R^x_{\mathit{st}} \preccurlyeq_{\mathit{st}+w}^1  R''^x_{\mathit{st}} \preccurlyeq_{\mathit{st}+w}^1  W^y_{\mathit{st}} \preccurlyeq_{\mathit{st}+w}^1 R^y_{\mathit{st}}$ 
+   We consider the  following global session trace originally discussed by Ahamad et al. in his paper \cite{Ahamad:1993:PPC:165231.165264} where he formalized Goodman's definition of PC. $\mathit{st}_6$: $w(x,0), w(y,0)$, $\mathit{st}_6^{'}$:  $ r(y){0}, r(x){1}$, and $\mathit{st}_6^{'}$:  $ r'(x){1}, r''(x){0}$. There exists following two valid partial orders for the above global session trace.   
    
-   \noindent $\preccurlyeq_{\mathit{st}+w}^2$  = $W'^y_{\mathit{st}} \preccurlyeq_{\mathit{st}+w}^2 R^y_{\mathit{st}} \preccurlyeq_{\mathit{st}+w}^2  R'^x_{\mathit{st}} \preccurlyeq_{\mathit{st}+w}^2  W^x_{\mathit{st}} \preccurlyeq_{\mathit{st}+w}^2  R^x_{\mathit{st}} \preccurlyeq_{\mathit{st}+w} ^2R''^x_{\mathit{st}}$
-    However,  in the above partial orders the order of the writes are different, thus violating the condition $\forall \mathit{st} \in \mathit{S_t}: W_\mathit{st}^x \preccurlyeq_{\mathit{st}+w} W'^{x}_\mathit{st} $ in the right hand side of Equation \ref{eqn:PC}. Hence the above global session trace is in violation of the definition in Equation \ref{eqn:PC}. 
+   $\noindent \preccurlyeq_{\mathit{st}+w}^1$  = $R^x_{\mathit{st}} \preccurlyeq_{\mathit{st}+w}^1 R'^x_{\mathit{st}} \preccurlyeq_{\mathit{st}+w}^1 W^x_{\mathit{st}} \preccurlyeq_{\mathit{st}+w}^1  R''^x_{\mathit{st}} \preccurlyeq_{\mathit{st}+w}^1  W^y_{\mathit{st}} \preccurlyeq_{\mathit{st}+w}^1 R^y_{\mathit{st}}$ 
+   
+   $\noindent \preccurlyeq_{\mathit{st}+w}^2$  = $R'^x_{\mathit{st}} \preccurlyeq_{\mathit{st}+w}^2 R^x_{\mathit{st}} \preccurlyeq_{\mathit{st}+w}^2 W^x_{\mathit{st}} \preccurlyeq_{\mathit{st}+w}^2  R''^x_{\mathit{st}} \preccurlyeq_{\mathit{st}+w}^2  W^y_{\mathit{st}} \preccurlyeq_{\mathit{st}+w}^2 R^y_{\mathit{st}}$ 
+      
+   \noindent $\preccurlyeq_{\mathit{st}+w}^3$  = $W^y_{\mathit{st}} \preccurlyeq_{\mathit{st}+w}^3 R^y_{\mathit{st}} \preccurlyeq_{\mathit{st}+w}^3  R^x_{\mathit{st}} \preccurlyeq_{\mathit{st}+w}^3 R'^x_{\mathit{st}} \preccurlyeq_{\mathit{st}+w}^3 W^x_{\mathit{st}} \preccurlyeq_{\mathit{st}+w}^3  R''^x_{\mathit{st}}$
+   
+      \noindent $\preccurlyeq_{\mathit{st}+w}^4$  = $W^y_{\mathit{st}} \preccurlyeq_{\mathit{st}+w}^4 R^y_{\mathit{st}} \preccurlyeq_{\mathit{st}+w}^4  R'^x_{\mathit{st}} \preccurlyeq_{\mathit{st}+w}^4 R^x_{\mathit{st}} \preccurlyeq_{\mathit{st}+w}^4 W^x_{\mathit{st}} \preccurlyeq_{\mathit{st}+w}^4  R''^x_{\mathit{st}} $
+      
+      Among the above partial orders, $\preccurlyeq_{\mathit{st}+w}^3$ and $\preccurlyeq_{\mathit{st}+w}^4$ satisfy the condition $\square \left( O_\mathit{st}^x \rightarrow \lozenge O_\mathit{st}^{y} \right)$ in Equation \ref{eqn:PC}.
+    However,  in the partial orders $\preccurlyeq_{\mathit{st}+w}^3$ and $\preccurlyeq_{\mathit{st}+w}^4$ the order of the writes are different, thus violating the condition $\forall \mathit{st} \in \mathit{S_t}: W_\mathit{st}^x \preccurlyeq_{\mathit{st}+w} W'^{x}_\mathit{st} $ in Equation \ref{eqn:PC}. Hence the above global session trace is in violation of the definition in Equation \ref{eqn:PC}. 
    For the converse case, consider a session trace collected by executing operations on the above client  applications as follows.   $\mathit{st}_7$: $w(x,1), w'(x,3)$, $\mathit{st}_7^{'}$:  $ r(x){1}, r'(x){3}$,    %$\mathit{st}_7^{'}$: $r^1(x){1}$,  
     $\mathit{st}_7^{''}$: 
   $w(y){1}, w'(y){2}$, and $\mathit{st}_7^{''}$: 
