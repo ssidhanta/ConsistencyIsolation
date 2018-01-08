@@ -1,389 +1,488 @@
-{\rtf1\ansi\deff3\adeflang1025
-{\fonttbl{\f0\froman\fprq2\fcharset0 Times New Roman;}{\f1\froman\fprq2\fcharset2 Symbol;}{\f2\fswiss\fprq2\fcharset0 Arial;}{\f3\froman\fprq2\fcharset0 Liberation Serif{\*\falt Times New Roman};}{\f4\fswiss\fprq2\fcharset0 Liberation Sans{\*\falt Arial};}{\f5\froman\fprq2\fcharset0 Times New Roman;}{\f6\froman\fprq2\fcharset0 Helvetica{\*\falt Arial};}{\f7\froman\fprq2\fcharset0 Arial;}{\f8\fnil\fprq2\fcharset0 Arial Unicode MS;}{\f9\fnil\fprq2\fcharset0 Helvetica{\*\falt Arial};}{\f10\fnil\fprq2\fcharset0 Times New Roman;}{\f11\fnil\fprq2\fcharset0 Arial;}}
-{\colortbl;\red0\green0\blue0;\red0\green0\blue255;\red0\green255\blue255;\red0\green255\blue0;\red255\green0\blue255;\red255\green0\blue0;\red255\green255\blue0;\red255\green255\blue255;\red0\green0\blue128;\red0\green128\blue128;\red0\green128\blue0;\red128\green0\blue128;\red128\green0\blue0;\red128\green128\blue0;\red128\green128\blue128;\red192\green192\blue192;\red26\green26\blue26;\red16\green60\blue192;}
-{\stylesheet{\s0\snext0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033 Normal;}
-{\*\cs15\snext15 Default Paragraph Font;}
-{\*\cs16\snext16\cf9\ul\ulc0\langfe255\alang255\lang255 Internet Link;}
-{\s17\sbasedon0\snext18\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\sb240\sa120\keepn\ltrpar\dbch\af8\langfe1033\dbch\af8\afs28\alang1033\loch\f4\fs28\lang1033 Heading;}
-{\s18\sbasedon0\snext18\sl288\slmult1\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\sb0\sa140\ltrpar\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\loch\f5\fs20\lang1033 Text Body;}
-{\s19\sbasedon18\snext19\sl288\slmult1\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\sb0\sa140\ltrpar\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\loch\f5\fs20\lang1033 List;}
-{\s20\sbasedon0\snext20\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\sb120\sa120\noline\ltrpar\i\dbch\af9\langfe1033\dbch\af10\afs24\alang1033\ai\loch\f5\fs24\lang1033 Caption;}
-{\s21\sbasedon0\snext21\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\noline\ltrpar\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\loch\f5\fs20\lang1033 Index;}
-{\s22\snext22\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033 DocumentMap;}
-}{\*\generator LibreOffice_Vanilla/5.4.4.3$MacOSX_X86_64 LibreOffice_project/327ad42f4b641f37cf4dd9936346bc386252669a}{\info{\creatim\yr2017\mo12\dy21\hr21\min11}{\revtim\yr2017\mo12\dy28\hr11\min5}{\printim\yr0\mo0\dy0\hr0\min0}}{\*\userprops{\propname Operator}\proptype30{\staticval Rodrigo R.}}\deftab720\deftab720
-\viewscale100
-{\*\pgdsctbl
-{\pgdsc0\pgdscuse451\pgwsxn11906\pghsxn16838\marglsxn1440\margrsxn1440\margtsxn1440\margbsxn1440\pgdscnxt0 Default Style;}}
-\formshade{\*\pgdscno0}\paperh16838\paperw11906\margl1440\margr1440\margt1440\margb1440\sectd\sbknone\sectunlocked1\pgndec\pgwsxn11906\pghsxn16838\marglsxn1440\margrsxn1440\margtsxn1440\margbsxn1440\ftnbj\ftnstart1\ftnrstcont\ftnnar\aenddoc\aftnrstcont\aftnstart1\aftnnrlc
-{\*\ftnsep\chftnsep}\pgndec\pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\nowidctlpar\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li0\ri0\lin0\rin0\fi0\ltrpar{\langfe1033\dbch\af9\afs24\alang1033\rtlch \ltrch\loch\fs24\lang1033\loch\f6\hich\af6
-We sincerely thank the reviewers for the insightful comments and feedback. We made a significant effort to improve the paper by carefully addressing each comment. We list all of the feedback we received in the reviews (in bold) and inline how we modified the paper to address each feedback item.}
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar\cf17\ul\ulc0\b\langfe1033\dbch\af11\afs25\alang1033\ab\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar{\cf17\ul\ulc0\b\langfe1033\dbch\af11\afs25\alang1033\ab\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-Reviewer: 1:}
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar\cf17\ul\ulc0\langfe1033\dbch\af11\afs25\alang1033\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar{\cf17\b\langfe1033\dbch\af11\afs25\alang1033\ab\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-1) Many assumptions are left implicit which makes it difficult to grasp the actual power and generality of the approach.}
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar{\cf17\b\langfe1033\dbch\af11\afs25\alang1033\ab\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-For example, the F_st operator is introduced in page 3 by giving an example how to link writes and reads in a session.}
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar{\cf17\b\langfe1033\dbch\af11\afs25\alang1033\ab\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-Consider the following trace: w(x,1) w(x, 2) r(x),1 .}
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar{\cf17\b\langfe1033\dbch\af11\afs25\alang1033\ab\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-In this trace, does it hold that w(x) F_st r(x) ?}
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar{\cf17\b\langfe1033\dbch\af11\afs25\alang1033\ab\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-Yet, the expression w(x) F_st r(x) is seemingly assumed to hold true for the remainder of the paper (cf. also the evaluation).}
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar{\cf17\b\langfe1033\dbch\af11\afs25\alang1033\ab\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-This assumption precludes formalizations of systems which apply versioning.}
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar{\cf17\b\langfe1033\dbch\af11\afs25\alang1033\ab\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-Similarly, systems must have a sequential specification, which indirectly excludes systems whose semantics cover actual concurrent operations.}
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar\cf17\langfe1033\dbch\af11\afs25\alang1033\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar{\cf17\langfe1033\dbch\af11\afs25\alang1033\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-We addressed this comment by rewriting the definitions to completely remove the F_st operator, and instead resort to }{\cf17\langfe1033\dbch\af11\afs25\alang1033\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-the}{\cf17\langfe1033\dbch\af11\afs25\alang1033\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
- set of basic LTL operators. It should now be clear, in our new definitions, that the trace above meets the corresponding updated definition.}
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar\cf17\langfe1033\dbch\af11\afs25\alang1033\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar{\cf17\langfe1033\dbch\af11\afs25\alang1033\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-Concerning formalizations that apply versioning, we believe (and our experience so far confirms) that it is possible to explain most consistency semantics without resorting to the notion of versioning, which is a concept very close to the actual implementation of the system.}
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar\cf17\langfe1033\dbch\af11\afs25\alang1033\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar{\cf17\langfe1033\dbch\af11\afs25\alang1033\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-The reviewer is right that we cannot define specifications where concurrent operations lead to a result that would not be possible in a sequential execution. This decision has the advantage of simplifying our definitions. We have clarified this in the text.}
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar\cf17\langfe1033\dbch\af11\afs25\alang1033\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar\cf17\langfe1033\dbch\af11\afs25\alang1033\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar{\cf17\b\langfe1033\dbch\af11\afs25\alang1033\ab\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-Though the paper makes the claim in the introduction that the formalism can abstract from implementation details, assumptions are stated regarding the protocols implementing a specific consistency semantics for the proof of a theorem.}
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar{\cf17\b\langfe1033\dbch\af11\afs25\alang1033\ab\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-Now, it remains unclear where the assumptions actually come into play.}
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar\cf17\b\langfe1033\dbch\af11\afs25\alang1033\ab\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar{\cf17\langfe1033\dbch\af11\afs25\alang1033\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-This apparent contradiction is not really a contradiction for the following reason: the protocol assumptions are not used at all for the definitions. They only come into play when proving the generalized CAP theorem (and are only needed in that section). There, these assumptions are inevitable there since CAP is a theorem about the characteristics of the implementation of a certain consistency specification). In fact, we note that the proof of the generalized CAP theorem follows the same approach as the one taken to prove the original CAP. }
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar\cf17\langfe1033\dbch\af11\afs25\alang1033\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar{\cf17\langfe1033\dbch\af11\afs25\alang1033\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-We addressed this comment by clarifying this point in the end of section 3.}
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar\cf17\langfe1033\dbch\af11\afs25\alang1033\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar{\cf17\b\langfe1033\dbch\af11\afs25\alang1033\ab\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-The definition of causal consistency (p.4/5) supposedly only covers single-object causal consistency.}
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar{\cf17\b\langfe1033\dbch\af11\afs25\alang1033\ab\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-Also, it is unclear how the definition tackles the transitivity of causal dependencies across sessions.}
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar\cf17\langfe1033\dbch\af11\afs25\alang1033\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar{\cf17\langfe1033\dbch\af11\afs25\alang1033\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-The reviewer is right that causal consistency needs to also hold across objects, and we updated the definitions accordingly.}
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar\cf17\langfe1033\dbch\af11\afs25\alang1033\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar{\cf17\langfe1033\dbch\af11\afs25\alang1033\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-On the second point for how dependencies across sessions are tackled, this is incorporated in the generic part of the definitions due to the fact that we define ConSpec based on partial orders, and these incorporate the need for transitivity, which suffices to make dependencies hold across sessions. We addressed this latter comment by explaining this aspect in the text.}
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar\cf17\langfe1033\dbch\af11\afs25\alang1033\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar\cf17\langfe1033\dbch\af11\afs25\alang1033\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar{\cf17\langfe1033\dbch\af11\afs25\alang1033\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-I}{\cf17\b\langfe1033\dbch\af11\afs25\alang1033\ab\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-n all examples, operation sequences always start with writes. Do these first writes represent initializations? Can these be concurrent?}
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar{\cf17\b\langfe1033\dbch\af11\afs25\alang1033\ab\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-What is the semantics of traces that start with a read? }
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar\kerning1\langfe1033\dbch\af9\afs24\alang1033\rtlch \ltrch\loch\fs24\lang1033\loch\f6\hich\af6
-
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar{\kerning1\langfe1033\dbch\af9\afs24\alang1033\rtlch \ltrch\loch\fs24\lang1033\loch\f6\hich\af6
-To address these questions, we completely reworked the examples in the paper to now include a diverse set of examples, preferably those that were used in previous papers that introduced different consistency models.}
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar\kerning1\langfe1033\dbch\af9\afs24\alang1033\rtlch \ltrch\loch\fs24\lang1033\loch\f6\hich\af6
-
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar{\cf17\b\langfe1033\dbch\af11\afs25\alang1033\ab\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-Page 7: "it is always legal to remove orderings between operations across sessions" - But this ordering might be necessary to explain an outcome of a trace.}
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar\cf17\langfe1033\dbch\af11\afs25\alang1033\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar{\cf17\langfe1033\dbch\af11\afs25\alang1033\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-To address this point, we rephrased the text in the paper to clarify this part. In particular, the point that we wanted to make here is that, since it is allowed by the consistency model for the output of an operation to depend exclusively on prior operations from \u8220\'93the same side\u8221\'94 of the partition, then it is feasible to produce an implementation that meets this condition and is available despite partitions, since it only needs access to local information.}
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar\cf17\langfe1033\dbch\af11\afs25\alang1033\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar{\cf17\b\langfe1033\dbch\af11\afs25\alang1033\ab\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-2) The formalisms are not applied with the mathematical rigor that I would expect from a paper with this kind of theoretical contributions.}
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar{\cf17\b\langfe1033\dbch\af11\afs25\alang1033\ab\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-On page 3, the variables A and B denote both propositional variables and events.}
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar{\cf17\b\langfe1033\dbch\af11\afs25\alang1033\ab\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-How are events and operations related?}
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar\cf17\b\langfe1033\dbch\af11\afs25\alang1033\ab\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar{\cf17\langfe1033\dbch\af11\afs25\alang1033\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-We rewrote the formalism and the basic definitions to fix and clarify this point.}
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar\cf17\langfe1033\dbch\af11\afs25\alang1033\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar{\cf17\b\langfe1033\dbch\af11\afs25\alang1033\ab\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-Page 4ff: How is the variable x in the different variants of E quantified?}
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar\cf17\b\langfe1033\dbch\af11\afs25\alang1033\ab\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar{\cf17\langfe1033\dbch\af11\afs25\alang1033\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-We rewrote the definitions, and we are now quantifying all the variables.}
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar\kerning1\langfe1033\dbch\af9\afs24\alang1033\rtlch \ltrch\loch\fs24\lang1033\loch\f6\hich\af6
-
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar{\cf17\b\langfe1033\dbch\af11\afs25\alang1033\ab\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-Page 6, Definition 2: The symbol between S_t and S_it at the end is never introduced.}
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar\cf17\b\langfe1033\dbch\af11\afs25\alang1033\ab\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar{\cf17\langfe1033\dbch\af11\afs25\alang1033\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-We rewrote the definitions, and we are now explaining all the symbols we introduce.}
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar\cf17\langfe1033\dbch\af11\afs25\alang1033\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar{\cf17\b\langfe1033\dbch\af11\afs25\alang1033\ab\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-Page 7, Proof of Theorem 7.1: The partial order enumeration is dependent on E^s, but this dependence does not seem to play a role in the proof. Why?}
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar\cf17\b\langfe1033\dbch\af11\afs25\alang1033\ab\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar{\cf17\langfe1033\dbch\af11\afs25\alang1033\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-To address this comment we explain now why this plays a role. The explanation is that the second part of the proof of the theorem (direction }{{\*\bkmkstart __Fieldmark__57_828085462}\cf17\langfe1033\dbch\af11\afs25\alang1033\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-}{\cf17\langfe1033\dbch\af11\afs25\alang1033\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-}{{\*\bkmkend __Fieldmark__57_828085462}\cf17\langfe1033\dbch\af11\afs25\alang1033\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-) requires this for arguing that it is possible to build a \u8220\'93local\u8221\'94 reply without contacting the other side of the partition. In particular, if this were not possible, then this would invalidate the hypothesis on the right hand side of the equivalence stated in Theorem, since a valid partial order would not meet the property that removing all but the edges in the same session would be a part of the partial order enumeration for $E^s$.}
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar\cf17\langfe1033\dbch\af11\afs25\alang1033\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar\cf17\langfe1033\dbch\af11\afs25\alang1033\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar{\cf17\b\langfe1033\dbch\af11\afs25\alang1033\ab\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-3) The evaluation is only preliminary.}
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar{\cf17\b\langfe1033\dbch\af11\afs25\alang1033\ab\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-Figure 3 shows the time to verify *a* global session trace. - Did you apply the tool only to one example??}
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar\cf17\b\langfe1033\dbch\af11\afs25\alang1033\ab\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar{\kerning1\langfe1033\dbch\af9\afs24\alang1033\rtlch \ltrch\loch\fs24\lang1033\loch\f6\hich\af6
-We had applied the tool to verify a series of global session traces of increasing size collected using the YCSB benchmark suite.  Now, we have  also added new subsection 10.2 here we run the tool on traces collected from experiments with the TPC-C benchmark.}
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar\kerning1\langfe1033\dbch\af9\afs24\alang1033\rtlch \ltrch\loch\fs24\lang1033\loch\f6\hich\af6
-
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar{\cf17\b\langfe1033\dbch\af11\afs25\alang1033\ab\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-How many runs were evaluated? What is the variance of latency?}
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar\kerning1\langfe1033\dbch\af9\afs24\alang1033\rtlch \ltrch\loch\fs24\lang1033\loch\f6\hich\af6
-
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar{\kerning1\langfe1033\dbch\af9\afs24\alang1033\rtlch \ltrch\loch\fs24\lang1033\loch\f6\hich\af6
-In each of the experiments, we executed the tool 5 times on each global session trace. We have shown the variance of 5 repetitions of each verification step against every 30th global session trace. The variance is highlighted as text labels in the green coloured stacks in the stacked bar charts. }
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar\kerning1\langfe1033\dbch\af9\afs24\alang1033\rtlch \ltrch\loch\fs24\lang1033\loch\f6\hich\af6
-
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar{\cf17\b\langfe1033\dbch\af11\afs25\alang1033\ab\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-How does this tool compare to other similar tools? Is the preprocessing part of the measurement?}
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar\cf17\langfe1033\dbch\af11\afs25\alang1033\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar{\cf17\langfe1033\dbch\af11\afs25\alang1033\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-We have added a new subsection 10.3 where we compare the performance of the tool with respect to Burkhardt\u8217\'92s definitions. We translated Burkhardt\u8217\'92s definitions into ConSpec format, and ran the tool on these specifications and global session traces collected using TPC-C.  We analyzed how Burkhardt\u8217\'92s definitions compare against ConSpec definitions in terms of performance as well as flexibility. }
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar{\cf17\langfe1033\dbch\af11\afs25\alang1033\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-Yes, preprocessing is part of the measurement, We have updated the evaluation section to clarify this and other details about the evaluation methodology used. }
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar\cf17\langfe1033\dbch\af11\afs25\alang1033\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar{\cf17\b\langfe1033\dbch\af11\afs25\alang1033\ab\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-It is very unsatisfactory as an explanation for the obviously unexpected scalability behavior that optimizations of Spin are a *possible* explanation.}
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar{\cf17\b\langfe1033\dbch\af11\afs25\alang1033\ab\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-Which optimizations come into play here? Which property of the traces allow such optimizations?}
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar\cf17\b\langfe1033\dbch\af11\afs25\alang1033\ab\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar{\cf17\langfe1033\dbch\af11\afs25\alang1033\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-We have updated the subsection 10.1 discussing categorically which optimizations in Spin allowed for semi-linear scalability of the tool. }
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar\cf17\langfe1033\dbch\af11\afs25\alang1033\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar\cf17\langfe1033\dbch\af11\afs25\alang1033\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar{\cf17\b\langfe1033\dbch\af11\afs25\alang1033\ab\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-Further comments:}
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar{\cf17\b\langfe1033\dbch\af11\afs25\alang1033\ab\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-- p. 4: The explanation is difficult to follow: ... such that W'(x) <<_st+w R'(x) is holds (broken sentence?)}
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar\kerning1\langfe1033\dbch\af9\afs24\alang1033\rtlch \ltrch\loch\fs24\lang1033\loch\f6\hich\af6
-
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar{\kerning1\langfe1033\dbch\af9\afs24\alang1033\rtlch \ltrch\loch\fs24\lang1033\loch\f6\hich\af6
-Fixed the typo.}
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar\kerning1\langfe1033\dbch\af9\afs24\alang1033\rtlch \ltrch\loch\fs24\lang1033\loch\f6\hich\af6
-
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar{\cf17\b\langfe1033\dbch\af11\afs25\alang1033\ab\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-- On a side note, in my opinion it should be left to the reader to judge whether a solution is "elegant".}
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar\cf17\b\langfe1033\dbch\af11\afs25\alang1033\ab\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar{\cf17\langfe1033\dbch\af11\afs25\alang1033\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-Removed that claim.}
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar\cf17\langfe1033\dbch\af11\afs25\alang1033\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar{\cf17\b\langfe1033\dbch\af11\afs25\alang1033\ab\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-- Fig. 2: The type setting of the formula is broken.}
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar\kerning1\langfe1033\dbch\af9\afs24\alang1033\rtlch \ltrch\loch\fs24\lang1033\loch\f6\hich\af6
-
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar{\kerning1\langfe1033\dbch\af9\afs24\alang1033\rtlch \ltrch\loch\fs24\lang1033\loch\f6\hich\af6
-Fixed the figure. }
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar\b\kerning1\langfe1033\dbch\af9\afs24\alang1033\ab\rtlch \ltrch\loch\fs24\lang1033\loch\f6\hich\af6
-
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar{\cf17\b\langfe1033\dbch\af11\afs25\alang1033\ab\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-- p. 7: "specificaiton"}
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar\cf17\langfe1033\dbch\af11\afs25\alang1033\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar{\cf17\langfe1033\dbch\af11\afs25\alang1033\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-Corrected typo.}
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar\cf17\langfe1033\dbch\af11\afs25\alang1033\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar{\cf17\b\langfe1033\dbch\af11\afs25\alang1033\ab\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-- p. 8: "created by the statement Ser ser[2]" ? Does this array only have two entries? Or is it a literature reference?}
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar\cf17\langfe1033\dbch\af11\afs25\alang1033\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar{\cf17\langfe1033\dbch\af11\afs25\alang1033\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-Corrected. It was supposed to be a variable.}
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar\cf17\langfe1033\dbch\af11\afs25\alang1033\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar{\cf17\b\langfe1033\dbch\af11\afs25\alang1033\ab\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-- p. 8: What is the formula E^s used in the example?}
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar\cf17\langfe1033\dbch\af11\afs25\alang1033\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar{\cf17\langfe1033\dbch\af11\afs25\alang1033\rtlch \ltrch\fs25\lang1033\loch\f7\hich\af7
- }{\cf17\langfe1033\dbch\af11\afs25\alang1033\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-Added reference to the RYW formula. }
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar\cf17\b\langfe1033\dbch\af11\afs25\alang1033\ab\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar{\cf17\b\langfe1033\dbch\af11\afs25\alang1033\ab\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-- You should refer to the appendix in the text. This text would benefit from some structure. p. 11, lines 11-13: Shouldn't the condition be inv^i -> resp^i (for i = 1,2) and resp^1 -> inv^2?}
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar\cf17\langfe1033\dbch\af11\afs25\alang1033\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar{\cf17\langfe1033\dbch\af11\afs25\alang1033\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-Updated that portion of the text. }
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar\kerning1\langfe1033\dbch\af9\afs24\alang1033\rtlch \ltrch\loch\fs24\lang1033\loch\f6\hich\af6
-
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar\cf17\ul\ulc0\b\langfe1033\dbch\af11\afs25\alang1033\ab\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar{\cf17\ul\ulc0\b\langfe1033\dbch\af11\afs25\alang1033\ab\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-Reviewer: 2:}
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar\cf17\b\langfe1033\dbch\af11\afs25\alang1033\ab\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar\cf17\b\langfe1033\dbch\af11\afs25\alang1033\ab\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar{\cf17\b\langfe1033\dbch\af11\afs25\alang1033\ab\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-- It could be nice to add some names (of authors or of the systems) when citing references}
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar\cf17\b\langfe1033\dbch\af11\afs25\alang1033\ab\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar{\cf17\langfe1033\dbch\af11\afs25\alang1033\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-Updated the related work section.}
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar\cf17\langfe1033\dbch\af11\afs25\alang1033\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar{\cf17\b\langfe1033\dbch\af11\afs25\alang1033\ab\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-- The evaluation part is the less interesting, the results are quite predictable and the performance of the software tool does not seems to be an important problem.}
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar\cf17\b\langfe1033\dbch\af11\afs25\alang1033\ab\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar{\cf17\langfe1033\dbch\af11\afs25\alang1033\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-Added new subsections 10.2 where we describe results obtained with the TPC-C benchmark, and section 10.3 illustrating experiments performed with Burkhardt\u8217\'92s definitions against TPC-C  traces.}
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar\cf17\langfe1033\dbch\af11\afs25\alang1033\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar\cf17\ul\ulc0\b\langfe1033\dbch\af11\afs25\alang1033\ab\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar{\cf17\ul\ulc0\b\langfe1033\dbch\af11\afs25\alang1033\ab\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-Reviewer: 3:}
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar\cf17\langfe1033\dbch\af11\afs25\alang1033\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar{\cf17\b\langfe1033\dbch\af11\afs25\alang1033\ab\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-Another problem of the paper is the lack of comparison with recent work that has been carried out in the topic: for example,}
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar\cf17\b\langfe1033\dbch\af11\afs25\alang1033\ab\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar{\cf17\b\langfe1033\dbch\af11\afs25\alang1033\ab\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-*the problem of specifying consistency models using temporal logic has also been assessed by Weber et al.,}
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar{\cf17\b\langfe1033\dbch\af11\afs25\alang1033\ab\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-see\~}{{\field{\*\fldinst HYPERLINK "https://link.springer.com/chapter/10.1007%2F978-3-319-60225-7_17" }{\fldrslt {\cf9\ul\ulc0\langfe255\alang255\lang255\cf18\ul\ulc0\b\langfe1033\dbch\af11\afs25\alang1033\ab\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-https://link.springer.com/chapter/10.1007%2F978-3-319-60225-7_17}{}}}\cf17\b\langfe1033\dbch\af11\afs25\alang1033\ab\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-.}
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar\cf17\langfe1033\dbch\af11\afs25\alang1033\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar{\cf17\langfe1033\dbch\af11\afs25\alang1033\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-Added comparison with the paper by Weber et al. in related work section.}
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar\cf17\langfe1033\dbch\af11\afs25\alang1033\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar{\cf17\langfe1033\dbch\af11\afs25\alang1033\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-*}{\cf17\b\langfe1033\dbch\af11\afs25\alang1033\ab\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-*the authors reference the works of Burckhardt\~ et al. to model weak consistency [25,26,27]. Recently, Cerone et al. proposed a systematic way to define axioms in this}
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar{\cf17\b\langfe1033\dbch\af11\afs25\alang1033\ab\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-framework to specify consistency guarantees (}{{\field{\*\fldinst HYPERLINK "https://arxiv.org/abs/1702.06028" }{\fldrslt {\cf9\ul\ulc0\langfe255\alang255\lang255\cf18\ul\ulc0\b\langfe1033\dbch\af11\afs25\alang1033\ab\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-https://arxiv.org/abs/1702.06028}{}}}\cf17\b\langfe1033\dbch\af11\afs25\alang1033\ab\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-). Although the work focuses on transactional consistency models of distributed databases, their approach can be adapted to model session guarantees and other weak consistency properties.}
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar\cf17\b\langfe1033\dbch\af11\afs25\alang1033\ab\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar{\cf17\langfe1033\dbch\af11\afs25\alang1033\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-Added comparison with the paper by Cerone et al. in related work section. Their paper have the same inherent problem as Burckhardt\u8217\'92s paper.}
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar\cf17\langfe1033\dbch\af11\afs25\alang1033\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar{\cf17\b\langfe1033\dbch\af11\afs25\alang1033\ab\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-* Weak consistency appears in the context of shared memory systems as well. In this field, there has been a lot of work regarding the implementation of tools that could determine whether a trace is allowed by a weak memory model. For example, Wickerson et al. recent work on the automatic comparison of weak memory models using the Alloy Analyzer: see\~}{{\field{\*\fldinst HYPERLINK "https://johnwickerson.github.io/papers/memalloy.pdf" }{\fldrslt {\cf9\ul\ulc0\langfe255\alang255\lang255\cf18\ul\ulc0\b\langfe1033\dbch\af11\afs25\alang1033\ab\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-https://johnwickerson.github.io/papers/memalloy.pdf}{}}}\cf17\b\langfe1033\dbch\af11\afs25\alang1033\ab\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-.}
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar\cf17\langfe1033\dbch\af11\afs25\alang1033\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar\cf17\langfe1033\dbch\af11\afs25\alang1033\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar{\cf17\langfe1033\dbch\af11\afs25\alang1033\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-Added comparison to Alloy in related work. }
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar\cf17\langfe1033\dbch\af11\afs25\alang1033\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar{\cf17\b\langfe1033\dbch\af11\afs25\alang1033\ab\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-Technical comments:}
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar\cf17\b\langfe1033\dbch\af11\afs25\alang1033\ab\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar{\cf17\b\langfe1033\dbch\af11\afs25\alang1033\ab\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-* the authors state that they use linear temporal logic (LTL) as a basis for their framework (page 3, line 47); afterwards, they make use of universal and existential quantifications in formal specifications: however, these operators, are not part of the standard LTL syntax (see Section 9.1. here:\~}{{\field{\*\fldinst HYPERLINK "http://www.win.tue.nl/~jschmalt/teaching/2IX20/reader_software_specification_ch_9.pdf" }{\fldrslt {\cf9\ul\ulc0\langfe255\alang255\lang255\cf18\ul\ulc0\b\langfe1033\dbch\af11\afs25\alang1033\ab\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-http://www.win.tue.nl/~jschmalt/teaching/2IX20/reader_software_specification_ch_9.pdf}{}}}\cf17\b\langfe1033\dbch\af11\afs25\alang1033\ab\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-)}
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar\cf17\langfe1033\dbch\af11\afs25\alang1033\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar{\cf17\langfe1033\dbch\af11\afs25\alang1033\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-We have extended LTL by adding support for existential and universal quantifiers. Updated the relevant portion in Section 3. }
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar\cf17\langfe1033\dbch\af11\afs25\alang1033\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar\cf17\langfe1033\dbch\af11\afs25\alang1033\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar{\cf17\b\langfe1033\dbch\af11\afs25\alang1033\ab\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-* In LTL, the finally/eventually operator corresponds to the diamond operator <> (see again the link above, section 9.3). The authors\~ define "finally" as the operator\~ (=> <>)}
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar{\cf17\b\langfe1033\dbch\af11\afs25\alang1033\ab\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-(page 3, column 1, line 54). This may create some confusion to reader with a background in temporal logic.}
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar\cf17\b\langfe1033\dbch\af11\afs25\alang1033\ab\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar{\cf17\langfe1033\dbch\af11\afs25\alang1033\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-Fixed this in Section 3. It was a typo; we represented finally as <> and implies finally as =<> .}
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar\cf17\langfe1033\dbch\af11\afs25\alang1033\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar{\cf17\b\langfe1033\dbch\af11\afs25\alang1033\ab\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-* At page 3, column 1, line 56, the authors state that (A => <> B) has the meaning that if A is true at some point in time, then B will eventually be true. This is false: the formula (A => <> B) states that if A is true at the beginning of a trace (i.e. A holds for the first operation of a trace), then B will eventually become true. I believe that the right formula that captures what the authors are trying to model is [](A =>\~ <> B), which is also known as "A leadsto B".}
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar\cf17\langfe1033\dbch\af11\afs25\alang1033\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar{\cf17\langfe1033\dbch\af11\afs25\alang1033\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-Fixed the relevant content in Section 3, Section 5, Section 6, and the Appendix. We used the expression [](A F B) or [](A =>\~ <> B) instead of A =>\~ <> B.}
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar\cf17\langfe1033\dbch\af11\afs25\alang1033\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar{\cf17\langfe1033\dbch\af11\afs25\alang1033\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-*}{\cf17\b\langfe1033\dbch\af11\afs25\alang1033\ab\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
- the syntactic operator F_\{st\}, introduced at Page 3,\~ \~is parametric in a denotational component, namely a session trace st. This is quite odd.}
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar\cf17\b\langfe1033\dbch\af11\afs25\alang1033\ab\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar{\cf17\langfe1033\dbch\af11\afs25\alang1033\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-As already stated, instead of classical LTL we extend LTL introducing special-purpose operators. F_st is one such special-purpose operator. We highlighted this in Section 3. }{\cf17\langfe1033\dbch\af11\afs25\alang1033\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-However, we updated the definitions to use traditional LTL operators instead of }{\cf17\b0\langfe1033\dbch\af11\afs25\alang1033\ab0\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
- F_\{st\}.}
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar\cf17\b\langfe1033\dbch\af11\afs25\alang1033\ab\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar\cf17\b\langfe1033\dbch\af11\afs25\alang1033\ab\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar{\cf17\b\langfe1033\dbch\af11\afs25\alang1033\ab\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-* Furthermore, the operator F_\{st\} is ill-defined: at page 3, column 2, line 3, it is stated that}
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar{\cf17\b\langfe1033\dbch\af11\afs25\alang1033\ab\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-"A F_\{st\} B = \\exists A, B \\in st. A F B".}
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar{\cf17\b\langfe1033\dbch\af11\afs25\alang1033\ab\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-One problem with this definition is that the predicates A, B are bound to an existential quantifier in the RHS, but are free in the LHS. Thus the definition of A F_\{st\} B does}
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar{\cf17\b\langfe1033\dbch\af11\afs25\alang1033\ab\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-not depend from A, B at all. Another problem is that the existential quantification in the RHS requires that A,B are elements of the session trace st. But A, B are predicates, not elements of a trace. The obvious way to fix this problem (assuming LTL has been extended with existential quantification) would be "A F_\{st\} B = \\exists s_1,s_2 \\in st. A(s_1) /\\ B(s_2) \\wedge A F B", but this does not seem to express what the authors had in mind. Some clarification is necessary here.}
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar\cf17\langfe1033\dbch\af11\afs25\alang1033\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar{\cf17\langfe1033\dbch\af11\afs25\alang1033\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-Updated the definitions to remove all references of F_st}{\cf17\langfe1033\dbch\af11\afs25\alang1033\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-.}
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar\cf17\langfe1033\dbch\af11\afs25\alang1033\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar{\cf17\b\langfe1033\dbch\af11\afs25\alang1033\ab\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-* The operator F_\{st\} introduced by the authors is not associative: for this reason, the meaning of the second line of equation (3), Page 4, second column, is not clear. I believe that the operator F_\{st\} is right associative, but this should be stated somewhere (or explicit parentheses should be inserted).}
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar\cf17\b\langfe1033\dbch\af11\afs25\alang1033\ab\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-
-\par \pard\plain \s0\ql\widctlpar\faauto\li0\ri0\lin0\rin0\fi0\ltrpar\hyphpar0\dbch\af9\langfe1033\dbch\af10\afs20\alang1033\cf0\kerning1\loch\f5\fs20\lang1033\sl300\slmult0\nowidctlpar\li0\ri0\lin0\rin0\fi0\ltrpar{\cf17\langfe1033\dbch\af11\afs25\alang1033\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-As already stated all references to}{\cf17\langfe1033\dbch\af11\afs25\alang1033\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
- F_s}{\cf17\langfe1033\dbch\af11\afs25\alang1033\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-t has been removed. But the reviewer is right to point out that associativity of the LTL operator is indeed required for the definitions to work. }{\cf17\langfe1033\dbch\af11\afs25\alang1033\rtlch \ltrch\loch\fs25\lang1033\loch\f7\hich\af7
-We updated Section 3 as such.}
-\par }
+{\rtf1\ansi\ansicpg1252\cocoartf1561\cocoasubrtf200
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\froman\fcharset0 TimesNewRomanPSMT;\f2\fswiss\fcharset0 ArialMT;
+}
+{\colortbl;\red255\green255\blue255;\red26\green26\blue26;\red16\green60\blue192;}
+{\*\expandedcolortbl;;\csgenericrgb\c10196\c10196\c10196;\csgenericrgb\c6275\c23529\c75294;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww11900\viewh12920\viewkind1
+\deftab720
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardeftab720\ri-6\partightenfactor0
+
+\f0\fs24 \cf0 We sincerely thank the reviewers for the insightful comments and feedback. We made a significant effort to improve the paper by carefully addressing each comment. In particular, in our major revision, we completely rewrote one of the main sections of the paper, which is the section with several definitions for existing models. This included a complete rewrite of those definitions to use basic LTL operators. \
+\
+Next, we list all of the feedback we received in the reviews (in bold) and inline how we modified the paper to address each feedback item.
+\f1\fs20 \
+\pard\pardeftab720\ri-6\sl300\partightenfactor0
+
+\f2\b\fs25 \cf2 \ul \ulc2 \
+Reviewer: 1:
+\f1\b0\fs20 \cf0 \ulnone \
+\pard\pardeftab720\ri-6\sl300\partightenfactor0
+
+\f2\fs25 \cf2 \ul \ulc2 \
+\pard\pardeftab720\ri-6\sl300\partightenfactor0
+
+\b \cf2 \ulnone 1) Many assumptions are left implicit which makes it difficult to grasp the actual power and generality of the approach.
+\f1\b0\fs20 \cf0 \
+
+\f2\b\fs25 \cf2 For example, the F_st operator is introduced in page 3 by giving an example how to link writes and reads in a session.
+\f1\b0\fs20 \cf0 \
+
+\f2\b\fs25 \cf2 Consider the following trace: w(x,1) w(x, 2) r(x),1 .
+\f1\b0\fs20 \cf0 \
+
+\f2\b\fs25 \cf2 In this trace, does it hold that w(x) F_st r(x) ?
+\f1\b0\fs20 \cf0 \
+
+\f2\b\fs25 \cf2 Yet, the expression w(x) F_st r(x) is seemingly assumed to hold true for the remainder of the paper (cf. also the evaluation).
+\f1\b0\fs20 \cf0 \
+
+\f2\b\fs25 \cf2 This assumption precludes formalizations of systems which apply versioning.
+\f1\b0\fs20 \cf0 \
+
+\f2\b\fs25 \cf2 Similarly, systems must have a sequential specification, which indirectly excludes systems whose semantics cover actual concurrent operations.
+\f1\b0\fs20 \cf0 \
+\pard\pardeftab720\ri-6\sl300\partightenfactor0
+
+\f2\fs25 \cf2 \
+We addressed this comment by rewriting the definitions to completely remove the F_st operator, and instead resort to the set of basic LTL operators. It should now be clear, in our new definitions, that the trace above meets the corresponding updated definition.
+\f1\fs20 \cf0 \
+
+\f2\fs25 \cf2 \
+Concerning formalizations that apply versioning, we believe (and our experience so far confirms) that it is possible to explain most consistency semantics without resorting to the notion of versioning, which is a concept very close to the actual implementation of the system.
+\f1\fs20 \cf0 \
+
+\f2\fs25 \cf2 \
+The reviewer is right that we cannot define specifications where concurrent operations lead to a result that would not be possible in a sequential execution. This decision has the advantage of simplifying our definitions. We have clarified this in the text.
+\f1\fs20 \cf0 \
+
+\f2\fs25 \cf2 \
+\
+\pard\pardeftab720\ri-6\sl300\partightenfactor0
+
+\b \cf2 Though the paper makes the claim in the introduction that the formalism can abstract from implementation details, assumptions are stated regarding the protocols implementing a specific consistency semantics for the proof of a theorem.
+\f1\b0\fs20 \cf0 \
+
+\f2\b\fs25 \cf2 Now, it remains unclear where the assumptions actually come into play.
+\f1\b0\fs20 \cf0 \
+
+\f2\b\fs25 \cf2 \
+\pard\pardeftab720\ri-6\sl300\partightenfactor0
+
+\b0 \cf2 This apparent contradiction is not really a contradiction for the following reason: the protocol assumptions are not used at all for the definitions. They only come into play when proving the generalized CAP theorem (and are only needed in that section). There, these assumptions are inevitable there since CAP is a theorem about the characteristics of the implementation of a certain consistency specification). In fact, we note that the proof of the generalized CAP theorem follows the same approach as the one taken to prove the original CAP. 
+\f1\fs20 \cf0 \
+
+\f2\fs25 \cf2 \
+We addressed this comment by clarifying this point in the end of section 3.
+\f1\fs20 \cf0 \
+
+\f2\fs25 \cf2 \
+\pard\pardeftab720\ri-6\sl300\partightenfactor0
+
+\b \cf2 The definition of causal consistency (p.4/5) supposedly only covers single-object causal consistency.
+\f1\b0\fs20 \cf0 \
+
+\f2\b\fs25 \cf2 Also, it is unclear how the definition tackles the transitivity of causal dependencies across sessions.
+\f1\b0\fs20 \cf0 \
+\pard\pardeftab720\ri-6\sl300\partightenfactor0
+
+\f2\fs25 \cf2 \
+The reviewer is right that causal consistency needs to also hold across objects, and we updated the definitions accordingly.
+\f1\fs20 \cf0 \
+
+\f2\fs25 \cf2 \
+On the second point for how dependencies across sessions are tackled, this is incorporated in the generic part of the definitions due to the fact that we define ConSpec based on partial orders, and these incorporate the need for transitivity, which suffices to make dependencies hold across sessions. We addressed this latter comment by explaining this aspect in the text.
+\f1\fs20 \cf0 \
+
+\f2\fs25 \cf2 \
+\
+I
+\b n all examples, operation sequences always start with writes. Do these first writes represent initializations? Can these be concurrent?
+\f1\b0\fs20 \cf0 \
+\pard\pardeftab720\ri-6\sl300\partightenfactor0
+
+\f2\b\fs25 \cf2 What is the semantics of traces that start with a read? 
+\f1\b0\fs20 \cf0 \
+\pard\pardeftab720\ri-6\partightenfactor0
+
+\f0\fs24 \cf0 \
+To address these questions, we completely reworked the examples in the paper to now include a diverse set of examples, preferably those that were used in previous papers that introduced different consistency models.\
+\
+The semantics of traces that start with a read are dependent on the sequential specification, which must define those semantics, namely through some sort of initial state of the storage system.
+\f1\fs20 \
+
+\f0\fs24 \
+\pard\pardeftab720\ri-6\sl300\partightenfactor0
+
+\f2\b\fs25 \cf2 Page 7: "it is always legal to remove orderings between operations across sessions" - But this ordering might be necessary to explain an outcome of a trace.
+\f1\b0\fs20 \cf0 \
+\pard\pardeftab720\ri-6\sl300\partightenfactor0
+
+\f2\fs25 \cf2 \
+To address this point, we rephrased the text in the paper to clarify this part. In particular, the point that we wanted to make here is that, since it is allowed by the consistency model for the output of an operation to depend exclusively on prior operations from \'93the same side\'94 of the partition, then it is feasible to produce an implementation that meets this condition and is available despite partitions, since it only needs access to local information.
+\f1\fs20 \cf0 \
+
+\f2\fs25 \cf2 \
+\pard\pardeftab720\ri-6\sl300\partightenfactor0
+
+\b \cf2 2) The formalisms are not applied with the mathematical rigor that I would expect from a paper with this kind of theoretical contributions.
+\f1\b0\fs20 \cf0 \
+
+\f2\b\fs25 \cf2 On page 3, the variables A and B denote both propositional variables and events.
+\f1\b0\fs20 \cf0 \
+
+\f2\b\fs25 \cf2 How are events and operations related?
+\f1\b0\fs20 \cf0 \
+
+\f2\b\fs25 \cf2 \
+\pard\pardeftab720\ri-6\sl300\partightenfactor0
+
+\b0 \cf2 We rewrote the formalism and the basic definitions to fix and clarify this point.
+\f1\fs20 \cf0 \
+
+\f2\fs25 \cf2 \
+\pard\pardeftab720\ri-6\sl300\partightenfactor0
+
+\b \cf2 Page 4ff: How is the variable x in the different variants of E quantified?
+\f1\b0\fs20 \cf0 \
+
+\f2\b\fs25 \cf2 \
+\pard\pardeftab720\ri-6\sl300\partightenfactor0
+
+\b0 \cf2 We rewrote the definitions, and we are now quantifying all the variables.
+\f1\fs20 \cf0 \
+\pard\pardeftab720\ri-6\sl300\partightenfactor0
+
+\f0\fs24 \cf0 \
+\pard\pardeftab720\ri-6\sl300\partightenfactor0
+
+\f2\b\fs25 \cf2 Page 6, Definition 2: The symbol between S_t and S_it at the end is never introduced.
+\f1\b0\fs20 \cf0 \
+
+\f2\b\fs25 \cf2 \
+\pard\pardeftab720\ri-6\sl300\partightenfactor0
+
+\b0 \cf2 We rewrote the definitions, and we are now explaining all the symbols we introduce.
+\f1\fs20 \cf0 \
+
+\f2\fs25 \cf2 \
+\pard\pardeftab720\ri-6\sl300\partightenfactor0
+
+\b \cf2 Page 7, Proof of Theorem 7.1: The partial order enumeration is dependent on E^s, but this dependence does not seem to play a role in the proof. Why?
+\f1\b0\fs20 \cf0 \
+
+\f2\b\fs25 \cf2 \
+\pard\pardeftab720\ri-6\sl300\partightenfactor0
+
+\b0 \cf2 To address this comment we try to better explain now why this plays a role. In the first part of the proof (direction ) this is clear from the properties of the initial execution that was considered in the end of the first paragraph of the proof. The explanation for the second part of the proof of the theorem (direction ) is that it requires this for arguing that it is possible to build a \'93local\'94 reply without contacting the other side of the partition. In particular, if this were not possible, then this would invalidate the hypothesis on the right hand side of the equivalence stated in Theorem, since a valid partial order would not meet the property that removing all but the edges in the same session would be a part of the partial order enumeration for $E^s$.
+\f1\fs20 \cf0 \
+
+\f2\fs25 \cf2 \
+\
+\pard\pardeftab720\ri-6\sl300\partightenfactor0
+
+\b \cf2 3) The evaluation is only preliminary.
+\f1\b0\fs20 \cf0 \
+
+\f2\b\fs25 \cf2 Figure 3 shows the time to verify *a* global session trace. - Did you apply the tool only to one example??
+\f1\b0\fs20 \cf0 \
+
+\f2\b\fs25 \cf2 \
+\pard\pardeftab720\ri-6\sl300\partightenfactor0
+
+\f0\b0\fs24 \cf0 We had applied the tool to verify a series of global session traces of increasing size collected using the YCSB benchmark suite.  To address this comment from the reviewer, we have also added a new subsection (9.2) where we run the tool on traces collected from experiments with the TPC-C benchmark.
+\f1\fs20 \
+
+\f0\fs24 \
+\pard\pardeftab720\ri-6\sl300\partightenfactor0
+
+\f2\b\fs25 \cf2 How many runs were evaluated? What is the variance of latency?
+\f1\b0\fs20 \cf0 \
+\pard\pardeftab720\ri-6\sl300\partightenfactor0
+
+\f0\fs24 \cf0 \
+In each of the experiments, we executed the tool 5 times on each global session trace. We have shown the average and standard deviation of the 5 repetitions of each verification step against every 30th global session trace. This is not explained in the text and the standard deviation is now shown as error bars. 
+\f1\fs20 \
+
+\f0\fs24 \
+\pard\pardeftab720\ri-6\sl300\partightenfactor0
+
+\f2\b\fs25 \cf2 How does this tool compare to other similar tools? Is the preprocessing part of the measurement?
+\f1\b0\fs20 \cf0 \
+\pard\pardeftab720\ri-6\sl300\partightenfactor0
+
+\f2\fs25 \cf2 \
+We have added a new subsection 9.3 where we compare the performance of the tool with respect to Burkhardt\'92s definitions. Note that, in our view, this is the comparison that makes more sense: the paper proposes a new set of definitions, which are orthogonal to the verification technique used to validate executions against them. Thus, we fix the underlying verification engine and compare our definitions against a previous proposal.\
+Yes, preprocessing is part of the measurement. We have updated the evaluation section to clarify this and other details about the evaluation methodology used. 
+\f1\fs20 \cf0 \
+
+\f2\fs25 \cf2 \
+\pard\pardeftab720\ri-6\sl300\partightenfactor0
+
+\b \cf2 It is very unsatisfactory as an explanation for the obviously unexpected scalability behavior that optimizations of Spin are a *possible* explanation.
+\f1\b0\fs20 \cf0 \
+
+\f2\b\fs25 \cf2 Which optimizations come into play here? Which property of the traces allow such optimizations?
+\f1\b0\fs20 \cf0 \
+
+\f2\b\fs25 \cf2 \
+\pard\pardeftab720\ri-6\sl300\partightenfactor0
+
+\b0 \cf2 We have updated the subsection 9.1 discussing in a more conclusive way, and supported by a citation to prior work, which optimizations in Spin allowed for semi-linear scalability of the tool. 
+\f1\fs20 \cf0 \
+
+\f2\fs25 \cf2 \
+\
+\pard\pardeftab720\ri-6\sl300\partightenfactor0
+
+\b \cf2 Further comments:
+\f1\b0\fs20 \cf0 \
+
+\f2\b\fs25 \cf2 - p. 4: The explanation is difficult to follow: ... such that W'(x) <<_st+w R'(x) is holds (broken sentence?)
+\f1\b0\fs20 \cf0 \
+\pard\pardeftab720\ri-6\sl300\partightenfactor0
+
+\f0\fs24 \cf0 \
+Fixed the typo.
+\f1\fs20 \
+
+\f0\fs24 \
+\pard\pardeftab720\ri-6\sl300\partightenfactor0
+
+\f2\b\fs25 \cf2 - On a side note, in my opinion it should be left to the reader to judge whether a solution is "elegant".
+\f1\b0\fs20 \cf0 \
+
+\f2\b\fs25 \cf2 \
+\pard\pardeftab720\ri-6\sl300\partightenfactor0
+
+\b0 \cf2 Removed the adjective \'93elegant\'94 from the paper.
+\f1\fs20 \cf0 \
+
+\f2\fs25 \cf2 \
+\pard\pardeftab720\ri-6\sl300\partightenfactor0
+
+\b \cf2 - Fig. 2: The type setting of the formula is broken.
+\f1\b0\fs20 \cf0 \
+\pard\pardeftab720\ri-6\sl300\partightenfactor0
+
+\f0\fs24 \cf0 \
+Fixed the figure. 
+\f1\fs20 \
+\pard\pardeftab720\ri-6\sl300\partightenfactor0
+
+\f0\b\fs24 \cf0 \
+\pard\pardeftab720\ri-6\sl300\partightenfactor0
+
+\f2\fs25 \cf2 - p. 7: "specificaiton"
+\f1\b0\fs20 \cf0 \
+\pard\pardeftab720\ri-6\sl300\partightenfactor0
+
+\f2\fs25 \cf2 \
+Corrected typo.
+\f1\fs20 \cf0 \
+
+\f2\fs25 \cf2 \
+\pard\pardeftab720\ri-6\sl300\partightenfactor0
+
+\b \cf2 - p. 8: "created by the statement Ser ser[2]" ? Does this array only have two entries? Or is it a literature reference?
+\f1\b0\fs20 \cf0 \
+\pard\pardeftab720\ri-6\sl300\partightenfactor0
+
+\f2\fs25 \cf2 \
+Corrected. It was supposed to be a variable.
+\f1\fs20 \cf0 \
+
+\f2\fs25 \cf2 \
+\pard\pardeftab720\ri-6\sl300\partightenfactor0
+
+\b \cf2 - p. 8: What is the formula E^s used in the example?
+\f1\b0\fs20 \cf0 \
+\pard\pardeftab720\ri-6\sl300\partightenfactor0
+
+\f2\fs25 \cf2 \
+ Added reference to the RYW formula. 
+\f1\fs20 \cf0 \
+\pard\pardeftab720\ri-6\sl300\partightenfactor0
+
+\f2\b\fs25 \cf2 \
+- You should refer to the appendix in the text. This text would benefit from some structure. p. 11, lines 11-13: Shouldn't the condition be inv^i -> resp^i (for i = 1,2) and resp^1 -> inv^2?
+\f1\b0\fs20 \cf0 \
+\pard\pardeftab720\ri-6\sl300\partightenfactor0
+
+\f2\fs25 \cf2 \
+Updated that portion of the text. 
+\f1\fs20 \cf0 \
+\pard\pardeftab720\ri-6\sl300\partightenfactor0
+
+\f0\fs24 \cf0 \
+\pard\pardeftab720\ri-6\sl300\partightenfactor0
+
+\f2\b\fs25 \cf2 \ul \ulc2 \
+Reviewer: 2:
+\f1\b0\fs20 \cf0 \ulnone \
+\pard\pardeftab720\ri-6\sl300\partightenfactor0
+
+\f2\b\fs25 \cf2 \
+\
+- It could be nice to add some names (of authors or of the systems) when citing references
+\f1\b0\fs20 \cf0 \
+
+\f2\b\fs25 \cf2 \
+\pard\pardeftab720\ri-6\sl300\partightenfactor0
+
+\b0 \cf2 As suggested, we updated the text before references to add author names.
+\f1\fs20 \cf0 \
+
+\f2\fs25 \cf2 \
+\pard\pardeftab720\ri-6\sl300\partightenfactor0
+
+\b \cf2 - The evaluation part is the less interesting, the results are quite predictable and the performance of the software tool does not seems to be an important problem.
+\f1\b0\fs20 \cf0 \
+
+\f2\b\fs25 \cf2 \
+\pard\pardeftab720\ri-6\sl300\partightenfactor0
+
+\b0 \cf2 As mentioned in the replies to reviewer 1, we improved the evaluation, by adding new subsections 9.2 where we describe results obtained with the TPC-C benchmark, and section 9.3 illustrating experiments performed with Burkhardt\'92s definitions against TPC-C traces. 
+\f1\fs20 \cf0 \
+
+\f2\fs25 \cf2 \
+\pard\pardeftab720\ri-6\sl300\partightenfactor0
+
+\b \cf2 \ul \ulc2 \
+Reviewer: 3:
+\f1\b0\fs20 \cf0 \ulnone \
+\pard\pardeftab720\ri-6\sl300\partightenfactor0
+
+\f2\fs25 \cf2 \
+\pard\pardeftab720\ri-6\sl300\partightenfactor0
+
+\b \cf2 Another problem of the paper is the lack of comparison with recent work that has been carried out in the topic: for example,
+\f1\b0\fs20 \cf0 \
+
+\f2\b\fs25 \cf2 \
+*the problem of specifying consistency models using temporal logic has also been assessed by Weber et al.,
+\f1\b0\fs20 \cf0 \
+
+\f2\b\fs25 \cf2 see\'a0{\field{\*\fldinst{HYPERLINK "https://link.springer.com/chapter/10.1007%2F978-3-319-60225-7_17"}}{\fldrslt \cf3 \ul \ulc3 https://link.springer.com/chapter/10.1007%2F978-3-319-60225-7_17}}.
+\f1\b0\fs20 \cf0 \
+\pard\pardeftab720\ri-6\sl300\partightenfactor0
+
+\f2\fs25 \cf2 \
+To address this comment, we added comparison to the paper by Weber et al. in the related work section.
+\f1\fs20 \cf0 \
+
+\f2\fs25 \cf2 \
+*
+\b *the authors reference the works of Burckhardt\'a0 et al. to model weak consistency [25,26,27]. Recently, Cerone et al. proposed a systematic way to define axioms in this
+\f1\b0\fs20 \cf0 \
+\pard\pardeftab720\ri-6\sl300\partightenfactor0
+
+\f2\b\fs25 \cf2 framework to specify consistency guarantees ({\field{\*\fldinst{HYPERLINK "https://arxiv.org/abs/1702.06028"}}{\fldrslt \cf3 \ul \ulc3 https://arxiv.org/abs/1702.06028}}). Although the work focuses on transactional consistency models of distributed databases, their approach can be adapted to model session guarantees and other weak consistency properties.
+\f1\b0\fs20 \cf0 \
+
+\f2\b\fs25 \cf2 \
+\pard\pardeftab720\ri-6\sl300\partightenfactor0
+
+\b0 \cf2 To address this comment, we added a comparison to the paper by Cerone et al. in related work section. The contrasting features to Cerone et al\'92s work are similar to the ones in the comparison to Burckhardt et al.
+\f1\fs20 \cf0 \
+\pard\tx3520\pardeftab720\ri-6\sl300\partightenfactor0
+
+\f2\fs25 \cf2 	\
+\pard\pardeftab720\ri-6\sl300\partightenfactor0
+
+\b \cf2 * Weak consistency appears in the context of shared memory systems as well. In this field, there has been a lot of work regarding the implementation of tools that could determine whether a trace is allowed by a weak memory model. For example, Wickerson et al. recent work on the automatic comparison of weak memory models using the Alloy Analyzer: see\'a0{\field{\*\fldinst{HYPERLINK "https://johnwic"}}{\fldrslt \cf3 \ul \ulc3 https://johnwickerson.github.io/papers/memalloy.pdf}}.
+\f1\b0\fs20 \cf0 \
+\pard\pardeftab720\ri-6\sl300\partightenfactor0
+
+\f2\fs25 \cf2 \
+\
+To address this comment, we added a comparison to Alloy in the related work. 
+\f1\fs20 \cf0 \
+
+\f2\fs25 \cf2 \
+\pard\pardeftab720\ri-6\sl300\partightenfactor0
+
+\b \cf2 Technical comments:
+\f1\b0\fs20 \cf0 \
+
+\f2\b\fs25 \cf2 \
+* the authors state that they use linear temporal logic (LTL) as a basis for their framework (page 3, line 47); afterwards, they make use of universal and existential quantifications in formal specifications: however, these operators, are not part of the standard LTL syntax (see Section 9.1. here:\'a0{\field{\*\fldinst{HYPERLINK "http://www.win.tue.nl/~jschmalt/teaching/2IX20/reader_software_specification_ch_9.pdf"}}{\fldrslt \cf3 \ul \ulc3 http://www.win.tue.nl/~jschmalt/teaching/2IX20/reader_software_specification_ch_9.pdf}})
+\f1\b0\fs20 \cf0 \
+\pard\pardeftab720\ri-6\sl300\partightenfactor0
+
+\f2\fs25 \cf2 \
+To address this comment, we completely rewrote the definitions to make use of standard LTL syntax.
+\f1\fs20 \cf0 \
+
+\f2\fs25 \cf2 \
+\
+\pard\pardeftab720\ri-6\sl300\partightenfactor0
+
+\b \cf2 * In LTL, the finally/eventually operator corresponds to the diamond operator <> (see again the link above, section 9.3). The authors\'a0 define "finally" as the operator\'a0 (=> <>)
+\f1\b0\fs20 \cf0 \
+
+\f2\b\fs25 \cf2 (page 3, column 1, line 54). This may create some confusion to reader with a background in temporal logic.
+\f1\b0\fs20 \cf0 \
+
+\f2\b\fs25 \cf2 \
+\pard\pardeftab720\ri-6\sl300\partightenfactor0
+
+\b0 \cf2 In the same way we addressed the previous comment, we completely rewrote the definitions to make use of standard LTL syntax.
+\f1\fs20 \cf0 \
+
+\f2\fs25 \cf2 \
+\pard\pardeftab720\ri-6\sl300\partightenfactor0
+
+\b \cf2 * At page 3, column 1, line 56, the authors state that (A => <> B) has the meaning that if A is true at some point in time, then B will eventually be true. This is false: the formula (A => <> B) states that if A is true at the beginning of a trace (i.e. A holds for the first operation of a trace), then B will eventually become true. I believe that the right formula that captures what the authors are trying to model is [](A =>\'a0 <> B), which is also known as "A leadsto B".
+\f1\b0\fs20 \cf0 \
+\pard\pardeftab720\ri-6\sl300\partightenfactor0
+
+\f2\fs25 \cf2 \
+Again, this reviewer made very good suggestions, which we incorporated in our rewriting of the syntax of our definitions.
+\f1\fs20 \cf0 \
+
+\f2\fs25 \cf2 \
+*
+\b  the syntactic operator F_\{st\}, introduced at Page 3,\'a0 \'a0is parametric in a denotational component, namely a session trace st. This is quite odd.
+\f1\b0\fs20 \cf0 \
+\pard\pardeftab720\ri-6\sl300\partightenfactor0
+
+\f2\b\fs25 \cf2 \
+\pard\pardeftab720\ri-6\sl300\partightenfactor0
+
+\b0 \cf2 in our rewriting of the syntax of our definitions, we removed all references to F_st.
+\f1\fs20 \cf0 \
+\pard\pardeftab720\ri-6\sl300\partightenfactor0
+
+\f2\b\fs25 \cf2 \
+\
+* Furthermore, the operator F_\{st\} is ill-defined: at page 3, column 2, line 3, it is stated that
+\f1\b0\fs20 \cf0 \
+
+\f2\b\fs25 \cf2 "A F_\{st\} B = \\exists A, B \\in st. A F B".
+\f1\b0\fs20 \cf0 \
+
+\f2\b\fs25 \cf2 One problem with this definition is that the predicates A, B are bound to an existential quantifier in the RHS, but are free in the LHS. Thus the definition of A F_\{st\} B does
+\f1\b0\fs20 \cf0 \
+
+\f2\b\fs25 \cf2 not depend from A, B at all. Another problem is that the existential quantification in the RHS requires that A,B are elements of the session trace st. But A, B are predicates, not elements of a trace. The obvious way to fix this problem (assuming LTL has been extended with existential quantification) would be "A F_\{st\} B = \\exists s_1,s_2 \\in st. A(s_1) /\\ B(s_2) \\wedge A F B", but this does not seem to express what the authors had in mind. Some clarification is necessary here.
+\f1\b0\fs20 \cf0 \
+\pard\pardeftab720\ri-6\sl300\partightenfactor0
+
+\f2\fs25 \cf2 \
+in our rewriting of the syntax of our definitions, we removed all references to F_st.
+\f1\fs20 \cf0 \
+\pard\tx2900\pardeftab720\ri-6\sl300\partightenfactor0
+
+\f2\fs25 \cf2 	\
+\pard\pardeftab720\ri-6\sl300\partightenfactor0
+
+\b \cf2 * The operator F_\{st\} introduced by the authors is not associative: for this reason, the meaning of the second line of equation (3), Page 4, second column, is not clear. I believe that the operator F_\{st\} is right associative, but this should be stated somewhere (or explicit parentheses should be inserted).
+\f1\b0\fs20 \cf0 \
+
+\f2\b\fs25 \cf2 \
+\pard\pardeftab720\ri-6\sl300\partightenfactor0
+
+\b0 \cf2 in our rewriting of the syntax of our definitions, we removed all references to F_st.
+\f1\fs20 \cf0 \
+\
+}
