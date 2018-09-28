@@ -2295,6 +2295,14 @@ In this section, we evaluate how long ConSpec takes to verify the consistency of
  The ConSpec Tool was run over the above traces on an Apple McBook Pro, with 8 GB 1600 MHz DDR3 RAM,  2.9 GHz Intel Core i7 processor, %Intel HD Graphics 4000 1536 MB,
  running McOS Sierra v10.12.4. The partial order generator component of the tool was run on Java 1.8.0\_121, and the PROMELA component were  compiled and run on Spin v6.4.6.
  Throughout the evaluation, by execution time we refer to the time duration beginning with the preprocessing of the input global session trace and ending with printing the result of verification of the above  trace against the given ConSpec specification.
+ \begin{figure}%[t]
+      %\begin{center}
+        \includegraphics[width=3.7in,height=2.8in]
+                    {oneany.eps} %\vspace{-5em}
+          %\end{center}
+        \caption{Staleness in Gamma vs Latency with YCSB.}
+        \label{fig:oneany}
+\end{figure}
 
   \subsection{Evaluation with YCSB}\label{sec:evalycsb}
       \begin{figure}%[t]
@@ -2320,8 +2328,11 @@ In this part of the evaluation, we use YCSB to evaluate the scalability of our v
  We execute the YCSB client with 50 concurrent client threads; thus, the global session  trace comprises 50 concurrent sessions.
  Then, to obtain global session traces of an increasing length, we created several instances of an execution of the YCSB client, where, for each execution, we increase the length of the global session trace by increasing the  duration of execution of the client while keeping the concurrency level fixed at 50 concurrent threads. Thus, for each execution, the size of the global session trace (i.e., the total number of  operations in that trace) is given by $50 \times op$,  where $op$ is the number of operations executed by one client thread during that run.
    We  preloaded the YCSB backend with $1,000,000$ records.  The ``request distribution'' parameter is used to indicate to the YCSB client which specific random distribution to use for the keys, which, in turn, forms the basis for choosing the records on which a given operation is to be performed. We ran the client with the ``latest'' request distribution of keys, where the latest inserted records comprise the head of the distribution. The  ``target'' parameter is used to throttle  the target number of operations per second; we set the value of ``target'' to 100  operations per second. 
-   We express the inconsistencies observed in our experiments in terms of the observed staleness of the results. Golab et al. \cite{DBLP:conf/cloud/GolabRAKWG13} %\cite{DBLP:conf/cloud/GolabRAKWG13}
-  demonstrate that both the proportion and severity of stale results increases from stronger to weaker consistency levels. We measure staleness in terms of the  {\boldmath$\Gamma$} metric proposed by Golab et al. \cite{DBLP:conf/cloud/GolabRAKWG13}. As demonstrated in the above work, {\boldmath$\Gamma$}  is preferred over other client-centric staleness measures for its proven sensitivity to workload parameters and consistency level. According to \cite{DBLP:conf/bigdataconf/McKenzieFG15}, with increasing values of read proportion, the value of {\boldmath$\Gamma$} metric also increases from 5 to 55. Also, the proportion of positive {\boldmath$\Gamma$} values  increases from 0.005 to 0.045. In our experiments with YCSB the observed  inconsistencies in the results, measured in terms of   {\boldmath$\Gamma$} values, are bounded by the above range.   
+   %We express the inconsistencies observed in our experiments in terms of the observed staleness of the results. Golab et al. \cite{DBLP:conf/cloud/GolabRAKWG13} %\cite{DBLP:conf/cloud/GolabRAKWG13}
+  %demonstrate that both the proportion and severity of stale results increases from stronger to weaker consistency levels. We measure staleness in terms of the  {\boldmath$\Gamma$} metric proposed by Golab et al. \cite{DBLP:conf/cloud/GolabRAKWG13}. As demonstrated in the above work, {\boldmath$\Gamma$}  is preferred over other client-centric staleness measures for its proven sensitivity to workload parameters and consistency level. According to \cite{DBLP:conf/bigdataconf/McKenzieFG15}, with increasing values of read proportion, the value of {\boldmath$\Gamma$} metric also increases from 5 to 55. Also, the proportion of positive {\boldmath$\Gamma$} values  increases from 0.005 to 0.045. In our experiments with YCSB the observed  inconsistencies in the results, measured in terms of   {\boldmath$\Gamma$} values, are bounded by the above range.  
+   To measure the level of deviation from strong consistency models such as linearizability that was seen in this trace, we used a metric called $\Gamma$ proposed by Golab et al.~\cite{DBLP:conf/cloud/GolabRAKWG13}. Intuitively this
+metric captures both the proportion and severity of stale results. The results of applying this metric to the data that is produced by our trace are depicted in Figure~\ref{fig:oneany}. This shows that the values of 95 percentile 
+$\Gamma$ score range from 0 to 14 ms, which implies that the severity of observed staleness in our results is negligibly small.
 
 
    Figure \ref{fig:examplefull} depicts the variation of the execution time of ConSpec on global session  traces collected from YCSB, as we vary the length of the traces, i.e., the number of operations performed is plotted along the x axis. We repeated the verification of each global session trace 5 times,  and in each case we report the average and, as error bars, the standard deviation of the execution times observed in the 5 runs.
