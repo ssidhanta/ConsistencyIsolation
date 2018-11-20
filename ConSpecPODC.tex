@@ -1456,7 +1456,8 @@ In this case, the partial orderings that need to be used by the second and third
   The above global session trace satisfies PC %the write operations  are %executed according to the precedence order
  % $w(x,1)$ followed by $ w'(y,1)$. %, hence we assign $w^1(x,1)$ and $ w^2(y,1)$ as $w^{'}(x)$ and $w^{'}(y)$. Also, let us assign
   %the sequence of read operations $r(x){1}$  and $r^2(y){1}$ as $r^k(x)$ and $r^l(x)$, respectively.
-   since the results of the write operations are observed by corresponding read operations in an identical order in all processors.
+   since the results of the write operations are observed by corresponding read operations in an identical order in all processors. A valid global partial order that satisfies Equation \ref{eqn:PC} for the given global session trace is given as follows: 
+   $W^x_{\mathit{st}}  \preccurlyeq_{\mathit{st}+w} R^x_{\mathit{st}} \preccurlyeq_{\mathit{st}+w} W'^x_{\mathit{st}} \preccurlyeq_{\mathit{st}+w} W^y_{\mathit{st}} \preccurlyeq_{\mathit{st}+w}   R^y_{\mathit{st}} \preccurlyeq_{\mathit{st}+w} W'^y_{\mathit{st}}   \preccurlyeq_{\mathit{st}+w} R'^x_{\mathit{st}} \preccurlyeq_{\mathit{st}+w} R'^y_{\mathit{st}} .$ 
 
 \subsection{Sequential Consistency}
 
