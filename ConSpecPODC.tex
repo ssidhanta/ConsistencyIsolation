@@ -5,6 +5,7 @@
 %\usepackage{pdfpages}
 %\citestyle{acmauthoryear}
 %\usepackage{booktabs} % For formal tables
+\usepackage{changes}
 \usepackage[ruled]{algorithm2e} % For algorithms
 \usepackage{subfigure}
 \usepackage{marvosym}
@@ -22,6 +23,8 @@
 %\usepackage[hyphenbreaks]{breakurl}
 \usepackage[numbers]{natbib}
 \usepackage{accents}
+\definechangesauthor[name=Subhajit, color=blue]{1}
+\definechangesauthor[name=Rodrigo, color=red]{2}
 \newtheorem{theorem}{Theorem}[section]
 \newtheorem{lemma}[theorem]{Lemma}
  %\newtheorem {theorem} {Theorem}
@@ -486,7 +489,8 @@ We denote the set of all objects in a storage system as $\mathcal{X}$. In our no
 In our LTL formulas, variables denote operations that occur in a session trace.
 Instead of defining predicates over these variables that restrict the type of operation or the corresponding parameters (e.g., a predicate {\tt isWrite(A)} to mean that variable A is a write operation), we use a shorthand notation $W^{x}_{st}$ to denote a variable that refers to a write operation to object $x$ that is part of session trace $st$. In turn, the notation $R^{x}_{st}$ denotes a read operation to object $x$ in session trace $st$. We also use the variable representation $O^{x}_{st}$ to denote a read or write operation over object $x$ that occurs in session trace $st$.
 
-We use LTL to describe precedence relations among operations in the same session trace. We use LTL operators such as the implies operator $\Rightarrow$ as qualifiers in our consistency formulas. The LTL operator globally $\square$ is used to express a proposition which holds accross the entirety of a given path; in our case a session trace is the given  path. The LTL operator eventually $\lozenge$ expresses the statement that a proposition holds subsequently somewhere in a given path (i.e., given session trace).  For instance the LTL formula
+We use LTL to describe precedence relations among operations in the same session trace. 
+\added[id=1]{We use LTL operators such as the implies operator $\Rightarrow$ as qualifiers in our consistency formulas. The LTL operator globally $\square$ is used to express a proposition which holds accross the entirety of a given path; in our case a session trace is the given  path. The LTL operator eventually $\lozenge$ expresses the statement that a proposition holds subsequently somewhere in a given path (i.e., given session trace). } For instance the LTL formula
 
 $$ \quad \square \left( R_\mathit{st}^x \rightarrow \lozenge W_\mathit{st}^{x'} \right) $$
  
@@ -510,7 +514,7 @@ While our consistency definitions are completely agnostic of implementation-leve
   %%  i\textquotesingle th operation comprised in the set $mathcal{O}$ of operations executed from a given client application in a session trace.
   %%   \newtheorem{definition}{Definition}
   %%    \begin{definition}(Legal Serialization)
-  %%  We represent a global execution, comprising concurrent operations executed from multiple clients on a system, with a global session trace $\mathcal{S}_t$, which is a set of operations from all clients. A legal serialization $\mathit{Ser}$ of a given global execution is represented by a sequence of propositional variables ${\mathit{Op}^i}^{'}$, each variable ${\mathit{Op}^i}$ denoting an execution of an
+  %%  We represent a global execution, comprising concurrent operations executed from multiple clients on a system, with a global session trace $\mathcal{S}_t$, which is a set of operations from all clien0ts. A legal serialization $\mathit{Ser}$ of a given global execution is represented by a sequence of propositional variables ${\mathit{Op}^i}^{'}$, each variable ${\mathit{Op}^i}$ denoting an execution of an
   %%   operation ${\mathit{o}}^i$, comprised in the set of operations ${\mathcal{O}_{St}}_{St}$ executed by a given client, observed a global session trace $\mathcal{S}_t$, as follows.
   %%  $\mathit{Ser}$ = $\Set{ {\mathit{Op}^i}^{'} } {{\mathit{Op}^i}^{'} \in \mathit{st}}, $ such that
   %%  $\forall {\mathit{o}^i}^{'}, {\mathit{o}^j}^{'} \in {\mathcal{O}_{St}} \\ \big( {\mathit{Op}^i}^{'} = {W^i}^{'} \wedge {\mathit{Op}^j}^{'} = {R^j}^{'}  \wedge \exists \mathit{st} \in \mathcal{S}_t  \; \big( \big( {\mathit{Op}^i}^{'} F {\mathit{Op}^j}^{'} \in \mathit{st}  \; \wedge \\
