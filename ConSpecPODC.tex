@@ -265,55 +265,30 @@ theorem, whose original formulation only considered linearizability, to precisel
 	\section{Introduction}\label{sec:intro}%}
 %\section{Introduction}\label{sec:intro}
 
-   \IEEEPARstart{T}{he} development of Internet-based applications and services requires application developers to take into account the semantics of the
-%consistency \cite{Burckhardt:2014:PEC:2693641.2693642} and isolation level \cite{DBLP:conf/icde/AdyaLO00} provided by the
-underlying storage system, to ensure correctness and acceptable performance.
- In fact, there is evidence that the lack of a good comprehension of these
-semantics can lead programmers to unintentionally break the application semantics \cite{Bailis:2015:FCC:2723372.2737784}.
-However, the task of understanding and comparing the semantics provided by storage systems, normally encapsulated in a consistency definition, is made difficult by several factors. First, the current set of possible consistency models is not only large but also expanding, as new storage systems often coin new terms for the consistency semantics that they offer \cite{Cooper:2008:PYH:1454159.1454167, Lloyd:2011:DSE:2043556.2043593, Lakshman:2010:CDS:1773912.1773922}.
-% http://docs.datastax.com/en/archived/cassandra/2.0/cassandra/dml/dml_config_consistency_c.html
-Second, existing consistency semantics have definitions that are often imprecise and/or are tied to implementation specifics (such as versioning \cite{DBLP:conf/icde/AdyaLO00} or the existence of replicas at different sites \cite{Li:2012:MGS:2387880.2387906}).
-%% , and not generic enough to be used in the context of a different (newer) storage system.
-%%       It is important for consistency and isolation definitions to be implementation-independent, because a particular
-%%       storage system implementation may not be suitable for different application domains. A relational storage system, like MySQL
-%%       or Oracle, may be unsuitable for an application that operates in the scale of millions of concurrent executions,
-%%       serving clients that are geographically distributed across different continents. In the latter case, a
-%%       geo-distributed storage system like Cassandra may prove to be more be more efficient, producing lower latency, while
-%%       compromising on serializability and strict isolation.  Hence, research papers and projects often end up  re-defining
-%%        existing consistency models using disparate semantics and notations.
-%%        \par Disparities among multiple definitions of the
-%%       same model may result in ambiguities and confusion, which in turn, may result in incorrect design and implementations
-%%         of applications built upon such definitions.
-%%  Also, with such ambiguous definitions, it is difficult to compare consistency models of different storage systems, and choose
-%%  a suitable storage system for a given application. Though Adya et al. claim that their definitions are implementation agnostic,
-%%  they assume that the system is able to track version histories of each object; hence, we argue that these definitions
-%%  will not be applicable to systems that do not persist version histories.
-%%  Further, they use graphical representation of proscribed
-%%    anomalies and allowed dependencies between operations; making it difficult to automatically verify such definitions.
-%%    Existing definitions of consistency models  used either textual descriptions or graphical representations, making
-%%    automated verification even more difficult. The goal of this paper is to specify consistency and isolation definitions
-%%     using a uniform syntax in an implementation agnostic manner.
-%%    \par Traditionally, specifications of consistency models or isolation levels are comprised of the following components:
-%%    \emph{rules} that restrict the order in which results of operations can be observed, specified using axiomatic expressions,
-%%    \emph{anomalies} precluded by the models, expressed using directed serialization graphs (DSGs), where vertices in a DSG
-%%    represent operations, and edges represent the dependency relations among operations corresponding to the connecting
-%%    vertices.
-%%  The rules in state-of-the-art consistency and isolation definitions specify the valid order of execution among operations
-%%   in terms of dependency relations, like write-write (ww), write-read (wr) dependency, etc. Such dependency relations
-%%   belong to two categories - explicit dependencies, like ww dependency, and implicit dependencies, like read-write (rw)
-%%   dependency, that are expressed in terms of one or more explicit dependencies.
-%%  These dependency relations are not apparent from the statement of consistency and isolation definition, especially
-%%  implicit dependencies, since those are further described in terms of explicit dependencies.
-%% \par However, a given consistency or isolation level specifies a valid relative temporal order among operations. Such
-%% temporal order can be directly expressed using LTL \cite{Lamport:1994:TLA:177492.177726} operators, like next, eventually, etc.
-%% We argue that consistency and isolation levels can be readily expressed in term of LTL-like expressions
-%%  that specify required temporal order among operations according to given consistency or isolation level.
- Third, even when precise definitions exist, it is difficult to compare different definitions, since they use different formalisms and community-specific terms or notations.
+        \IEEEPARstart{T}{he} development of Internet-scale applications and services led to the increasing adoption of scalable storage systems that trade performance for semantics. In particular, we have witnessed a profusion of proposals for  systems that fall into the ``NoSQL'' category, which are characterized by compromising consistency semantics in order to scale to a large volume of data, stored in many nodes across different geographic locations.
 
-To address these issues, we propose a specification language called
-\emph{ConSpec} that  we use to develop a generic definition for consistency models, which can
+
+        This phenomenon increases the complexity of the design and implementation not only of the applications, since application developers now need to take into account weaker consistency semantics that are often hard to understand~\cite{Bailis:2015:FCC:2723372.2737784}, but also of the storage systems themselves, which have to be carefully designed and implemented to provide the intended consistency.
+
+        In this paper, we present a comprehensive solution that addresses two important problems that arise in this setting: (1) gaining a better understanding of consistency semantics and its fundamental limitations, and (2) having practical tools to systematically test if a given consistency level is correctly implemented.
+
+%%         , namely by ensuring that the code they produce still behaves according to a target specification, even when the underlying storage system provides 
+
+
+%%         application developers to take into account the semantics of the
+%% %consistency \cite{Burckhardt:2014:PEC:2693641.2693642} and isolation level \cite{DBLP:conf/icde/AdyaLO00} provided by the
+%% underlying storage system, to ensure correctness and acceptable performance.
+%%  In fact, there is evidence that the lack of a good comprehension of these
+%% semantics can lead programmers to unintentionally break the application semantics \cite{Bailis:2015:FCC:2723372.2737784}.
+%% However, the task of understanding and comparing the semantics provided by storage systems, normally encapsulated in a consistency definition, is made difficult by several factors. First, the current set of possible consistency models is not only large but also expanding, as new storage systems often coin new terms for the consistency semantics that they offer \cite{Cooper:2008:PYH:1454159.1454167, Lloyd:2011:DSE:2043556.2043593, Lakshman:2010:CDS:1773912.1773922}.
+%% % http://docs.datastax.com/en/archived/cassandra/2.0/cassandra/dml/dml_config_consistency_c.html
+%% Second, existing consistency semantics have definitions that are often imprecise and/or are tied to implementation specifics (such as versioning \cite{DBLP:conf/icde/AdyaLO00} or the existence of replicas at different sites \cite{Li:2012:MGS:2387880.2387906}).
+%%  Third, even when precise definitions exist, it is difficult to compare different definitions, since they use different formalisms and community-specific terms or notations.
+
+In particular, we begin by proposing a specification language called
+\emph{ConSpec}: a generic definition for consistency models, which can
 be easily parameterized to obtain precise definitions of a variety of
-semantics. ConSpec builds on the observations made by several proposals
+semantics. ConSpec builds on the observation made by several proposals
 that it is possible to define weak consistency semantics in terms of
 partial orders over the set of operations that were executed in the
 system, which comprise a visibility graph
@@ -322,7 +297,7 @@ the configurable part of the consistency definition to a set of restrictions,
 written in Linear Temporal Logic (LTL) \cite{4567924}, on top of a generic partial order.
 %% . LTL is a natural choice for specifying relative
 %%  temporal ordering among operations in different consistency and isolation definitions. ConSpec uses LTL-like semantics to
-Intuitively, this allows us to express a set of rules that specify the allowed order in which results of operations can be visible to a client application.
+Intuitively, these restrictions specify the allowed order in which results of operations can become visible to a client application.
 %  The ConSpec expressions specify the allowed temporal order (i.e., ``happens before" order \cite{Bailis:2013:BCC:2463676.2465279}) in which operations within a client application return results, and restricts the manner in which these results are visible to subsequent operations in the client application.
 
 
@@ -338,8 +313,8 @@ Based on the same framework, we were also able to revisit the CAP theorem \cite{
 Finally, we built a tool called ConSpecCheck, which is available online, to %check whether a given trace violates a certain consistency model. 
  %The tool can 
 determine whether a client trace from a storage system satisfies a certain consistency model.
- This tool can be used with existing testing framewoks, which are used for generating test cases, to attempt to expose violations of the specified consistency semantics. For example, by coupling our system with a set of outputs of different thread interleavings that are generated by a concurrency testing framework like Chess~\cite{Musuvathi:2008:SCT:1390841.1390851}, we are able to systematically attempt to uncover concurrency bugs that lead to subtle consistency violations.
-A noteworthy point is that the ConSpec checker highlights the advantage of our LTL-based specifications: even though we are not fully exploiting the expressiveness of LTL, it nonetheless allowed us to seamlessly leverage existing model checking systems in our design.
+ This tool can be used with existing testing framewoks, which are used for generating test cases, to attempt to expose bugs that cause storage systems to deviate from the specified consistency semantics. For example, by coupling our system with a set of outputs of different thread interleavings that are generated by a concurrency testing framework like Chess~\cite{Musuvathi:2008:SCT:1390841.1390851}, we are able to systematically attempt to uncover concurrency bugs that lead to subtle consistency violations.
+A noteworthy point is that the ConSpec checker highlights the advantage of our LTL-based specifications: even though we could specify consistency models without resorting to LTL, its use allowed us to seamlessly leverage existing model checking systems in our design.
 
 
 % With this tool,  we can perform runtime verification of a storage system on the basis of execution traces generated by running client  appl%ications on top of the storage system. The tool checks whether a particular execution trace violates a given consistency model. For example, to  test if a given social networking application like Facebook satisfies causal conssistency, we generate execution traces comprising blog posts and comments on those blogs from concurrent clients.  The consistency for that system is verified    by running the tool on execution traces collected from all concurrent client applications.    
