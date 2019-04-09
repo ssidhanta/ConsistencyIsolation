@@ -197,29 +197,18 @@ escapeinside={\%*}{*)},         % if you want to add a comment within your code
 
 %\IEEEtitleabstractindextext{
 \begin{abstract}
- We propose a specification language named \emph{ConSpec}, which enables the formalization of
+Recent storage systems compromise strong consistency in favor of performance, availability, and scalability. However, this makes it hard understand the semantics that the storage system provides, and also makes the design and implementation of the storage system itself more error-prone. This paper proposes a comprehensive solution to these problems. In particular, we propose a specification language named \emph{ConSpec}, which enables the formalization of
  different consistency semantics that a storage system may provide, using a uniform syntax that is independent
- of the design and implementation of the target storage system. ConSpec addresses the recent profusion of consistency definitions,
- which are often accompanied by either informal definitions, or definitions that are tied to implementation-level details.
-% Furthermore, even in the case of consistency models that have a precise definition associated with them,
-%  Prior to ConSpec, definitions of
-%  consistency models were tightly coupled with the specific design and implementation of the target storage system.
-%  Each new storage system would redefine a consistency model in terms of its design and implementation. T
-%   the absence of a uniform notation for describing different models
-%   makes it difficult to compare different proposals.
-%  Existing
-%  definitions of consistency models and isolation levels either use textual descriptions or graphical representation of
-%  proscribed anomalies and allowed dependencies between operations, making
-%   automated verification even more difficult. To the best of our knowledge, this is the first work that expresses both
-%   consistency and isolation levels in terms of ConSpec, a language that
+ of the design and implementation of the target storage system.
  To enable a simple and uniform description of various existing proposals, ConSpec builds on recent proposals that view weak consistency
 definitions as partial orderings between operations forming a visibility graph, which reduces the consistency definitions to a set of
 restrictions on those partial orders, described using Linear Temporal Logic (LTL). We use ConSpec to revisit several existing models in light
-of a common way to define and compare them. Furthermore, the use
+of a common way to define and compare them and to generalize the CAP
+theorem, whose original formulation only considered linearizability, to precisely define the class of consistency definitions that can and cannot be implemented in a highly-available, partition-tolerant way.
+Furthermore, the use
 of LTL enabled us to leverage existing automatic checkers to build a tool for validating whether a given trace of the execution of a system meets
 a certain consistency semantics.
-Finally, using our generic definitions and the insights from analyzing different models, we generalized the CAP
-theorem, whose original formulation only considered linearizability, to precisely define the class of consistency definitions that can and cannot be implemented in a highly-available, partition-tolerant way. The evaluation of our consistency checker shows that it is able to verify the correctness of long traces in a reasonable time.
+ The evaluation of our consistency checker shows that it is able to verify the correctness of long traces in a reasonable time.
 
 %We present SpecCheck, an  automated verification tool that is used %leverages of static analysis techniques
   %to  verify whether a storage system satisfies a consistency model or isolation level, specified using ConSpec.
