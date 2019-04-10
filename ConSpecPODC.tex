@@ -200,14 +200,13 @@ escapeinside={\%*}{*)},         % if you want to add a comment within your code
 Recent storage systems compromise strong consistency in favor of performance, availability, and scalability. However, this makes it hard understand the semantics that the storage system provides, and also makes the design and implementation of the storage system itself more error-prone. This paper proposes a comprehensive solution to these problems. In particular, we propose a specification language named \emph{ConSpec}, which enables the formalization of
  different consistency semantics that a storage system may provide, using a uniform syntax that is independent
  of the design and implementation of the target storage system.
- To enable a simple and uniform description of various existing proposals, ConSpec builds on recent proposals that view weak consistency
-definitions as partial orderings between operations forming a visibility graph, which reduces the consistency definitions to a set of
-restrictions on those partial orders, described using Linear Temporal Logic (LTL). We use ConSpec to revisit several existing models in light
-of a common way to define and compare them and to generalize the CAP
+% To enable a simple and uniform description of various existing proposals, ConSpec builds on recent proposals that view weak consistency
+%definitions as partial orderings between operations forming a visibility graph, which reduces the consistency definitions to a set of
+ %restrictions on those partial orders, described using Linear Temporal Logic (LTL).
+ We use ConSpec to revisit several existing models in light
+of a common way to define and compare them. Furthermore, we generalize the CAP
 theorem, whose original formulation only considered linearizability, to precisely define the class of consistency definitions that can and cannot be implemented in a highly-available, partition-tolerant way.
-Furthermore, the use
-of LTL enabled us to leverage existing automatic checkers to build a tool for validating whether a given trace of the execution of a system meets
-a certain consistency semantics.
+Finally, we present the design and implementation of a new consistency checker that takes trace from a storage system (e.g., the output of a test suite) and validates whether it meets any consistency semantics defined using ConSpec.
  The evaluation of our consistency checker shows that it is able to verify the correctness of long traces in a reasonable time.
 
 %We present SpecCheck, an  automated verification tool that is used %leverages of static analysis techniques
@@ -769,25 +768,33 @@ Putting together the previous requirements, we can see that only the orders $\pr
 %  Also, there doesn't exist an operation $r^k$ preceding $r^2(x){2}$ that satisfies the condition ${v_k}^{''} \not= {v_i}^{'} $.
 %  Thus, the given session trace violates Equation \ref{eqn:TSO}.
 
-As an example that obeys causal consistency, consider a global session trace comprising the following session traces:
+As an example that obeys causal consistency~--~but fails to meet stronger conditions such as sequential consistency or linearizability~--~consider a global session trace comprising the following session traces:
 
 $\mathit{st}'_1$: $w(x,1)$,
 
- $\mathit{st}'_2$: $r(x){1}, w'(x,2)$,
+ $\mathit{st}'_2$: $w'(x,2)$,
 
- and  $\mathit{st}'_3$: $r'(x){1}, r''(x){2}$
+ $\mathit{st}'_3$: $r(x){1}, r'(x){2}$,
 
-In this case, any partial order  $\preccurlyeq$  that meets the following constraints:
+ and  $\mathit{st}'_4$: $r''(x){2}, r'''(x){1}$
+
+In this case, the following partial order  $\preccurlyeq$ can be used in our ConSpec formula.
 
 \begin{itemize}
 
-\item $W^x_{\mathit{st}}   \preccurlyeq R^x_{\mathit{st}} $
-\item $W^x_{\mathit{st}}  \preccurlyeq R'^x_{\mathit{st}} $
-\item $R^x_{\mathit{st}} ,  R'^x_{\mathit{st}}   \preccurlyeq W'^x_{\mathit{st}} $
-\item $ W'^x_{\mathit{st}} \preccurlyeq R''^x_{\mathit{st}}$
+\item $W^x_{\mathit{st}}   \preccurlyeq R^x_{\mathit{st}} $  
+\item $W'^x_{\mathit{st}}  \preccurlyeq R'^x_{\mathit{st}} $
+\item $R^x_{\mathit{st}} \preccurlyeq R'^x_{\mathit{st}} $
+
+\item $W'^x_{\mathit{st}}   \preccurlyeq R''^x_{\mathit{st}} $  
+\item $W^x_{\mathit{st}}  \preccurlyeq R'''^x_{\mathit{st}} $
+\item $R''^x_{\mathit{st}} \preccurlyeq R'''^x_{\mathit{st}} $
+
+
+
 \end{itemize}
 
-\noindent satisfies the right and side of the implication of Equation \ref{eqn:Causal} for all pairs of operations that satisfy its left hand side. The following partial order satisfies all of the above conditions: $\preccurlyeq^5$ = $W^x_{\mathit{st}}   \preccurlyeq R^x_{\mathit{st}}  \preccurlyeq R'^x_{\mathit{st}}  \preccurlyeq  W'^x_{\mathit{st}}   \preccurlyeq R''^x_{\mathit{st}} $.  Thus the above  global session trace satisfies Causal consistency.
+\noindent Thus the above  global session trace satisfies Causal consistency. Note, however, that $\preccurlyeq$ is not a total order (and in fact there is no total order that can be used in this case), which explains why this trace does not meet the aforementioned strong consistency specifications.
 
 % Causal+ consistency
 % %, which is the strongest consistency that can  be implemented in  a highly available manner (i.e.,  the system is available in presence of partitions)
