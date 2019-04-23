@@ -1680,7 +1680,8 @@
 	
 	\section{Implementation}\label{sec:impl}
 	We provide an open source automated  tool for verifying whether a session trace meets a given consistency model. This tool was built using Spin \cite{Holzmann:2003:SMC:1405716}, a widely used open source software verification framework. The source code of the ConSpec tool along with instructions for running it are publicly available at \url{https://github.com/ssidhanta/ConSpecTool}.  %\footnote{\url{https://github.com/ssidhanta/ConSpecTool}}.
-	A global session trace is supplied to the tool as input, in the form of a text file containing a sequence of storage operations as a series of rows of comma separated strings. The tool automatically checks whether a given session trace is valid under a given consistency model $\mathcal{C}$, specified in terms of  $E^S_C$, which is in turn a Spin LTL formula modelled using the PROMELA meta language.
+	A global session trace is supplied to the tool as input, in the form of a text file containing a sequence of storage operations as a series of rows of comma separated strings.  ConSpec definition $E^S_C$ of a consistency model $\mathcal{C}$ is expressed as a Spin LTL formula modelled using the PROMELA meta language. 
+%	The tool automatically checks whether a given session trace is valid under a given consistency model $\mathcal{C}$, specified in terms of  $E^S_C$, which is in turn a Spin LTL formula modelled using the PROMELA meta language.
 	Internally, Spin translates the PROMELA source file into C code. The Spin driver then runs the built-in model checker to check for counter-examples for the above generated C code  against  the Spin formula given as $E^S_C$. % The Spin model checker validates the generated C code with the Spin formula acting as an invariant on the system behaviour modelled by the C code. %, with the set of equivalent legal serializations generated from the given session trace supplied as an input to the model checkers.  %The github repository comprises a PROMELA specification for each of the consistency models and isolation levels, the Spin-based main source file, and the code for generating the list of  equivalent serializations.
 	\begin{figure}\caption{ConSpec Specification in PROMELA}\label{format:spec}
 		\begin{lstlisting}[escapeinside={(*}{*)}]
@@ -1697,28 +1698,34 @@
 		(*$ltl$*) (*$\mathit{cc}$*) {(*$\square$*)((*$\lnot$*)((*$\mathit{po}[i].\mathit{st}[j].\mathit{optype}=w$*) (*$\Rightarrow \; \lozenge$*)(*$\mathit{po}[i].\mathit{st}[j].\mathit{optype}=r))$*)}
 		\end{lstlisting}
 	\end{figure}
-	\par ConSpec provides a library of definitions with one PROMELA source file for each consistency model.
+	\par %ConSpec provides a library of definitions with one .pml (PROMELA) source file for each consistency model.
 	%Given a session trace, the first step of the tool is to execute Spin against the PROMELA file corresponding to the given consistency model on the session trace. Spin accepts specifications of consistency models in the form of Spin LTL  formulas provided in the corresponding PROMELA source files.
 	%Figure \ref{format:spec} illustrates 
-	The snippet in Figure \ref{format:spec} is taken from the PROMELA  source file for the RYW consistency model defined in Section \ref{sec:morelist}. In the above snippet, $\mathit{cc}$ is a Spin-style declaration of an LTL formula that specifies the RYW consistency model; $\mathit{cc}$ is expressed in terms of the following PROMELA variable declarations provided in the .pml (PROMELA)  file. The event of execution of an operation is declared using the typedef declaration  $\mathit{typedef}\; \mathit{Op}\; ...$, where $\mathit{typedef}$ is the PROMELA syntax for declaring a user-defined data type.
+	The snippet in Figure \ref{format:spec} is taken from the PROMELA  source file for the RYW consistency model defined in Section \ref{sec:morelist}. In the above snippet, $\mathit{cc}$ is a Spin-style declaration of an LTL formula that specifies the RYW consistency model. 
+%	; $\mathit{cc}$ is expressed in terms of the following PROMELA variable declarations provided in the .pml (PROMELA)  file. 
+	The event of execution of an operation is declared as a user-defined data type using the PROMELA typedef declaration  $\mathit{typedef}\; \mathit{Op}\; ...$. 
+%	, where $\mathit{typedef}$ is the PROMELA syntax for declaring a user-defined data type.
 	%In the declaration of an operation, the operation type and variable (object) for each operation are declared as  mtype variables $\mathit{optype}$ and $\mathit{var}$, where $\mathit{mtype} $ is a PROMELA-style declaration of a constant ($\mathit{optype}$ can take constant values read or write).
 	%We refer to the length of the trace as its size, i.e., the number of rows in the trace, which in turn is the number of operations executed.
-	Each operation in a trace is represented as a tuple  $\mathit{Op}$ comprised of the following elements: the operation type $\mathit{optype}$, the variable name $\mathit{var}$, and the value $\mathit{val}$.  Then, using the statement $\mathit{Op} \; \mathit{st}[\mathit{size}]$, a session trace of length $\mathit{size}$ is declared as an array $\mathit{st} $ of elements belonging to the user-defined datatype $\mathit{Op}$.   A valid partial order for a given session trace is declared using the typedef declaration $\mathit{typedef}\; \mathit{PO}\; ...$  The list of all possible valid partial orders for a session trace $\mathit{st}$ is declared as an array $\mathit{po}$, which is created by the statement $\mathit{PO}\; \mathit{po}[\mathit{po}_\mathit{size}];$ this creates an array of elements belonging to the type $\mathit{PO}$ with an  array-size of $\mathit{po}_\mathit{size}$. Each element in the array $\mathit{po}$ is a permutation of the session trace $\mathit{st}$. The i'th element in the list of all possible partial orders $\mathit{po}$ is accessed as $\mathit{po}[i]$, and the j'th operation in $\mathit{po}[i]$ is accessed as $\mathit{po}[i].\mathit{st}[j]$. In the LTL declaration
+	Each operation in a trace is represented as a tuple  $\mathit{Op}$ comprised of the following elements: the operation type $\mathit{optype}$, the variable name $\mathit{var}$, and the value $\mathit{val}$.  Then, using the statement $\mathit{Op} \; \mathit{st}[\mathit{size}]$, a session trace of length $\mathit{size}$ is declared as an array $\mathit{st} $ of elements belonging to the user-defined datatype $\mathit{Op}$.   A valid partial order for a given session trace is declared using the typedef declaration $\mathit{typedef}\; \mathit{PO}\; ...$  The list of all possible valid partial orders for a session trace $\mathit{st}$ is declared as an array $\mathit{po}$, which is created by the statement $\mathit{PO}\; \mathit{po}[\mathit{po}_\mathit{size}];$ this creates an array of elements belonging to the type $\mathit{PO}$ with an  array-size of $\mathit{po}_\mathit{size}$. Each element in the array $\mathit{po}$ is a permutation of the session trace $\mathit{st}$. The i'th element in the list of all possible partial orders $\mathit{po}$ is accessed as $\mathit{po}[i]$, and the j'th operation in $\mathit{po}[i]$ is accessed as $\mathit{po}[i].\mathit{st}[j]$. 
+	%In the LTL declaration %derived from Equation \ref{eqn:RYW}
+	 %at the end of snippet,  
 	%  {\setlength{\abovedisplayskip}{0pt}%
 	%\setlength{\mathindent}{0pt}
-	\begin{align*}%\label{eqn:ltldec}	
-	%\begin{split}
-	ltl \; \mathit{cc}  \; \{  \square ( \lnot (\mathit{po}[i].\mathit{st}[j].\mathit{optype} = w \Rightarrow \\
-	\lozenge  \mathit{po}[i].\mathit{st}[j].\mathit{optype} = r)) \},
-	% \end{split}
-	\end{align*}
+%	\begin{align*}%\label{eqn:ltldec}	
+%	%\begin{split}
+%	ltl \; \mathit{cc}  \; \{  \square ( \lnot (\mathit{po}[i].\mathit{st}[j].\mathit{optype} = w \Rightarrow \\
+%	\lozenge  \mathit{po}[i].\mathit{st}[j].\mathit{optype} = r)) \},
+%	% \end{split}
+%	\end{align*}
 	% }%
-	derived from Equation \ref{eqn:RYW}, $\mathit{po}[i]. \mathit{st}[j].\mathit{optype}$ denotes the operation type of the j'th operation in the i'th partial order. $\square$ is the LTL operator globally, $\lozenge$ is the LTL operator eventually, $\lnot$ is the negation operator, and   $\Rightarrow$ denotes the implies operator.  Thus, the specification $cc$ in  the above snippet %Figure \ref{format:spec} 
+	%derived from Equation \ref{eqn:RYW},
+	In $\mathit{cc}$, $\mathit{po}[i]. \mathit{st}[j].\mathit{optype}$ denotes the operation type of the j'th operation in the i'th partial order. $\square$ is the LTL operator globally, $\lozenge$ is the LTL operator eventually, $\lnot$ is the negation operator, and   $\Rightarrow$ denotes the implies operator.  Thus, the specification $cc$ in  the above snippet %Figure \ref{format:spec} 
 	denotes that if the operation type \emph{optype} of an operation $st[j]$ in a given session trace $st$ is write, then the next read operation, which follows $st[j]$ in the same session trace and reads an  object that was written by $st[j]$, must return the value that was written by $st[j]$.
-	The above specification is provided in the pml file, as a declarative statement, followed by the specification of the system behavior, namely the semantics of read and write operations. The pml file is then compiled using the Spinroot compiler with the above LTL specification as the spin invariant. 
+	The above specification is provided in the pml file, as a declarative statement, followed by the specification of the system behavior, namely the semantics of read and write operations. 
+	The pml file is then compiled using the Spinroot compiler with the above LTL specification as the spin invariant. 
 	% The  C++ file, which is output of the above compilation step, is then compiled using the gcc compiler. 
 	This produces a C++ program, whose output flags if a given input session trace is a case of violation or satisfies of the consistency model specified in the LTL invariant given in  the above snippet. %Figure \ref{format:spec}.
-	
 	%The derivations of rest of the consistency models, which follow the above approach, are given in Section \ref{sec:restderive}.
 	\section{Evaluation}\label{sec:eval}
 	In this section, we evaluate how long the ConSpec tool takes to check the consistency of a  session trace, how this validation time varies depending on the length (or size) of the trace, and that compares to checking traces expressed in conventional syntaxes. In our evaluation, we use two sets of traces, where the first one is generated by executing the Yahoo Cloud Serving Benchmark (YCSB) benchmark suite (YCSB v 0.1.4)  \cite{Cooper:2010:BCS:1807128.1807152}   on top of a Cassandra cluster (Apache Cassandra v 2.1.2)  \cite{Lakshman:2010:CDS:1773912.1773922}, and the second one is obtained by executing the TPC-C benchmark on top of a MySQL database.
@@ -1776,8 +1783,7 @@
 	%, with the different coloured stack representing the execution time for each run. %We  record the variances of execution times for each global session trace as labels on each bar  corresponding to the respective global session trace.
 	\par This linear scalability was somewhat surprising, since the preprocessing step in ConSpec for generating all possible legal serializations for a given session trace has a complexity $\mathcal{O}(\mathit{l}!),$ where $\mathit{l}$ is the length of the session trace. To understand this performance trend, we note that the ConSpec tool performs the verification of a given session trace with the  Spin model checker, which reduces the verification problem into a graph reachability problem; it internally constructs a graph of all possible states and subsequently determines  reachable states in the graph \cite{Holzmann:1997:MCS:260897.260902}. Next, the Spin model checker  employs the nested depth first search algorithm \cite{DBLP:conf/dimacs/HolzmannPY96} to search for accepting states within the state space comprising all possible reachable states \cite{DBLP:conf/tacas/SchwoonE05}.
 	%In the first step, the nested depth first search algorithm reduces the model checking problem into a reachability problem where it searches for accepting states comprised in some strongly connected components in the graph of the given state space. Second, it leverages partial order reduction techniques to look for cycles around the accepting states on-the-fly.  The above two steps are interleaved with each other which enables nested depth first search achieve linear complexity and high memory efficiency.
-	While performing the above task, the Spin model checker  applies partial order reduction techniques \cite{Peled1994}, which result in reduction of the search space of reachable states explored during the nested depth first search. In  \cite{Holzmann:1997:MCS:260897.260902}, Holzmann et al.\ provide a complexity analysis of the Spin tool in performing verification of the well known leader election algorithm. Holzmann et al.\ observe a linear growth in the number of reachable states explored by the Spin model checking algorithm instead of an expected exponential growth. They also report a similar linear growth with other typical use cases of the model checker. As such, this is very likely to explain the results we obtained. 
-	
+	While performing the above task, the Spin model checker  applies partial order reduction techniques \cite{Peled1994}, which result in reduction of the search space of reachable states explored during the nested depth first search. In  \cite{Holzmann:1997:MCS:260897.260902}, Holzmann et al.\ provide a complexity analysis of the Spin tool in performing verification of the well known leader election algorithm. Holzmann et al.\ observe a linear growth in the number of reachable states explored by the Spin model checking algorithm instead of an expected exponential growth. They also report a similar linear growth with other typical use cases of the model checker. As such, this is very likely to explain the results we obtained.  
 	In practice, for long-running executions of a storage system, it makes more sense to run the tool periodically against a sliding window of recent operations. In an Appendix (Section~\ref{sec:additionalYCSBexp}), we evaluate the scalability of the tool using this approach.
 	
 	
@@ -1804,7 +1810,7 @@
 		\includegraphics[width=3.2in,height=2in]
 		{conspecTPCCvarhist.eps} %\vspace{-5em}
 		%\end{center}
-		\caption{Execution Time of ConSpec Tool Against TPCC Trace With respect to ConSpec Definitions vs Burkhardt's Definitions.}
+		\caption{Execution Time of ConSpec Tool Against TPCC Trace With ConSpec Definitions vs Burkhardt's Definitions.}
 		\label{fig:examplefulltpcc}
 	\end{figure}
 	% \begin{figure}%[t]
