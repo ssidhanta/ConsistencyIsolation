@@ -591,7 +591,7 @@
 	
 	\section{Specifying existing models}\label{sec:list}
 	In this section, we present the ConSpec specifications for a few example common
-	consistency models. We have defined several other models using ConSpec, but, due to space limitations, defer their presentation to a longer version of this document.
+	consistency models. We have defined several other models using ConSpec, but, due to space limitations, we defer their presentation to a longer version of this document.
 	%, which is the Read Your Writes session guarantee, originally proposed by Terry et al.\ in the context of a mobile computing storage system called Bayou~\cite{Terry:1994:SGW:645792.668302}.
 	%Due to space constrains, we leave the definition of other consistency models and session guarantees, as well as a step by step derivation of the ConSpec definition from their original counterparts to an Appendix.  %an extended version of the paper  at \url{https://github.com/ssidhanta/ConSpecTool/blob/master/ConSpecPODCFull.pdf}.
 	%Subsequently, in the Appendix, we discuss how these definitions correspond to their original counterparts.
@@ -644,6 +644,8 @@
 %	In this definition, the use of  $\preccurlyeq$ reflects this last aspect that Causal consistency is defined as a global property, instead of being specific to a given session trace $\mathit{st} \in \mathcal{S}_t$ and the respective subset of the relation $\preccurlyeq$.
         The above expression simply specifies that, for  all session traces in a global session trace $\mathcal{S}_t$, there must exist a common valid partial order $\preccurlyeq$ that orders operations according to the precedence relation of those operations in the respective session trace. %, i.e., $\preccurlyeq$ preserves precedence among operations with respect to each corresponding seession trace.	
 	Note that this definition is simplified by the fact that the generic ConSpec construction already encodes an important aspect of Causal consistency, which is the fact that ConSpec requires the operations to form a partial order. Given the transitivity property of partial orders, this implies that if operation $b$ sees the effects of $a$ and operations $c$ sees the effects of $b$, then $c$ must also see the effects of $a$.
+
+        From this definition we can also derive the various session guarantees~\cite{Terry:1994:SGW:645792.668302}, namely Read Your Writes, Writes Follow Reads, Monotonic Writes and Monotonic Reads. These are essentially special cases of the above definition, which restrict the types of the pairs of operations bound by $\preccurlyeq$. Again, we defer a formal presentation to a longer version of this document.
 	
 	%\begin{figure}%[t]
 	%\begin{center}
