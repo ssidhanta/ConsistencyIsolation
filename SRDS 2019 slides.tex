@@ -76,7 +76,7 @@ Conventions we will use:
 	\includegraphics[height=4cm]{rywmodel.png}
 	
 	\column{0.5\textwidth}
-	\includegraphics[height=4cm]{causalmodel.png}
+	\includegraphics[height=3cm]{causalmodel.png}
 \end{columns}
 Choosing appropriate consistency model requires understanding the operational  semantics of model. This makes a formal model necessary rather than textual definition.
 
@@ -152,6 +152,10 @@ There is an ever increasing number of storage systems which implement a wide ran
 
 \begin{frame}
 \frametitle{Generalized form of ConSpec:}
+ConSpec: LTL Based constraints: \\
+Consistency: restrictions on temporal order in which results of operations can be observed\\
+Easier to understand and read \\
+A wide array of available automated verification tools
 	\begin{definition}{}\label{def:form0}
 	Given a global session trace $\mathcal{S}_t$,
 	% representing a global execution of all concurrent clients on a given storage
@@ -241,10 +245,12 @@ $\mathit{st}_2^{''}$:  $w(x, 2), r(x){2}, r(x){1}$
 	where we define {$\textsc RemoveAllExceptSession$} as a partial order where the maximum $o$ is only directly ordered after prior operations in the same session, i.e.:
 	$\noindent {\textsc RemoveAllExceptSession}(\preccurlyeq,o(x)) \equiv \; \preccurlyeq \setminus \{ \langle o'(x),o(x) \rangle$ , where $\langle o'(x),o(x) \rangle$ belongs to the transitive reduction of $\preccurlyeq$, and $o'(x)$ does not belong to the same session as $o(x)\}$.
 \end{theorem}
+We can see that both the causal and processor consistency definitions (plus the session guarantees – MR, MW, RYW, WFR) are only forcing constraints on the partial ordering across operations from the same session.\\
+In contrast, SC requires that the visibility order  among operations from all the clients in the system forms a total order.
 \end{frame}
 
 \begin{frame}
-\frametitle{ConSpec Checket Tool}
+\frametitle{ConSpec Checker Tool}
 \begin{itemize}
 	\item Spinroot based prototype Automated Verification Tools
  \item A global session trace is supplied to the tool as input
